@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Navbar, Footer } from '@/components/sections';
+import { Navbar, Footer, ContactForm } from '@/components/sections';
 import { Mail, MapPin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
@@ -15,9 +15,9 @@ export default async function ContactoPage() {
     const t = await getTranslations('Contacto');
 
     return (
-        <>
+        <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-grow bg-[#050a14] min-h-screen pt-20 animate-fade-in text-white">
+            <main className="flex-grow bg-[#050a14] pt-20 animate-fade-in text-white">
                 {/* Hero */}
                 <section className="relative py-32 md:py-48 px-4 text-center border-b border-white/5 overflow-hidden">
                     <div
@@ -45,8 +45,8 @@ export default async function ContactoPage() {
                                     <div className="flex items-start gap-4">
                                         <Mail className="w-5 h-5 text-[#c5a059] mt-1" />
                                         <div>
-                                            <p className="text-white mb-1">{t('Info.emailLabel')}</p>
-                                            <a href="mailto:info@escuelahispanica.org" className="text-white/60 text-sm hover:text-[#c5a059] transition-colors">
+                                            <p className="font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-1">{t('Info.emailLabel')}</p>
+                                            <a href="mailto:info@escuelahispanica.org" className="text-white/80 text-sm hover:text-[#c5a059] transition-colors font-serif">
                                                 info@escuelahispanica.org
                                             </a>
                                         </div>
@@ -54,8 +54,8 @@ export default async function ContactoPage() {
                                     <div className="flex items-start gap-4">
                                         <MapPin className="w-5 h-5 text-[#c5a059] mt-1" />
                                         <div>
-                                            <p className="text-white mb-1">{t('Info.addressLabel')}</p>
-                                            <p className="text-white/60 text-sm">Calle Zurbano 71, Oficina 9<br />28010, Madrid, España</p>
+                                            <p className="font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-1">{t('Info.addressLabel')}</p>
+                                            <p className="text-white/80 text-sm font-serif leading-relaxed">Calle Zurbano 71, Oficina 9<br />28010, Madrid, España</p>
                                         </div>
                                     </div>
                                 </div>
@@ -63,54 +63,13 @@ export default async function ContactoPage() {
                         </div>
 
                         {/* Contact Form */}
-                        <div className="bg-[#0a111e] border border-white/5 p-8">
-                            <h2 className="font-cinzel text-xl tracking-wider mb-8">{t('Form.title')}</h2>
-                            <form className="space-y-6">
-                                <div>
-                                    <label className="block text-white/60 text-sm mb-2">{t('Form.nameLabel')}</label>
-                                    <input
-                                        type="text"
-                                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white focus:border-[#c5a059] outline-none transition-colors"
-                                        placeholder={t('Form.namePlaceholder')}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-white/60 text-sm mb-2">{t('Form.emailLabel')}</label>
-                                    <input
-                                        type="email"
-                                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white focus:border-[#c5a059] outline-none transition-colors"
-                                        placeholder="tu@email.com"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-white/60 text-sm mb-2">{t('Form.subjectLabel')}</label>
-                                    <select className="w-full bg-[#0a111e] border border-white/10 px-4 py-3 text-white focus:border-[#c5a059] outline-none transition-colors appearance-none cursor-pointer">
-                                        <option value="general" className="bg-[#0a111e] text-white">{t('Form.subjectGeneral')}</option>
-                                        <option value="memberships" className="bg-[#0a111e] text-white">{t('Form.subjectMemberships')}</option>
-                                        <option value="research" className="bg-[#0a111e] text-white">{t('Form.subjectResearch')}</option>
-                                        <option value="press" className="bg-[#0a111e] text-white">{t('Form.subjectPress')}</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-white/60 text-sm mb-2">{t('Form.messageLabel')}</label>
-                                    <textarea
-                                        rows={5}
-                                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white focus:border-[#c5a059] outline-none transition-colors resize-none"
-                                        placeholder={t('Form.messagePlaceholder')}
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="w-full bg-[#c5a059] text-[#050a14] py-4 font-cinzel text-sm tracking-widest hover:bg-white transition-all"
-                                >
-                                    {t('Form.submit')}
-                                </button>
-                            </form>
+                        <div className="relative">
+                            <ContactForm />
                         </div>
                     </div>
                 </section>
             </main>
             <Footer />
-        </>
+        </div>
     );
 }
