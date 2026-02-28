@@ -69,7 +69,23 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Optional: Trigger email notification via Resend here if needed.
+        // 4. Trigger email notification via Resend
+        const approverEmail = process.env.APPROVER_EMAIL || 'info@escuelahispanica.org';
+        const { sendEmail } = await import('@/lib/email');
+
+        await sendEmail({
+            to: approverEmail,
+            subject: `Nuevo mensaje de contacto: ${subject || 'Contacto Web'}`,
+            html: `
+                <h2>Nuevo Mensaje de Contacto</h2>
+                <p><strong>De:</strong> ${first_name} ${last_name} (${email})</p>
+                <p><strong>Asunto:</strong> ${subject || 'Contacto Web'}</p>
+                <p><strong>Mensaje:</strong></p>
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+                    ${finalMessage.replace(/\n/g, '<br>')}
+                </div>
+            `
+        });
 
         return NextResponse.json({ success: true });
     } catch (error) {
