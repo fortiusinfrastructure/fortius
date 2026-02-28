@@ -1,0 +1,535 @@
+{
+    "Navigation": {
+        "home": "Início",
+        "about": "Sobre Nós",
+        "projects": "Projetos",
+        "activities": "Atividades",
+        "publications": "Publicações",
+        "collaborate": "Colabore",
+        "contact": "Contato"
+    },
+    "Footer": {
+        "address": {
+            "line1": "Calle Zurbano 71, Escritório 9",
+            "line2": "28010, Madrid, Espanha"
+        },
+        "links": {
+            "legal": "Aviso Legal",
+            "cookies": "Política de Cookies",
+            "privacy": "Privacidade"
+        },
+        "copyright": "© 2024 ESCUELA HISPÁNICA. TODOS OS DIREITOS RESERVADOS."
+    },
+    "Home": {
+        "Hero": {
+            "subtitle": "Uma exploração da",
+            "title": "TRADIÇÃO HISPÂNICA DE",
+            "highlight": "LIBERDADE",
+            "buttons": {
+                "projects": "PROJETOS",
+                "explore": "EXPLORAR O ARQUIVO"
+            }
+        },
+        "Manifesto": {
+            "title": "Uma comunidade a serviço da Hispanidade",
+            "paragraphDropCap": "A",
+            "paragraph": " Escola Hispânica nasce de nossa convicção de que o exame e a compreensão de nosso passado intelectual e linhagem comuns, voltados para o futuro, contribuirão para aproximar nossos países e agregar grande valor ao discurso político, ao diálogo social e cultural, e ao desenvolvimento de políticas públicas.",
+            "button": "Conhecer a Escola"
+        },
+        "Project": {
+            "imageAlt": "Projeto 1776 - Declaração de Independência",
+            "tag": "Projeto Destacado",
+            "title": "PROJETO",
+            "paragraph": "Pesquisa sobre a influência da escolástica hispânica na independência dos EUA. Uma ponte intelectual esquecida entre Salamanca e Filadélfia que reescreve nossa história comum.",
+            "button": "Descobrir Projeto 1776"
+        },
+        "Activities": {
+            "tag": "Agenda Acadêmica",
+            "title": "Atividades em Destaque",
+            "viewAll": "Ver todas as atividades",
+            "defaultType": "Evento",
+            "defaultLocation": "Madrid",
+            "readMore": "Ler mais"
+        },
+        "Publications": {
+            "tag": "Arquivo Digital",
+            "title": "Últimas Publicações",
+            "readMore": "Ler mais",
+            "viewAll": "Ver todo o arquivo"
+        },
+        "Membership": {
+            "tag": "Comunidade",
+            "title": "Faça parte da nossa comunidade acadêmica e cultural",
+            "description": "A Escola Hispânica não é apenas uma instituição acadêmica, é uma comunidade viva. Colabore conosco e contribua para o renascimento de nosso legado.",
+            "tiers": {
+                "amigo": {
+                    "title": "Amigo",
+                    "desc": "Apoie nossa missão cultural e receba boletins trimestrais e acesso prioritário a eventos públicos."
+                },
+                "miembro": {
+                    "title": "Membro Acadêmico",
+                    "desc": "Acesso à biblioteca inédita, seminários privados, direito de voto e possibilidade de publicação acadêmica."
+                },
+                "mecenas": {
+                    "title": "Mecenas",
+                    "desc": "Faça parte do Conselho de Honra. Convites para jantares exclusivos e menção especial em publicações."
+                }
+            },
+            "button": "Colabore"
+        },
+        "Pillars": {
+            "sectionTitle": "Eixos da Escola",
+            "pillar1Title": "Arquitetura do Pensamento Político Hispânico",
+            "pillar1Desc": "Este eixo dedica-se à reconstrução sistemática da arquitetura conceitual que moldou o mundo político hispânico: suas categorias jurídicas, sua compreensão de soberania, a articulação entre lei natural e lei positiva, a representação política, a jurisdição e a limitação do poder. O objetivo é contribuir para a consolidação de um corpus próprio, com categorias compartilhadas e formulação positiva, capaz de dialogar com a teoria política contemporânea sem se reduzir a uma mera reação frente a outras tradições.",
+            "pillar2Title": "Tradição Hispânica em Diálogo com o Ocidente",
+            "pillar2Desc": "A tradição hispânica não se desenvolveu isoladamente, mas em diálogo constante com o restante do pensamento europeu e atlântico. Este eixo examina essas interações — especialmente com a tradição anglo-americana — para compreender como o mundo moderno se configurou a partir de múltiplas correntes convergentes. O propósito não é estabelecer oposições identitárias, mas reintegrar essa tradição na narrativa comum do Ocidente, ressaltando sua contribuição ao debate contemporâneo sobre o liberalismo, a comunidade política e a ordem internacional.",
+            "pillar3Title": "Tradição Hispânica da Liberdade",
+            "pillar3Desc": "Este eixo explora a forma concreta pela qual a liberdade se articulou historicamente no mundo hispânico através de instituições, foros, pactos e mecanismos de limitação de poder. Em oposição a concepções abstratas ou puramente individualistas, a experiência hispânica desenvolveu uma compreensão institucional e comunitária da liberdade. Ao mesmo tempo, oferece ferramentas conceituais para enfrentar os debates atuais sobre a fragmentação social, a crise de legitimidade institucional e a redefinição da ordem política no século XXI."
+        }
+    },
+    "Metadata": {
+        "title": "Escuela Hispánica",
+        "description": "Um espaço de conhecimento e cultura dedicado ao estudo da tradição intelectual do mundo hispânico. Filosofia, história, direito e economia desde a Escola de Salamanca.",
+        "ogDescription": "Um espaço de conhecimento e cultura dedicado ao estudo da tradição intelectual do mundo hispânico.",
+        "twitterDescription": "Tradição intelectual do mundo hispânico"
+    },
+    "Publicaciones": {
+        "Archive": {
+            "title": "Arquivo Acadêmico",
+            "subtitle": "Biblioteca & Publicações",
+            "description": "Repositório aberto de artigos, relatórios e materiais acadêmicos destinados a difundir ideias e reflexões que inspiram o debate cultural e social.",
+            "metaTitle": "Arquivo Acadêmico | Escola Hispânica",
+            "metaDescription": "Coleção de artigos, relatórios e materiais de interesse elaborados pela Escola Hispânica e seus colaboradores.",
+            "featured": "DESTAQUE",
+            "readArticle": "LER ARTIGO"
+        },
+        "Article": {
+            "home": "INÍCIO",
+            "archive": "ARQUIVO",
+            "readingTime": "12 MIN LEITURA",
+            "share": "Compartilhar",
+            "viewMoreAuthor": "Ver mais do autor",
+            "expandHorizons": "Expandir horizontes",
+            "relatedPosts": "Publicações Relacionadas",
+            "exploreArchive": "EXPLORAR ARQUIVO",
+            "notFound": "Artigo não encontrado",
+            "guestAuthor": "AUTOR CONVIDADO",
+            "authorBioMember": "Membro da Escola Hispânica como {role}. Dedica o seu trabalho de pesquisa à promoção e estudo da tradição intelectual do mundo hispânico.",
+            "authorBioGuest": "Colaborador da Escola Hispânica especializado no estudo da tradição intelectual e política do mundo hispânico. As suas pesquisas centram-se na atualidade do pensamento clássico na modernidade."
+        }
+    },
+    "Proyectos": {
+        "Hero": {
+            "tag": "Pesquisa",
+            "title": "Projetos",
+            "description": "Linhas de trabalho e pesquisa promovidas pela Escola Hispânica. Cada projeto articula-se com fontes, publicações e actividades académicas."
+        },
+        "ActiveProject": {
+            "tag": "Projeto Ativo",
+            "label": "Pesquisa Histórica",
+            "status": "ATIVO",
+            "viewProject": "VER O PROJETO",
+            "explorePublications": "EXPLORAR PUBLICAÇÕES"
+        },
+        "Archive": {
+            "title": "Arquivo de Projetos",
+            "description": "Esta secção cresce com o tempo. Novas linhas de pesquisa serão incorporadas aqui à medida que os trabalhos editoriais e académicos da Escola progridam."
+        },
+        "Meta": {
+            "title": "Proyectos | Escuela Hispánica",
+            "description": "Linhas de trabalho e pesquisa promovidas por Escuela Hispânica."
+        }
+    },
+    "Proyecto1776": {
+        "Hero": {
+            "title": "PROJETO",
+            "subtitle": "A marca da Escolástica Hispânica na Declaração de Independência dos EUA.",
+            "researchNote": "Projeto de pesquisa em desenvolvimento por ocasião do 250º aniversário da Declaração de Independência dos Estados Unidos da América (1776–2026).",
+            "readIntro": "LER INTRODUÇÃO",
+            "collaborate": "COLABORAR"
+        },
+        "Sidebar": {
+            "contents": "CONTEÚDOS",
+            "introduccion": "INTRODUÇÃO",
+            "hitos": "MARCOS DO PENSAMENTO",
+            "fundadores": "PAIS FUNDADORES",
+            "otros": "OUTROS PENSADORES",
+            "ejes": "EIXOS DO PROJETO",
+            "vision": "VISÃO E ALICERCES",
+            "bibliografia": "BIBLIOGRAFIA"
+        },
+        "Content": {
+            "introTitle": "Introdução",
+            "introText1": "Na Escola Hispânica, impulsionamos o Projeto 1776; um projeto de pesquisa em desenvolvimento por ocasião do 250º aniversário da Declaração de Independência dos Estados Unidos da América (1776–2026). Este projeto explora a influência do pensamento político da Segunda Escolástica —especialmente da Escola de Salamanca— nas origens intelectuais do constitucionalismo estadunidense.",
+            "introText2": "Diversos autores têm demonstrado que muitos dos princípios que hoje consideramos pilares das democracias modernas —como a dignidade humana, a soberania popular ou a limitação do poder— foram formulados séculos antes por teólogos e juristas católicos dos séculos XVI e XVII.",
+            "introHighlight": "O Projeto 1776 não procura apenas recuperar uma genealogia intelectual esquecida, mas também oferecer uma visão alternativa —hispânica, humanista e católica— do nascimento do constitucionalismo moderno.",
+            "milestonesTitle": "Marcos do Pensamento",
+            "foundersTitle": "Pais Fundadores",
+            "foundersSubtitle": "Principais figuras da Revolução Americana cuja formação intelectual e biblioteca pessoal revelam uma conexão significativa com a tradição escolástica.",
+            "receptionTitle": "Receção e Redescoberta"
+        },
+        "Axes": {
+            "title": "Eixos do Projeto",
+            "description": "Este projeto articula-se em torno de vários eixos operacionais e de pesquisa:",
+            "01": "Estudos comparativos entre as emancipações hispano-americanas e a estadunidense.",
+            "02": "Estudos sobre a influência da tradição hispânica nos pais fundadores dos Estados Unidos.",
+            "03": "Publicações sobre a influência da tradição hispânica na tradição política anglo-americana.",
+            "04": "Eventos presenciais e virtuais sobre os pontos anteriores."
+        },
+        "Paintings": {
+            "galvezMarch": "\"A MARCHA DE GÁLVEZ\" - AUGUSTO FERRER-DALMAU",
+            "galvezMarchDesc": "Este quadro representa o general Bernardo de Gálvez liderando suas tropas através de um pântano durante a campanha da Guerra da Independência dos Estados Unidos. Carregando uma bandeira espanhola e outra americana, Gálvez, a cavalo, guia seus homens, que avançam com dificuldade entre a água e a vegetação. Soldados de diferentes raças, incluindo nativos americanos, participam da marcha, refletindo a diversidade e a determinação do exército que luta pela liberdade.",
+            "forSpain": "\"POR ESPANHA E PELO REI\" - AUGUSTO FERRER-DALMAU",
+            "forSpainDesc": "O quadro retrata uma cena de batalha durante a Guerra da Independência dos Estados Unidos, destacando a participação espanhola.",
+            "sisterFlags": "\"BANDEIRAS IRMÃS\" - AUGUSTO FERRER-DALMAU",
+            "sisterFlagsDesc": "Este quadro mostra dois navios majestosos, um espanhol e outro americano, navegando juntos."
+        },
+        "Vision": {
+            "title": "Visão e Alicerces",
+            "text": "O Projeto 1776 procura despoeirar a tradição hispânica, desconhecida ou esquecida por muitos, atualizá-la e colocá-la ao serviço das nossas sociedades e do Ocidente, como uma visão complementar e necessária à anglo-americana."
+        },
+        "Bibliography": {
+            "title": "Referências Bibliográficas"
+        },
+        "Participate": {
+            "title": "PARTICIPAR NO PROJETO",
+            "description": "Se você é pesquisador, acadêmico ou deseja apoiar esta linha de pesquisa para o 250º aniversário dos Estados Unidos, entre em contato conosco.",
+            "button": "SOLICITAR INFORMAÇÃO"
+        },
+        "Meta": {
+            "title": "Projeto 1776 | Escola Hispânica",
+            "description": "A marca da Escolástica Hispânica na Declaração de Independência dos EUA."
+        }
+    },
+    "PoliticaPrivacidad": {
+        "Meta": {
+            "title": "Política de Privacidade | Escola Hispânica",
+            "description": "Política de privacidade da Escola Hispânica."
+        }
+    },
+    "Actividades": {
+        "Meta": {
+            "title": "Atividades | Escola Hispânica",
+            "description": "Encontros, jornadas e congressos vinculados à pesquisa e à vida intelectual da Escola Hispânica."
+        },
+        "Hero": {
+            "label": "Agenda & Eventos",
+            "title": "Atividades",
+            "description": "Encontros, jornadas e congressos vinculados à pesquisa e à vida intelectual da Escola Hispânica."
+        },
+        "Upcoming": {
+            "label": "Atividade futura",
+            "viewDetails": "Ver detalhes e registro"
+        },
+        "Featured": {
+            "title": "ATIVIDADES EM DESTAQUE",
+            "subtitle": "Eventos fundamentais da agenda acadêmica atual."
+        },
+        "Past": {
+            "title": "ATIVIDADES PASSADAS",
+            "subtitle": "Arquivo histórico de jornadas e encontros realizados."
+        },
+        "Actions": {
+            "moreInfo": "TODA A INFORMAÇÃO"
+        }
+    },
+    "AvisoLegal": {
+        "Meta": {
+            "title": "Aviso Legal | Escola Hispânica",
+            "description": "Aviso legal da Escola Hispânica."
+        }
+    },
+    "PoliticaCookies": {
+        "Meta": {
+            "title": "Política de Cookies | Escola Hispânica",
+            "description": "Política de cookies da Escola Hispânica."
+        }
+    },
+    "Nosotros": {
+        "Meta": {
+            "title": "A Escola | Escola Hispânica",
+            "description": "Conheça a Escola Hispânica, nossa missão, história e equipa dedicada ao estudo da tradição intelectual hispânica."
+        },
+        "Hero": {
+            "label": "Instituição",
+            "title": "A Escola",
+            "description": "A Escola Hispânica surge com o objetivo de consolidar um espaço de estudo, pesquisa e difusão da língua, história e cultura hispânica. Desde a sua criação, tem se dedicado a fortalecer os vínculos acadêmicos e culturais entre Espanha e América Latina."
+        },
+        "MisionVision": {
+            "misionLabel": "Missão",
+            "mision": "Promover o estudo e a atualização do pensamento político hispânico, explorando as ideias e tradições que moldaram a noção de liberdade no mundo hispânico. A Escola Hispânica busca criar uma comunidade intelectual comprometida com a pesquisa rigorosa, o diálogo e a transmissão de um legado político e histórico comum à Espanha, Portugal e América Latina.",
+            "visionLabel": "Visão",
+            "vision": "Ser uma referência internacional no estudo do pensamento político hispânico e da tradição de liberdade, contribuindo para que essa herança intelectual ilumine os desafios contemporâneos. Aspiramos a fortalecer os laços entre as nações de língua hispânica e lusitana através da compreensão compartilhada de sua história, filosofia política e projeção futura."
+        },
+        "Valores": {
+            "label": "Fundamentos",
+            "title": "Valores",
+            "v1": "Defesa da Hispanidade, seu legado e sua plena atualidade",
+            "v2": "Rigor Académico",
+            "v3": "Cultura e memória"
+        },
+        "WhatWeDo": {
+            "title": "O que Fazemos",
+            "pub": {
+                "title": "Publicações",
+                "desc": "Editamos obras, ensaios e documentos inéditos da tradição hispânica.",
+                "link": "Ver Arquivo"
+            },
+            "act": {
+                "title": "Atividades",
+                "desc": "Congressos, jornadas académicas e cursos sobre pensamento hispânico.",
+                "link": "Agenda"
+            },
+            "proj": {
+                "title": "Projetos",
+                "desc": "Impulsionamos linhas de pesquisa sobre temas-chave da nossa história.",
+                "link": "Ver Linhas"
+            }
+        },
+        "Team": {
+            "title": "Quem Somos",
+            "junta": "Junta Diretiva",
+            "consejo": "Conselho Consultivo",
+            "comiteEmpresarial": "Comité Empresarial",
+            "equipo": "Equipa",
+            "readBio": "Ler bio"
+        },
+        "Academic": {
+            "title": "Membros Académicos",
+            "subtitle": "Investigadores e académicos que participam da vida intelectual da Escola.",
+            "updated": "A lista é atualizada periodicamente."
+        },
+        "Colabora": {
+            "title": "Colabore connosco",
+            "subtitle": "Impulsionamos o pensamento e a consciência hispânica através do estudo, da pesquisa e da formação académica.",
+            "ctaTitle": "Apoie a Nossa Missão",
+            "ctaDesc": "Junte-se à Escola Hispânica. Descubra as nossas diferentes modalidades de colaboração, assinaturas e benefícios exclusivos.",
+            "ctaBtn": "Colabore com a Escola"
+        }
+    },
+    "Contacto": {
+        "Meta": {
+            "title": "Contato | Escola Hispânica",
+            "description": "Entre em contato com a Escola Hispânica. Estamos em Madrid, Espanha."
+        },
+        "Hero": {
+            "label": "Escreva-nos",
+            "title": "Contato",
+            "description": "Tem alguma dúvida sobre nossos projetos, atividades ou assinaturas? Estamos aqui para ajudar."
+        },
+        "Info": {
+            "title": "INFORMAÇÕES DE CONTATO",
+            "emailLabel": "E-mail",
+            "addressLabel": "Endereço",
+            "addressValue": "Calle Zurbano 71, Oficina 9\n28010, Madrid, Espanha"
+        },
+        "Form": {
+            "title": "ENVIE-NOS UMA MENSAGEM",
+            "namePlaceholder": "Seu nome",
+            "nameLabel": "Nome",
+            "emailLabel": "E-mail",
+            "subjectLabel": "Assunto",
+            "messageLabel": "Mensagem",
+            "messagePlaceholder": "Como podemos ajudar você?",
+            "submit": "ENVIAR MENSAGEM",
+            "subjectGeneral": "Consulta geral",
+            "subjectMemberships": "Assinaturas",
+            "subjectResearch": "Projetos de pesquisa",
+            "subjectPress": "Imprensa e media"
+        }
+    },
+    "Recursos": {
+        "Meta": {
+            "title": "Recursos | Escola Hispânica",
+            "description": "Recursos bibliográficos e recomendações sobre a tradição hispânica da liberdade."
+        },
+        "Hero": {
+            "label": "Biblioteca",
+            "title": "Recursos",
+            "description": "Espaço dedicado a publicar recursos bibliográficos e recomendações técnicas que fazem parte do corpus de pensamento que a Escola Hispânica busca redescobrir e difundir."
+        }
+    },
+    "Colabora": {
+        "Meta": {
+            "title": "Colabore | Escola Hispânica",
+            "description": "Junte-se à Escola Hispânica. Escolha o seu nível de compromisso: Amigo, Académico ou Mecenas."
+        },
+        "Hero": {
+            "label": "Comunidade",
+            "title": "Junte-se à Escola",
+            "description": "Apoiar a Escola Hispânica é defender um espaço de liberdade intelectual e rigor histórico. Ao ingressar em nossa comunidade, você faz parte de uma rede viva de pensamento."
+        },
+        "Tiers": {
+            "researchersLabel": "INVESTIGADORES",
+            "freeContribution": "Contribuição Livre",
+            "perMonth": "mês",
+            "perYear": "ano",
+            "descAmigo": "Para quem deseja apoiar a missão da Escola e manter-se informado.",
+            "descAcademico": "Para acadêmicos e investigadores. Requer candidatura e aprovação do comité.",
+            "descMecenas": "Para quem deseja um compromisso maior e um vínculo direto com a instituição.",
+            "btnAmigo": "TORNAR-ME AMIGO",
+            "btnAcademico": "SOLICITAR ADMISSÃO",
+            "btnMecenas": "TORNAR-ME MECENAS",
+            "btnRedirecting": "REDIRECIONANDO..."
+        },
+        "Comparison": {
+            "title": "Comparativo de benefícios",
+            "benefit": "Benefício",
+            "benefits": {
+                "newsletters": "Boletins de Notícias",
+                "eventDiscount": "Desconto em Eventos",
+                "privateLibrary": "Acesso à Biblioteca Privada",
+                "certificate": "Certificado de Pertença",
+                "votingRight": "Direito de Voto",
+                "publication": "Publicação de Investigações",
+                "dinners": "Jantares com Palestrantes",
+                "mention": "Menção nas Memórias"
+            },
+            "discountAmigo": "10%",
+            "discountAcademico": "25%",
+            "discountMecenas": "VIP / Grátis",
+            "pubWithReview": "Com revisão",
+            "mentionAmigo": "Opcional",
+            "mentionAcademico": "Académica",
+            "mentionMecenas": "Destacada"
+        },
+        "FAQ": {
+            "title": "Perguntas frequentes",
+            "q1": "Posso cancelar a minha subscrição?",
+            "a1": "Sim, a qualquer momento na sua área de utilizador. O cancelamento entra em vigor no final do período contratado.",
+            "q2": "Como funciona o processo de admissão académica?",
+            "a2": "O comité avalia o seu CV e o texto inédito. Procuramos rigor e alinhamento com os valores da Escola. O rácio de aceitação garante a qualidade da comunidade.",
+            "q3": "Os pagamentos são seguros?",
+            "a3": "Utilizamos o Stripe como gateway de pagamento encriptado. Não armazenamos os seus dados bancários.",
+            "q4": "Posso mudar de categoria?",
+            "a4": "Sim, pode atualizar de Amigo para Mecenas ou solicitar a passagem para Académico contactando a secretaria."
+        },
+        "Security": "Pagamentos seguros processados via Stripe. Dados protegidos de acordo com o RGPD.",
+        "Modal": {
+            "amigo": {
+                "title": "Contribuição Amigo",
+                "subtitle": "Escolha a sua contribuição e modalidade",
+                "amountLabel": "Valor (€)",
+                "modeLabel": "Modalidade",
+                "modeOnce": "Pontual",
+                "modeMonthly": "Mensal",
+                "errorMin": "O valor mínimo é 1€",
+                "errorConnection": "Erro de conexão",
+                "errorPayment": "Erro ao criar a sessão de pagamento",
+                "submit": "PROCEDER AO PAGAMENTO",
+                "submitting": "REDIRECIONANDO...",
+                "cancel": "CANCELAR"
+            },
+            "academico": {
+                "title": "Candidatura Académica",
+                "subtitle": "Complete a sua candidatura para se juntar à nuestra comunidade académica",
+                "nameLabel": "Nome Completo",
+                "namePlaceholder": "O seu nome e sobrenome",
+                "emailLabel": "E-mail",
+                "emailPlaceholder": "exemplo@email.com",
+                "motivationLabel": "Por que deseja juntar-se?",
+                "motivationPlaceholder": "Conte-nos brevemente o seu interesse e trajetória...",
+                "cvLabel": "Curriculum Vitae (PDF)",
+                "errorConnection": "Erro de conexão",
+                "errorSubmit": "Erro ao enviar a solicitação",
+                "submit": "ENVIAR SOLICITAÇÃO",
+                "submitting": "ENVIANDO...",
+                "cancel": "CANCELAR",
+                "successTitle": "Solicitação enviada",
+                "successMessage": "Receberá uma confirmação por e-mail. El comité avaliará o seu perfil e notificará o resultado.",
+                "close": "FECHAR"
+            }
+        },
+        "Success": {
+            "Meta": {
+                "title": "Assinatura ativada | Escola Hispânica",
+                "description": "A sua assinatura foi ativada com sucesso."
+            },
+            "amigo": {
+                "title": "Obrigado pelo seu apoio!",
+                "subtitle": "Agora é Amigo da Escola Hispânica",
+                "message": "A sua contribuição ajuda-nos a manter vivo o pensamento hispânico. Receberá os nossos boletins exclusivos e acesso a descontos em eventos."
+            },
+            "academico": {
+                "title": "Bem-vindo, Membro Académico!",
+                "subtitle": "A sua assinatura foi ativada com sucesso",
+                "message": "Agora tem acesso pleno à nossa biblioteca privada, seminários exclusivos e a possibilidade de publicar as suas investigações."
+            },
+            "mecenas": {
+                "title": "Bem-vindo, Mecenas!",
+                "subtitle": "O seu patrocínio faz a diferença",
+                "message": "Como Mecenas, tem acesso a todos os benefícios da Escola, além de convites para jantares exclusivos e encontros privados com autores."
+            },
+            "backHome": "VOLTAR AO INÍCIO",
+            "exploreContent": "EXPLORAR CONTEÚDO"
+        }
+    },
+    "Auth": {
+        "Meta": {
+            "loginTitle": "Entrar | Escola Hispânica",
+            "registerTitle": "Criar conta | Escola Hispânica"
+        },
+        "Login": {
+            "access": "Acesso à comunidade",
+            "emailLabel": "E-mail",
+            "passwordLabel": "Senha",
+            "submit": "ENTRAR",
+            "submitting": "ENTRANDO...",
+            "noAccount": "Ainda não tem uma conta?",
+            "register": "Registre-se",
+            "backHome": "← Voltar ao início",
+            "errorCallback": "Erro ao verificar a sua conta. Por favor, tente novamente."
+        },
+        "Register": {
+            "join": "Junte-se à comunidade",
+            "fullNameLabel": "Nome completo",
+            "fullNamePlaceholder": "Seu nome",
+            "emailLabel": "E-mail",
+            "passwordLabel": "Senha",
+            "passwordPlaceholder": "Mínimo 8 caracteres",
+            "passwordError": "A senha deve ter pelo menos 8 caracteres.",
+            "submit": "CRIAR CONTA",
+            "submitting": "CRIANDO CONTA...",
+            "hasAccount": "Já tem uma conta?",
+            "login": "Entrar",
+            "backHome": "← Voltar ao início",
+            "successTitle": "Verifique o seu e-mail",
+            "successMessage": "Enviamos-lhe um link de verificação. Clique nele para ativar a sua conta e aceder à Escola Hispânica.",
+            "goToLogin": "Ir para entrar →"
+        }
+    },
+    "ActividadesSlug": {
+        "Meta": {
+            "notFound": "Atividade não encontrada"
+        },
+        "Breadcrumb": {
+            "home": "INÍCIO",
+            "activities": "ATIVIDADES"
+        },
+        "Share": "Compartilhar",
+        "Details": {
+            "title": "Detalhes do evento",
+            "date": "Data",
+            "location": "Localização",
+            "organizer": "Organizador",
+            "phone": "Telefone",
+            "email": "E-mail",
+            "web": "Web",
+            "allActivities": "TODAS AS ATIVIDADES"
+        },
+        "Gallery": "Galeria do evento",
+        "Related": {
+            "label": "Mais eventos",
+            "title": "Outras Atividades",
+            "viewAll": "VER TODOS"
+        }
+    },
+    "Biografias": {
+        "Meta": {
+            "title": "Biografias | Escola Hispânica",
+            "description": "História da Escola Hispânica através dos seus autores fundamentais."
+        },
+        "title": "Biografias",
+        "placeholder": "Construindo a linha do tempo interativa... (Pendente de documento de detalhe)."
+    }
+}

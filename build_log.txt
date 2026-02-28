@@ -1,0 +1,54 @@
+• turbo 2.8.9
+• Packages in scope: @fortius/database, @fortius/eslint-config, @fortius/typescript-config, @fortius/ui, web-escuela-hispanica
+• Running build in 5 packages
+• Remote caching disabled
+web-escuela-hispanica:build: cache miss, executing 6c2d39d4c3adbdfc
+web-escuela-hispanica:build: 
+web-escuela-hispanica:build: > web-escuela-hispanica@1.0.0 build /Users/dasalazarr/Projects/Fortius/fortius/apps/web-escuela-hispanica
+web-escuela-hispanica:build: > next build
+web-escuela-hispanica:build: 
+web-escuela-hispanica:build: ▲ Next.js 16.1.6 (Turbopack)
+web-escuela-hispanica:build: - Environments: .env.local
+web-escuela-hispanica:build: 
+web-escuela-hispanica:build:   Creating an optimized production build ...
+web-escuela-hispanica:build: ✓ Compiled successfully in 2.3s
+web-escuela-hispanica:build:   Running TypeScript ...
+web-escuela-hispanica:build:   Collecting page data using 9 workers ...
+web-escuela-hispanica:build: Error: Missing API key. Pass it to the constructor `new Resend("re_123")`
+web-escuela-hispanica:build:     at new <anonymous> (.next/server/chunks/[root-of-the-server]__8656cd45._.js:6:28183)
+web-escuela-hispanica:build:     at module evaluation (.next/server/chunks/[root-of-the-server]__8656cd45._.js:6:27733)
+web-escuela-hispanica:build:     at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+web-escuela-hispanica:build:     at getOrInstantiateModuleFromParent (.next/server/chunks/[turbopack]_runtime.js:763:12)
+web-escuela-hispanica:build:     at Context.esmImport [as i] (.next/server/chunks/[turbopack]_runtime.js:228:20)
+web-escuela-hispanica:build:     at module evaluation (.next/server/chunks/[root-of-the-server]__3d575ab6._.js:1:2081)
+web-escuela-hispanica:build:     at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+web-escuela-hispanica:build:     at instantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:768:12)
+web-escuela-hispanica:build:     at getOrInstantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:781:12)
+web-escuela-hispanica:build:     at Object.m (.next/server/chunks/[turbopack]_runtime.js:790:18)
+web-escuela-hispanica:build: Error: Missing API key. Pass it to the constructor `new Resend("re_123")`
+web-escuela-hispanica:build:     at new <anonymous> (.next/server/chunks/[root-of-the-server]__8656cd45._.js:6:28183)
+web-escuela-hispanica:build:     at module evaluation (.next/server/chunks/[root-of-the-server]__8656cd45._.js:6:27733)
+web-escuela-hispanica:build:     at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+web-escuela-hispanica:build:     at getOrInstantiateModuleFromParent (.next/server/chunks/[turbopack]_runtime.js:763:12)
+web-escuela-hispanica:build:     at Context.esmImport [as i] (.next/server/chunks/[turbopack]_runtime.js:228:20)
+web-escuela-hispanica:build:     at module evaluation (.next/server/chunks/[root-of-the-server]__b9aaf7fa._.js:1:2068)
+web-escuela-hispanica:build:     at instantiateModule (.next/server/chunks/[turbopack]_runtime.js:740:9)
+web-escuela-hispanica:build:     at instantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:768:12)
+web-escuela-hispanica:build:     at getOrInstantiateRuntimeModule (.next/server/chunks/[turbopack]_runtime.js:781:12)
+web-escuela-hispanica:build:     at Object.m (.next/server/chunks/[turbopack]_runtime.js:790:18)
+web-escuela-hispanica:build: 
+web-escuela-hispanica:build: > Build error occurred
+web-escuela-hispanica:build: Error: Failed to collect page data for /api/admin/approve
+web-escuela-hispanica:build:     at ignore-listed frames {
+web-escuela-hispanica:build:   type: 'Error'
+web-escuela-hispanica:build: }
+web-escuela-hispanica:build:  ELIFECYCLE  Command failed with exit code 1.
+web-escuela-hispanica:build: ERROR: command finished with error: command (/Users/dasalazarr/Projects/Fortius/fortius/apps/web-escuela-hispanica) /opt/homebrew/bin/pnpm run build exited (1)
+web-escuela-hispanica#build: command (/Users/dasalazarr/Projects/Fortius/fortius/apps/web-escuela-hispanica) /opt/homebrew/bin/pnpm run build exited (1)
+
+ Tasks:    0 successful, 1 total
+Cached:    0 cached, 1 total
+  Time:    6.212s 
+Failed:    web-escuela-hispanica#build
+
+ ERROR  run failed: command  exited (1)

@@ -1,0 +1,531 @@
+{
+    "Navigation": {
+        "home": "Home",
+        "about": "About Us",
+        "projects": "Projects",
+        "activities": "Activities",
+        "publications": "Publications",
+        "collaborate": "Collaborate",
+        "contact": "Contact"
+    },
+    "Footer": {
+        "address": {
+            "line1": "Calle Zurbano 71, Office 9",
+            "line2": "28010, Madrid, Spain"
+        },
+        "links": {
+            "legal": "Legal Notice",
+            "cookies": "Cookie Policy",
+            "privacy": "Privacy"
+        },
+        "copyright": "© 2024 ESCUELA HISPÁNICA. ALL RIGHTS RESERVED."
+    },
+    "Home": {
+        "Hero": {
+            "subtitle": "An exploration of the",
+            "title": "HISPANIC TRADITION OF",
+            "highlight": "FREEDOM",
+            "buttons": {
+                "projects": "PROJECTS",
+                "explore": "EXPLORE THE ARCHIVE"
+            }
+        },
+        "Manifesto": {
+            "title": "A community serving Hispanidad",
+            "paragraphDropCap": "T",
+            "paragraph": "he Escuela Hispánica is born from our conviction that the examination and understanding of our shared intellectual past and lineage, with an eye toward the future, will contribute to bringing our countries closer together and add great value to political discourse, social and cultural dialogue, and public policy development.",
+            "button": "Discover the School"
+        },
+        "Project": {
+            "imageAlt": "Project 1776 - Declaration of Independence",
+            "tag": "Featured Project",
+            "title": "PROJECT",
+            "paragraph": "Research on the influence of Hispanic scholasticism on US independence. A forgotten intellectual bridge between Salamanca and Philadelphia that rewrites our common history.",
+            "button": "Discover Project 1776"
+        },
+        "Activities": {
+            "tag": "Academic Agenda",
+            "title": "Featured Activities",
+            "viewAll": "View all activities",
+            "defaultType": "Event",
+            "defaultLocation": "Madrid",
+            "readMore": "Read more"
+        },
+        "Publications": {
+            "tag": "Digital Archive",
+            "title": "Latest Publications",
+            "readMore": "Read more",
+            "viewAll": "View entire archive"
+        },
+        "Membership": {
+            "tag": "Community",
+            "title": "Become part of our academic and cultural community",
+            "description": "The Escuela Hispánica is not just an academic institution, it is a living community. Collaborate with us and contribute to the rebirth of our legacy.",
+            "tiers": {
+                "amigo": {
+                    "title": "Friend",
+                    "desc": "Support our cultural mission and receive quarterly newsletters and priority access to public events."
+                },
+                "miembro": {
+                    "title": "Academic Member",
+                    "desc": "Access to the unpublished library, private seminars, voting rights, and the possibility of academic publication."
+                },
+                "mecenas": {
+                    "title": "Patron",
+                    "desc": "Become part of the Council of Honor. Invitations to exclusive dinners and special mention in publications."
+                }
+            },
+            "button": "Collaborate"
+        },
+        "Pillars": {
+            "sectionTitle": "Pillars of the School",
+            "pillar1Title": "Architecture of Hispanic Political Thought",
+            "pillar1Desc": "This axis is dedicated to the systematic reconstruction of the conceptual architecture that shaped the Hispanic political world: its legal categories, its understanding of sovereignty, the articulation between natural law and positive law, political representation, jurisdiction, and the limitation of power. The goal is to contribute to the consolidation of a corpus of ideas with shared categories, capable of engaging with contemporary political theory without reducing itself to a mere reaction against other traditions.",
+            "pillar2Title": "Hispanic Tradition in Dialogue with the West",
+            "pillar2Desc": "The Hispanic tradition did not develop in isolation, but in constant dialogue with the rest of European and Atlantic thought. This axis examines those interactions—especially with the Anglo-American tradition—to understand how the modern world was shaped by multiple converging currents. The purpose is not to establish identity-based oppositions, but to reintegrate this tradition into the common Western narrative, highlighting its contribution to contemporary debates on liberalism, political community, and international order.",
+            "pillar3Title": "Hispanic Tradition of Freedom",
+            "pillar3Desc": "This axis explores the concrete ways in which freedom was articulated historically in the Hispanic world through institutions, charters, pacts, and mechanisms for limiting power. Rather than abstract or purely individualistic conceptions, the Hispanic experience developed an institutional and communal understanding of freedom. It also provides conceptual tools for addressing contemporary debates on social fragmentation, the crisis of institutional legitimacy, and the redefinition of the political order in the twenty-first century."
+        }
+    },
+    "Metadata": {
+        "title": "Escuela Hispánica",
+        "description": "A space of knowledge and culture dedicated to studying the intellectual tradition of the Hispanic world. Philosophy, history, law, and economics from the School of Salamanca.",
+        "ogDescription": "A space of knowledge and culture dedicated to studying the intellectual tradition of the Hispanic world.",
+        "twitterDescription": "Intellectual tradition of the Hispanic world"
+    },
+    "Publicaciones": {
+        "Archive": {
+            "title": "Academic Archive",
+            "subtitle": "Library & Publications",
+            "description": "Open repository of articles, reports and academic materials designed to disseminate ideas and reflections that inspire cultural and social debate.",
+            "metaTitle": "Academic Archive | Hispanic School",
+            "metaDescription": "Collection of articles, reports and materials of interest prepared by the Hispanic School and its collaborators.",
+            "featured": "FEATURED",
+            "readArticle": "READ ARTICLE"
+        },
+        "Article": {
+            "home": "HOME",
+            "archive": "ARCHIVE",
+            "readingTime": "12 MIN READ",
+            "share": "Share",
+            "viewMoreAuthor": "View more from author",
+            "expandHorizons": "Expand horizons",
+            "relatedPosts": "Related Posts",
+            "exploreArchive": "EXPLORAR ARCHIVE",
+            "notFound": "Article not found",
+            "guestAuthor": "GUEST AUTHOR",
+            "authorBioMember": "Member of the Hispanic School as {role}. Dedicates their research work to the promotion and study of the intellectual tradition of the Hispanic world.",
+            "authorBioGuest": "Collaborator of the Hispanic School specialized in the study of the intellectual and political tradition of the Hispanic world. Their research focuses on the relevance of classical thought in modernity."
+        }
+    },
+    "Proyectos": {
+        "Hero": {
+            "tag": "Research",
+            "title": "Projects",
+            "description": "Lines of work and research promoted by the Hispanic School. Each project is articulated with sources, publications, and academic activities."
+        },
+        "ActiveProject": {
+            "tag": "Active Project",
+            "label": "Historical Research",
+            "status": "ACTIVE",
+            "viewProject": "VIEW PROJECT",
+            "explorePublications": "EXPLORE PUBLICATIONS"
+        },
+        "Archive": {
+            "title": "Project Archive",
+            "description": "This section grows over time. New lines of research will be incorporated here as the editorial and academic works of the School progress."
+        },
+        "Meta": {
+            "title": "Projects | Hispanic School",
+            "description": "Lines of work and research promoted by the Hispanic School."
+        }
+    },
+    "Proyecto1776": {
+        "Hero": {
+            "title": "PROJECT",
+            "subtitle": "The footprint of Hispanic Scholasticism in the US Declaration of Independence.",
+            "researchNote": "Research project in development on the occasion of the 250th anniversary of the Declaration of Independence of the United States of America (1776–2026).",
+            "readIntro": "READ INTRODUCTION",
+            "collaborate": "COLLABORATE"
+        },
+        "Sidebar": {
+            "contents": "CONTENTS",
+            "introduccion": "INTRODUCTION",
+            "hitos": "MILESTONES OF THOUGHT",
+            "fundadores": "FOUNDING FATHERS",
+            "otros": "OTHER THINKERS",
+            "ejes": "PROJECT AXES",
+            "vision": "VISION AND FOUNDATIONS",
+            "bibliografia": "BIBLIOGRAPHY"
+        },
+        "Content": {
+            "introTitle": "Introduction",
+            "introText1": "At the Hispanic School, we have promoted Project 1776; an ongoing research project marking the 250th anniversary of the Declaration of Independence of the United States of America (1776–2026). This project explores the influence of Second Scholastic political thought—especially from the School of Salamanca—on the intellectual origins of American constitutionalism.",
+            "introText2": "Various authors have highlighted that many principles we consider pillars of modern democracies today—such as human dignity, popular sovereignty, or the limitation of power—were formulated centuries earlier by Catholic theologians and jurists of the 16th and 17th centuries.",
+            "introHighlight": "Project 1776 not only seeks to recover a forgotten intellectual genealogy but also to offer an alternative vision—Hispanic, humanist, and Catholic—of the birth of modern constitutionalism.",
+            "milestonesTitle": "Milestones of Thought",
+            "foundersTitle": "Founding Fathers",
+            "foundersSubtitle": "Key figures of the American Revolution whose intellectual training and personal library reveal a significant connection with the scholastic tradition.",
+            "receptionTitle": "Reception and Rediscovery"
+        },
+        "Axes": {
+            "title": "Project Axes",
+            "description": "This project is organized around several operational and research axes:",
+            "01": "Comparative studies between Hispanic American and United States emancipations.",
+            "02": "Studies on the influence of the Hispanic tradition on the Founding Fathers of the United States.",
+            "03": "Publications on the influence of the Hispanic tradition on the Anglo-American political tradition.",
+            "04": "In-person and virtual events on the previous points."
+        },
+        "Paintings": {
+            "galvezMarch": "\"THE MARCH OF GÁLVEZ\" - AUGUSTO FERRER-DALMAU",
+            "galvezMarchDesc": "This painting represents General Bernardo de Gálvez leading his troops through a swamp during the American Revolutionary War campaign. Carrying both a Spanish and an American flag, Gálvez on horseback guides his men as they advance with difficulty through water and vegetation. Soldiers of different races, including Native Americans, participate in the march, reflecting the diversity and determination of the army fighting for freedom.",
+            "forSpain": "\"FOR SPAIN AND FOR THE KING\" - AUGUSTO FERRER-DALMAU",
+            "forSpainDesc": "The painting portrays a battle scene during the American Revolutionary War, highlighting Spanish participation.",
+            "sisterFlags": "\"SISTER FLAGS\" - AUGUSTO FERRER-DALMAU",
+            "sisterFlagsDesc": "This painting shows two majestic ships, one Spanish and one American, sailing together."
+        },
+        "Vision": {
+            "title": "Vision and Foundations",
+            "text": "Project 1776 seeks to dust off the Hispanic tradition, unknown or forgotten by many, update it, and place it at the service of our societies and the West, as a complementary and necessary vision to the Anglo-American one."
+        },
+        "Bibliography": {
+            "title": "Bibliographic References"
+        },
+        "Participate": {
+            "title": "PARTICIPATE IN THE PROJECT",
+            "description": "If you are a researcher, academic or wish to support this line of research for the 250th anniversary of the United States, contact us.",
+            "button": "REQUEST INFORMATION"
+        },
+        "Meta": {
+            "title": "Project 1776 | Hispanic School",
+            "description": "The footprint of Hispanic Scholasticism in the US Declaration of Independence."
+        }
+    },
+    "PoliticaPrivacidad": {
+        "Meta": {
+            "title": "Privacy Policy | Hispanic School",
+            "description": "Privacy policy of the Hispanic School."
+        }
+    },
+    "Actividades": {
+        "Meta": {
+            "title": "Activities | Hispanic School",
+            "description": "Meetings, workshops and conferences linked to research and the intellectual life of Hispanic School."
+        },
+        "Hero": {
+            "label": "Agenda & Events",
+            "title": "Activities",
+            "description": "Meetings, workshops and conferences linked to research and the intellectual life of Hispanic School."
+        },
+        "Upcoming": {
+            "label": "Future activity",
+            "viewDetails": "View details and registration"
+        },
+        "Featured": {
+            "title": "FEATURED ACTIVITIES",
+            "subtitle": "Key events of the current academic agenda."
+        },
+        "Past": {
+            "title": "PAST ACTIVITIES",
+            "subtitle": "Historical archive of workshops and meetings held."
+        },
+        "Actions": {
+            "moreInfo": "ALL INFORMATION"
+        }
+    },
+    "AvisoLegal": {
+        "Meta": {
+            "title": "Legal Notice | Hispanic School",
+            "description": "Legal notice of the Hispanic School."
+        }
+    },
+    "PoliticaCookies": {
+        "Meta": {
+            "title": "Cookie Policy | Hispanic School",
+            "description": "Cookie policy of the Hispanic School."
+        }
+    },
+    "Nosotros": {
+        "Meta": {
+            "title": "The School | Hispanic School",
+            "description": "Learn about the Hispanic School, our mission, history and team dedicated to the study of the Hispanic intellectual tradition."
+        },
+        "Hero": {
+            "label": "Institution",
+            "title": "The School",
+            "description": "The Hispanic School was founded with the aim of consolidating a space for the study, research and dissemination of the Hispanic language, history and culture. Since its creation, it has been dedicated to strengthening academic and cultural ties between Spain and Latin America."
+        },
+        "MisionVision": {
+            "misionLabel": "Mission",
+            "mision": "To promote the study and renewal of Hispanic political thought, exploring the ideas and traditions that have shaped the notion of freedom in the Hispanic world. The Hispanic School seeks to build an intellectual community committed to rigorous research, dialogue, and the transmission of a shared political and historical legacy among Spain, Portugal, and Latin America.",
+            "visionLabel": "Vision",
+            "vision": "To become an international reference in the study of Hispanic political thought and the tradition of freedom, helping this intellectual heritage illuminate contemporary challenges. We aspire to strengthen bonds among Spanish- and Portuguese-speaking nations through a shared understanding of their history, political philosophy, and future projection."
+        },
+        "Valores": {
+            "label": "Foundations",
+            "title": "Values",
+            "v1": "Defense of Hispanicity, its legacy and its full contemporary relevance",
+            "v2": "Academic Rigor",
+            "v3": "Culture and Memory"
+        },
+        "WhatWeDo": {
+            "title": "What We Do",
+            "pub": {
+                "title": "Publications",
+                "desc": "We edit works, essays and unpublished documents from the Hispanic tradition.",
+                "link": "View Archive"
+            },
+            "act": {
+                "title": "Activities",
+                "desc": "Congresses, academic workshops and courses on Hispanic thought.",
+                "link": "Agenda"
+            },
+            "proj": {
+                "title": "Projects",
+                "desc": "We drive research lines on key topics of our history.",
+                "link": "View Lines"
+            }
+        },
+        "Team": {
+            "title": "Who We Are",
+            "junta": "Board of Directors",
+            "consejo": "Advisory Council",
+            "comiteEmpresarial": "Business Committee",
+            "equipo": "Team",
+            "readBio": "Read bio"
+        },
+        "Academic": {
+            "title": "Academic Members",
+            "subtitle": "Researchers and academics who participate in the intellectual life of the School.",
+            "updated": "The list is updated periodically."
+        },
+        "Colabora": {
+            "title": "Collaborate with us",
+            "subtitle": "We drive Hispanic thought and consciousness through study, research and academic training.",
+            "ctaTitle": "Support Our Mission",
+            "ctaDesc": "Join the Hispanic School. Discover our different collaboration modalities, memberships and exclusive benefits.",
+            "ctaBtn": "Collaborate with the School"
+        }
+    },
+    "Contacto": {
+        "Meta": {
+            "title": "Contact | Hispanic School",
+            "description": "Get in touch with the Hispanic School. We are in Madrid, Spain."
+        },
+        "Hero": {
+            "label": "Write to us",
+            "title": "Contact",
+            "description": "Do you have any questions about our projects, activities or memberships? We are here to help you resolve your doubts."
+        },
+        "Info": {
+            "title": "CONTACT INFORMATION",
+            "emailLabel": "Email",
+            "addressLabel": "Address",
+            "addressValue": "Calle Zurbano 71, Office 9\n28010, Madrid, Spain"
+        },
+        "Form": {
+            "title": "SEND US A MESSAGE",
+            "namePlaceholder": "Your name",
+            "nameLabel": "Name",
+            "emailLabel": "Email",
+            "subjectLabel": "Subject",
+            "messageLabel": "Message",
+            "messagePlaceholder": "How can we help you?",
+            "submit": "SEND MESSAGE",
+            "subjectGeneral": "General inquiry",
+            "subjectMemberships": "Memberships",
+            "subjectResearch": "Research projects",
+            "subjectPress": "Press and media"
+        }
+    },
+    "Recursos": {
+        "Meta": {
+            "title": "Resources | Hispanic School",
+            "description": "Bibliographic resources and recommendations on the Hispanic tradition of liberty."
+        },
+        "Hero": {
+            "label": "Library",
+            "title": "Resources",
+            "description": "A space dedicated to uploading bibliographic resources and technical recommendations that form part of the corpus of thought that the Hispanic School seeks to rediscover and disseminate."
+        }
+    },
+    "Colabora": {
+        "Meta": {
+            "title": "Collaborate | Hispanic School",
+            "description": "Join the Hispanic School. Choose your level of commitment: Friend, Academic or Patron."
+        },
+        "Hero": {
+            "label": "Community",
+            "title": "Join the School",
+            "description": "Supporting the Hispanic School means defending a space of intellectual freedom and historical rigor. By joining our community, you become part of a living network of thought."
+        },
+        "Tiers": {
+            "researchersLabel": "RESEARCHERS",
+            "freeContribution": "Free Contribution",
+            "perMonth": "month",
+            "perYear": "year",
+            "descAmigo": "For those who wish to support the School's mission and stay informed.",
+            "descAcademico": "For academics and researchers. Requires application and committee approval.",
+            "descMecenas": "For those who wish a greater commitment and a direct link with the institution.",
+            "btnAmigo": "BECOME A FRIEND",
+            "btnAcademico": "APPLY FOR ADMISSION",
+            "btnMecenas": "BECOME A PATRON",
+            "btnRedirecting": "REDIRECTING..."
+        },
+        "Comparison": {
+            "title": "Benefits comparison",
+            "benefit": "Benefit",
+            "benefits": {
+                "newsletters": "Newsletters",
+                "eventDiscount": "Event Discount",
+                "privateLibrary": "Private Library Access",
+                "certificate": "Membership Certificate",
+                "votingRight": "Voting Rights",
+                "publication": "Research Publication",
+                "dinners": "Dinners with Speakers",
+                "mention": "Mention in Reports"
+            },
+            "discountAmigo": "10%",
+            "discountAcademico": "25%",
+            "discountMecenas": "VIP / Free",
+            "pubWithReview": "With review",
+            "mentionAmigo": "Optional",
+            "mentionAcademico": "Academic",
+            "mentionMecenas": "Featured"
+        },
+        "FAQ": {
+            "title": "Frequently asked questions",
+            "q1": "Can I cancel my subscription?",
+            "a1": "Yes, at any time from your user area. Cancellation takes effect at the end of the contracted period.",
+            "q2": "How does the academic admission process work?",
+            "a2": "The committee evaluates your CV and unpublished text. We look for rigor and alignment with the School's values. The acceptance ratio guarantees the quality of the community.",
+            "q3": "Are payments secure?",
+            "a3": "We use Stripe as an encrypted payment gateway. We do not store your banking data.",
+            "q4": "Can I change my membership tier?",
+            "a4": "Yes, you can upgrade from Friend to Patron or apply for Academic status by contacting the secretariat."
+        },
+        "Security": "Secure payments processed via Stripe. Data protected under GDPR.",
+        "Modal": {
+            "amigo": {
+                "title": "Friend Contribution",
+                "subtitle": "Choose your contribution and mode",
+                "amountLabel": "Amount (€)",
+                "modeLabel": "Mode",
+                "modeOnce": "One-time",
+                "modeMonthly": "Monthly",
+                "errorMin": "Minimum amount is €1",
+                "errorConnection": "Connection error",
+                "errorPayment": "Error creating payment session",
+                "submit": "PROCEED TO PAYMENT",
+                "submitting": "REDIRECTING...",
+                "cancel": "CANCEL"
+            },
+            "academico": {
+                "title": "Academic Application",
+                "subtitle": "You must be registered and logged in to apply",
+                "motivationLabel": "Why do you want to join? (optional)",
+                "motivationPlaceholder": "Tell us briefly about your interest and background...",
+                "cvLabel": "Curriculum Vitae (PDF)",
+                "errorConnection": "Connection error",
+                "errorSubmit": "Error submitting the application",
+                "submit": "SUBMIT APPLICATION",
+                "submitting": "SENDING...",
+                "cancel": "CANCEL",
+                "successTitle": "Application submitted",
+                "successMessage": "You will receive a confirmation by email. The committee will evaluate your profile and notify you of the result.",
+                "close": "CLOSE"
+            }
+        },
+        "Success": {
+            "Meta": {
+                "title": "Membership Activated | Hispanic School",
+                "description": "Your membership has been successfully activated."
+            },
+            "amigo": {
+                "title": "Thank you for your support!",
+                "subtitle": "You are now a Friend of the Hispanic School",
+                "message": "Your contribution helps us keep Hispanic thought alive. You will receive our exclusive newsletters and access to event discounts."
+            },
+            "academico": {
+                "title": "Welcome, Academic Member!",
+                "subtitle": "Your membership has been successfully activated",
+                "message": "You now have full access to our private library, exclusive seminars, and the ability to publish your research."
+            },
+            "mecenas": {
+                "title": "Welcome, Patron!",
+                "subtitle": "Your patronage makes a difference",
+                "message": "As a Patron, you have access to all the benefits of the School, plus invitations to exclusive dinners and private meetings with authors."
+            },
+            "backHome": "BACK TO HOME",
+            "exploreContent": "EXPLORE CONTENT"
+        }
+    },
+    "Auth": {
+        "Meta": {
+            "loginTitle": "Sign in | Hispanic School",
+            "registerTitle": "Create account | Hispanic School"
+        },
+        "Login": {
+            "access": "Community access",
+            "emailLabel": "Email",
+            "passwordLabel": "Password",
+            "submit": "SIGN IN",
+            "submitting": "SIGNING IN...",
+            "noAccount": "Don't have an account yet?",
+            "register": "Sign up",
+            "backHome": "← Back to home",
+            "errorCallback": "Error verifying your account. Please try again."
+        },
+        "Register": {
+            "join": "Join the community",
+            "fullNameLabel": "Full name",
+            "fullNamePlaceholder": "Your name",
+            "emailLabel": "Email",
+            "passwordLabel": "Password",
+            "passwordPlaceholder": "At least 8 characters",
+            "passwordError": "Password must be at least 8 characters.",
+            "submit": "CREATE ACCOUNT",
+            "submitting": "CREATING ACCOUNT...",
+            "hasAccount": "Already have an account?",
+            "login": "Sign in",
+            "backHome": "← Back to home",
+            "successTitle": "Check your email",
+            "successMessage": "We have sent you a verification link. Click on it to activate your account and access the Hispanic School.",
+            "goToLogin": "Go to sign in →"
+        }
+    },
+    "ActividadesSlug": {
+        "Meta": {
+            "notFound": "Activity not found"
+        },
+        "Breadcrumb": {
+            "home": "HOME",
+            "activities": "ACTIVITIES"
+        },
+        "Share": "Share",
+        "Details": {
+            "title": "Event details",
+            "date": "Date",
+            "location": "Location",
+            "organizer": "Organizer",
+            "phone": "Phone",
+            "email": "Email",
+            "web": "Web",
+            "allActivities": "ALL ACTIVITIES"
+        },
+        "Gallery": "Event gallery",
+        "Related": {
+            "label": "More events",
+            "title": "Other Activities",
+            "viewAll": "VIEW ALL"
+        }
+    },
+    "Biografias": {
+        "Meta": {
+            "title": "Biographies | Hispanic School",
+            "description": "History of the Hispanic School through its foundational authors."
+        },
+        "title": "Biographies",
+        "placeholder": "Building the interactive timeline... (Pending detail document)."
+    }
+}
