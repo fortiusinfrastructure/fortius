@@ -195,82 +195,82 @@ export default async function Proyecto1776Page({ params }: Props) {
     ];
 
     const founders = [
-    {
-        name: 'John Adams',
-        image: '/images/colabora/john-adams.webp',
-        description: {
-            es: 'Adams leyó y citó a Juan de Mariana, especialmente De Rege et Regis Institutione (1599), integrándolo en su reflexión constitucional junto a la tradición republicana inglesa. En 1787 publicó A Defence of the Constitutions of Government of the United States, donde cita a Marchamont Nedham (The Excellencie of a Free-State, 1654) dentro de una genealogía política en la que sitúa también a Mariana; en 1788 recibió un ejemplar de la obra del jesuita español y, décadas después, en su carta a John Taylor del 14 de diciembre de 1814, volvió a mencionarlo explícitamente como autoridad política. A través de estas lecturas y referencias, Adams asumió la legitimidad de deponer gobiernos injustos y la superioridad de la ley natural sobre el poder arbitrario, incorporando al pensamiento constitucional americano la idea de un poder fiduciario, limitado y subordinado al bien común, propia de la escolástica ibérica transmitida al mundo anglosajón.',
-            en: 'Adams read and cited Juan de Mariana, incorporating him into his constitutional reflection alongside the English republican tradition. Through these readings, Adams assumed the superiority of natural law over arbitrary power, incorporating into American thought the idea of a fiduciary power, limited and subordinated to the common good, typical of Iberian scholasticism.',
-            pt: 'Adams leu e citou Juan de Mariana, integrando-o na sua reflexão constitucional junto à tradição republicana inglesa. Assumiu a legitimidade de depor governos injustos e a superioridade da lei natural sobre o poder arbitrário, incorporando no pensamento americano a ideia de poder limitado e subordinado ao bem comum, própria da escolástica ibérica.'
+        {
+            name: 'John Adams',
+            image: '/images/proyectos/1776/johnadams.jpg',
+            description: {
+                es: 'Adams leyó y citó a Juan de Mariana, especialmente De Rege et Regis Institutione (1599), integrándolo en su reflexión constitucional junto a la tradición republicana inglesa. En 1787 publicó A Defence of the Constitutions of Government of the United States, donde cita a Marchamont Nedham (The Excellencie of a Free-State, 1654) dentro de una genealogía política en la que sitúa también a Mariana; en 1788 recibió un ejemplar de la obra del jesuita español y, décadas después, en su carta a John Taylor del 14 de diciembre de 1814, volvió a mencionarlo explícitamente como autoridad política. A través de estas lecturas y referencias, Adams asumió la legitimidad de deponer gobiernos injustos y la superioridad de la ley natural sobre el poder arbitrario, incorporando al pensamiento constitucional americano la idea de un poder fiduciario, limitado y subordinado al bien común, propia de la escolástica ibérica transmitida al mundo anglosajón.',
+                en: 'Adams read and cited Juan de Mariana, incorporating him into his constitutional reflection alongside the English republican tradition. Through these readings, Adams assumed the superiority of natural law over arbitrary power, incorporating into American thought the idea of a fiduciary power, limited and subordinated to the common good, typical of Iberian scholasticism.',
+                pt: 'Adams leu e citou Juan de Mariana, integrando-o na sua reflexão constitucional junto à tradição republicana inglesa. Assumiu a legitimidade de depor governos injustos e a superioridade da lei natural sobre o poder arbitrário, incorporando no pensamento americano a ideia de poder limitado e subordinado ao bem comum, própria da escolástica ibérica.'
+            }
+        },
+        {
+            name: 'Thomas Jefferson',
+            image: '/images/proyectos/1776/thomasjefferson.jpg',
+            description: {
+                es: 'Jefferson mostró un interés sostenido por la cultura y el pensamiento hispánico: en la década de 1760–1770 adquirió y leyó Don Quijote de la Mancha (1605–1615) de Miguel de Cervantes como parte de su formación intelectual. Al redactar la Declaración de Independencia en 1776 formuló políticamente principios de derechos naturales y soberanía popular que dialogaban con esa tradición europea previa. Durante su estancia diplomática en Europa entre 1785 y 1789 amplió su biblioteca política —incluyendo obras de Juan de Mariana— y posteriormente reorganizó su colección en 1815, manteniendo textos hispánicos entre sus referencias.\n\nSu interés alcanzó también a Juan de Palafox y Mendoza (1600–1659), obispo de Puebla de los Ángeles y virrey interino de Nueva España, protagonista de los grandes conflictos jurisdiccionales del siglo XVII entre poder político, Iglesia y corporaciones. En escritos como sus Cartas pastorales y memoriales sobre jurisdicción y gobierno (décadas de 1640–1650) defendió que la autoridad debía someterse a la ley moral y al bien común, rechazando tanto el absolutismo político como los privilegios corporativos que anulaban la responsabilidad pública. Esta defensa de un poder limitado por normas superiores —no por mera voluntad— se aproxima al principio jeffersoniano de derechos previos al Estado. Así, en la biblioteca y correspondencia de Jefferson aparece una mirada hacia España no sólo literaria sino también política, donde ley natural, dignidad humana y limitación del poder dialogan con su concepción del republicanismo americano.',
+                en: 'Jefferson showed a sustained interest in Hispanic culture: he acquired and read Don Quixote. During his diplomatic stay in Europe, he expanded his political library—including works by Juan de Mariana—and also took interest in Juan de Palafox y Mendoza. In Jefferson\'s library, there is a look toward Spain not only literary but also political, connecting natural law, human dignity, and the limitation of power with American republicanism.',
+                pt: 'Jefferson demonstrou um interesse sustentado na cultura e no pensamento hispânico: leu e adquiriu obras de Cervantes. Durante a sua estada diplomática na Europa, incluiu obras de Juan de Mariana na sua biblioteca. O seu interesse alcançou também autores como Juan de Palafox y Mendoza, ligando a defesa clássica de uma autoridade submetida à lei moral e ao bem comum aos ideais da revolução.'
+            }
+        },
+        {
+            name: 'James Madison',
+            image: '/images/proyectos/1776/jamesmadison.jpg',
+            description: {
+                es: 'En The Federalist Papers (1787–1788), especialmente en los ensayos nº 10 y nº 51, Madison desarrolla la idea de que la soberanía reside en el pueblo pero debe ejercerse a través de instituciones que canalicen y limiten el poder político. Su defensa del gobierno representativo, de la separación de poderes y del equilibrio entre facciones reproduce —aunque sin cita explícita— la tradición escolástica formulada por Francisco Suárez en Defensio Fidei (1613) y por Juan de Mariana en De Rege et Regis Institutione (1599): el poder es originariamente comunitario, se delega fiduciariamente y debe estructurarse para impedir la tiranía. La famosa tesis madisoniana según la cual "la ambición debe contrarrestar la ambición" traduce en lenguaje constitucional la antropología política escolástica, que partía de la imperfección humana para justificar un orden mixto y prudencial. Así, la Constitución aparece no como creación de la soberanía popular, sino como su forma institucional estable, heredera indirecta de la teoría política ibérica transmitida al mundo anglosajón.',
+                en: 'In The Federalist Papers, Madison develops the idea that sovereignty resides in the people but must be exercised through institutions that channel and limit political power. His defense of representative government reproduces—although without explicit citation—the scholastic tradition of a prudential mixed order. The Constitution appears as the stable institutional form of popular sovereignty, an indirect heir to Iberian political theory.',
+                pt: 'Em Os Artigos Federalistas, Madison desenvolve a ideia de que a soberania reside no povo mas deve ser exercida através de instituições que limitem o poder político. A sua defesa do governo representativo, se bem que sem citação explícita, reproduz a antropologia política escolástica.'
+            }
+        },
+        {
+            name: 'Alexander Hamilton',
+            image: '/images/proyectos/1776/alexander madison.jpg',
+            description: {
+                es: 'En el Report on Public Credit (1790) y el Report on a National Bank (1790), Hamilton vincula estabilidad monetaria, confianza pública y libertad política, afirmando que el orden constitucional requiere un sistema financiero capaz de evitar arbitrariedades fiscales. Esta preocupación conecta con la crítica de Juan de Mariana en De Monetae Mutatione (1609), donde la manipulación de la moneda se describe como un impuesto encubierto contrario al consentimiento político. Aunque Hamilton adopta soluciones institucionales distintas —la creación de un banco nacional y un crédito público sólido— comparte la premisa escolástica de que la legitimidad del poder depende de respetar la propiedad y evitar formas indirectas de exacción. La arquitectura económica de la joven república traduce así al plano práctico un problema ya formulado en la escolástica hispánica: la relación entre moneda, tributación y soberanía, incorporando a la experiencia constitucional americana debates originados dos siglos antes en la teoría moral y jurídica ibérica.',
+                en: 'Hamilton links monetary stability, public trust, and political liberty. This concern connects with Juan de Mariana\'s critique in De Monetae Mutatione (1609), where currency manipulation is described as a hidden tax contrary to political consent. The economic architecture of the young republic incorporated debates originated two centuries earlier in Iberian moral theory.',
+                pt: 'Hamilton liga estabilidade monetária, confiança pública e liberdade política. Esta preocupação conecta-se com a crítica de Juan de Mariana em De Monetae Mutatione (1609), onde a manipulação de moeda é descrita como imposto encoberto.'
+            }
         }
-    },
-    {
-        name: 'Thomas Jefferson',
-        image: '/images/colabora/thomas-jefferson.webp',
-        description: {
-            es: 'Jefferson mostró un interés sostenido por la cultura y el pensamiento hispánico: en la década de 1760–1770 adquirió y leyó Don Quijote de la Mancha (1605–1615) de Miguel de Cervantes como parte de su formación intelectual. Al redactar la Declaración de Independencia en 1776 formuló políticamente principios de derechos naturales y soberanía popular que dialogaban con esa tradición europea previa. Durante su estancia diplomática en Europa entre 1785 y 1789 amplió su biblioteca política —incluyendo obras de Juan de Mariana— y posteriormente reorganizó su colección en 1815, manteniendo textos hispánicos entre sus referencias.\n\nSu interés alcanzó también a Juan de Palafox y Mendoza (1600–1659), obispo de Puebla de los Ángeles y virrey interino de Nueva España, protagonista de los grandes conflictos jurisdiccionales del siglo XVII entre poder político, Iglesia y corporaciones. En escritos como sus Cartas pastorales y memoriales sobre jurisdicción y gobierno (décadas de 1640–1650) defendió que la autoridad debía someterse a la ley moral y al bien común, rechazando tanto el absolutismo político como los privilegios corporativos que anulaban la responsabilidad pública. Esta defensa de un poder limitado por normas superiores —no por mera voluntad— se aproxima al principio jeffersoniano de derechos previos al Estado. Así, en la biblioteca y correspondencia de Jefferson aparece una mirada hacia España no sólo literaria sino también política, donde ley natural, dignidad humana y limitación del poder dialogan con su concepción del republicanismo americano.',
-            en: 'Jefferson showed a sustained interest in Hispanic culture: he acquired and read Don Quixote. During his diplomatic stay in Europe, he expanded his political library—including works by Juan de Mariana—and also took interest in Juan de Palafox y Mendoza. In Jefferson\'s library, there is a look toward Spain not only literary but also political, connecting natural law, human dignity, and the limitation of power with American republicanism.',
-            pt: 'Jefferson demonstrou um interesse sustentado na cultura e no pensamento hispânico: leu e adquiriu obras de Cervantes. Durante a sua estada diplomática na Europa, incluiu obras de Juan de Mariana na sua biblioteca. O seu interesse alcançou também autores como Juan de Palafox y Mendoza, ligando a defesa clássica de uma autoridade submetida à lei moral e ao bem comum aos ideais da revolução.'
-        }
-    },
-    {
-        name: 'James Madison',
-        image: '/images/colabora/james-madison.webp',
-        description: {
-            es: 'En The Federalist Papers (1787–1788), especialmente en los ensayos nº 10 y nº 51, Madison desarrolla la idea de que la soberanía reside en el pueblo pero debe ejercerse a través de instituciones que canalicen y limiten el poder político. Su defensa del gobierno representativo, de la separación de poderes y del equilibrio entre facciones reproduce —aunque sin cita explícita— la tradición escolástica formulada por Francisco Suárez en Defensio Fidei (1613) y por Juan de Mariana en De Rege et Regis Institutione (1599): el poder es originariamente comunitario, se delega fiduciariamente y debe estructurarse para impedir la tiranía. La famosa tesis madisoniana según la cual "la ambición debe contrarrestar la ambición" traduce en lenguaje constitucional la antropología política escolástica, que partía de la imperfección humana para justificar un orden mixto y prudencial. Así, la Constitución aparece no como creación de la soberanía popular, sino como su forma institucional estable, heredera indirecta de la teoría política ibérica transmitida al mundo anglosajón.',
-            en: 'In The Federalist Papers, Madison develops the idea that sovereignty resides in the people but must be exercised through institutions that channel and limit political power. His defense of representative government reproduces—although without explicit citation—the scholastic tradition of a prudential mixed order. The Constitution appears as the stable institutional form of popular sovereignty, an indirect heir to Iberian political theory.',
-            pt: 'Em Os Artigos Federalistas, Madison desenvolve a ideia de que a soberania reside no povo mas deve ser exercida através de instituições que limitem o poder político. A sua defesa do governo representativo, se bem que sem citação explícita, reproduz a antropologia política escolástica.'
-        }
-    },
-    {
-        name: 'Alexander Hamilton',
-        image: '/images/colabora/alexander-hamilton.webp',
-        description: {
-            es: 'En el Report on Public Credit (1790) y el Report on a National Bank (1790), Hamilton vincula estabilidad monetaria, confianza pública y libertad política, afirmando que el orden constitucional requiere un sistema financiero capaz de evitar arbitrariedades fiscales. Esta preocupación conecta con la crítica de Juan de Mariana en De Monetae Mutatione (1609), donde la manipulación de la moneda se describe como un impuesto encubierto contrario al consentimiento político. Aunque Hamilton adopta soluciones institucionales distintas —la creación de un banco nacional y un crédito público sólido— comparte la premisa escolástica de que la legitimidad del poder depende de respetar la propiedad y evitar formas indirectas de exacción. La arquitectura económica de la joven república traduce así al plano práctico un problema ya formulado en la escolástica hispánica: la relación entre moneda, tributación y soberanía, incorporando a la experiencia constitucional americana debates originados dos siglos antes en la teoría moral y jurídica ibérica.',
-            en: 'Hamilton links monetary stability, public trust, and political liberty. This concern connects with Juan de Mariana\'s critique in De Monetae Mutatione (1609), where currency manipulation is described as a hidden tax contrary to political consent. The economic architecture of the young republic incorporated debates originated two centuries earlier in Iberian moral theory.',
-            pt: 'Hamilton liga estabilidade monetária, confiança pública e liberdade política. Esta preocupação conecta-se com a crítica de Juan de Mariana em De Monetae Mutatione (1609), onde a manipulação de moeda é descrita como imposto encoberto.'
-        }
-    }
-];
+    ];
 
     const thinkers = [
-    {
-        name: 'Orestes Brownson',
-        period: '(1803–1876)',
-        description: {
-            es: 'El pensador político católico norteamericano defendió que la Constitución no es un contrato artificial sino la forma jurídica de una comunidad política previa. En The American Republic (1865) sostiene que la soberanía pertenece al pueblo en cuanto comunidad moral y no a individuos aislados, una formulación extraordinariamente cercana a Francisco Suárez, Defensio Fidei (1613).\n\nBrownson cita expresamente la tradición escolástica —especialmente tomista y suareciana— para criticar el individualismo contractualista puro. Para él, Estados Unidos funciona porque sin saberlo conserva una concepción clásica (pre-liberal) del poder político: autoridad derivada, limitada y orientada al bien común.',
-            en: 'The American Catholic political thinker defended that the Constitution is not an artificial contract but the juridical form of a prior political community. In The American Republic (1865) he maintains that sovereignty belongs to the people as a moral community and not to isolated individuals, a formulation extraordinarily close to Francisco Suárez.',
-            pt: 'O pensador político católico norte-americano defendeu que a Constituição não é um contrato artificial, mas a forma jurídica de uma comunidade política prévia. Em The American Republic (1865), afirma que a soberania pertence ao povo enquanto comunidade moral e não a indivíduos isolados, uma formulação muito próxima de Francisco Suárez.'
+        {
+            name: 'Orestes Brownson',
+            period: '(1803–1876)',
+            description: {
+                es: 'El pensador político católico norteamericano defendió que la Constitución no es un contrato artificial sino la forma jurídica de una comunidad política previa. En The American Republic (1865) sostiene que la soberanía pertenece al pueblo en cuanto comunidad moral y no a individuos aislados, una formulación extraordinariamente cercana a Francisco Suárez, Defensio Fidei (1613).\n\nBrownson cita expresamente la tradición escolástica —especialmente tomista y suareciana— para criticar el individualismo contractualista puro. Para él, Estados Unidos funciona porque sin saberlo conserva una concepción clásica (pre-liberal) del poder político: autoridad derivada, limitada y orientada al bien común.',
+                en: 'The American Catholic political thinker defended that the Constitution is not an artificial contract but the juridical form of a prior political community. In The American Republic (1865) he maintains that sovereignty belongs to the people as a moral community and not to isolated individuals, a formulation extraordinarily close to Francisco Suárez.',
+                pt: 'O pensador político católico norte-americano defendeu que a Constituição não é um contrato artificial, mas a forma jurídica de uma comunidade política prévia. Em The American Republic (1865), afirma que a soberania pertence ao povo enquanto comunidade moral e não a indivíduos isolados, uma formulação muito próxima de Francisco Suárez.'
+            }
+        },
+        {
+            name: 'John Courtney Murray',
+            period: '1960',
+            description: {
+                es: 'En We Hold These Truths (1960), Murray interpreta la Primera Enmienda estadounidense a la luz de la tradición del derecho natural y reconoce la herencia de Suárez y Belarmino en la soberanía popular limitada. Argumenta que el experimento americano funciona porque institucionaliza principios clásicos previos al liberalismo ilustrado: autoridad derivada, ley moral superior al Estado y legitimidad condicionada del poder político.',
+                en: 'In We Hold These Truths (1960), Murray interprets the First Amendment in light of the natural law tradition and recognizes the heritage of Suárez and Bellarmine in limited popular sovereignty.',
+                pt: 'Em We Hold These Truths (1960), Murray interpreta a Primeira Emenda à luz da tradição do direito natural e reconhece a herança de Suárez e Belarmino na noção de soberania popular limitada.'
+            }
+        },
+        {
+            name: 'Heinrich A. Rommen',
+            period: '1967',
+            description: {
+                es: 'En The Natural Law (1947, ediciones difundidas en EE. UU. en la posguerra), Rommen presenta la Escuela de Salamanca como origen del constitucionalismo moderno. Su obra se convierte en manual en facultades de derecho americanas y reintroduce explícitamente la tradición escolástica en la teoría jurídica contemporánea estadounidense.',
+                en: 'In The Natural Law (1947), Rommen presents the School of Salamanca as the origin of modern constitutionalism. His work becomes a manual in American law schools.',
+                pt: 'Em The Natural Law (1947), Rommen apresenta a Escola de Salamanca como origem do constitucionalismo moderno. A sua obra converte-se em manual nas faculdades de direito americanas.'
+            }
+        },
+        {
+            name: 'Carlos Stoetzer',
+            period: '1986',
+            description: {
+                es: 'En The Scholastic Roots of the American Constitution (1986), Stoetzer documenta sistemáticamente la influencia de Vitoria, Suárez y Mariana en la formación intelectual del constitucionalismo norteamericano, mostrando cómo la doctrina de soberanía popular, poder delegado y derecho de resistencia circuló por el mundo atlántico antes de 1776. Amplía esta tesis en El pensamiento político en la América española durante el período de la emancipación (1789–1825) y en Raíces escolásticas de la emancipación de la América española, donde demuestra que las revoluciones hispanoamericanas utilizaron las mismas categorías jurídicas —comunidad política previa al rey, retroversión de la soberanía y legitimidad condicionada del poder— para justificar la independencia. De este modo, tanto la revolución estadounidense como la hispanoamericana aparecen como expresiones de una misma tradición jurídico-política nacida en la segunda escolástica, y no como fenómenos exclusivamente derivados de la Ilustración anglosajona.',
+                en: 'In The Scholastic Roots of the American Constitution (1986), Stoetzer systematically documents the influence of Vitoria, Suárez, and Mariana on the intellectual formation of American constitutionalism.',
+                pt: 'Em The Scholastic Roots of the American Constitution (1986), Stoetzer documenta sistematicamente a influência de Vitoria, Suárez e Mariana na formação intelectual do constitucionalismo norte-americano.'
+            }
         }
-    },
-    {
-        name: 'John Courtney Murray',
-        period: '1960',
-        description: {
-            es: 'En We Hold These Truths (1960), Murray interpreta la Primera Enmienda estadounidense a la luz de la tradición del derecho natural y reconoce la herencia de Suárez y Belarmino en la soberanía popular limitada. Argumenta que el experimento americano funciona porque institucionaliza principios clásicos previos al liberalismo ilustrado: autoridad derivada, ley moral superior al Estado y legitimidad condicionada del poder político.',
-            en: 'In We Hold These Truths (1960), Murray interprets the First Amendment in light of the natural law tradition and recognizes the heritage of Suárez and Bellarmine in limited popular sovereignty.',
-            pt: 'Em We Hold These Truths (1960), Murray interpreta a Primeira Emenda à luz da tradição do direito natural e reconhece a herança de Suárez e Belarmino na noção de soberania popular limitada.'
-        }
-    },
-    {
-        name: 'Heinrich A. Rommen',
-        period: '1967',
-        description: {
-            es: 'En The Natural Law (1947, ediciones difundidas en EE. UU. en la posguerra), Rommen presenta la Escuela de Salamanca como origen del constitucionalismo moderno. Su obra se convierte en manual en facultades de derecho americanas y reintroduce explícitamente la tradición escolástica en la teoría jurídica contemporánea estadounidense.',
-            en: 'In The Natural Law (1947), Rommen presents the School of Salamanca as the origin of modern constitutionalism. His work becomes a manual in American law schools.',
-            pt: 'Em The Natural Law (1947), Rommen apresenta a Escola de Salamanca como origem do constitucionalismo moderno. A sua obra converte-se em manual nas faculdades de direito americanas.'
-        }
-    },
-    {
-        name: 'Carlos Stoetzer',
-        period: '1986',
-        description: {
-            es: 'En The Scholastic Roots of the American Constitution (1986), Stoetzer documenta sistemáticamente la influencia de Vitoria, Suárez y Mariana en la formación intelectual del constitucionalismo norteamericano, mostrando cómo la doctrina de soberanía popular, poder delegado y derecho de resistencia circuló por el mundo atlántico antes de 1776. Amplía esta tesis en El pensamiento político en la América española durante el período de la emancipación (1789–1825) y en Raíces escolásticas de la emancipación de la América española, donde demuestra que las revoluciones hispanoamericanas utilizaron las mismas categorías jurídicas —comunidad política previa al rey, retroversión de la soberanía y legitimidad condicionada del poder— para justificar la independencia. De este modo, tanto la revolución estadounidense como la hispanoamericana aparecen como expresiones de una misma tradición jurídico-política nacida en la segunda escolástica, y no como fenómenos exclusivamente derivados de la Ilustración anglosajona.',
-            en: 'In The Scholastic Roots of the American Constitution (1986), Stoetzer systematically documents the influence of Vitoria, Suárez, and Mariana on the intellectual formation of American constitutionalism.',
-            pt: 'Em The Scholastic Roots of the American Constitution (1986), Stoetzer documenta sistematicamente a influência de Vitoria, Suárez e Mariana na formação intelectual do constitucionalismo norte-americano.'
-        }
-    }
-];
+    ];
 
     return (
         <div className="flex flex-col min-h-screen bg-[#050a14] text-white selection:bg-[#c5a059]/30">
@@ -359,7 +359,7 @@ export default async function Proyecto1776Page({ params }: Props) {
                                     <p>{t('Content.introParagraph3')}</p>
                                     <p>{t('Content.introParagraph4')}</p>
                                     <p>{t('Content.introParagraph5')}</p>
-                                    
+
                                     <div className="my-10 pl-8 border-l-2 border-[#c5a059] py-2">
                                         <p className="text-[#c5a059] font-serif italic text-xl mb-3">
                                             {t('Content.introQuote')}
