@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         const approverEmail = process.env.APPROVER_EMAIL || 'info@escuelahispanica.org';
         const { sendEmail } = await import('@/lib/email');
 
-        await sendEmail({
+        const emailResult = await sendEmail({
             to: approverEmail,
             subject: `Nuevo mensaje de contacto: ${subject || 'Contacto Web'}`,
             reply_to: email,
@@ -88,11 +88,19 @@ export async function POST(request: NextRequest) {
             `
         });
 
-        return NextResponse.json({ success: true });
-    } catch (error) {
+        if (!emailResult.success) {
+            console.error('[api/contact] Resend email delivery failed:', emailResult.error);
+            return NextResponse.json(
+                { error: 'El mensaje se guardó, pero hubo un error enviando la notificación por email.' },
+                { status: 500 }
+            );
+        }
+
+        return NextResponse.json({ success: true, emailId: emailResult.id });
+    } catch (error: any) {
         console.error('[api/contact] handler error:', error);
         return NextResponse.json(
-            { error: 'Error inesperado del servidor' },
+            { error: 'Error inesperado del servidor', details: error.message },
             { status: 500 }
         );
     }
