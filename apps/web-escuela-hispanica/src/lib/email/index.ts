@@ -7,10 +7,7 @@ if (!process.env.RESEND_API_KEY && process.env.NODE_ENV !== 'production') {
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_for_build');
 
 const FROM_EMAIL = 'Escuela Hispánica <noreply@escuelahispanica.org>';
-
-// In development, use Resend's sandbox domain
-const isDev = process.env.NODE_ENV === 'development';
-const fromAddress = isDev ? 'Escuela Hispánica <onboarding@resend.dev>' : FROM_EMAIL;
+const fromAddress = FROM_EMAIL;
 
 /**
  * Send an email using Resend.

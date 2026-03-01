@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         const message = formData.get('message') as string;
         const subject = formData.get('subject') as string;
 
-        if (!first_name || !last_name || !email) {
+        if (!first_name || !last_name || !email || !message) {
             return NextResponse.json(
                 { error: 'Faltan campos obligatorios' },
                 { status: 400 }

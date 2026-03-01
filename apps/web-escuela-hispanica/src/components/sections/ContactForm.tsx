@@ -17,24 +17,43 @@ export default function ContactForm() {
         const form = e.currentTarget;
         const formData = new FormData(form);
 
+        // Client-side validation
+        const firstName = formData.get('first_name') as string;
+        const lastName = formData.get('last_name') as string;
+        const email = formData.get('email') as string;
+        const message = formData.get('message') as string;
+
+        if (!firstName.trim() || !lastName.trim() || !email.trim() || !message.trim()) {
+            setStatus('error');
+            setErrorMsg('Por favor, completa todos los campos requeridos.');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.trim())) {
+            setStatus('error');
+            setErrorMsg('Por favor, ingresa un correo electrónico válido.');
+            return;
+        }
+
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 body: formData,
             });
 
-            const data = await res.json();
+            const data = await res.json().catch(() => ({}));
 
             if (res.ok) {
                 setStatus('success');
                 form.reset();
             } else {
                 setStatus('error');
-                setErrorMsg(data.error || 'Error al enviar el mensaje');
+                setErrorMsg(data.error || 'Ocurrió un error al enviar el mensaje. Por favor intenta nuevamente.');
             }
         } catch (err) {
             setStatus('error');
-            setErrorMsg('Error de conexión con el servidor');
+            setErrorMsg('Error de conexión. Revisa tu conexión a internet e intenta nuevamente.');
         }
     }
 
@@ -48,7 +67,7 @@ export default function ContactForm() {
                 </p>
                 <button
                     onClick={() => setStatus('idle')}
-                    className="mt-8 font-cinzel text-[10px] tracking-[0.2em] text-[#c5a059] hover:text-white transition-colors"
+                    className="mt-8 font-cinzel text-[10px] tracking-[0.2em] text-[#c5a059] hover:text-white transition-colors uppercase"
                 >
                     ENVIAR OTRO MENSAJE
                 </button>
@@ -57,43 +76,50 @@ export default function ContactForm() {
     }
 
     return (
-        <div className="bg-[#0a111e] border border-white/5 p-8 shadow-2xl">
+        <div className="bg-[#0a111e] border border-white/5 p-8 shadow-2xl relative">
             <h2 className="font-cinzel text-xl tracking-wider mb-8 text-white/90">{t('title')}</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+
+            {status === 'error' && (
+                <div className="mb-6 border border-red-500/30 bg-red-500/5 px-4 py-3 text-sm text-red-400 font-serif">
+                    {errorMsg}
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('nameLabel')}</label>
+                        <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('nameLabel')} *</label>
                         <input
                             name="first_name"
                             type="text"
                             required
-                            className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all"
+                            className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all placeholder-white/20"
                             placeholder={t('namePlaceholder')}
                         />
                     </div>
                     <div>
-                        <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">Apellido</label>
+                        <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">Apellido *</label>
                         <input
                             name="last_name"
                             type="text"
                             required
-                            className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all"
+                            className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all placeholder-white/20"
                             placeholder="Tu apellido"
                         />
                     </div>
                 </div>
                 <div>
-                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('emailLabel')}</label>
+                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('emailLabel')} *</label>
                     <input
                         name="email"
                         type="email"
                         required
-                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all"
+                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all placeholder-white/20"
                         placeholder="tu@email.com"
                     />
                 </div>
                 <div>
-                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('subjectLabel')}</label>
+                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('subjectLabel')} *</label>
                     <select
                         name="subject"
                         className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all appearance-none cursor-pointer"
@@ -105,30 +131,28 @@ export default function ContactForm() {
                     </select>
                 </div>
                 <div>
-                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('messageLabel')}</label>
+                    <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-2">{t('messageLabel')} *</label>
                     <textarea
                         name="message"
                         rows={5}
                         required
-                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all resize-none"
+                        className="w-full bg-[#050a14] border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] outline-none transition-all resize-none placeholder-white/20"
                         placeholder={t('messagePlaceholder')}
                     />
                 </div>
 
-                {status === 'error' && (
-                    <p className="text-red-400 text-xs font-serif italic">{errorMsg}</p>
-                )}
-
-                <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="w-full bg-[#c5a059] text-[#050a14] py-4 font-cinzel text-[10px] font-bold tracking-[0.2em] hover:bg-white transition-all disabled:opacity-50 flex items-center justify-center gap-3 group"
-                >
-                    {status === 'loading' ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-[#050a14]" />
-                    ) : null}
-                    {status === 'loading' ? 'ENVIANDO...' : t('submit')}
-                </button>
+                <div className="pt-2">
+                    <button
+                        type="submit"
+                        disabled={status === 'loading'}
+                        className="w-full bg-[#c5a059] text-[#050a14] py-4 font-cinzel text-[10px] font-bold tracking-[0.2em] hover:bg-white transition-all disabled:opacity-50 flex items-center justify-center gap-3 group uppercase"
+                    >
+                        {status === 'loading' ? (
+                            <Loader2 className="w-4 h-4 animate-spin text-[#050a14]" />
+                        ) : null}
+                        {status === 'loading' ? 'ENVIANDO...' : t('submit')}
+                    </button>
+                </div>
             </form>
         </div>
     );
