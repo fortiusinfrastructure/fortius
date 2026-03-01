@@ -76,6 +76,7 @@ export async function POST(request: NextRequest) {
         await sendEmail({
             to: approverEmail,
             subject: `Nuevo mensaje de contacto: ${subject || 'Contacto Web'}`,
+            reply_to: email,
             html: `
                 <h2>Nuevo Mensaje de Contacto</h2>
                 <p><strong>De:</strong> ${first_name} ${last_name} (${email})</p>

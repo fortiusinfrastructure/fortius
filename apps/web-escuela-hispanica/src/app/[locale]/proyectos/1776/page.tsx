@@ -21,16 +21,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const TIMELINE_DATA: TimelineItem[] = [
     {
         id: '1',
-        year: '1550–1600',
+        year: 'SIGLO XVI',
         title: {
-            es: 'Red universitaria ibérica',
-            en: 'Iberian university network',
-            pt: 'Rede universitária ibérica'
+            es: 'Escuela de Salamanca',
+            en: 'School of Salamanca',
+            pt: 'Escola de Salamanca'
         },
         description: {
-            es: 'Desarrollo de una reflexión sistemática sobre economía, derecho y política en universidades como Salamanca y Alcalá.',
-            en: 'Development of a systematic reflection on economics, law, and politics in universities such as Salamanca and Alcalá.',
-            pt: 'Desenvolvimento de uma reflexão sistemática sobre economia, direito e política em universidades como Salamanca e Alcalá.'
+            es: 'Teólogos y juristas desarrollan en las universidades ibéricas una reflexión sistemática sobre el derecho, la economía y el poder político.',
+            en: 'Theologians and jurists develop a systematic reflection on law, economics, and political power in Iberian universities.',
+            pt: 'Teólogos e juristas desenvolvem nas universidades ibéricas uma reflexão sistemática sobre o direito, a economia e o poder político.'
         },
         type: 'philosophical',
     },
@@ -38,199 +38,168 @@ const TIMELINE_DATA: TimelineItem[] = [
         id: '2',
         year: '1539',
         title: {
-            es: 'Francisco de Vitoria: Relectio de Indis',
-            en: 'Francisco de Vitoria: Relectio de Indis',
-            pt: 'Francisco de Vitoria: Relectio de Indis'
+            es: 'Francisco de Vitoria',
+            en: 'Francisco de Vitoria',
+            pt: 'Francisco de Vitoria'
         },
         description: {
-            es: 'Establece la igualdad natural de todos los hombres y formula el derecho de gentes, base del derecho internacional moderno.',
-            en: 'Establishes the natural equality of all men and formulates the law of nations, the basis of modern international law.',
-            pt: 'Estabelece a igualdade natural de todos os homens e formula o direito das gentes, base do direito internacional moderno.'
+            es: 'En "Relectio de Indis", establece la igualdad natural de todos los hombres y los límites del poder soberano, sentando las bases del derecho de gentes contemporáneo.',
+            en: 'In "Relectio de Indis", establishes the natural equality of all men and the limits of sovereign power, laying the foundations of contemporary law of nations.',
+            pt: 'Em "Relectio de Indis", estabelece a igualdade natural de todos os homens e os limites do poder soberano, lançando as bases do direito das gentes contemporâneo.'
         },
         type: 'philosophical',
     },
     {
         id: '3',
-        year: '1553–1569',
+        year: '1599',
         title: {
-            es: 'Domingo de Soto: precio justo',
-            en: 'Domingo de Soto: just price',
-            pt: 'Domingo de Soto: preço justo'
+            es: 'Juan de Mariana',
+            en: 'Juan de Mariana',
+            pt: 'Juan de Mariana'
         },
         description: {
-            es: 'Sostiene que el precio justo lo fija la estimación común del mercado y no la autoridad.',
-            en: 'Argues that the just price is set by the common estimation of the market and not by authority.',
-            pt: 'Sustenta que o preço justo é fixado pela estimativa comum do mercado e não pela autoridade.'
+            es: 'En "De Rege", sostiene que el poder reside originariamente en el pueblo. Justifica el tiranicidio y establece que la sumisión fiscal debe ser consentida ("no taxation without representation").',
+            en: 'In "De Rege", argues that power resides originally in the people. Justifies tyrannicide and establishes that tax submission must be consented ("no taxation without representation").',
+            pt: 'Em "De Rege", argumenta que o poder reside originariamente no povo. Justifica o tiranicídio e estabelece que a submissão fiscal deve ser consentida ("no taxation without representation").'
         },
         type: 'philosophical',
     },
     {
         id: '4',
-        year: '1556',
+        year: '1610',
         title: {
-            es: 'Martín de Azpilcueta: teoría monetaria',
-            en: 'Martín de Azpilcueta: monetary theory',
-            pt: 'Martín de Azpilcueta: teoria monetária'
+            es: 'Roberto Belarmino',
+            en: 'Robert Bellarmine',
+            pt: 'Roberto Belarmino'
         },
         description: {
-            es: 'Formula una temprana teoría cuantitativa del dinero: su valor depende de su escasez relativa. Sus intuiciones sobre inflación y estabilidad monetaria reaparecerán en los debates de los federalistas americanos.',
-            en: 'Formulates an early quantitative theory of money: its value depends on its relative scarcity. His insights on inflation and monetary stability will reappear in the federalist debates.',
-            pt: 'Formula uma teoria quantitativa precoce do dinheiro: seu valor depende de sua escassez relativa. Suas intuições sobre inflação e estabilidade monetária reaparecerão nos debates federalistas.'
+            es: 'Sistematiza la distinción entre autoridad terrenal y divina y afirma que la autoridad política reside en la comunidad.',
+            en: 'Systematizes the distinction between earthly and divine authority and affirms that political authority resides in the community.',
+            pt: 'Sistematiza a distinção entre autoridade terrena e divina e afirma que a autoridade política reside na comunidade.'
         },
         type: 'philosophical',
     },
     {
         id: '5',
-        year: '1571',
+        year: '1613',
         title: {
-            es: 'Tomás de Mercado: comercio y crédito',
-            en: 'Tomás de Mercado: trade and credit',
-            pt: 'Tomás de Mercado: comércio e crédito'
+            es: 'Francisco Suárez',
+            en: 'Francisco Suárez',
+            pt: 'Francisco Suárez'
         },
         description: {
-            es: 'Estudia el comercio internacional y defiende la legitimidad moral de la actividad mercantil, describiendo el mercado como un sistema de intercambios voluntarios.',
-            en: 'Studies international trade and defends the moral legitimacy of mercantile activity, describing the market as a system of voluntary exchanges.',
-            pt: 'Estuda o comércio internacional e defende a legitimidade moral da atividade mercantil, descrevendo o mercado como um sistema de trocas voluntárias.'
+            es: 'En "Defensio Fidei", consolida la idea de que la autoridad proviene de Dios, pero es conferida al pueblo ("populum consentientem"), estableciendo el consentimiento como base del gobierno.',
+            en: 'In "Defensio Fidei", consolidates the idea that authority comes from God but is conferred to the people ("populum consentientem"), establishing consent as the basis of government.',
+            pt: 'Em "Defensio Fidei", consolida a ideia de que a autoridade provém de Deus, mas é conferida ao povo ("populum consentientem"), estabelecendo o consentimento como base do governo.'
         },
         type: 'philosophical',
+    },
+    {
+        id: 'h-1',
+        year: 'TRANSMISIÓN',
+        title: { es: 'La Europa Protestante', en: 'Protestant Europe', pt: 'Europa Protestante' },
+        description: { es: '', en: '', pt: '' },
+        type: 'section_header'
     },
     {
         id: '6',
-        year: '1599',
+        year: '1603',
         title: {
-            es: 'Juan de Mariana: De Rege',
-            en: 'Juan de Mariana: De Rege',
-            pt: 'Juan de Mariana: De Rege'
+            es: 'Johannes Althusius',
+            en: 'Johannes Althusius',
+            pt: 'Johannes Althusius'
         },
         description: {
-            es: 'Sostiene que el poder reside en el pueblo y se delega en el gobernante. Sus tesis sobre el consentimiento para impuestos y el derecho de resistencia influyeron directamente en John Locke.',
-            en: 'Argues that power resides in the people and is delegated to the ruler. His theses on consent for taxes and the right of resistance directly influenced John Locke.',
-            pt: 'Sustenta que o poder reside no povo e é delegado ao governante. Suas teses sobre o consentimento para impostos e o direito de resistência influenciaram diretamente John Locke.'
+            es: 'Publica "Politica", donde integra el pensamiento asociativo hispánico e ideas suarecianas en el ámbito calvinista.',
+            en: 'Publishes "Politica", where he integrates Hispanic associative thought and Suarean ideas into the Calvinist sphere.',
+            pt: 'Publica "Politica", onde integra o pensamento associativo hispânico e ideias suarezianas na esfera calvinista.'
         },
-        type: 'philosophical',
+        type: 'historical',
     },
     {
         id: '7',
-        year: '1609–1610',
+        year: '1625',
         title: {
-            es: 'El proceso contra Mariana',
-            en: 'The case against Mariana',
-            pt: 'O processo contra Mariana'
+            es: 'Hugo Grocio',
+            en: 'Hugo Grotius',
+            pt: 'Hugo Grotius'
         },
         description: {
-            es: 'Mariana afirma que la manipulación monetaria es un impuesto encubierto y que la fiscalidad sin representación es robo. Precedente del lema "No taxation without representation".',
-            en: 'Mariana states that monetary manipulation is a hidden tax and that taxation without representation is theft. Precedent for the slogan "No taxation without representation".',
-            pt: 'Mariana afirma que a manipulação monetária é um imposto oculto e que a fiscalidade sem representação é roubo. Precedente do lema "No taxation without representation".'
+            es: 'Pública "De jure belli ac pacis". En esta obra clave del derecho internacional, Grocio apoya sus argumentos con múltiples referencias a Vitoria, Suárez y Vásquez de Menchaca.',
+            en: 'Publishes "De jure belli ac pacis". In this key work of international law, Grotius supports his arguments with multiple references to Vitoria, Suárez, and Vásquez de Menchaca.',
+            pt: 'Publica "De jure belli ac pacis". Nesta obra fundamental do direito internacional, Grotius apoia os seus argumentos com múltiplas referências a Vitoria, Suárez e Vásquez de Menchaca.'
         },
         type: 'historical',
     },
     {
         id: '8',
-        year: '1610–1614',
+        year: '1680',
         title: {
-            es: 'Roberto Belarmino: De Laicis',
-            en: 'Robert Bellarmine: De Laicis',
-            pt: 'Roberto Belarmino: De Laicis'
+            es: 'Robert Filmer',
+            en: 'Robert Filmer',
+            pt: 'Robert Filmer'
         },
         description: {
-            es: 'Sistematiza que la autoridad política reside originariamente en la comunidad. Sus argumentos fueron citados extensamente por Robert Filmer en la polémica que Jefferson anotó en su ejemplar de "Patriarcha".',
-            en: 'Systematizes that political authority resides originally in the community. His arguments were extensively cited by Robert Filmer in the controversy that Jefferson noted in his copy of "Patriarcha".',
-            pt: 'Sistematiza que a autoridade política reside originariamente na comunidade. Seus argumentos foram citados extensivamente por Robert Filmer na polêmica que Jefferson anotou em seu exemplar de "Patriarcha".'
-        },
-        type: 'philosophical',
-    },
-    {
-        id: '9',
-        year: '1613',
-        title: {
-            es: 'Francisco Suárez: Defensio Fidei',
-            en: 'Francisco Suárez: Defensio Fidei',
-            pt: 'Francisco Suárez: Defensio Fidei'
-        },
-        description: {
-            es: 'Sistematiza que la autoridad reside en la comunidad ("populum consentientem"). Su obra fue clave en los debates ingleses que configuraron la tradición constitucional británica que heredará la Revolución Americana.',
-            en: 'Systematizes that authority resides in the community ("populum consentientem"). His work was key in the English debates that shaped the British constitutional tradition inherited by the American Revolution.',
-            pt: 'Sistematiza que a autoridade reside na comunidade ("populum consentientem"). Sua obra foi fundamental nos debates ingleses que configuraram a tradição constitucional britânica herdada pela Revolução Americana.'
-        },
-        type: 'philosophical',
-    },
-    {
-        id: '10',
-        year: '1654',
-        title: {
-            es: 'Marchamont Nedham',
-            en: 'Marchamont Nedham',
-            pt: 'Marchamont Nedham'
-        },
-        description: {
-            es: 'En la Inglaterra republicana, defiende que la soberanía reside en el pueblo, integrando argumentos de la escolástica que serán citados por John Adams al tratar la separación de poderes.',
-            en: 'In republican England, he defends that sovereignty resides in the people, integrating scholastic arguments that would be cited by John Adams when discussing the separation of powers.',
-            pt: 'Na Inglaterra republicana, defende que a soberania reside no povo, integrando argumentos da escolástica que seriam citados por John Adams ao tratar a separação de poderes.'
+            es: 'Critica ferozmente las ideas de poder limitado en "Patriarcha", paradójicamente sirviendo para darlas a conocer en el mundo aglosajón. El propio Jefferson poseía un ejemplar muy anotado de su obra.',
+            en: 'Fiercely criticizes the ideas of limited power in "Patriarcha", paradoxically serving to make them known in the Anglo-Saxon world. Jefferson himself owned a heavily annotated copy of his work.',
+            pt: 'Critica ferozmente as ideias de poder limitado em "Patriarcha", paradoxalmente servindo para dá-las a conhecer no mundo anglo-saxão. O próprio Jefferson possuía um exemplar amplamente anotado da sua obra.'
         },
         type: 'historical',
     },
     {
-        id: '11',
-        year: '1680',
+        id: '9',
+        year: '1689',
         title: {
-            es: 'Robert Filmer: Patriarcha',
-            en: 'Robert Filmer: Patriarcha',
-            pt: 'Robert Filmer: Patriarcha'
+            es: 'John Locke',
+            en: 'John Locke',
+            pt: 'John Locke'
         },
         description: {
-            es: 'Al atacar a Belarmino, Filmer introduce en el mundo anglosajón la doctrina de la soberanía popular. Jefferson poseía y anotó un ejemplar de este texto.',
-            en: 'By attacking Bellarmine, Filmer introduces the doctrine of popular sovereignty into the Anglo-Saxon world. Jefferson owned and annotated a copy of this text.',
-            pt: 'Ao atacar Belarmino, Filmer introduz no mundo anglo-saxão a doutrina da soberania popular. Jefferson possuía e anotou um exemplar deste texto.'
+            es: 'Se publican los "Dos Tratados sobre el Gobierno Civil". Locke conoció, leyó y recomendó activamente los escritos de Juan de Mariana, cuya visión del consentimiento y el derecho de resistencia reflejan paralelismos notables.',
+            en: 'The "Two Treatises of Government" are published. Locke actively knew, read, and recommended the writings of Juan de Mariana, whose vision of consent and the right of resistance reflect notable parallels.',
+            pt: 'São publicados os "Dois Tratados sobre o Governo Civil". Locke conheceu, leu e recomendou ativamente os escritos de Juan de Mariana, cuja visão do consentimento e do direito de resistência reflete paralelismos notáveis.'
+        },
+        type: 'historical',
+    },
+    {
+        id: '10',
+        year: '1762',
+        title: {
+            es: 'Surgimiento de la Revolución Americana',
+            en: 'Emergence of the American Revolution',
+            pt: 'Surgimento da Revolução Americana'
+        },
+        description: {
+            es: 'En el debate sobre la tributación ("Stamp Act", "Townshend Acts"), los colonos esgrimen los mismos argumentos desarrollados por Mariana en "De monetae mutatione" contra los impuestos sin representación.',
+            en: 'In the debate on taxation ("Stamp Act", "Townshend Acts"), colonists use the same arguments developed by Mariana in "De monetae mutatione" against taxation without representation.',
+            pt: 'No debate sobre a tributação ("Stamp Act", "Townshend Acts"), os colonos utilizam os mesmos argumentos desenvolvidos por Mariana em "De monetae mutatione" contra os impostos sem representação.'
+        },
+        type: 'historical',
+    },
+    {
+        id: 'h-2',
+        year: 'AMÉRICA',
+        title: { es: 'Conexión Atlántica', en: 'Atlantic Connection', pt: 'Conexão Atlântica' },
+        description: { es: '', en: '', pt: '' },
+        type: 'section_header'
+    },
+    {
+        id: '11',
+        year: '1776',
+        title: {
+            es: 'Declaración de Derechos de Virginia',
+            en: 'Virginia Declaration of Rights',
+            pt: 'Declaração de Direitos da Virgínia'
+        },
+        description: {
+            es: 'Redactada por George Mason (junio 1776), formula sistemáticamente la soberanía popular y los derechos naturales inherentes.',
+            en: 'Drafted by George Mason (June 1776), systematically formulates popular sovereignty and inherent natural rights.',
+            pt: 'Redigida por George Mason (junho de 1776), formula sistematicamente a soberania popular e os direitos naturais inerentes.'
         },
         type: 'historical',
     },
     {
         id: '12',
-        year: '1688–1689',
-        title: {
-            es: 'John Locke: Two Treatises',
-            en: 'John Locke: Two Treatises',
-            pt: 'John Locke: Two Treatises'
-        },
-        description: {
-            es: 'Formula la teoría del poder fiduciario y el derecho de resistencia con paralelismos notables con Juan de Mariana, cuyas obras Locke poseía y recomendaba.',
-            en: 'Formulates the theory of fiduciary power and the right of resistance with notable parallels to Juan de Mariana, whose works Locke owned and recommended.',
-            pt: 'Formula a teoria do poder fiduciário e o direito de resistência com paralelismos notáveis com Juan de Mariana, cujas obras Locke possuía e recomendava.'
-        },
-        type: 'historical',
-    },
-    {
-        id: '13',
-        year: '1639',
-        title: {
-            es: 'Fundamental Orders of Connecticut',
-            en: 'Fundamental Orders of Connecticut',
-            pt: 'Fundamental Orders of Connecticut'
-        },
-        description: {
-            es: 'Uno de los primeros textos constitucionales basados en el consentimiento y la limitación del poder, reflejando la tradición anti-absolutista europea impregnada de tesis escolásticas.',
-            en: 'One of the first constitutional texts based on consent and the limitation of power, reflecting the European anti-absolutist tradition soaked in scholastic theses.',
-            pt: 'Um dos primeiros textos constitucionais baseados no consentimento e na limitação do poder, refletindo a tradição anti-absolutista europeia impregnada de teses escolásticas.'
-        },
-        type: 'historical',
-    },
-    {
-        id: '14',
-        year: 'S. XVIII–XIX',
-        title: {
-            es: 'Recepción estadounidense',
-            en: 'American reception',
-            pt: 'Receção estadunidense'
-        },
-        description: {
-            es: 'Jefferson y Adams buscaban y poseían obras de Mariana, cuya defensa de la limitación del poder dialogó con el pensamiento de Locke en la cultura política colonial.',
-            en: 'Jefferson and Adams sought out and owned Mariana\'s works, whose defense of limited power dialogued with Locke\'s thought in colonial political culture.',
-            pt: 'Jefferson e Adams procuravam e possuíam obras de Mariana, cuja defesa da limitação do poder dialogou com o pensamento de Locke na cultura política colonial.'
-        },
-        type: 'historical',
-    },
-    {
-        id: '15',
         year: '1776',
         title: {
             es: 'Declaración de Independencia',
@@ -238,57 +207,109 @@ const TIMELINE_DATA: TimelineItem[] = [
             pt: 'Declaração de Independência'
         },
         description: {
-            es: 'El principio de derechos naturales y consentimiento refleja la doctrina de Vitoria sobre igualdad y la de Suárez sobre autoridad delegada por la comunidad.',
-            en: 'The principle of natural rights and consent reflects Vitoria\'s doctrine on equality and Suárez\'s on authority delegated by the community.',
-            pt: 'O princípio dos direitos naturais e do consentimento reflete a doutrina de Vitoria sobre a igualdade e a de Suárez sobre a autoridade delegada pela comunidade.'
+            es: 'Thomas Jefferson redacta el documento fundacional. El principio de "Consent of the Governed" recoge la concepción madurada desde Suárez pasando por Locke.',
+            en: 'Thomas Jefferson drafts the founding document. The principle of "Consent of the Governed" gathers the conception matured from Suárez through Locke.',
+            pt: 'Thomas Jefferson redige o documento fundacional. O princípio do "Consentimento dos Governados" reúne a conceção amadurecida desde Suárez passando por Locke.'
         },
         type: 'historical',
     },
     {
-        id: '16',
-        year: '1776',
+        id: '13',
+        year: '1787',
         title: {
-            es: 'Virginia Declaration of Rights',
-            en: 'Virginia Declaration of Rights',
-            pt: 'Virginia Declaration of Rights'
+            es: 'Constitución de los EE. UU.',
+            en: 'US Constitution',
+            pt: 'Constituição dos EUA'
         },
         description: {
-            es: 'George Mason formula la soberanía popular en términos que reproducen la doctrina de Suárez. La crítica a la tributación sin representación tiene raíces salmantinas del siglo XVI.',
-            en: 'George Mason formulates popular sovereignty in terms that reproduce Suárez\'s doctrine. The critique of taxation without representation has 16th-century Salmantine roots.',
-            pt: 'George Mason formula a soberania popular em termos que reproduzem a doutrina de Suárez. A crítica à tributação sem representação tem raízes salmantinas do século XVI.'
+            es: 'Fijación institucional del poder delegado, equilibrado y sujeto al bien común, reflejando materialmente las cautelas escolásticas frente al absolutismo estatal.',
+            en: 'Institutional fixation of delegated power, balanced and subject to the common good, materially reflecting scholastic cautions against state absolutism.',
+            pt: 'Fixação institucional do poder delegado, equilibrado e sujeito ao bem comum, refletindo materialmente as cautelas escolásticas face ao absolutismo estatal.'
+        },
+        type: 'historical',
+    },
+    {
+        id: '14',
+        year: '1787–1788',
+        title: {
+            es: 'El Federalista',
+            en: 'The Federalist Papers',
+            pt: 'Os Artigos Federalistas'
+        },
+        description: {
+            es: 'Hamilton, Madison y Jay justifican la ratificación de la constitución esgrimiendo argumentos contractualistas sobre la separación de poderes y el gobierno limitado.',
+            en: 'Hamilton, Madison, and Jay justify the ratification of the constitution by using contractual arguments on the separation of powers and limited government.',
+            pt: 'Hamilton, Madison e Jay justificam a ratificação da constituição utilizando argumentos contratualistas sobre a separação de poderes e o governo limitado.'
+        },
+        type: 'historical',
+    },
+    {
+        id: '15',
+        year: '1789',
+        title: {
+            es: 'Carta de Derechos (Bill of Rights)',
+            en: 'Bill of Rights',
+            pt: 'Carta de Direitos'
+        },
+        description: {
+            es: 'Las enmiendas consagran libertades individuales. Su fundamentación conecta indirectamente con el iusnaturalismo de raíz ibérica transmitida por autores protestantes al mundo colonial.',
+            en: 'The amendments consecrate individual liberties. Their foundation indirectly connects with the natural law of Iberian root transmitted by Protestant authors to the colonial world.',
+            pt: 'As emendas consagram liberdades individuais. A sua fundamentação liga-se indiretamente com o jusnaturalismo de raiz ibérica transmitido por autores protestantes ao mundo colonial.'
+        },
+        type: 'historical',
+    },
+    {
+        id: 'h-3',
+        year: 'RECEPCIÓN',
+        title: { es: 'Recuperación Histórica', en: 'Historical Recovery', pt: 'Recuperação Histórica' },
+        description: { es: '', en: '', pt: '' },
+        type: 'section_header'
+    },
+    {
+        id: '16',
+        year: '1947',
+        title: {
+            es: 'H. A. Rommen: "The Natural Law"',
+            en: 'H. A. Rommen: "The Natural Law"',
+            pt: 'H. A. Rommen: "The Natural Law"'
+        },
+        description: {
+            es: 'Sistematiza el redescubrimiento moderno, postulando que la Declaración de Independencia es un producto del pensamiento iusnaturalista clásico y de los escolásticos españoles.',
+            en: 'Systematizes modern rediscovery, postulating that the Declaration of Independence is a product of classical natural law thought and the Spanish scholastics.',
+            pt: 'Sistematiza o redescobrimento moderno, postulando que a Declaração de Independência é um produto do pensamento jusnaturalista clássico e dos escolásticos espanhóis.'
         },
         type: 'historical',
     },
     {
         id: '17',
-        year: '1787',
+        year: '1960',
         title: {
-            es: 'Constitución de EE. UU.',
-            en: 'US Constitution',
-            pt: 'Constituição dos EUA'
+            es: 'John Courtney Murray: "We Hold These Truths"',
+            en: 'John Courtney Murray: "We Hold These Truths"',
+            pt: 'John Courtney Murray: "We Hold These Truths"'
         },
         description: {
-            es: 'La separación de poderes y el gobierno sujeto a límites institucionales reflejan la concepción de Suárez y Belarmino del poder delegado orientado al bien común.',
-            en: 'The separation of powers and government subject to institutional limits reflect Suárez and Bellarmine\'s conception of delegated power oriented to the common good.',
-            pt: 'A separação de poderes e o governo sujeito a limites institucionais refletem a conceção de Suárez e Belarmino do poder delegado orientado ao bem comum.'
+            es: 'Demuestra cómo la Primera Enmienda a la Constitución puede entenderse a la luz del desarrollo jurídico legado por figuras como Suárez o Belarmino frente a la monarquía absoluta.',
+            en: 'Shows how the First Amendment to the Constitution can be understood in light of the legal development left by figures such as Suárez or Bellarmine against absolute monarchy.',
+            pt: 'Demonstra como a Primeira Emenda à Constituição pode ser entendida à luz do desenvolvimento jurídico legado por figuras como Suárez ou Belarmino face à monarquia absoluta.'
         },
         type: 'historical',
     },
     {
         id: '18',
-        year: '1789',
+        year: '2016',
         title: {
-            es: 'Bill of Rights',
-            en: 'Bill of Rights',
-            pt: 'Bill of Rights'
+            es: 'Institución del Día del Legado Hispánico',
+            en: 'Institution of Hispanic Heritage Day',
+            pt: 'Instituição do Dia do Patrimônio Hispânico'
         },
         description: {
-            es: 'La protección de la propiedad y libertades individuales se relaciona con la defensa de los derechos naturales de Vitoria y la inviolabilidad de la propiedad en Mariana.',
-            en: 'The protection of property and individual liberties relates to Vitoria\'s defense of natural rights and Mariana\'s on the inviolability of property.',
-            pt: 'A proteção da propriedade e das liberdades individuais relaciona-se com a defesa dos direitos naturais de Vitoria e a inviolabilidade da propriedade em Mariana.'
+            es: 'Un reconocimiento creciente que empuja las fronteras de los estudios coloniales y exige reconsiderar los fundamentos ideológicos estadounidenses.',
+            en: 'A growing recognition that pushes the boundaries of colonial studies and demands reconsidering ideological foundations of the US.',
+            pt: 'Um reconhecimento crescente que alarga as fronteiras dos estudos coloniais e exige repensar os fundamentos ideológicos estadunidenses.'
         },
         type: 'historical',
-    },
+    }
 ];
 
 export default async function Proyecto1776Page({ params }: Props) {
@@ -322,76 +343,76 @@ export default async function Proyecto1776Page({ params }: Props) {
             name: 'John Adams',
             img: '/images/proyectos/1776/johnadams.jpg',
             text: locale === 'es'
-                ? 'Adams leyó y citó a Juan de Mariana, especialmente De Rege et Regis Institutione (1599), integrándolo en su reflexión constitucional junto a la tradición republicana inglesa.'
+                ? 'El segundo presidente y gran estudioso de la teoría política y sistemas de gobierno, John Adams dedicó tres volúmenes al análisis constitucional donde expone la importancia de la separación de poderes para evitar la tiranía. Al igual que James Madison u otros fundadores ingleses, Adams recurrió de nuevo y citó directamente a Juan de Mariana («Del Rey y de la Institución Real», 1599) integrándolo en su reflexión general al tratar la importancia de los parlamentos o en cómo limitar el poder para evitar que degenere. De hecho, fue un ávido lector de Cervantes (aprendió castellano expresamente para leerlo) y admiraba la libertad ibérica medieval descrita en el Quijote, reflejando así un diálogo directo con el pensamiento hispánico temprano.'
                 : locale === 'en'
-                    ? 'Adams read and cited Juan de Mariana, especially De Rege et Regis Institutione (1599), integrating it into his constitutional reflection alongside the English republican tradition.'
-                    : 'Adams leu e citou Juan de Mariana, especialmente De Rege et Regis Institutione (1599), integrando-o na sua reflexão constitucional ao lado da tradição republicana inglesa.'
+                    ? 'The second president and great student of political theory and government systems, John Adams dedicated three volumes to constitutional analysis where he exposes the importance of the separation of powers to prevent tyranny. Like James Madison or other English founders, Adams returned to and directly cited Juan de Mariana ("De Rege et Regis Institutione", 1599) integrating him into his general reflection when addressing the importance of parliaments or how to limit power to prevent it from degenerating. In fact, he was an avid reader of Cervantes (he learned Spanish expressly to read it) and admired the medieval Iberian freedom described in Quixote, thus reflecting a direct dialogue with early Hispanic thought.'
+                    : 'O segundo presidente e grande estudioso da teoria política e sistemas de governo, John Adams dedicou três volumes à análise constitucional onde expõe a importância da separação de poderes para evitar a tirania. Tal como James Madison ou outros fundadores ingleses, Adams recorreu novamente e citou diretamente a Juan de Mariana ("Do Rei e da Instituição Real", 1599) integrando-o na sua reflexão geral ao tratar da importância dos parlamentos ou em como limitar o poder para evitar que degenere. De facto, foi um ávido leitor de Cervantes (aprendeu castelhano expressamente para o ler) e admirava a liberdade ibérica medieval descrita no Quixote, refletindo assim um diálogo direto com o pensamento hispânico inicial.'
         },
         {
             name: 'Thomas Jefferson',
             img: '/images/proyectos/1776/thomasjefferson.jpg',
             text: locale === 'es'
-                ? 'Jefferson mostró un interés sostenido por el pensamiento hispánico, adquiriendo obras de Juan de Mariana y Juan de Palafox. Al redactar la Declaración de Independencia, formuló principios que dialogaban con la ley natural.'
+                ? 'Thomas Jefferson mostró un profundo y sostenido interés a lo largo de su vida por la cultura y el pensamiento de filiación hispánica (aprendió a leerlo pero recomendó incansablemente su estudio debido a las historias conectadas del continente). Adquirió obras fundamentales como las de Juan de Palafox y otras relativas a la historia de América y España. Si bien se discute su lectura directa previa a la independencia, Jefferson construyó una biblioteca que permitiera indagar en los autores hispánicos. Estuvo expuesto a las matrices de pensamiento heredadas de la escolástica —como la noción de soberanía popular y los frenos al poder—. Particularmente revelador es que poseyera su copia fuertemente anotada de la obra de Robert Filmer, «Patriarcha», puesto que este libro surge como crítica a Roberto Belarmino con extensas citas literales del jesuita sobre la autoridad de la comunidad; a través de su refutación, Belarmino y su exposición de que «el poder recae primeramente sobre el pueblo» entraron de lleno en el hogar de Jefferson.'
                 : locale === 'en'
-                    ? 'Jefferson showed a sustained interest in Hispanic thought, acquiring works by Juan de Mariana and Juan de Palafox. When drafting the Declaration of Independence, he formulated principles that dialogued with natural law.'
-                    : 'Jefferson mostrou um interesse sustentado pelo pensamento hispânico, adquirindo obras de Juan de Mariana e Juan de Palafox. Ao redigir a Declaração de Independência, formulou princípios que dialogavam com a lei natural.'
+                    ? 'Thomas Jefferson showed a deep and sustained interest throughout his life in culture and thought of Hispanic affiliation (he learned to read it but tirelessly recommended its study due to the connected histories of the continent). He acquired fundamental works such as those of Juan de Palafox and others related to the history of America and Spain. Although his direct reading prior to independence is debated, Jefferson built a library that allowed investigating Hispanic authors. He was exposed to the matrices of thought inherited from scholasticism—such as the notion of popular sovereignty and checks on power—. Particularly revealing is that he possessed a heavily annotated copy of Robert Filmer\'s work, "Patriarcha", since this book arises as a critique of Robert Bellarmine with extensive literal quotes from the Jesuit on the authority of the community; through its refutation, Bellarmine and his exposition that "power first falls upon the people" entered fully into Jefferson\'s home.'
+                    : 'Thomas Jefferson mostrou um profundo e sustentado interesse ao longo da sua vida pela cultura e pensamento de filiação hispânica (aprendeu a lê-lo, mas recomendou incansavelmente o seu estudo devido às histórias conectadas do continente). Adquiriu obras fundamentais como as de Juan de Palafox e outras relativas à história da América e Espanha. Embora se discuta a sua leitura direta anterior à independência, Jefferson construiu uma biblioteca que permitisse investigar os autores hispânicos. Esteve exposto às matrizes de pensamento herdadas da escolástica —como a noção de soberania popular e os freios ao poder—. Particularmente revelador é que possuísse a sua cópia fortemente anotada da obra de Robert Filmer, «Patriarcha», dado que este livro surge como crítica a Roberto Belarmino com extensas citações literais do jesuíta sobre a autoridade da comunidade; através da sua refutação, Belarmino e a sua exposição de que «o poder recai primeiramente sobre o povo» entraram em cheio no lar de Jefferson.'
         },
         {
             name: 'James Madison',
             img: '/images/proyectos/1776/jamesmadison.jpg',
             text: locale === 'es'
-                ? 'En The Federalist Papers, Madison desarrolla el gobierno representativo y la separación de poderes, reproduciendo la tesis escolástica de que el poder es originariamente comunitario.'
+                ? 'Padre de la Constitución estadounidense, James Madison elaboró un entramado institucional diseñado para salvaguardar la libertad individual frente a los excesos del poder concentrado. En ensayos como «El Federalista No. 10» y «No. 51», expuso la necesidad de construir instituciones equilibradas acordes a la naturaleza falible del ser humano. En sus razonamientos asoman ecos que emulan los debates hispánicos sobre la limitación del poder; cuando Mariana se preguntaba «¿por qué medios se puede contener» a quien concentra tanto poder, o advertía sobre los peligros del monopolio representativo, señalaba problemáticas que Madison recogerá más tarde al articular teóricamente que «la ambición debe contrarrestar a la ambición».'
                 : locale === 'en'
-                    ? 'In The Federalist Papers, Madison develops representative government and the separation of powers, reproducing the scholastic thesis that power is originally communal.'
-                    : 'Em The Federalist Papers, Madison desenvolve o governo representativo e a separação de poderes, reproduzindo a tese escolástica de que o poder é originariamente comunitário.'
+                    ? 'Father of the American Constitution, James Madison elaborated an institutional framework designed to safeguard individual freedom against the excesses of concentrated power. In essays such as "The Federalist No. 10" and "No. 51", he exposed the need to build balanced institutions in accordance with the fallible nature of the human being. In his reasoning, echoes appear that emulate Hispanic debates on the limitation of power; when Mariana asked "by what means can one contain" whoever concentrates so much power, or warned about the dangers of representative monopoly, he pointed out problems that Madison would later collect when theoretically articulating that "ambition must counteract ambition".'
+                    : 'Pai da Constituição estadunidense, James Madison elaborou um quadro institucional concebido para salvaguardar a liberdade individual face aos excessos do poder concentrado. Em ensaios como "O Federalista Não. 10" e "Não. 51", expôs a necessidade de construir instituições equilibradas de acordo com a natureza falível do ser humano. Nos seus raciocínios surgem ecos que emulam os debates hispânicos sobre a limitação do poder; quando Mariana se perguntava "por que meios se pode conter" quem concentra tanto poder, ou advertia sobre os perigos do monopólio representativo, assinalava problemas que Madison recolheria mais tarde ao articular teoricamente que "a ambição deve contrabalançar a ambição".'
         },
         {
             name: 'Alexander Hamilton',
             img: '/images/proyectos/1776/alexander madison.jpg',
             text: locale === 'es'
-                ? 'Hamilton vincula la estabilidad monetaria y la confianza pública con la libertad política, compartiendo la premisa de Mariana de que la manipulación de la moneda es un impuesto encubierto.'
+                ? 'Alexander Hamilton, artífice del primer sistema financiero estadounidense y firme defensor de un gobierno federal enérgico, reconoció que la libertad política requería irremediablemente de la estabilidad fiscal y monetaria. Su entendimiento de que la manipulación de la moneda o la deuda excesiva destruiría la confianza pública y subyugaría materialmente al ciudadano conecta con el corazón del realismo económico de Juan de Mariana. Aquel jesuita de Talavera de la Reina, siglos antes y desde contextos distintos, ya había denunciado sin ambages que alterar la moneda sin el consentimiento popular no es otra cosa que confiscar de modo ilegítimo la propiedad («un impuesto encubierto», decía) y, en fin, una tiranía. Una de las primeras exigencias de Hamilton y del resto de padres fundacionales será que el Congreso monopolizara el control de la emisión monetaria, desvinculándola de motivaciones partidistas.'
                 : locale === 'en'
-                    ? 'Hamilton links monetary stability and public trust with political freedom, sharing Mariana\'s premise that currency manipulation is a disguised tax.'
-                    : 'Hamilton associa a estabilidade monetária e a confiança pública à liberdade política, partilhando a premissa de Mariana de que a manipulação da moeda é um imposto dissimulado.'
+                    ? 'Alexander Hamilton, architect of the first American financial system and a staunch defender of an energetic federal government, recognized that political freedom inevitably required fiscal and monetary stability. His understanding that currency manipulation or excessive debt would destroy public trust and materially subjugate the citizen connects to the heart of Juan de Mariana\'s economic realism. That Jesuit from Talavera de la Reina, centuries earlier and from different contexts, had already unambiguously denounced that altering currency without popular consent is nothing else than illegitimately confiscating property ("a hidden tax", he said) and, ultimately, a tyranny. One of the first demands of Hamilton and the rest of the founding fathers will be that Congress monopolize the control of monetary emission, detaching it from partisan motivations.'
+                    : 'Alexander Hamilton, artífice do primeiro sistema financeiro estadunidense e fervoroso defensor de um governo federal enérgico, reconheceu que a liberdade política requeria irremediavelmente a estabilidade fiscal e monetária. O seu entendimento de que a manipulação da moeda ou a dívida excessiva destruiria a confiança pública e subjugaria materialmente o cidadão liga-se ao coração do realismo económico de Juan de Mariana. Esse jesuíta de Talavera de la Reina, séculos antes e a partir de contextos diferentes, já tinha denunciado sem rodeios que alterar a moeda sem o consentimento popular não é outra coisa senão confiscar ilegitimamente a propriedade ("um imposto encapuçado", dizia) e, no fundo, uma tirania. Uma das primeiras exigências de Hamilton e do resto dos pais fundadores será que o Congresso monopolizasse o controlo da emissão monetária, desvinculando-a de motivações partidárias.'
         }
     ];
 
     const thinkers = [
         {
             name: 'Orestes Brownson',
-            title: locale === 'es' ? 'Constitucionalismo Orgánico (1803–1876)' : 'Organic Constitutionalism (1803–1876)',
+            title: locale === 'es' ? '1803–1876' : '1803–1876',
             text: locale === 'es'
-                ? 'Defendió que la soberanía pertenece al pueblo como comunidad moral, citando expresamente la tradición tomista y suareciana.'
+                ? 'Enseñó que el proyecto americano y los Padres Fundadores habían importado e implementado sin percatarse —pero con firmeza— las conclusiones propias de teólogos hispánicos (notablemente Suárez), afirmando la soberanía de la comunidad moral.'
                 : locale === 'en'
-                    ? 'Argued that sovereignty belongs to the people as a moral community, specifically citing the Thomist and Suarean tradition.'
-                    : 'Defendeu que a soberania pertence ao povo como comunidade moral, citando expressamente a tradição tomista e suareziana.'
+                    ? 'Taught that the American project and the Founding Fathers had unwittingly—but firmly—imported and implemented the conclusions of Hispanic theologians (notably Suárez), affirming the sovereignty of the moral community.'
+                    : 'Ensinou que o projeto americano e os Pais Fundadores tinham importado e implementado sem se aperceberem —mas com firmeza— as conclusões próprias de teólogos hispânicos (nomeadamente Suárez), afirmando a soberania da comunidade moral.'
         },
         {
             name: 'John Courtney Murray',
-            title: locale === 'es' ? 'Libertad Religiosa (1960)' : 'Religious Freedom (1960)',
+            title: locale === 'es' ? '1904–1967' : '1904–1967',
             text: locale === 'es'
-                ? 'Interpretó la Primera Enmienda a la luz del derecho natural, reconociendo la herencia de Suárez y Belarmino.'
+                ? 'Reivindicó que la Primera Enmienda, la separación de esferas y el límite al Estado absoluto que encarnaron figuras como el jesuita Roberto Belarmino encuentran su realización práctica en el diseño constitucional estadounidense.'
                 : locale === 'en'
-                    ? 'Interpreted the First Amendment in light of natural law, recognizing the heritage of Suárez and Bellarmine.'
-                    : 'Interpretou a Primeira Emenda à luz do direito natural, reconhecendo a herança de Suárez e Belarmino.'
+                    ? 'Claimed that the First Amendment, the separation of spheres, and the limit to the absolute State embodied by figures like the Jesuit Robert Bellarmine find their practical realization in the American constitutional design.'
+                    : 'Reivindicou que a Primeira Emenda, a separação de esferas e o limite ao Estado absoluto que encarnaram figuras como o jesuíta Roberto Belarmino encontram a sua realização prática no desenho constitucional estadunidense.'
         },
         {
             name: 'Heinrich A. Rommen',
-            title: locale === 'es' ? 'The Natural Law (1947)' : 'The Natural Law (1947)',
+            title: locale === 'es' ? '1897–1967' : '1897–1967',
             text: locale === 'es'
-                ? 'Presentó la Escuela de Salamanca como el origen del constitucionalismo moderno en manuales estadounidenses.'
+                ? 'A través de obras como "The Natural Law", se esforzó en recordar a la academia y la opinión norteamericana que los cimientos sobre los que descansaba ese país procedían innegablemente de las fuentes hispanas de la Segunda Escolástica.'
                 : locale === 'en'
-                    ? 'Presented the School of Salamanca as the origin of modern constitutionalism in American manuals.'
-                    : 'Apresentou a Escola de Salamanca como a origem do constitucionalismo moderno em manuais americanos.'
+                    ? 'Through works like "The Natural Law", he strove to remind North American academia and opinion that the foundations upon which that country rested undeniably came from Hispanic sources of the Second Scholasticism.'
+                    : 'Através de obras como "The Natural Law", esforçou-se por lembrar à academia e à opinião norte-americana que os alicerces sobre os quais descansava esse país procediam inegavelmente das fontes hispanas da Segunda Escolástica.'
         },
         {
             name: 'Carlos Stoetzer',
-            title: locale === 'es' ? 'Investigación Sistemática (1986)' : 'Systematic Research (1986)',
+            title: locale === 'es' ? '1920–2011' : '1920–2011',
             text: locale === 'es'
-                ? 'Documentó la influencia de Vitoria, Suárez y Mariana en la formación intelectual del constitucionalismo norteamericano.'
+                ? 'Desde Washington y otros enclaves, documentó meticulosamente cómo autores hispánicos intervinieron, se importaron o dialogaron en la gestación de los cimientos constitucionales frente a la tiranía.'
                 : locale === 'en'
-                    ? 'Documented the influence of Vitoria, Suárez, and Mariana on the intellectual formation of North American constitutionalism.'
-                    : 'Documentou a influência de Vitoria, Suárez e Mariana na formação intelectual do constitucionalismo norte-americano.'
+                    ? 'From Washington and other enclaves, he meticulously documented how Hispanic authors intervened, were imported, or dialogued in the gestation of constitutional foundations against tyranny.'
+                    : 'Desde Washington e outros enclaves, documentou meticulosamente como autores hispânicos intervieram, foram importados ou dialogaram na gestação das bases constitucionais face à tirania.'
         }
     ];
 

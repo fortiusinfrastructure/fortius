@@ -3,7 +3,7 @@ import { BookOpen, Milestone } from 'lucide-react';
 import { LocalizedText } from '@/types';
 import { getLocalizedValue } from '@/lib/i18n/localize';
 
-export type TimelineItemType = 'historical' | 'philosophical';
+export type TimelineItemType = 'historical' | 'philosophical' | 'section_header';
 
 export interface TimelineItem {
     id: string;
@@ -26,6 +26,30 @@ export const Timeline: React.FC<TimelineProps> = ({ items, locale }) => {
 
             <div className="space-y-20">
                 {items.map((item, index) => {
+                    const isSectionHeader = item.type === 'section_header';
+
+                    if (isSectionHeader) {
+                        return (
+                            <div key={item.id} className="relative w-full flex items-center justify-center py-16 z-20">
+                                {/* Línea horizontal de división */}
+                                <div className="absolute w-full h-px bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent max-w-4xl" />
+
+                                {/* Etiqueta del separador */}
+                                <div className="relative bg-[#050a14] px-8 md:px-12 py-4 border-y border-[#c5a059]/20 flex flex-col items-center shadow-[0_0_30px_rgba(5,10,20,1)]">
+                                    <span className="font-cinzel text-white/40 text-[10px] tracking-[0.4em] mb-1">
+                                        {item.year}
+                                    </span>
+                                    <span className="font-serif text-[#c5a059] text-xl md:text-2xl mt-1 tracking-widest uppercase">
+                                        {getLocalizedValue(item.title, locale)}
+                                    </span>
+                                </div>
+                            </div>
+                        );
+                    }
+
+                    // To keep the left/right alternating logic consistent for standard items,
+                    // we could filter index but for now we just use the original index.
+                    // This means a section header might flip the side of the next item.
                     const isEven = index % 2 === 0;
                     const isPhilosophical = item.type === 'philosophical';
 
