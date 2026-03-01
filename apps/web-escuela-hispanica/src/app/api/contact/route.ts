@@ -9,14 +9,14 @@ import { createAdminClient } from '@fortius/database';
  */
 export async function POST(request: NextRequest) {
     try {
-        const formData = await request.formData();
+        const body = await request.json();
 
-        const first_name = formData.get('first_name') as string;
-        const last_name = formData.get('last_name') as string;
-        const email = formData.get('email') as string;
-        const institution = formData.get('institution') as string;
-        const message = formData.get('message') as string;
-        const subject = formData.get('subject') as string;
+        const first_name = body.first_name as string;
+        const last_name = body.last_name as string;
+        const email = body.email as string;
+        const institution = body.institution as string;
+        const message = body.message as string;
+        const subject = body.subject as string;
 
         if (!first_name || !last_name || !email || !message) {
             return NextResponse.json(
