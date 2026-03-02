@@ -3,6 +3,7 @@
         "home": "Home",
         "about": "About Us",
         "projects": "Projects",
+        "resources": "Resources",
         "activities": "Activities",
         "publications": "Publications",
         "collaborate": "Collaborate",
@@ -357,6 +358,26 @@
             "label": "Library",
             "title": "Resources",
             "description": "A space dedicated to uploading bibliographic resources and technical recommendations that form part of the corpus of thought that the Hispanic School seeks to rediscover and disseminate."
+        },
+        "UI": {
+            "categories": {
+                "all": "All",
+                "libro": "Reference Books",
+                "articulo": "Recommended Articles",
+                "otro": "Others"
+            },
+            "search": {
+                "placeholder": "Search by author, title, publisher…",
+                "noResults": "No results found for"
+            },
+            "links": {
+                "availableHere": "Available here",
+                "viewBiographies": "VIEW BIOGRAPHIES"
+            },
+            "banner": {
+                "title": "History of the Hispanic School",
+                "description": "Explore the biographies and legacy of the authors who make up our tradition over the centuries."
+            }
         }
     },
     "Colabora": {

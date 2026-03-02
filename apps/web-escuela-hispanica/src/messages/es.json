@@ -3,6 +3,7 @@
         "home": "Inicio",
         "about": "Nosotros",
         "projects": "Proyectos",
+        "resources": "Recursos",
         "activities": "Actividades",
         "publications": "Publicaciones",
         "collaborate": "Colabora",
@@ -357,6 +358,26 @@
             "label": "Biblioteca",
             "title": "Recursos",
             "description": "Espacio dedicado a subir recursos bibliográficos y recomendaciones técnicas que forman parte del corpus de pensamiento que la Escuela Hispánica busca redescubrir y difundir."
+        },
+        "UI": {
+            "categories": {
+                "all": "Todos",
+                "libro": "Libros de referencia",
+                "articulo": "Artículos recomendados",
+                "otro": "Otros"
+            },
+            "search": {
+                "placeholder": "Buscar por autor, título, editorial…",
+                "noResults": "No se encontraron resultados para"
+            },
+            "links": {
+                "availableHere": "Disponible aquí",
+                "viewBiographies": "VER BIOGRAFÍAS"
+            },
+            "banner": {
+                "title": "Historia de la Escuela Hispánica",
+                "description": "Explora las biografías y el legado de los autores que conforman nuestra tradición a lo largo de los siglos."
+            }
         }
     },
     "Colabora": {

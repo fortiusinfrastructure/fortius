@@ -4,15 +4,9 @@ import React, { useState, useMemo } from 'react';
 import { Search, BookOpen, FileText, ExternalLink, Globe } from 'lucide-react';
 import { resources, searchResources } from '@/lib/mock-data/resources';
 import type { Resource } from '@/types';
+import { useTranslations } from 'next-intl';
 
 type CategoryKey = 'all' | 'libro' | 'articulo' | 'otro';
-
-const categories: { key: CategoryKey; label: string; icon: React.ReactNode }[] = [
-    { key: 'all', label: 'Todos', icon: <Search className="w-4 h-4" /> },
-    { key: 'libro', label: 'Libros de referencia', icon: <BookOpen className="w-4 h-4" /> },
-    { key: 'articulo', label: 'Artículos recomendados', icon: <FileText className="w-4 h-4" /> },
-    { key: 'otro', label: 'Otros', icon: <Globe className="w-4 h-4" /> },
-];
 
 function ResourceCard({ resource }: { resource: Resource }) {
     return (
@@ -62,8 +56,16 @@ function CategorySection({ title, icon, items }: { title: string; icon: React.Re
 }
 
 export default function ResourcesContent() {
+    const t = useTranslations('Recursos.UI');
     const [query, setQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
+
+    const categories: { key: CategoryKey; label: string; icon: React.ReactNode }[] = [
+        { key: 'all', label: t('categories.all'), icon: <Search className="w-4 h-4" /> },
+        { key: 'libro', label: t('categories.libro'), icon: <BookOpen className="w-4 h-4" /> },
+        { key: 'articulo', label: t('categories.articulo'), icon: <FileText className="w-4 h-4" /> },
+        { key: 'otro', label: t('categories.otro'), icon: <Globe className="w-4 h-4" /> },
+    ];
 
     const filtered = useMemo(() => {
         let results = query.trim() ? searchResources(query) : resources;
@@ -83,10 +85,10 @@ export default function ResourcesContent() {
             {/* ── Biografias Banner ───────────────────────────────────── */}
             <div className="mb-16 border border-[#c5a059]/30 bg-[#c5a059]/5 p-8 text-center relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#c5a059]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                <h3 className="font-serif text-2xl text-white mb-3">Historia de la Escuela Hispánica</h3>
-                <p className="font-light text-white/60 mb-6 max-w-lg mx-auto text-sm">Explora las biografías y el legado de los autores que conforman nuestra tradición a lo largo de los siglos.</p>
+                <h3 className="font-serif text-2xl text-white mb-3">{t('banner.title')}</h3>
+                <p className="font-light text-white/60 mb-6 max-w-lg mx-auto text-sm">{t('banner.description')}</p>
                 <a href="/recursos/biografias" className="inline-block border border-[#c5a059] text-[#c5a059] px-6 py-2 text-xs font-cinzel tracking-widest hover:bg-[#c5a059] hover:text-[#050a14] transition-colors">
-                    VER BIOGRAFÍAS
+                    {t('links.viewBiographies')}
                 </a>
             </div>
 
@@ -97,7 +99,7 @@ export default function ResourcesContent() {
                     type="text"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
-                    placeholder="Buscar por autor, título, editorial…"
+                    placeholder={t('search.placeholder')}
                     className="w-full bg-[#08101f] border border-white/10 text-white placeholder:text-white/30 py-4 pl-12 pr-4 font-light text-sm focus:outline-none focus:border-[#c5a059]/50 transition-colors"
                 />
             </div>
@@ -124,14 +126,14 @@ export default function ResourcesContent() {
                 <div className="text-center py-20">
                     <Search className="w-10 h-10 text-white/10 mx-auto mb-4" />
                     <p className="text-white/40 font-light">
-                        No se encontraron resultados para &ldquo;{query}&rdquo;
+                        {t('search.noResults')} &ldquo;{query}&rdquo;
                     </p>
                 </div>
             ) : activeCategory === 'all' ? (
                 <>
-                    <CategorySection title="Libros de referencia" icon={<BookOpen className="w-5 h-5" />} items={libros} />
-                    <CategorySection title="Artículos recomendados" icon={<FileText className="w-5 h-5" />} items={articulos} />
-                    <CategorySection title="Otros" icon={<Globe className="w-5 h-5" />} items={otros} />
+                    <CategorySection title={t('categories.libro')} icon={<BookOpen className="w-5 h-5" />} items={libros} />
+                    <CategorySection title={t('categories.articulo')} icon={<FileText className="w-5 h-5" />} items={articulos} />
+                    <CategorySection title={t('categories.otro')} icon={<Globe className="w-5 h-5" />} items={otros} />
                 </>
             ) : (
                 <div className="border-t border-[#c5a059]/20">

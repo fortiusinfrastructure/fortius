@@ -41,6 +41,7 @@ const Navbar: React.FC = () => {
     { name: t('publications'), href: '/publicaciones' },
     { name: t('activities'), href: '/actividades' },
     { name: t('projects'), href: '/proyectos' },
+    { name: t('resources'), href: '/recursos' },
     { name: t('collaborate'), href: '/colabora' },
     { name: t('contact'), href: '/contacto' },
   ];
