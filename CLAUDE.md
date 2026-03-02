@@ -182,3 +182,13 @@ pnpm build                      # Build de producción
 - **Imports internos:** `@fortius/database`
 - **Naming:** kebab-case para archivos, PascalCase para componentes
 - **Git:** Commits en inglés, branch principal `main`
+
+## Despliegue en Vercel (Notas Críticas)
+
+Debido al setup de Turborepo (`pnpm@10`), Next.js 16 y dependencias nativas, se requieren configuraciones específicas para que los builds en Vercel funcionen y no reporten "Internal Error":
+
+1. **`.npmrc` (Root):** Es imperativo mantener `node-linker=hoisted` y la whitelist `only-built-dependencies[]` para binarios como `supabase`, `sharp`, `@swc/core`, `@parcel/watcher` y `unrs-resolver`. De lo contrario, `pnpm` ignora los binarios y el despliegue falla por archivos desaparecidos (`ENOENT`).
+2. **`next.config.ts`:** Requiere `output: 'standalone'` activo.
+3. **Manejo de Rutas (Middleware vs Proxy):** En Next.js 16+, la convención de exportar por defecto desde `middleware.ts` está deprecada en entornos de Edge proxy de Vercel (provoca build failure o warnings fatales). Utilizar `src/proxy.ts` exportando `export default async function proxy(request)`.
+4. **Vercel Env Vars en `turbo.json`:** Cualquier variable usada en Vercel durante el Build/Run (incluyendo las de Supabase, Stripe y Resend) debe pre-declararse obligatoriamente en el array `globalEnv` de `turbo.json` para evitar que Turbo las descarte por considerar que rompen el cache de build.
+5. **Metadata URLs:** En los `layout.tsx` (especialmente de auth), es obligatorio configurar `metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL)` para asegurar la correcta resolución de rutas absolutas durante la pre-renderización SSR en Vercel.
