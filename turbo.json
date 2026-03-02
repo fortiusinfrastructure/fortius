@@ -4,6 +4,18 @@
   "globalDependencies": [
     "**/.env.*local"
   ],
+  "globalEnv": [
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "RESEND_API_KEY",
+    "STRIPE_SECRET_KEY",
+    "STRIPE_WEBHOOK_SECRET",
+    "APPROVAL_SECRET",
+    "APPROVER_EMAIL",
+    "STRIPE_PRICE_ACADEMICO_MONTHLY",
+    "STRIPE_PRICE_ACADEMICO_ANNUAL",
+    "STRIPE_PRICE_AMIGO_MONTHLY",
+    "STRIPE_PRICE_MECENAS_ANNUAL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": [
