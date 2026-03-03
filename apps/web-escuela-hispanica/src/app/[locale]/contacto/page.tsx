@@ -12,7 +12,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     };
 }
 
-export default async function ContactoPage() {
+export default async function ContactoPage({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Contacto' });
 
     return (
