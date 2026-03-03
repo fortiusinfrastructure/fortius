@@ -10,7 +10,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const t = await getTranslations('Actividades.Meta');
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Actividades.Meta' });
     return {
         title: t('title'),
         description: t('description'),

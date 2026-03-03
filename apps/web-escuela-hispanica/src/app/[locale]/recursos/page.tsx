@@ -4,16 +4,21 @@ import ResourcesContent from '@/components/resources/ResourcesContent';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'Recursos.Meta' });
+    const p = await params;
+    const t = await getTranslations({ locale: p.locale, namespace: 'Recursos.Meta' });
     return {
         title: t('title'),
         description: t('description'),
     };
 }
 
-export default async function RecursosPage() {
-    const t = await getTranslations({ locale, namespace: 'Recursos' });
+export default async function RecursosPage({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const p = await params;
+    const t = await getTranslations({ locale: p.locale, namespace: 'Recursos' });
 
     return (
         <>

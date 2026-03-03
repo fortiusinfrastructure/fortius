@@ -4,8 +4,8 @@ import { Mail, MapPin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'Contacto.Meta' });
+    const p = await params;
+    const t = await getTranslations({ locale: p.locale, namespace: 'Contacto.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -17,8 +17,8 @@ export default async function ContactoPage({
 }: {
     params: Promise<{ locale: string }>;
 }) {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'Contacto' });
+    const p = await params;
+    const t = await getTranslations({ locale: p.locale, namespace: 'Contacto' });
 
     return (
         <div className="flex flex-col min-h-screen">

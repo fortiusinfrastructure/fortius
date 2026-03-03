@@ -4,8 +4,8 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import React from 'react';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'PoliticaCookies.Meta' });
+    const p = await params;
+    const t = await getTranslations({ locale: p.locale, namespace: 'PoliticaCookies.Meta' });
     return {
         title: t('title'),
         description: t('description'),
