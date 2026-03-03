@@ -3,8 +3,9 @@ import { Navbar, Footer } from '@/components/sections';
 import ResourcesContent from '@/components/resources/ResourcesContent';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('Recursos.Meta');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Recursos.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -12,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RecursosPage() {
-    const t = await getTranslations('Recursos');
+    const t = await getTranslations({ locale, namespace: 'Recursos' });
 
     return (
         <>

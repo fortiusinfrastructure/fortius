@@ -11,7 +11,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const t = await getTranslations('Proyectos.Meta');
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Proyectos.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -22,7 +23,7 @@ export default async function ProyectosPage({ params }: Props) {
     const { locale } = await params;
     const activeProject = projects.find(p => p.id === '1776');
     const otherProjects = projects.filter(p => p.id !== '1776');
-    const t = await getTranslations('Proyectos');
+    const t = await getTranslations({ locale, namespace: 'Proyectos' });
 
     return (
         <div className="flex flex-col min-h-screen bg-[#050a14]">

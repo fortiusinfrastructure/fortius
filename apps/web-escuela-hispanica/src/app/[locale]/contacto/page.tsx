@@ -3,8 +3,9 @@ import { Navbar, Footer, ContactForm } from '@/components/sections';
 import { Mail, MapPin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('Contacto.Meta');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Contacto.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -12,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactoPage() {
-    const t = await getTranslations('Contacto');
+    const t = await getTranslations({ locale, namespace: 'Contacto' });
 
     return (
         <div className="flex flex-col min-h-screen">

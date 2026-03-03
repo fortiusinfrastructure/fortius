@@ -4,8 +4,9 @@ import { Heart, Medal, Crown, Check } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('Colabora.Success.Meta');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Colabora.Success.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -28,7 +29,7 @@ export default async function ExitoPage({
     const validTier = tierIcons[tier] ? tier : 'amigo';
     const Icon = tierIcons[validTier];
 
-    const t = await getTranslations('Colabora.Success');
+    const t = await getTranslations({ locale, namespace: 'Colabora.Success' });
 
     return (
         <div className="flex flex-col min-h-screen bg-[#050a14] text-white">

@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { Navbar, Footer } from '@/components/sections';
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('Biografias.Meta');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Biografias.Meta' });
     return {
         title: t('title'),
         description: t('description'),
@@ -11,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BiografiasPage() {
-    const t = await getTranslations('Biografias');
+    const t = await getTranslations({ locale, namespace: 'Biografias' });
 
     return (
         <>
