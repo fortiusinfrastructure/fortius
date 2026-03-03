@@ -21,10 +21,13 @@ const tierIcons = {
 
 export default async function ExitoPage({
     searchParams,
+    params,
 }: {
     searchParams: Promise<{ tier?: string }>;
+    params: Promise<{ locale: string }>;
 }) {
     const { tier: tierParam } = await searchParams;
+    const { locale } = await params;
     const tier = (tierParam as keyof typeof tierIcons) || 'amigo';
     const validTier = tierIcons[tier] ? tier : 'amigo';
     const Icon = tierIcons[validTier];
