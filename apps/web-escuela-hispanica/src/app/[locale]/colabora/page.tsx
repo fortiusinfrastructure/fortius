@@ -264,6 +264,12 @@ function AcademicoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
 
                             {error && <p className="text-red-400 text-xs font-serif">{error}</p>}
 
+                            <div className="bg-white/5 p-4 border border-white/10 rounded-sm">
+                                <p className="text-[10px] font-serif leading-relaxed text-white/60 italic text-justify">
+                                    {t('institutionalText')}
+                                </p>
+                            </div>
+
                             <button
                                 type="submit"
                                 disabled={loading}

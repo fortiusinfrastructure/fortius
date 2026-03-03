@@ -461,6 +461,7 @@
                 "motivationLabel": "¿Por qué desea unirse?",
                 "motivationPlaceholder": "Cuéntenos brevemente su interés y trayectoria...",
                 "cvLabel": "Curriculum Vitae (PDF)",
+                "institutionalText": "La renovación anual está sujeta al cumplimiento de las condiciones económicas y al mantenimiento de los estándares académicos y de conducta intelectual de la institución.",
                 "errorConnection": "Error de conexión",
                 "errorSubmit": "Error al enviar la solicitud",
                 "submit": "ENVIAR SOLICITUD",
@@ -561,6 +562,559 @@
             "description": "Historia de la Escuela Hispánica a través de sus autores fundamentales."
         },
         "title": "Biografías",
-        "placeholder": "Construyendo la línea de tiempo interactiva... (Pendiente del documento de detalle)."
+        "intro": {
+            "p1": "A lo largo de los siglos, el espacio cultural formado por la Monarquía Hispánica y el mundo ibérico desarrolló una tradición intelectual singular: una reflexión sobre la libertad que no nació de la ruptura revolucionaria, sino de la elaboración jurídica y moral del poder. Desde el siglo XVI, las universidades de Salamanca, Coimbra y Évora articularon una comunidad que pensó la política a partir del derecho natural y la limitación estructural de la autoridad.",
+            "p2": "Este lenguaje político cruzó el Atlántico y se transformó en América. Las independencias hispanoamericanas no supusieron el abandono de aquella tradición, sino su evolución hacia el constitucionalismo republicano. La unidad dejó de ser territorial para convertirse en civilizatoria: una lengua, un derecho y una misma concepción del poder como servicio al bien común permanecieron compartidos a ambos lados del océano.",
+            "p3": "La tradición hispánica de la libertad no es una corriente marginal, sino uno de los pilares de Occidente. Es una vía distinta de la ilustración contractualista, pero convergente en sus resultados: la afirmación de que la libertad es un orden moral previo al poder político.",
+            "p4": "A continuación, presentamos un horizonte temporal continuo donde las ideas aparecen, se transmiten y se transforman, desde la Escuela Ibérica del siglo XVI hasta el pensamiento contemporáneo."
+        },
+        "authors": {
+            "vitoria": {
+                "name": "Francisco de Vitoria",
+                "period": "c. 1483–1546",
+                "nationality": "Española",
+                "shortBio": "Dominico burgalés y catedrático en Salamanca, renovó la teología tras estudiar en París.",
+                "contribution": "Fundador del derecho internacional moderno; defendió los derechos naturales de los indígenas y la soberanía basada en la razón."
+            },
+            "lascasas": {
+                "name": "Bartolomé de las Casas",
+                "period": "1484–1566",
+                "nationality": "Española",
+                "shortBio": "Dominico y obispo, dedicó su vida a la defensa jurídica de los indígenas americanos.",
+                "contribution": "Propuso la igualdad jurídica universal y argumentó que el poder civil pertenece a los pueblos, independientemente de su religión."
+            },
+            "azpilcueta": {
+                "name": "Martín de Azpilcueta",
+                "period": "1492–1586",
+                "nationality": "Española",
+                "shortBio": "El 'Doctor Navarrus', figura central en Salamanca y Coimbra.",
+                "contribution": "Formuló por primera vez la teoría cuantitativa del dinero, vinculando su valor a la escasez y criticando la manipulación monetaria."
+            },
+            "soto": {
+                "name": "Domingo de Soto",
+                "period": "1494–1560",
+                "nationality": "Española",
+                "shortBio": "Discípulo de Vitoria y teólogo imperial en el Concilio de Trento.",
+                "contribution": "Arquitecto del derecho natural; formuló la teoría del precio justo basada en la estimación común del mercado."
+            },
+            "veracruz": {
+                "name": "Alonso de la Vera Cruz",
+                "period": "1507–1584",
+                "nationality": "Hispanoamericana (Nueva España)",
+                "shortBio": "Agustino y primer filósofo sistemático de América, fundador de la Universidad de México.",
+                "contribution": "Defendió la soberanía legítima de los pueblos indígenas por derecho natural y la autodeterminación política."
+            },
+            "covarrubias": {
+                "name": "Diego de Covarrubias y Leyva",
+                "period": "1512–1577",
+                "nationality": "Española",
+                "shortBio": "Gran jurista del Renacimiento y miembro del Consejo de Castilla.",
+                "contribution": "Desarrolló la teoría subjetiva del valor basada en la percepción humana y defendió la autonomía de la esfera civil."
+            },
+            "menchaca": {
+                "name": "Fernando Vázquez de Menchaca",
+                "period": "1512–1569",
+                "nationality": "Española",
+                "shortBio": "Jurista seglar de vanguardia, influyente en toda Europa.",
+                "contribution": "Afirmó que el poder nace de un pacto racional entre individuos libres, anticipando la soberanía popular."
+            },
+            "mercado": {
+                "name": "Tomás de Mercado",
+                "period": "c. 1525–1575",
+                "nationality": "Española / Hispanoamericana",
+                "shortBio": "Dominico sevillano que analizó la economía global entre Europa y América.",
+                "contribution": "Legitimó el comercio basado en la transparencia y el consentimiento informado; precursor de la ética contractual."
+            },
+            "medina": {
+                "name": "Bartolomé de Medina",
+                "period": "1527–1581",
+                "nationality": "Española",
+                "shortBio": "Dominico en Salamanca, renovador de la metodología moral.",
+                "contribution": "Formuló el probabilismo moral, otorgando autonomía a la conciencia individual frente a la autoridad."
+            },
+            "anchieta": {
+                "name": "José de Anchieta",
+                "period": "1534–1597",
+                "nationality": "Española / Portuguesa (Brasil)",
+                "shortBio": "Jesuita canario en Brasil, fundador de la sociedad colonial brasileña.",
+                "contribution": "Implementó estructuras políticas subsidiarias y organizó comunidades respetando las formas culturales locales."
+            },
+            "molina": {
+                "name": "Luis de Molina",
+                "period": "1535–1600",
+                "nationality": "Española",
+                "shortBio": "Jesuita conquense en Coimbra, defensor de la libertad humana.",
+                "contribution": "Definió el mercado como institución moral donde el precio surge del acuerdo libre, vinculando economía y libertad."
+            },
+            "fonseca": {
+                "name": "Pedro da Fonseca",
+                "period": "1528–1599",
+                "nationality": "Portuguesa",
+                "shortBio": "El 'Aristóteles portugués' de Coimbra, maestro del aristotelismo ibérico.",
+                "contribution": "Estableció la base metafísica de la ley natural, subordinando la política al orden racional de la naturaleza."
+            },
+            "banez": {
+                "name": "Domingo Báñez",
+                "period": "1528–1604",
+                "nationality": "Española",
+                "shortBio": "Dominico vallisoletano y gran teólogo de la Contrarreforma.",
+                "contribution": "Defendió los límites objetivos del poder político; la autoridad no crea el derecho, sino que debe reflejarlo."
+            },
+            "mariana": {
+                "name": "Juan de Mariana",
+                "period": "1536–1624",
+                "nationality": "Española",
+                "shortBio": "Jesuita talaverano radical, defensor del derecho de resistencia.",
+                "contribution": "Afirmó que el poder reside en la comunidad; criticó la inflación como robo y justificó la deposición del tirano."
+            },
+            "aragon": {
+                "name": "Pedro de Aragón",
+                "period": "1545–1592",
+                "nationality": "Española",
+                "shortBio": "Dominico salmantino, sistematizador de la Segunda Escolástica.",
+                "contribution": "Conceptualizó la propiedad como función social y limitó la autoridad del príncipe sobre los derechos de los súbditos."
+            },
+            "suarez": {
+                "name": "Francisco Suárez",
+                "period": "1548–1617",
+                "nationality": "Española",
+                "shortBio": "El 'Doctor Eximius', jesuita y último gran metafísico escolástico.",
+                "contribution": "Sistematizó la teoría del poder delegado: la soberanía reside en el pueblo y el gobernante es un administrador fiduciario."
+            },
+            "acosta": {
+                "name": "José de Acosta",
+                "period": "1540–1600",
+                "nationality": "Española / Hispanoamericana",
+                "shortBio": "Jesuita y misionero en Perú y México, pionero de la antropología.",
+                "contribution": "Defendió la racionalidad política indígena y la unidad moral de la humanidad frente a la diversidad cultural."
+            },
+            "belarmino": {
+                "name": "Roberto Belarmino",
+                "period": "1542–1621",
+                "nationality": "Italiana (Monarquía Hispánica)",
+                "shortBio": "Cardenal jesuita y gran polemista europeo de la Contrarreforma.",
+                "contribution": "Sostuvo que la autoridad civil es mediata y derivada del consentimiento popular, influyendo en el constitucionalismo."
+            },
+            "salas": {
+                "name": "Juan de Salas",
+                "period": "1553–1612",
+                "nationality": "Española",
+                "shortBio": "Jesuita salmantino experto en justicia distributiva y contratos.",
+                "contribution": "Definió el mercado como un orden de normas basado en la confianza racional y la seguridad jurídica."
+            },
+            "solorzano": {
+                "name": "Juan de Solórzano Pereira",
+                "period": "1575–1655",
+                "nationality": "Española / Hispanoamericana",
+                "shortBio": "Jurista y oidor en Lima, sistematizador del derecho indiano.",
+                "contribution": "Propuso un pluralismo jurídico donde las comunidades conservan sus normas bajo principios superiores de justicia."
+            },
+            "lugo": {
+                "name": "Juan de Lugo",
+                "period": "1583–1660",
+                "nationality": "Española",
+                "shortBio": "Cardenal jesuita y gran economista de la escolástica tardía.",
+                "contribution": "Formuló una teoría subjetiva del valor basada en la utilidad estimada, anticipando la economía marginalista."
+            },
+            "palafox": {
+                "name": "Juan de Palafox y Mendoza",
+                "period": "1600–1659",
+                "nationality": "Española / Hispanoamericana",
+                "shortBio": "Obispo de Puebla y virrey de Nueva España, reformador institucional.",
+                "contribution": "Defendió la autoridad como oficio fiduciario y la responsabilidad moral del gobernante ante la comunidad."
+            },
+            "caramuel": {
+                "name": "Juan Caramuel y Lobkowitz",
+                "period": "1606–1682",
+                "nationality": "Española",
+                "shortBio": "Cisterciense y polímata barroco, experto en lógica y probabilidad.",
+                "contribution": "Aplicó el razonamiento probabilístico a la moral y la política, viendo el orden social como un sistema complejo."
+            },
+            "velarde": {
+                "name": "Pedro Murillo Velarde",
+                "period": "1696–1753",
+                "nationality": "Española / Filipinas",
+                "shortBio": "Jesuita en Filipinas, sistematizador del derecho en ultramar.",
+                "contribution": "Aplicó la tradición de Salamanca al contexto asiático, defendiendo un orden jurídico universal basado en el derecho natural."
+            },
+            "campomanes": {
+                "name": "Pedro Rodríguez de Campomanes",
+                "period": "1723–1802",
+                "nationality": "Española",
+                "shortBio": "Economista y fiscal del Consejo de Castilla, reformador ilustrado.",
+                "contribution": "Defendió la libertad productiva frente a los monopolios, viendo el orden económico como un fenómeno social espontáneo."
+            },
+            "clavijero": {
+                "name": "Francisco Javier Clavijero",
+                "period": "1731–1787",
+                "nationality": "Hispanoamericana (Nueva España)",
+                "shortBio": "Jesuita novohispano exiliado, defensor de la cultura americana.",
+                "contribution": "Articuló una defensa filosófica de la racionalidad política indígena, sentando bases para la autonomía americana."
+            },
+            "jovellanos": {
+                "name": "Gaspar Melchor de Jovellanos",
+                "period": "1744–1181",
+                "nationality": "Española",
+                "shortBio": "Gran ilustrado español, magistrado y defensor del derecho natural clásico.",
+                "contribution": "Defendió que las instituciones brotan de la vida social y que la propiedad privada es un pilar moral de la civilización."
+            },
+            "viscardo": {
+                "name": "Juan Pablo Viscardo y Guzmán",
+                "period": "1748–1798",
+                "nationality": "Hispanoamericana (Perú)",
+                "shortBio": "Jesuita peruano y primer gran ideólogo de la emancipación.",
+                "contribution": "Transformó el pactismo escolástico en conciencia independentista: si el poder no sirve al bien común, el vínculo se rompe."
+            },
+            "marina": {
+                "name": "Francisco Martínez Marina",
+                "period": "1754–1833",
+                "nationality": "Española",
+                "shortBio": "Sacerdote e historiador, defensor del constitucionalismo histórico.",
+                "contribution": "Argumentó que la soberanía nacional en Cádiz era la recuperación de un pacto histórico español de limitación del poder."
+            },
+            "forner": {
+                "name": "Juan Pablo Forner",
+                "period": "1756–1797",
+                "nationality": "Española",
+                "shortBio": "Jurista salmantino y fiscal, crítico del racionalismo abstracto.",
+                "contribution": "Defendió que el derecho nace de la práctica social sedimentada y no de teorías universales inventadas."
+            },
+            "miranda": {
+                "name": "Francisco de Miranda",
+                "period": "1750–1816",
+                "nationality": "Hispanoamericana (Venezuela)",
+                "shortBio": "'El Precursor', militar y pensador venezolano de alcance atlántico.",
+                "contribution": "Sintetizó la soberanía popular escolástica con el constitucionalismo moderno para diseñar la libertad de América."
+            },
+            "talamantes": {
+                "name": "Melchor de Talamantes",
+                "period": "1765–1809",
+                "nationality": "Hispanoamericana (Perú/México)",
+                "shortBio": "Mercedario peruano en México, jurista de la soberanía.",
+                "contribution": "Aplicó la doctrina de Suárez ante la crisis de 1808: el poder retorna al pueblo cuando la autoridad legítima desaparece."
+            },
+            "mier": {
+                "name": "Servando Teresa de Mier",
+                "period": "1765–1827",
+                "nationality": "Hispanoamericana (México)",
+                "shortBio": "Dominico mexicano radical, puente entre escolástica y república.",
+                "contribution": "Utilizó la doctrina de Suárez para justificar la independencia como restauración del orden jurídico natural."
+            },
+            "henriquez": {
+                "name": "Camilo Henríquez",
+                "period": "1769–1825",
+                "nationality": "Hispanoamericana (Chile)",
+                "shortBio": "Sacerdote y periodista chileno, difusor de la doctrina política.",
+                "contribution": "Adaptó el pactismo suareciano al lenguaje popular, legitimando el autogobierno como exigencia de la naturaleza social."
+            },
+            "bello": {
+                "name": "Andrés Bello",
+                "period": "1781–1865",
+                "nationality": "Hispanoamericana (Venezuela/Chile)",
+                "shortBio": "Humanista universal, autor del Código Civil chileno.",
+                "contribution": "Estabilizó las repúblicas integrando la tradición jurídica hispánica con la racionalidad moderna y la seguridad jurídica."
+            },
+            "alaman": {
+                "name": "Lucas Alamán",
+                "period": "1792–1853",
+                "nationality": "Hispanoamericana (México)",
+                "shortBio": "Historiador y político mexicano, defensor del orden institucional.",
+                "contribution": "Afirmó que la libertad requiere un fundamento moral previo, criticando la soberanía abstracta sin límites."
+            },
+            "estrada": {
+                "name": "José María Gutiérrez de Estrada",
+                "period": "1800–1867",
+                "nationality": "Hispanoamericana (México)",
+                "shortBio": "Diplomático y jurista mexicano, crítico de la inestabilidad política.",
+                "contribution": "Propuso instituciones que aseguraran la neutralidad del poder y su subordinación al bien común."
+            },
+            "herrera": {
+                "name": "Bartolomé Herrera",
+                "period": "1808–1864",
+                "nationality": "Hispanoamericana (Perú)",
+                "shortBio": "Sacerdote y jurista peruano, rector en San Carlos de Lima.",
+                "contribution": "Trasladó la doctrina de Suárez a la república, defendiendo que la soberanía debe orientarse por el bien común."
+            },
+            "cortes": {
+                "name": "Juan Donoso Cortés",
+                "period": "1809–1853",
+                "nationality": "Española",
+                "shortBio": "Diplomático y pensador extremeño, analista de la crisis europea.",
+                "contribution": "Advirtió que sin ley natural ni fundamento moral, la política degenera en anarquía o en el absolutismo estatal."
+            },
+            "herculano": {
+                "name": "Alexandre Herculano",
+                "period": "1810–1877",
+                "nationality": "Portuguesa",
+                "shortBio": "Historiador y político portugués, defensor de las libertades históricas.",
+                "contribution": "Recuperó la tradición de municipios y fueros como el origen del constitucionalismo frente al modelo jacobino."
+            },
+            "balmes": {
+                "name": "Jaime Balmes",
+                "period": "1810–1848",
+                "nationality": "Española",
+                "shortBio": "Sacerdote y filósofo, gran sistematizador del pensamiento católico español del XIX.",
+                "contribution": "Argumentó que las libertades europeas nacieron de la concepción cristiana de la persona y de la limitación del poder."
+            },
+            "menendez": {
+                "name": "Marcelino Menéndez Pelayo",
+                "period": "1856–1912",
+                "nationality": "Española",
+                "shortBio": "Historiador y polígrafo santanderino, reconstruyó la continuidad intelectual de España.",
+                "contribution": "Rescató a los escolásticos como autores centrales de la modernidad y devolvió conciencia histórica a la tradición hispánica."
+            },
+            "mella": {
+                "name": "Juan Vázquez de Mella",
+                "period": "1861–1928",
+                "nationality": "Española",
+                "shortBio": "Principal teórico del tradicionalismo, convirtió el pactismo en teoría política moderna.",
+                "contribution": "Defendió una sociedad de comunidades históricas donde la autoridad es delegada por la comunidad viva y no absoluta."
+            },
+            "rizal": {
+                "name": "José Rizal",
+                "period": "1861–1896",
+                "nationality": "Filipina (Monarquía Hispánica)",
+                "shortBio": "Héroe nacional y pensador filipino, crítico moral del poder arbitrario.",
+                "contribution": "Exigió derechos en nombre de la legalidad hispánica, argumentando que la autoridad pierde legitimidad cuando viola la justicia."
+            },
+            "mabini": {
+                "name": "Apolinario Mabini",
+                "period": "1864–1903",
+                "nationality": "Filipina",
+                "shortBio": "Teórico de la independencia filipina, asesor del presidente Aguinaldo.",
+                "contribution": "Elaboró una teoría del Estado basada en la soberanía moral: el gobierno existe para el bien común y está limitado por la justicia."
+            },
+            "unamuno": {
+                "name": "Miguel de Unamuno",
+                "period": "1864–1936",
+                "nationality": "Española",
+                "shortBio": "Filósofo y rector en Salamanca, defensor de la conciencia frente al mecanismo.",
+                "contribution": "Recuperó el núcleo antropológico escolástico: la política debe servir al hombre real y la conciencia debe primar sobre el poder."
+            },
+            "maeztu": {
+                "name": "Ramiro de Maeztu",
+                "period": "1874–1936",
+                "nationality": "Española",
+                "shortBio": "Pensador vasco de alcance internacional, defensor de la Hispanidad.",
+                "contribution": "Interpretó la Hispanidad como una civilización jurídica centrada en la dignidad de la persona y la ley natural."
+            },
+            "belaunde": {
+                "name": "Víctor Andrés Belaúnde",
+                "period": "1883–1966",
+                "nationality": "Hispanoamericana (Perú)",
+                "shortBio": "Diplomático y ensayista peruano, presidente de la Asamblea General de la ONU.",
+                "contribution": "Definió la cultura política hispánica como personalista, integrando derechos humanos con el arraigo en comunidades históricas."
+            },
+            "ortega": {
+                "name": "José Ortega y Gasset",
+                "period": "1883–1955",
+                "nationality": "Española",
+                "shortBio": "El filósofo español más influyente del siglo XX, renovador del pensamiento europeo.",
+                "contribution": "Comprendió que el Estado no crea la sociedad sino que la organiza, priorizando la vida social sobre la estructura política."
+            },
+            "madariaga": {
+                "name": "Salvador de Madariaga",
+                "period": "1886–1978",
+                "nationality": "Española",
+                "shortBio": "Diplomático y humanista gallego, intérprete de la conciencia universal.",
+                "contribution": "Situó el origen de los derechos humanos modernos en las dudas morales escolásticas sobre la legitimidad de la conquista."
+            },
+            "sardinha": {
+                "name": "António Sardinha",
+                "period": "1887–1925",
+                "nationality": "Portuguesa",
+                "shortBio": "Pensador portugués e ideólogo del integralismo lusitano.",
+                "contribution": "Defendió que la civilización ibérica no conoció la soberanía absoluta, estando el poder siempre subordinado a la sociedad."
+            },
+            "moncada": {
+                "name": "Cabral de Moncada",
+                "period": "1888–1974",
+                "nationality": "Portuguesa",
+                "shortBio": "Gran filósofo del derecho en Coimbra, crítico del positivismo jurídico.",
+                "contribution": "Recuperó el principio de que el legislador no crea el derecho, sino que debe reconocer un orden de justicia objetivo."
+            },
+            "meinvielle": {
+                "name": "Julio Meinvielle",
+                "period": "1905–1973",
+                "nationality": "Hispanoamericana (Argentina)",
+                "shortBio": "Sacerdote y filósofo argentino, defensor del realismo tomista.",
+                "contribution": "Afirmó que la política debe facilitar la vida virtuosa y que la libertad es el orden racional del obrar humano."
+            },
+            "eyzaguirre": {
+                "name": "Jaime Eyzaguirre",
+                "period": "1908–1968",
+                "nationality": "Hispanoamericana (Chile)",
+                "shortBio": "Historiador chileno, reintérprete de la independencia americana.",
+                "contribution": "Demostró que la emancipación fue una activación de la soberanía popular escolástica y no una ruptura contractual."
+            },
+            "grice": {
+                "name": "Marjorie Grice-Hutchinson",
+                "period": "1909–2003",
+                "nationality": "Británica",
+                "shortBio": "Economista británica, redescubridora de la Escuela de Salamanca.",
+                "contribution": "Demostró que los escolásticos españoles formularon los principios del orden económico libre siglos antes que Adam Smith."
+            },
+            "navarro": {
+                "name": "Mariano Navarro Rubio",
+                "period": "1913–2001",
+                "nationality": "Española",
+                "shortBio": "Ministro de Hacienda español, impulsor del Plan de Estabilización de 1959.",
+                "contribution": "Aplicó el principio de estabilidad monetaria y responsabilidad fiscal como garantías de la libertad civil."
+            },
+            "gongora": {
+                "name": "Mario Góngora",
+                "period": "1915–1985",
+                "nationality": "Hispanoamericana (Chile)",
+                "shortBio": "Gran historiador del Estado chileno, discípulo del realismo histórico.",
+                "contribution": "Sostuvo que el Estado surge de una sociedad previa y que su legitimidad depende de respetar la historia de la comunidad."
+            },
+            "dors": {
+                "name": "Álvaro d’Ors",
+                "period": "1915–2004",
+                "nationality": "Española",
+                "shortBio": "Prestigioso romanista y filósofo del derecho, defensor de la autoridad social.",
+                "contribution": "Distinguio entre autoridad (social) y potestad (política), advirtiendo que el Estado absoluto nace al sustituir al derecho."
+            },
+            "stoetzer": {
+                "name": "Carlos Stoetzer",
+                "period": "1916–1997",
+                "nationality": "Hispanoamericana (Argentina)",
+                "shortBio": "Jurista e investigador de las raíces escolásticas del constitucionalismo.",
+                "contribution": "Demostró que la soberanía popular y el gobierno limitado en las Américas proceden de la matriz de Vitoria y Suárez."
+            },
+            "termes": {
+                "name": "Rafael Termes Carreró",
+                "period": "1918–2005",
+                "nationality": "Española",
+                "shortBio": "Economista y pensador, defensor del humanismo en el capitalismo.",
+                "contribution": "Vinculó la economía de mercado con la responsabilidad personal y la tradición del derecho natural."
+            },
+            "canals": {
+                "name": "Francisco Canals Vidal",
+                "period": "1922–2009",
+                "nationality": "Española",
+                "shortBio": "Filósofo barcelonés y profesor tomista, figura central del personalismo cristiano.",
+                "contribution": "Defendió que la sociedad nace de la sociabilidad natural de la persona y que el poder debe servir al bien común."
+            },
+            "sanchez": {
+                "name": "Ismael Sánchez Bella",
+                "period": "1922–2018",
+                "nationality": "Española",
+                "shortBio": "Gran historiador del derecho indiano en la Universidad de Navarra.",
+                "contribution": "Demostró que la Monarquía Hispánica en América funcionaba como un orden legal plural y jurisdiccional."
+            },
+            "mora": {
+                "name": "Gonzalo Fernández de la Mora",
+                "period": "1924–2002",
+                "nationality": "Española",
+                "shortBio": "Diplomático y pensador político, autor de 'El crepúsculo de las ideologías'.",
+                "contribution": "Defendió una política racional subordinada al bien común objetivo, remitiendo a la ley natural."
+            },
+            "velardefuertes": {
+                "name": "Juan Velarde Fuertes",
+                "period": "1927–2023",
+                "nationality": "Española",
+                "shortBio": "Catedrático y economista asturiano, experto en la historia del pensamiento español.",
+                "contribution": "Reintegró la Escuela de Salamanca en la historia de la economía, resaltando su análisis moral del mercado."
+            },
+            "gonzalez": {
+                "name": "Efraín González Morfín",
+                "period": "1929–2009",
+                "nationality": "Hispanoamericana (México)",
+                "shortBio": "Intelectual y político mexicano, exponente del humanismo cristiano.",
+                "contribution": "Defendió que el Estado no crea derechos sino que los reconoce, organizando el bien común según la naturaleza humana."
+            },
+            "negro": {
+                "name": "Dalmacio Negro Pavón",
+                "period": "1931–2025",
+                "nationality": "Española",
+                "shortBio": "Catedrático y filósofo político madrileño, analista de la transformación del poder.",
+                "contribution": "Distinguió entre autoridad social y poder estatal autónomo, reivindicando los límites morales clásicos."
+            },
+            "sacheri": {
+                "name": "Carlos Alberto Sacheri",
+                "period": "1933–1974",
+                "nationality": "Hispanoamericana (Argentina)",
+                "shortBio": "Filósofo argentino y profesor universitario de la UCA.",
+                "contribution": "Criticó la pretensión de soberanía ilimitada del Estado moderno, defendiendo que el poder es fiduciario."
+            },
+            "ochaa": {
+                "name": "Constantino Ocha’a Mve Bengobesama",
+                "period": "1936–2001",
+                "nationality": "Ecuatoguineana",
+                "shortBio": "Jurista ecuatoguineano formado en España, defensor del Estado de derecho.",
+                "contribution": "Propuso un Estado basado en normas racionales y el reconocimiento de la comunidad frente al poder personal."
+            },
+            "schwartz": {
+                "name": "Pedro Schwartz",
+                "period": "1935–",
+                "nationality": "Española",
+                "shortBio": "Economista y académico madrileño, defensor del liberalismo clásico.",
+                "contribution": "Subrayó la continuidad institucional de fueros y pactismo español como el origen de las libertades hispánicas."
+            },
+            "bravo": {
+                "name": "Bernardino Bravo Lira",
+                "period": "1938–",
+                "nationality": "Hispanoamericana (Chile)",
+                "shortBio": "Jurista e historiador chileno, investigador del derecho jurisdiccional.",
+                "contribution": "Demostró que el constitucionalismo americano hereda la tradición medieval y escolástica de limitación del poder."
+            },
+            "alvira": {
+                "name": "Rafael Alvira",
+                "period": "1942–2024",
+                "nationality": "Española",
+                "shortBio": "Catedrático zaragozano, defensor del realismo en la filosofía social.",
+                "contribution": "Desarrolló una teoría de la sociedad centrada en la comunidad como realidad previa al Estado."
+            },
+            "nogueira": {
+                "name": "Jaime Nogueira Pinto",
+                "period": "1946–",
+                "nationality": "Portuguesa",
+                "shortBio": "Ensayista e historiador portugués, analista de la legitimidad política.",
+                "contribution": "Reivindicó la autoridad limitada por tradiciones y cuerpos intermedios frente a la soberanía absoluta."
+            },
+            "brito": {
+                "name": "António José de Brito",
+                "period": "1947–2023",
+                "nationality": "Portuguesa",
+                "shortBio": "Filósofo político portugués, especialista en derecho natural clásico.",
+                "contribution": "Defendió que la civilización occidental solo puede sostenerse si reconoce límites morales al poder."
+            },
+            "cabrillo": {
+                "name": "Francisco Cabrillo Rodríguez",
+                "period": "1948–",
+                "nationality": "Española",
+                "shortBio": "Catedrático de economía aplicada, experto en análisis económico del derecho.",
+                "contribution": "Vinculó la libertad económica con la tradición institucional hispánica de limitación del poder arbitrario."
+            },
+            "moreira": {
+                "name": "José Manuel Moreira",
+                "period": "1949–",
+                "nationality": "Portuguesa",
+                "shortBio": "Filósofo y economista portugués, investigador de la ética económica.",
+                "contribution": "Situó a la Segunda Escolástica en la genealogía del liberalismo occidental, rompiendo la narrativa anglosajona."
+            },
+            "ndongo": {
+                "name": "Donato Ndongo-Bidyogo",
+                "period": "1950–",
+                "nationality": "Ecuatoguineana",
+                "shortBio": "Intelectual y novelista ecuatoguineano, crítico del poder autónomo.",
+                "contribution": "Reflexionó sobre la dignidad personal como realidad anterior al Estado y sobre los límites de la autoridad."
+            },
+            "belda": {
+                "name": "Juan Belda Plans",
+                "period": "1950–",
+                "nationality": "Española",
+                "shortBio": "Sacerdote e historiador de la teología, experto en la Escuela de Salamanca.",
+                "contribution": "Reconstruyó la Escuela de Salamanca como un programa intelectual que respondió a los retos globales."
+            },
+            "huerta": {
+                "name": "Jesús Huerta de Soto",
+                "period": "1556–",
+                "nationality": "Española",
+                "shortBio": "Catedrático de economía política y defensor de la Escuela Austriaca.",
+                "contribution": "Demostró que el liberalismo moderno es un desarrollo coherente del derecho natural escolástico."
+            }
+        }
     }
 }
