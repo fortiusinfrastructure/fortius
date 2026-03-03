@@ -7,7 +7,8 @@ import { Calendar, User, BookOpen } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const t = await getTranslations('Publicaciones.Archive');
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Publicaciones.Archive' });
 
     return {
         title: t('metaTitle'),
@@ -20,7 +21,7 @@ export default async function PublicacionesPage({ params }: { params: Promise<{ 
     const featuredArticle = getFeaturedArticles()[0];
     const listArticles = articles.filter(a => a.id !== featuredArticle?.id);
 
-    const t = await getTranslations('Publicaciones.Archive');
+    const t = await getTranslations({ locale, namespace: 'Publicaciones.Archive' });
 
     return (
         <>

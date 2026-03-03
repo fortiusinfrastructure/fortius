@@ -23,7 +23,7 @@ export default async function ActividadesPage({ params }: Props) {
     const featuredActivities = getFeaturedActivities();
     const pastActivities = getPastActivities();
     const upcomingActivities = getUpcomingActivities();
-    const t = await getTranslations('Actividades');
+    const t = await getTranslations({ locale, namespace: 'Actividades' });
 
     return (
         <>

@@ -16,7 +16,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale } = await params;
     const activity = getActivityBySlug(slug);
-    const t = await getTranslations('ActividadesSlug.Meta');
+    const t = await getTranslations({ locale, namespace: 'ActividadesSlug.Meta' });
     if (!activity) return { title: t('notFound') };
 
     const title = getLocalizedValue(activity.title, locale);
@@ -42,7 +42,7 @@ export async function generateStaticParams() {
 export default async function ActivityPage({ params }: Props) {
     const { slug, locale } = await params;
     const activity = getActivityBySlug(slug);
-    const t = await getTranslations('ActividadesSlug');
+    const t = await getTranslations({ locale, namespace: 'ActividadesSlug' });
 
     if (!activity) {
         notFound();

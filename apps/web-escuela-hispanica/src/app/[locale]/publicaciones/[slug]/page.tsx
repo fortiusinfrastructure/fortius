@@ -16,7 +16,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale } = await params;
     const article = getArticleBySlug(slug);
-    const t = await getTranslations('Publicaciones.Article');
+    const t = await getTranslations({ locale, namespace: 'Publicaciones.Article' });
     if (!article) return { title: t('notFound') };
 
     const title = getLocalizedValue(article.title, locale);
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
     const locales = ['es', 'en', 'pt'];
     const params: { slug: string; locale: string }[] = [];
-    
+
     for (const locale of locales) {
         for (const article of articles) {
             params.push({
@@ -45,7 +45,7 @@ export async function generateStaticParams() {
             });
         }
     }
-    
+
     return params;
 }
 
@@ -57,7 +57,7 @@ export default async function ArticlePage({ params }: Props) {
         notFound();
     }
 
-    const t = await getTranslations('Publicaciones.Article');
+    const t = await getTranslations({ locale, namespace: 'Publicaciones.Article' });
 
     // Related articles (same category, excluding current)
     const relatedArticles = articles
