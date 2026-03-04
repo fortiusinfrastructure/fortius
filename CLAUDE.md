@@ -144,6 +144,7 @@ APPROVER_EMAIL=secretaria@escuelahispanica.org
 - **Auth completa** (middleware, login, register, callback, navbar)
 - **Backend de pagos** (6 API routes, Stripe + HMAC tokens)
 - **Emails transaccionales** (Resend wrapper + templates inline)
+- **Resiliencia i18n:** Fix persistente de Error 500 en `generateMetadata` al navegar sin prefijo de idioma.
 
 ### 🔜 Sprint actual: Poner operativo el flujo de membresía
 1. **Fix webhook → DB column mismatch** (amount, plan_id)

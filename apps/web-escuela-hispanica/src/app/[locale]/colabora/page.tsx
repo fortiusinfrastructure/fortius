@@ -4,14 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Navbar, Footer } from '@/components/sections';
 import { membershipPlans } from '@/lib/mock-data';
-import { Heart, Medal, Crown, Check, X, ShieldCheck, Loader2, ChevronRight } from 'lucide-react';
+import { Heart, GraduationCap, Crown, Check, X, ShieldCheck, Loader2, ChevronRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { getLocalizedValue } from '@/lib/i18n/localize';
 import { createBrowserClient } from '@fortius/database/src/client/browser';
 
 const tierIcons = {
     amigo: Heart,
-    academico: Medal,
+    academico: GraduationCap,
     mecenas: Crown,
 };
 

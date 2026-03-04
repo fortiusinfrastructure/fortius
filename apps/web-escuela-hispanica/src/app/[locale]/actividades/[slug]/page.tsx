@@ -14,46 +14,64 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug, locale } = await params;
-    const activity = getActivityBySlug(slug);
-    const t = await getTranslations({ locale, namespace: 'ActividadesSlug.Meta' });
-    if (!activity) return { title: t('notFound') };
+    try {
+        const { slug, locale } = await params;
+        const activity = getActivityBySlug(slug);
+        const t = await getTranslations({ locale, namespace: 'ActividadesSlug.Meta' });
+        if (!activity) return { title: t('notFound') };
 
-    const title = getLocalizedValue(activity.title, locale);
-    const excerpt = getLocalizedValue(activity.excerpt, locale);
+        const title = getLocalizedValue(activity.title, locale);
+        const excerpt = getLocalizedValue(activity.excerpt, locale);
 
-    return {
-        title: `${title} | Escuela Hispánica`,
-        description: excerpt,
-        openGraph: {
-            title: title,
+        return {
+            title: `${title} | Escuela Hispánica`,
             description: excerpt,
-            images: [activity.image],
-        },
-    };
+            openGraph: {
+                title: title,
+                description: excerpt,
+                images: [activity.image],
+            },
+        };
+    } catch (error) {
+        console.error('Metadata generation error:', error);
+        return {
+            title: 'Actividad | Escuela Hispánica',
+        };
+    }
 }
 
 export async function generateStaticParams() {
-    return activities.map((activity) => ({
-        slug: activity.slug,
-    }));
+    const locales = ['es', 'en', 'pt'];
+    const params: { slug: string; locale: string }[] = [];
+
+    for (const locale of locales) {
+        for (const activity of activities) {
+            params.push({
+                slug: activity.slug,
+                locale,
+            });
+        }
+    }
+
+    return params;
 }
 
 export default async function ActivityPage({ params }: Props) {
-    const { slug, locale } = await params;
-    const activity = getActivityBySlug(slug);
-    const t = await getTranslations({ locale, namespace: 'ActividadesSlug' });
+    try {
+        const { slug, locale } = await params;
+        const activity = getActivityBySlug(slug);
+        const t = await getTranslations({ locale, namespace: 'ActividadesSlug' });
 
-    if (!activity) {
-        notFound();
-    }
+        if (!activity) {
+            notFound();
+        }
 
-    const relatedActivities = activities
-        .filter((a) => a.slug !== activity.slug)
-        .slice(0, 3);
+        const relatedActivities = activities
+            .filter((a) => a.slug !== activity.slug)
+            .slice(0, 3);
 
-    return (
-        <div className="flex flex-col min-h-screen">
+        return (
+            <div className="flex flex-col min-h-screen">
             <Navbar />
             <ScrollProgress />
 
@@ -234,7 +252,13 @@ export default async function ActivityPage({ params }: Props) {
                                                         rel="noopener noreferrer"
                                                         className="text-[#c5a059]/80 text-sm font-light hover:text-[#c5a059] transition-colors break-all"
                                                     >
-                                                        {new URL(activity.web).hostname}
+                                                        {(() => {
+                                                            try {
+                                                                return new URL(activity.web).hostname;
+                                                            } catch {
+                                                                return activity.web;
+                                                            }
+                                                        })()}
                                                     </a>
                                                 </div>
                                             </div>
@@ -312,7 +336,13 @@ export default async function ActivityPage({ params }: Props) {
                                     <div>
                                         <p className="text-white/30 font-cinzel text-[9px] tracking-widest uppercase mb-1">{t('Details.web')}</p>
                                         <a href={activity.web} target="_blank" rel="noopener noreferrer" className="text-[#c5a059]/80 text-sm font-light hover:text-[#c5a059] transition-colors">
-                                            {new URL(activity.web).hostname}
+                                            {(() => {
+                                                try {
+                                                    return new URL(activity.web).hostname;
+                                                } catch {
+                                                    return activity.web;
+                                                }
+                                            })()}
                                         </a>
                                     </div>
                                 </div>
@@ -380,4 +410,8 @@ export default async function ActivityPage({ params }: Props) {
             <Footer />
         </div>
     );
+    } catch (error) {
+        console.error('Activity page error:', error);
+        notFound();
+    }
 }

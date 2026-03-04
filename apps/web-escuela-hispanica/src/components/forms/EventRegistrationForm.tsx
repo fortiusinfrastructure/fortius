@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 export function EventRegistrationForm({ eventName, eventId }: { eventName: string, eventId: string }) {
-    const t = useTranslations('Common');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
