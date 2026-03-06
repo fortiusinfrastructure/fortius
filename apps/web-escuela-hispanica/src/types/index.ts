@@ -16,6 +16,10 @@ export interface Article {
   image: string;
   authorImage?: string;
   isFeatured?: boolean;
+  gallery?: Array<{
+    src: string;
+    caption?: string | LocalizedText;
+  }>;
 }
 
 export interface Activity {

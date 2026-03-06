@@ -21,7 +21,7 @@ const content = {
                 title: '1. Titularidad',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entidad:</strong> FUNDACIÓN FORTIUS ESPAÑA (en adelante "FUNDACIÓN FORTIUS"), titular de www.ieam.es.</li>
+                        <li><strong>Entidad:</strong> FUNDACIÓN FORTIUS ESPAÑA (en adelante "FUNDACIÓN FORTIUS"), titular de https://escuelahispanica.org</li>
                         <li><strong>NIF:</strong> G56299100</li>
                         <li><strong>Domicilio Social:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid.</li>
                         <li><strong>Dirección Postal:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid</li>
@@ -68,7 +68,7 @@ const content = {
                 title: '1. Ownership',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entity:</strong> FUNDACIÓN FORTIUS ESPAÑA (hereinafter "FUNDACIÓN FORTIUS"), owner of www.ieam.es.</li>
+                        <li><strong>Entity:</strong> FUNDACIÓN FORTIUS ESPAÑA (hereinafter "FUNDACIÓN FORTIUS"), owner of https://escuelahispanica.org</li>
                         <li><strong>VAT Number:</strong> G56299100</li>
                         <li><strong>Registered Office:</strong> Calle Zurbano 71, office 9, 28010, Madrid, Spain.</li>
                         <li><strong>Postal Address:</strong> Calle Zurbano 71, office 9, 28010, Madrid, Spain</li>
@@ -115,7 +115,7 @@ const content = {
                 title: '1. Titularidade',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entidade:</strong> FUNDACIÓN FORTIUS ESPAÑA (doravante "FUNDACIÓN FORTIUS"), titular de www.ieam.es.</li>
+                        <li><strong>Entidade:</strong> FUNDACIÓN FORTIUS ESPAÑA (doravante "FUNDACIÓN FORTIUS"), titular de https://escuelahispanica.org</li>
                         <li><strong>NIF:</strong> G56299100</li>
                         <li><strong>Sede:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid, Espanha.</li>
                         <li><strong>Endereço Postal:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid, Espanha</li>

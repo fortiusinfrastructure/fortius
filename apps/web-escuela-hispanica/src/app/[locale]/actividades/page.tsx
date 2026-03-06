@@ -67,7 +67,7 @@ export default async function ActividadesPage({ params }: Props) {
 
                             return (
                                 <div key={activity.id} className="group relative">
-                                    <div className="relative w-full min-h-[70vh] md:min-h-[80vh] overflow-hidden">
+                                    <div className="relative w-full aspect-video overflow-hidden">
                                         <img
                                             src={activity.image}
                                             alt={getLocalizedValue(activity.title, locale)}
@@ -76,7 +76,7 @@ export default async function ActividadesPage({ params }: Props) {
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#050a14] via-[#050a14]/80 to-[#050a14]/30" />
                                         <div className="absolute inset-0 bg-gradient-to-r from-[#050a14]/90 via-transparent to-transparent" />
 
-                                        <div className="relative z-10 flex flex-col justify-end h-full min-h-[70vh] md:min-h-[80vh] px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
+                                        <div className="relative z-10 flex flex-col justify-end h-full px-6 md:px-16 lg:px-24 pb-8 md:pb-12">
                                             <div className="flex items-center gap-3 mb-8">
                                                 <div className="w-8 h-[1px] bg-[#c5a059]" />
                                                 <span className="font-cinzel text-[10px] md:text-xs tracking-[0.4em] text-[#c5a059] uppercase">

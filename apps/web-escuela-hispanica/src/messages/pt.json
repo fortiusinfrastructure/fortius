@@ -19,7 +19,7 @@
             "cookies": "Política de Cookies",
             "privacy": "Privacidade"
         },
-        "copyright": "© 2024 ESCUELA HISPÁNICA. TODOS OS DIREITOS RESERVADOS."
+        "copyright": "© 2026 ESCUELA HISPÁNICA. TODOS OS DIREITOS RESERVADOS."
     },
     "Home": {
         "Hero": {
@@ -268,7 +268,7 @@
         },
         "MisionVision": {
             "misionLabel": "Missão",
-            "mision": "Promover o estudo e a atualização do pensamento político hispânico, explorando as ideias e tradições que moldaram a noção de liberdade no mundo hispânico. A Escola Hispânica busca criar uma comunidade intelectual comprometida com a pesquisa rigorosa, o diálogo e a transmissão de um legado político e histórico comum à Espanha, Portugal e América Latina.",
+            "mision": "Promover o estudo e a atualização do pensamento político hispânico, explorando as ideias e tradições que moldaram a noção de liberdade no mundo hispânico. A Escola Hispânica busca criar uma comunidade intelectual comprometida com a pesquisa rigorosa, o diálogo e a transmissão de um legado político e histórico comum à Espanha, Portugal e Hispano-América.",
             "visionLabel": "Visão",
             "vision": "Ser uma referência internacional no estudo do pensamento político hispânico e da tradição de liberdade, contribuindo para que essa herança intelectual ilumine os desafios contemporâneos. Aspiramos a fortalecer os laços entre as nações de língua hispânica e lusitana através da compreensão compartilhada de sua história, filosofia política e projeção futura."
         },
@@ -308,6 +308,7 @@
         "Academic": {
             "title": "Membros Académicos",
             "subtitle": "Investigadores e académicos que participam da vida intelectual da Escola.",
+            "stats": "Somos {count} membros de {countries} países.",
             "updated": "A lista é atualizada periodicamente."
         },
         "Colabora": {
@@ -555,6 +556,26 @@
             "title": "Outras Atividades",
             "viewAll": "VER TODOS"
         }
+    },
+    "EventRegistration": {
+        "title": "Registo de Presença",
+        "firstName": "Nome",
+        "firstNamePlaceholder": "O seu nome",
+        "lastName": "Apelido",
+        "lastNamePlaceholder": "O seu apelido",
+        "email": "Endereço de E-mail",
+        "emailPlaceholder": "email@exemplo.com",
+        "institution": "Instituição ou Organização",
+        "institutionPlaceholder": "Opcional",
+        "message": "Mensagem Adicional",
+        "messagePlaceholder": "Interesses particulares no evento, cargo, títulos académicos, etc.",
+        "submit": "Confirmar Presença",
+        "submitting": "A processar...",
+        "disclaimer": "Ao confirmar, os seus dados serão tratados para a organização do evento pela Escola Hispânica.",
+        "errorDefault": "Ocorreu um erro inesperado ao processar o seu registo. Por favor, tente novamente mais tarde.",
+        "successTitle": "Registo Confirmado",
+        "successMessage": "Recebemos corretamente o seu pedido de presença para <strong>{eventName}</strong>. O seu pedido será avaliado e entraremos em contacto consigo brevemente com mais detalhes.",
+        "successBack": "Voltar"
     },
     "Biografias": {
         "Meta": {

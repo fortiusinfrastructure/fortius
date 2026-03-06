@@ -133,6 +133,12 @@ export default function NosotrosClient() {
     const [activeMember, setActiveMember] = useState<TeamMemberWithBio | null>(null);
     const [activeAcademic, setActiveAcademic] = useState<string | null>(null);
 
+    // Calculate members and countries
+    const totalMembers = academicMembers.length;
+    const uniqueCountries = new Set(
+        academicMembers.map(m => m.country || (m as any).info).filter(Boolean)
+    ).size;
+
     return (
         <>
             <Navbar />
@@ -283,6 +289,9 @@ export default function NosotrosClient() {
                         <div className="mb-20">
                             <h3 className="text-white font-serif text-3xl md:text-5xl mb-4 uppercase tracking-tight">{t('Academic.title')}</h3>
                             <p className="text-white/80 font-serif text-lg mb-2">{t('Academic.subtitle')}</p>
+                            <p className="text-white/60 font-serif text-sm mb-4">
+                                {t('Academic.stats', { count: totalMembers, countries: uniqueCountries })}
+                            </p>
                             <p className="text-[#c5a059] font-cinzel text-[10px] tracking-[0.4em] uppercase">{t('Academic.updated')}</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-0 border-t border-white/5 pt-12 text-left">

@@ -19,7 +19,7 @@
             "cookies": "Política de Cookies",
             "privacy": "Privacidad"
         },
-        "copyright": "© 2024 ESCUELA HISPÁNICA. TODOS LOS DERECHOS RESERVADOS."
+        "copyright": "© 2026 ESCUELA HISPÁNICA. TODOS LOS DERECHOS RESERVADOS."
     },
     "Home": {
         "Hero": {
@@ -308,6 +308,7 @@
         "Academic": {
             "title": "Miembros Académicos",
             "subtitle": "Investigadores y académicos que participan en la vida intelectual de la Escuela.",
+            "stats": "Somos {count} miembros de {countries} países.",
             "updated": "La lista se actualiza periódicamente."
         },
         "Colabora": {
@@ -556,6 +557,26 @@
             "viewAll": "VER TODAS"
         }
     },
+    "EventRegistration": {
+        "title": "Registro de Asistencia",
+        "firstName": "Nombre",
+        "firstNamePlaceholder": "Su nombre",
+        "lastName": "Apellidos",
+        "lastNamePlaceholder": "Sus apellidos",
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "correo@ejemplo.com",
+        "institution": "Institución u Organización",
+        "institutionPlaceholder": "Opcional",
+        "message": "Mensaje Adicional",
+        "messagePlaceholder": "Intereses particulares en el evento, cargo, títulos académicos, etc.",
+        "submit": "Confirmar Asistencia",
+        "submitting": "Procesando...",
+        "disclaimer": "Al confirmar, sus datos serán procesados para la organización del evento por Escuela Hispánica.",
+        "errorDefault": "Ha ocurrido un error inesperado al procesar su registro. Por favor, inténtelo de nuevo más tarde.",
+        "successTitle": "Registro Confirmado",
+        "successMessage": "Hemos recibido correctamente su solicitud de asistencia para <strong>{eventName}</strong>. Su petición será evaluada y nos pondremos en contacto con usted a la brevedad con más detalles.",
+        "successBack": "Volver"
+    },
     "Biografias": {
         "Meta": {
             "title": "Biografías | Escuela Hispánica",
@@ -573,7 +594,7 @@
                 "name": "Francisco de Vitoria",
                 "period": "c. 1483–1546",
                 "nationality": "Española",
-                "shortBio": "Dominico burgalés y catedrático en Salamanca, renovó la teología tras estudiar en París.",
+                "shortBio": "Francisco de Vitoria nació en Burgos hacia 1483 y murió en Salamanca el 12 de agosto de 1546. Ingresó en la Orden de Predicadores (dominicos) y se formó intelectualmente en la Universidad de París, el principal centro teológico europeo de su tiempo, donde estudió profundamente a Tomás de Aquino. A su regreso a España fue nombrado catedrático de Prima de Teología en la Universidad de Salamanca, desde donde impulsó una renovación intelectual que marcaría el pensamiento europeo durante siglos y daría origen a la llamada Segunda Escolástica. El contexto histórico de su obra fue decisivo: el descubrimiento de América planteó por primera vez a Europa un problema radicalmente nuevo. ¿Qué legitimidad tenía una potencia cristiana para dominar pueblos no cristianos? La tradición medieval no ofrecía respuestas claras para una realidad verdaderamente global. Vitoria convirtió esta cuestión práctica en un problema filosófico universal. Sus enseñanzas se conservan en las Relectiones, conferencias académicas dictadas entre 1537 y 1540 y publicadas póstumamente, entre las cuales destacan De Indis (1539) y De iure belli (1539). En ellas rechaza dos ideas dominantes de su época: la autoridad universal del Papa sobre toda la humanidad y el derecho automático de conquista por superioridad religiosa o cultural. Ninguna nación, sostiene, puede apropiarse legítimamente del dominio político de otra simplemente por ser pagana o menos civilizada. Su argumento parte de una premisa revolucionaria para el siglo XVI: todos los seres humanos comparten la misma naturaleza racional y, por tanto, poseen derechos políticos naturales. Los pueblos indígenas americanos tienen legítima soberanía sobre sus territorios, sus leyes y sus gobernantes. La conversión religiosa no puede imponerse por la fuerza, y la guerra solo puede justificarse bajo criterios estrictos de justicia. Con ello Vitoria transforma la teología moral en teoría política universal. La comunidad política no nace del poder, sino de la sociabilidad humana. El poder es legítimo solo si protege el bien común y respeta un orden moral previo. Surge así la noción de ius gentium moderno: existe un derecho de las naciones anterior a cualquier imperio. Esta idea inaugura el derecho internacional contemporáneo. Las relaciones entre pueblos no se basan en jerarquías religiosas o imperiales, sino en normas comunes derivadas de la razón natural: libertad de comercio, derecho de comunicación entre pueblos, protección de inocentes en guerra y límites al uso de la fuerza. La guerra deja de ser instrumento normal de expansión política y pasa a ser un recurso excepcional sometido a condiciones jurídicas. El alcance filosófico es profundo. Vitoria introduce la noción de derechos anteriores al Estado: la autoridad política no crea la dignidad humana, la reconoce. El poder queda subordinado a la justicia. Este principio, aplicado primero a la relación entre imperios y pueblos indígenas, terminará influyendo en la idea moderna de derechos humanos y en la legitimidad condicionada del gobierno. De este modo, Francisco de Vitoria establece el fundamento remoto del constitucionalismo: si existen derechos previos al poder, el gobierno debe limitarse por normas superiores. La política deja de ser mera dominación y pasa a ser orden jurídico. Su pensamiento abre el camino hacia una concepción universalista de la comunidad humana, donde ninguna autoridad puede reclamar legitimidad absoluta sin referencia al derecho natural.",
                 "contribution": "Fundador del derecho internacional moderno; defendió los derechos naturales de los indígenas y la soberanía basada en la razón."
             },
             "lascasas": {

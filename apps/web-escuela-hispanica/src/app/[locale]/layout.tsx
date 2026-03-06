@@ -81,6 +81,11 @@ export async function generateMetadata({
         title: t.title,
         description: t.twitterDescription,
       },
+      icons: {
+        icon: '/favicon.svg',
+        shortcut: '/favicon.svg',
+        apple: '/favicon.svg',
+      },
     };
   } catch (error) {
     console.error(`Failed to load messages for locale: ${locale}`, error);

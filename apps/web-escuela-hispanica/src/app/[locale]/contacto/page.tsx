@@ -61,7 +61,7 @@ export default async function ContactoPage({
                                         <MapPin className="w-5 h-5 text-[#c5a059] mt-1" />
                                         <div>
                                             <p className="font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-1">{t('Info.addressLabel')}</p>
-                                            <p className="text-white/80 text-sm font-serif leading-relaxed">Calle Zurbano 71, Oficina 9<br />28010, Madrid, España</p>
+                                            <p className="text-white/80 text-sm font-serif leading-relaxed">Calle Zurbano 71, Oficina 9<br />Madrid, España</p>
                                         </div>
                                     </div>
                                 </div>

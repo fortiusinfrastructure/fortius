@@ -95,7 +95,7 @@ export const activities: Activity[] = [
                 <p style="font-style: italic; color: rgba(255,255,255,0.5);">* Agenda pendente de confirmação</p>
             `
         },
-        image: '/images/activities/escuela_hispanica.jpg',
+        image: '/images/activities/lusofonia_activity.png',
         isFeatured: false,
         isUpcoming: true
     },

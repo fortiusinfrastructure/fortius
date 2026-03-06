@@ -2,6 +2,7 @@ import React from 'react';
 import { BookOpen, Milestone } from 'lucide-react';
 import { LocalizedText } from '@/types';
 import { getLocalizedValue } from '@/lib/i18n/localize';
+import { RichText } from '@/components/ui/RichText';
 
 export type TimelineItemType = 'historical' | 'philosophical' | 'section_header';
 
@@ -70,7 +71,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, locale }) => {
                                         {getLocalizedValue(item.title, locale)}
                                     </h3>
                                     <p className="font-serif text-base text-white/50 leading-relaxed font-light">
-                                        {getLocalizedValue(item.description, locale)}
+                                        <RichText text={getLocalizedValue(item.description, locale)} />
                                     </p>
                                 </div>
                             </div>

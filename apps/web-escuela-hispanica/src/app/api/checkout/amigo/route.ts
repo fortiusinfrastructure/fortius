@@ -28,6 +28,13 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        if (mode === 'subscription' && !process.env.STRIPE_PRICE_AMIGO_MONTHLY) {
+            return NextResponse.json(
+                { error: 'La suscripción mensual no está disponible en este momento' },
+                { status: 500 },
+            );
+        }
+
         const supabase = await createServerClient();
         const {
             data: { user },

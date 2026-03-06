@@ -305,11 +305,11 @@ export default function ColaboraPage() {
 
     const comparisonData = [
         { key: 'newsletters', amigo: true, academico: true, mecenas: true },
-        { key: 'eventDiscount', amigo: t('Comparison.discountAmigo'), academico: t('Comparison.discountAcademico'), mecenas: t('Comparison.discountMecenas') },
+        { key: 'eventDiscount', amigo: t('Comparison.discountAmigo'), academico: t('Comparison.discountAcademico'), mecenas: 'VIP' },
         { key: 'privateLibrary', amigo: false, academico: true, mecenas: true },
         { key: 'certificate', amigo: false, academico: true, mecenas: true },
         { key: 'votingRight', amigo: false, academico: true, mecenas: true },
-        { key: 'publication', amigo: false, academico: t('Comparison.pubWithReview'), mecenas: t('Comparison.pubWithReview') },
+        { key: 'publication', amigo: false, academico: t('Comparison.pubWithReview'), mecenas: true },
         { key: 'dinners', amigo: false, academico: false, mecenas: true },
         { key: 'mention', amigo: t('Comparison.mentionAmigo'), academico: t('Comparison.mentionAcademico'), mecenas: t('Comparison.mentionMecenas') },
     ];

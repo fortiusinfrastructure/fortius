@@ -2,12 +2,13 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Navbar, Footer } from '@/components/sections';
 import { articles, getArticleBySlug } from '@/lib/mock-data';
-import { Calendar, User, ArrowLeft, Share2, Bookmark, Clock, ChevronRight } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Share2, Bookmark, Clock, ChevronRight, ImageIcon } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { getLocalizedValue } from '@/lib/i18n/localize';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import { getTeamMemberByName } from '@/lib/mock-data/team';
 import { getTranslations } from 'next-intl/server';
+import PhotoGallery from '@/components/ui/PhotoGallery';
 
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
@@ -157,6 +158,18 @@ export default async function ArticlePage({ params }: Props) {
                                 className="article-content px-6 md:px-0"
                                 dangerouslySetInnerHTML={{ __html: getLocalizedValue(article.content, locale) }}
                             />
+
+                            {/* Photo Gallery */}
+                            {article.gallery && article.gallery.length > 0 && (
+                                <div className="mt-24 mb-8 px-6 md:px-0">
+                                    <div className="flex items-center gap-4 mb-10">
+                                        <ImageIcon className="w-5 h-5 text-[#c5a059]/60" />
+                                        <p className="text-[#c5a059] font-cinzel text-[10px] tracking-[0.4em] uppercase">Galería</p>
+                                        <div className="h-[1px] flex-grow bg-white/5" />
+                                    </div>
+                                    <PhotoGallery images={article.gallery} locale={locale} />
+                                </div>
+                            )}
 
                             {/* Author Editorial Card */}
                             <footer className="mt-40 border-t border-white/5 pt-20">

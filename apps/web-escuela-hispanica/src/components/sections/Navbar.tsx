@@ -94,15 +94,18 @@ const Navbar: React.FC = () => {
               )}
             </div>
           ) : (
-            <Link
-              href="/auth/login"
-              className="flex items-center gap-2 text-white/50 hover:text-[#c5a059] transition-colors"
-            >
-              <LogIn className="w-4 h-4" />
-              <span className="hidden md:inline font-cinzel text-[9px] tracking-[0.1em] uppercase">
-                Acceder
-              </span>
-            </Link>
+            // TODO: Ciudadela Digital — botón de acceso oculto hasta implementar portal de miembros.
+            // Ver CLAUDE.md § "Ciudadela Digital (Portal de Miembros)" para el plan de desarrollo.
+            // <Link
+            //   href="/auth/login"
+            //   className="flex items-center gap-2 text-white/50 hover:text-[#c5a059] transition-colors"
+            // >
+            //   <LogIn className="w-4 h-4" />
+            //   <span className="hidden md:inline font-cinzel text-[9px] tracking-[0.1em] uppercase">
+            //     Acceder
+            //   </span>
+            // </Link>
+            null
           )}
         </div>
 

@@ -17,8 +17,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="text-white/50 text-xs space-y-2">
-            <p className="max-w-[150px]">{t('address.line1')}<br />{t('address.line2')}</p>
-            <a href="mailto:info@escuelahispanica.org" className="hover:text-white transition-colors underline decoration-[#c5a059] block mt-4">
+            <a href="mailto:info@escuelahispanica.org" className="hover:text-white transition-colors block mt-4">
               info@escuelahispanica.org
             </a>
           </div>

@@ -471,6 +471,26 @@ export interface Database {
                     created_at?: string | null
                 }
             }
+            stripe_events: {
+                Row: {
+                    id: string
+                    event_id: string
+                    event_type: string
+                    processed_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    event_id: string
+                    event_type: string
+                    processed_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    event_id?: string
+                    event_type?: string
+                    processed_at?: string | null
+                }
+            }
         }
     }
 }

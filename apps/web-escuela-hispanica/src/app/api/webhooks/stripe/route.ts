@@ -149,7 +149,7 @@ export async function POST(request: NextRequest) {
                         stripe_subscription_id: session.subscription as string,
                         stripe_customer_id: session.customer as string,
                         status: 'active',
-                    }, { onConflict: 'user_id' });
+                    }, { onConflict: 'stripe_subscription_id' });
                 }
 
                 // Record payment
@@ -218,7 +218,7 @@ export async function POST(request: NextRequest) {
 
                     await admin
                         .from('subscriptions')
-                        .update({ status: 'cancelled' })
+                        .update({ status: 'canceled' })
                         .eq('stripe_subscription_id', subscription.id);
                 }
 

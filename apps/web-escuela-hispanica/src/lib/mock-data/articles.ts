@@ -37,7 +37,7 @@ export const articles: Article[] = [
         <p>Entre los participantes estuvieron figuras vinculadas a Escuela Hispánica, como su presidente de honor, Alejandro Chafuen, y dos de sus vicepresidentes académicos: Carroll Ríos, presidenta del Instituto Fe y Libertad e impulsora directa de la conferencia, y León Gómez Rivas. La presencia de estos ponentes contribuyó a articular el coloquio dentro de un esfuerzo intelectual más amplio por recuperar la tradición hispánica en el debate contemporáneo.</p>
 
         <figure>
-          <img src="/images/publications/ecos-de-salamanca.jpg" alt="Participantes en Eco de Salamanca" />
+          <img src="/images/activities/encuentrosalamanca.jpg" alt="Participantes en Eco de Salamanca" />
           <figcaption style="font-family: var(--font-cinzel); font-size: 0.7rem; color: #c5a059; text-align: center; margin-top: -3.5rem; margin-bottom: 4rem; letter-spacing: 0.1em; opacity: 0.8;">
             De izquierda a derecha: Alejandro Chafuen (Presidente de Honor de EH), Carroll Ríos (presidenta del Instituto de Fe y Libertad, Guatemala, y vicepresidente de EH), y León Gómez Rivas (catedrático de la Universidad Europea y vicepresidente de EH).
           </figcaption>
@@ -100,7 +100,7 @@ export const articles: Article[] = [
         <p>Among the participants were figures linked to Escuela Hispánica, such as its honorary president, Alejandro Chafuen, and two of its academic vice presidents: Carroll Ríos, president of the Fe y Libertad Institute and direct promoter of the conference, and León Gómez Rivas. The presence of these speakers helped to articulate the colloquium within a broader intellectual effort to recover the Hispanic tradition in the contemporary debate.</p>
 
         <figure>
-          <img src="/images/publications/ecos-de-salamanca.jpg" alt="Participants in Echo of Salamanca" />
+          <img src="/images/activities/encuentrosalamanca.jpg" alt="Participants in Echo of Salamanca" />
           <figcaption style="font-family: var(--font-cinzel); font-size: 0.7rem; color: #c5a059; text-align: center; margin-top: -3.5rem; margin-bottom: 4rem; letter-spacing: 0.1em; opacity: 0.8;">
             From left to right: Alejandro Chafuen (Honorary President of EH), Carroll Ríos (President of the Fe y Libertad Institute, Guatemala, and Vice President of EH), and León Gómez Rivas (Professor at the European University and Vice President of EH).
           </figcaption>
@@ -133,7 +133,7 @@ export const articles: Article[] = [
         <p>Entre os participantes estiveram figuras ligadas à Escuela Hispánica, como o seu presidente honorário, Alejandro Chafuen, e dois dos seus vice-presidentes académicos: Carroll Ríos, presidente do Instituto Fé e Liberdade e principal promotora da conferência, e León Gómez Rivas. A presença destes oradores contribuiu para articular o colóquio num esforço intelectual mais amplo de recuperação da tradição hispânica no debate contemporâneo.</p>
 
         <figure>
-          <img src="/images/publications/ecos-de-salamanca.jpg" alt="Participantes no Eco de Salamanca" />
+          <img src="/images/activities/encuentrosalamanca.jpg" alt="Participantes no Eco de Salamanca" />
           <figcaption style="font-family: var(--font-cinzel); font-size: 0.7rem; color: #c5a059; text-align: center; margin-top: -3.5rem; margin-bottom: 4rem; letter-spacing: 0.1em; opacity: 0.8;">
             Da esquerda para a direita: Alejandro Chafuen (Presidente Honorário da EH), Carroll Ríos (presidente do Instituto de Fé e Liberdade, Guatemala, e vice-presidente da EH), e León Gómez Rivas (catedrático da Universidade Europeia e vice-presidente da EH).
           </figcaption>
@@ -152,8 +152,50 @@ export const articles: Article[] = [
         <p>O Eco de Salamanca voltará a realizar-se este ano em La Antigua Guatemala, consolidando-se como um fórum periódico de reflexão sobre a tradição intelectual hispânica e a sua projeção contemporânea.</p>
       `
     },
-    image: '/images/publications/ecos-de-salamanca.jpg',
-    isFeatured: true
+    image: '/images/activities/encuentrosalamanca.jpg',
+    isFeatured: true,
+    gallery: [
+      {
+        src: '/images/publications/eco salamanca/Participantes Eco de Salamanca.jpg',
+        caption: {
+          es: 'Participantes del coloquio Eco de Salamanca, La Antigua Guatemala, octubre de 2025',
+          en: 'Participants of the Echo of Salamanca colloquium, La Antigua Guatemala, October 2025',
+          pt: 'Participantes do colóquio Eco de Salamanca, La Antigua Guatemala, outubro de 2025'
+        }
+      },
+      {
+        src: '/images/publications/eco salamanca/2025 Eco de Salamanca Día 1 Eco de Salamanca.jpg',
+        caption: {
+          es: 'Primera jornada del coloquio Eco de Salamanca, 2025',
+          en: 'First day of the Echo of Salamanca colloquium, 2025',
+          pt: 'Primeiro dia do colóquio Eco de Salamanca, 2025'
+        }
+      },
+      {
+        src: '/images/publications/eco salamanca/2025 Eco de Salamanca Alex Chafuen.jpg',
+        caption: {
+          es: 'Alejandro Chafuen, Presidente de Honor de la Escuela Hispánica',
+          en: 'Alejandro Chafuen, Honorary President of the Escuela Hispánica',
+          pt: 'Alejandro Chafuen, Presidente Honorário da Escuela Hispánica'
+        }
+      },
+      {
+        src: '/images/publications/eco salamanca/2025 Eco de Salamanca León Gómez Rivas.jpg',
+        caption: {
+          es: 'León Gómez Rivas, vicepresidente académico de la Escuela Hispánica',
+          en: 'León Gómez Rivas, academic vice-president of the Escuela Hispánica',
+          pt: 'León Gómez Rivas, vice-presidente académico da Escuela Hispánica'
+        }
+      },
+      {
+        src: '/images/publications/eco salamanca/2025 Eco de Salamanca bts pódcast León Gómez Rivas.jpg',
+        caption: {
+          es: 'Grabación del pódcast con León Gómez Rivas, entre bastidores',
+          en: 'Behind the scenes of the podcast recording with León Gómez Rivas',
+          pt: 'Bastidores da gravação do pódcast com León Gómez Rivas'
+        }
+      }
+    ]
   },
   {
     id: 2,
@@ -944,9 +986,9 @@ export const articles: Article[] = [
     id: 5,
     slug: 'la-agitada-hispana',
     title: {
-      es: 'La agitada hispana',
-      en: 'The Agitated Hispanic Soul',
-      pt: 'A agitada alma hispânica'
+      es: 'La agitación hispana',
+      en: 'La agitación hispana',
+      pt: 'La agitación hispana'
     },
     author: 'Manuel Lucena Giraldo',
     date: '23/12/2023',
@@ -1496,9 +1538,9 @@ export const articles: Article[] = [
     id: 8,
     slug: 'vigencia-contenido-hispanidad',
     title: {
-      es: 'Vigencia y conexión de la Hispanidad',
-      en: 'Relevance and Connection of Hispanicity',
-      pt: 'Vigência e conexão da Hispanidade'
+      es: 'Vigencia y contenido de la Hispanidad',
+      en: 'Vigencia y contenido de la Hispanidad',
+      pt: 'Vigencia y contenido de la Hispanidad'
     },
     author: 'Gonzalo Vial Correa',
     date: '25/07/2023',

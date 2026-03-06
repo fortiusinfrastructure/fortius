@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-export function EventRegistrationForm({ eventName, eventId }: { eventName: string, eventId: string }) {
+export function EventRegistrationForm({ eventName, eventId }: { eventName: string; eventId: string }) {
+    const t = useTranslations('EventRegistration');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -14,10 +15,21 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
 
         const formData = new FormData(e.currentTarget);
 
+        // Build a plain JSON object from the form — the API reads request.json()
+        const body = {
+            first_name: formData.get('first_name') as string,
+            last_name: formData.get('last_name') as string,
+            email: formData.get('email') as string,
+            institution: formData.get('institution') as string,
+            message: formData.get('message') as string,
+            subject: `Registro de Evento: ${eventName} (${eventId})`,
+        };
+
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
-                body: formData,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
             });
 
             if (!res.ok) {
@@ -26,9 +38,10 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
             }
 
             setStatus('success');
-        } catch (error: any) {
-            console.error('Registration error:', error);
-            setErrorMessage(error.message);
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : String(error);
+            console.error('Registration error:', message);
+            setErrorMessage(message);
             setStatus('error');
         }
     };
@@ -41,16 +54,19 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <h3 className="font-serif text-2xl text-white mb-2">Registro Confirmado</h3>
+                <h3 className="font-serif text-2xl text-white mb-2">{t('successTitle')}</h3>
                 <p className="text-white/60 font-light mb-6">
-                    Hemos recibido correctamente su solicitud de asitencia para <strong>{eventName}</strong>. Su petición será evaluada y nos pondremos in contacto con usted a la brevedad con más detalles.
+                    {t.rich('successMessage', {
+                        eventName,
+                        strong: (chunks) => <strong>{chunks}</strong>,
+                    })}
                 </p>
                 <button
                     type="button"
                     onClick={() => setStatus('idle')}
                     className="px-4 py-2 border rounded-md border-white/10 text-white hover:bg-white/5 hover:border-white/20 font-cinzel text-xs tracking-widest uppercase transition-all"
                 >
-                    Volver
+                    {t('successBack')}
                 </button>
             </div>
         );
@@ -62,78 +78,75 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#c5a059]/5 blur-3xl -z-10 rounded-full mix-blend-screen" />
 
             <div className="mb-8">
-                <h3 className="font-serif text-2xl text-white mb-2">Registro de Asistencia</h3>
+                <h3 className="font-serif text-2xl text-white mb-2">{t('title')}</h3>
                 <p className="text-[#c5a059] font-cinzel text-xs tracking-widest uppercase mb-1">{eventName}</p>
                 <div className="w-12 h-[1px] bg-white/20 mt-4" />
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10 w-full">
-                <input type="hidden" name="subject" value={`Registro de Evento: ${eventName} (${eventId})`} />
-                <input type="hidden" name="form_type" value="event_registration" />
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                     <div className="space-y-2">
-                        <label htmlFor="first_name" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">Nombre</label>
+                        <label htmlFor="first_name" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">{t('firstName')}</label>
                         <input
                             type="text"
                             id="first_name"
                             name="first_name"
                             required
                             className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] transition-colors"
-                            placeholder="Su nombre"
+                            placeholder={t('firstNamePlaceholder')}
                         />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="last_name" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">Apellidos</label>
+                        <label htmlFor="last_name" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">{t('lastName')}</label>
                         <input
                             type="text"
                             id="last_name"
                             name="last_name"
                             required
                             className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] transition-colors"
-                            placeholder="Sus apellidos"
+                            placeholder={t('lastNamePlaceholder')}
                         />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                     <div className="space-y-2">
-                        <label htmlFor="email" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">Correo Electrónico</label>
+                        <label htmlFor="email" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">{t('email')}</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             required
                             className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] transition-colors"
-                            placeholder="correo@ejemplo.com"
+                            placeholder={t('emailPlaceholder')}
                         />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="institution" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">Institución u Organización</label>
+                        <label htmlFor="institution" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">{t('institution')}</label>
                         <input
                             type="text"
                             id="institution"
                             name="institution"
                             className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] transition-colors"
-                            placeholder="Opcional"
+                            placeholder={t('institutionPlaceholder')}
                         />
                     </div>
                 </div>
 
                 <div className="space-y-2 w-full">
-                    <label htmlFor="message" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">Mensaje Adicional</label>
+                    <label htmlFor="message" className="block text-xs font-cinzel tracking-widest text-white/60 uppercase">{t('message')}</label>
                     <textarea
                         id="message"
                         name="message"
                         rows={4}
                         className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] transition-colors resize-none"
-                        placeholder="Intereses particulares in el evento, cargo, títulos académicos, etc."
+                        placeholder={t('messagePlaceholder')}
                     />
                 </div>
 
                 {status === 'error' && (
                     <div className="p-4 bg-red-900/20 border border-red-500/30 text-red-200 text-sm">
-                        {errorMessage || 'Ha ocurrido un error inesperado al procesar su registro. Por favor, inténtelo de nuevo más tarde.'}
+                        {errorMessage || t('errorDefault')}
                     </div>
                 )}
 
@@ -142,11 +155,11 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
                     disabled={status === 'loading'}
                     className="w-full flex items-center justify-center rounded-md bg-[#c5a059] hover:bg-[#d4b475] disabled:opacity-50 disabled:cursor-not-allowed text-[#050a14] font-cinzel text-sm tracking-widest uppercase py-4 transition-all"
                 >
-                    {status === 'loading' ? 'Procesando...' : 'Confirmar Asistencia'}
+                    {status === 'loading' ? t('submitting') : t('submit')}
                 </button>
 
                 <p className="text-xs text-white/40 font-light text-center mt-4">
-                    Al confirmar, sus datos serán procesados para la organización del evento por Escuela Hispánica.
+                    {t('disclaimer')}
                 </p>
             </form>
         </div>

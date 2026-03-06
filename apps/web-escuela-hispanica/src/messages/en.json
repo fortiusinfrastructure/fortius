@@ -19,7 +19,7 @@
             "cookies": "Cookie Policy",
             "privacy": "Privacy"
         },
-        "copyright": "© 2024 ESCUELA HISPÁNICA. ALL RIGHTS RESERVED."
+        "copyright": "© 2026 ESCUELA HISPÁNICA. ALL RIGHTS RESERVED."
     },
     "Home": {
         "Hero": {
@@ -268,7 +268,7 @@
         },
         "MisionVision": {
             "misionLabel": "Mission",
-            "mision": "To promote the study and renewal of Hispanic political thought, exploring the ideas and traditions that have shaped the notion of freedom in the Hispanic world. The Hispanic School seeks to build an intellectual community committed to rigorous research, dialogue, and the transmission of a shared political and historical legacy among Spain, Portugal, and Latin America.",
+            "mision": "To promote the study and renewal of Hispanic political thought, exploring the ideas and traditions that have shaped the notion of freedom in the Hispanic world. The Hispanic School seeks to build an intellectual community committed to rigorous research, dialogue, and the transmission of a shared political and historical legacy among Spain, Portugal, and Hispanic America.",
             "visionLabel": "Vision",
             "vision": "To become an international reference in the study of Hispanic political thought and the tradition of freedom, helping this intellectual heritage illuminate contemporary challenges. We aspire to strengthen bonds among Spanish- and Portuguese-speaking nations through a shared understanding of their history, political philosophy, and future projection."
         },
@@ -308,6 +308,7 @@
         "Academic": {
             "title": "Academic Members",
             "subtitle": "Researchers and academics who participate in the intellectual life of the School.",
+            "stats": "We are {count} members from {countries} countries.",
             "updated": "The list is updated periodically."
         },
         "Colabora": {
@@ -551,6 +552,26 @@
             "title": "Other Activities",
             "viewAll": "VIEW ALL"
         }
+    },
+    "EventRegistration": {
+        "title": "Event Registration",
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Your first name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Your last name",
+        "email": "Email Address",
+        "emailPlaceholder": "email@example.com",
+        "institution": "Institution or Organization",
+        "institutionPlaceholder": "Optional",
+        "message": "Additional Message",
+        "messagePlaceholder": "Particular interests in the event, position, academic titles, etc.",
+        "submit": "Confirm Attendance",
+        "submitting": "Processing...",
+        "disclaimer": "By confirming, your data will be processed for event organization by Escuela Hispánica.",
+        "errorDefault": "An unexpected error occurred while processing your registration. Please try again later.",
+        "successTitle": "Registration Confirmed",
+        "successMessage": "We have successfully received your attendance request for <strong>{eventName}</strong>. Your request will be reviewed and we will contact you shortly with more details.",
+        "successBack": "Go back"
     },
     "Biografias": {
         "Meta": {
