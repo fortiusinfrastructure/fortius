@@ -276,10 +276,9 @@ export async function POST(request: NextRequest) {
 
             case 'invoice.payment_succeeded': {
                 const invoice = event.data.object as Stripe.Invoice;
+                const subRef = invoice.parent?.subscription_details?.subscription;
                 const subscriptionId =
-                    typeof invoice.subscription === 'string'
-                        ? invoice.subscription
-                        : (invoice.subscription as Stripe.Subscription | null)?.id;
+                    typeof subRef === 'string' ? subRef : subRef?.id ?? null;
 
                 // Only record recurring payments (billing_reason === 'subscription_cycle')
                 // The initial payment is already captured in checkout.session.completed
@@ -295,10 +294,7 @@ export async function POST(request: NextRequest) {
                             user_id: sub.user_id,
                             amount_cents: invoice.amount_paid || 0,
                             currency: invoice.currency || 'eur',
-                            stripe_payment_intent_id:
-                                typeof invoice.payment_intent === 'string'
-                                    ? invoice.payment_intent
-                                    : (invoice.payment_intent as Stripe.PaymentIntent | null)?.id || invoice.id,
+                            stripe_payment_intent_id: invoice.id,
                             status: 'completed',
                         });
                     }
@@ -309,10 +305,9 @@ export async function POST(request: NextRequest) {
 
             case 'invoice.payment_failed': {
                 const invoice = event.data.object as Stripe.Invoice;
+                const subRef = invoice.parent?.subscription_details?.subscription;
                 const subscriptionId =
-                    typeof invoice.subscription === 'string'
-                        ? invoice.subscription
-                        : (invoice.subscription as Stripe.Subscription | null)?.id;
+                    typeof subRef === 'string' ? subRef : subRef?.id ?? null;
 
                 if (subscriptionId) {
                     await admin
