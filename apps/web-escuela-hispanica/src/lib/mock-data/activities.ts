@@ -7,8 +7,9 @@ export const activities: Activity[] = [
         title: {
             es: 'Escola Hispânica en la Lusofonía',
             en: 'Escola Hispânica in Lusofonia',
-            pt: 'Escola Hispânica na Lusofonia'
+            pt: 'Escola Hispânica na Lusofonía'
         },
+        sortDate: '2026-04-17',
         date: '17 - 18 Abril 2026',
         location: {
             es: 'Lisboa, Portugal',
@@ -107,6 +108,7 @@ export const activities: Activity[] = [
             en: 'First International Congress between Puerto Rico and Spain',
             pt: 'Primeiro Congresso Internacional entre Porto Rico e Espanha'
         },
+        sortDate: '2025-10-14',
         date: '14 Octubre 2025',
         endDate: '18 Octubre 2025',
         location: {
@@ -380,6 +382,7 @@ export const activities: Activity[] = [
             en: 'American Politics & Government Summit (ISI) 2025',
             pt: 'American Politics & Government Summit (ISI) 2025'
         },
+        sortDate: '2025-10-10',
         date: '10 Octubre 2025',
         endDate: '12 Octubre 2025',
         location: {
@@ -643,6 +646,7 @@ export const activities: Activity[] = [
             en: 'II Hispanic Thought Days',
             pt: 'II Jornadas de Pensamento Hispânico'
         },
+        sortDate: '2025-06-08',
         date: '08 - 10 Junio 2025',
         location: {
             es: 'Real Centro Universitario María Cristina, San Lorenzo de El Escorial, España',
@@ -743,6 +747,7 @@ export const activities: Activity[] = [
             en: 'Hispanic Inaugural Ball',
             pt: 'Baile Inaugural Hispânico'
         },
+        sortDate: '2025-01-19',
         date: '19 Enero 2025',
         location: {
             es: 'Washington D.C., Estados Unidos',
@@ -811,6 +816,7 @@ export const activities: Activity[] = [
             en: 'American Politics and Government Summit (APGS) 2024',
             pt: 'American Politics and Government Summit (APGS) 2024'
         },
+        sortDate: '2024-11-07',
         date: '07 Noviembre 2024',
         endDate: '09 Noviembre 2024',
         location: {
@@ -884,6 +890,7 @@ export const activities: Activity[] = [
             en: 'I Hispanic Thought Days',
             pt: 'I Jornadas de Pensamento Hispânico'
         },
+        sortDate: '2024-07-01',
         date: '01 - 02 Julio 2024',
         location: {
             es: 'El Escorial, Madrid, España',
@@ -1000,6 +1007,7 @@ export const activities: Activity[] = [
             en: 'X International Meeting on the History of Thought',
             pt: 'X Encontro Internacional de História do Pensamento'
         },
+        sortDate: '2024-04-11',
         date: '11 - 12 Abril 2024',
         location: {
             es: 'Salamanca, España',
@@ -1051,8 +1059,9 @@ export const activities: Activity[] = [
         title: {
             es: 'La fe y las culturas mayas: Domingo de Vico y el inicio de la evangelización in Guatemala',
             en: 'Faith and Mayan Cultures: Domingo de Vico and the Start of Evangelization in Guatemala',
-            pt: 'A fé e as culturas maias: Domingo de Vico e o início da evangelização na Guatemala'
+            pt: 'A fé e as culturas maias: Domingo de Vico e o início da evangelización na Guatemala'
         },
+        sortDate: '2024-03-08',
         date: '08 Marzo 2024',
         location: {
             es: 'Auditorio Milton Friedman, Universidad Francisco Marroquín, Ciudad de Guatemala',
@@ -1140,6 +1149,7 @@ export const activities: Activity[] = [
             en: 'IV Centenary of the Death of Juan de Mariana',
             pt: 'IV Centenário do falecimento de Juan de Mariana'
         },
+        sortDate: '2024-02-16',
         date: '16 Febrero 2024',
         location: {
             es: 'Ateneo de Madrid, España',
@@ -1213,6 +1223,7 @@ export const activities: Activity[] = [
             en: 'II Hispanic-Peruvian Thought and Culture Meeting',
             pt: 'II Encontro de Pensamento e Cultura Hispano-Peruana'
         },
+        sortDate: '2023-12-07',
         date: '07 Diciembre 2023',
         location: {
             es: 'Salamanca - Piura (Telemático)',
@@ -1270,6 +1281,7 @@ export const activities: Activity[] = [
             en: 'Foundational Meeting',
             pt: 'Reunião fundacional'
         },
+        sortDate: '2023-09-20',
         date: '20 Septiembre 2023',
         location: {
             es: 'Real Centro Universitario María Cristina, San Lorenzo de El Escorial, España',
@@ -1326,6 +1338,192 @@ export const activities: Activity[] = [
             { src: '/images/activities/reunionfundacional4.jpg', caption: 'Inicio de la etapa de Escuela Hispánica' }
         ],
         isFeatured: false
+    },
+    {
+        id: 19,
+        slug: 'ecos-de-salamanca',
+        title: {
+            es: 'Eco de Salamanca',
+            en: 'Echo of Salamanca',
+            pt: 'Eco de Salamanca'
+        },
+        sortDate: '2025-10-12',
+        date: '12 - 15 Octubre 2025',
+        location: {
+            es: 'La Antigua, Guatemala',
+            en: 'La Antigua, Guatemala',
+            pt: 'La Antigua, Guatemala'
+        },
+        organizer: {
+            es: 'Instituto Fe y Libertad',
+            en: 'Fe y Libertad Institute',
+            pt: 'Instituto Fé e Liberdade'
+        },
+        type: {
+            es: 'Coloquio',
+            en: 'Colloquium',
+            pt: 'Colóquio'
+        },
+        excerpt: {
+            es: 'Del 12 al 15 de octubre se celebró en La Antigua Guatemala el coloquio «Eco de Salamanca», organizado por el Instituto Fe y Libertad, un encuentro académico internacional dedicado a reflexionar sobre la vigencia histórica e intelectual de la Escuela de Salamanca.',
+            en: 'From October 12 to 15, the "Echo of Salamanca" colloquium was held in La Antigua Guatemala, organized by the Fe y Libertad Institute, an international academic meeting dedicated to reflecting on the historical and intellectual relevance of the School of Salamanca.',
+            pt: 'De 12 a 15 de outubro, realizou-se em La Antigua Guatemala o colóquio «Eco de Salamanca», organizado pelo Instituto Fé e Liberdade, um encontro académico internacional dedicado a refletir sobre a atualidade histórica e intelectual da Escola de Salamanca.'
+        },
+        content: {
+            es: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Instituto Fe y Libertad (Guatemala)<br/>
+                        <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Fechas:</strong> 12-15 de octubre de 2025<br/>
+                        <strong style="color: #c5a059;">Lugar:</strong> La Antigua, Guatemala
+                    </p>
+                </div>
+
+                <p>Del 12 al 15 de octubre se celebró en La Antigua Guatemala el coloquio «Eco de Salamanca», organizado por el Instituto Fe y Libertad, un encuentro académico internacional dedicado a reflexionar sobre la vigencia histórica e intelectual de la Escuela de Salamanca y su aportación al pensamiento occidental contemporáneo. El evento reunió a investigadores de diversas disciplinas —filosofía, derecho, economía, teología e historia— en un diálogo marcado por el rigor académico y la pluralidad de enfoques.</p>
+
+                <p>Entre los participantes estuvieron figuras vinculadas a Escuela Hispánica, como su presidente de honor, Alejandro Chafuen, y dos de sus vicepresidentes académicos: Carroll Ríos, presidenta del Instituto Fe y Libertad e impulsora directa de la conferencia, y León Gómez Rivas. La presencia de estos ponentes contribuyó a articular el coloquio dentro de un esfuerzo intelectual más amplio por recuperar la tradición hispánica en el debate contemporáneo.</p>
+
+                <p>Las sesiones giraron en torno al legado de los escolásticos del siglo XVI y XVII, cuyo punto de partida se sitúa en la cátedra de Francisco de Vitoria en Salamanca (1526), dentro de la tradición tomista inspirada en Santo Tomás de Aquino. Los ponentes subrayaron cómo estos autores integraron fe y razón al recuperar la filosofía aristotélica, permitiendo el uso sistemático de la lógica en la reflexión moral y jurídica cristiana. Lejos de ser meramente especulativos, los escolásticos respondieron a problemas concretos de su tiempo: la humanidad y los derechos de los indígenas tras el descubrimiento de América, la legitimidad del poder político, la propiedad privada, la justicia de los precios, la inflación causada por la llegada masiva de plata americana o los límites fiscales del Estado.</p>
+
+                <p>Especial atención se prestó a la figura de Vitoria como precursor del derecho internacional y de la noción moderna de derechos humanos, así como a Juan de Mariana —defensor del origen popular del poder político y crítico de la manipulación monetaria— y a Diego de Covarrubias, cuya teoría del valor subjetivo anticipó siglos antes desarrollos posteriores de la economía. Se recordó igualmente el contexto histórico: desde las preocupaciones de Isabel la Católica por el trato a los indígenas hasta los debates de Valladolid, mostrando cómo la tradición salmantina nació del intento de responder moralmente a una realidad inédita.</p>
+
+                <p>Más allá del contenido histórico, el coloquio enfatizó tres rasgos intelectuales de la escuela: su actitud abierta a los problemas concretos del tiempo, su capacidad de síntesis —el “et… et…” católico frente al exclusivismo ideológico— y su defensa de la dignidad humana como límite permanente del poder. En ese sentido, se insistió en que la tradición salmantina no constituye una reliquia erudita, sino un marco útil para pensar cuestiones actuales: desde la legitimidad política y la justicia económica hasta la relación entre libertad, cultura y responsabilidad moral.</p>
+
+                <p>El encuentro se vinculó además al proyecto editorial del Instituto Fe y Libertad sobre Occidente en crisis (volumen 8), del que participas como editor invitado, integrando así el coloquio en un programa de investigación más amplio orientado a recuperar el humanismo hispánico sin caer ni en la leyenda negra ni en la idealización.</p>
+
+                <div style="margin: 4rem 0; border: 1px solid rgba(197, 160, 89, 0.2); padding: 2rem; background: rgba(0,0,0,0.2);">
+                    <p style="font-family: var(--font-cinzel); font-size: 0.9rem; color: #c5a059; margin-bottom: 1.5rem; text-align: center; letter-spacing: 0.1em;">Coloquio Destacado</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 1rem;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/FNmH9fII29A" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                    <p style="font-family: var(--font-serif); font-size: 0.85rem; color: rgba(255,255,255,0.7); text-align: center; font-style: italic;">
+                        Encuentro entre León Gómez Rivas y Alejandro Chafuen
+                    </p>
+                </div>
+
+                <p>El cierre dejó una conclusión compartida: la Escuela de Salamanca no fue solo un episodio histórico, sino un método intelectual —realista, moral y abierto— que puede seguir iluminando los debates del siglo XXI.</p>
+
+                <p>Eco de Salamanca volverá a celebrarse este año en La Antigua Guatemala, consolidándose como un foro periódico de reflexión sobre la tradición intelectual hispánica y su proyección contemporánea.</p>
+
+                <div style="margin: 4rem 0; border: 1px solid rgba(197, 160, 89, 0.2); padding: 2rem; background: rgba(0,0,0,0.2);">
+                    <p style="font-family: var(--font-cinzel); font-size: 0.9rem; color: #c5a059; margin-bottom: 1.5rem; text-align: center; letter-spacing: 0.1em;">Conferencia Destacada</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 1rem;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/1L4F7R7Mpg8" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                    <p style="font-family: var(--font-serif); font-size: 0.85rem; color: rgba(255,255,255,0.7); text-align: center; font-style: italic;">
+                        Alejandro Chafuen sobre el legado hispánico
+                    </p>
+                </div>
+            `,
+            en: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizer:</strong> Fe y Libertad Institute (Guatemala)<br/>
+                        <strong style="color: #c5a059;">Collaborator:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Dates:</strong> October 12-15, 2025<br/>
+                        <strong style="color: #c5a059;">Location:</strong> La Antigua, Guatemala
+                    </p>
+                </div>
+
+                <p>From October 12 to 15, the "Echo of Salamanca" colloquium was held in La Antigua Guatemala, organized by the Fe y Libertad Institute, an international academic meeting dedicated to reflecting on the historical and intellectual relevance of the School of Salamanca and its contribution to contemporary Western thought. The event brought together researchers from various disciplines—philosophy, law, economics, theology, and history—in a dialogue marked by academic rigor and a plurality of approaches.</p>
+
+                <p>Among the participants were figures linked to Escuela Hispánica, such as its honorary president, Alejandro Chafuen, and two of its academic vice presidents: Carroll Ríos, president of the Fe y Libertad Institute and direct promoter of the conference, and León Gómez Rivas. The presence of these speakers helped to articulate the colloquium within a broader intellectual effort to recover the Hispanic tradition in the contemporary debate.</p>
+
+                <p>The sessions revolved around the legacy of the scholastics of the 16th and 17th centuries, whose starting point is located in Francisco de Vitoria's chair in Salamanca (1526), within the Thomistic tradition inspired by Saint Thomas Aquinas. The speakers underscored how these authors integrated faith and reason by recovering Aristotelian philosophy, allowing the systematic use of logic in Christian moral and legal reflection. Far from being merely speculative, the scholastics responded to concrete problems of their time: the humanity and rights of indigenous people after the discovery of America, the legitimacy of political power, private property, price justice, inflation caused by the massive arrival of American silver, or the fiscal limits of the State.</p>
+
+                <p>Special attention was paid to the figure of Vitoria as a precursor of international law and the modern notion of human rights, as well as to Juan de Mariana—defender of the popular origin of political power and critic of monetary manipulation—and Diego de Covarrubias, whose theory of subjective value anticipated developments in economics centuries later. The historical context was also recalled: from Isabella the Catholic's concerns for the treatment of indigenous people to the debates of Valladolid, showing how the Salamancan tradition was born from the attempt to respond morally to an unprecedented reality.</p>
+
+                <p>Beyond the historical content, the colloquium emphasized three intellectual features of the school: its open attitude to the concrete problems of the time, its capacity for synthesis—the Catholic "et... et..." versus ideological exclusivism—and its defense of human dignity as a permanent limit of power. In this sense, it was insisted that the Salamancan tradition does not constitute a scholarly relic, but a useful framework for thinking about current issues: from political legitimacy and economic justice to the relationship between freedom, culture, and moral responsibility.</p>
+
+                <p>The meeting was also linked to the Fe y Libertad Institute's editorial project on the West in Crisis (volume 8), in which you participate as a guest editor, thus integrating the colloquium into a broader research program oriented towards recovering Hispanic humanism without falling into either the black legend or idealization.</p>
+
+                <p>The closing left a shared conclusion: the School of Salamanca was not just a historical episode, but an intellectual method—realistic, moral, and open—that can continue to illuminate the debates of the 21st century.</p>
+
+                <p>Echo of Salamanca will take place again this year in La Antigua Guatemala, consolidating itself as a periodic forum for reflection on the Hispanic intellectual tradition and its contemporary projection.</p>
+            `,
+            pt: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Instituto Fé e Liberdade (Guatemala)<br/>
+                        <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Datas:</strong> 12-15 de outubro de 2025<br/>
+                        <strong style="color: #c5a059;">Local:</strong> La Antigua, Guatemala
+                    </p>
+                </div>
+
+                <p>De 12 a 15 de outubro, realizou-se em La Antigua Guatemala o colóquio «Eco de Salamanca», organizado pelo Instituto Fé e Liberdade, um encontro académico internacional dedicado a refletir sobre a atualidade histórica e intelectual da Escola de Salamanca e a sua contribuição para o pensamento ocidental contemporâneo. O evento reuniu investigadores de diversas áreas — filosofia, direito, economia, teologia e história — num diálogo marcado pelo rigor académico e pela pluralidade de abordagens.</p>
+
+                <p>Entre os participantes estiveram figuras ligadas à Escuela Hispánica, como o seu presidente honorário, Alejandro Chafuen, e dois dos seus vice-presidentes académicos: Carroll Ríos, presidente do Instituto Fé e Liberdade e principal promotora da conferência, e León Gómez Rivas. A presença destes oradores contribuiu para articular o colóquio num esforço intelectual mais amplo de recuperação da tradição hispânica no debate contemporâneo.</p>
+
+                <p>As sessões centraram-se no legado dos escolásticos dos séculos XVI e XVII, cujo ponto de partida se situa na cátedra de Francisco de Vitoria em Salamanca (1526), inserida na tradição tomista inspirada em São Tomás de Aquino. Os oradores destacaram como estes autores integraram fé e razão ao recuperarem a filosofia aristotélica, permitindo a utilização sistemática da lógica na reflexão moral e jurídica cristã. Longe de serem meramente especulativos, os escolásticos responderam a problemas concretos do seu tempo: a humanidade e os direitos dos indígenas após a descoberta da América, a legitimidade do poder político, a propriedade privada, a justiça dos preços, a inflação causada pela chegada massiva de prata americana ou os limites fiscais do Estado.</p>
+
+                <p>Foi dada especial atenção à figura de Vitoria como precursor do direito internacional e da noção moderna de direitos humanos, assim como a Juan de Mariana — defensor da origem popular do poder político e crítico da manipulação monetária — e a Diego de Covarrubias, cuja teoria do valor subjetivo antecipou em séculos os desenvolvimentos posteriores da economia. Recordou-se também o contexto histórico: desde as preocupações de Isabel a Católica com o tratamento dos indígenas até aos debates de Valladolid, mostrando como a tradição salmantina nasceu da tentativa de responder moralmente a uma realidade inédita.</p>
+
+                <p>Para além do conteúdo histórico, o colóquio enfatizou três características intelectuais da escola: a sua atitude aberta aos problemas concretos do tempo, a sua capacidade de síntese — o “et… et…” católico face ao exclusivismo ideológico — e a sua defesa da dignidade humana como limite permanente do poder. Nesse sentido, insistiu-se que a tradição salmantina não constitui uma relíquia erudita, mas sim um quadro útil para pensar questões atuais: da legitimidade política e justiça económica à relação entre liberdade, cultura e responsabilidade moral.</p>
+
+                <p>O encontro esteve também ligado ao projeto editorial do Instituto Fé e Liberdade sobre o Ocidente em Crise (volume 8), no qual participa como editor convidado, integrando assim o colóquio num programa de investigação mais amplo orientado para a recuperação do humanismo hispânico sem cair nem na legenda negra nem na idealização.</p>
+
+                <p>O encerramento deixou uma conclusão partilhada: a Escola de Salamanca não foi apenas um episódio histórico, mas um método intelectual — realista, moral e aberto — que pode continuar a iluminar os debates do século XXI.</p>
+
+                <p>O Eco de Salamanca voltará a realizar-se este ano em La Antigua Guatemala, consolidando-se como um fórum periódico de reflexão sobre a tradição intelectual hispânica e a sua projeção contemporânea.</p>
+            `
+        },
+        image: '/images/activities/encuentrosalamanca.jpg',
+        isFeatured: false,
+        isUpcoming: false,
+        gallery: [
+            {
+                src: '/images/publications/eco salamanca/Participantes Eco de Salamanca.jpg',
+                caption: {
+                    es: 'Participantes del coloquio Eco de Salamanca, La Antigua Guatemala, octubre de 2025',
+                    en: 'Participants of the Echo of Salamanca colloquium, La Antigua Guatemala, October 2025',
+                    pt: 'Participantes do colóquio Eco de Salamanca, La Antigua Guatemala, outubro de 2025'
+                }
+            },
+            {
+                src: '/images/publications/eco salamanca/2025 Eco de Salamanca Día 1 Eco de Salamanca.jpg',
+                caption: {
+                    es: 'Primera jornada del coloquio Eco de Salamanca, 2025',
+                    en: 'First day of the Echo of Salamanca colloquium, 2025',
+                    pt: 'Primeiro dia do colóquio Eco de Salamanca, 2025'
+                }
+            },
+            {
+                src: '/images/publications/eco salamanca/2025 Eco de Salamanca Alex Chafuen.jpg',
+                caption: {
+                    es: 'Alejandro Chafuen, Presidente de Honor de la Escuela Hispánica',
+                    en: 'Alejandro Chafuen, Honorary President of the Escuela Hispánica',
+                    pt: 'Alejandro Chafuen, Presidente Honorário da Escuela Hispánica'
+                }
+            },
+            {
+                src: '/images/publications/eco salamanca/2025 Eco de Salamanca León Gómez Rivas.jpg',
+                caption: {
+                    es: 'León Gómez Rivas, vicepresidente académico de la Escuela Hispánica',
+                    en: 'León Gómez Rivas, academic vice-president of the Escuela Hispánica',
+                    pt: 'León Gómez Rivas, vice-presidente académico da Escuela Hispánica'
+                }
+            },
+            {
+                src: '/images/publications/eco salamanca/2025 Eco de Salamanca bts pódcast León Gómez Rivas.jpg',
+                caption: {
+                    es: 'Grabación del pódcast con León Gómez Rivas, entre bastidores',
+                    en: 'Behind the scenes of the podcast recording with León Gómez Rivas',
+                    pt: 'Bastidores da gravação do pódcast com León Gómez Rivas'
+                }
+            }
+        ]
     }
 ];
 
@@ -1342,7 +1540,9 @@ export function getFeaturedActivities(): Activity[] {
 }
 
 export function getPastActivities(): Activity[] {
-    return activities.filter(activity => !activity.isFeatured && !activity.isUpcoming);
+    return activities
+        .filter(activity => !activity.isFeatured && !activity.isUpcoming)
+        .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''));
 }
 
 export function getUpcomingActivities(): Activity[] {
@@ -1351,12 +1551,15 @@ export function getUpcomingActivities(): Activity[] {
 
 export function getLatestActivities(count: number = 3): Activity[] {
     // Sort activities by date (most recent first), prioritizing featured
-    const sorted = [...activities].filter(a => !a.isUpcoming).sort((a, b) => {
-        // Featured activities come first
-        if (a.isFeatured && !b.isFeatured) return -1;
-        if (!a.isFeatured && b.isFeatured) return 1;
-        // The array is already sorted descending by date
-        return 0;
-    });
+    const sorted = [...activities]
+        .filter(a => !a.isUpcoming)
+        .sort((a, b) => {
+            // Featured activities come first
+            if (a.isFeatured && !b.isFeatured) return -1;
+            if (!a.isFeatured && b.isFeatured) return 1;
+
+            // Then sort by sortDate descending
+            return (b.sortDate || '').localeCompare(a.sortDate || '');
+        });
     return sorted.slice(0, count);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@/i18n/routing';
-import { Heart, Award, Crown } from 'lucide-react';
+import { Heart, GraduationCap, Crown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const HomeMembership: React.FC = () => {
@@ -36,7 +36,7 @@ const HomeMembership: React.FC = () => {
                 {/* Miembro - Highlighted */}
                 <div className="border border-[#c5a059] p-10 text-center group flex flex-col relative bg-[#111111]">
                     <div className="mb-6 text-[#c5a059] flex justify-center">
-                        <Award strokeWidth={1} className="w-8 h-8" />
+                        <GraduationCap strokeWidth={1} className="w-8 h-8" />
                     </div>
                     <h3 className="font-cinzel text-base text-white mb-6 tracking-[0.2em] uppercase">{t('tiers.miembro.title')}</h3>
                     <div className="w-8 h-[1px] bg-[#c5a059] mx-auto mb-6" />

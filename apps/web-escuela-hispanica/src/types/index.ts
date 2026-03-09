@@ -40,6 +40,7 @@ export interface Activity {
   gallery?: { src: string; caption: string | LocalizedText }[];
   isFeatured?: boolean;
   isUpcoming?: boolean;
+  sortDate?: string;
 }
 
 export interface Author {
