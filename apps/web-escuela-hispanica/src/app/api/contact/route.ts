@@ -100,14 +100,17 @@ export async function POST(request: NextRequest) {
         // 4b. Send a confirmation email to the submitter (best-effort — never blocks success)
         const confirmationResult = await sendEmail({
             to: email,
-            subject: `Confirmación de registro: ${subject || 'Contacto Web'}`,
+            subject: 'Confirmación de Recepción de Mensaje',
             html: `
-                <h2>Hemos recibido tu solicitud</h2>
-                <p>Estimado/a ${first_name} ${last_name},</p>
-                <p>Gracias por ponerte en contacto con la Escuela Hispánica. Hemos recibido correctamente tu solicitud y nos pondremos en contacto contigo a la brevedad.</p>
-                <p><strong>Asunto:</strong> ${subject || 'Contacto Web'}</p>
-                <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-                <p style="color: #888; font-size: 12px;">Escuela Hispánica — <a href="https://escuelahispanica.org">escuelahispanica.org</a></p>
+                <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
+                    <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Confirmación de Recepción</h2>
+                    <p>Estimado/a ${first_name} ${last_name},</p>
+                    <p>Le agradecemos que se haya puesto en contacto con Escuela Hispánica.</p>
+                    <p>Su mensaje ha sido recibido correctamente y será atendido por el equipo a la mayor brevedad posible.</p>
+                    <p>Le agradecemos su interés y la atención prestada a nuestra labor académica.</p>
+                    <p style="margin-top: 30px;">Reciba un cordial saludo,</p>
+                    <p><strong>Secretaría</strong><br>Escuela Hispánica</p>
+                </div>
             `
         });
 

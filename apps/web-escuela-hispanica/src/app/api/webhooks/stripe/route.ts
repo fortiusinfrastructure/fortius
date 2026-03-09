@@ -162,11 +162,10 @@ export async function POST(request: NextRequest) {
                     status: 'completed',
                 });
 
-                // Send welcome email
+                // Send tier-specific welcome email
                 const { data: authUser } = await admin.auth.admin.getUserById(finalUserId);
                 if (authUser?.user?.email) {
                     const fullName = authUser.user.user_metadata?.full_name || authUser.user.email;
-                    const tierName = tier === 'mecenas' ? 'Mecenas' : tier === 'academico' ? 'Miembro Académico' : 'Amigo';
 
                     // Generate activation link if it's a shadow user (no last_sign_in_at)
                     let activationSection = '';
@@ -186,19 +185,57 @@ export async function POST(request: NextRequest) {
                         }
                     }
 
+                    // Build tier-specific email body
+                    let emailSubject: string;
+                    let emailBody: string;
+
+                    if (tier === 'mecenas') {
+                        // Template 7 — Mecenas
+                        emailSubject = 'Bienvenido/a como Mecenas de Escuela Hispánica';
+                        emailBody = `
+              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
+                <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Bienvenido/a como Mecenas</h2>
+                <p>Estimado/a ${fullName},</p>
+                <p>Desde Escuela Hispánica queremos expresarle nuestro más sincero agradecimiento por haberse convertido en <strong>Mecenas</strong>. Su generosidad y compromiso son fundamentales para sostener y ampliar nuestra misión cultural y académica.</p>
+                <p>Nos pondremos en contacto con usted en los próximos días para agendar una reunión personal con nuestro Director, en el horario y formato que le resulten más cómodos, y nuestro Director se pondrá en contacto con usted.</p>
+                <p>Como Mecenas, tendrá acceso privilegiado a actividades exclusivas y a una comunidad de académicos e investigadores comprometidos con la cultura y la reflexión. Su contribución se hará visible también en nuestras memorias anuales, reconociendo su apoyo a esta misión.</p>
+                <p>Le agradecemos profundamente su confianza y quedamos a su disposición para cualquier iniciativa que quiera explorar junto a la Escuela.</p>
+                ${activationSection}
+                <p style="margin-top: 30px;"><strong>Secretaría</strong><br>Escuela Hispánica</p>
+              </div>`;
+                    } else if (tier === 'academico') {
+                        // Template 6 — Académico IV (Bienvenida tras pago)
+                        emailSubject = 'Bienvenido/a como Miembro Académico de Escuela Hispánica';
+                        emailBody = `
+              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
+                <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Bienvenido/a, Miembro Académico</h2>
+                <p>Estimado/a ${fullName},</p>
+                <p>Es un placer darle la bienvenida oficial como <strong>Miembro Académico</strong> de Escuela Hispánica. Su suscripción ha sido procesada correctamente y su membresía está ahora activa.</p>
+                <p>A partir de este momento, podrá participar en seminarios exclusivos, publicar en nuestras colecciones académicas y colaborar con investigadores de diversas disciplinas dentro de nuestra comunidad.</p>
+                <p>Recibirá periódicamente información sobre las próximas actividades, convocatorias y oportunidades de colaboración reservadas a nuestros miembros.</p>
+                <p>Le invitamos a explorar los recursos disponibles y a conectar con otros miembros a través de nuestros canales.</p>
+                ${activationSection}
+                <p style="margin-top: 30px;"><strong>Secretaría</strong><br>Escuela Hispánica</p>
+              </div>`;
+                    } else {
+                        // Template 2 — Amigo
+                        emailSubject = 'Bienvenido/a como Amigo/a de Escuela Hispánica';
+                        emailBody = `
+              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
+                <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Bienvenido/a, Amigo/a</h2>
+                <p>Estimado/a ${fullName},</p>
+                <p>Queremos agradecerle sinceramente su apoyo como <strong>Amigo/a</strong> de Escuela Hispánica. Su contribución nos ayuda a seguir impulsando el pensamiento, la cultura y el diálogo en el ámbito hispánico.</p>
+                <p>Como Amigo/a, tendrá acceso a nuestras comunicaciones periódicas, invitaciones a eventos abiertos y la satisfacción de formar parte de una comunidad comprometida con la reflexión y el conocimiento.</p>
+                <p>Le mantendremos informado/a sobre nuestras actividades, publicaciones y novedades. Si en algún momento desea ampliar su participación, estaremos encantados de acompañarle.</p>
+                ${activationSection}
+                <p style="margin-top: 30px;"><strong>Secretaría</strong><br>Escuela Hispánica</p>
+              </div>`;
+                    }
+
                     await sendEmail({
                         to: authUser.user.email,
-                        subject: `¡Bienvenido/a, ${tierName}! — Escuela Hispánica`,
-                        html: `
-              <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
-                <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">¡Bienvenido/a a la Escuela Hispánica!</h2>
-                <p>Estimado/a ${fullName},</p>
-                <p>Su membresía como <strong>${tierName}</strong> se ha activado correctamente.</p>
-                <p>Ahora forma parte de una comunidad dedicada a preservar y difundir el pensamiento hispánico.</p>
-                ${activationSection}
-                <p style="margin-top: 30px; color: #666;">Atentamente,<br>Secretaría — Escuela Hispánica</p>
-              </div>
-            `,
+                        subject: emailSubject,
+                        html: emailBody,
                     });
                 }
 

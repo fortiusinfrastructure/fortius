@@ -139,7 +139,7 @@ export const articles: Article[] = [
       </p>
     `
     },
-    image: '/images/activities/escuela_hispanica.jpg',
+    image: '/images/publications/cincosiglosdespues.jpg',
     isFeatured: true
   },
   {

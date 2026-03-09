@@ -96,7 +96,7 @@ export const activities: Activity[] = [
                 <p style="font-style: italic; color: rgba(255,255,255,0.5);">* Agenda pendente de confirmação</p>
             `
         },
-        image: '/images/activities/lusofonia_activity.png',
+        image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
         isFeatured: false,
         isUpcoming: true
     },
@@ -156,8 +156,6 @@ export const activities: Activity[] = [
                 <p>
                     3) El <em>annus mirabilis</em> de la monarquía hispánica en Brasil, el impacto global de la conquista y recuperación de Salvador de Bahía.
                 </p>
-
-                <img src="/images/activities/primercongreso1.jpeg" alt="David Cruz de la Torre junto a su profesor Rafael Maldonado de Guevara Delgado" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre junto a su profesor Rafael Maldonado de Guevara Delgado de la Universidad Carlos III de Madrid, Miembro del Comité Organizador del congreso
                 </p>
@@ -177,8 +175,6 @@ export const activities: Activity[] = [
                 <p>
                     Algo que no es muy reconocido fuera de España es el rol central del Cardenal Francisco Jiménez de Cisneros, su concepto <em>Civitas Dei</em> in el desarrollo de la ciudad-universitaria moderna. <em>Civitas Dei</em> refiere a la Ciudad de Dios, un concepto de ciudad ideal que se originó in la Universidad de Alcalá de Henares, fundada por él mismo. Esta ciudad universitaria modelo sirvió como ejemplo para otras universidades a través Europa y América. <em>Civitas Dei</em> fue el modelo de la comunidad urbana ideal que los misioneros españoles llevaron a América. Tenemos que reconocer la ciudad universitaria ideal y la influencia de Alcalá de Henares in las universidades de San Marcos in Perú, la Universidad de Santo Domingo in la República Dominicana y la Real y Pontificia Universidad de México. También se puede ver la influencia hispana in las nuevas ciudades de la laguna (Las Canarias), Santo Domingo, Cartagena de las Indias, otras ciudades a través de las Américas. Entre Alcalá de Henares y Salamanca, uno puede entender cómo España se ha replicado sí misma in las Américas y cómo ha creado una fuerte hermandad civilizacional entre los países iberoamericanos.
                 </p>
-
-                <img src="/images/activities/primercongreso2.webp" alt="David Cruz de la Torre durante su ponencia" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre durante su ponencia
                 </p>
@@ -188,8 +184,6 @@ export const activities: Activity[] = [
                 <p>
                     A la mañana siguiente se organizaron varias mesas temáticas sobre María Zambrano, los exiliados españoles in Puerto Rico y apuntes historiográficos sobre la inmigración de canarios y baleáricos durante el siglo XIX hacia Puerto Rico. El Primer Congreso internacional entre Puerto Rico y España busca tender el camino hacia conversaciones que miran al futuro de su relación, poniendo especial énfasis in la ley de las sefardíes y la propuesta de nacionalidad reparativa de Puerto Rico. Aunque el tema deja más preguntas que respuestas. Sin embargo, es notable que estas preguntas sean expuestas ante decenas de estudiantes y con patrocinadores como el Ministerio de Cultura de España, las ciudades autónomas como San Juan y Bayamón, el ayuntamiento de Vélez-Málaga, Compañías como Hyatt Hotels y Goya y fundaciones como la de María Zambrano y la de Heriberto Nieves.
                 </p>
-
-                <img src="/images/activities/primercongreso3.webp" alt="Cabalgata de la Hispanidad 2025" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     Cabalgata de la Hispanidad 2025
                 </p>
@@ -226,8 +220,6 @@ export const activities: Activity[] = [
                 <p>
                     3) The <em>annus mirabilis</em> of the Hispanic monarchy in Brazil, the global impact of the conquest and recovery of Salvador de Bahia.
                 </p>
-
-                <img src="/images/activities/primercongreso1.jpeg" alt="David Cruz de la Torre with his professor Rafael Maldonado de Guevara Delgado" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre with his professor Rafael Maldonado de Guevara Delgado from the Carlos III University of Madrid, Member of the Congress Organizing Committee
                 </p>
@@ -247,8 +239,6 @@ export const activities: Activity[] = [
                 <p>
                     Something that is not very recognized outside of Spain is the central role of Cardinal Francisco Jiménez de Cisneros and his concept of <em>Civitas Dei</em> in the development of the modern university city. <em>Civitas Dei</em> refers to the City of God, a concept of an ideal city that originated at the University of Alcalá de Henares, founded by himself. This model university city served as an example for other universities across Europe and America. <em>Civitas Dei</em> was the model of the ideal urban community that Spanish missionaries brought to America. We must recognize the ideal university city and the influence of Alcalá de Henares on the universities of San Marcos in Peru, the University of Santo Domingo in the Dominican Republic, and the Royal and Pontifical University of Mexico. The Hispanic influence can also be seen in the new cities of La Laguna (Canary Islands), Santo Domingo, Cartagena de Indias, and other cities across the Americas. Between Alcalá de Henares and Salamanca, one can understand how Spain has replicated itself in the Americas and how it has created a strong civilizational brotherhood among Ibero-American countries.
                 </p>
-
-                <img src="/images/activities/primercongreso2.webp" alt="David Cruz de la Torre during his presentation" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre during his presentation
                 </p>
@@ -258,8 +248,6 @@ export const activities: Activity[] = [
                 <p>
                     The following morning, several thematic tables were organized on María Zambrano, Spanish exiles in Puerto Rico, and historiographical notes on the immigration of people from the Canary and Balearic Islands during the 19th century to Puerto Rico. The first International Congress between Puerto Rico and Spain seeks to pave the way for conversations that look toward the future of their relationship, putting special emphasis on the Sephardic law and the proposal for reparative nationality for Puerto Rico. Although the topic leaves more questions than answers, it is notable that these questions are exposed before dozens of students and with sponsors such as the Spanish Ministry of Culture, autonomous cities like San Juan and Bayamón, the city council of Vélez-Málaga, companies like Hyatt Hotels and Goya, and foundations such as María Zambrano and Heriberto Nieves.
                 </p>
-
-                <img src="/images/activities/primercongreso3.webp" alt="Hispanicity Parade 2025" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     Hispanicity Parade 2025
                 </p>
@@ -296,8 +284,6 @@ export const activities: Activity[] = [
                 <p>
                     3) O <em>annus mirabilis</em> da monarquia hispânica no Brasil, o impacto global da conquista e recuperação de Salvador da Bahia.
                 </p>
-
-                <img src="/images/activities/primercongreso1.jpeg" alt="David Cruz de la Torre com o seu professor Rafael Maldonado de Guevara Delgado" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre com o seu professor Rafael Maldonado de Guevara Delgado da Universidade Carlos III de Madrid, Membro da Comissão Organizadora do congresso
                 </p>
@@ -317,8 +303,6 @@ export const activities: Activity[] = [
                 <p>
                     Algo que não é muito reconhecido fora de Espanha é o papel central do Cardeal Francisco Jiménez de Cisneros e o seu conceito de <em>Civitas Dei</em> no desenvolvimento da cidade-universitária moderna. <em>Civitas Dei</em> refere-se à Cidade de Deus, um conceito de cidade ideal que teve origem na Universidade de Alcalá de Henares, fundada por si mesmo. Esta cidade universitária modelo serviu de exemplo para outras universidades através da Europa e América. <em>Civitas Dei</em> foi o modelo da comunidade urbana ideal que os missionários espanhóis levaram para a América. Temos de reconhecer a cidade universitária ideal e a influência de Alcalá de Henares nas universidades de San Marcos no Peru, na Universidade de Santo Domingo na República Dominicana e na Real e Pontifícia Universidade do México. A influência hispânica também pode ser vista nas novas cidades de La Laguna (Ilhas Canárias), Santo Domingo, Cartagena das Índias e outras cidades através das Américas. Entre Alcalá de Henares e Salamanca, pode-se compreender como a Espanha se replicou a si mesma nas Américas e como criou uma forte irmandade civilizacional entre os países ibero-americanos.
                 </p>
-
-                <img src="/images/activities/primercongreso2.webp" alt="David Cruz de la Torre durante a sua palestra" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     David Cruz de la Torre durante a sua palestra
                 </p>
@@ -328,8 +312,6 @@ export const activities: Activity[] = [
                 <p>
                     Na manhã seguinte, organizaram-se várias mesas temáticas sobre María Zambrano, os exilados espanhóis em Porto Rico e notas historiográficas sobre a imigração de pessoas das Canárias e Baleares durante o século XIX para Porto Rico. O primeiro Congresso internacional entre Porto Rico e Espanha procura abrir o caminho para conversas que olham para o futuro da sua relação, colocando especial ênfase na lei dos sefarditas e na proposta de nacionalidade reparadora para Porto Rico. Embora o tema deixe mais perguntas do que respostas, é notável que estas perguntas sejam expostas perante dezenas de estudantes e com patrocinadores como o Ministério da Cultura de Espanha, cidades autónomas como San Juan e Bayamón, a câmara municipal de Vélez-Málaga, empresas como Hyatt Hotels e Goya e fundações como a de María Zambrano e a de Heriberto Nieves.
                 </p>
-
-                <img src="/images/activities/primercongreso3.webp" alt="Desfile da Hispanidade 2025" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">
                     Desfile da Hispanidade 2025
                 </p>
@@ -345,10 +327,10 @@ export const activities: Activity[] = [
                 </p>
             `
         },
-        image: '/images/activities/primercongresoimagendestacada.jpg',
+        image: '/images/activities/primer congreso internacional entre puerto rico y españa/portada.jpg',
         gallery: [
             {
-                src: '/images/activities/primercongreso1.jpeg',
+                src: '/images/activities/primer congreso internacional entre puerto rico y españa/galeria1.jpg',
                 caption: {
                     es: 'David Cruz de la Torre junto a su profesor Rafael Maldonado de Guevara Delgado de la Universidad Carlos III de Madrid, uno de los Miembros del Comité Organizador del congreso',
                     en: 'David Cruz de la Torre with his professor Rafael Maldonado de Guevara Delgado from the Carlos III University of Madrid, Member of the Congress Organizing Committee',
@@ -356,7 +338,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/primercongreso2.webp',
+                src: '/images/activities/primer congreso internacional entre puerto rico y españa/galeria2.jpg',
                 caption: {
                     es: 'David Cruz de la Torre durante su ponencia',
                     en: 'David Cruz de la Torre during his presentation',
@@ -364,7 +346,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/primercongreso3.webp',
+                src: '/images/activities/primer congreso internacional entre puerto rico y españa/galeria3.jpg',
                 caption: {
                     es: 'Cabalgata de la Hispanidad 2025',
                     en: 'Hispanicity Parade 2025',
@@ -422,8 +404,6 @@ export const activities: Activity[] = [
                 <p>Del 7 al 9 de noviembre de 2024 se celebró in Wilmington (Delaware, Estados Unidos) el American Politics and Government Summit (APGS), organizado por el Intercollegiate Studies Institute con la colaboración de Escuela Hispánica. El encuentro reunió a académicos, estudiantes y líderes intelectuales interesados in la tradición política occidental y los debates contemporáneos sobre el conservadurismo.</p>
 
                 <p>En este marco, el secretario general de Escuela Hispánica impartió una ponencia dedicada a la tradición hispánica de la libertad y su papel como complemento necesario de la tradición anglosajona para sostener el proyecto histórico de Occidente. La intervención subrayó que la historia intelectual occidental no puede entenderse únicamente desde la genealogía habitual —Jerusalén, Atenas, Roma, Londres y Filadelfia—, pues existe una "ciudad perdida" in ese relato: Salamanca.</p>
-
-                <img src="/images/activities/isi1.jpg" alt="Ponencia in APGS Summit" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervención durante el American Politics and Government Summit in Delaware.</p>
 
                 <p>Desde ahí, fue reconstruyendo un hilo que enlaza a Santo Tomás, los franciscanos precursores y los escolásticos hispánicos con el nacimiento de la economía moderna. Su énfasis in el valor subjetivo, in la relación entre precio justo y libre mercado —"sin monopolio, sin fraude, sin coacción"— anticipa nociones centrales que más tarde formalizarían los economistas austríacos. Chafuen subrayó también el papel de Juan de Mariana, quien unió la reflexión moral a la crítica institucional: la manipulación de la moneda, advertía el jesuita, no era solo un error técnico, sino un acto de injusticia social. En su obra <em>De Rege et Regis Institutione</em>, Mariana proponía una monarquía republicana fundada in la virtud y el respeto al orden natural, consciente de que el poder político, sin moral, se degrada inevitablemente in tiranía.</p>
@@ -435,8 +415,6 @@ export const activities: Activity[] = [
                 <blockquote class="my-12 pl-8 border-l-2 border-[#c5a059]/40 italic font-serif text-xl md:text-2xl text-white/80 leading-relaxed">
                     "La libertad de es insuficiente sin la libertad para", señaló. "La libertad, sin una idea del bien que la ordene, se disuelve in arbitrariedad."
                 </blockquote>
-
-                <img src="/images/activities/isiimagendestacada.jpg" alt="Representantes de Escuela Hispánica in la cumbre ISI" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Representantes de Escuela Hispánica in la cumbre «American Politics &amp; Government Summit (ISI) 2025»</p>
 
                 <p>Soto alertó además de un malentendido contemporáneo: el uso político de la Hispanidad como instrumento de contraposición geopolítica frente a Estados Unidos. Frente a esas lecturas de antagonismo, propuso entender la tradición hispánica como una contribución constitutiva del proyecto occidental, no como su negación. "El Occidente de hoy", afirmó, "no puede sostenerse sobre una sola columna —la anglosajona—; necesita apoyarse in las demás, especialmente la hispánica, que introduce una antropología más completa y una concepción más moral del orden político".</p>
@@ -458,8 +436,6 @@ export const activities: Activity[] = [
                 <p>Durante el diálogo con el público, los participantes abordaron cuestiones como la tensión entre ley natural y voluntad soberana, la influencia real de los escolásticos sobre Locke y Smith, y la herencia del Concilio de Trento in el desarrollo del pensamiento político moderno. Soto insistió in que el objetivo no es decidir quién "tenía razón" —si la Reforma o la Contrarreforma—, sino redescubrir los puntos de convergencia que cimentaron el mundo occidental: la primacía de la ley sobre el poder, la dignidad de la persona y el papel central de la virtud in la vida pública.</p>
 
                 <p>Chafuen añadió una observación significativa: las culturas protestantes y católicas, dijo, han cultivado dimensiones complementarias de la civilización moderna —el respeto a la ley, in un caso; la profundidad moral y filosófica, in el otro—, y el futuro de Occidente dependerá de su reconciliación. En paralelo a esta mesa, otro miembro de Escuela Hispánica, Felipe Mosquera, participó in otro panel donde destacó la influencia de Jovellanos in esta tradición.</p>
-
-                <img src="/images/activities/isi2.jpg" alt="Intervención de Felipe Mosquera" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervención de Felipe Mosquera in su panel dentro de la American Politics &amp; Government Summit (ISI)</p>
 
                 <h3>Conclusión: una tarea esencial</h3>
@@ -483,8 +459,6 @@ export const activities: Activity[] = [
                 <p>From November 7 to 9, 2024, the American Politics and Government Summit (APGS) was held in Wilmington (Delaware, United States), organized by the Intercollegiate Studies Institute with the collaboration of Escuela Hispánica. The meeting brought together academics, students, and intellectual leaders interested in the Western political tradition and contemporary debates on conservatism.</p>
 
                 <p>In this framework, the general secretary of Escuela Hispánica delivered a presentation dedicated to the Hispanic tradition of liberty and its role as a necessary complement to the Anglo-Saxon tradition to sustain the historical project of the West. The intervention underscored that Western intellectual history cannot be understood solely through the usual genealogy—Jerusalem, Athens, Rome, London, and Philadelphia—because there is a "lost city" in that narrative: Salamanca.</p>
-
-                <img src="/images/activities/isi1.jpg" alt="Presentation at APGS Summit" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervention during the American Politics and Government Summit in Delaware.</p>
 
                 <p>From there, he reconstructed a thread linking St. Thomas, the precursor Franciscans, and the Hispanic scholastics with the birth of modern economics. His emphasis on subjective value, on the relationship between fair price and the free market—"without monopoly, without fraud, without coercion"—anticipates central notions that Austrian economists would later formalize. Chafuen also highlighted the role of Juan de Mariana, who linked moral reflection to institutional critique: the manipulation of currency, the Jesuit warned, was not just a technical error, but an act of social injustice. In his work <em>De Rege et Regis Institutione</em>, Mariana proposed a republican monarchy founded on virtue and respect for the natural order, aware that political power, without morality, inevitably degrades into tyranny.</p>
@@ -496,8 +470,6 @@ export const activities: Activity[] = [
                 <blockquote class="my-12 pl-8 border-l-2 border-[#c5a059]/40 italic font-serif text-xl md:text-2xl text-white/80 leading-relaxed">
                     "Freedom from is insufficient without freedom for," he noted. "Freedom, without an idea of the good to order it, dissolves into arbitrariness."
                 </blockquote>
-
-                <img src="/images/activities/isiimagendestacada.jpg" alt="Representatives of Escuela Hispánica at the ISI Summit" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Representatives of Escuela Hispánica at the "American Politics &amp; Government Summit (ISI) 2025" summit</p>
 
                 <p>Soto also warned of a contemporary misunderstanding: the political use of Hispanicity as a tool for geopolitical counterposition against the United States. Faced with these readings of antagonism, he proposed understanding the Hispanic tradition as a constitutive contribution to the Western project, not its negation. "The West of today," he stated, "cannot be sustained by a single column—the Anglo-Saxon one; it needs to rely on the others, especially the Hispanic one, which introduces a more complete anthropology and a more moral conception of the political order."</p>
@@ -519,8 +491,6 @@ export const activities: Activity[] = [
                 <p>During the dialogue with the audience, participants addressed questions such as the tension between natural law and sovereign will, the actual influence of the scholastics on Locke and Smith, and the legacy of the Council of Trent in the development of modern political thought. Soto insisted that the goal is not to decide who "was right"—whether the Reformation or the Counter-Reformation—but to rediscover the points of convergence that cemented the Western world: the primacy of law over power, the dignity of the person, and the central role of virtue in public life.</p>
 
                 <p>Chafuen added a significant observation: Protestant and Catholic cultures, he said, have cultivated complementary dimensions of modern civilization—respect for the law, in one case; moral and philosophical depth, in the other—and the future of the West will depend on their reconciliation. In parallel to this table, another member of Escuela Hispánica, Felipe Mosquera, participated in another panel where he highlighted the influence of Jovellanos in this tradition.</p>
-
-                <img src="/images/activities/isi2.jpg" alt="Intervention by Felipe Mosquera" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervention by Felipe Mosquera in his panel within the American Politics &amp; Government Summit (ISI)</p>
 
                 <h3>Conclusion: An Essential Task</h3>
@@ -544,8 +514,6 @@ export const activities: Activity[] = [
                 <p>De 7 a 9 de novembro de 2024, realizou-se em Wilmington (Delaware, Estados Unidos) a American Politics and Government Summit (APGS), organizada pelo Intercollegiate Studies Institute com a colaboração da Escuela Hispânica. O encontro reuniu académicos, estudantes e líderes intelectuais interessados na tradição política ocidental e nos debates contemporâneos sobre o conservadorismo.</p>
 
                 <p>Neste quadro, o secretário-geral da Escuela Hispânica proferiu uma palestra dedicada à tradição hispânica da liberdade e ao seu papel como complemento necessário da tradição anglo-saxónica para sustentar o projeto histórico do Ocidente. A intervenção sublinhou que a história intelectual ocidental não pode ser compreendida apenas a partir da genealogia habitual — Jerusalém, Atenas, Roma, Londres e Filadelfia —, pois existe uma "cidade perdida" nesse relato: Salamanca.</p>
-
-                <img src="/images/activities/isi1.jpg" alt="Palestra na Cimeira APGS" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervenção durante a American Politics and Government Summit em Delaware.</p>
 
                 <p>A partir daí, foi reconstruindo um fio que liga Santo Tomás, os franciscanos precursores e os escolásticos hispânicos ao nascimento da economia moderna. A sua ênfase no valor subjetivo, na relação entre preço justo e mercado livre — "sem monopólio, sem fraude, sem coação" — antecipa noções centrais que mais tarde seriam formalizadas pelos economistas austríacos. Chafuen sublinhou também o papel de Juan de Mariana, que uniu a reflexão moral à crítica institucional: a manipulação da moeda, advertia o jesuíta, não era apenas um erro técnico, mas um ato de injustiça social. Na sua obra <em>De Rege et Regis Institutione</em>, Mariana propunha uma monarquia republicana fundada na virtude e no respeito pela ordem natural, consciente de que o poder político, sem moral, degrada-se inevitavelmente em tirania.</p>
@@ -557,8 +525,6 @@ export const activities: Activity[] = [
                 <blockquote class="my-12 pl-8 border-l-2 border-[#c5a059]/40 italic font-serif text-xl md:text-2xl text-white/80 leading-relaxed">
                     "A liberdade 'de' é insuficiente sem a liberdade 'para'", assinalou. "A liberdade, sem uma ideia do bem que a ordene, dissolve-se em arbitrariedade."
                 </blockquote>
-
-                <img src="/images/activities/isiimagendestacada.jpg" alt="Representantes da Escuela Hispânica na cimeira ISI" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Representantes da Escuela Hispânica na cimeira «American Politics &amp; Government Summit (ISI) 2025»</p>
 
                 <p>Soto alertou ainda para um equívoco contemporâneo: o uso político da Hispanidade como instrumento de contraposição geopolítica face aos Estados Unidos. Perante estas leituras de antagonismo, propôs compreender a tradição hispânica como uma contribuição constitutiva do projeto ocidental, não como a sua negação. "O Ocidente de hoje", afirmou, "não pode sustentar-se apenas sobre uma coluna — a anglo-saxónica; precisa de se apoiar nas outras, especialmente na hispânica, que introduz uma antropologia mais completa e uma conceção mais moral da ordem política".</p>
@@ -580,8 +546,6 @@ export const activities: Activity[] = [
                 <p>Durante o diálogo com o público, os participantes abordaram questões como a tensão entre lei natural e vontade soberana, a influência real dos escolásticos sobre Locke e Smith, e a herança do Concilio de Trento no desenvolvimento do pensamento político moderno. Soto insistiu que o objetivo não é decidir quem "tenha razão" — se a Reforma ou a Contrarreforma —, mas redescobrir os pontos de convergência que alicerçaram o mundo ocidental: a primacia da lei sobre o poder, a dignidade da pessoa e o papel central da virtude na vida pública.</p>
 
                 <p>Chafuen acrescentou uma observação significativa: as culturas protestante e católica, disse, cultivaram dimensões complementares da civilização moderna — o respeito pela lei, num caso; a profundidade moral e filosófica, no outro — e o futuro do Ocidente dependerá da sua reconciliação. Em paralelo a esta mesa, outro membro da Escuela Hispânica, Felipe Mosquera, participou noutro painel onde destacou a influência de Jovellanos nesta tradição.</p>
-
-                <img src="/images/activities/isi2.jpg" alt="Intervenção de Felipe Mosquera" />
                 <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Intervenção de Felipe Mosquera no seu painel dentro da American Politics &amp; Government Summit (ISI)</p>
 
                 <h3>Conclusão: Uma Tarefa Essencial</h3>
@@ -593,10 +557,10 @@ export const activities: Activity[] = [
                 </blockquote>
             `
         },
-        image: '/images/activities/isiimagendestacada.jpg',
+        image: '/images/activities/american politics & government summit (isi) 2025/portada.jpg',
         gallery: [
             {
-                src: '/images/activities/isi1.jpg',
+                src: '/images/activities/american politics & government summit (isi) 2025/galeria1.jpg',
                 caption: {
                     es: 'Ponencia del secretario general de Escuela Hispánica in el APGS',
                     en: 'Presentation by the general secretary of Escuela Hispánica at the APGS',
@@ -604,7 +568,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/isi2.jpg',
+                src: '/images/activities/american politics & government summit (isi) 2025/galeria2.jpg',
                 caption: {
                     es: 'Intervención de Felipe Mosquera in su panel',
                     en: 'Intervention by Felipe Mosquera in his panel',
@@ -612,7 +576,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/isi3.jpeg',
+                src: '/images/activities/american politics & government summit (isi) 2025/galeria3.jpg',
                 caption: {
                     es: 'Sesión plenaria del American Politics & Government Summit 2024',
                     en: 'Plenary session of the American Politics & Government Summit 2024',
@@ -620,7 +584,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/isi4.jpeg',
+                src: '/images/activities/american politics & government summit (isi) 2025/galeria4.jpg',
                 caption: {
                     es: 'Miembros de Escuela Hispánica durante el APGS',
                     en: 'Members of Escuela Hispánica during the APGS',
@@ -628,7 +592,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/activities/isi5.jpeg',
+                src: '/images/activities/american politics & government summit (isi) 2025/galeria5.jpg',
                 caption: {
                     es: 'Participantes in el APGS (ISI) 2024',
                     en: 'Participants in the APGS (ISI) 2024',
@@ -679,8 +643,6 @@ export const activities: Activity[] = [
             <p>Las II Jornadas de Pensamiento Hispánico, celebradas del 8 al 10 de junio in el Real Centro Universitario Escorial–María Cristina, consolidaron este encuentro como un espacio de referencia intelectual in el ámbito hispanoamericano. A través de un programa cuidadosamente articulado, el evento reunió a pensadores, académicos y jóvenes interesados in el estudio y la revitalización del legado hispánico in la filosofía, la teología, la historia y las ideas políticas.</p>
 
             <p>Estas jornadas nacen de una convicción compartida: la tradición hispánica no es un vestigio del pasado, sino una fuente viva de pensamiento y acción. Ante la fragmentación cultural y el vacío antropológico contemporáneo, la recuperación del pensamiento político clásico, del humanismo cristiano y de los vínculos históricos entre España y América se presenta como una tarea particularmente necesaria.</p>
-
-            <img src="/images/activities/2jornadas1.jpeg" alt="II Jornadas de Pensamiento Hispánico - Apertura" />
             <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Participantes in las II Jornadas de Pensamiento Hispánico in el Real Centro Universitario María Cristina.</p>
 
             <h3>Domingo 8 de junio: Recepción y Vínculos</h3>
@@ -692,16 +654,12 @@ export const activities: Activity[] = [
             <p>Ese mismo día tuvo lugar la mesa redonda “El legado de la Escuela Hispánica in el siglo XVIII”, con la participación de León Gómez Rivas (Universidad Europea) y Francisco José Contreras (Universidad de Sevilla), quienes abordaron la continuidad escolástica y la riqueza jurídica y filosófica de la Escuela de Salamanca como fundamento de una cultura política cristiana, racional y universalista.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-16">
-                <img src="/images/activities/2jornadas2.jpeg" alt="Mesa redonda - Ponentes" class="w-full h-auto" />
-                <img src="/images/activities/2jornadas3.jpeg" alt="Debates académicos" class="w-full h-auto" />
             </div>
 
             <p>A continuación se celebró la mesa “Repensar España y América a la luz de los siglos XIX y XX”. Amparo Ruiz Palazuelos analizó la figura de Alfonso XIII, subrayando su impulso regenerador y modernizador tras la crisis del 98. Por su parte, el Dr. Cristóbal Matarán López (Instituto Juan de Mariana) ofreció una reflexión crítica sobre la evolución liberal decimonónica y la necesidad de reconstruir una comunidad política asentada in principios antropológicos firmes.</p>
 
             <h3>Diálogo Atlántico: El Proyecto 1776</h3>
             <p>Durante la tarde se desarrolló la mesa in inglés “La Escuela Hispánica y 1776”, que abrió un diálogo atlántico entre Daniel Garza (The LIBRE Initiative), Noah Torres (Texas Public Policy Foundation) y Humberto López Vega (Patria Unida por un México Valiente), moderados por Juan Ángel Soto Gómez. En ella se presentó el “Proyecto 1776”, orientado a repensar el diálogo entre la tradición política hispánica y los ideales fundacionales de Estados Unidos. In el debate se destacó la influencia de la Escuela de Salamanca in la tradición del derecho natural estadounidense, así como la aplicación práctica de estos principios in el ámbito social y político contemporáneo.</p>
-
-            <img src="/images/activities/2jornadas4.jpeg" alt="Mesa de diálogo Proyecto 1776" />
             <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Mesa de diálogo internacional sobre el Proyecto 1776.</p>
 
             <p>La última mesa de la jornada se dedicó a la formación de líderes políticos a partir de <em>De rege et regis institutione</em> de Juan de Mariana. Participaron Pedro López Arriba (Ateneo de Madrid), quien reflexionó sobre el gobernante como servidor del bien común, y Alice Galván (Patria Unida por un México Valiente), quien abordó la educación del príncipe como fundamento de una cultura política sólida in Hispanoamérica.</p>
@@ -730,12 +688,12 @@ export const activities: Activity[] = [
 
             <p>Agradecemos a todos los participantes y, especialmente, al Ateneo Escurialense, al Instituto Juan de Mariana y al Centro Diego de Covarrubias por su apoyo in la organización.</p>
         `,
-        image: '/images/activities/2jornadas1.jpeg',
+        image: '/images/activities/ii jornadas de pensamiento hispánico/portada.jpg',
         gallery: [
-            { src: '/images/activities/2jornadas1.jpeg', caption: 'Participantes in las II Jornadas de Pensamiento Hispánico' },
-            { src: '/images/activities/2jornadas2.jpeg', caption: 'Ponencias in el Real Centro Universitario María Cristina' },
-            { src: '/images/activities/2jornadas3.jpeg', caption: 'Ambiente de reflexión y estudio' },
-            { src: '/images/activities/2jornadas4.jpeg', caption: 'Sesión sobre el Proyecto 1776' }
+            { src: '/images/activities/ii jornadas de pensamiento hispánico/galeria1.jpg', caption: 'Participantes in las II Jornadas de Pensamiento Hispánico' },
+            { src: '/images/activities/ii jornadas de pensamiento hispánico/galeria2.jpg', caption: 'Ponencias in el Real Centro Universitario María Cristina' },
+            { src: '/images/activities/ii jornadas de pensamiento hispánico/galeria3.jpg', caption: 'Ambiente de reflexión y estudio' },
+            { src: '/images/activities/ii jornadas de pensamiento hispánico/galeria4.jpg', caption: 'Sesión sobre el Proyecto 1776' }
         ],
         isFeatured: false
     },
@@ -782,27 +740,23 @@ export const activities: Activity[] = [
             </div>
 
             <p>El 19 de enero, Escuela Hispánica estuvo presente in la Hispanic Inaugural Ball celebrada in Washington D.C. in el marco de la Inauguración Presidencial 2025. Este evento, que reunió a destacados miembros de la comunidad hispana in los Estados Unidos, fue una oportunidad para reafirmar el compromiso con los ideales de la libertad y la tradición hispánica.</p>
-
-            <img src="/images/activities/hispanicinaugural1.jpeg" alt="Hispanic Inaugural Ball — Delegación de Escuela Hispánica" />
             <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Delegación de Escuela Hispánica in la Hispanic Inaugural Ball</p>
 
             <p>La delegación de Escuela Hispánica estuvo encabezada por su fundador y secretario general, Juan Ángel Soto Gómez, acompañado de Víctor González Coello de Portugal, presidente de nuestro Consejo Empresarial. Juntos, participaron in la Hispanic Inaugural Ball, organizada por Bienvenido Empresarios, donde se discutieron temas clave para la integración y el fortalecimiento de la presencia hispánica in Estados Unidos, especialmente in el contexto de la reciente toma de posesión del presidente Donald Trump.</p>
-
-            <img src="/images/activities/hispanicinaugural2.jpeg" alt="Hispanic Inaugural Ball — Washington DC" />
             <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Miembros de Escuela Hispánica durante la gala in Washington D.C.</p>
 
             <p>Este evento no solo destacó la importancia de la presencia hispánica in la política y la sociedad estadounidense, sino también el firme compromiso de Escuela Hispánica con los valores que caracterizan nuestra cultura: libertad, respeto y un profundo sentido de comunidad. Nuestra presencia in la Hispanic Inaugural Ball representa un paso más hacia el fortalecimiento de los lazos entre la comunidad hispánica in Estados Unidos y las tradiciones que compartimos, así como a la profundización in la influencia hispánica in este gran país.</p>
 
             <p>A medida que avanzamos, estamos comprometidos in seguir promoviendo el desarrollo y el apoyo a los valores hispánicos in todos los ámbitos posibles, tanto in España como in Hispanoamérica y los Estados Unidos.</p>
         `,
-        image: '/images/activities/hispanicinaugural1.jpeg',
+        image: '/images/activities/hispanic inaugural ball/portada.jpg',
         gallery: [
             {
-                src: '/images/activities/hispanicinaugural1.jpeg',
+                src: '/images/activities/hispanic inaugural ball/galeria1.jpg',
                 caption: 'Delegación de Escuela Hispánica in la Hispanic Inaugural Ball'
             },
             {
-                src: '/images/activities/hispanicinaugural2.jpeg',
+                src: '/images/activities/hispanic inaugural ball/galeria2.jpg',
                 caption: 'Miembros de Escuela Hispánica durante la gala in Washington D.C.'
             }
         ],
@@ -846,13 +800,9 @@ export const activities: Activity[] = [
             
             <p>Antes del constitucionalismo moderno y del liberalismo atlántico, la Escuela de Salamanca desarrolló una reflexión sobre la dignidad humana, los límites del poder político y el derecho natural que anticipó elementos centrales del pensamiento político contemporáneo.</p>
 
-            <img src="/images/activities/APGS.jpg" alt="American Politics and Government Summit (APGS) 2024" />
-
             <p>La ponencia ofreció asimismo una crítica amistosa al llamado post-liberalismo, señalando que la tradición salmantina ya abordó la tensión entre autoridad y libertad sin necesidad de abandonar la matriz liberal clásica. Frente a la dicotomía entre individualismo radical y comunitarismo coercitivo, los escolásticos propusieron una síntesis: una libertad moralmente ordenada, fundada in el derecho natural y in una concepción auténticamente católica de la vida social.</p>
 
             <p>En ese sentido, se defendió que el conservadurismo estadounidense —in la línea descrita por Russell Kirk— no puede comprenderse plenamente sin reconocer esa herencia intelectual previa: tras Jerusalén, Atenas y Roma, pero antes que Londres y Filadelfia, estuvo Salamanca.</p>
-
-            <img src="/images/activities/APGS2.jpeg" alt="Juan Ángel Soto in APGS 2024" />
 
             <p>Escuela Hispánica continúa así su labor de recuperación y difusión de la tradición intelectual hispánica como una contribución necesaria para reconciliar autoridad política y moral con libertad personal dentro de la civilización occidental.</p>
 
@@ -871,14 +821,12 @@ export const activities: Activity[] = [
                     <p>En esta conversación, los tres miembros académicos de Escuela Hispánica examinan cómo la fragmentación social, la corrupción elitista y la desigualdad económica desafían al proyecto liberal, particularmente in Estados Unidos y in Occidente, y cómo tradiciones alternativas —como el legado intelectual hispánico— ofrecen un camino hacia adelante. Con reflexiones sobre el papel de la filosofía política católica y la evolución del panorama cultural estadounidense, Soto y Pallares discuten las tensiones entre autoridad y libertad y la posibilidad de revitalizar los ideales occidentales para un futuro más cohesionado.</p>
                 </div>
             </div>
-
-            <img src="/images/activities/APGS3.jpeg" alt="Delegación de Escuela Hispánica" />
         `,
-        image: '/images/activities/APGS.jpg',
+        image: '/images/activities/american politics and government summit (apgs) 2024/portada.jpg',
         gallery: [
-            { src: '/images/activities/APGS.jpg', caption: 'American Politics and Government Summit (APGS) 2024' },
-            { src: '/images/activities/APGS2.jpeg', caption: 'Sesión durante el congreso' },
-            { src: '/images/activities/APGS3.jpeg', caption: 'Delegación de Escuela Hispánica' }
+            { src: '/images/activities/american politics and government summit (apgs) 2024/galeria1.jpg', caption: 'American Politics and Government Summit (APGS) 2024' },
+            { src: '/images/activities/american politics and government summit (apgs) 2024/galeria2.jpg', caption: 'Sesión durante el congreso' },
+            { src: '/images/activities/american politics and government summit (apgs) 2024/galeria3.jpg', caption: 'Delegación de Escuela Hispánica' }
         ],
         isFeatured: false
     },
@@ -989,13 +937,13 @@ export const activities: Activity[] = [
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/XMt0TKk_4VU" frameBorder="0" allowFullScreen class="w-full h-full"></iframe>
             </div>
         `,
-        image: '/images/activities/2jornadapensamientoimagendestacada.jpg',
+        image: '/images/activities/i jornadas de pensamiento hispánico/portada.jpg',
         gallery: [
-            { src: '/images/activities/1jornadas.jpg', caption: 'I Jornadas de Pensamiento Hispánico in El Escorial' },
-            { src: '/images/activities/1jornadas2.jpg', caption: 'Sesión inaugural y ponencias' },
-            { src: '/images/activities/1jornadas3.jpeg', caption: 'Encuentro académico in el Real Centro Universitario María Cristina' },
-            { src: '/images/activities/1jornadas4.jpeg', caption: 'Debates sobre la tradición intelectual ibérica' },
-            { src: '/images/activities/1jornadas5.jpeg', caption: 'Participantes y colaboradores de las jornadas' }
+            { src: '/images/activities/i jornadas de pensamiento hispánico/galeria1.jpg', caption: 'I Jornadas de Pensamiento Hispánico in El Escorial' },
+            { src: '/images/activities/i jornadas de pensamiento hispánico/galeria2.jpg', caption: 'Sesión inaugural y ponencias' },
+            { src: '/images/activities/i jornadas de pensamiento hispánico/galeria3.jpg', caption: 'Encuentro académico in el Real Centro Universitario María Cristina' },
+            { src: '/images/activities/i jornadas de pensamiento hispánico/galeria4.jpg', caption: 'Debates sobre la tradición intelectual ibérica' },
+            { src: '/images/activities/i jornadas de pensamiento hispánico/galeria5.jpg', caption: 'Participantes y colaboradores de las jornadas' }
         ],
         isFeatured: false
     },
@@ -1050,7 +998,7 @@ export const activities: Activity[] = [
                 La actividad contó con la colaboración de la Revista Cauriensia, Editorial Sindéresis y UPSA Ediciones, y estuvo asociada al proyecto de investigación “La comprensión vitoriana de la persona: estudio y edición del ms. 85/3, in relación con su obra y textos fundamentales de su escuela. Su proyección in materia económica” (PID2021-126478NB-C21), financiado por el Ministerio de Ciencia e Innovación de España, así como al grupo de investigación Iure hominis. Derechos humanos: fundamentación y protección jurídico-política (Universidad Internacional de La Rioja).
             </p>
         `,
-        image: '/images/activities/encuentrosalamanca.jpg',
+        image: '/images/activities/x encuentro internacional de historia del pensamiento/portada.jpg',
         isFeatured: false
     },
     {
@@ -1138,7 +1086,7 @@ export const activities: Activity[] = [
                 El simposio concluyó con palabras de cierre a las 4:30 p.m., destacando la importancia de recuperar y difundir el legado histórico, cultural y lingüístico de fray Domingo de Vico para las nuevas generaciones.
             </p>
         `,
-        image: '/images/activities/guatemala.jpg',
+        image: '/images/activities/la fe y las culturas mayas domingo de vico y el inicio de la evangelización in guatemala/portada.jpg',
         isFeatured: false
     },
     {
@@ -1212,7 +1160,7 @@ export const activities: Activity[] = [
                 La reflexión marianista sobre límites al poder y respeto a los derechos fundamentales sigue siendo relevante hoy in día. Según Gómez Rivas: “Mariana y los autores de la Escuela de Salamanca nos enseñan que desmontar los principios de la ley natural es peligroso. El orden espontáneo y el respeto a las reglas básicas de la sociedad son esenciales para su estabilidad.”
             </p>
         `,
-        image: '/images/activities/ateneomadrid.jpg',
+        image: '/images/activities/iv centenario del fallecimiento de juan de mariana/portada.jpg',
         isFeatured: false
     },
     {
@@ -1270,7 +1218,7 @@ export const activities: Activity[] = [
                 El encuentro concluyó con un espacio de diálogo y la clausura oficial de la jornada. Este seminario contó con la colaboración del Proyecto “La comprensión vitoriana de la persona: estudio y edición del ms. 85/3, in relación con su obra y textos fundamentales de su escuela” (PID2021-126478NB-C21), financiado por el Ministerio de Ciencia e Innovación de España.
             </p>
         `,
-        image: '/images/activities/escuela_hispanica.png',
+        image: '/images/activities/ii encuentro de pensamiento y cultura hispano-peruana/portada.jpg',
         isFeatured: false
     },
     {
@@ -1316,26 +1264,16 @@ export const activities: Activity[] = [
 
             <p>El encuentro reunió a amigos y colaboradores que, desde hace años, comparten una trayectoria intelectual común in torno a la Escolástica Tardía y al legado hispánico del pensamiento político, jurídico y económico. Más que una sesión formal de trabajo, fue un espacio de conversación serena donde la afinidad intelectual y personal permitió abordar con profundidad tanto cuestiones organizativas como orientaciones estratégicas.</p>
 
-            <img src="/images/activities/reunionfundacional1.jpg" alt="Reunión fundacional - Escuela Hispánica" />
-            <p style="text-align: center; font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: -3rem; margin-bottom: 4rem;">Primer momento de reflexión conjunta in el Real Centro Universitario María Cristina.</p>
-
             <p>A los pies del Real Monasterio de San Lorenzo del Escorial —un marco especialmente simbólico para la noción histórica de Hispanidad— la conversación giró también hacia los fundamentos doctrinales que inspiran el proyecto. Se revisaron algunas de las principales aportaciones de las tradiciones escolásticas de Salamanca, Coímbra y Évora, no como objeto meramente erudito, sino como punto de partida para repensar categorías políticas contemporáneas desde una perspectiva histórica.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-16">
-                <img src="/images/activities/reunionfundacional2.jpg" alt="Colaboradores in la reunión fundacional" class="w-full h-auto" />
-                <img src="/images/activities/reunionfundacional3.jpg" alt="Entorno de El Escorial" class="w-full h-auto" />
-            </div>
-
             <p>Esta reunión marcó, in definitiva, el inicio de una etapa: la voluntad compartida de convertir la Escuela Hispánica in un espacio de estudio, diálogo y proyección cultural que recupere y actualice una tradición intelectual propia para los desafíos del presente.</p>
-
-            <img src="/images/activities/reunionfundacional4.jpg" alt="Escuela Hispánica - El Escorial" />
         `,
-        image: '/images/activities/reunionfundacional1.jpg',
+        image: '/images/activities/reunión fundacional/portada.jpg',
         gallery: [
-            { src: '/images/activities/reunionfundacional1.jpg', caption: 'Reunión fundacional in El Escorial' },
-            { src: '/images/activities/reunionfundacional2.jpg', caption: 'Colaboradores in la sesión de reflexión' },
-            { src: '/images/activities/reunionfundacional3.jpg', caption: 'Entorno simbólico de San Lorenzo de El Escorial' },
-            { src: '/images/activities/reunionfundacional4.jpg', caption: 'Inicio de la etapa de Escuela Hispánica' }
+            { src: '/images/activities/reunión fundacional/reunionfundacional1.jpg', caption: { es: 'Reunión fundacional in El Escorial', en: 'Foundational meeting in El Escorial', pt: 'Reunião fundacional em El Escorial' } },
+            { src: '/images/activities/reunión fundacional/reunionfundacional2.jpg', caption: { es: 'Colaboradores in la sesión de reflexión', en: 'Collaborators in the reflection session', pt: 'Colaboradores na sessão de reflexão' } },
+            { src: '/images/activities/reunión fundacional/reunionfundacional3.jpg', caption: { es: 'Entorno simbólico de San Lorenzo de El Escorial', en: 'Symbolic environment of San Lorenzo de El Escorial', pt: 'Entorno simbólico de San Lorenzo de El Escorial' } },
+            { src: '/images/activities/reunión fundacional/reunionfundacional4.jpg', caption: { es: 'Inicio de la etapa de Escuela Hispánica', en: 'Beginning of the Escuela Hispánica stage', pt: 'Início da etapa da Escuela Hispánica' } }
         ],
         isFeatured: false
     },
@@ -1479,12 +1417,12 @@ export const activities: Activity[] = [
                 <p>O Eco de Salamanca voltará a realizar-se este ano em La Antigua Guatemala, consolidando-se como um fórum periódico de reflexão sobre a tradição intelectual hispânica e a sua projeção contemporânea.</p>
             `
         },
-        image: '/images/activities/encuentrosalamanca.jpg',
+        image: '/images/activities/eco de salamanca/portada.jpg',
         isFeatured: false,
         isUpcoming: false,
         gallery: [
             {
-                src: '/images/publications/eco salamanca/Participantes Eco de Salamanca.jpg',
+                src: '/images/activities/eco de salamanca/galeria1.jpg',
                 caption: {
                     es: 'Participantes del coloquio Eco de Salamanca, La Antigua Guatemala, octubre de 2025',
                     en: 'Participants of the Echo of Salamanca colloquium, La Antigua Guatemala, October 2025',
@@ -1492,7 +1430,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/publications/eco salamanca/2025 Eco de Salamanca Día 1 Eco de Salamanca.jpg',
+                src: '/images/activities/eco de salamanca/galeria2.jpg',
                 caption: {
                     es: 'Primera jornada del coloquio Eco de Salamanca, 2025',
                     en: 'First day of the Echo of Salamanca colloquium, 2025',
@@ -1500,7 +1438,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/publications/eco salamanca/2025 Eco de Salamanca Alex Chafuen.jpg',
+                src: '/images/activities/eco de salamanca/galeria3.jpg',
                 caption: {
                     es: 'Alejandro Chafuen, Presidente de Honor de la Escuela Hispánica',
                     en: 'Alejandro Chafuen, Honorary President of the Escuela Hispánica',
@@ -1508,7 +1446,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/publications/eco salamanca/2025 Eco de Salamanca León Gómez Rivas.jpg',
+                src: '/images/activities/eco de salamanca/galeria4.jpg',
                 caption: {
                     es: 'León Gómez Rivas, vicepresidente académico de la Escuela Hispánica',
                     en: 'León Gómez Rivas, academic vice-president of the Escuela Hispánica',
@@ -1516,7 +1454,7 @@ export const activities: Activity[] = [
                 }
             },
             {
-                src: '/images/publications/eco salamanca/2025 Eco de Salamanca bts pódcast León Gómez Rivas.jpg',
+                src: '/images/activities/eco de salamanca/galeria5.jpg',
                 caption: {
                     es: 'Grabación del pódcast con León Gómez Rivas, entre bastidores',
                     en: 'Behind the scenes of the podcast recording with León Gómez Rivas',

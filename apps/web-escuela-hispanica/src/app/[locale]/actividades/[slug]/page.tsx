@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import fs from 'fs';
+import path from 'path';
 import { Navbar, Footer } from '@/components/sections';
 import { activities, getActivityBySlug } from '@/lib/mock-data';
 import { Calendar, MapPin, Building2, Phone, Mail, Globe, ArrowLeft, ChevronRight, Share2, ImageIcon } from 'lucide-react';
@@ -67,6 +69,39 @@ export default async function ActivityPage({ params }: Props) {
             notFound();
         }
 
+        // Auto-detect gallery images
+        let dynamicGallery = [...(activity.gallery || [])];
+
+        try {
+            // activity.image format: /images/activities/folder/portada.jpg
+            const parts = activity.image.split('/');
+            if (parts.length >= 4 && parts[1] === 'images' && parts[2] === 'activities') {
+                const folderName = parts[3];
+                const publicDirPath = path.join(process.cwd(), 'public', 'images', 'activities', folderName);
+
+                if (fs.existsSync(publicDirPath)) {
+                    const files = fs.readdirSync(publicDirPath);
+                    const galleryFiles = files
+                        .filter(f => f.toLowerCase().startsWith('galeria'))
+                        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+
+                    const existingSrcs = new Set(dynamicGallery.map(g => g.src));
+
+                    galleryFiles.forEach(file => {
+                        const src = `/images/activities/${folderName}/${file}`;
+                        if (!existingSrcs.has(src)) {
+                            dynamicGallery.push({
+                                src,
+                                caption: { es: '', en: '', pt: '' }
+                            });
+                        }
+                    });
+                }
+            }
+        } catch (e) {
+            console.error('Error auto-detecting gallery:', e);
+        }
+
         const relatedActivities = activities
             .filter((a) => a.slug !== activity.slug)
             .slice(0, 3);
@@ -82,7 +117,7 @@ export default async function ActivityPage({ params }: Props) {
                     <section className="relative py-32 md:py-48 px-4 overflow-hidden">
                         <div
                             className="absolute inset-0 z-0 opacity-20 bg-cover bg-center bg-fixed transition-transform duration-[10s] scale-110"
-                            style={{ backgroundImage: `url(${activity.image})` }}
+                            style={{ backgroundImage: `url("${activity.image}")` }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-b from-[#050a14]/60 via-[#050a14]/90 to-[#050a14] z-0" />
 
@@ -152,14 +187,14 @@ export default async function ActivityPage({ params }: Props) {
                                     dangerouslySetInnerHTML={{ __html: getLocalizedValue(activity.content, locale) }}
                                 />
 
-                                {activity.gallery && activity.gallery.length > 0 && (
+                                {dynamicGallery.length > 0 && (
                                     <div className="mt-24 mb-16">
                                         <div className="flex items-center gap-4 mb-10">
                                             <ImageIcon className="w-5 h-5 text-[#c5a059]/60" />
                                             <p className="text-[#c5a059] font-cinzel text-[10px] tracking-[0.4em] uppercase">{t('Gallery')}</p>
                                             <div className="h-[1px] flex-grow bg-white/5" />
                                         </div>
-                                        <PhotoGallery images={activity.gallery} locale={locale} />
+                                        <PhotoGallery images={dynamicGallery} locale={locale} />
                                     </div>
                                 )}
                             </article>

@@ -87,7 +87,7 @@ export default async function PublicacionesPage({ params }: { params: Promise<{ 
                         {listArticles.map(article => (
                             <Link key={article.id} href={`/publicaciones/${article.slug}`}>
                                 <div className="group flex flex-col bg-[#0a111e]/40 border border-white/5 hover:border-[#c5a059]/40 transition-all duration-300 cursor-pointer h-full">
-                                    <div className="h-48 overflow-hidden relative">
+                                    <div className="aspect-video overflow-hidden relative">
                                         <img
                                             src={article.image}
                                             alt={getLocalizedValue(article.title, locale)}

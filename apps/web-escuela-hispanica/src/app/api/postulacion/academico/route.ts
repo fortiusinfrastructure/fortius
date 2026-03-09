@@ -168,18 +168,21 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        // Send confirmation to applicant
+        // Send confirmation to applicant (Académico I — Solicitud recibida)
         if (targetEmail) {
             await sendEmail({
                 to: targetEmail,
-                subject: 'Solicitud recibida — Escuela Hispánica',
+                subject: 'Confirmación de Solicitud de Miembro Académico',
                 html: `
             <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
               <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Solicitud Recibida</h2>
               <p>Estimado/a ${fullName},</p>
-              <p>Hemos recibido su solicitud para el programa de <strong>Miembro Académico</strong> de la Escuela Hispánica.</p>
-              <p>Nuestro comité revisará su perfil y le notificaremos el resultado a la brevedad.</p>
-              <p style="margin-top: 30px; color: #666;">Atentamente,<br>Secretaría — Escuela Hispánica</p>
+              <p>Le agradecemos que haya presentado su solicitud para convertirse en Miembro Académico de Escuela Hispánica.</p>
+              <p>Su solicitud será evaluada por nuestro comité científico a la mayor brevedad posible. En caso de que necesitemos información adicional para completar la valoración, nos pondremos en contacto con usted.</p>
+              <p>De ser aceptada su candidatura, se le indicarán los pasos para formalizar su suscripción y acceder a los beneficios exclusivos por este medio.</p>
+              <p>Si tiene cualquier duda, puede ponerse en contacto con nosotros a través del siguiente correo electrónico <a href="mailto:info@escuelahispanica.org" style="color: #c5a059;">info@escuelahispanica.org</a>.</p>
+              <p style="margin-top: 30px;">Reciba un cordial saludo,</p>
+              <p><strong>Secretaría</strong><br>Escuela Hispánica</p>
             </div>
           `,
             });

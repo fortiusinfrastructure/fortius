@@ -103,21 +103,24 @@ export async function GET(request: NextRequest) {
         }
     }
 
-    // Send approval email to the applicant
+    // Send approval email to the applicant (Académico II — Aprobación)
     await sendEmail({
         to: userEmail,
-        subject: '¡Bienvenido/a! Tu candidatura ha sido aprobada — Escuela Hispánica',
+        subject: 'Resultado de su solicitud como Miembro Académico',
         html: `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
-        <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Candidatura Aprobada</h2>
+        <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Candidatura Aceptada</h2>
         <p>Estimado/a ${fullName},</p>
-        <p>Es un placer comunicarle que su solicitud para formar parte del programa de <strong>Miembro Académico</strong> ha sido aprobada por el comité de la Escuela Hispánica.</p>
-        <p>Para activar su membresía, complete su suscripción haciendo clic en el siguiente enlace:</p>
+        <p>Nos complace informarle que su candidatura como Miembro Académico de Escuela Hispánica ha sido aceptada por nuestro comité científico.</p>
+        <p>Está ahora a un paso de convertirse en miembro pleno y comenzar a participar activamente en nuestra comunidad, un espacio de referencia donde investigadores y académicos intercambian ideas, reflexionan y colaboran en proyectos de alto nivel.</p>
+        <p>Para formalizar su membresía anual, complete su suscripción en el siguiente enlace:</p>
         <div style="margin: 30px 0; text-align: center;">
-          <a href="${paymentUrl}" style="display: inline-block; background: #c5a059; color: #050a14; padding: 16px 40px; text-decoration: none; font-weight: bold; font-size: 14px;">ACTIVAR MI MEMBRESÍA</a>
+          <a href="${paymentUrl}" style="display: inline-block; background: #c5a059; color: #050a14; padding: 16px 40px; text-decoration: none; font-weight: bold; font-size: 14px;">FORMALIZAR MI MEMBRESÍA</a>
         </div>
-        <p style="font-size: 13px; color: #666;">Este enlace le dirigirá a una página de pago seguro procesada por Stripe.</p>
-        <p style="margin-top: 30px; color: #666;">Atentamente,<br>Secretaría — Escuela Hispánica</p>
+        <p style="font-size: 13px; color: #666;">Una vez completada la suscripción, podrá disfrutar de los beneficios exclusivos de miembro.</p>
+        <p>Le damos la bienvenida a este proyecto y esperamos que su participación enriquezca tanto su experiencia como la de toda nuestra comunidad académica.</p>
+        <p style="margin-top: 30px;">Reciba un cordial saludo,</p>
+        <p><strong>Secretaría</strong><br>Escuela Hispánica</p>
       </div>
     `,
     });

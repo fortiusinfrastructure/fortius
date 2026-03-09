@@ -62,17 +62,18 @@ export async function GET(request: NextRequest) {
     if (authUser?.user) {
         const fullName = authUser.user.user_metadata?.full_name || authUser.user.email;
 
+        // Académico III — Rechazo
         await sendEmail({
             to: authUser.user.email!,
-            subject: 'Actualización sobre su solicitud — Escuela Hispánica',
+            subject: 'Resultado de su solicitud como Miembro Académico',
             html: `
         <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
-          <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Actualización de Solicitud</h2>
+          <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Resultado de su Solicitud</h2>
           <p>Estimado/a ${fullName},</p>
-          <p>Agradecemos su interés en el programa de Miembro Académico de la Escuela Hispánica.</p>
-          <p>Lamentamos comunicarle que, tras la evaluación del comité, su candidatura no ha sido seleccionada en esta convocatoria.</p>
-          <p>Le animamos a seguir participando en nuestras actividades abiertas y a considerar la membresía <strong>Amigo</strong> para mantenerse conectado con nuestra comunidad.</p>
-          <p style="margin-top: 30px; color: #666;">Atentamente,<br>Secretaría — Escuela Hispánica</p>
+          <p>Nos dirigimos a usted para informarle que, tras la evaluación de su candidatura, el comité científico de Escuela Hispánica ha decidido rechazar su solicitud como Miembro Académico en esta ocasión.</p>
+          <p>No obstante, le animamos a que considere volver a postular pasado un lapso de seis meses. Asimismo, le invitamos a participar en alguno de los eventos organizados por Escuela Hispánica. Estos espacios ofrecen una excelente oportunidad para compartir ideas, dialogar y estrechar vínculos con los miembros de nuestra comunidad.</p>
+          <p>Agradecemos sinceramente el interés mostrado en formar parte de la Escuela y esperamos contar con su participación en nuestras actividades más adelante.</p>
+          <p style="margin-top: 30px;"><strong>Secretaría</strong><br>Escuela Hispánica</p>
         </div>
       `,
         });
