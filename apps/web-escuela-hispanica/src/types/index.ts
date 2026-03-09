@@ -9,6 +9,7 @@ export interface Article {
   slug: string;
   title: string | LocalizedText;
   author: string;
+  authorRole?: string | LocalizedText;
   date: string;
   category: string | LocalizedText;
   excerpt: string | LocalizedText;

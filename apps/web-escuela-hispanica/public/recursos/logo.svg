@@ -2,14 +2,19 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="100%" height="100%" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(5.048318,0,0,5.048318,-4178.461984,-514.58472)">
-        <g transform="matrix(50,0,0,50,1207.718591,265.415914)">
+        <g>
+            <g transform="matrix(1,0,0,1,950.469,265.416)">
+                <text x="0px" y="0px" style="font-family:'PlayfairDisplay-Regular', 'Playfair Display';font-size:50px;fill:rgb(197,160,89);">HISP</text>
+            </g>
+            <g transform="matrix(1,0,0,1,1059.469,265.416)">
+                <text x="0px" y="0px" style="font-family:'PlayfairDisplay-Regular', 'Playfair Display';font-size:50px;fill:rgb(197,160,89);">Á<tspan x="30.5px 65.8px 82.35px " y="0px 0px 0px ">NIC</tspan>A</text>
+            </g>
         </g>
-        <text x="950.469px" y="265.416px" style="font-family:'PlayfairDisplay-Regular', 'Playfair Display';font-size:50px;fill:rgb(197,160,89);">HISP<tspan x="1059.469px 1089.969px 1125.269px 1141.819px " y="265.416px 265.416px 265.416px 265.416px ">ÁNIC</tspan>A</text>
     </g>
     <g transform="matrix(5.818149,0,0,5.818149,-4910.03383,-1009.285944)">
-        <g transform="matrix(50,0,0,50,1173.618591,265.415914)">
+        <g transform="matrix(1,0,0,1,950.469,265.416)">
+            <text x="0px" y="0px" style="font-family:'PlayfairDisplay-SemiBold', 'Playfair Display';font-weight:600;font-size:50px;fill:white;">ESCUELA</text>
         </g>
-        <text x="950.469px" y="265.416px" style="font-family:'PlayfairDisplay-SemiBold', 'Playfair Display';font-weight:600;font-size:50px;fill:white;">ESCUELA</text>
     </g>
     <g transform="matrix(0.79267,0,0,0.79267,26.740752,273.794036)">
         <g transform="matrix(2.358533,0,0,2.358533,-926.871868,-139.153984)">

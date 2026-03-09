@@ -71,8 +71,12 @@ export default async function ArticlePage({ params }: Props) {
 
     // Determine author role and info
     const teamMember = getTeamMemberByName(article.author);
-    const authorRole = teamMember ? getLocalizedValue(teamMember.role, locale) : t('guestAuthor');
-    const authorImage = teamMember ? teamMember.image : '/images/authors/default-avatar.svg';
+    const authorRole = teamMember
+        ? getLocalizedValue(teamMember.role, locale)
+        : article.authorRole
+            ? (typeof article.authorRole === 'string' ? article.authorRole : getLocalizedValue(article.authorRole, locale))
+            : t('guestAuthor');
+    const authorImage = teamMember ? teamMember.image : (article.authorImage || '/images/authors/default-avatar.svg');
 
     const authorBio = teamMember
         ? t('authorBioMember', { role: getLocalizedValue(teamMember.role, locale).toLowerCase() })

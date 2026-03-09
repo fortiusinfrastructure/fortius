@@ -130,6 +130,7 @@ function AcademicoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
     const t = useTranslations('Colabora.Modal.academico');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [institution, setInstitution] = useState('');
     const [motivation, setMotivation] = useState('');
     const [cv, setCv] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
@@ -158,6 +159,7 @@ function AcademicoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             const formData = new FormData();
             formData.append('name', name);
             formData.append('email', email);
+            formData.append('institution', institution);
             formData.append('motivation', motivation);
             if (cv) formData.append('cv', cv);
 
@@ -234,6 +236,19 @@ function AcademicoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                                         className="w-full bg-transparent border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] focus:outline-none transition-colors"
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block font-cinzel text-[9px] tracking-[0.2em] text-white/50 uppercase mb-2">
+                                    {t('institutionLabel')}
+                                </label>
+                                <input
+                                    type="text"
+                                    value={institution}
+                                    onChange={(e) => setInstitution(e.target.value)}
+                                    placeholder={t('institutionPlaceholder')}
+                                    className="w-full bg-transparent border border-white/10 px-4 py-3 text-white font-serif text-sm focus:border-[#c5a059] focus:outline-none transition-colors"
+                                />
                             </div>
 
                             <div>

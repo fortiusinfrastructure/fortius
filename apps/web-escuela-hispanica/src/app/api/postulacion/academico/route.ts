@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
     try {
         const formData = await request.formData();
         const motivation = formData.get('motivation') as string;
+        const institution = formData.get('institution') as string;
         const cv = formData.get('cv') as File | null;
         const name = formData.get('name') as string;
         const email = (formData.get('email') as string)?.toLowerCase();
@@ -154,6 +155,7 @@ export async function POST(request: NextRequest) {
             <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Nueva Solicitud de Miembro Académico</h2>
             <p><strong>Nombre:</strong> ${fullName}</p>
             <p><strong>Email:</strong> ${targetEmail}</p>
+            ${institution ? `<p><strong>Institución:</strong> ${institution}</p>` : ''}
             ${motivation ? `<p><strong>Motivación:</strong> ${motivation}</p>` : ''}
             ${cvUrl ? `<p><strong>CV:</strong> <a href="${cvUrl}" style="color: #c5a059;">Descargar CV</a></p>` : ''}
             <div style="margin-top: 30px; display: flex; gap: 12px;">

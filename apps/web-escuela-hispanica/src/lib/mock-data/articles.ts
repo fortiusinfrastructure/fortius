@@ -2,6 +2,147 @@ import type { Article } from '@/types';
 
 export const articles: Article[] = [
   {
+    id: 10,
+    slug: 'cinco-siglos-despues-escuela-hispanica',
+    title: {
+      es: 'Cinco siglos después: Escuela Hispánica',
+      en: 'Five Centuries Later: Escuela Hispánica',
+      pt: 'Cinco séculos depois: Escuela Hispánica'
+    },
+    author: 'Jorge Machín Mezher',
+    authorRole: {
+      es: 'Director Escuela Hispánica',
+      en: 'Director of Escuela Hispánica',
+      pt: 'Diretor da Escuela Hispánica'
+    },
+    date: '09/03/2026',
+    category: {
+      es: 'Institucional',
+      en: 'Institutional',
+      pt: 'Institucional'
+    },
+    excerpt: {
+      es: 'En el año en que se conmemoran cinco siglos del impulso intelectual que dio lugar a la Escuela de Salamanca, el nuevo director de Escuela Hispánica expone la misión y visión de esta nueva etapa de consolidación y crecimiento.',
+      en: 'In the year marking five centuries since the intellectual impulse that gave rise to the School of Salamanca, the new director of Escuela Hispánica presents the mission and vision for this new stage of consolidation and growth.',
+      pt: 'No ano em que se comemoram cinco séculos do impulso intelectual que deu origem à Escola de Salamanca, o novo diretor da Escuela Hispánica apresenta a missão e visão desta nova etapa de consolidação e crescimento.'
+    },
+    content: {
+      es: `
+      <p>
+        En el año en que se conmemoran cinco siglos del impulso intelectual que dio lugar a la Escuela de Salamanca —y del florecimiento paralelo de los estudios jurídicos y teológicos en Coímbra y Évora— asumo la dirección de Escuela Hispánica con una convicción clara: nuestra comunidad intelectual no nace de la nostalgia, sino de la responsabilidad.
+      </p>
+
+      <p>
+        España, Portugal e Iberoamérica comparten un linaje histórico e intelectual que ha contribuido de manera decisiva a la reflexión sobre la libertad, el derecho, la dignidad de la persona y el orden político. Se trata de una tradición profundamente marcada por la catolicidad de su horizonte intelectual, que no solo se desarrolló en el mundo ibérico e iberoamericano, sino que se proyectó también hacia otros territorios vinculados históricamente a esa misma comunidad cultural. Ese legado, sin embargo, permanece en buena medida disperso, insuficientemente estudiado o eclipsado por narrativas que han relegado su aportación a un segundo plano.
+      </p>
+
+      <p>
+        Escuela Hispánica nace precisamente de la certeza de que el examen riguroso de nuestro pasado común —con la mirada puesta en el futuro— no solo fortalece los vínculos entre nuestras naciones, sino que enriquece el debate político, cultural y jurídico contemporáneo. En esta línea se inscribe, por ejemplo, el Proyecto 1776, actualmente en marcha, que estudia la presencia de la tradición del pensamiento hispánico en la Declaración de Independencia de los Estados Unidos, con el fin de iluminar la proyección atlántica de nuestro pensamiento político y jurídico.
+      </p>
+
+      <p>
+        Nuestra tarea no puede limitarse a la mera oposición a corrientes ideológicas contrarias a la libertad. La defensa de la vida, de la dignidad humana y del florecimiento de nuestras sociedades exige fundamentos más hondos. Exige redescubrir, estudiar y actualizar un cuerpo de pensamiento que, aun no siendo lineal ni homogéneo, constituye una tradición intelectual de enorme riqueza.
+      </p>
+
+      <p>
+        La historia, la tradición y la fe forman parte de ese sustrato. Pero también lo hace una reflexión política y jurídica que se desarrolló con especial vigor en el ámbito ibérico y americano, y que merece ser conocida en toda su profundidad y complejidad.
+      </p>
+
+      <p>
+        En esta nueva etapa queremos consolidar a Escuela Hispánica como un espacio estable de investigación, diálogo y proyección pública. Un lugar donde académicos, investigadores y profesionales puedan trabajar con rigor, publicar, debatir y colaborar en la recuperación y actualización de esta tradición.
+      </p>
+
+      <p>
+        No se trata solo de reivindicar un pasado. Se trata de ponerlo al servicio del presente y del futuro.
+      </p>
+
+      <p>
+        Para ello necesitamos comunidad. Necesitamos instituciones, investigadores y colaboradores comprometidos con esta tarea común.
+      </p>
+
+      <p>
+        Invito a todos aquellos que compartan esta vocación a sumarse a Escuela Hispánica y a participar activamente en esta etapa de consolidación y crecimiento.
+      </p>
+    `,
+      en: `
+      <p>
+        In the year marking five centuries since the intellectual impulse that gave rise to the School of Salamanca —and the parallel flourishing of juridical and theological studies in Coimbra and Évora— I assume the direction of Escuela Hispánica with a clear conviction: our intellectual community is not born of nostalgia, but of responsibility.
+      </p>
+
+      <p>
+        Spain, Portugal, and Ibero-America share a historical and intellectual lineage that has decisively contributed to reflection on freedom, law, the dignity of the person, and political order. It is a tradition deeply marked by the catholicity of its intellectual horizon, which not only developed in the Iberian and Ibero-American world but also projected itself toward other territories historically linked to that same cultural community. This legacy, however, remains largely dispersed, insufficiently studied, or eclipsed by narratives that have relegated its contribution to the background.
+      </p>
+
+      <p>
+        Escuela Hispánica is born precisely from the certainty that the rigorous examination of our common past —with an eye on the future— not only strengthens the bonds between our nations but enriches the contemporary political, cultural, and juridical debate. In this line, for example, the 1776 Project, currently underway, studies the presence of the Hispanic intellectual tradition in the United States Declaration of Independence, aiming to illuminate the Atlantic projection of our political and juridical thought.
+      </p>
+
+      <p>
+        Our task cannot be limited to mere opposition to ideological currents contrary to freedom. The defense of life, human dignity, and the flourishing of our societies demands deeper foundations. It demands rediscovering, studying, and updating a body of thought that, while neither linear nor homogeneous, constitutes an intellectual tradition of enormous richness.
+      </p>
+
+      <p>
+        History, tradition, and faith are part of that substrate. But so is a political and juridical reflection that developed with particular vigor in the Iberian and American sphere, and that deserves to be known in all its depth and complexity.
+      </p>
+
+      <p>
+        In this new stage, we want to consolidate Escuela Hispánica as a stable space for research, dialogue, and public engagement. A place where academics, researchers, and professionals can work with rigor, publish, debate, and collaborate in the recovery and updating of this tradition.
+      </p>
+
+      <p>
+        It is not just about vindicating a past. It is about putting it at the service of the present and the future.
+      </p>
+
+      <p>
+        For this, we need community. We need institutions, researchers, and collaborators committed to this common task.
+      </p>
+
+      <p>
+        I invite all those who share this vocation to join Escuela Hispánica and to participate actively in this stage of consolidation and growth.
+      </p>
+    `,
+      pt: `
+      <p>
+        No ano em que se comemoram cinco séculos do impulso intelectual que deu origem à Escola de Salamanca —e do florescimento paralelo dos estudos jurídicos e teológicos em Coimbra e Évora— assumo a direção da Escuela Hispánica com uma convicção clara: a nossa comunidade intelectual não nasce da nostalgia, mas da responsabilidade.
+      </p>
+
+      <p>
+        Espanha, Portugal e Ibero-América partilham uma linhagem histórica e intelectual que contribuiu de forma decisiva para a reflexão sobre a liberdade, o direito, a dignidade da pessoa e a ordem política. Trata-se de uma tradição profundamente marcada pela catolicidade do seu horizonte intelectual, que não só se desenvolveu no mundo ibérico e ibero-americano, como se projetou também para outros territórios historicamente ligados a essa mesma comunidade cultural. Esse legado, porém, permanece em boa medida disperso, insuficientemente estudado ou eclipsado por narrativas que relegaram a sua contribuição para um segundo plano.
+      </p>
+
+      <p>
+        A Escuela Hispánica nasce precisamente da certeza de que o exame rigoroso do nosso passado comum —com o olhar posto no futuro— não só fortalece os vínculos entre as nossas nações, como enriquece o debate político, cultural e jurídico contemporâneo. Nesta linha inscreve-se, por exemplo, o Projeto 1776, atualmente em curso, que estuda a presença da tradição do pensamento hispânico na Declaração de Independência dos Estados Unidos, com o objetivo de iluminar a projeção atlântica do nosso pensamento político e jurídico.
+      </p>
+
+      <p>
+        A nossa tarefa não pode limitar-se à mera oposição a correntes ideológicas contrárias à liberdade. A defesa da vida, da dignidade humana e do florescimento das nossas sociedades exige fundamentos mais profundos. Exige redescobrir, estudar e atualizar um corpo de pensamento que, ainda que não sendo linear nem homogéneo, constitui uma tradição intelectual de enorme riqueza.
+      </p>
+
+      <p>
+        A história, a tradição e a fé fazem parte desse substrato. Mas também o faz uma reflexão política e jurídica que se desenvolveu com especial vigor no âmbito ibérico e americano, e que merece ser conhecida em toda a sua profundidade e complexidade.
+      </p>
+
+      <p>
+        Nesta nova etapa queremos consolidar a Escuela Hispánica como um espaço estável de investigação, diálogo e projeção pública. Um lugar onde académicos, investigadores e profissionais possam trabalhar com rigor, publicar, debater e colaborar na recuperação e atualização desta tradição.
+      </p>
+
+      <p>
+        Não se trata apenas de reivindicar um passado. Trata-se de o colocar ao serviço do presente e do futuro.
+      </p>
+
+      <p>
+        Para isso precisamos de comunidade. Precisamos de instituições, investigadores e colaboradores comprometidos com esta tarefa comum.
+      </p>
+
+      <p>
+        Convido todos aqueles que partilhem esta vocação a juntarem-se à Escuela Hispánica e a participar ativamente nesta etapa de consolidação e crescimento.
+      </p>
+    `
+    },
+    image: '/images/activities/escuela_hispanica.jpg',
+    isFeatured: true
+  },
+  {
     id: 2,
     slug: 'en-defensa-de-hispanoamerica',
     title: {

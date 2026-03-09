@@ -11,9 +11,10 @@ import type Stripe from 'stripe';
  * Uses stripe_events table for idempotency.
  *
  * Events handled:
- * - checkout.session.completed → Activate membership
- * - customer.subscription.deleted → Deactivate membership
- * - invoice.payment_failed → Mark as past_due
+ * - checkout.session.completed    → Activate membership, record initial payment
+ * - customer.subscription.deleted → Deactivate membership (fallback: lookup by stripe_subscription_id)
+ * - invoice.payment_succeeded     → Record recurring payments in payment_history
+ * - invoice.payment_failed        → Mark subscription as past_due
  */
 export async function POST(request: NextRequest) {
     const body = await request.text();
@@ -208,18 +209,62 @@ export async function POST(request: NextRequest) {
                 const subscription = event.data.object as Stripe.Subscription;
                 const metadata = subscription.metadata || {};
 
-                // Deactivate membership
-                if (metadata.userId) {
+                // Resolve userId from metadata, or fall back to our subscriptions table
+                let userId = metadata.userId;
+                if (!userId) {
+                    const { data: sub } = await admin
+                        .from('subscriptions')
+                        .select('user_id')
+                        .eq('stripe_subscription_id', subscription.id)
+                        .single();
+                    userId = sub?.user_id;
+                }
+
+                if (userId) {
                     await admin
                         .from('user_memberships')
                         .update({ status: 'inactive' })
-                        .eq('user_id', metadata.userId)
+                        .eq('user_id', userId)
                         .eq('status', 'active');
+                }
 
-                    await admin
+                // Always mark the subscription row as canceled
+                await admin
+                    .from('subscriptions')
+                    .update({ status: 'canceled' })
+                    .eq('stripe_subscription_id', subscription.id);
+
+                break;
+            }
+
+            case 'invoice.payment_succeeded': {
+                const invoice = event.data.object as Stripe.Invoice;
+                const subscriptionId =
+                    typeof invoice.subscription === 'string'
+                        ? invoice.subscription
+                        : (invoice.subscription as Stripe.Subscription | null)?.id;
+
+                // Only record recurring payments (billing_reason === 'subscription_cycle')
+                // The initial payment is already captured in checkout.session.completed
+                if (subscriptionId && invoice.billing_reason === 'subscription_cycle') {
+                    const { data: sub } = await admin
                         .from('subscriptions')
-                        .update({ status: 'canceled' })
-                        .eq('stripe_subscription_id', subscription.id);
+                        .select('user_id')
+                        .eq('stripe_subscription_id', subscriptionId)
+                        .single();
+
+                    if (sub?.user_id) {
+                        await admin.from('payment_history').insert({
+                            user_id: sub.user_id,
+                            amount_cents: invoice.amount_paid || 0,
+                            currency: invoice.currency || 'eur',
+                            stripe_payment_intent_id:
+                                typeof invoice.payment_intent === 'string'
+                                    ? invoice.payment_intent
+                                    : (invoice.payment_intent as Stripe.PaymentIntent | null)?.id || invoice.id,
+                            status: 'completed',
+                        });
+                    }
                 }
 
                 break;
@@ -227,12 +272,10 @@ export async function POST(request: NextRequest) {
 
             case 'invoice.payment_failed': {
                 const invoice = event.data.object as Stripe.Invoice;
-                // In Stripe v20, subscription is accessed differently
-                const invoiceAny = invoice as any;
                 const subscriptionId =
-                    typeof invoiceAny.subscription === 'string'
-                        ? invoiceAny.subscription
-                        : invoiceAny.subscription?.id;
+                    typeof invoice.subscription === 'string'
+                        ? invoice.subscription
+                        : (invoice.subscription as Stripe.Subscription | null)?.id;
 
                 if (subscriptionId) {
                     await admin
