@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Navbar, Footer, ContactForm } from '@/components/sections';
-import { Mail, MapPin } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -57,13 +57,7 @@ export default async function ContactoPage({
                                             </a>
                                         </div>
                                     </div>
-                                    <div className="flex items-start gap-4">
-                                        <MapPin className="w-5 h-5 text-[#c5a059] mt-1" />
-                                        <div>
-                                            <p className="font-cinzel text-[9px] tracking-[0.2em] text-white/40 uppercase mb-1">{t('Info.addressLabel')}</p>
-                                            <p className="text-white/80 text-sm font-serif leading-relaxed">Calle Zurbano 71, Oficina 9<br />Madrid, España</p>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

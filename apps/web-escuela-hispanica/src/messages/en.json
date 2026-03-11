@@ -322,7 +322,7 @@
     "Contacto": {
         "Meta": {
             "title": "Contact | Hispanic School",
-            "description": "Get in touch with the Hispanic School. We are in Madrid, Spain."
+            "description": "Get in touch with the Hispanic School."
         },
         "Hero": {
             "label": "Write to us",
@@ -333,7 +333,7 @@
             "title": "CONTACT INFORMATION",
             "emailLabel": "Email",
             "addressLabel": "Address",
-            "addressValue": "Calle Zurbano 71, Office 9\n28010, Madrid, Spain"
+            "addressValue": ""
         },
         "Form": {
             "title": "SEND US A MESSAGE",

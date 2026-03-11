@@ -76,12 +76,19 @@ body {
 .drop-cap p:first-of-type::first-letter {
   float: left;
   font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 5.5rem;
+  font-size: 4rem;
   line-height: 0.85;
-  margin-top: 0.1em;
+  margin-top: 0.15em;
   margin-right: 0.15em;
   color: var(--brand-gold);
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .drop-cap p:first-of-type::first-letter {
+    font-size: 5.5rem;
+    margin-top: 0.1em;
+  }
 }
 
 /* ==========================================================================
@@ -167,37 +174,64 @@ body {
 
 .article-content p {
   font-family: var(--font-serif), 'Playfair Display', serif;
-  font-size: 1.35rem;
-  /* ~21.6px */
-  line-height: 2.1;
-  margin-bottom: 2.5rem;
+  font-size: 1.125rem;
+  /* ~18px */
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 300;
   text-wrap: pretty;
   text-align: justify;
 }
 
+@media (min-width: 768px) {
+  .article-content p {
+    font-size: 1.35rem;
+    /* ~21.6px */
+    line-height: 2.1;
+    margin-bottom: 2.5rem;
+  }
+}
+
 .article-content h3 {
   font-family: var(--font-serif), 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-style: italic;
-  margin-top: 6rem;
-  margin-bottom: 2.5rem;
+  margin-top: 4rem;
+  margin-bottom: 1.75rem;
   border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-  padding-bottom: 1.5rem;
+  padding-bottom: 1rem;
   color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .article-content h3 {
+    font-size: 2.5rem;
+    margin-top: 6rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
 }
 
 .article-content blockquote {
   font-family: var(--font-serif), 'Playfair Display', serif;
   font-style: italic;
-  font-size: 1.6rem;
-  line-height: 1.8;
-  padding: 3.5rem;
-  margin: 5rem 0;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  padding: 2rem;
+  margin: 3rem 0;
   background: rgba(10, 17, 30, 0.5);
   border-left: 3px solid var(--brand-gold);
   color: rgba(255, 255, 255, 0.85);
+}
+
+@media (min-width: 768px) {
+  .article-content blockquote {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    padding: 3.5rem;
+    margin: 5rem 0;
+  }
 }
 
 .article-content img {
@@ -215,12 +249,20 @@ body {
 
 .prose-hispana p {
   font-family: var(--font-serif), 'Playfair Display', serif;
-  font-size: 1.25rem;
-  line-height: 2.1;
-  margin-bottom: 2.5rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 300;
   text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .prose-hispana p {
+    font-size: 1.25rem;
+    line-height: 2.1;
+    margin-bottom: 2.5rem;
+  }
 }
 
 .prose-hispana blockquote p {

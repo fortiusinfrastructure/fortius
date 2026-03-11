@@ -322,7 +322,7 @@
     "Contacto": {
         "Meta": {
             "title": "Contacto | Escuela Hispánica",
-            "description": "Ponte en contacto con la Escuela Hispánica. Estamos en Madrid, España."
+            "description": "Ponte en contacto con la Escuela Hispánica."
         },
         "Hero": {
             "label": "Escríbenos",
@@ -333,7 +333,7 @@
             "title": "INFORMACIÓN DE CONTACTO",
             "emailLabel": "Email",
             "addressLabel": "Dirección",
-            "addressValue": "Calle Zurbano 71, Oficina 9\n28010, Madrid, España"
+            "addressValue": ""
         },
         "Form": {
             "title": "ENVÍANOS UN MENSAJE",
