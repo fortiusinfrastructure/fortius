@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
 
         <Link href="/" className="text-center cursor-pointer transition-opacity hover:opacity-80">
           <img
-            src="/recursos/logo.svg"
+            src="/recursos/logo.png"
             alt="Escuela Hispánica Logo"
             className="h-24 md:h-32 w-auto"
           />
