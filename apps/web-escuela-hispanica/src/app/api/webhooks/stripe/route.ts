@@ -2,7 +2,24 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { stripe } from '@/lib/stripe';
 import { createAdminClient } from '@fortius/database';
 import { sendEmail } from '@/lib/email';
+import { getPaymentReceiptTemplate, getPaymentFailedTemplate } from '@/lib/email/templates';
 import type Stripe from 'stripe';
+
+function getStripeObjectId(value: string | { id: string } | null | undefined) {
+    if (!value) return null;
+    return typeof value === 'string' ? value : value.id;
+}
+
+async function sendEmailWithLog(
+    label: string,
+    options: Parameters<typeof sendEmail>[0],
+) {
+    const result = await sendEmail(options);
+
+    if (!result.success) {
+        console.error(`[webhook] Failed to send ${label} email:`, result.error);
+    }
+}
 
 /**
  * POST /api/webhooks/stripe
@@ -63,32 +80,57 @@ export async function POST(request: NextRequest) {
                 const session = event.data.object as Stripe.Checkout.Session;
                 const metadata = session.metadata || {};
                 const { tier, userId: metadataUserId, orgSlug, membershipId } = metadata;
+                const paymentReference = getStripeObjectId(session.payment_intent) ?? session.id;
+                const stripeSubscriptionId = getStripeObjectId(session.subscription);
+                const stripeCustomerId = getStripeObjectId(session.customer);
 
                 let finalUserId = metadataUserId;
 
                 // Handle anonymous user
                 if (!finalUserId || finalUserId === 'anonymous') {
                     const email = session.customer_details?.email?.toLowerCase();
-                    if (!email) break;
+                    if (email) {
+                        // Find or create user
+                        const { data: existingUser } = await admin.auth.admin.listUsers();
+                        const foundUser = existingUser.users.find(u => u.email === email);
 
-                    // Find or create user
-                    const { data: existingUser } = await admin.auth.admin.listUsers();
-                    const foundUser = existingUser.users.find(u => u.email === email);
-
-                    if (foundUser) {
-                        finalUserId = foundUser.id;
-                    } else {
-                        const { data: newUser, error: createError } = await admin.auth.admin.createUser({
-                            email,
-                            user_metadata: { full_name: session.customer_details?.name || email },
-                            email_confirm: true,
-                        });
-                        if (createError) throw createError;
-                        finalUserId = newUser.user.id;
+                        if (foundUser) {
+                            finalUserId = foundUser.id;
+                        } else {
+                            const { data: newUser, error: createError } = await admin.auth.admin.createUser({
+                                email,
+                                user_metadata: { full_name: session.customer_details?.name || email },
+                                email_confirm: true,
+                            });
+                            if (!createError) {
+                                finalUserId = newUser.user.id;
+                            }
+                        }
                     }
                 }
 
-                if (!finalUserId) break;
+                // Record payment only when we have a valid user_id.
+                // payment_history.user_id is NOT NULL in the current schema.
+                if (finalUserId && finalUserId !== 'anonymous') {
+                    const { error: paymentError } = await admin.from('payment_history').insert({
+                        user_id: finalUserId,
+                        amount_cents: session.amount_total || 0,
+                        currency: session.currency || 'eur',
+                        stripe_payment_intent_id: paymentReference,
+                        status: 'completed',
+                    });
+
+                    if (paymentError) {
+                        console.error('[webhook] Failed to record checkout payment:', paymentError);
+                    }
+                } else {
+                    console.warn(
+                        '[webhook] Skipping payment_history insert because user_id could not be resolved for checkout session:',
+                        session.id,
+                    );
+                }
+
+                if (!finalUserId || finalUserId === 'anonymous') break;
 
                 // Get organization
                 const { data: org } = await admin
@@ -134,7 +176,7 @@ export async function POST(request: NextRequest) {
                 }
 
                 // Update subscription ID if it's a subscription
-                if (session.subscription) {
+                if (stripeSubscriptionId && stripeCustomerId) {
                     const planSlug = tier === 'mecenas' ? 'eh-mecenas-annual'
                         : tier === 'academico' ? 'eh-academico-annual'
                             : 'eh-amigo';
@@ -147,20 +189,16 @@ export async function POST(request: NextRequest) {
                     await admin.from('subscriptions').upsert({
                         user_id: finalUserId,
                         plan_id: plan?.id || planSlug,
-                        stripe_subscription_id: session.subscription as string,
-                        stripe_customer_id: session.customer as string,
+                        stripe_subscription_id: stripeSubscriptionId,
+                        stripe_customer_id: stripeCustomerId,
                         status: 'active',
                     }, { onConflict: 'stripe_subscription_id' });
+                } else if (stripeSubscriptionId) {
+                    console.warn(
+                        '[webhook] Skipping subscriptions upsert because customer id is missing for subscription:',
+                        stripeSubscriptionId,
+                    );
                 }
-
-                // Record payment
-                await admin.from('payment_history').insert({
-                    user_id: finalUserId,
-                    amount_cents: session.amount_total || 0,
-                    currency: session.currency || 'eur',
-                    stripe_payment_intent_id: session.payment_intent as string || session.id,
-                    status: 'completed',
-                });
 
                 // Send tier-specific welcome email
                 const { data: authUser } = await admin.auth.admin.getUserById(finalUserId);
@@ -232,11 +270,37 @@ export async function POST(request: NextRequest) {
               </div>`;
                     }
 
-                    await sendEmail({
+                    await sendEmailWithLog('welcome', {
                         to: authUser.user.email,
                         subject: emailSubject,
                         html: emailBody,
                     });
+
+                    // Send separate payment receipt (transaccional)
+                    if (session.amount_total && session.amount_total > 0) {
+                        const description = tier === 'amigo'
+                            ? 'Contribución como Amigo de la Escuela Hispánica'
+                            : tier === 'academico'
+                                ? 'Membresía: Miembro Académico'
+                                : tier === 'mecenas'
+                                    ? 'Membresía: Mecenas'
+                                    : 'Contribución General';
+
+                        const receiptHtml = getPaymentReceiptTemplate({
+                            fullName,
+                            amount: session.amount_total,
+                            currency: session.currency || 'eur',
+                            date: new Date().toLocaleDateString('es-ES'),
+                            reference: paymentReference,
+                            description
+                        });
+
+                        await sendEmailWithLog('payment receipt', {
+                            to: authUser.user.email,
+                            subject: 'Recibo de Pago de Escuela Hispánica',
+                            html: receiptHtml
+                        });
+                    }
                 }
 
                 break;
@@ -289,14 +353,35 @@ export async function POST(request: NextRequest) {
                         .eq('stripe_subscription_id', subscriptionId)
                         .single();
 
-                    if (sub?.user_id) {
-                        await admin.from('payment_history').insert({
-                            user_id: sub.user_id,
-                            amount_cents: invoice.amount_paid || 0,
-                            currency: invoice.currency || 'eur',
-                            stripe_payment_intent_id: invoice.id,
-                            status: 'completed',
-                        });
+                    await admin.from('payment_history').insert({
+                        user_id: sub?.user_id || null,
+                        amount_cents: invoice.amount_paid || 0,
+                        currency: invoice.currency || 'eur',
+                        stripe_payment_intent_id: invoice.id,
+                        status: 'completed',
+                    });
+
+                    // Send recurring payment receipt if user exists
+                    if (invoice.amount_paid > 0 && sub?.user_id) {
+                        const { data: authUser } = await admin.auth.admin.getUserById(sub.user_id);
+
+                        if (authUser?.user?.email) {
+                            const fullName = authUser.user.user_metadata?.full_name || authUser.user.email;
+                            const receiptHtml = getPaymentReceiptTemplate({
+                                fullName,
+                                amount: invoice.amount_paid,
+                                currency: invoice.currency || 'eur',
+                                date: new Date(invoice.created * 1000).toLocaleDateString('es-ES'),
+                                reference: invoice.id,
+                                description: 'Renovación de Membresía / Suscripción'
+                            });
+
+                            await sendEmailWithLog('recurring payment receipt', {
+                                to: authUser.user.email,
+                                subject: 'Recibo de Pago - Renovación de Suscripción',
+                                html: receiptHtml
+                            });
+                        }
                     }
                 }
 
@@ -314,6 +399,29 @@ export async function POST(request: NextRequest) {
                         .from('subscriptions')
                         .update({ status: 'past_due' })
                         .eq('stripe_subscription_id', subscriptionId);
+
+                    const { data: sub } = await admin
+                        .from('subscriptions')
+                        .select('user_id')
+                        .eq('stripe_subscription_id', subscriptionId)
+                        .single();
+
+                    if (sub?.user_id) {
+                        const { data: authUser } = await admin.auth.admin.getUserById(sub.user_id);
+                        if (authUser?.user?.email) {
+                            const fullName = authUser.user.user_metadata?.full_name || authUser.user.email;
+                            const failedHtml = getPaymentFailedTemplate({
+                                fullName,
+                                description: 'Renovación de Membresía / Suscripción'
+                            });
+
+                            await sendEmailWithLog('failed payment', {
+                                to: authUser.user.email,
+                                subject: 'Aviso Importante: Problema con el pago de su suscripción',
+                                html: failedHtml
+                            });
+                        }
+                    }
                 }
 
                 break;
