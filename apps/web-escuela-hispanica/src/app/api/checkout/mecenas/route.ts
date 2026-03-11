@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
                 userId: user?.id || 'anonymous',
                 orgSlug: 'escuela-hispanica',
             },
-            successUrl: `${siteUrl}/colabora/exito?tier=mecenas`,
+            successUrl: `${siteUrl}/colabora/exito?tier=mecenas&session_id={CHECKOUT_SESSION_ID}`,
             cancelUrl: `${siteUrl}/colabora`,
         });
 

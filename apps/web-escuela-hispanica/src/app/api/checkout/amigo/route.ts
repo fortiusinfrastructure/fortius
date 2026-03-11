@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
                 userId: user?.id || 'anonymous',
                 orgSlug: 'escuela-hispanica',
             },
-            successUrl: `${siteUrl}/colabora/exito?tier=amigo`,
+            successUrl: `${siteUrl}/colabora/exito?tier=amigo&session_id={CHECKOUT_SESSION_ID}`,
             cancelUrl: `${siteUrl}/colabora`,
         });
 

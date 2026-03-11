@@ -495,6 +495,18 @@
                 "subtitle": "Tu patrocinio marca la diferencia",
                 "message": "Como Mecenas, tienes acceso a todos los beneficios de la Escuela, además de invitaciones a cenas exclusivas y encuentros privados con autores."
             },
+            "access": {
+                "readyTitle": "Tu acceso está listo",
+                "readyMessage": "Tu pago ya quedó vinculado a tu cuenta. Ya puedes continuar y entrar en la Escuela Hispánica.",
+                "activateTitle": "Activa tu acceso ahora",
+                "activateMessage": "Tu pago ya fue confirmado. Entra con un enlace seguro para dejar tu cuenta lista en este mismo momento.",
+                "pendingTitle": "Estamos confirmando tu pago",
+                "pendingMessage": "Tu checkout terminó correctamente, pero la confirmación final puede tardar unos segundos más. Si no ves el acceso de inmediato, usa el enlace que recibirás por correo.",
+                "emailTitle": "Accede desde tu correo",
+                "emailMessage": "Si cerraste la ventana o el acceso directo no se completó, usa el enlace seguro enviado a tu correo para terminar la activación.",
+                "activateButton": "ACTIVAR MI ACCESO",
+                "enterContent": "IR A MI CONTENIDO"
+            },
             "backHome": "VOLVER AL INICIO",
             "exploreContent": "EXPLORAR CONTENIDO"
         }

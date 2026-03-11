@@ -204,6 +204,12 @@ export async function POST(request: NextRequest) {
                 const { data: authUser } = await admin.auth.admin.getUserById(finalUserId);
                 if (authUser?.user?.email) {
                     const fullName = authUser.user.user_metadata?.full_name || authUser.user.email;
+                    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+                    const accessRedirectUrl = new URL('/api/auth/callback', siteUrl);
+                    accessRedirectUrl.searchParams.set(
+                        'next',
+                        `/colabora/exito?tier=${tier || 'amigo'}&access=ready`,
+                    );
 
                     // Generate activation link if it's a shadow user (no last_sign_in_at)
                     let activationSection = '';
@@ -211,7 +217,7 @@ export async function POST(request: NextRequest) {
                         const { data: linkData } = await admin.auth.admin.generateLink({
                             type: 'magiclink',
                             email: authUser.user.email,
-                            options: { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/login` }
+                            options: { redirectTo: accessRedirectUrl.toString() }
                         });
                         if (linkData?.properties?.action_link) {
                             activationSection = `

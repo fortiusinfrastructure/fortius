@@ -94,7 +94,7 @@ export async function GET(request: NextRequest) {
                     membershipId: decoded.membershipId,
                     orgSlug: 'escuela-hispanica',
                 },
-                successUrl: `${siteUrl}/colabora/exito?tier=academico`,
+                successUrl: `${siteUrl}/colabora/exito?tier=academico&session_id={CHECKOUT_SESSION_ID}`,
                 cancelUrl: `${siteUrl}/colabora`,
             });
             paymentUrl = session.url || siteUrl;

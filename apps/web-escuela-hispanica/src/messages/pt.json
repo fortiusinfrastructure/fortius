@@ -495,6 +495,18 @@
                 "subtitle": "O seu patrocínio faz a diferença",
                 "message": "Como Mecenas, tem acesso a todos os benefícios da Escola, além de convites para jantares exclusivos e encontros privados com autores."
             },
+            "access": {
+                "readyTitle": "O seu acesso está pronto",
+                "readyMessage": "O seu pagamento já ficou associado à sua conta. Agora já pode continuar para a Escola Hispânica.",
+                "activateTitle": "Ative o seu acesso agora",
+                "activateMessage": "O seu pagamento já foi confirmado. Entre com um link seguro para deixar a sua conta pronta agora mesmo.",
+                "pendingTitle": "Estamos a confirmar o seu pagamento",
+                "pendingMessage": "O seu checkout terminou corretamente, mas a confirmação final ainda pode demorar mais alguns segundos. Se não vir o acesso imediatamente, use o link seguro enviado por e-mail.",
+                "emailTitle": "Aceda a partir do seu e-mail",
+                "emailMessage": "Se fechou a janela ou o acesso direto não terminou, use o link seguro enviado para o seu e-mail para concluir a ativação.",
+                "activateButton": "ATIVAR O MEU ACESSO",
+                "enterContent": "IR PARA O MEU CONTEÚDO"
+            },
             "backHome": "VOLTAR AO INÍCIO",
             "exploreContent": "EXPLORAR CONTEÚDO"
         }

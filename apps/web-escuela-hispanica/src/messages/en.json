@@ -495,6 +495,18 @@
                 "subtitle": "Your patronage makes a difference",
                 "message": "As a Patron, you have access to all the benefits of the School, plus invitations to exclusive dinners and private meetings with authors."
             },
+            "access": {
+                "readyTitle": "Your access is ready",
+                "readyMessage": "Your payment is already linked to your account. You can now continue into the Hispanic School.",
+                "activateTitle": "Activate your access now",
+                "activateMessage": "Your payment has already been confirmed. Sign in with a secure link to finish setting up your account right now.",
+                "pendingTitle": "We are confirming your payment",
+                "pendingMessage": "Your checkout finished correctly, but final confirmation can still take a few more seconds. If you do not see access right away, use the secure link sent by email.",
+                "emailTitle": "Access from your email",
+                "emailMessage": "If you closed the window or direct access did not finish, use the secure link sent to your email to complete activation.",
+                "activateButton": "ACTIVATE MY ACCESS",
+                "enterContent": "GO TO MY CONTENT"
+            },
             "backHome": "BACK TO HOME",
             "exploreContent": "EXPLORE CONTENT"
         }
