@@ -1149,6 +1149,20 @@
                 "nationality": "Spanish",
                 "shortBio": "Professor of political economy and defender of the Austrian School.",
                 "contribution": "Demonstrated that modern liberalism is a coherent development of scholastic natural law."
+            },
+            "saravia": {
+                "name": "Luis Saravia de la Calle",
+                "period": "fl. 1544",
+                "nationality": "Spain",
+                "shortBio": "Luis Saravia de la Calle was a Castilian jurist and economist active toward the mid-16th century. Little is known of his personal life, but his work was highly relevant in early economic debates.",
+                "contribution": "In his treatise on commerce and prices, he argued that the value of goods does not depend on their objective essence or political decree, but on the common estimation of men in exchange. It is one of the first explicit formulations of market value. His argument attacked the medieval tradition of prices fixed by authority. The ruler cannot determine economic value because it arises from social interaction. Economics has its own logic prior to power. Saravia thus introduces the idea of spontaneous order: prices coordinate dispersed information without central planning. This principle will be essential in later economics."
+            },
+            "martinezmarina": {
+                "name": "Francisco Martínez Marina",
+                "period": "1754–1833",
+                "nationality": "Spain",
+                "shortBio": "Born in Oviedo in 1754, priest and historian, he dedicated his life to studying Spanish medieval institutions.",
+                "contribution": "In Teoría de las Cortes (1813) he argues that political representation existed in the Hispanic monarchy centuries before modern liberalism. For Marina, the national sovereignty proclaimed in Cádiz was not a revolutionary principle, but the modern formulation of a historical pact. Royal power had always been limited by the political community. His work was decisive in legitimizing the Constitution of 1812 as historical continuity and not as a rupture."
             }
         }
     }

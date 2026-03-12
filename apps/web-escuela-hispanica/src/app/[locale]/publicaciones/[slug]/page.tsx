@@ -10,6 +10,41 @@ import { getTeamMemberByName } from '@/lib/mock-data/team';
 import { getTranslations } from 'next-intl/server';
 import PhotoGallery from '@/components/ui/PhotoGallery';
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.escuelahispanica.org';
+const FALLBACK_SOCIAL_IMAGE = '/opengraph-image.jpg';
+
+const localeToOG: Record<string, string> = {
+    es: 'es_ES',
+    en: 'en_US',
+    pt: 'pt_BR',
+};
+
+function getLocalePrefix(locale: string) {
+    return locale === 'es' ? '' : `/${locale}`;
+}
+
+function getAbsoluteUrl(path: string) {
+    return new URL(path, BASE_URL).toString();
+}
+
+function getArticleUrl(locale: string, slug: string) {
+    return getAbsoluteUrl(`${getLocalePrefix(locale)}/publicaciones/${slug}`);
+}
+
+function getSocialImageUrl(image?: string) {
+    const normalizedImage = image?.trim();
+
+    if (!normalizedImage) {
+        return getAbsoluteUrl(FALLBACK_SOCIAL_IMAGE);
+    }
+
+    if (normalizedImage.startsWith('http://') || normalizedImage.startsWith('https://')) {
+        return normalizedImage;
+    }
+
+    return getAbsoluteUrl(normalizedImage.startsWith('/') ? normalizedImage : `/${normalizedImage}`);
+}
+
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
 }
@@ -21,15 +56,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!article) return { title: t('notFound') };
 
     const title = getLocalizedValue(article.title, locale);
-    const excerpt = getLocalizedValue(article.excerpt, locale);
+    const description = getLocalizedValue(article.excerpt, locale);
+    const articleUrl = getArticleUrl(locale, slug);
+    const articleImageUrl = getSocialImageUrl(article.image);
 
     return {
-        title: `${title} | Escuela Hispánica`,
-        description: excerpt,
+        metadataBase: new URL(BASE_URL),
+        title,
+        description,
+        alternates: {
+            canonical: articleUrl,
+            languages: {
+                es: getArticleUrl('es', slug),
+                en: getArticleUrl('en', slug),
+                pt: getArticleUrl('pt', slug),
+                'x-default': getArticleUrl('es', slug),
+            },
+        },
         openGraph: {
-            title: title,
-            description: excerpt,
-            images: [article.image],
+            type: 'article',
+            url: articleUrl,
+            siteName: 'Escuela Hispánica',
+            locale: localeToOG[locale] || 'es_ES',
+            title,
+            description,
+            images: [
+                {
+                    url: articleImageUrl,
+                    alt: title,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: [articleImageUrl],
         },
     };
 }

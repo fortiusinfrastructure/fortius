@@ -5,12 +5,14 @@ import { Link } from '@/i18n/routing';
 import { getLocalizedValue } from '@/lib/i18n/localize';
 import { Calendar, User, BookOpen } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { METADATA_BASE } from '@/lib/seo/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Publicaciones.Archive' });
 
     return {
+        metadataBase: METADATA_BASE,
         title: t('metaTitle'),
         description: t('metaDescription'),
     };

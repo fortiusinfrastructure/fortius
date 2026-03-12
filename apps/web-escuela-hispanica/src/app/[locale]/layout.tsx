@@ -26,6 +26,7 @@ const lato = Lato({
 });
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.escuelahispanica.org';
+const DEFAULT_SOCIAL_IMAGE = new URL('/opengraph-image.jpg', BASE_URL).toString();
 
 const localeToOG: Record<string, string> = {
   es: 'es_ES',
@@ -75,11 +76,18 @@ export async function generateMetadata({
         siteName: t.title,
         title: t.title,
         description: t.ogDescription,
+        images: [
+          {
+            url: DEFAULT_SOCIAL_IMAGE,
+            alt: t.title,
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: t.title,
         description: t.twitterDescription,
+        images: [DEFAULT_SOCIAL_IMAGE],
       },
       icons: {
         icon: '/favicon.svg',

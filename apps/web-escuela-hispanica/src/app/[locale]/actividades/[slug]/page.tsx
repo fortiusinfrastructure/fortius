@@ -12,6 +12,8 @@ import { EventRegistrationForm } from '@/components/forms/EventRegistrationForm'
 import { getTranslations } from 'next-intl/server';
 import PhotoGallery from '@/components/ui/PhotoGallery';
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.escuelahispanica.org';
+
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
 }
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         const excerpt = getLocalizedValue(activity.excerpt, locale);
 
         return {
+            metadataBase: new URL(BASE_URL),
             title: `${title} | Escuela Hispánica`,
             description: excerpt,
             openGraph: {

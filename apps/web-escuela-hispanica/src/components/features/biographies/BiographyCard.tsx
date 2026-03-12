@@ -1,37 +1,45 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { User, ChevronDown, ChevronUp, Quote } from 'lucide-react';
 import { RichText } from '@/components/ui/RichText';
 
 interface BiographyCardProps {
+    id: string;
     name: string;
     period: string;
     nationality: string;
     shortBio: string;
     contribution: string;
     index: number;
+    isExpanded: boolean;
+    onToggle: (id: string) => void;
 }
 
 export const BiographyCard: React.FC<BiographyCardProps> = ({
+    id,
     name,
     period,
     nationality,
     shortBio,
     contribution,
-    index
+    index,
+    isExpanded,
+    onToggle,
 }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const isEven = index % 2 === 0;
 
     return (
-        <div className="relative flex flex-col items-center">
+        <div className={`relative flex flex-col md:flex-row items-center w-full ${isEven ? 'md:justify-start' : 'md:justify-end'} pl-12 md:pl-0`}>
             {/* Dot on the timeline */}
-            <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-3 h-3 rounded-full bg-[#c5a059] z-10 shadow-[0_0_10px_rgba(197,160,89,0.5)]" />
+            <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-10 md:top-1/2 md:-translate-y-1/2 w-3 h-3 rounded-full bg-[#c5a059] z-10 shadow-[0_0_10px_rgba(197,160,89,0.5)]" />
+
+            {/* Connecting line on desktop */}
+            <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-px bg-[#c5a059]/30 w-12 ${isEven ? 'right-[50%] translate-x-1/2 mr-6' : 'left-[50%] -translate-x-1/2 ml-6'}`} />
 
             <div
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={`w-full max-w-2xl cursor-pointer bg-[#0a111e]/40 border border-white/5 hover:border-[#c5a059]/30 transition-all duration-500 rounded-sm overflow-hidden group ${isExpanded ? 'shadow-[0_0_40px_rgba(0,0,0,0.4)] border-[#c5a059]/20' : ''
-                    }`}
+                onClick={() => onToggle(id)}
+                className={`w-full md:w-[calc(50%-3rem)] cursor-pointer bg-[#0a111e]/40 border border-white/5 hover:border-[#c5a059]/30 transition-all duration-500 rounded-sm overflow-hidden group ${isExpanded ? 'shadow-[0_0_40px_rgba(0,0,0,0.4)] border-[#c5a059]/20' : ''}`}
             >
                 {/* Minimal State */}
                 <div className="p-6 md:p-8 flex items-start gap-6">
@@ -48,7 +56,7 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
                                 <h3 className="font-serif text-xl md:text-2xl text-white group-hover:text-[#c5a059] transition-colors duration-500">
                                     {name}
                                 </h3>
-                                <span className="font-serif text-xs text-white/40 italic">
+                                <span className="font-serif text-xs text-white/40">
                                     {nationality}
                                 </span>
                             </div>
@@ -61,8 +69,7 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
 
                 {/* Expanded State */}
                 <div
-                    className={`transition-all duration-700 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                        }`}
+                    className={`transition-all duration-700 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                     <div className="px-8 pb-8 pt-2 md:px-12 md:pb-12 border-t border-white/5">
                         <div className="space-y-8">
@@ -70,9 +77,11 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
                                 <h4 className="font-cinzel text-[10px] tracking-[0.3em] text-[#c5a059] mb-4 uppercase">
                                     Biografía
                                 </h4>
-                                <p className="font-serif text-white/70 leading-relaxed font-light text-base md:text-lg italic text-pretty">
-                                    <RichText text={shortBio} />
-                                </p>
+                                <div className="font-serif text-white/70 leading-relaxed font-light text-base md:text-lg text-pretty space-y-4">
+                                    {shortBio.split('\n').filter(p => p.trim()).map((para, i) => (
+                                        <p key={i}><RichText text={para} /></p>
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="relative">

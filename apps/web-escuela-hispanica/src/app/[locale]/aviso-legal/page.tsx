@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { Navbar, Footer } from '@/components/sections';
 import { getLocale, getTranslations } from 'next-intl/server';
 import React from 'react';
+import { METADATA_BASE } from '@/lib/seo/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'AvisoLegal.Meta' });
     return {
+        metadataBase: METADATA_BASE,
         title: t('title'),
         description: t('description'),
     };

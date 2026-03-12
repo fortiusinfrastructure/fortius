@@ -5,6 +5,7 @@ import { Link } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
 import { getLocalizedValue } from '@/lib/i18n/localize';
 import { getTranslations } from 'next-intl/server';
+import { METADATA_BASE } from '@/lib/seo/metadata';
 
 interface Props {
     params: Promise<{ locale: string }>;
@@ -14,6 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Proyectos.Meta' });
     return {
+        metadataBase: METADATA_BASE,
         title: t('title'),
         description: t('description'),
     };

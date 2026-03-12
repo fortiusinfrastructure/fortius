@@ -2,11 +2,13 @@ import type { Metadata } from 'next';
 import { Navbar, Footer, ContactForm } from '@/components/sections';
 import { Mail } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { METADATA_BASE } from '@/lib/seo/metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const p = await params;
     const t = await getTranslations({ locale: p.locale, namespace: 'Contacto.Meta' });
     return {
+        metadataBase: METADATA_BASE,
         title: t('title'),
         description: t('description'),
     };

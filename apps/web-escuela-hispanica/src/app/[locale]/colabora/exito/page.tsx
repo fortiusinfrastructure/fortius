@@ -4,6 +4,7 @@ import { Heart, Medal, Crown, Check } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { createServerClient } from '@fortius/database';
+import { METADATA_BASE } from '@/lib/seo/metadata';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const p = await params;
     const t = await getTranslations({ locale: p.locale, namespace: 'Colabora.Success.Meta' });
     return {
+        metadataBase: METADATA_BASE,
         title: t('title'),
         description: t('description'),
     };
