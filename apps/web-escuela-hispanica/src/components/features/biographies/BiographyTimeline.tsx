@@ -7,11 +7,7 @@ import { biographyIds } from '@/data/biographies-list';
 
 export const BiographyTimeline: React.FC = () => {
     const t = useTranslations('Biografias.authors');
-    const [expandedId, setExpandedId] = useState<string | null>(null);
-
-    const handleToggle = (id: string) => {
-        setExpandedId(prev => (prev === id ? null : id));
-    };
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
         <div className="relative w-full py-20">
@@ -22,15 +18,14 @@ export const BiographyTimeline: React.FC = () => {
                 {biographyIds.map((id, index) => (
                     <BiographyCard
                         key={id}
-                        id={id}
                         index={index}
+                        isExpanded={openIndex === index}
+                        onToggle={() => setOpenIndex(openIndex === index ? null : index)}
                         name={t(`${id}.name`)}
                         period={t(`${id}.period`)}
                         nationality={t(`${id}.nationality`)}
                         shortBio={t(`${id}.shortBio`)}
                         contribution={t(`${id}.contribution`)}
-                        isExpanded={expandedId === id}
-                        onToggle={handleToggle}
                     />
                 ))}
             </div>

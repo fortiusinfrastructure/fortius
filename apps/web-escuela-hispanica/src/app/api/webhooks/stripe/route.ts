@@ -34,6 +34,13 @@ async function sendEmailWithLog(
  * - invoice.payment_failed        → Mark subscription as past_due
  */
 export async function POST(request: NextRequest) {
+    // Early env var check — fail fast with a clear message
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!endpointSecret) {
+        console.error('[webhook] STRIPE_WEBHOOK_SECRET is not configured');
+        return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
+    }
+
     const body = await request.text();
     const sig = request.headers.get('stripe-signature');
 
@@ -44,35 +51,44 @@ export async function POST(request: NextRequest) {
     let event: Stripe.Event;
 
     try {
-        event = stripe.webhooks.constructEvent(
-            body,
-            sig,
-            process.env.STRIPE_WEBHOOK_SECRET!,
-        );
+        event = stripe.webhooks.constructEvent(body, sig, endpointSecret);
     } catch (err) {
         console.error('[webhook] Signature verification failed:', err);
         return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
 
-    const admin = createAdminClient();
-
-    // Idempotency check — don't process the same event twice
-    const { data: existingEvent } = await admin
-        .from('stripe_events')
-        .select('id')
-        .eq('event_id', event.id)
-        .single();
-
-    if (existingEvent) {
-        return NextResponse.json({ received: true, deduplicated: true });
+    let admin: ReturnType<typeof createAdminClient>;
+    try {
+        admin = createAdminClient();
+    } catch (err) {
+        console.error('[webhook] Failed to create admin client (missing env vars?):', err);
+        return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
     }
 
-    // Record the event for idempotency
-    await admin.from('stripe_events').insert({
-        event_id: event.id,
-        event_type: event.type,
-        processed_at: new Date().toISOString(),
-    });
+    // Idempotency check — don't process the same event twice
+    try {
+        const { data: existingEvent } = await admin
+            .from('stripe_events')
+            .select('id')
+            .eq('event_id', event.id)
+            .single();
+
+        if (existingEvent) {
+            return NextResponse.json({ received: true, deduplicated: true });
+        }
+
+        // Record the event for idempotency
+        await admin.from('stripe_events').insert({
+            event_id: event.id,
+            event_type: event.type,
+            processed_at: new Date().toISOString(),
+        });
+    } catch (err) {
+        // Log but continue — idempotency is a safety net, not a blocker.
+        // If the DB is down, we still want to attempt processing so Stripe
+        // doesn't keep retrying events that would succeed on a healthy DB.
+        console.error('[webhook] Idempotency check failed (DB issue?):', err);
+    }
 
     try {
         switch (event.type) {

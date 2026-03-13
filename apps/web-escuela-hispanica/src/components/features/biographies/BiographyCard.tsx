@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { User, ChevronDown, ChevronUp, Quote } from 'lucide-react';
 import { RichText } from '@/components/ui/RichText';
 
 interface BiographyCardProps {
-    id: string;
     name: string;
     period: string;
     nationality: string;
@@ -13,11 +12,10 @@ interface BiographyCardProps {
     contribution: string;
     index: number;
     isExpanded: boolean;
-    onToggle: (id: string) => void;
+    onToggle: () => void;
 }
 
 export const BiographyCard: React.FC<BiographyCardProps> = ({
-    id,
     name,
     period,
     nationality,
@@ -27,10 +25,26 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
     isExpanded,
     onToggle,
 }) => {
+    const cardRef = useRef<HTMLDivElement>(null);
     const isEven = index % 2 === 0;
 
+    const handleClick = () => {
+        const el = cardRef.current;
+        if (el) {
+            const prevTop = el.getBoundingClientRect().top;
+            const prevScrollY = window.scrollY;
+            onToggle();
+            requestAnimationFrame(() => {
+                const newTop = el.getBoundingClientRect().top;
+                window.scrollTo({ top: prevScrollY + (newTop - prevTop), behavior: 'instant' as ScrollBehavior });
+            });
+        } else {
+            onToggle();
+        }
+    };
+
     return (
-        <div className={`relative flex flex-col md:flex-row items-center w-full ${isEven ? 'md:justify-start' : 'md:justify-end'} pl-12 md:pl-0`}>
+        <div ref={cardRef} className={`relative flex flex-col md:flex-row items-center w-full ${isEven ? 'md:justify-start' : 'md:justify-end'} pl-12 md:pl-0`}>
             {/* Dot on the timeline */}
             <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-10 md:top-1/2 md:-translate-y-1/2 w-3 h-3 rounded-full bg-[#c5a059] z-10 shadow-[0_0_10px_rgba(197,160,89,0.5)]" />
 
@@ -38,7 +52,7 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
             <div className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-px bg-[#c5a059]/30 w-12 ${isEven ? 'right-[50%] translate-x-1/2 mr-6' : 'left-[50%] -translate-x-1/2 ml-6'}`} />
 
             <div
-                onClick={() => onToggle(id)}
+                onClick={handleClick}
                 className={`w-full md:w-[calc(50%-3rem)] cursor-pointer bg-[#0a111e]/40 border border-white/5 hover:border-[#c5a059]/30 transition-all duration-500 rounded-sm overflow-hidden group ${isExpanded ? 'shadow-[0_0_40px_rgba(0,0,0,0.4)] border-[#c5a059]/20' : ''}`}
             >
                 {/* Minimal State */}
@@ -56,7 +70,7 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
                                 <h3 className="font-serif text-xl md:text-2xl text-white group-hover:text-[#c5a059] transition-colors duration-500">
                                     {name}
                                 </h3>
-                                <span className="font-serif text-xs text-white/40">
+                                <span className="font-serif text-xs text-white/40 italic">
                                     {nationality}
                                 </span>
                             </div>
@@ -78,7 +92,7 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
                                     Biografía
                                 </h4>
                                 <div className="font-serif text-white/70 leading-relaxed font-light text-base md:text-lg text-pretty space-y-4">
-                                    {shortBio.split('\n').filter(p => p.trim()).map((para, i) => (
+                                    {shortBio.split("\n").filter(p => p.trim()).map((para, i) => (
                                         <p key={i}><RichText text={para} /></p>
                                     ))}
                                 </div>
