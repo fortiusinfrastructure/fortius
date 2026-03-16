@@ -132,23 +132,43 @@ export default async function ProyectosPage({ params }: Props) {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
                             {otherProjects.map(project => (
-                                <Link key={project.id} href={`/proyectos/${project.slug}`} className="group block text-left">
-                                    <div className="aspect-video overflow-hidden border border-white/5 mb-6 relative bg-[#0a111e]">
-                                        <img
-                                            src={project.image}
-                                            alt={getLocalizedValue(project.title, locale)}
-                                            className="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-[#050a14]/60 group-hover:bg-transparent transition-all duration-700" />
-                                        <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 text-white/60 font-cinzel text-[9px] tracking-widest">
-                                            {project.status.toUpperCase()}
+                                project.slug === 'instituto-pensamiento-iberico' ? (
+                                    <div key={project.id} className="group block text-left">
+                                        <div className="aspect-video overflow-hidden border border-white/5 mb-6 relative bg-[#0a111e]">
+                                            <img
+                                                src={project.image}
+                                                alt={getLocalizedValue(project.title, locale)}
+                                                className="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-[#050a14]/60 group-hover:bg-transparent transition-all duration-700" />
+                                            <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 text-white/60 font-cinzel text-[9px] tracking-widest">
+                                                {project.status.toUpperCase()}
+                                            </div>
                                         </div>
+                                        <h4 className="text-white font-serif text-xl mb-3 group-hover:text-[#c5a059] transition-colors">{getLocalizedValue(project.title, locale)}</h4>
+                                        <p className="text-white/40 font-serif text-sm line-clamp-2 leading-relaxed">
+                                            {getLocalizedValue(project.description, locale)}
+                                        </p>
                                     </div>
-                                    <h4 className="text-white font-serif text-xl mb-3 group-hover:text-[#c5a059] transition-colors">{getLocalizedValue(project.title, locale)}</h4>
-                                    <p className="text-white/40 font-serif text-sm line-clamp-2 leading-relaxed">
-                                        {getLocalizedValue(project.description, locale)}
-                                    </p>
-                                </Link>
+                                ) : (
+                                    <Link key={project.id} href={`/proyectos/${project.slug}`} className="group block text-left">
+                                        <div className="aspect-video overflow-hidden border border-white/5 mb-6 relative bg-[#0a111e]">
+                                            <img
+                                                src={project.image}
+                                                alt={getLocalizedValue(project.title, locale)}
+                                                className="w-full h-full object-cover grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                                            />
+                                            <div className="absolute inset-0 bg-[#050a14]/60 group-hover:bg-transparent transition-all duration-700" />
+                                            <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 text-white/60 font-cinzel text-[9px] tracking-widest">
+                                                {project.status.toUpperCase()}
+                                            </div>
+                                        </div>
+                                        <h4 className="text-white font-serif text-xl mb-3 group-hover:text-[#c5a059] transition-colors">{getLocalizedValue(project.title, locale)}</h4>
+                                        <p className="text-white/40 font-serif text-sm line-clamp-2 leading-relaxed">
+                                            {getLocalizedValue(project.description, locale)}
+                                        </p>
+                                    </Link>
+                                )
                             ))}
                         </div>
                     </div>

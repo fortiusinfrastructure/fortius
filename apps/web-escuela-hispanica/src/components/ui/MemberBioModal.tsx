@@ -2,14 +2,16 @@
 
 import { useEffect, useCallback } from 'react';
 import { X } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import type { LocalizedText } from '@/types';
+import { getLocalizedValue } from '@/lib/i18n/localize';
 
 export interface TeamMemberWithBio {
     name: string;
     role: string | LocalizedText;
     image: string;
     country?: string;
-    bio?: string;
+    bio?: string | LocalizedText;
     institution?: string;
 }
 
@@ -19,6 +21,8 @@ interface MemberBioModalProps {
 }
 
 export function MemberBioModal({ member, onClose }: MemberBioModalProps) {
+    const locale = useLocale();
+    
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') onClose();
@@ -95,8 +99,8 @@ export function MemberBioModal({ member, onClose }: MemberBioModalProps) {
 
                         {/* Bio */}
                         {member.bio ? (
-                            <p className="text-white/60 font-serif text-sm leading-[1.9] tracking-wide">
-                                {member.bio}
+                            <p className="text-white/60 font-serif text-sm leading-[1.9] tracking-wide whitespace-pre-line">
+                                {getLocalizedValue(member.bio, locale)}
                             </p>
                         ) : (
                             <p className="text-white/20 font-serif text-sm italic">
