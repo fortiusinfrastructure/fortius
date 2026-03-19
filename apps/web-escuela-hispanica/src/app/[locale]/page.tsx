@@ -5,6 +5,7 @@ import {
   HomeProject,
   HomeActivities,
   HomePublications,
+  HomeResources,
   HomePillars,
   HomeMembership
 } from '@/components/home';
@@ -19,6 +20,7 @@ export default function HomePage() {
         <HomeProject />
         <HomeActivities />
         <HomePublications />
+        <HomeResources />
         <HomePillars />
         <HomeMembership />
       </main>

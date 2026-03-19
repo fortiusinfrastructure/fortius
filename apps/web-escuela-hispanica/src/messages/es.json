@@ -58,6 +58,14 @@
             "readMore": "Leer más",
             "viewAll": "Ver todo el archivo"
         },
+        "Resources": {
+            "tag": "Biblioteca y Recursos",
+            "title": "Conoce nuestros recursos",
+            "description": "Un espacio dedicado a recuperar, reunir y difundir el corpus intelectual de la tradición hispánica. Libros, artículos y biografías de los autores que forjaron nuestra tradición de libertad.",
+            "exploreButton": "EXPLORAR RECURSOS",
+            "biographiesButton": "VER BIOGRAFÍAS",
+            "biographiesSubtitle": "Conoce la historia de la tradición hispánica"
+        },
         "Membership": {
             "tag": "Comunidad",
             "title": "Forma parte de nuestra comunidad académica y cultural",

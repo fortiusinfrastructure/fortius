@@ -58,6 +58,14 @@
       "readMore": "Read more",
       "viewAll": "View entire archive"
     },
+    "Resources": {
+      "tag": "Library & Resources",
+      "title": "Discover our resources",
+      "description": "A space dedicated to recovering, gathering, and disseminating the intellectual corpus of the Hispanic tradition. Books, articles, and biographies of the authors who forged our tradition of freedom.",
+      "exploreButton": "EXPLORE RESOURCES",
+      "biographiesButton": "VIEW BIOGRAPHIES",
+      "biographiesSubtitle": "Discover the history of the Hispanic tradition"
+    },
     "Membership": {
       "tag": "Community",
       "title": "Become part of our academic and cultural community",
