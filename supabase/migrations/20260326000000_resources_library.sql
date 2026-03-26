@@ -40,11 +40,13 @@ CREATE INDEX IF NOT EXISTS idx_resources_org_category
 -- Row Level Security
 ALTER TABLE resources ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Published resources viewable by everyone" ON resources;
 CREATE POLICY "Published resources viewable by everyone"
   ON resources FOR SELECT
   USING (status = 'published');
 
 -- Admins y editores de la org pueden gestionar recursos
+DROP POLICY IF EXISTS "Org admins can manage resources" ON resources;
 CREATE POLICY "Org admins can manage resources"
   ON resources FOR ALL
   USING (
@@ -75,11 +77,13 @@ VALUES (
 ON CONFLICT (id) DO NOTHING;
 
 -- Política de lectura pública para el bucket
+DROP POLICY IF EXISTS "Public read on library-docs" ON storage.objects;
 CREATE POLICY "Public read on library-docs"
   ON storage.objects FOR SELECT
   USING (bucket_id = 'library-docs');
 
 -- Política de escritura para admins de cualquier org
+DROP POLICY IF EXISTS "Org admins can upload to library-docs" ON storage.objects;
 CREATE POLICY "Org admins can upload to library-docs"
   ON storage.objects FOR INSERT
   WITH CHECK (
@@ -103,7 +107,10 @@ BEGIN
     RAISE EXCEPTION 'Organization escuela-hispanica not found';
   END IF;
 
-  -- 2. Insertar recursos
+  -- 2. Limpiar datos de prueba anteriores para evitar duplicados
+  DELETE FROM resources WHERE organization_id = eh_org_id;
+
+  -- 3. Insertar recursos
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'libro', 'external', 'Azevedo Alves, A. & Moreira, J. M. (2013). The Salamanca School, Major Conservative and Libertarian Thinkers Vol. 9, Bloomsbury: London.', NULL, 1);
@@ -112,7 +119,7 @@ BEGIN
   VALUES (eh_org_id, 'libro', 'external', 'Azevedo Alves, A. (2017). ''Vitoria, the Common Good and the Limits of Political Power'', en At the Origins of Modernity, Springer, pp. 63-75.', NULL, 2);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'libro', 'pdf', 'Beorlegui, C. (2017). Martín de Azpilcueta. Un artífice de la Modernidad, Cuadernos de Cristianismo y Economía de Mercado 10, Unión Editorial & Centro Diego de Covarrubias, Madrid.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/beorlegui-2017-martin-de-azpilcueta.pdf', 3);
+  VALUES (eh_org_id, 'libro', 'pdf', 'Beorlegui, C. (2017). Martín de Azpilcueta. Un artífice de la Modernidad, Cuadernos de Cristianismo y Economía de Mercado 10, Unión Editorial & Centro Diego de Covarrubias, Madrid.', '/docs/escuela-hispanica/beorlegui-2017-martin-de-azpilcueta.pdf', 3);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'libro', 'external', 'Boeira, M. (2018). A Escola de Salamanca e a fundação constitucional do Brasil, Editora UNISINOS.', NULL, 4);
@@ -124,7 +131,7 @@ BEGIN
   VALUES (eh_org_id, 'libro', 'external', 'Chafuen, A. A. (1991). Economía y ética. Raíces cristianas de la economía de libre mercado, Rialp, Madrid.', NULL, 6);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'libro', 'pdf', 'De Carvalho, M. S., Lárazo Pulido, M., Guidi, S. (eds.) (2020). Francisco Suárez: Metafísica, Política e Ética, Imprensa da Universidade de Coimbra.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/carvalho-2020-francisco-suarez.pdf', 7);
+  VALUES (eh_org_id, 'libro', 'pdf', 'De Carvalho, M. S., Lárazo Pulido, M., Guidi, S. (eds.) (2020). Francisco Suárez: Metafísica, Política e Ética, Imprensa da Universidade de Coimbra.', '/docs/escuela-hispanica/carvalho-2020-francisco-suarez.pdf', 7);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'libro', 'external', 'Gómez Rivas, L. (2019). Campeones de la libertad. Los maestros de la Segunda Escolástica española e iberoamericana, Cuadernos de Cristianismo y Economía de Mercado, Unión Editorial & Centro Diego de Covarrubias.', NULL, 8);
@@ -139,7 +146,7 @@ BEGIN
   VALUES (eh_org_id, 'libro', 'external', 'Gonnet, J. S. (2002). La Universidad de Salamanca y la Constitución de los Estados Unidos de América, Universidad Pontificia Argentina.', NULL, 11);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'libro', 'pdf', 'Grice-Hutchinson, M. (1952). The School of Salamanca: Readings on the Spanish Monetary Theory 1554-1605, Oxford University Press: Londres.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/grice-hutchinson-1952-school-of-salamanca.pdf', 12);
+  VALUES (eh_org_id, 'libro', 'pdf', 'Grice-Hutchinson, M. (1952). The School of Salamanca: Readings on the Spanish Monetary Theory 1554-1605, Oxford University Press: Londres.', '/docs/escuela-hispanica/grice-hutchinson-1952-school-of-salamanca.pdf', 12);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'libro', 'external', 'Grice-Hutchinson, M. (2022). La Escuela de Salamanca: Lecturas sobre teoría monetaria española, Unión Editorial & Centro Diego de Covarrubias, Madrid.', NULL, 13);
@@ -160,7 +167,7 @@ BEGIN
   VALUES (eh_org_id, 'articulo', 'external', 'Azevedo Alves, A. & Moreira, J. M. (2013). ''Virtue and Commerce in Domingo de Soto''s Thought: Commercial Practices, Character, and the Common Good'', Journal of Business Ethics, Volume 113, pp. 627–638.', NULL, 18);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Domingo Oslé, R. (2022). ''Repensar la Escuela de Salamanca: Presentación de publicaciones recientes'', Isidorianum 31/1 (2022), pp. 159-174.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/domingo-osle-2022-repensar-escuela.pdf', 19);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Domingo Oslé, R. (2022). ''Repensar la Escuela de Salamanca: Presentación de publicaciones recientes'', Isidorianum 31/1 (2022), pp. 159-174.', '/docs/escuela-hispanica/domingo-osle-2022-repensar-escuela.pdf', 19);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'articulo', 'external', 'Fernandez Luiña, E. (2007). ''Saavedra Fajardo y la Escuela de Salamanca'', Empresas políticas, 8 (2007), pp. 121-134.', NULL, 20);
@@ -175,19 +182,19 @@ BEGIN
   VALUES (eh_org_id, 'articulo', 'external', 'Gómez Rivas, L. (2017). ''¿Conoció George Mason a los escolásticos españoles?'', Instituto Juan de Mariana.', 'https://juandemariana.org/george-mason-conocio-a-los-escolasticos-espanoles/', 23);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Gómez Rivas, L. (2020). ''Liberalismo, capitalismo y la segunda escolástica salmantina ¿qué podemos aprender?'', Revista Fe y Libertad, Vol. 3, 1-2 (2020).', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/gomez-rivas-2020-liberalismo.pdf', 24);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Gómez Rivas, L. (2020). ''Liberalismo, capitalismo y la segunda escolástica salmantina ¿qué podemos aprender?'', Revista Fe y Libertad, Vol. 3, 1-2 (2020).', '/docs/escuela-hispanica/gomez-rivas-2020-liberalismo.pdf', 24);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2014). ''Juan de Mariana y la política monetaria estadounidense moderna. Salamanca, Cervantes, Jefferson y la Escuela Austriaca'', Procesos de Mercado: Revista Europea de Economía Política, Vol. 11, 1, Primavera 2014, pp. 67-103.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/graf-2014-juan-de-mariana.pdf', 25);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2014). ''Juan de Mariana y la política monetaria estadounidense moderna. Salamanca, Cervantes, Jefferson y la Escuela Austriaca'', Procesos de Mercado: Revista Europea de Economía Política, Vol. 11, 1, Primavera 2014, pp. 67-103.', '/docs/escuela-hispanica/graf-2014-juan-de-mariana.pdf', 25);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2018). ''Juan de Mariana and Miguel de Cervantes: The School of Salamanca and the Invention of the Modern Novel'', Quarterly Journal of Austrian Economics 21(2), pp. 137-146.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/graf-2018-juan-de-mariana-cervantes.pdf', 26);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2018). ''Juan de Mariana and Miguel de Cervantes: The School of Salamanca and the Invention of the Modern Novel'', Quarterly Journal of Austrian Economics 21(2), pp. 137-146.', '/docs/escuela-hispanica/graf-2018-juan-de-mariana-cervantes.pdf', 26);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2019). ''Escolásticos: Francisco Suárez, Juan de Mariana y las revoluciones en América. Bicentenario de la independencia 1810-30''. Credencial Historia, Bogotá, pp. 42-51.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/graf-2019-escolasticos-francisco-suarez.pdf', 27);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2019). ''Escolásticos: Francisco Suárez, Juan de Mariana y las revoluciones en América. Bicentenario de la independencia 1810-30''. Credencial Historia, Bogotá, pp. 42-51.', '/docs/escuela-hispanica/graf-2019-escolasticos-francisco-suarez.pdf', 27);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2024). ''Thomas Jefferson y la metalépsis atmosférica'', Cuadernos FAES de pensamiento político 81, pp. 91-102.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/graf-2024-thomas-jefferson.pdf', 28);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Graf, E.-C. (2024). ''Thomas Jefferson y la metalépsis atmosférica'', Cuadernos FAES de pensamiento político 81, pp. 91-102.', '/docs/escuela-hispanica/graf-2024-thomas-jefferson.pdf', 28);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'articulo', 'external', 'Huerta de Soto, J. (2020). ''Juan de Mariana y los escolásticos españoles. Homenaje al profesor Octavio Uña'', Procesos de Mercado: Revista Europea de Economía Política, Vol. 17, 2, Otoño 2020, pp. 415-433.', NULL, 29);
@@ -199,16 +206,16 @@ BEGIN
   VALUES (eh_org_id, 'articulo', 'external', 'Rev. John C. Rager, S.T.D. (1928). ''Catholic Sources and the Declaration of Independence''. American Catholic Historical Association.', 'https://www.evangelizationstation.com/htm_html/Political%20&%20Social%20Issues/Political%20Issues/catholic_sources_and_the_declara.htm', 31);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Ríos de Rodríguez, C. (2020). ''Juan de Mariana, Public Choice y la constitución fiscal: los límites efectivos al poder político''. Revista Fe y Libertad, Vol. 3, 1-2 (2020).', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/rios-rodriguez-2020-juan-de-mariana.pdf', 32);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Ríos de Rodríguez, C. (2020). ''Juan de Mariana, Public Choice y la constitución fiscal: los límites efectivos al poder político''. Revista Fe y Libertad, Vol. 3, 1-2 (2020).', '/docs/escuela-hispanica/rios-rodriguez-2020-juan-de-mariana.pdf', 32);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'articulo', 'external', 'Schwartz Girón, P. (2021). ''El legado de la Escuela de Economía de Salamanca. Una evaluación actual'', Procesos de Mercado: Revista Europea de Economía Política, Vol. 18, 2, Otoño 2021, pp. 149-226.', 'https://escuelaiberica.squarespace.com/s/El-legado-de-la-Escuela-de-Economia-de-Salamanca', 33);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Stoetzer, C. (1981). ''Las raíces escolásticas de la Revolución Americana''. Ponencia sometida a la consideración de las XV Jornadas-Seminario internacional de la Asociación Argentina de Estudios Americanos. Buenos Aires, R.A., 18-21 de Septiembre de 1981.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/stoetzer-1981-raices-escolasticas.pdf', 34);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Stoetzer, C. (1981). ''Las raíces escolásticas de la Revolución Americana''. Ponencia sometida a la consideración de las XV Jornadas-Seminario internacional de la Asociación Argentina de Estudios Americanos. Buenos Aires, R.A., 18-21 de Septiembre de 1981.', '/docs/escuela-hispanica/stoetzer-1981-raices-escolasticas.pdf', 34);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Termes, R. (2000). ''Francisco Suárez y The Fundamental Orders de Connecticut'', Cuadernos de Ciencias Económicas y Empresariales, 37, pp. 161-168.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/termes-2000-francisco-suarez.pdf', 35);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Termes, R. (2000). ''Francisco Suárez y The Fundamental Orders de Connecticut'', Cuadernos de Ciencias Económicas y Empresariales, 37, pp. 161-168.', '/docs/escuela-hispanica/termes-2000-francisco-suarez.pdf', 35);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'articulo', 'external', 'Termes, R. (2005). ''La tradición hispana de libertad'', Conferencia en un encuentro del Instituto Acton en Orlando, Florida.', NULL, 36);
@@ -217,10 +224,10 @@ BEGIN
   VALUES (eh_org_id, 'articulo', 'external', 'Tourinho, L. (2018). ''A Escola de Salamanca e sua Contribuição à História do Pensamento Econômico'', Universidade Federal da Bahia.', 'https://repositorio.ufba.br/bitstream/ri/28115/1/TCC%20vers%C3%A3o%20final.pdf', 37);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Zanotti, G. & Estrada, J. (2020). ''La Escolástica Española'', Revista Fe y Libertad, Vol. 3, 1-2 (2020).', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/zanotti-2020-escolastica-espanola.pdf', 38);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Zanotti, G. & Estrada, J. (2020). ''La Escolástica Española'', Revista Fe y Libertad, Vol. 3, 1-2 (2020).', '/docs/escuela-hispanica/zanotti-2020-escolastica-espanola.pdf', 38);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
-  VALUES (eh_org_id, 'articulo', 'pdf', 'Zorroza, I. (2013). ''Hacia una delimitación de la Escuela de Salamanca'', Revista Empresa y Humanismo Vol. XVI, 1 (2023), Instituto Empresa y Humanismo, Universidad de Navarra, Pamplona.', 'https://airsfteshzwuykmygojl.supabase.co/storage/v1/object/public/library-docs/escuela-hispanica/zorroza-2013-delimitacion-escuela.pdf', 39);
+  VALUES (eh_org_id, 'articulo', 'pdf', 'Zorroza, I. (2013). ''Hacia una delimitación de la Escuela de Salamanca'', Revista Empresa y Humanismo Vol. XVI, 1 (2023), Instituto Empresa y Humanismo, Universidad de Navarra, Pamplona.', '/docs/escuela-hispanica/zorroza-2013-delimitacion-escuela.pdf', 39);
 
   INSERT INTO resources (organization_id, category, link_type, citation, url, display_order)
   VALUES (eh_org_id, 'otro', 'external', 'Proyecto de investigación «The School of Salamanca». Max Planck Institute for Legal History and Legal Theory.', 'https://www.lhlt.mpg.de/joint-project/the-school-of-salamanca', 40);
