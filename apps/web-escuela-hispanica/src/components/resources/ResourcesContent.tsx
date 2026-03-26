@@ -2,13 +2,20 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search, BookOpen, FileText, ExternalLink, Globe } from 'lucide-react';
-import { resources, searchResources } from '@/lib/mock-data/resources';
 import type { Resource } from '@/types';
 import { useTranslations } from 'next-intl';
 
 type CategoryKey = 'all' | 'libro' | 'articulo' | 'otro';
 
+function searchResources(items: Resource[], query: string): Resource[] {
+    if (!query.trim()) return items;
+    const lower = query.toLowerCase();
+    return items.filter(r => r.citation.toLowerCase().includes(lower));
+}
+
 function ResourceCard({ resource }: { resource: Resource }) {
+    const isPdf = resource.linkType === 'pdf';
+    
     return (
         <div className="group py-5 border-b border-white/5 last:border-b-0">
             <p className="text-white/80 font-light text-[15px] leading-relaxed">
@@ -20,10 +27,19 @@ function ResourceCard({ resource }: { resource: Resource }) {
                             href={resource.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-[#c5a059] hover:text-white transition-colors text-sm"
+                            className="inline-flex items-center gap-1.5 text-[#c5a059] hover:text-white transition-colors text-sm font-medium mt-1"
                         >
-                            Disponible aquí
-                            <ExternalLink className="w-3 h-3" />
+                            {isPdf ? (
+                                <>
+                                    <FileText className="w-3.5 h-3.5" />
+                                    Descargar PDF
+                                </>
+                            ) : (
+                                <>
+                                    <ExternalLink className="w-3 h-3" />
+                                    Disponible aquí
+                                </>
+                            )}
                         </a>
                     </>
                 )}
@@ -55,7 +71,7 @@ function CategorySection({ title, icon, items }: { title: string; icon: React.Re
     );
 }
 
-export default function ResourcesContent() {
+export default function ResourcesContent({ initialResources = [] }: { initialResources: Resource[] }) {
     const t = useTranslations('Recursos.UI');
     const [query, setQuery] = useState('');
     const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
@@ -68,12 +84,12 @@ export default function ResourcesContent() {
     ];
 
     const filtered = useMemo(() => {
-        let results = query.trim() ? searchResources(query) : resources;
+        let results = query.trim() ? searchResources(initialResources, query) : initialResources;
         if (activeCategory !== 'all') {
             results = results.filter(r => r.category === activeCategory);
         }
         return results;
-    }, [query, activeCategory]);
+    }, [query, activeCategory, initialResources]);
 
     const libros = useMemo(() => filtered.filter(r => r.category === 'libro'), [filtered]);
     const articulos = useMemo(() => filtered.filter(r => r.category === 'articulo'), [filtered]);

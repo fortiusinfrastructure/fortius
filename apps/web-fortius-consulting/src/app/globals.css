@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ==========================================================================
+   FORTIUS CONSULTING - Editorial Light Design System
+   ========================================================================== */
+
+:root {
+  /* Primitives */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-50: #FAFAFA;
+  --color-neutral-100: #F4F4F5;
+  --color-neutral-200: #E4E4E7;
+  --color-neutral-300: #D4D4D8;
+  --color-neutral-400: #A1A1AA;
+  --color-neutral-500: #71717A;
+  --color-neutral-600: #52525B;
+  --color-neutral-700: #3F3F46;
+  --color-neutral-800: #27272A;
+  --color-neutral-900: #18181B;
+  --color-neutral-950: #0A0A0A; /* Tinta negra */
+
+  /* Accents */
+  --color-brand-consulting: #991b1b;
+  --color-brand-foundation: #166534;
+  --color-brand-intelligence: #1e3a8a;
+  --color-brand-intelligence-light: #3b82f6;
+
+  /* Semantic - LIGHT MODE */
+  --background: var(--color-neutral-0);
+  --foreground: var(--color-neutral-950);
+  --border-subtle: rgba(0, 0, 0, 0.08); /* Dark lines on white */
+  --border-medium: rgba(0, 0, 0, 0.15);
+  
+  /* Selection - High contrast */
+  --selection-bg: var(--color-brand-consulting);
+  --selection-text: var(--color-neutral-0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-brand-consulting: var(--color-brand-consulting);
+  --color-brand-intelligence: var(--color-brand-intelligence);
+  --color-border-subtle: var(--border-subtle);
+  
+  --font-serif: "Playfair Display", "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+::-moz-selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* ==========================================================================
+   Typography & Utilities
+   ========================================================================== */
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Identidad visual corchetes (Editorial) */
+.bracket-header {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem; /* Smaller for editorial elegance */
+  color: var(--color-neutral-500);
+}
+
+.bracket-header::before {
+  content: "[ ";
+  color: var(--color-neutral-400);
+}
+
+.bracket-header::after {
+  content: " ]";
+  color: var(--color-neutral-400);
+}
+
+/* Minimalist scrollbar - Dark thumb on white bg */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-400);
+}
+
+html {
+  scroll-behavior: smooth;
+}

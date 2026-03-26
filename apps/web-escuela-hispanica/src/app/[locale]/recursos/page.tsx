@@ -3,6 +3,8 @@ import { Navbar, Footer } from '@/components/sections';
 import ResourcesContent from '@/components/resources/ResourcesContent';
 import { getTranslations } from 'next-intl/server';
 import { METADATA_BASE } from '@/lib/seo/metadata';
+import { createServerClient } from '@fortius/database';
+import type { Resource } from '@/types';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const p = await params;
@@ -21,6 +23,36 @@ export default async function RecursosPage({
 }) {
     const p = await params;
     const t = await getTranslations({ locale: p.locale, namespace: 'Recursos' });
+
+    const supabase = await createServerClient();
+    let mappedResources: Resource[] = [];
+    
+    try {
+        const { data: org } = await supabase.from('organizations').select('id').eq('slug', 'escuela-hispanica').single();
+        if (org && (org as any).id) {
+            const orgId = (org as any).id;
+            const { data: resources, error } = await supabase
+                .from('resources')
+                .select('*')
+                .eq('organization_id', orgId)
+                .eq('status', 'published')
+                .order('display_order', { ascending: true });
+                
+            if (resources && !error) {
+                mappedResources = resources.map((r: any) => ({
+                    id: r.id,
+                    category: r.category as 'libro' | 'articulo' | 'otro',
+                    linkType: r.link_type as 'pdf' | 'external',
+                    citation: r.citation,
+                    url: r.url
+                }));
+            } else if (error) {
+                console.error("Supabase Error fetching resources:", error);
+            }
+        }
+    } catch (e) {
+        console.error("Fetch Exception (Did you run the Migration?):", e);
+    }
 
     return (
         <>
@@ -44,7 +76,7 @@ export default async function RecursosPage({
                 </section>
 
                 {/* Content */}
-                <ResourcesContent />
+                <ResourcesContent initialResources={mappedResources} />
             </main>
             <Footer />
         </>

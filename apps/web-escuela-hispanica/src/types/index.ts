@@ -107,8 +107,9 @@ export interface MultimediaItem {
 }
 
 export interface Resource {
-  id: number;
+  id: string | number;
   category: 'libro' | 'articulo' | 'otro';
+  linkType?: 'pdf' | 'external';
   citation: string;
   url?: string;
 }
