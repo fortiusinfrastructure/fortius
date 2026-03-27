@@ -7,10 +7,15 @@ const nextConfig: NextConfig = {
   /* config options here */
   // reactCompiler: true,
   async rewrites() {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://airsfteshzwuykmygojl.supabase.co';
     return [
       {
         source: '/docs/:path*',
-        destination: `${process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://airsfteshzwuykmygojl.supabase.co'}/storage/v1/object/public/library-docs/:path*`,
+        destination: `${supabaseUrl}/storage/v1/object/public/library-docs/:path*`,
+      },
+      {
+        source: '/:locale/docs/:path*',
+        destination: `${supabaseUrl}/storage/v1/object/public/library-docs/:path*`,
       },
     ];
   },
