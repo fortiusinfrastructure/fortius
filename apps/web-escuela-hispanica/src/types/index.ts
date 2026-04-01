@@ -41,6 +41,7 @@ export interface Activity {
   gallery?: { src: string; caption: string | LocalizedText }[];
   isFeatured?: boolean;
   isUpcoming?: boolean;
+  showRegistrationForm?: boolean;
   sortDate?: string;
 }
 

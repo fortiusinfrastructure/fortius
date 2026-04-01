@@ -96,9 +96,10 @@ export const activities: Activity[] = [
                 </div>
             `
         },
-        image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
+        image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
         isFeatured: true,
-        isUpcoming: true
+        isUpcoming: true,
+        showRegistrationForm: true
     },
     {
         id: 18,
@@ -191,7 +192,8 @@ export const activities: Activity[] = [
         },
         image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
         isFeatured: false,
-        isUpcoming: false
+        isUpcoming: true,
+        showRegistrationForm: false
     },
     {
         id: 1,
