@@ -82,12 +82,41 @@ export async function POST(req: Request) {
 
         const registrationId = registrationRow.id;
 
-        // 4. If free event, just finish and return no checkout url
+        // 4. If free event, send confirmation email and return success (no Stripe)
         if (!isPaidEvent) {
+            const { sendEmail } = await import('@/lib/email');
+            const approverEmail = process.env.APPROVER_EMAIL || 'info@escuelahispanica.org';
+
+            // Confirmation to the attendee
+            await sendEmail({
+                to: email,
+                subject: `✅ Confirmación de Inscripción — ${event_name || event_slug}`,
+                html: `
+                    <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
+                        <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Inscripción Confirmada</h2>
+                        <p>Estimado/a <strong>${first_name} ${last_name}</strong>,</p>
+                        <p>Su inscripción ha sido registrada correctamente. Le esperamos con mucho gusto en el evento.</p>
+                        <p style="margin-top: 30px;">Atentamente,<br><strong>Escuela Hispánica</strong></p>
+                    </div>
+                `
+            });
+
+            // Internal notification
+            await sendEmail({
+                to: approverEmail,
+                subject: `📋 Nueva Inscripción (gratuita) — ${event_slug}`,
+                html: `<h2>Nueva Inscripción Gratuita</h2>
+                       <p><strong>Evento:</strong> ${event_slug}</p>
+                       <p><strong>Nombre:</strong> ${first_name} ${last_name}</p>
+                       <p><strong>Email:</strong> ${email}</p>
+                       ${institution ? `<p><strong>Institución:</strong> ${institution}</p>` : ''}
+                       ${message ? `<p><strong>Mensaje:</strong> ${message}</p>` : ''}`
+            });
+
             return NextResponse.json({
                 success: true,
-                message: 'Registro gratuito completado.',
-                checkoutUrl: null 
+                message: 'Registro completado.',
+                checkoutUrl: null
             });
         }
 

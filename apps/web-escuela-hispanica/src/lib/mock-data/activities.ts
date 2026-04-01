@@ -189,7 +189,7 @@ export const activities: Activity[] = [
         image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
         isFeatured: true,
         isUpcoming: false,
-        showRegistrationForm: false
+        showRegistrationForm: true
     },
     {
         id: 1,

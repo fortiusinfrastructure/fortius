@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Lock } from 'lucide-react';
 
 export function EventRegistrationForm({ 
     eventName, 
@@ -17,6 +18,8 @@ export function EventRegistrationForm({
     const t = useTranslations('EventRegistration');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+
+    const isPaidEvent = amount > 0;
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -54,7 +57,7 @@ export function EventRegistrationForm({
 
             if (data.checkoutUrl) {
                 window.location.href = data.checkoutUrl;
-                return; // Stop execution, browser redirects
+                return; // Browser redirects, stop execution
             }
 
             setStatus('success');
@@ -98,8 +101,21 @@ export function EventRegistrationForm({
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#c5a059]/5 blur-3xl -z-10 rounded-full mix-blend-screen" />
 
             <div className="mb-8">
-                <h3 className="font-serif text-2xl text-white mb-2">{t('title')}</h3>
-                <p className="text-[#c5a059] font-cinzel text-xs tracking-widest uppercase mb-1">{eventName}</p>
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                    <div>
+                        <h3 className="font-serif text-2xl text-white mb-2">{t('title')}</h3>
+                        <p className="text-[#c5a059] font-cinzel text-xs tracking-widest uppercase mb-1">{eventName}</p>
+                    </div>
+                    {/* Payment badge — only rendered for paid events */}
+                    {isPaidEvent && (
+                        <div className="flex items-center gap-2 bg-[#c5a059]/10 border border-[#c5a059]/30 px-4 py-2 rounded-sm shrink-0">
+                            <Lock className="w-3 h-3 text-[#c5a059]" />
+                            <span className="font-cinzel text-[#c5a059] text-xs tracking-widest uppercase font-semibold">
+                                {amount}{currency.toUpperCase() === 'EUR' ? '€' : currency.toUpperCase()}
+                            </span>
+                        </div>
+                    )}
+                </div>
                 <div className="w-12 h-[1px] bg-white/20 mt-4" />
             </div>
 
@@ -173,13 +189,19 @@ export function EventRegistrationForm({
                 <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full flex items-center justify-center rounded-md bg-[#c5a059] hover:bg-[#d4b475] disabled:opacity-50 disabled:cursor-not-allowed text-[#050a14] font-cinzel text-sm tracking-widest uppercase py-4 transition-all"
+                    className="w-full flex items-center justify-center gap-2 rounded-md bg-[#c5a059] hover:bg-[#d4b475] disabled:opacity-50 disabled:cursor-not-allowed text-[#050a14] font-cinzel text-sm tracking-widest uppercase py-4 transition-all"
                 >
-                    {status === 'loading' ? t('submitting') : t('submit')}
+                    {status === 'loading' ? t('submitting') : (
+                        isPaidEvent 
+                            ? <>{t('submit')} ({amount}€) <Lock className="w-4 h-4 ml-1" /></>
+                            : t('submit')
+                    )}
                 </button>
 
                 <p className="text-xs text-white/40 font-light text-center mt-4">
-                    {t('disclaimer')}
+                    {isPaidEvent 
+                        ? 'Será redirigido a Stripe para completar el pago de forma segura.' 
+                        : t('disclaimer')}
                 </p>
             </form>
         </div>
