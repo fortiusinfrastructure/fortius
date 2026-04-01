@@ -97,7 +97,7 @@ export const activities: Activity[] = [
             `
         },
         image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
-        isFeatured: true,
+        isFeatured: false,
         isUpcoming: true,
         showRegistrationForm: true
     },
@@ -191,8 +191,8 @@ export const activities: Activity[] = [
             `
         },
         image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
-        isFeatured: false,
-        isUpcoming: true,
+        isFeatured: true,
+        isUpcoming: false,
         showRegistrationForm: false
     },
     {
@@ -1569,7 +1569,9 @@ export function getActivityById(id: number): Activity | undefined {
 }
 
 export function getFeaturedActivities(): Activity[] {
-    return activities.filter(activity => activity.isFeatured && !activity.isUpcoming);
+    return activities
+        .filter(activity => activity.isFeatured && !activity.isUpcoming)
+        .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''));
 }
 
 export function getPastActivities(): Activity[] {
