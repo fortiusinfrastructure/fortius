@@ -376,7 +376,7 @@ export default async function ActivityPage({ params }: Props) {
                     </section>
 
                     {/* Event Registration Section */}
-                    {activity.isUpcoming && activity.showRegistrationForm !== false && (
+                    {activity.showRegistrationForm === true && (
                         <section className="py-24 px-4 bg-[#0a111e] border-t border-white/5">
                             <div className="max-w-4xl mx-auto">
                                 <EventRegistrationForm 
