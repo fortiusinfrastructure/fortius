@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+  variable: "--font-source-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Fortius Consulting",
-  description: "Consultoría estratégica para transformar la sociedad",
+  description: "Consultoría estratégica para transformar la sociedad.",
 };
 
 export default function RootLayout({
@@ -17,10 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
-      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
-        {children}
-      </body>
+    <html
+      lang="es"
+      data-brand="consulting"
+      className={`${cormorant.variable} ${sourceSans.variable}`}
+    >
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

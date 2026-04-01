@@ -1,0 +1,589 @@
+/* ==========================================================================
+   FORTIUS DESIGN SYSTEM — Design Tokens
+   Version 1.0
+
+   A unified token system for the Fortius ecosystem:
+   - Fortius Consulting (red/granate accent)
+   - Fortius Foundation (green accent)
+   - Intelligence products (steel blue accent)
+
+   Base aesthetic: Dark institutional minimalism.
+   Reference: Escuela Hispánica (escuelahispanica.org)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   LAYER 1: PRIMITIVES — Raw color values
+   ========================================================================== */
+
+:root {
+  /* --- Neutral Scale (cool-tinted darks) --- */
+  --color-neutral-1000: #020508;
+  --color-neutral-950:  #050a14;
+  --color-neutral-900:  #0a111e;
+  --color-neutral-850:  #0f1724;
+  --color-neutral-800:  #141d2e;
+  --color-neutral-750:  #1a2538;
+  --color-neutral-700:  #1e232e;  /* EH header tone */
+  --color-neutral-650:  #252d3a;
+  --color-neutral-600:  #2e3746;
+  --color-neutral-550:  #3a4456;
+  --color-neutral-500:  #4a5568;
+  --color-neutral-450:  #5c6b7f;
+  --color-neutral-400:  #6e7f96;
+  --color-neutral-350:  #8494a7;
+  --color-neutral-300:  #97a5b6;
+  --color-neutral-250:  #adb8c6;
+  --color-neutral-200:  #c2cad5;
+  --color-neutral-150:  #d5dbe3;
+  --color-neutral-100:  #e4e8ed;
+  --color-neutral-50:   #f0f2f5;
+  --color-neutral-0:    #ffffff;
+
+  /* --- Brand Accent: Consulting (Granate/Red) --- */
+  --color-consulting-950: #1c0508;
+  --color-consulting-900: #3a0a10;
+  --color-consulting-800: #5c1018;
+  --color-consulting-700: #7a1520;
+  --color-consulting-600: #9b1a28;
+  --color-consulting-500: #b82030;
+  --color-consulting-400: #d43040;
+  --color-consulting-300: #e05a68;
+  --color-consulting-200: #eb8a94;
+  --color-consulting-100: #f5bcc2;
+  --color-consulting-50:  #fce8ea;
+
+  /* --- Brand Accent: Foundation (Verde institucional) --- */
+  --color-foundation-950: #041208;
+  --color-foundation-900: #08240f;
+  --color-foundation-800: #0f3d1c;
+  --color-foundation-700: #165628;
+  --color-foundation-600: #1e7035;
+  --color-foundation-500: #278a42;
+  --color-foundation-400: #36a856;
+  --color-foundation-300: #5cc27a;
+  --color-foundation-200: #8dd8a2;
+  --color-foundation-100: #beecca;
+  --color-foundation-50:  #e8f8ec;
+
+  /* --- Brand Accent: Intelligence (Azul acero) --- */
+  --color-intelligence-950: #040a14;
+  --color-intelligence-900: #081428;
+  --color-intelligence-800: #0f2240;
+  --color-intelligence-700: #163158;
+  --color-intelligence-600: #1e4170;
+  --color-intelligence-500: #285288;
+  --color-intelligence-400: #3668a5;
+  --color-intelligence-300: #5a8cc2;
+  --color-intelligence-200: #8ab2db;
+  --color-intelligence-100: #bad6ee;
+  --color-intelligence-50:  #e4eff8;
+
+  /* --- Gold (shared heritage from EH) --- */
+  --color-gold-900: #6b5420;
+  --color-gold-800: #8a6e2a;
+  --color-gold-700: #a68535;
+  --color-gold-600: #b89440;
+  --color-gold-500: #c5a059;  /* EH primary gold */
+  --color-gold-400: #d4b169;
+  --color-gold-300: #dfbf7e;
+  --color-gold-200: #e9d4a0;
+  --color-gold-100: #f2e6c5;
+  --color-gold-50:  #faf5e8;
+
+  /* --- Functional Colors --- */
+  --color-success-500: #22c55e;
+  --color-success-400: #4ade80;
+  --color-warning-500: #eab308;
+  --color-warning-400: #facc15;
+  --color-error-500:   #ef4444;
+  --color-error-400:   #f87171;
+  --color-info-500:    #3b82f6;
+  --color-info-400:    #60a5fa;
+}
+
+
+/* ==========================================================================
+   LAYER 2: SEMANTIC — Meaning-based tokens
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces --- */
+  --surface-primary:     var(--color-neutral-950);   /* Main background */
+  --surface-secondary:   var(--color-neutral-900);   /* Cards, elevated panels */
+  --surface-tertiary:    var(--color-neutral-850);   /* Nested elements */
+  --surface-elevated:    var(--color-neutral-800);   /* Modals, dropdowns */
+  --surface-header:      var(--color-neutral-700);   /* Nav/header bg */
+  --surface-overlay:     rgba(5, 10, 20, 0.80);     /* Backdrop overlays */
+  --surface-highlight:   rgba(197, 160, 89, 0.06);  /* Subtle gold tint */
+
+  /* --- Text --- */
+  --text-primary:        #E7E5E4;                    /* Headings, body */
+  --text-secondary:      rgba(231, 229, 228, 0.70); /* Supporting text */
+  --text-tertiary:       rgba(231, 229, 228, 0.45); /* Captions, meta */
+  --text-inverse:        var(--color-neutral-950);   /* On light surfaces */
+  --text-disabled:       rgba(231, 229, 228, 0.25);
+
+  /* --- Borders --- */
+  --border-default:      rgba(255, 255, 255, 0.08);
+  --border-subtle:       rgba(255, 255, 255, 0.04);
+  --border-strong:       rgba(255, 255, 255, 0.15);
+  --border-focus:        var(--color-gold-500);
+
+  /* --- Brand Accents (contextual — override per app) --- */
+  --accent-primary:      var(--color-gold-500);      /* Default: gold */
+  --accent-primary-hover: var(--color-gold-400);
+  --accent-primary-muted: rgba(197, 160, 89, 0.15);
+  --accent-primary-text: var(--color-gold-500);
+
+  /* --- Consulting overrides --- */
+  --accent-consulting:        var(--color-consulting-500);
+  --accent-consulting-hover:  var(--color-consulting-400);
+  --accent-consulting-muted:  rgba(184, 32, 48, 0.15);
+
+  /* --- Foundation overrides --- */
+  --accent-foundation:        var(--color-foundation-500);
+  --accent-foundation-hover:  var(--color-foundation-400);
+  --accent-foundation-muted:  rgba(39, 138, 66, 0.12);
+
+  /* --- Intelligence overrides --- */
+  --accent-intelligence:       var(--color-intelligence-500);
+  --accent-intelligence-hover: var(--color-intelligence-400);
+  --accent-intelligence-muted: rgba(40, 82, 136, 0.15);
+}
+
+/* Brand-specific overrides — apply on <html> or wrapper */
+[data-brand="consulting"] {
+  --accent-primary:      var(--accent-consulting);
+  --accent-primary-hover: var(--accent-consulting-hover);
+  --accent-primary-muted: var(--accent-consulting-muted);
+  --accent-primary-text: var(--color-consulting-400);
+}
+
+[data-brand="foundation"] {
+  --accent-primary:      var(--accent-foundation);
+  --accent-primary-hover: var(--accent-foundation-hover);
+  --accent-primary-muted: var(--accent-foundation-muted);
+  --accent-primary-text: var(--color-foundation-400);
+}
+
+[data-brand="intelligence"] {
+  --accent-primary:      var(--accent-intelligence);
+  --accent-primary-hover: var(--accent-intelligence-hover);
+  --accent-primary-muted: var(--accent-intelligence-muted);
+  --accent-primary-text: var(--color-intelligence-400);
+}
+
+
+/* ==========================================================================
+   LAYER 3: COMPONENT TOKENS
+   ========================================================================== */
+
+:root {
+  /* --- Navigation --- */
+  --nav-bg:              var(--surface-header);
+  --nav-bg-scrolled:     rgba(30, 35, 46, 0.95);
+  --nav-text:            var(--text-primary);
+  --nav-text-active:     var(--accent-primary-text);
+  --nav-border:          var(--border-subtle);
+  --nav-height:          72px;
+  --nav-height-mobile:   64px;
+
+  /* --- Buttons --- */
+  --btn-primary-bg:      var(--accent-primary);
+  --btn-primary-text:    var(--color-neutral-950);
+  --btn-primary-hover:   var(--accent-primary-hover);
+
+  --btn-secondary-bg:    transparent;
+  --btn-secondary-text:  var(--text-primary);
+  --btn-secondary-border: var(--border-strong);
+  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.05);
+
+  --btn-ghost-text:      var(--accent-primary-text);
+  --btn-ghost-hover-bg:  var(--accent-primary-muted);
+
+  --btn-cta-bg:          var(--accent-primary);
+  --btn-cta-text:        var(--color-neutral-950);
+  --btn-cta-shadow:      0 0 24px rgba(197, 160, 89, 0.25);
+
+  /* --- Cards --- */
+  --card-bg:             var(--surface-secondary);
+  --card-bg-hover:       var(--surface-tertiary);
+  --card-border:         var(--border-default);
+  --card-border-hover:   var(--border-strong);
+  --card-radius:         8px;
+  --card-padding:        24px;
+  --card-shadow:         0 4px 24px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover:   0 8px 40px rgba(0, 0, 0, 0.45);
+
+  /* --- Section Headers (bracket style) --- */
+  --section-label-text:  var(--text-tertiary);
+  --section-label-tracking: 0.25em;
+  --section-label-size:  0.75rem;
+  --section-title-text:  var(--text-primary);
+  --section-divider:     var(--border-default);
+
+  /* --- Footer --- */
+  --footer-bg:           var(--color-neutral-1000);
+  --footer-text:         var(--text-secondary);
+  --footer-border:       var(--border-subtle);
+
+  /* --- Inputs --- */
+  --input-bg:            var(--surface-tertiary);
+  --input-border:        var(--border-default);
+  --input-border-focus:  var(--accent-primary);
+  --input-text:          var(--text-primary);
+  --input-placeholder:   var(--text-tertiary);
+  --input-radius:        6px;
+
+  /* --- Badges / Tags --- */
+  --badge-bg:            var(--accent-primary-muted);
+  --badge-text:          var(--accent-primary-text);
+  --badge-border:        transparent;
+  --badge-radius:        4px;
+
+  /* --- Data Display --- */
+  --data-value-text:     var(--text-primary);
+  --data-label-text:     var(--text-tertiary);
+  --data-accent:         var(--accent-primary-text);
+  --data-divider:        var(--border-default);
+}
+
+
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM
+
+   Fonts:
+   - Display / Headings: Cormorant Garamond (elegant serif, intellectual authority)
+   - Body / UI:          Source Sans 3 (humanist sans, excellent dark-mode legibility)
+
+   Both available on Google Fonts. Cormorant offers the same classical
+   gravitas as Playfair but with more refined thin weights and better
+   performance at display sizes. Source Sans 3 (Adobe's open source)
+   provides superior readability on dark backgrounds vs Lato.
+   ========================================================================== */
+
+:root {
+  /* --- Font Families --- */
+  --font-display:    'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-heading:    'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-body:       'Source Sans 3', 'Source Sans Pro', -apple-system, sans-serif;
+  --font-mono:       'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-caption:    'Source Sans 3', 'Source Sans Pro', -apple-system, sans-serif;
+  --font-accent:     'Cinzel', 'Trajan Pro', serif;  /* Drop caps, insignia */
+
+  /* --- Type Scale (modular, ratio ~1.25 — Major Third) --- */
+
+  /* Display — Hero headlines, landing pages */
+  --text-display-2xl:     5rem;       /* 80px */
+  --text-display-xl:      3.75rem;    /* 60px */
+  --text-display-lg:      3rem;       /* 48px */
+  --lh-display:           1.05;
+  --ls-display:           -0.02em;
+  --fw-display:           300;        /* Light weight for elegance */
+
+  /* Heading — Section titles, page titles */
+  --text-heading-xl:      2.25rem;    /* 36px */
+  --text-heading-lg:      1.875rem;   /* 30px */
+  --text-heading-md:      1.5rem;     /* 24px */
+  --text-heading-sm:      1.25rem;    /* 20px */
+  --text-heading-xs:      1.125rem;   /* 18px */
+  --lh-heading:           1.2;
+  --ls-heading:           -0.01em;
+  --fw-heading:           600;
+
+  /* Body — Paragraphs, descriptions */
+  --text-body-lg:         1.25rem;    /* 20px */
+  --text-body-md:         1.0625rem;  /* 17px */
+  --text-body-sm:         0.9375rem;  /* 15px */
+  --lh-body:              1.65;
+  --ls-body:              0.01em;
+  --fw-body:              400;
+  --fw-body-light:        300;
+
+  /* Caption — Labels, meta, small print */
+  --text-caption-md:      0.8125rem;  /* 13px */
+  --text-caption-sm:      0.75rem;    /* 12px */
+  --text-caption-xs:      0.6875rem;  /* 11px */
+  --lh-caption:           1.4;
+  --ls-caption:           0.04em;
+  --fw-caption:           400;
+
+  /* Mono — Data, code, metrics */
+  --text-mono-lg:         1.125rem;   /* 18px */
+  --text-mono-md:         0.875rem;   /* 14px */
+  --text-mono-sm:         0.75rem;    /* 12px */
+  --lh-mono:              1.5;
+  --ls-mono:              -0.02em;
+
+  /* Section Labels (bracket style: [ SECTION ]) */
+  --text-section-label:   0.75rem;
+  --ls-section-label:     0.25em;
+  --fw-section-label:     500;
+  --tt-section-label:     uppercase;
+}
+
+
+/* ==========================================================================
+   SPACING SYSTEM (8px base grid)
+   ========================================================================== */
+
+:root {
+  /* --- Spacing Scale --- */
+  --space-0:     0;
+  --space-px:    1px;
+  --space-0-5:   2px;
+  --space-1:     4px;
+  --space-1-5:   6px;
+  --space-2:     8px;
+  --space-3:     12px;
+  --space-4:     16px;
+  --space-5:     20px;
+  --space-6:     24px;
+  --space-8:     32px;
+  --space-10:    40px;
+  --space-12:    48px;
+  --space-16:    64px;
+  --space-20:    80px;
+  --space-24:    96px;
+  --space-32:    128px;
+  --space-40:    160px;
+  --space-48:    192px;
+
+  /* --- Semantic Spacing --- */
+  --section-py:          var(--space-24);     /* Vertical padding between sections */
+  --section-py-lg:       var(--space-32);     /* Large section padding */
+  --section-gap:         var(--space-16);     /* Gap between section elements */
+  --content-gap:         var(--space-8);      /* Gap within content blocks */
+  --component-gap:       var(--space-4);      /* Gap between inline components */
+
+  /* --- Border Radius --- */
+  --radius-none:   0;
+  --radius-sm:     4px;
+  --radius-md:     6px;
+  --radius-lg:     8px;
+  --radius-xl:     12px;
+  --radius-2xl:    16px;
+  --radius-full:   9999px;
+
+  /* --- Container Widths --- */
+  --container-xs:  480px;
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1200px;
+  --container-2xl: 1400px;
+  --container-max: 1600px;
+
+  /* Container padding (responsive via media queries below) */
+  --container-px:  16px;
+
+  /* --- Grid --- */
+  --grid-columns:  12;
+  --grid-gutter:   var(--space-6);      /* 24px */
+  --grid-gutter-lg: var(--space-8);     /* 32px */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --container-px:    24px;
+    --section-py:      var(--space-32);
+    --section-py-lg:   var(--space-40);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --container-px:    32px;
+  }
+}
+
+@media (min-width: 1400px) {
+  :root {
+    --container-px:    48px;
+  }
+}
+
+
+/* ==========================================================================
+   MOTION & ANIMATION
+   ========================================================================== */
+
+:root {
+  /* --- Durations --- */
+  --duration-instant:  75ms;
+  --duration-fast:     150ms;
+  --duration-normal:   300ms;
+  --duration-slow:     500ms;
+  --duration-slower:   700ms;
+  --duration-entrance: 600ms;
+
+  /* --- Easing Curves --- */
+  --ease-default:      cubic-bezier(0.25, 0.1, 0.25, 1.0);   /* Smooth default */
+  --ease-in:           cubic-bezier(0.55, 0.06, 0.68, 0.19);  /* Accelerate */
+  --ease-out:          cubic-bezier(0.22, 0.61, 0.36, 1.0);   /* Decelerate */
+  --ease-in-out:       cubic-bezier(0.65, 0.05, 0.36, 1.0);   /* Symmetric */
+  --ease-spring:       cubic-bezier(0.16, 1.0, 0.3, 1.0);     /* Springy bounce */
+  --ease-snap:         cubic-bezier(0.85, 0.0, 0.15, 1.0);    /* Quick settle */
+
+  /* --- Transition Presets --- */
+  --transition-colors:  color var(--duration-fast) var(--ease-default),
+                         background-color var(--duration-fast) var(--ease-default),
+                         border-color var(--duration-fast) var(--ease-default);
+  --transition-opacity: opacity var(--duration-normal) var(--ease-out);
+  --transition-transform: transform var(--duration-normal) var(--ease-out);
+  --transition-all:    all var(--duration-normal) var(--ease-default);
+}
+
+/* --- Animation Keyframes --- */
+
+@keyframes fortius-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fortius-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fortius-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fortius-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fortius-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fortius-reveal-line {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Utility classes */
+.ft-fade-in      { animation: fortius-fade-in var(--duration-entrance) var(--ease-out) forwards; }
+.ft-fade-up      { animation: fortius-fade-up var(--duration-entrance) var(--ease-out) forwards; }
+.ft-fade-down    { animation: fortius-fade-down var(--duration-normal) var(--ease-out) forwards; }
+.ft-slide-right  { animation: fortius-slide-in-right var(--duration-entrance) var(--ease-out) forwards; }
+.ft-scale-in     { animation: fortius-scale-in var(--duration-normal) var(--ease-spring) forwards; }
+
+/* Stagger support — add delay per child */
+.ft-stagger > *:nth-child(1)  { animation-delay: 0ms; }
+.ft-stagger > *:nth-child(2)  { animation-delay: 80ms; }
+.ft-stagger > *:nth-child(3)  { animation-delay: 160ms; }
+.ft-stagger > *:nth-child(4)  { animation-delay: 240ms; }
+.ft-stagger > *:nth-child(5)  { animation-delay: 320ms; }
+.ft-stagger > *:nth-child(6)  { animation-delay: 400ms; }
+.ft-stagger > *:nth-child(7)  { animation-delay: 480ms; }
+.ft-stagger > *:nth-child(8)  { animation-delay: 560ms; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ==========================================================================
+   DARK MODE SHADOWS & ELEVATION
+
+   In dark mode, traditional drop shadows are invisible. Instead we use:
+   - Subtle border glow (inner light edges)
+   - Ambient soft shadows with higher opacity
+   - Elevated surfaces are LIGHTER, not shadowed
+   ========================================================================== */
+
+:root {
+  --shadow-xs:     0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md:     0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xl:     0 16px 64px rgba(0, 0, 0, 0.5);
+  --shadow-inner:  inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Glow effects for accent states */
+  --glow-gold:     0 0 24px rgba(197, 160, 89, 0.20);
+  --glow-consulting: 0 0 24px rgba(184, 32, 48, 0.20);
+  --glow-foundation: 0 0 24px rgba(39, 138, 66, 0.18);
+  --glow-intelligence: 0 0 24px rgba(40, 82, 136, 0.22);
+}
+
+
+/* ==========================================================================
+   BASE DARK MODE STYLES
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--color-neutral-950);
+}
+
+::-moz-selection {
+  background-color: var(--accent-primary);
+  color: var(--color-neutral-950);
+}
+
+/* Focus visible — accessibility */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Image treatment in dark mode — slight brightness reduction, subtle border */
+img:not([data-no-treatment]) {
+  border: 1px solid var(--border-default);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary-hover);
+}

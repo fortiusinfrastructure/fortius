@@ -1,48 +1,63 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, useSpring, animate } from "framer-motion";
+import { useInView, motion } from "framer-motion";
 
 interface CounterProps {
-  value: number;
+  target: number;
   suffix?: string;
   prefix?: string;
+  duration?: number;
   className?: string;
 }
 
-export function Counter({ value, suffix = "", prefix = "", className = "" }: CounterProps) {
+export function Counter({
+  target,
+  suffix = "",
+  prefix = "",
+  duration = 2,
+  className,
+}: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
-  const [hasStarted, setHasStarted] = useState(false);
-  
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    damping: 50,
-    stiffness: 100,
-  });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (isInView && !hasStarted) {
-      setHasStarted(true);
-      const controls = animate(motionValue, value, {
-        duration: 2.5,
-        ease: "easeOut",
-      });
-      return controls.stop;
-    }
-  }, [isInView, value, motionValue, hasStarted]);
+    if (!isInView) return;
 
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = `${prefix}${Math.floor(latest)}${suffix}`;
+    let start = 0;
+    const startTime = performance.now();
+    const step = (currentTime: number) => {
+      const elapsed = (currentTime - startTime) / 1000;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+
+      if (current !== start) {
+        start = current;
+        setCount(current);
       }
-    });
-  }, [springValue, prefix, suffix]);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }, [isInView, target, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}0{suffix}
-    </span>
+    <motion.span
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.4 }}
+      className={className}
+    >
+      {prefix}
+      {count}
+      {suffix}
+    </motion.span>
   );
 }

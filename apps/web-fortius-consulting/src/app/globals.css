@@ -2,125 +2,218 @@
 @plugin "@tailwindcss/typography";
 
 /* ==========================================================================
-   FORTIUS CONSULTING - Editorial Light Design System
+   FORTIUS CONSULTING — Design System Tokens
+   Dark institutional minimalism + granate accent
    ========================================================================== */
 
 :root {
-  /* Primitives */
-  --color-neutral-0: #FFFFFF;
-  --color-neutral-50: #FAFAFA;
-  --color-neutral-100: #F4F4F5;
-  --color-neutral-200: #E4E4E7;
-  --color-neutral-300: #D4D4D8;
-  --color-neutral-400: #A1A1AA;
-  --color-neutral-500: #71717A;
-  --color-neutral-600: #52525B;
-  --color-neutral-700: #3F3F46;
-  --color-neutral-800: #27272A;
-  --color-neutral-900: #18181B;
-  --color-neutral-950: #0A0A0A; /* Tinta negra */
+  /* --- Neutral Scale (cool navy darks) --- */
+  --color-neutral-1000: #020508;
+  --color-neutral-950:  #050a14;
+  --color-neutral-900:  #0a111e;
+  --color-neutral-850:  #0f1724;
+  --color-neutral-800:  #141d2e;
+  --color-neutral-750:  #1a2538;
+  --color-neutral-700:  #1e232e;
+  --color-neutral-650:  #252d3a;
+  --color-neutral-600:  #2e3746;
+  --color-neutral-550:  #3a4456;
+  --color-neutral-500:  #4a5568;
+  --color-neutral-400:  #6e7f96;
+  --color-neutral-300:  #97a5b6;
+  --color-neutral-200:  #c2cad5;
+  --color-neutral-100:  #e4e8ed;
+  --color-neutral-50:   #f0f2f5;
 
-  /* Accents */
-  --color-brand-consulting: #991b1b;
-  --color-brand-foundation: #166534;
-  --color-brand-intelligence: #1e3a8a;
-  --color-brand-intelligence-light: #3b82f6;
+  /* --- Brand: Consulting (Red #E94748) --- */
+  --color-accent-900: #2d0a0a;
+  --color-accent-800: #520f0f;
+  --color-accent-700: #7a1616;
+  --color-accent-600: #a81e1e;
+  --color-accent-500: #e94748;
+  --color-accent-400: #ee6c6d;
+  --color-accent-300: #f39192;
+  --color-accent-200: #f8b5b6;
+  --color-accent-100: #fcdada;
 
-  /* Semantic - LIGHT MODE */
-  --background: var(--color-neutral-0);
-  --foreground: var(--color-neutral-950);
-  --border-subtle: rgba(0, 0, 0, 0.08); /* Dark lines on white */
-  --border-medium: rgba(0, 0, 0, 0.15);
-  
-  /* Selection - High contrast */
-  --selection-bg: var(--color-brand-consulting);
-  --selection-text: var(--color-neutral-0);
+  /* --- Gold (heritage from EH ecosystem) --- */
+  --color-gold-600: #b89440;
+  --color-gold-500: #c5a059;
+  --color-gold-400: #d4b169;
+  --color-gold-300: #dfbf7e;
+
+  /* --- Semantic: Surfaces --- */
+  --surface-primary:     var(--color-neutral-950);
+  --surface-secondary:   var(--color-neutral-900);
+  --surface-tertiary:    var(--color-neutral-850);
+  --surface-elevated:    var(--color-neutral-800);
+  --surface-header:      rgba(30, 35, 46, 0.95);
+  --surface-overlay:     rgba(5, 10, 20, 0.80);
+  --surface-highlight:   rgba(233, 71, 72, 0.06);
+
+  /* --- Semantic: Text --- */
+  --text-primary:        #E7E5E4;
+  --text-secondary:      rgba(231, 229, 228, 0.70);
+  --text-tertiary:       rgba(231, 229, 228, 0.40);
+  --text-inverse:        var(--color-neutral-950);
+  --text-accent:         var(--color-accent-400);
+
+  /* --- Semantic: Borders --- */
+  --border-default:      rgba(255, 255, 255, 0.08);
+  --border-subtle:       rgba(255, 255, 255, 0.04);
+  --border-strong:       rgba(255, 255, 255, 0.15);
+  --border-accent:       var(--color-accent-500);
+
+  /* --- Shadows & Glow --- */
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md:     0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xl:     0 16px 64px rgba(0, 0, 0, 0.5);
+  --glow-accent:   0 0 30px rgba(233, 71, 72, 0.22);
+
+  /* --- Motion --- */
+  --duration-fast:     150ms;
+  --duration-normal:   300ms;
+  --duration-slow:     500ms;
+  --duration-entrance: 600ms;
+  --ease-out:          cubic-bezier(0.22, 0.61, 0.36, 1.0);
+  --ease-spring:       cubic-bezier(0.16, 1.0, 0.3, 1.0);
+  --ease-snap:         cubic-bezier(0.85, 0.0, 0.15, 1.0);
+
+  /* --- Spacing --- */
+  --container-max: 1400px;
+  --container-px:  16px;
+  --nav-height:    72px;
+
+  color-scheme: dark;
 }
+
+@media (min-width: 768px) {
+  :root { --container-px: 24px; }
+}
+@media (min-width: 1024px) {
+  :root { --container-px: 40px; }
+}
+
+/* ==========================================================================
+   TAILWIND THEME BRIDGE
+   ========================================================================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  
-  --color-brand-consulting: var(--color-brand-consulting);
-  --color-brand-intelligence: var(--color-brand-intelligence);
+  --color-background: var(--surface-primary);
+  --color-foreground: var(--text-primary);
+
+  /* Surfaces */
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-elevated: var(--surface-elevated);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-accent: var(--text-accent);
+
+  /* Accent */
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-muted: rgba(233, 71, 72, 0.12);
+
+  /* Borders */
+  --color-border: var(--border-default);
   --color-border-subtle: var(--border-subtle);
-  
-  --font-serif: "Playfair Display", "Times New Roman", serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-mono: "Geist Mono", monospace;
+  --color-border-strong: var(--border-strong);
+
+  /* Fonts */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-source-sans), "Source Sans 3", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
 }
 
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body), "Source Sans 3", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: var(--selection-bg);
-  color: var(--selection-text);
+  background-color: var(--color-accent-500);
+  color: var(--surface-primary);
 }
 
-::-moz-selection {
-  background-color: var(--selection-bg);
-  color: var(--selection-text);
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
 }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-primary); }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-600); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-500); }
 
 /* ==========================================================================
-   Typography & Utilities
+   UTILITY CLASSES
    ========================================================================== */
 
-.font-serif {
-  font-family: var(--font-serif);
-}
-
-.font-sans {
-  font-family: var(--font-sans);
-}
-
-.font-mono {
-  font-family: var(--font-mono);
-}
-
-/* Identidad visual corchetes (Editorial) */
-.bracket-header {
-  font-family: var(--font-mono);
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem; /* Smaller for editorial elegance */
-  color: var(--color-neutral-500);
+  color: var(--text-tertiary);
 }
 
-.bracket-header::before {
-  content: "[ ";
-  color: var(--color-neutral-400);
+.accent-text { color: var(--color-accent-400); }
+.accent-bg { background-color: var(--color-accent-500); }
+.accent-border { border-color: var(--color-accent-500); }
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.bracket-header::after {
-  content: " ]";
-  color: var(--color-neutral-400);
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Minimalist scrollbar - Dark thumb on white bg */
-::-webkit-scrollbar {
-  width: 6px;
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
+@keyframes reveal-width {
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-neutral-300);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neutral-400);
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

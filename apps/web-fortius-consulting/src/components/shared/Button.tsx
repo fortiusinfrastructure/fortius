@@ -1,52 +1,49 @@
-"use client";
-
-import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { type ButtonHTMLAttributes, forwardRef } from "react";
 
-export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
-  children?: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
-  size?: "sm" | "md" | "lg";
-  withArrow?: boolean;
+type Variant = "primary" | "secondary" | "ghost";
+type Size = "sm" | "md" | "lg";
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", withArrow = false, children, ...props }, ref) => {
-    
-    const baseStyles = "inline-flex items-center justify-center font-sans font-medium rounded-full transition-colors duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-black disabled:opacity-50 disabled:pointer-events-none";
-    
-    const variants = {
-      primary: "bg-brand-consulting text-white hover:bg-[#7f1d1d]",
-      secondary: "bg-transparent border border-brand-consulting text-brand-consulting hover:bg-brand-consulting/5",
-      ghost: "bg-transparent text-neutral-600 hover:text-brand-consulting",
-    };
-    
-    const sizes = {
-      sm: "h-9 px-4 text-sm",
-      md: "h-11 px-6 text-sm tracking-wide",
-      lg: "h-14 px-8 text-base tracking-wide",
-    };
+const variantStyles: Record<Variant, string> = {
+  primary:
+    "bg-[var(--color-accent-500)] text-[var(--surface-primary)] hover:bg-[var(--color-accent-400)] font-semibold",
+  secondary:
+    "bg-transparent text-[var(--text-primary)] border border-[var(--border-strong)] hover:bg-[rgba(255,255,255,0.04)] hover:border-[rgba(255,255,255,0.25)]",
+  ghost:
+    "bg-transparent text-[var(--color-accent-400)] hover:bg-[rgba(233,71,72,0.1)]",
+};
 
+const sizeStyles: Record<Size, string> = {
+  sm: "px-5 py-2 text-xs",
+  md: "px-7 py-3 text-sm",
+  lg: "px-9 py-3.5 text-sm",
+};
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "primary", size = "md", className, children, ...props }, ref) => {
     return (
-      <motion.button
+      <button
         ref={ref}
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        className={cn(
+          "inline-flex items-center justify-center gap-2 rounded-md uppercase tracking-wider",
+          "transition-all duration-150 ease-out",
+          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-500)]",
+          "disabled:opacity-40 disabled:pointer-events-none",
+          variantStyles[variant],
+          sizeStyles[size],
+          className,
+        )}
         {...props}
       >
         {children}
-        {withArrow && (
-          <span className="ml-2 group-hover:translate-x-1 transition-transform">
-            →
-          </span>
-        )}
-      </motion.button>
+      </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";
-
-export { Button };

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/dasalazarr/Projects/Fortius/fortius -name tailwind.config.* -o -name globals.css -o -name theme*.ts -o -name theme*.js)",
+      "Bash(find /Users/dasalazarr/Projects/Fortius/fortius -path */node_modules -prune -o -name *.css -type f -print)",
+      "Bash(grep -E \"\\\\.\\(config|json|js|ts\\)$\")",
+      "Bash(find /Users/dasalazarr/Projects/Fortius/fortius/packages -maxdepth 3 -type f \\\\\\(-name *.css -o -name *.json \\\\\\))",
+      "Bash(find /Users/dasalazarr/Projects/Fortius/fortius/packages/ui -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.css -o -name *.json \\\\\\))",
+      "Bash(git diff:*)",
+      "Bash(ls /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-consulting/postcss.config.*)",
+      "Bash(ls /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-consulting/next.config.*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm install:*)"
+    ]
+  }
+}

@@ -2,6 +2,105 @@ import type { Activity } from '@/types';
 
 export const activities: Activity[] = [
     {
+        id: 19,
+        slug: 'jantar-da-hispanidade-e-da-lusofonia',
+        title: {
+            es: 'Jantar Da Hispanidade e Da Lusofonia',
+            en: 'Jantar Da Hispanidade e Da Lusofonia',
+            pt: 'Jantar Da Hispanidade e Da Lusofonia'
+        },
+        sortDate: '2026-04-17',
+        date: '17 Abril 2026',
+        location: {
+            es: 'Real Clube Tauromáquico Português, Lisboa, Portugal',
+            en: 'Real Clube Tauromáquico Português, Lisbon, Portugal',
+            pt: 'Real Clube Tauromáquico Português, Lisboa, Portugal'
+        },
+        organizer: {
+            es: 'Escuela Hispánica',
+            en: 'Escuela Hispánica',
+            pt: 'Escuela Hispânica'
+        },
+        type: {
+            es: 'Cena Académica',
+            en: 'Academic Dinner',
+            pt: 'Jantar Acadêmico'
+        },
+        excerpt: {
+            es: 'Cena académica organizada por la Escuela Hispánica en Lisboa para fortalecer los lazos culturales e intelectuales entre el mundo hispánico y lusófono.',
+            en: 'Academic dinner organized by the Escuela Hispánica in Lisbon to strengthen the cultural and intellectual ties between the Hispanic and Lusophone worlds.',
+            pt: 'Jantar académico organizado pela Escuela Hispânica em Lisboa para fortalecer os laços culturais e intelectuais entre o mundo hispânico e lusófono.'
+        },
+        content: {
+            es: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Fecha y Hora:</strong> 17 de abril de 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Lugar:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
+                    </p>
+                </div>
+
+                <p>La actividad tendrá lugar el 17 de abril con una cena académica organizada por la Escuela Hispánica, concebida como un espacio de encuentro y diálogo intelectual entre los participantes internacionales del encuentro. En un ambiente de amistad y reflexión, la velada buscará fortalecer los lazos culturales e intelectuales entre el mundo hispánico y lusófono, así como fomentar el intercambio de ideas en torno a nuestra tradición común y los desafíos contemporáneos de nuestras sociedades.</p>
+                
+                <p>El evento contará con una ponencia (ponente por confirmar).</p>
+
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Pasarela de pago de la cena</p>
+                    <p style="color: rgba(255,255,255,0.8);">El coste de la cena es de <strong>25 euros</strong> por comensal.</p>
+                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
+                        Pagar Cena (25€)
+                    </a>
+                </div>
+            `,
+            en: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizer:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Date and Time:</strong> April 17, 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Location:</strong> Real Clube Tauromáquico Português, Lisbon, Portugal
+                    </p>
+                </div>
+
+                <p>The activity will take place on April 17 with an academic dinner organized by the Escuela Hispánica, conceived as a space for meeting and intellectual dialogue among the international participants of the meeting. In an atmosphere of friendship and reflection, the evening will seek to strengthen cultural and intellectual ties between the Hispanic and Lusophone worlds, as well as to encourage the exchange of ideas about our common tradition and the contemporary challenges of our societies.</p>
+                
+                <p>The event will feature a presentation (speaker to be confirmed).</p>
+
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Dinner Payment Gateway</p>
+                    <p style="color: rgba(255,255,255,0.8);">The cost of the dinner is <strong>25 euros</strong> per person.</p>
+                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
+                        Pay for Dinner (25€)
+                    </a>
+                </div>
+            `,
+            pt: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Data e Hora:</strong> 17 de abril de 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Local:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
+                    </p>
+                </div>
+
+                <p>A atividade terá lugar a 17 de abril com um jantar académico organizado pela Escuela Hispânica, concebido como um espaço de encontro e diálogo intelectual entre os participantes internacionais do encontro. Num ambiente de amizade e reflexão, o serão procurará fortalecer os laços culturais e intelectuais entre o mundo hispânico e lusófono, bem como fomentar a troca de ideias em torno da nossa tradição comum e dos desafios contemporâneos das nossas sociedades.</p>
+                
+                <p>O evento contará com uma palestra (orador a confirmar).</p>
+
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Gateway de pagamento do jantar</p>
+                    <p style="color: rgba(255,255,255,0.8);">O custo do jantar é de <strong>25 euros</strong> por pessoa.</p>
+                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
+                        Pagar Jantar (25€)
+                    </a>
+                </div>
+            `
+        },
+        image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
+        isFeatured: true,
+        isUpcoming: true
+    },
+    {
         id: 18,
         slug: 'escola-hispanica-lusofonia',
         title: {
@@ -9,8 +108,8 @@ export const activities: Activity[] = [
             en: 'Escola Hispânica in Lusofonia',
             pt: 'Escola Hispânica na Lusofonía'
         },
-        sortDate: '2026-04-17',
-        date: '17 - 18 Abril 2026',
+        sortDate: '2026-04-18',
+        date: '18 Abril 2026',
         location: {
             es: 'Lisboa, Portugal',
             en: 'Lisbon, Portugal',
@@ -29,76 +128,70 @@ export const activities: Activity[] = [
         excerpt: {
             es: 'En abril de 2026 la Escuela Hispánica participará en Lisboa en un simposio internacional dedicado a reflexionar sobre los fundamentos culturales de las democracias occidentales.',
             en: 'In April 2026, the Escuela Hispánica will participate in an international symposium in Lisbon dedicated to reflecting on the cultural foundations of Western democracies.',
-            pt: 'Em abril de 2026, a Escuela Hispánica participará em Lisboa num simpósio internacional dedicado a refletir sobre os fundamentos culturais das democracias ocidentais.'
+            pt: 'Em abril de 2026, a Escuela Hispânica participará em Lisboa num simpósio internacional dedicado a refletir sobre os fundamentos culturais das democracias ocidentais.'
         },
         content: {
             es: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Fechas:</strong> 17 y 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Fecha:</strong> 18 de abril de 2026<br/>
                         <strong style="color: #c5a059;">Lugar:</strong> Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>En abril de 2026 la Escuela Hispánica participará en Lisboa en un simposio internacional organizado junto a la Sociedade de Estudos e Acção (SALL), dedicado a reflexionar sobre los fundamentos culturales, jurídicos y políticos de la vida pública en las democracias occidentales.</p>
+                <p>En abril de 2026, la Escuela Hispánica participará en un simposio internacional en Lisboa, organizado conjuntamente con la Sociedade de Estudos e Acção (SALL), dedicado a reflexionar sobre los fundamentos culturales, jurídicos y políticos de la vida pública en las democracias occidentales.</p>
 
-                <p>El encuentro se celebrará en el contexto del 50º aniversario de la Constitución portuguesa y reunirá a académicos, juristas, pensadores y representantes de la sociedad civil para analizar la evolución reciente del marco constitucional europeo y su relación con las libertades fundamentales.</p>
+                <p>El encuentro se celebrará el 18 de abril, en el contexto del 50º aniversario de la Constitución portuguesa, y reunirá a académicos, juristas, pensadores y representantes de la sociedad civil para analizar la evolución reciente del marco constitucional europeo y su relación con las libertades fundamentales.</p>
 
-                <p>La actividad comenzará el 17 de abril con una cena académica organizada por la Escuela Hispánica en el Grémio Literário, concebida como un espacio de diálogo intelectual entre participantes internacionales. El día 18 tendrá lugar el simposio principal, estructurado en varias mesas redondas dedicadas a cuestiones centrales del orden político contemporáneo: la dignidad de la vida humana, la familia y la infancia, la libertad de conciencia y los fundamentos culturales de la civilización occidental.</p>
+                <p>El simposio se estructura en varias mesas redondas dedicadas a cuestiones centrales del orden político contemporáneo: la dignidad de la vida humana, la familia y la infancia, la libertad de conciencia y los fundamentos culturales de la civilización occidental.</p>
 
-                <p>La Escuela Hispánica participará especialmente en la sesión de síntesis final, destinada a ofrecer una reflexión de conjunto desde la tradición intelectual hispánica, en diálogo con otras tradiciones europeas, sobre los principios que sostienen la convivencia política y el bien común.</p>
+                <p>La Escuela Hispánica participará especialmente en la sesión final de síntesis, destinada a ofrecer una reflexión colectiva desde la tradición intelectual hispánica, en diálogo con otras tradiciones europeas, sobre los principios que sostienen la convivencia política y el bien común.</p>
 
-                <p>Este encuentro forma parte del proceso de internacionalización de la Escuela Hispánica y refleja también su interés por integrar y reivindicar la tradición de pensamiento portugués dentro del marco común de la cultura intelectual hispánica, contribuyendo al debate público desde una perspectiva histórica, filosófica y comparada.</p>
-
-                <p style="font-style: italic; color: rgba(255,255,255,0.5);">* Agenda pendiente de confirmar</p>
+                <p>Este encuentro se inscribe en el proceso de internacionalización de la Escuela Hispánica y refleja también su interés por integrar y poner en valor la tradición de pensamiento portuguesa dentro del marco común de la cultura intelectual hispánica, contribuyendo al debate público desde una perspectiva histórica, filosófica y comparada.</p>
             `,
             en: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Collaborator:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Dates:</strong> April 17 and 18, 2026<br/>
+                        <strong style="color: #c5a059;">Date:</strong> April 18, 2026<br/>
                         <strong style="color: #c5a059;">Location:</strong> Lisbon, Portugal
                     </p>
                 </div>
 
-                <p>In April 2026, the Escuela Hispánica will participate in an international symposium in Lisbon organized together with the Sociedade de Estudos e Acção (SALL), dedicated to reflecting on the cultural, legal, and political foundations of public life in Western democracies.</p>
+                <p>In April 2026, the Escuela Hispánica will participate in an international symposium in Lisbon, jointly organized with the Sociedade de Estudos e Acção (SALL), dedicated to reflecting on the cultural, legal, and political foundations of public life in Western democracies.</p>
 
-                <p>The meeting will be held in the context of the 50th anniversary of the Portuguese Constitution and will bring together academics, jurists, thinkers, and representatives of civil society to analyze the recent evolution of the European constitutional framework and its relationship with fundamental freedoms.</p>
+                <p>The meeting will be held on April 18, in the context of the 50th anniversary of the Portuguese Constitution, and will bring together academics, jurists, thinkers, and representatives of civil society to analyze the recent evolution of the European constitutional framework and its relationship with fundamental freedoms.</p>
 
-                <p>The activity will begin on April 17 with an academic dinner organized by the Escuela Hispánica at the Grémio Literário, conceived as a space for intellectual dialogue among international participants. On the 18th, the main symposium will take place, structured into several round tables dedicated to central issues of the contemporary political order: the dignity of human life, family and childhood, freedom of conscience, and the cultural foundations of Western civilization.</p>
+                <p>The symposium is structured into several round tables dedicated to central issues of the contemporary political order: the dignity of human life, family and childhood, freedom of conscience, and the cultural foundations of Western civilization.</p>
 
                 <p>The Escuela Hispánica will participate especially in the final synthesis session, intended to offer a collective reflection from the Hispanic intellectual tradition, in dialogue with other European traditions, on the principles that sustain political coexistence and the common good.</p>
 
-                <p>This meeting is part of the internationalization process of the Escuela Hispánica and also reflects its interest in integrating and claiming the Portuguese tradition of thought within the common framework of Hispanic intellectual culture, contributing to the public debate from a historical, philosophical, and comparative perspective.</p>
-
-                <p style="font-style: italic; color: rgba(255,255,255,0.5);">* Agenda pending confirmation</p>
+                <p>This meeting is part of the internationalization process of the Escuela Hispánica and also reflects its interest in integrating and valuing the Portuguese tradition of thought within the common framework of Hispanic intellectual culture, contributing to the public debate from a historical, philosophical, and comparative perspective.</p>
             `,
             pt: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Datas:</strong> 17 e 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Data:</strong> 18 de abril de 2026<br/>
                         <strong style="color: #c5a059;">Local:</strong> Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>Em abril de 2026, a Escuela Hispánica participará em Lisboa num simpósio internacional organizado em conjunto com a Sociedade de Estudos e Acção (SALL), dedicado a refletir sobre os fundamentos culturais, jurídicos e políticos da vida pública nas democracias ocidentais.</p>
+                <p>Em abril de 2026, a Escuela Hispânica participará num simpósio internacional em Lisboa, organizado conjuntamente com a Sociedade de Estudos e Acção (SALL), dedicado a refletir sobre os fundamentos culturais, jurídicos e políticos da vida pública nas democracias ocidentais.</p>
 
-                <p>O encontro realizar-se-á no contexto do 50.º aniversário da Constituição portuguesa e reunirá académicos, juristas, pensadores e representantes da sociedade civil para analisar a evolução recente do quadro constitucional europeu e a sua relação com as liberdades fundamentais.</p>
+                <p>O encontro realizar-se-á a 18 de abril, no contexto do 50.º aniversário da Constituição portuguesa, e reunirá académicos, juristas, pensadores e representantes da sociedade civil para analisar a evolução recente do quadro constitucional europeu e a sua relação com as liberdades fundamentais.</p>
 
-                <p>A atividade terá início a 17 de abril com um jantar académico organizado pela Escuela Hispánica no Grémio Literário, concebido como um espaço de diálogo intelectual entre participantes internacionais. No dia 18 terá lugar o simpósio principal, estruturado em várias mesas redondas dedicadas a questões centrais da ordem política contemporânea: a dignidade da vida humana, a família e a infância, a liberdade de consciência e os fundamentos culturais da civilização ocidental.</p>
+                <p>O simpósio estrutura-se em várias mesas redondas dedicadas a questões centrais da ordem política contemporânea: a dignidade da vida humana, a família e a infância, a liberdade de consciência e os fundamentos culturais da civilização ocidental.</p>
 
-                <p>A Escuela Hispánica participará especialmente na sessão de síntese final, destinada a oferecer uma reflexão de conjunto a partir da tradição intelectual hispânica, em diálogo com outras tradições europeias, sobre os princípios que sustentam a convivência política e o bem comum.</p>
+                <p>A Escuela Hispânica participará especialmente na sessão final de síntese, destinada a oferecer uma reflexão coletiva a partir da tradição intelectual hispânica, em diálogo com outras tradições europeias, sobre os princípios que sustentam a convivência política e o bem comum.</p>
 
-                <p>Este encontro faz parte do processo de internacionalização da Escuela Hispánica e reflete também o seu interesse em integrar e reivindicar a tradição do pensamento português no quadro comum da cultura intelectual hispânica, contribuindo para o debate público a partir de uma perspetiva histórica, filosófica e comparada.</p>
-
-                <p style="font-style: italic; color: rgba(255,255,255,0.5);">* Agenda pendente de confirmação</p>
+                <p>Este encontro insere-se no processo de internacionalização da Escuela Hispânica e reflete também o seu interesse em integrar e valorizar a tradição de pensamento portuguesa no quadro comum da cultura intelectual hispânica, contribuindo para o debate público numa perspetiva histórica, filosófica e comparada.</p>
             `
         },
         image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
         isFeatured: false,
-        isUpcoming: true
+        isUpcoming: false
     },
     {
         id: 1,
