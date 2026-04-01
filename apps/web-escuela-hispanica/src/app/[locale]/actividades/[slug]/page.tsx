@@ -379,7 +379,12 @@ export default async function ActivityPage({ params }: Props) {
                     {activity.isUpcoming && activity.showRegistrationForm !== false && (
                         <section className="py-24 px-4 bg-[#0a111e] border-t border-white/5">
                             <div className="max-w-4xl mx-auto">
-                                <EventRegistrationForm eventName={getLocalizedValue(activity.title, locale)} eventId={activity.id.toString()} />
+                                <EventRegistrationForm 
+                                    eventName={getLocalizedValue(activity.title, locale)} 
+                                    eventId={activity.slug || activity.id.toString()} 
+                                    amount={activity.priceAmount}
+                                    currency={activity.priceCurrency}
+                                />
                             </div>
                         </section>
                     )}

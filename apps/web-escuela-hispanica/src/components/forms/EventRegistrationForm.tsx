@@ -3,7 +3,17 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-export function EventRegistrationForm({ eventName, eventId }: { eventName: string; eventId: string }) {
+export function EventRegistrationForm({ 
+    eventName, 
+    eventId,
+    amount = 0,
+    currency = 'eur'
+}: { 
+    eventName: string; 
+    eventId: string;
+    amount?: number;
+    currency?: string;
+}) {
     const t = useTranslations('EventRegistration');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -15,18 +25,21 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
 
         const formData = new FormData(e.currentTarget);
 
-        // Build a plain JSON object from the form — the API reads request.json()
         const body = {
             first_name: formData.get('first_name') as string,
             last_name: formData.get('last_name') as string,
             email: formData.get('email') as string,
             institution: formData.get('institution') as string,
             message: formData.get('message') as string,
-            subject: `Registro de Evento: ${eventName} (${eventId})`,
+            event_slug: eventId,
+            event_name: eventName,
+            amount: amount,
+            currency: currency,
+            locale: window.location.pathname.split('/')[1] || 'es',
         };
 
         try {
-            const res = await fetch('/api/contact', {
+            const res = await fetch('/api/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -35,6 +48,13 @@ export function EventRegistrationForm({ eventName, eventId }: { eventName: strin
             if (!res.ok) {
                 const data = await res.json();
                 throw new Error(data.error || 'Failed to submit');
+            }
+
+            const data = await res.json();
+
+            if (data.checkoutUrl) {
+                window.location.href = data.checkoutUrl;
+                return; // Stop execution, browser redirects
             }
 
             setStatus('success');

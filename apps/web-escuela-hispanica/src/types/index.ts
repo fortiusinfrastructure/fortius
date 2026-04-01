@@ -42,6 +42,8 @@ export interface Activity {
   isFeatured?: boolean;
   isUpcoming?: boolean;
   showRegistrationForm?: boolean;
+  priceAmount?: number;
+  priceCurrency?: string;
   sortDate?: string;
 }
 

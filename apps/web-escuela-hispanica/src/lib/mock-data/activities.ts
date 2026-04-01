@@ -46,11 +46,9 @@ export const activities: Activity[] = [
                 <p>El evento contará con una ponencia (ponente por confirmar).</p>
 
                 <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Pasarela de pago de la cena</p>
-                    <p style="color: rgba(255,255,255,0.8);">El coste de la cena es de <strong>25 euros</strong> por comensal.</p>
-                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
-                        Pagar Cena (25€)
-                    </a>
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Inscripción a la Cena</p>
+                    <p style="color: rgba(255,255,255,0.8);">El coste de la cena es de <strong>25 euros</strong> por comensal. El pago se realizará de forma segura al completar el formulario de registro en la parte inferior de esta página.</p>
                 </div>
             `,
             en: `
@@ -67,11 +65,9 @@ export const activities: Activity[] = [
                 <p>The event will feature a presentation (speaker to be confirmed).</p>
 
                 <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Dinner Payment Gateway</p>
-                    <p style="color: rgba(255,255,255,0.8);">The cost of the dinner is <strong>25 euros</strong> per person.</p>
-                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
-                        Pay for Dinner (25€)
-                    </a>
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Dinner Registration</p>
+                    <p style="color: rgba(255,255,255,0.8);">The cost of the dinner is <strong>25 euros</strong> per person. Payment will be securely processed after completing the registration form at the bottom of this page.</p>
                 </div>
             `,
             pt: `
@@ -88,18 +84,18 @@ export const activities: Activity[] = [
                 <p>O evento contará com uma palestra (orador a confirmar).</p>
 
                 <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Gateway de pagamento do jantar</p>
-                    <p style="color: rgba(255,255,255,0.8);">O custo do jantar é de <strong>25 euros</strong> por pessoa.</p>
-                    <a href="#" style="display: inline-block; background-color: #c5a059; color: #050a14; padding: 0.8rem 1.5rem; font-family: var(--font-cinzel); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; margin-top: 1rem; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#d4b475'" onmouseout="this.style.backgroundColor='#c5a059'">
-                        Pagar Jantar (25€)
-                    </a>
+                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
+                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Inscrição para o jantar</p>
+                    <p style="color: rgba(255,255,255,0.8);">O custo do jantar é de <strong>25 euros</strong> por pessoa. O pagamento será processado de forma segura após o preenchimento do formulário de inscrição na parte inferior desta página.</p>
                 </div>
             `
         },
         image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
         isFeatured: false,
         isUpcoming: true,
-        showRegistrationForm: true
+        showRegistrationForm: true,
+        priceAmount: 25,
+        priceCurrency: 'eur'
     },
     {
         id: 18,
