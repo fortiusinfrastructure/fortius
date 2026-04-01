@@ -162,7 +162,7 @@ export default async function ActividadesPage({ params }: Props) {
                             <p className="text-white/60 font-light text-sm">{t('Featured.subtitle')}</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                            {featuredActivities.map(activity => (
+                            {featuredActivities.slice(0, 2).map(activity => (
                                 <div key={activity.id} className="group bg-[#050a14] border border-white/5 hover:border-[#c5a059]/30 transition-all duration-300 flex flex-col h-full">
                                     <div className="relative aspect-video overflow-hidden">
                                         <img
