@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { BiographyCard } from './BiographyCard';
-import { biographyIds } from '@/data/biographies-list';
+import { biographyIds, biographyImages } from '@/data/biographies-list';
 
 export const BiographyTimeline: React.FC = () => {
     const t = useTranslations('Biografias.authors');
@@ -19,6 +19,8 @@ export const BiographyTimeline: React.FC = () => {
                     <BiographyCard
                         key={id}
                         index={index}
+                        id={id}
+                        image={biographyImages[id]}
                         isExpanded={openIndex === index}
                         onToggle={() => setOpenIndex(openIndex === index ? null : index)}
                         name={t(`${id}.name`)}

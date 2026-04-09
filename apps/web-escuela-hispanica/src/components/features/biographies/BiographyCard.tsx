@@ -11,6 +11,8 @@ interface BiographyCardProps {
     shortBio: string;
     contribution: string;
     index: number;
+    id: string;
+    image: string | null;
     isExpanded: boolean;
     onToggle: () => void;
 }
@@ -22,6 +24,8 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
     shortBio,
     contribution,
     index,
+    id,
+    image,
     isExpanded,
     onToggle,
 }) => {
@@ -57,8 +61,12 @@ export const BiographyCard: React.FC<BiographyCardProps> = ({
             >
                 {/* Minimal State */}
                 <div className="p-6 md:p-8 flex items-start gap-6">
-                    <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#050a14] border border-[#c5a059]/20 flex items-center justify-center group-hover:border-[#c5a059]/50 transition-colors duration-500">
-                        <User size={24} className="text-[#c5a059]/60 group-hover:text-[#c5a059] transition-colors" />
+                    <div className="flex-shrink-0 w-16 h-16 rounded-full bg-[#050a14] border border-[#c5a059]/20 flex items-center justify-center group-hover:border-[#c5a059]/50 transition-colors duration-500 overflow-hidden">
+                        {image ? (
+                            <img src={`/images/biografias/${image}`} alt={name} className="w-full h-full object-cover" />
+                        ) : (
+                            <User size={24} className="text-[#c5a059]/60 group-hover:text-[#c5a059] transition-colors" />
+                        )}
                     </div>
 
                     <div className="flex-grow">
