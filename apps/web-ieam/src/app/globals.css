@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ==========================================================================
+   IEAM — Premium Editorial Design System
+   Reference: Institut Montaigne / The Economist / Chatham House
+   ========================================================================== */
+
+:root {
+  /* Raw IEAM palette */
+  --ieam-navy-900: #0a2540;
+  --ieam-navy-700: #1a3a5c;
+  --ieam-mediterranean: #006994;
+  --ieam-accent-red: #d4212a;
+  --ieam-accent-terracotta: #c45831;
+  --ieam-accent-gold: #d4a72c;
+  --ieam-paper: #fafaf8;
+  --ieam-paper-warm: #f5f3ef;
+  --ieam-cream: #f8f5f0;
+  --ieam-surface-soft: #f8fafc;
+  --ieam-ink: #0a2540;
+  --ieam-ink-muted: #64748b;
+  --ieam-ink-subtle: #94a3b8;
+  --ieam-hairline: #e2e8f0;
+  --ieam-hairline-subtle: #f1f5f9;
+
+  /* Legacy aliases — preserved so ported Vite components work verbatim
+     without class/var renames. Do not remove until every component
+     references the --ieam-* names directly. */
+  --color-navy-900: var(--ieam-navy-900);
+  --color-navy-700: var(--ieam-navy-700);
+  --color-mediterranean: var(--ieam-mediterranean);
+  --color-accent-red: var(--ieam-accent-red);
+  --color-accent-terracotta: var(--ieam-accent-terracotta);
+  --color-accent-gold: var(--ieam-accent-gold);
+  --color-paper: var(--ieam-paper);
+  --color-paper-warm: var(--ieam-paper-warm);
+  --color-cream: var(--ieam-cream);
+  --color-surface-soft: var(--ieam-surface-soft);
+  --color-text-primary: var(--ieam-ink);
+  --color-text-secondary: var(--ieam-ink-muted);
+  --color-text-muted: var(--ieam-ink-subtle);
+  --color-border: var(--ieam-hairline);
+  --color-border-subtle: var(--ieam-hairline-subtle);
+
+  /* Editorial rhythm */
+  --section-padding-y: 4rem;
+  --section-padding-y-lg: 6rem;
+  --container-max: 1280px;
+  --container-reading: 680px;
+
+  /* Effects */
+  --shadow-editorial: 0 25px 50px -12px rgb(10 37 64 / 0.25);
+  --transition-base: 200ms ease;
+}
+
+@theme inline {
+  /* Color utilities */
+  --color-navy-900: var(--ieam-navy-900);
+  --color-navy-700: var(--ieam-navy-700);
+  --color-mediterranean: var(--ieam-mediterranean);
+  --color-accent-red: var(--ieam-accent-red);
+  --color-accent-terracotta: var(--ieam-accent-terracotta);
+  --color-paper: var(--ieam-paper);
+  --color-paper-warm: var(--ieam-paper-warm);
+  --color-cream: var(--ieam-cream);
+  --color-surface-soft: var(--ieam-surface-soft);
+  --color-ink: var(--ieam-ink);
+  --color-ink-muted: var(--ieam-ink-muted);
+  --color-ink-subtle: var(--ieam-ink-subtle);
+  --color-hairline: var(--ieam-hairline);
+  --color-hairline-subtle: var(--ieam-hairline-subtle);
+
+  /* Typography families — injected via next/font CSS variables in layout */
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+body {
+  background: var(--ieam-paper);
+  color: var(--ieam-ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-playfair), Georgia, serif;
+  color: var(--ieam-ink);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.625;
+}
+
+a {
+  color: var(--ieam-mediterranean);
+  transition: color var(--transition-base);
+}
+
+a:hover {
+  color: var(--ieam-navy-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ieam-mediterranean);
+  outline-offset: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--ieam-accent-red);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Editorial layout helpers
+   Mirrors the Vite app (`page-shell`, `section-shell`, `reading-width`,
+   `eyebrow`, `hairline`) so components port over with no class renames.
+   ========================================================================== */
+
+.page-shell {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding: 0 2rem;
+  }
+}
+
+.section-shell {
+  padding: var(--section-padding-y) 0;
+}
+
+.section-shell-lg {
+  padding: var(--section-padding-y-lg) 0;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding: 6rem 0;
+  }
+
+  .section-shell-lg {
+    padding: 8rem 0;
+  }
+}
+
+.reading-width {
+  max-width: var(--container-reading);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ieam-ink-muted);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--ieam-accent-red);
+  border-radius: 9999px;
+}
+
+.hairline {
+  border-color: var(--ieam-hairline);
+}

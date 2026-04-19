@@ -129,17 +129,17 @@ export async function POST(req: Request) {
         }
     } else if (event.type === 'checkout.session.expired') {
         const session = event.data.object as Stripe.Checkout.Session;
-        
+
         // Prevent infinite loops by checking metadata.recovery_attempt
         const attempts = parseInt(session.metadata?.recovery_attempt || '0', 10);
-        
+
         if (attempts < 2) {
             console.log(`⚠️  Session expired for ${session.customer_email}. Attempting to regenerate (attempt ${attempts + 1}).`);
-            
+
             try {
                 // Fetch the line items from the expired session
                 const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
-                
+
                 if (lineItems.data.length > 0 && session.customer_email) {
                     // Prepare the new line items format for session creation
                     const newLineItems = lineItems.data.map(item => {
@@ -169,7 +169,7 @@ export async function POST(req: Request) {
 
                     // Send an email to the customer with the new link
                     const { sendEmail } = await import('@/lib/email');
-                    
+
                     await sendEmail({
                         to: session.customer_email,
                         subject: `💡 Tu enlace de inscripción ha expirado. Aquí tienes uno nuevo.`,
@@ -187,7 +187,7 @@ export async function POST(req: Request) {
                             </div>
                         `
                     });
-                    
+
                     console.log(`✅  Recovery email sent with new session: ${newSession.id}`);
                 } else {
                     console.log('⚠️  Could not recover session. Missing line items or customer email.');

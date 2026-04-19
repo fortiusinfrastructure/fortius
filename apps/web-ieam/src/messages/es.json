@@ -1,0 +1,370 @@
+{
+    "Metadata": {
+        "title": "IEAM · Instituto de Estudios sobre África y el Mediterráneo",
+        "description": "Think tank independiente que analiza las dinámicas de migración, seguridad y diálogo entre Europa, África y el Mediterráneo.",
+        "ogDescription": "Centro independiente de investigación y reflexión sobre movilidad, seguridad y cooperación entre Europa y África.",
+        "twitterDescription": "Think tank independiente sobre migraciones, seguridad y Mediterráneo."
+    },
+    "hero": {
+        "eyebrow": "Think Tank independiente · Europa · África",
+        "title_start": "Centro independiente de",
+        "title_highlight": "investigación y reflexión",
+        "title_end": "sobre migraciones",
+        "subtitle": "Construyendo puentes estratégicos entre Europa, África y el Mediterráneo.",
+        "cta_explore": "Explorar análisis",
+        "cta_events": "Ver próximos eventos",
+        "featured": {
+            "label": "Informe Destacado",
+            "title": "Repensar la Movilidad entre Mali y Europa",
+            "subtitle": "Un nuevo marco de cooperación para una gestión migratoria sostenible y humana.",
+            "reading_time": "Lectura: 12 min",
+            "read_now": "Leer ahora"
+        }
+    },
+    "strategy": {
+        "title": "Nuestra Metodología",
+        "cta": "Saber más",
+        "items": {
+            "0": {
+                "title": "Diálogo Estratégico",
+                "tags": [
+                    "Talleres",
+                    "Foros",
+                    "Diplomacia"
+                ],
+                "description": "Talleres de inteligencia colectiva, foros multilaterales (Madrid, Bruselas, Marruecos, Túnez, Bamako, Dakar) y cocreación con contrapartes africanas y europeas para validar políticas y programas."
+            },
+            "1": {
+                "title": "Investigación",
+                "tags": [
+                    "Informes",
+                    "Datos",
+                    "Análisis"
+                ],
+                "description": "Revisión de marcos normativos, literatura académica y fuentes abiertas. Publicaciones con datos secundarios, encuestas y entrevistas en España, Europa y terreno."
+            },
+            "2": {
+                "title": "Divulgación y Advocacy",
+                "tags": [
+                    "Policy Briefs",
+                    "Medios",
+                    "Advocacy"
+                ],
+                "description": "Policy briefs en ES/EN/FR/AR con recomendaciones prácticas; campañas multicanal y rondas de incidencia ante UE, parlamentos y gobiernos, apoyadas en evidencia y testimonios."
+            }
+        }
+    },
+    "newsletter": {
+        "label": "Contacto",
+        "title": "Ponte en contacto con nosotros",
+        "subtitle": "¿Tienes alguna pregunta o comentario? Estamos aquí para ayudarte y colaborar en proyectos relacionados con migraciones y políticas públicas.",
+        "placeholder": "Tu correo electrónico",
+        "button": "Enviar",
+        "privacy_text": "Acepto la",
+        "privacy_link": "política de privacidad",
+        "social_title": "Síguenos en redes",
+        "social_text": "Conversaciones abiertas con la comunidad IEAM: actualizaciones, directos y convocatorias."
+    },
+    "analysis": {
+        "section_title": "Últimos análisis",
+        "view_archive": "Ver archivo completo"
+    },
+    "home_events": {
+        "section_title": "Agenda IEAM",
+        "view_agenda": "Ver agenda completa"
+    },
+    "about": {
+        "hero": {
+            "title": "Quiénes somos",
+            "description": "Transformamos la complejidad migratoria en soluciones. Creemos en la cooperación, el análisis basado en datos y el diálogo constructivo para diseñar un futuro donde la movilidad humana sea una oportunidad para ambas regiones.",
+            "floating_quote": "\"Transformamos la complejidad migratoria en soluciones. Creemos en la cooperación, el análisis basado en datos y el diálogo constructivo para diseñar un futuro donde la movilidad humana sea una oportunidad para ambas regiones.\""
+        },
+        "mission": {
+            "title": "Misión",
+            "description": "Ofrecer análisis riguroso, proponer políticas innovadoras y generar espacios de diálogo que permitan anticipar y gestionar la migración africana de manera sostenible, humana y útil para ambas regiones."
+        },
+        "vision": {
+            "title": "Visión",
+            "description": "Una Europa conectada con África mediante canales ordenados de movilidad que impulsen el desarrollo compartido de ambas regiones."
+        },
+        "principles": {
+            "title": "Principios",
+            "subtitle": "Valores que guían nuestra investigación y acción pública.",
+            "items": {
+                "national_interest": {
+                    "title": "Interés nacional",
+                    "description": "Velar por los intereses de España."
+                },
+                "evidence": {
+                    "title": "Evidencia y rigor",
+                    "description": "Datos verificables y revisión crítica."
+                },
+                "coresponsibility": {
+                    "title": "Corresponsabilidad",
+                    "description": "Soluciones co-diseñadas con socios africanos y europeos."
+                },
+                "dignity": {
+                    "title": "Dignidad",
+                    "description": "Enfoque humano en la realidad migratoria."
+                },
+                "public_utility": {
+                    "title": "Utilidad pública",
+                    "description": "Productos claros para decisiones reales."
+                },
+                "integrity": {
+                    "title": "Integridad",
+                    "description": "Transparencia financiera y de alianzas."
+                }
+            }
+        },
+        "team": {
+            "title": "Nuestro Equipo",
+            "label": "Nuestro Equipo",
+            "bio_button": "Bio"
+        },
+        "cta": {
+            "title": "Impulsa el debate. Transforma la política.",
+            "description": "No somos un centro de estudios convencional. En el IEAM buscamos mentes analíticas y espíritus prácticos dispuestos a convertir sus ideas en políticas reales.",
+            "button": "Contáctanos"
+        },
+        "partners": {
+            "label": "Colaboramos con",
+            "description": "Las colaboraciones académicas son una pieza clave para reforzar la base investigadora del IEAM, trabajar de la mano de expertos en materia migratoria y apoyar la aplicación de sus propuestas en materia de política pública.",
+            "unav": {
+                "name": "Universidad de Navarra",
+                "text": "En el marco del convenio con la Universidad de Navarra, se elaboró el informe \"Migraciones y migrantes: las rutas migratorias irregulares hacia Europa. España, un estudio de caso\", que aporta un análisis técnico sobre las rutas irregulares hacia Europa con especial foco en España. Publicación prevista para diciembre 2025."
+            },
+            "uir": {
+                "name": "Universidad Internacional de Rabat (UIR)",
+                "text": "El convenio con la UIR refuerza la perspectiva euromediterránea y africana del IEAM, contribuyendo a profundizar el análisis de dinámicas regionales de movilidad entre el Magreb, África Occidental y Europa."
+            },
+            "foessa": {
+                "name": "Fundación FOESSA",
+                "text": "El IEAM fue seleccionado como ganador del Concurso de Proyectos de Investigación 2025 con el proyecto “Puentes y Muros: Caminos hacia la inclusión de las personas migrantes en España”, que analiza los desafíos de la inclusión social y las vías de integración de las personas migrantes."
+            },
+            "others_title": "Otras entidades colaboradoras"
+        }
+    },
+    "research": {
+        "hero": {
+            "title": "Investigación",
+            "subtitle": "Análisis riguroso y basado en evidencia para informar políticas públicas.",
+            "quote": "Transformar datos en conocimiento accionable para construir políticas migratorias más justas y efectivas."
+        },
+        "pillars": {
+            "title": "Nuestros pilares",
+            "subtitle": "En el IEAM tenemos nueve pilares clave, conócelos",
+            "items": {
+                "mobility": {
+                    "title": "Movilidad legal y ordenada",
+                    "description": "Diseño y escalado de vías seguras como herramienta eficaz contra la trata y la explotación."
+                },
+                "routes": {
+                    "title": "Rutas y geografías clave",
+                    "description": "Foco en el Mar Mediterráneo y el Océano Atlántico (Mauritania, Senegal, Costa de Marfil) con lectura integrada del Sahel y África Central."
+                },
+                "governance": {
+                    "title": "Gobernanza y marcos normativos",
+                    "description": "Seguimiento comparado de políticas y leyes en Europa y África, e impulso de mejoras procedimentales en España."
+                },
+                "economy": {
+                    "title": "Economía, empleo y empresa",
+                    "description": "Cooperación público-privada para vincular necesidades reales de mano de obra con formación dual, movilidad circular e inversión conjunta en cadenas de valor."
+                },
+                "diaspora": {
+                    "title": "Diásporas y desarrollo",
+                    "description": "Apoyo a liderazgo, emprendimiento y remesas productivas; vínculos transnacionales y contranarrativas frente a la desinformación."
+                },
+                "narratives": {
+                    "title": "Percepciones y narrativas públicas",
+                    "description": "Diagnóstico multi-actor (gobiernos, sociedad civil, empresas y medios) para orientar comunicación y políticas basadas en evidencia."
+                },
+                "diplomacy": {
+                    "title": "Alianzas y diplomacia UE-África",
+                    "description": "Incentivos para cooperar con Europa, incidencia parlamentaria y aprendizaje comparado (benchmarking con Italia y Francia)."
+                },
+                "protection": {
+                    "title": "Protección y salvaguardas",
+                    "description": "Gobernanza fronteriza con enfoque de derechos, atención a menores y género, y retornos y reintegración con dignidad."
+                },
+                "data": {
+                    "title": "Datos, evaluación y aprendizaje",
+                    "description": "Monitorización de tendencias por país, métricas de impacto y ajuste continuo de programas."
+                }
+            }
+        },
+        "categories": {
+            "reports": "Informes",
+            "infographics": "Infografías",
+            "events_review": "Reseña de eventos",
+            "press": "Entrevistas y prensa",
+            "analysis": "Análisis",
+            "policy_brief": "Policy Brief"
+        },
+        "load_more": "Cargar más publicaciones",
+        "no_results": "No hay publicaciones en esta categoría por el momento."
+    },
+    "events": {
+        "hero": "Eventos",
+        "hero_description": "Seminarios, conferencias y talleres que reúnen a expertos, instituciones y sociedad civil.",
+        "hero_quote": "El diálogo es el primer paso hacia soluciones compartidas. Cada evento es una oportunidad para construir puentes.",
+        "upcoming": {
+            "title": "Próximos eventos",
+            "description": "En esta sección publicaremos los próximos eventos y actividades del IEAM.",
+            "badge": "Próximos"
+        },
+        "past": {
+            "title": "Eventos pasados",
+            "view_details": "Ver detalles"
+        }
+    },
+    "navigation": {
+        "home": "Inicio",
+        "about": "Quiénes somos",
+        "research": "Investigación",
+        "events": "Eventos",
+        "dialogue": "Diálogo Mediterráneo",
+        "collaborate": "Colabora",
+        "contact": "Contacto"
+    },
+    "contact": {
+        "hero": {
+            "title": "Contacto",
+            "description": "Estamos abiertos a la colaboración y al diálogo. Cuéntanos cómo podemos ayudarte o trabajar juntos.",
+            "quote": "Cada conversación es una oportunidad para construir puentes y generar impacto positivo."
+        },
+        "info": {
+            "title": "Información de contacto",
+            "description": "Para consultas generales, propuestas de investigación o solicitudes de prensa, puedes utilizar el formulario o escribirnos directamente.",
+            "headquarters": "Sede",
+            "location": "Madrid, España"
+        },
+        "press": {
+            "title": "Prensa y Medios",
+            "description": "Si necesitas recursos gráficos, declaraciones o concertar una entrevista con nuestro equipo investigador."
+        },
+        "form": {
+            "title": "Envíanos un mensaje",
+            "name": "Nombre",
+            "name_placeholder": "Tu nombre completo",
+            "email_placeholder": "tucorreo@ejemplo.com",
+            "subject": "Asunto",
+            "subject_placeholder": "Selecciona un motivo",
+            "subject_general": "Información General",
+            "subject_press": "Prensa y Medios",
+            "subject_interview": "Solicitud de Entrevista",
+            "subject_collaboration": "Colaboraciones y Alianzas",
+            "subject_other": "Otro",
+            "message": "Mensaje",
+            "message_placeholder": "¿En qué podemos ayudarte?",
+            "privacy_text": "He leído y acepto la",
+            "privacy_link": "política de privacidad",
+            "privacy_consent": "y consiento el tratamiento de mis datos para responder a esta consulta.",
+            "submit": "Enviar Mensaje",
+            "success": "Gracias por tu mensaje. Nos pondremos en contacto contigo pronto."
+        }
+    },
+    "collaborate": {
+        "hero": {
+            "label": "Colabora con nosotros",
+            "title": "Impulsa el análisis independiente",
+            "description": "Tu apoyo hace posible la investigación rigurosa sobre seguridad, migraciones y geopolítica en el espacio euro-africano y mediterráneo."
+        },
+        "tiers": {
+            "title": "Elige tu forma de colaborar",
+            "subtitle": "Todas las contribuciones apoyan directamente nuestra misión de análisis independiente.",
+            "basic": {
+                "title": "Apoyo Básico",
+                "description": "Colaboración puntual para apoyar nuestra labor",
+                "impact": "Contribuye a la publicación de un artículo de análisis"
+            },
+            "solidarity": {
+                "title": "Apoyo Solidario",
+                "description": "Impulsa la investigación independiente",
+                "impact": "Financia la creación de una infografía de datos",
+                "badge": "Más popular"
+            },
+            "institutional": {
+                "title": "Apoyo Institucional",
+                "description": "Respaldo significativo a nuestra misión",
+                "impact": "Patrocina un policy brief completo"
+            },
+            "frequency": "Donación única",
+            "button": "Donar"
+        },
+        "custom": {
+            "title": "Monto personalizado",
+            "subtitle": "Elige la cantidad que desees aportar",
+            "placeholder": "Cantidad",
+            "button": "Donar"
+        },
+        "switch": {
+            "monthly": "Apoyo Periódico",
+            "one_time": "Apoyo Puntual",
+            "save_badge": "Ahorra {{percent}}%",
+            "per_year": "/año",
+            "per_month": "/mes"
+        },
+        "impact": {
+            "title": "Tu impacto",
+            "subtitle": "Cada contribución fortalece nuestra capacidad de análisis independiente.",
+            "research": {
+                "title": "Investigación",
+                "description": "Publicamos análisis rigurosos sobre seguridad, migraciones y geopolítica mediterránea."
+            },
+            "dialogue": {
+                "title": "Diálogo",
+                "description": "Organizamos encuentros entre expertos, académicos y decisores políticos."
+            },
+            "independence": {
+                "title": "Independencia",
+                "description": "Tu apoyo garantiza nuestra independencia editorial y analítica."
+            }
+        },
+        "other_ways": {
+            "title": "¿Prefieres colaborar de otra forma?",
+            "description": "Para donaciones institucionales, patrocinios o colaboraciones especiales, contacta con nuestro equipo.",
+            "button": "Contactar"
+        }
+    },
+    "footer": {
+        "sections": {
+            "navigation": "Navegación",
+            "explore": "Explorar",
+            "institute": "El Instituto",
+            "resources": "Recursos",
+            "legal": "Legal",
+            "contact": "Contacto",
+            "follow_us": "Síguenos"
+        },
+        "contact_info": "Centro independiente de investigación y reflexión sobre migraciones. Construyendo puentes entre Europa, África y el Mediterráneo.",
+        "location": "Madrid, España",
+        "legal": {
+            "privacy": "Política de Privacidad",
+            "cookies": "Política de Cookies",
+            "legal_notice": "Aviso Legal"
+        },
+        "description": "Transformando el debate sobre migración con datos y diálogo.",
+        "rights": "Todos los derechos reservados."
+    },
+    "common": {
+        "read_more": "Leer más",
+        "by": "por",
+        "badges": {
+            "infografía": "Infografía",
+            "infografia": "Infografía",
+            "informe": "Informe",
+            "analisis": "Análisis",
+            "análisis": "Análisis",
+            "entrevista": "Entrevista",
+            "policy_brief": "Policy Brief",
+            "reseña_de_evento": "Reseña de evento",
+            "evento": "Evento",
+            "cumbre": "Cumbre",
+            "taller": "Taller",
+            "foro": "Foro",
+            "diálogo": "Diálogo",
+            "dialogo": "Diálogo"
+        }
+    }
+}
