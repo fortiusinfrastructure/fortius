@@ -302,9 +302,10 @@
         "switch": {
             "monthly": "Recurring Support",
             "one_time": "One-time Support",
-            "save_badge": "Save {{percent}}%",
+            "save_badge": "Save {percent}%",
             "per_year": "/year",
-            "per_month": "/month"
+            "per_month": "/month",
+            "monthly_alt": "Or donate monthly:"
         },
         "impact": {
             "title": "Your Impact",
@@ -367,5 +368,25 @@
             "diálogo": "Dialogue",
             "dialogo": "Dialogue"
         }
+    },
+    "article": {
+        "author": "Author",
+        "authors": "Authors",
+        "read_time_suffix": "read",
+        "related_label": "Related Articles",
+        "keep_exploring": "Keep exploring",
+        "read_more": "Read more"
+    },
+    "event": {
+        "back_to_events": "Back to events",
+        "date": "Date",
+        "location": "Location",
+        "audience": "Audience",
+        "programme": "Programme",
+        "speakers": "Speakers",
+        "registration": "Registration",
+        "upcoming_label": "Upcoming event",
+        "past_label": "Past event",
+        "external_label": "External event"
     }
 }

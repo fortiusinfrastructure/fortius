@@ -301,9 +301,10 @@
         "switch": {
             "monthly": "Apoyo Periódico",
             "one_time": "Apoyo Puntual",
-            "save_badge": "Ahorra {{percent}}%",
+            "save_badge": "Ahorra {percent}%",
             "per_year": "/año",
-            "per_month": "/mes"
+            "per_month": "/mes",
+            "monthly_alt": "O donar mensual:"
         },
         "impact": {
             "title": "Tu impacto",
@@ -366,5 +367,25 @@
             "diálogo": "Diálogo",
             "dialogo": "Diálogo"
         }
+    },
+    "article": {
+        "author": "Autor",
+        "authors": "Autores",
+        "read_time_suffix": "lectura",
+        "related_label": "Artículos relacionados",
+        "keep_exploring": "Sigue explorando",
+        "read_more": "Leer más"
+    },
+    "event": {
+        "back_to_events": "Volver a eventos",
+        "date": "Fecha",
+        "location": "Ubicación",
+        "audience": "Público",
+        "programme": "Programa",
+        "speakers": "Ponentes",
+        "registration": "Inscripción",
+        "upcoming_label": "Próximo evento",
+        "past_label": "Evento pasado",
+        "external_label": "Evento externo"
     }
 }

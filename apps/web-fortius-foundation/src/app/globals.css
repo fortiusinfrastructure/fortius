@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ==========================================================================
+   FORTIUS FOUNDATION — Design System Tokens
+   Dark institutional minimalism + granate verde (base #164735)
+   ========================================================================== */
+
+:root {
+  /* --- Neutral Scale (cool navy darks — sibling to Consulting) --- */
+  --color-neutral-1000: #020508;
+  --color-neutral-950:  #050a14;
+  --color-neutral-900:  #0a111e;
+  --color-neutral-850:  #0f1724;
+  --color-neutral-800:  #141d2e;
+  --color-neutral-750:  #1a2538;
+  --color-neutral-700:  #1e232e;
+  --color-neutral-650:  #252d3a;
+  --color-neutral-600:  #2e3746;
+  --color-neutral-550:  #3a4456;
+  --color-neutral-500:  #4a5568;
+  --color-neutral-400:  #6e7f96;
+  --color-neutral-300:  #97a5b6;
+  --color-neutral-200:  #c2cad5;
+  --color-neutral-100:  #e4e8ed;
+  --color-neutral-50:   #f0f2f5;
+
+  /* --- Brand: Foundation (Deep Forest Green — base #164735) ---
+     Scale designed so 500 is a slightly brighter, more vibrant variant
+     that reads well on the dark surface while staying in the #164735 family. */
+  --color-accent-900: #061812;
+  --color-accent-800: #0b261c;
+  --color-accent-700: #0f3227;
+  --color-accent-600: #123c2e;
+  --color-accent-500: #164735;  /* brand base */
+  --color-accent-450: #1f5f47;
+  --color-accent-400: #2d7a5b;
+  --color-accent-300: #4f9b7c;
+  --color-accent-200: #83c0a2;
+  --color-accent-100: #c0dfd0;
+
+  /* --- Consulting (sibling accent — kept for cross-brand footer/lockups) --- */
+  --color-sibling-500: #e94748;
+  --color-sibling-400: #ee6c6d;
+  --color-sibling-muted: rgba(233, 71, 72, 0.12);
+
+  /* --- Gold (heritage from EH ecosystem) --- */
+  --color-gold-600: #b89440;
+  --color-gold-500: #c5a059;
+  --color-gold-400: #d4b169;
+
+  /* --- Semantic: Surfaces --- */
+  --surface-primary:     var(--color-neutral-950);
+  --surface-secondary:   var(--color-neutral-900);
+  --surface-tertiary:    var(--color-neutral-850);
+  --surface-elevated:    var(--color-neutral-800);
+  --surface-header:      rgba(30, 35, 46, 0.95);
+  --surface-overlay:     rgba(5, 10, 20, 0.80);
+  --surface-highlight:   rgba(22, 71, 53, 0.10);
+  --surface-brand:       #0d2b20; /* deep green-dark, used for "brand bands" */
+
+  /* --- Semantic: Text --- */
+  --text-primary:        #E7E5E4;
+  --text-secondary:      rgba(231, 229, 228, 0.70);
+  --text-tertiary:       rgba(231, 229, 228, 0.40);
+  --text-inverse:        var(--color-neutral-950);
+  --text-accent:         var(--color-accent-300);
+
+  /* --- Semantic: Borders --- */
+  --border-default:      rgba(255, 255, 255, 0.08);
+  --border-subtle:       rgba(255, 255, 255, 0.04);
+  --border-strong:       rgba(255, 255, 255, 0.15);
+  --border-accent:       var(--color-accent-500);
+
+  /* --- Shadows & Glow --- */
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md:     0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.45);
+  --shadow-xl:     0 16px 64px rgba(0, 0, 0, 0.5);
+  --glow-accent:   0 0 30px rgba(22, 71, 53, 0.30);
+
+  /* --- Motion --- */
+  --duration-fast:     150ms;
+  --duration-normal:   300ms;
+  --duration-slow:     500ms;
+  --ease-out:          cubic-bezier(0.22, 0.61, 0.36, 1.0);
+  --ease-spring:       cubic-bezier(0.16, 1.0, 0.3, 1.0);
+
+  /* --- Spacing --- */
+  --container-max: 1400px;
+  --container-px:  16px;
+  --nav-height:    72px;
+
+  color-scheme: dark;
+}
+
+@media (min-width: 768px) {
+  :root { --container-px: 24px; }
+}
+@media (min-width: 1024px) {
+  :root { --container-px: 40px; }
+}
+
+@theme inline {
+  --color-background: var(--surface-primary);
+  --color-foreground: var(--text-primary);
+
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-brand: var(--surface-brand);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-300: var(--color-accent-300);
+
+  --color-border: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-source-sans), "Source Sans 3", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+}
+
+body {
+  background: var(--surface-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body), "Source Sans 3", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-accent-500);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-400);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-primary); }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-600); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-400); }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

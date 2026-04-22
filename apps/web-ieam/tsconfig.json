@@ -25,6 +25,12 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@fortius/database": [
+        "../../packages/database/src/index.ts"
+      ],
+      "@fortius/admin-ui": [
+        "../../packages/admin-ui/src/index.ts"
       ]
     }
   },

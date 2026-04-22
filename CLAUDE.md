@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Fortius is a multi-organization digital ecosystem with a shared Supabase backend (multi-tenant via `organization_id`). Currently, only **Escuela Hispánica (EH)** is under active development as a Next.js 16 app. IEAM and Mediterranean Dialogue exist as separate Vite apps but are not being developed.
+Fortius is a multi-organization digital ecosystem with a shared Supabase backend (multi-tenant via `organization_id`). Active Next.js apps: **Escuela Hispánica (EH)**, **IEAM**, **Fortius Consulting**, **Fortius Fundación**. Mediterranean Dialogue is not being developed.
 
 ## Commands
 
@@ -30,22 +30,54 @@ pnpm check-types                # TypeScript check
 ```
 fortius/
 ├── apps/
-│   └── web-escuela-hispanica/    # Next.js 16 + next-intl (ES/EN/PT)
-│       ├── src/app/[locale]/     # App Router with i18n
-│       ├── src/app/api/          # API routes (checkout, webhooks, admin)
-│       ├── src/components/       # React components (EH-specific)
-│       ├── src/lib/
-│       │   ├── auth/actions.ts   # Server Actions (signIn, signUp, signOut)
-│       │   ├── stripe/           # Stripe SDK + HMAC tokens
-│       │   ├── email/            # Resend wrapper
-│       │   └── mock-data/        # Static data (pending Supabase migration)
-│       └── src/messages/         # i18n dictionaries (es.json, en.json, pt.json)
+│   ├── web-escuela-hispanica/    # Next.js 16 + next-intl (ES/EN/PT)
+│   │   ├── src/app/[locale]/     # App Router with i18n
+│   │   ├── src/app/api/          # API routes (checkout, webhooks, admin)
+│   │   ├── src/components/       # React components (EH-specific)
+│   │   ├── src/lib/
+│   │   │   ├── auth/actions.ts   # Server Actions (signIn, signUp, signOut)
+│   │   │   ├── stripe/           # Stripe SDK + HMAC tokens
+│   │   │   ├── email/            # Resend wrapper
+│   │   │   └── mock-data/        # Static data (pending Supabase migration)
+│   │   └── src/messages/         # i18n dictionaries (es.json, en.json, pt.json)
+│   └── web-ieam/                 # Next.js + next-intl (ES/EN)
+│       ├── src/app/[locale]/     # Public site (analisis, eventos, nosotros…)
+│       ├── src/app/admin/        # CMS admin — no locale prefix
+│       │   ├── (shell)/articles/ # CRUD artículos
+│       │   └── (shell)/events/   # CRUD eventos
+│       ├── src/lib/admin/        # Server Actions + queries (admin)
+│       │   ├── article-actions.ts  # 'use server' mutations
+│       │   ├── article-queries.ts  # Read-only (no 'use server')
+│       │   ├── event-actions.ts    # 'use server' mutations
+│       │   ├── event-queries.ts    # Read-only (no 'use server')
+│       │   └── auth.ts             # requireAdminUser()
+│       └── scripts/seed-content.ts # Seed mock data → Supabase
+│   ├── web-fortius-consulting/   # Next.js 16 — site Fortius Consulting
+│   │   ├── src/app/(consulting)/ # Route group: home, nosotros, sociedad-civil,
+│   │   │                         #   inteligencia, contacto, fundacion
+│   │   ├── src/app/lab/          # Design lab + prototipos (noindex)
+│   │   ├── src/components/consulting-v2/  # NavV2, HeroEditorial, VerticalSection,
+│   │   │                         #   PersonCard, PersonDialog, PersonPortrait, etc.
+│   │   └── src/content/          # home-v2.ts (verticales) + team.ts (personas + expertos)
+│   └── web-fortius-foundation/   # Next.js 16 — site Fortius Fundación (grant-making)
+│       ├── src/app/(foundation)/ # Route group: home, nosotros (F2: incubadora, ayudas, blog)
+│       ├── src/components/foundation/     # NavF, FooterF, HeroFoundation,
+│       │                         #   IncubadoraTeaser, AyudasTeaser, DonacionesCTA,
+│       │                         #   NewsletterCTA, PersonCard, PersonDialog, PersonPortrait,
+│       │                         #   FoundationLockup, BrandBanner
+│       └── src/content/          # team.ts (patronato + consejo asesor + equipo),
+│                                 #   projects.ts (incubadora + casos éxito), impact.ts
 ├── packages/
+│   ├── admin-ui/                 # @fortius/admin-ui — componentes CMS compartibles
+│   │   └── src/components/       # ArticleEditor, EventEditor, RichTextEditor,
+│   │                             #   ImageUpload, MultilangTabs, AdminShell
 │   ├── database/                 # @fortius/database
 │   │   └── src/
 │   │       ├── client/browser.ts # Client-side Supabase
 │   │       ├── client/server.ts  # Server Component Supabase
 │   │       ├── client/admin.ts   # Admin client (bypasses RLS)
+│   │       ├── queries/articles.ts
+│   │       ├── queries/activities.ts
 │   │       └── types/database.ts # Generated DB types
 │   ├── eslint-config/            # Shared ESLint
 │   └── typescript-config/        # Shared TS config
@@ -133,6 +165,30 @@ RESEND_API_KEY=
 APPROVAL_SECRET=
 APPROVER_EMAIL=
 ```
+
+## IEAM Admin CMS
+
+`/admin` routes bypass i18n (no locale prefix). Auth via middleware — redirige a `/admin/login` si no hay sesión. `requireAdminUser()` en cada Server Component verifica `role='admin'` en `user_memberships` para `org='ieam'`.
+
+### Patrón edit page (App Router)
+
+Las páginas de edición son **Server Components** que cargan el dato y lo pasan a un Client Component con el formulario. Las funciones de lectura viven en `*-queries.ts` (sin `'use server'`). Las mutaciones viven en `*-actions.ts` (con `'use server'`). Mezclar lecturas en archivos `'use server'` y llamarlas desde `useEffect` causa "Invalid Server Actions request".
+
+```
+page.tsx (Server Component)
+  └─ getEventById()  ← desde event-queries.ts (sin 'use server')
+  └─ <EditEventForm initialData={...} />  ← Client Component
+       └─ updateEventAction()  ← desde event-actions.ts ('use server')
+```
+
+### Seed script IEAM
+
+```bash
+# Desde la raíz del monorepo (fortius/)
+pnpm tsx apps/web-ieam/scripts/seed-content.ts
+```
+
+Requiere `NEXT_PUBLIC_SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` en `apps/web-ieam/.env` (o `.env.local`). Idempotente — safe re-ejecutar.
 
 ## Conventions
 

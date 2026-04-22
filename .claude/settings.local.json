@@ -10,7 +10,15 @@
       "Bash(ls /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-consulting/postcss.config.*)",
       "Bash(ls /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-consulting/next.config.*)",
       "Bash(pnpm build:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(mkdir -p \"/Users/dasalazarr/Projects/Fortius/fortius/apps/web-ieam/src/app/admin/\\(shell\\)/articles/[id]/edit\")",
+      "Bash(mkdir -p \"/Users/dasalazarr/Projects/Fortius/fortius/apps/web-ieam/src/app/admin/\\(shell\\)/events/[id]/edit\")",
+      "Bash(cp \"apps/web-ieam/src/app/admin/articles/[id]/edit/page.tsx\" \"apps/web-ieam/src/app/admin/\\(shell\\)/articles/[id]/edit/page.tsx\")",
+      "Bash(cp \"apps/web-ieam/src/app/admin/events/[id]/edit/page.tsx\" \"apps/web-ieam/src/app/admin/\\(shell\\)/events/[id]/edit/page.tsx\")",
+      "Bash(pnpm check-types *)",
+      "Bash(pnpm list *)",
+      "Bash(npx tsc *)",
+      "Bash(pnpm turbo *)"
     ]
   }
 }

@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/consulting/Hero";
-import { Method } from "@/components/consulting/Method";
-import { Statement } from "@/components/consulting/Statement";
-import { Services } from "@/components/consulting/Services";
-import { Intelligence } from "@/components/consulting/Intelligence";
-import { Experience } from "@/components/consulting/Experience";
-import { CTASection } from "@/components/consulting/CTASection";
+import { HeroEditorial } from "@/components/consulting-v2/HeroEditorial";
+import { VerticalSection } from "@/components/consulting-v2/VerticalSection";
+import { IdeasMarquee } from "@/components/consulting-v2/IdeasMarquee";
+import { FoundationBridge } from "@/components/consulting-v2/FoundationBridge";
+import { NewsletterCTA } from "@/components/consulting-v2/NewsletterCTA";
+import { VERTICALS } from "@/content/home-v2";
 
 export const metadata: Metadata = {
   title: "Fortius Consulting — Consultoría estratégica para organizaciones con principios",
   description:
-    "Asesoramos a organizaciones para maximizar el impacto de sus valores en la sociedad. Estrategia, ejecución y medición de resultados.",
+    "Acompañamos a organizaciones con principios y ofrecemos inteligencia política y geopolítica para decisiones de alto impacto.",
   openGraph: {
     title: "Fortius Consulting",
     description:
-      "Consultoría estratégica para organizaciones con principios. Transformamos la complejidad en ventaja estratégica.",
+      "Sociedad civil e inteligencia: dos verticales, un mismo estándar. Estrategia, análisis y ejecución al servicio de decisiones con valores.",
     type: "website",
     locale: "es_ES",
     siteName: "Fortius Consulting",
@@ -26,13 +25,12 @@ export const metadata: Metadata = {
   },
 };
 
-// Organization structured data
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Fortius Consulting",
   description:
-    "Consultoría estratégica para organizaciones con principios que buscan maximizar el impacto de sus valores en la sociedad.",
+    "Consultoría estratégica para organizaciones con principios e inteligencia política para decisiones de alto impacto.",
   url: "https://fortiusconsulting.com",
   foundingDate: "2010",
   areaServed: "Global",
@@ -40,12 +38,14 @@ const jsonLd = {
     "Strategic consulting",
     "Public affairs",
     "Impact measurement",
-    "Intelligence reports",
+    "Geopolitical intelligence",
     "Organizational development",
   ],
 };
 
 export default function ConsultingPage() {
+  const [civil, intelligence] = VERTICALS;
+
   return (
     <>
       <script
@@ -53,13 +53,12 @@ export default function ConsultingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="main-content">
-        <Hero />
-        <Method />
-        <Statement />
-        <Services />
-        <Intelligence />
-        <Experience />
-        <CTASection />
+        <HeroEditorial />
+        <VerticalSection vertical={civil} accentSide="left" />
+        <VerticalSection vertical={intelligence} accentSide="right" />
+        <IdeasMarquee />
+        <FoundationBridge />
+        <NewsletterCTA />
       </main>
     </>
   );

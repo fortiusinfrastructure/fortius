@@ -293,12 +293,21 @@ export interface Database {
                     title_es: string
                     title_en: string | null
                     title_pt: string | null
+                    subtitle_es: string | null
+                    subtitle_en: string | null
                     content_es: string
                     content_en: string | null
                     content_pt: string | null
                     excerpt_es: string | null
                     excerpt_en: string | null
                     excerpt_pt: string | null
+                    content_kind: string | null
+                    read_time: string | null
+                    materials: Json | null
+                    pull_quote_es: string | null
+                    pull_quote_en: string | null
+                    main_image_caption_es: string | null
+                    main_image_caption_en: string | null
                     author_name: string | null
                     author_id: string | null
                     published_at: string | null
@@ -317,12 +326,21 @@ export interface Database {
                     title_es: string
                     title_en?: string | null
                     title_pt?: string | null
+                    subtitle_es?: string | null
+                    subtitle_en?: string | null
                     content_es: string
                     content_en?: string | null
                     content_pt?: string | null
                     excerpt_es?: string | null
                     excerpt_en?: string | null
                     excerpt_pt?: string | null
+                    content_kind?: string | null
+                    read_time?: string | null
+                    materials?: Json | null
+                    pull_quote_es?: string | null
+                    pull_quote_en?: string | null
+                    main_image_caption_es?: string | null
+                    main_image_caption_en?: string | null
                     author_name?: string | null
                     author_id?: string | null
                     published_at?: string | null
@@ -341,12 +359,21 @@ export interface Database {
                     title_es?: string
                     title_en?: string | null
                     title_pt?: string | null
+                    subtitle_es?: string | null
+                    subtitle_en?: string | null
                     content_es?: string
                     content_en?: string | null
                     content_pt?: string | null
                     excerpt_es?: string | null
                     excerpt_en?: string | null
                     excerpt_pt?: string | null
+                    content_kind?: string | null
+                    read_time?: string | null
+                    materials?: Json | null
+                    pull_quote_es?: string | null
+                    pull_quote_en?: string | null
+                    main_image_caption_es?: string | null
+                    main_image_caption_en?: string | null
                     author_name?: string | null
                     author_id?: string | null
                     published_at?: string | null
@@ -359,6 +386,59 @@ export interface Database {
                     updated_at?: string | null
                 }
             }
+            article_authors: {
+                Row: {
+                    id: string
+                    article_id: string
+                    user_id: string | null
+                    display_order: number
+                    name: string
+                    name_en: string | null
+                    role_es: string | null
+                    role_en: string | null
+                    bio_es: string | null
+                    bio_en: string | null
+                    image_url: string | null
+                    linkedin: string | null
+                    email: string | null
+                    created_at: string | null
+                    updated_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    article_id: string
+                    user_id?: string | null
+                    display_order?: number
+                    name: string
+                    name_en?: string | null
+                    role_es?: string | null
+                    role_en?: string | null
+                    bio_es?: string | null
+                    bio_en?: string | null
+                    image_url?: string | null
+                    linkedin?: string | null
+                    email?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    article_id?: string
+                    user_id?: string | null
+                    display_order?: number
+                    name?: string
+                    name_en?: string | null
+                    role_es?: string | null
+                    role_en?: string | null
+                    bio_es?: string | null
+                    bio_en?: string | null
+                    image_url?: string | null
+                    linkedin?: string | null
+                    email?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+            }
             activities: {
                 Row: {
                     id: string
@@ -367,10 +447,19 @@ export interface Database {
                     title_es: string
                     title_en: string | null
                     title_pt: string | null
+                    subtitle_es: string | null
+                    subtitle_en: string | null
                     content_es: string
                     content_en: string | null
                     content_pt: string | null
                     excerpt_es: string | null
+                    excerpt_en: string | null
+                    format: string | null
+                    format_en: string | null
+                    agenda: Json | null
+                    agenda_title_es: string | null
+                    agenda_title_en: string | null
+                    highlight_image_url: string | null
                     event_date: string
                     end_date: string | null
                     location: string | null
@@ -392,10 +481,19 @@ export interface Database {
                     title_es: string
                     title_en?: string | null
                     title_pt?: string | null
+                    subtitle_es?: string | null
+                    subtitle_en?: string | null
                     content_es: string
                     content_en?: string | null
                     content_pt?: string | null
                     excerpt_es?: string | null
+                    excerpt_en?: string | null
+                    format?: string | null
+                    format_en?: string | null
+                    agenda?: Json | null
+                    agenda_title_es?: string | null
+                    agenda_title_en?: string | null
+                    highlight_image_url?: string | null
                     event_date: string
                     end_date?: string | null
                     location?: string | null
@@ -417,10 +515,19 @@ export interface Database {
                     title_es?: string
                     title_en?: string | null
                     title_pt?: string | null
+                    subtitle_es?: string | null
+                    subtitle_en?: string | null
                     content_es?: string
                     content_en?: string | null
                     content_pt?: string | null
                     excerpt_es?: string | null
+                    excerpt_en?: string | null
+                    format?: string | null
+                    format_en?: string | null
+                    agenda?: Json | null
+                    agenda_title_es?: string | null
+                    agenda_title_en?: string | null
+                    highlight_image_url?: string | null
                     event_date?: string
                     end_date?: string | null
                     location?: string | null
@@ -434,6 +541,44 @@ export interface Database {
                     metadata?: Json | null
                     created_at?: string | null
                     updated_at?: string | null
+                }
+            }
+            activity_speakers: {
+                Row: {
+                    id: string
+                    activity_id: string
+                    user_id: string | null
+                    display_order: number
+                    name: string
+                    role_es: string | null
+                    role_en: string | null
+                    group_name_es: string | null
+                    group_name_en: string | null
+                    created_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    activity_id: string
+                    user_id?: string | null
+                    display_order?: number
+                    name: string
+                    role_es?: string | null
+                    role_en?: string | null
+                    group_name_es?: string | null
+                    group_name_en?: string | null
+                    created_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    activity_id?: string
+                    user_id?: string | null
+                    display_order?: number
+                    name?: string
+                    role_es?: string | null
+                    role_en?: string | null
+                    group_name_es?: string | null
+                    group_name_en?: string | null
+                    created_at?: string | null
                 }
             }
             contact_submissions: {

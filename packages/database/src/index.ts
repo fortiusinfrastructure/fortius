@@ -3,3 +3,5 @@ export * from './client/browser';
 export * from './client/server';
 export * from './client/admin';
 export * from './queries/organizations';
+export * from './queries/articles';
+export * from './queries/activities';

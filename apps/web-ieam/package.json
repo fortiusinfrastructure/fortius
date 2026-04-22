@@ -10,6 +10,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@fortius/admin-ui": "workspace:*",
     "@fortius/database": "workspace:*",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.96.0",
@@ -24,6 +25,8 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "dotenv": "^16.0.0",
+    "tsx": "^4.7.0",
     "@fortius/eslint-config": "workspace:*",
     "@fortius/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4",

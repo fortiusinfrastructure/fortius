@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/shared/Navigation";
+import { NavV2 } from "@/components/consulting-v2/NavV2";
 import { Footer } from "@/components/shared/Footer";
 
 export default function ConsultingLayout({
@@ -8,7 +8,7 @@ export default function ConsultingLayout({
 }) {
   return (
     <>
-      <Navigation />
+      <NavV2 />
       {children}
       <Footer />
     </>

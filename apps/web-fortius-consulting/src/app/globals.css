@@ -42,6 +42,16 @@
   --color-gold-400: #d4b169;
   --color-gold-300: #dfbf7e;
 
+  /* --- Brand: Foundation (Green — sibling to Consulting red) --- */
+  --color-foundation-900: #0a1f16;
+  --color-foundation-800: #123a27;
+  --color-foundation-700: #1b563a;
+  --color-foundation-600: #27724d;
+  --color-foundation-500: #3a9c6e;
+  --color-foundation-400: #5cb890;
+  --color-foundation-300: #83cbab;
+  --color-foundation-muted: rgba(58, 156, 110, 0.12);
+
   /* --- Semantic: Surfaces --- */
   --surface-primary:     var(--color-neutral-950);
   --surface-secondary:   var(--color-neutral-900);

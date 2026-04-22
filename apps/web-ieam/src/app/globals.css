@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Scan @fortius/admin-ui package for Tailwind classes */
+@source "../../../packages/admin-ui/src/**/*.{ts,tsx}";
+
 /* ==========================================================================
    IEAM — Premium Editorial Design System
    Reference: Institut Montaigne / The Economist / Chatham House
