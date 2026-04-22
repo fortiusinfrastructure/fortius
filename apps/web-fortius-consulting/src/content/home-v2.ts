@@ -260,12 +260,11 @@ export const VERTICALS: VerticalDef[] = [
 ];
 
 export const RADICAL_IDEAS = [
-    "Gobernanza con principios",
-    "Inteligencia aplicada",
-    "Impacto medible",
-    "Sociedades fuertes",
-    "Análisis riguroso",
-    "Decisión informada",
-    "Estrategia con valores",
-    "Contexto antes que ruido",
+    "Universidad de Navarra",
+    "Acton Institute",
+    "The Lex Fellowship",
+    "Cruz del sur",
+    "OpenDoors",
+    "Universidad Francisco de Vitoria",
+    "World Youth Alliance",
 ];

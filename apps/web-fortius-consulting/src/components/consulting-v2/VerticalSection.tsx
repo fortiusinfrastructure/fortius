@@ -135,8 +135,13 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                             className="group col-span-1 lg:col-span-7 block"
                         >
                             <div className="relative aspect-[16/10] overflow-hidden bg-[var(--surface-tertiary)] mb-6">
+                                <img
+                                    src={v.id === "civil" ? "/images/eje1.png" : "/images/eje2.jpg"}
+                                    alt=""
+                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                                />
                                 <div
-                                    className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.04]"
+                                    className="absolute inset-0"
                                     style={{
                                         background:
                                             v.id === "civil"
@@ -222,71 +227,7 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                     </div>
                 </div>
 
-                {/* Equipo + Testimonios (dos columnas) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-                    <div className="col-span-1 lg:col-span-7">
-                        <Bracketed variant="kicker">Equipo · {v.label}</Bracketed>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                            {team.map((m) => (
-                                <PersonCard
-                                    key={m.slug}
-                                    name={m.name}
-                                    role={m.role}
-                                    area={m.area}
-                                    photo={m.photo}
-                                    onOpen={() =>
-                                        setActivePerson({
-                                            name: m.name,
-                                            role: m.role,
-                                            area: m.area,
-                                            bio: m.bio,
-                                            email: m.email,
-                                            linkedin: m.linkedin,
-                                            twitter: m.twitter,
-                                            photo: m.photo,
-                                            verticalLabel: v.label,
-                                        })
-                                    }
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="col-span-1 lg:col-span-5 flex flex-col">
-                        <Bracketed variant="kicker">Confían en nosotros</Bracketed>
-                        {v.testimonials[0] && (
-                            <blockquote className="mt-8 space-y-5">
-                                <span className="text-[var(--color-accent-500)] font-display text-5xl leading-none block">
-                                    &ldquo;
-                                </span>
-                                <p className="font-display text-[1.25rem] font-light leading-[1.35] italic text-[var(--text-primary)]">
-                                    {v.testimonials[0].quote}
-                                </p>
-                                <footer className="pt-2">
-                                    <p className="text-[0.85rem] font-medium text-[var(--text-primary)]">
-                                        {v.testimonials[0].author}
-                                    </p>
-                                    <p className="text-[0.75rem] text-[var(--text-tertiary)]">
-                                        {v.testimonials[0].role}
-                                    </p>
-                                </footer>
-                            </blockquote>
-                        )}
-
-                        <div className="mt-10 pt-8 border-t border-[var(--border-subtle)] flex flex-wrap gap-x-6 gap-y-3">
-                            {v.clients.map((c) => (
-                                <span
-                                    key={c}
-                                    className="text-[0.75rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
-                                >
-                                    {c}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Expertos vinculados — placeholders con bio emergente */}
+                {/* Expertos vinculados - placeholders con bio emergente */}
                 {experts.length > 0 && (
                     <div className="mb-20">
                         <div className="flex items-end justify-between mb-6">
