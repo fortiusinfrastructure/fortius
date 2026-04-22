@@ -62,7 +62,7 @@ export function NavV2() {
                         href="/fundacion"
                         className="text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
                     >
-                        [Fundación]
+                        [Foundation]
                     </a>
                     <a
                         href="/contacto"

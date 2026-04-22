@@ -15,7 +15,7 @@ const PILLARS = [
 export function FoundationBridge() {
     return (
         <section
-            aria-label="Fortius Fundación"
+            aria-label="Fortius Foundation"
             className="relative py-28 md:py-40 border-t border-[var(--border-subtle)] overflow-hidden"
         >
             {/* Gradiente de transición: el rojo se apaga, entra el verde */}
@@ -55,7 +55,7 @@ export function FoundationBridge() {
                     <span className="text-[var(--text-tertiary)] text-xs">&rarr;</span>
                     <span className="text-[var(--text-secondary)]">
                         <span className="text-[var(--color-foundation-500)]">[</span>
-                        <span className="px-1.5">Fundación</span>
+                        <span className="px-1.5">Foundation</span>
                         <span className="text-[var(--color-foundation-500)]">]</span>
                     </span>
                 </div>
@@ -78,7 +78,7 @@ export function FoundationBridge() {
                             </span>
                         </motion.h2>
                         <p className="text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                            Fortius Fundación es el brazo sin ánimo de lucro del ecosistema Fortius.
+                            Fortius Foundation es el brazo sin ánimo de lucro del ecosistema Fortius.
                             Donde la consultoría acompaña, la fundación{" "}
                             <span className="text-[var(--text-primary)]">forma, financia e investiga</span>{" "}
                             para que las sociedades fuertes no dependan solo de quienes pueden pagarlo.
@@ -131,7 +131,7 @@ export function FoundationBridge() {
                                             Fortius
                                         </span>
                                         <span className="text-[0.5rem] font-medium tracking-[0.25em] uppercase" style={{ color: "var(--color-foundation-400)" }}>
-                                            fundación
+                                            foundation
                                         </span>
                                     </div>
                                     <span
@@ -158,7 +158,7 @@ export function FoundationBridge() {
                                     borderColor: "var(--color-foundation-muted)",
                                 }}
                             >
-                                Conocer Fortius Fundación
+                                Conocer Fortius Foundation
                             </p>
                             <p className="mt-4 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
                                 Próximamente · sitio dedicado
