@@ -2,7 +2,10 @@ import { NextResponse, type NextRequest } from 'next/server';
 export const dynamic = 'force-dynamic';
 import { createAdminClient } from '@fortius/database';
 import { verifyApprovalToken } from '@/lib/stripe/tokens';
-import { createCheckoutSession } from '@/lib/stripe';
+import {
+    createAcademicPaymentToken,
+    buildAcademicPaymentUrl,
+} from '@/lib/stripe/academic-payment';
 import { sendEmail } from '@/lib/email';
 
 /**
@@ -50,10 +53,17 @@ export async function GET(request: NextRequest) {
         );
     }
 
-    // Update status to approved
+    // Generate a long-lived payment token for the intermediate page
+    const paymentToken = createAcademicPaymentToken(decoded.membershipId);
+
+    // Update status to approved and store payment token
     await admin
         .from('user_memberships')
-        .update({ status: 'approved' })
+        .update({
+            status: 'approved',
+            approved_at: new Date().toISOString(),
+            payment_link_id: paymentToken,
+        })
         .eq('id', decoded.membershipId);
 
     // Get user email from auth
@@ -68,40 +78,11 @@ export async function GET(request: NextRequest) {
         );
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
     const userEmail = authUser.user.email!;
     const fullName = authUser.user.user_metadata?.full_name || userEmail;
 
-    // Create Stripe Checkout for the approved applicant
-    // Offer both monthly and annual pricing
-    const monthlyPriceId = process.env.STRIPE_PRICE_ACADEMICO_MONTHLY;
-    const annualPriceId = process.env.STRIPE_PRICE_ACADEMICO_ANNUAL;
-
-    // Default to annual if available, otherwise monthly
-    const priceId = annualPriceId || monthlyPriceId;
-
-    let paymentUrl = siteUrl;
-
-    if (priceId) {
-        try {
-            const session = await createCheckoutSession({
-                mode: 'subscription',
-                priceId,
-                customerEmail: userEmail,
-                metadata: {
-                    tier: 'academico',
-                    userId: membership.user_id,
-                    membershipId: decoded.membershipId,
-                    orgSlug: 'escuela-hispanica',
-                },
-                successUrl: `${siteUrl}/colabora/exito?tier=academico&session_id={CHECKOUT_SESSION_ID}`,
-                cancelUrl: `${siteUrl}/colabora`,
-            });
-            paymentUrl = session.url || siteUrl;
-        } catch (error) {
-            console.error('[admin/approve] Stripe error:', error);
-        }
-    }
+    // Build the intermediate payment page URL (never expires — generates fresh Stripe session on demand)
+    const paymentUrl = buildAcademicPaymentUrl(decoded.membershipId, paymentToken);
 
     // Send approval email to the applicant (Académico II — Aprobación)
     await sendEmail({

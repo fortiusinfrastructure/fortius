@@ -120,6 +120,10 @@ export interface Database {
                     joined_at: string | null
                     expires_at: string | null
                     metadata: Json | null
+                    payment_link_id: string | null
+                    approved_at: string | null
+                    last_reminder_sent_at: string | null
+                    reminder_count: number
                     created_at: string | null
                     updated_at: string | null
                 }
@@ -133,6 +137,10 @@ export interface Database {
                     joined_at?: string | null
                     expires_at?: string | null
                     metadata?: Json | null
+                    payment_link_id?: string | null
+                    approved_at?: string | null
+                    last_reminder_sent_at?: string | null
+                    reminder_count?: number
                     created_at?: string | null
                     updated_at?: string | null
                 }
@@ -146,6 +154,10 @@ export interface Database {
                     joined_at?: string | null
                     expires_at?: string | null
                     metadata?: Json | null
+                    payment_link_id?: string | null
+                    approved_at?: string | null
+                    last_reminder_sent_at?: string | null
+                    reminder_count?: number
                     created_at?: string | null
                     updated_at?: string | null
                 }
