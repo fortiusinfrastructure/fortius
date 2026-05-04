@@ -49,9 +49,9 @@ export default async function ActividadesPage({ params }: Props) {
                 </section>
 
                 {/* Upcoming Activities — Full-width immersive cards */}
-                {upcomingActivities.length > 0 && (
-                    <section className="border-b border-white/5">
-                        {upcomingActivities.map(activity => {
+                <section className="border-b border-white/5">
+                    {upcomingActivities.length > 0 ? (
+                        upcomingActivities.map(activity => {
                             const dateParts = activity.date.match(/^(\d+)\s*[-–—]\s*(\d+)\s+(\w+)\s+(\d{4})$/);
                             const singleDate = activity.date.match(/^(\d+)\s+(\w+)\s+(\d{4})$/);
                             let dayDisplay = '';
@@ -150,9 +150,22 @@ export default async function ActividadesPage({ params }: Props) {
                                     </div>
                                 </div>
                             );
-                        })}
-                    </section>
-                )}
+                        })
+                    ) : (
+                        <div className="py-20 px-6 md:px-16 lg:px-24 flex flex-col items-center justify-center text-center">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-8 h-[1px] bg-[#c5a059]" />
+                                <span className="font-cinzel text-[10px] md:text-xs tracking-[0.4em] text-[#c5a059] uppercase">
+                                    {t('Upcoming.label')}
+                                </span>
+                                <div className="w-8 h-[1px] bg-[#c5a059]" />
+                            </div>
+                            <p className="font-cinzel text-white/30 text-sm tracking-widest uppercase">
+                                {t('Upcoming.empty')}
+                            </p>
+                        </div>
+                    )}
+                </section>
 
                 {/* Featured Activities */}
                 <section className="py-24 px-4 bg-[#0a111e]">

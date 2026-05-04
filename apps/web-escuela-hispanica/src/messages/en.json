@@ -238,7 +238,8 @@
         },
         "Upcoming": {
             "label": "Future activity",
-            "viewDetails": "View details and registration"
+            "viewDetails": "View details and registration",
+            "empty": "No upcoming activities at this time"
         },
         "Featured": {
             "title": "FEATURED ACTIVITIES",

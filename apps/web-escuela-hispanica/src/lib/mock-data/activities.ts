@@ -5,9 +5,9 @@ export const activities: Activity[] = [
         id: 19,
         slug: 'jantar-da-hispanidade-e-da-lusofonia',
         title: {
-            es: 'Jantar Da Hispanidade e Da Lusofonia',
-            en: 'Jantar Da Hispanidade e Da Lusofonia',
-            pt: 'Jantar Da Hispanidade e Da Lusofonia'
+            es: 'Crónica – Jantar da Hispanidade e Da Lusofonia',
+            en: 'Chronicle – Jantar da Hispanidade e Da Lusofonia',
+            pt: 'Crónica – Jantar da Hispanidade e Da Lusofonia'
         },
         sortDate: '2026-04-17',
         date: '17 Abril 2026',
@@ -19,177 +19,189 @@ export const activities: Activity[] = [
         organizer: {
             es: 'Escuela Hispánica',
             en: 'Escuela Hispánica',
-            pt: 'Escuela Hispânica'
+            pt: 'Escuela Hispánica'
         },
         type: {
-            es: 'Cena Académica',
-            en: 'Academic Dinner',
-            pt: 'Jantar Acadêmico'
+            es: 'Crónica',
+            en: 'Chronicle',
+            pt: 'Crónica'
         },
         excerpt: {
-            es: 'Cena académica organizada por la Escuela Hispánica en Lisboa para fortalecer los lazos culturales e intelectuales entre el mundo hispánico y lusófono.',
-            en: 'Academic dinner organized by the Escuela Hispánica in Lisbon to strengthen the cultural and intellectual ties between the Hispanic and Lusophone worlds.',
-            pt: 'Jantar académico organizado pela Escuela Hispânica em Lisboa para fortalecer os laços culturais e intelectuais entre o mundo hispânico e lusófono.'
+            es: 'La Escuela Hispánica debutó en Portugal en el III Simposio del SALL y organizó una cena académica en el Real Clube Tauromáquico Português, reuniendo a treinta personas en torno a la defensa de la civilización occidental.',
+            en: 'The Escuela Hispánica made its debut in Portugal at the III SALL Symposium and organised an academic dinner at the Real Clube Tauromáquico Português, bringing together thirty people in defence of Western civilisation.',
+            pt: 'A Escuela Hispánica estreou-se em Portugal no III Simpósio do SALL e organizou um jantar académico no Real Clube Tauromáquico Português, reunindo cerca de trinta pessoas em defesa da civilização ocidental.'
         },
         content: {
             es: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Fecha y Hora:</strong> 17 de abril de 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Fecha:</strong> 17 de abril de 2026<br/>
                         <strong style="color: #c5a059;">Lugar:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>La actividad tendrá lugar el 17 de abril con una cena académica organizada por la Escuela Hispánica, concebida como un espacio de encuentro y diálogo intelectual entre los participantes internacionales del encuentro. En un ambiente de amistad y reflexión, la velada buscará fortalecer los lazos culturales e intelectuales entre el mundo hispánico y lusófono, así como fomentar el intercambio de ideas en torno a nuestra tradición común y los desafíos contemporáneos de nuestras sociedades.</p>
-                
-                <p>El evento contará con una ponencia (ponente por confirmar).</p>
+                <p>La Escuela Hispánica debutó en suelo portugués el pasado 18 de abril, en el III Simposio del SALL, que contó con nuestra colaboración. La crónica del evento deja clara su repercusión e importancia, así como el papel que puede —y debe— desempeñar en Portugal.</p>
 
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Inscripción a la Cena</p>
-                    <p style="color: rgba(255,255,255,0.8);">El coste de la cena es de <strong>25 euros</strong> por comensal. El pago se realizará de forma segura al completar el formulario de registro en la parte inferior de esta página.</p>
-                </div>
+                <p>Pero la participación de la EH en la lusofonía comenzó la víspera, en una cena organizada por ella misma —y, una vez más, con el imprescindible apoyo del SALL— en un lugar emblemático de Lisboa. El Real Clube Tauromáquico Português es la asociación más antigua del mundo vinculada a la tauromaquia, una tradición compartida por las naciones que integran la Península Ibérica. Fundado en 1892, es un espacio que nos recuerda —independientemente de nuestra opinión o vínculo personal con los toros— la longevidad de las instituciones construidas y conservadas que forman parte esencial del tejido cultural de la civilización que hemos heredado.</p>
+
+                <p>Júlio de Castilho, escritor y político portugués de finales del siglo XIX y principios del XX, escribió que era en ese espacio donde se encontraba y reunía «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». Y fue allí también donde, el pasado 17 de abril, se reunieron cerca de treinta personas, entre ellas varios ponentes que participarían en el simposio del día siguiente. El encuentro comenzó con una intervención del secretario general de la Escuela Hispánica, Juan Ángel Soto, quien explicó de forma concisa el significado y el propósito de este proyecto a todos los presentes. Tras la cena, la palabra pasó al vicepresidente académico, el profesor André Azevedo Alves.</p>
+
+                <p>A continuación se desarrolló un breve debate libre, diverso e ilustrador, en el que se expusieron puntos de vista diferentes pero animados por un propósito común: defender la civilización occidental y la libertad que hemos heredado de ella y que tenemos el deber de preservar. Fue, en definitiva, un paso importante para dejar en aguas más limpias la importancia y la relevancia de la lusofonía y de la Escuela Hispánica para nuestro tiempo histórico.</p>
             `,
             en: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizer:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Date and Time:</strong> April 17, 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Date:</strong> April 17, 2026<br/>
                         <strong style="color: #c5a059;">Location:</strong> Real Clube Tauromáquico Português, Lisbon, Portugal
                     </p>
                 </div>
 
-                <p>The activity will take place on April 17 with an academic dinner organized by the Escuela Hispánica, conceived as a space for meeting and intellectual dialogue among the international participants of the meeting. In an atmosphere of friendship and reflection, the evening will seek to strengthen cultural and intellectual ties between the Hispanic and Lusophone worlds, as well as to encourage the exchange of ideas about our common tradition and the contemporary challenges of our societies.</p>
-                
-                <p>The event will feature a presentation (speaker to be confirmed).</p>
+                <p>The Escuela Hispánica made its debut on Portuguese soil on April 18th, at the III Symposium of the SALL, which featured our collaboration. The chronicle of the event makes clear the impact and importance of that presence, as well as the role that the Escuela can—and should—play in Portugal.</p>
 
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Dinner Registration</p>
-                    <p style="color: rgba(255,255,255,0.8);">The cost of the dinner is <strong>25 euros</strong> per person. Payment will be securely processed after completing the registration form at the bottom of this page.</p>
-                </div>
+                <p>But the EH's involvement in Lusophone circles began the evening before, at a dinner it organised—once again with the indispensable support of the SALL—at an emblematic venue in Lisbon. The Real Clube Tauromáquico Português is the oldest association in the world connected to bullfighting, a tradition shared by the nations that make up the Iberian Peninsula. Founded in 1892, it is a space that reminds us—regardless of our personal opinion or connection to bullfighting—of the longevity of institutions built and preserved as a crucial part of the cultural fabric of the civilisation we have inherited.</p>
+
+                <p>Júlio de Castilho, a Portuguese writer and politician of the late nineteenth and early twentieth centuries, wrote that it was in this space that one encountered and gathered «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». And it was there too that, on the evening of April 17th, some thirty people gathered—among them several speakers who would take part in the following day's symposium. The gathering opened with a brief address by the Secretary-General of the Escuela Hispánica, Juan Ángel Soto, who explained the meaning and purpose of this project to all those present. After dinner, the floor was given to the Academic Vice-President, Professor André Azevedo Alves.</p>
+
+                <p>This was followed by a brief, free-ranging, and illuminating discussion that offered different points of view, united by a common purpose: to defend Western civilisation, the freedom we have inherited from it, and our duty to preserve it. It was, in short, an important step toward bringing the importance and relevance of the Lusophone world—and of the Escuela Hispánica—into clearer and calmer waters.</p>
             `,
             pt: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Data e Hora:</strong> 17 de abril de 2026, 20:00-23:00<br/>
+                        <strong style="color: #c5a059;">Data:</strong> 17 de abril de 2026<br/>
                         <strong style="color: #c5a059;">Local:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>A atividade terá lugar a 17 de abril com um jantar académico organizado pela Escuela Hispânica, concebido como um espaço de encontro e diálogo intelectual entre os participantes internacionais do encontro. Num ambiente de amizade e reflexão, o serão procurará fortalecer os laços culturais e intelectuais entre o mundo hispânico e lusófono, bem como fomentar a troca de ideias em torno da nossa tradição comum e dos desafios contemporâneos das nossas sociedades.</p>
-                
-                <p>O evento contará com uma palestra (orador a confirmar).</p>
+                <p>A Escuela Hispánica estreou-se em solo português no passado dia 18 de Abril, no III Simpósio do SALL que contou com a nossa colaboração. A crónica do evento deixa claro o impacto e a importância da mesma, bem como o papel que pode, e deve, representar em Portugal.</p>
 
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <p style="font-family: var(--font-cinzel); font-size: 1.1rem; color: #c5a059;">Inscrição para o jantar</p>
-                    <p style="color: rgba(255,255,255,0.8);">O custo do jantar é de <strong>25 euros</strong> por pessoa. O pagamento será processado de forma segura após o preenchimento do formulário de inscrição na parte inferior desta página.</p>
-                </div>
+                <p>Mas a participação da EH na lusofonia teve início na véspera, num jantar por si organizado – e, mais uma vez, com o imprescindível apoio do SALL – num local emblemático de Lisboa. O Real Clube Tauromáquico Português é a associação mais antiga do mundo ligada à tauromaquia, uma tradição partilhada das nações que constituem a Península Ibérica, e, tendo sido fundado em 1892, é um espaço que nos relembra, independentemente da nossa opinião ou ligação pessoal com os touros, da longevidade das instituições construídas e conservadas que constituem parte crucial do tecido cultural da civilização que herdámos.</p>
+
+                <p>Júlio de Castilho, um escritor e político português de finais do século XIX e inícios do século XX, escreveu que era neste espaço onde se encontrava e reunia «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». E foi ali também que, no passado dia 17 de Abril, se reuniram cerca de trinta pessoas, das quais vários oradores que marcaram presença no simpósio do dia seguinte. O encontro contou com uma intervenção inicial do secretário-geral da Escuela Hispánica, Juan Ángel Soto, que explicou o significado e o propósito deste projeto de forma resumida a todos os presentes e, depois da refeição, a palavra passou para o vice-presidente académico, o professor André Azevedo Alves.</p>
+
+                <p>Seguiu-se uma breve discussão livre, diversa e esclarecedora que apresentou pontos de vista diferentes, mas com um propósito comum: defender a civilização ocidental, a liberdade que dela herdámos e que temos o dever de conservar. Assim, foi um passo importante para deixar a importância e relevância da lusofonia e da Escuela Hispánica para o nosso tempo histórico em água mais limpas.</p>
             `
         },
         image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
-        isFeatured: false,
-        isUpcoming: true,
-        showRegistrationForm: true,
-        priceAmount: 25,
-        priceCurrency: 'eur'
+        isFeatured: true,
+        isUpcoming: false,
+        showRegistrationForm: false
     },
     {
         id: 18,
         slug: 'escola-hispanica-lusofonia',
         title: {
-            es: 'Escola Hispânica en la Lusofonía',
-            en: 'Escola Hispânica in Lusofonia',
-            pt: 'Escola Hispânica na Lusofonía'
+            es: 'Crónica – Jantar da Hispanidade e Da Lusofonia',
+            en: 'Chronicle – Jantar da Hispanidade e Da Lusofonia',
+            pt: 'Crónica – Jantar da Hispanidade e Da Lusofonia'
         },
         sortDate: '2026-04-18',
-        date: '18 Abril 2026',
+        date: '17 - 18 Abril 2026',
         location: {
-            es: 'Lisboa, Portugal',
-            en: 'Lisbon, Portugal',
-            pt: 'Lisboa, Portugal'
+            es: 'Real Clube Tauromáquico Português, Lisboa, Portugal',
+            en: 'Real Clube Tauromáquico Português, Lisbon, Portugal',
+            pt: 'Real Clube Tauromáquico Português, Lisboa, Portugal'
         },
         organizer: {
-            es: 'Associação para a Defesa da Liberdade',
-            en: 'Associação para a Defesa da Liberdade',
-            pt: 'Associação para a Defesa da Liberdade'
+            es: 'Escuela Hispánica',
+            en: 'Escuela Hispánica',
+            pt: 'Escuela Hispánica'
         },
         type: {
-            es: 'Simposio Internacional',
-            en: 'International Symposium',
-            pt: 'Simpósio Internacional'
+            es: 'Crónica',
+            en: 'Chronicle',
+            pt: 'Crónica'
         },
         excerpt: {
-            es: 'En abril de 2026 la Escuela Hispánica participará en Lisboa en un simposio internacional dedicado a reflexionar sobre los fundamentos culturales de las democracias occidentales.',
-            en: 'In April 2026, the Escuela Hispánica will participate in an international symposium in Lisbon dedicated to reflecting on the cultural foundations of Western democracies.',
-            pt: 'Em abril de 2026, a Escuela Hispânica participará em Lisboa num simpósio internacional dedicado a refletir sobre os fundamentos culturais das democracias ocidentais.'
+            es: 'La Escuela Hispánica debutó en Portugal en el III Simposio del SALL y organizó una cena académica en el Real Clube Tauromáquico Português, reuniendo a treinta personas en torno a la defensa de la civilización occidental.',
+            en: 'The Escuela Hispánica made its debut in Portugal at the III SALL Symposium and organised an academic dinner at the Real Clube Tauromáquico Português, bringing together thirty people in defence of Western civilisation.',
+            pt: 'A Escuela Hispánica estreou-se em Portugal no III Simpósio do SALL e organizou um jantar académico no Real Clube Tauromáquico Português, reunindo cerca de trinta pessoas em defesa da civilização ocidental.'
         },
         content: {
             es: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
-                        <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Fecha:</strong> 18 de abril de 2026<br/>
-                        <strong style="color: #c5a059;">Lugar:</strong> Lisboa, Portugal
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Fecha:</strong> 17 - 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Lugar:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>En abril de 2026, la Escuela Hispánica participará en un simposio internacional en Lisboa, organizado conjuntamente con la Sociedade de Estudos e Acção (SALL), dedicado a reflexionar sobre los fundamentos culturales, jurídicos y políticos de la vida pública en las democracias occidentales.</p>
+                <p>La Escuela Hispánica debutó en suelo portugués el pasado 18 de abril, en el III Simposio del SALL, que contó con nuestra colaboración. La crónica del evento deja clara su repercusión e importancia, así como el papel que puede —y debe— desempeñar en Portugal.</p>
 
-                <p>El encuentro se celebrará el 18 de abril, en el contexto del 50º aniversario de la Constitución portuguesa, y reunirá a académicos, juristas, pensadores y representantes de la sociedad civil para analizar la evolución reciente del marco constitucional europeo y su relación con las libertades fundamentales.</p>
+                <p>Pero la participación de la EH en la lusofonía comenzó la víspera, en una cena organizada por ella misma —y, una vez más, con el imprescindible apoyo del SALL— en un lugar emblemático de Lisboa. El Real Clube Tauromáquico Português es la asociación más antigua del mundo vinculada a la tauromaquia, una tradición compartida por las naciones que integran la Península Ibérica. Fundado en 1892, es un espacio que nos recuerda —independientemente de nuestra opinión o vínculo personal con los toros— la longevidad de las instituciones construidas y conservadas que forman parte esencial del tejido cultural de la civilización que hemos heredado.</p>
 
-                <p>El simposio se estructura en varias mesas redondas dedicadas a cuestiones centrales del orden político contemporáneo: la dignidad de la vida humana, la familia y la infancia, la libertad de conciencia y los fundamentos culturales de la civilización occidental.</p>
+                <p>Júlio de Castilho, escritor y político portugués de finales del siglo XIX y principios del XX, escribió que era en ese espacio donde se encontraba y reunía «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». Y fue allí también donde, el pasado 17 de abril, se reunieron cerca de treinta personas, entre ellas varios ponentes que participarían en el simposio del día siguiente. El encuentro comenzó con una intervención del secretario general de la Escuela Hispánica, Juan Ángel Soto, quien explicó de forma concisa el significado y el propósito de este proyecto a todos los presentes. Tras la cena, la palabra pasó al vicepresidente académico, el profesor André Azevedo Alves.</p>
 
-                <p>La Escuela Hispánica participará especialmente en la sesión final de síntesis, destinada a ofrecer una reflexión colectiva desde la tradición intelectual hispánica, en diálogo con otras tradiciones europeas, sobre los principios que sostienen la convivencia política y el bien común.</p>
-
-                <p>Este encuentro se inscribe en el proceso de internacionalización de la Escuela Hispánica y refleja también su interés por integrar y poner en valor la tradición de pensamiento portuguesa dentro del marco común de la cultura intelectual hispánica, contribuyendo al debate público desde una perspectiva histórica, filosófica y comparada.</p>
+                <p>A continuación se desarrolló un breve debate libre, diverso e ilustrador, en el que se expusieron puntos de vista diferentes pero animados por un propósito común: defender la civilización occidental y la libertad que hemos heredado de ella y que tenemos el deber de preservar. Fue, en definitiva, un paso importante para dejar en aguas más limpias la importancia y la relevancia de la lusofonía y de la Escuela Hispánica para nuestro tiempo histórico.</p>
             `,
             en: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
-                        <strong style="color: #c5a059;">Collaborator:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Date:</strong> April 18, 2026<br/>
-                        <strong style="color: #c5a059;">Location:</strong> Lisbon, Portugal
+                        <strong style="color: #c5a059;">Organizer:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Date:</strong> April 17 - 18, 2026<br/>
+                        <strong style="color: #c5a059;">Location:</strong> Real Clube Tauromáquico Português, Lisbon, Portugal
                     </p>
                 </div>
 
-                <p>In April 2026, the Escuela Hispánica will participate in an international symposium in Lisbon, jointly organized with the Sociedade de Estudos e Acção (SALL), dedicated to reflecting on the cultural, legal, and political foundations of public life in Western democracies.</p>
+                <p>The Escuela Hispánica made its debut on Portuguese soil on April 18th, at the III Symposium of the SALL, which featured our collaboration. The chronicle of the event makes clear the impact and importance of that presence, as well as the role that the Escuela can—and should—play in Portugal.</p>
 
-                <p>The meeting will be held on April 18, in the context of the 50th anniversary of the Portuguese Constitution, and will bring together academics, jurists, thinkers, and representatives of civil society to analyze the recent evolution of the European constitutional framework and its relationship with fundamental freedoms.</p>
+                <p>But the EH's involvement in Lusophone circles began the evening before, at a dinner it organised—once again with the indispensable support of the SALL—at an emblematic venue in Lisbon. The Real Clube Tauromáquico Português is the oldest association in the world connected to bullfighting, a tradition shared by the nations that make up the Iberian Peninsula. Founded in 1892, it is a space that reminds us—regardless of our personal opinion or connection to bullfighting—of the longevity of institutions built and preserved as a crucial part of the cultural fabric of the civilisation we have inherited.</p>
 
-                <p>The symposium is structured into several round tables dedicated to central issues of the contemporary political order: the dignity of human life, family and childhood, freedom of conscience, and the cultural foundations of Western civilization.</p>
+                <p>Júlio de Castilho, a Portuguese writer and politician of the late nineteenth and early twentieth centuries, wrote that it was in this space that one encountered and gathered «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». And it was there too that, on the evening of April 17th, some thirty people gathered—among them several speakers who would take part in the following day's symposium. The gathering opened with a brief address by the Secretary-General of the Escuela Hispánica, Juan Ángel Soto, who explained the meaning and purpose of this project to all those present. After dinner, the floor was given to the Academic Vice-President, Professor André Azevedo Alves.</p>
 
-                <p>The Escuela Hispánica will participate especially in the final synthesis session, intended to offer a collective reflection from the Hispanic intellectual tradition, in dialogue with other European traditions, on the principles that sustain political coexistence and the common good.</p>
-
-                <p>This meeting is part of the internationalization process of the Escuela Hispánica and also reflects its interest in integrating and valuing the Portuguese tradition of thought within the common framework of Hispanic intellectual culture, contributing to the public debate from a historical, philosophical, and comparative perspective.</p>
+                <p>This was followed by a brief, free-ranging, and illuminating discussion that offered different points of view, united by a common purpose: to defend Western civilisation, the freedom we have inherited from it, and our duty to preserve it. It was, in short, an important step toward bringing the importance and relevance of the Lusophone world—and of the Escuela Hispánica—into clearer and calmer waters.</p>
             `,
             pt: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
-                        <strong style="color: #c5a059;">Colaborador:</strong> Escuela Hispánica<br/>
-                        <strong style="color: #c5a059;">Data:</strong> 18 de abril de 2026<br/>
-                        <strong style="color: #c5a059;">Local:</strong> Lisboa, Portugal
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Data:</strong> 17 - 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Local:</strong> Real Clube Tauromáquico Português, Lisboa, Portugal
                     </p>
                 </div>
 
-                <p>Em abril de 2026, a Escuela Hispânica participará num simpósio internacional em Lisboa, organizado conjuntamente com a Sociedade de Estudos e Acção (SALL), dedicado a refletir sobre os fundamentos culturais, jurídicos e políticos da vida pública nas democracias ocidentais.</p>
+                <p>A Escuela Hispánica estreou-se em solo português no passado dia 18 de Abril, no III Simpósio do SALL que contou com a nossa colaboração. A crónica do evento deixa claro o impacto e a importância da mesma, bem como o papel que pode, e deve, representar em Portugal.</p>
 
-                <p>O encontro realizar-se-á a 18 de abril, no contexto do 50.º aniversário da Constituição portuguesa, e reunirá académicos, juristas, pensadores e representantes da sociedade civil para analisar a evolução recente do quadro constitucional europeu e a sua relação com as liberdades fundamentais.</p>
+                <p>Mas a participação da EH na lusofonia teve início na véspera, num jantar por si organizado – e, mais uma vez, com o imprescindível apoio do SALL – num local emblemático de Lisboa. O Real Clube Tauromáquico Português é a associação mais antiga do mundo ligada à tauromaquia, uma tradição partilhada das nações que constituem a Península Ibérica, e, tendo sido fundado em 1892, é um espaço que nos relembra, independentemente da nossa opinião ou ligação pessoal com os touros, da longevidade das instituições construídas e conservadas que constituem parte crucial do tecido cultural da civilização que herdámos.</p>
 
-                <p>O simpósio estrutura-se em várias mesas redondas dedicadas a questões centrais da ordem política contemporânea: a dignidade da vida humana, a família e a infância, a liberdade de consciência e os fundamentos culturais da civilização ocidental.</p>
+                <p>Júlio de Castilho, um escritor e político português de finais do século XIX e inícios do século XX, escreveu que era neste espaço onde se encontrava e reunia «a mocidade feliz, que expandiu as suas asas iriadas numa restea de sol da vida». E foi ali também que, no passado dia 17 de Abril, se reuniram cerca de trinta pessoas, das quais vários oradores que marcaram presença no simpósio do dia seguinte. O encontro contou com uma intervenção inicial do secretário-geral da Escuela Hispánica, Juan Ángel Soto, que explicou o significado e o propósito deste projeto de forma resumida a todos os presentes e, depois da refeição, a palavra passou para o vice-presidente académico, o professor André Azevedo Alves.</p>
 
-                <p>A Escuela Hispânica participará especialmente na sessão final de síntese, destinada a oferecer uma reflexão coletiva a partir da tradição intelectual hispânica, em diálogo com outras tradições europeias, sobre os princípios que sustentam a convivência política e o bem comum.</p>
-
-                <p>Este encontro insere-se no processo de internacionalização da Escuela Hispânica e reflete também o seu interesse em integrar e valorizar a tradição de pensamento portuguesa no quadro comum da cultura intelectual hispânica, contribuindo para o debate público numa perspetiva histórica, filosófica e comparada.</p>
+                <p>Seguiu-se uma breve discussão livre, diversa e esclarecedora que apresentou pontos de vista diferentes, mas com um propósito comum: defender a civilização ocidental, a liberdade que dela herdámos e que temos o dever de conservar. Assim, foi um passo importante para deixar a importância e relevância da lusofonia e da Escuela Hispánica para o nosso tempo histórico em água mais limpas.</p>
             `
         },
         image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
+        gallery: [
+            {
+                src: '/images/activities/escola hispânica en la lusofonía/galeria1.jpg',
+                caption: {
+                    es: 'Jantar da Hispanidade e da Lusofonia en el Real Clube Tauromáquico Português, Lisboa',
+                    en: 'Jantar da Hispanidade e da Lusofonia at the Real Clube Tauromáquico Português, Lisbon',
+                    pt: 'Jantar da Hispanidade e da Lusofonia no Real Clube Tauromáquico Português, Lisboa'
+                }
+            },
+            {
+                src: '/images/activities/escola hispânica en la lusofonía/galeria2.jpg',
+                caption: {
+                    es: 'Intervención del secretario general Juan Ángel Soto y del vicepresidente académico André Azevedo Alves',
+                    en: 'Address by Secretary-General Juan Ángel Soto and Academic Vice-President André Azevedo Alves',
+                    pt: 'Intervenção do secretário-geral Juan Ángel Soto e do vice-presidente académico André Azevedo Alves'
+                }
+            },
+            {
+                src: '/images/activities/escola hispânica en la lusofonía/galeria3.jpg',
+                caption: {
+                    es: 'Participantes en el III Simposio del SALL, Lisboa, 18 de abril de 2026',
+                    en: 'Participants at the III SALL Symposium, Lisbon, April 18, 2026',
+                    pt: 'Participantes no III Simpósio do SALL, Lisboa, 18 de abril de 2026'
+                }
+            }
+        ],
         isFeatured: true,
         isUpcoming: false,
-        showRegistrationForm: true
+        showRegistrationForm: false
     },
     {
         id: 1,
@@ -1369,7 +1381,7 @@ export const activities: Activity[] = [
         isFeatured: false
     },
     {
-        id: 19,
+        id: 20,
         slug: 'ecos-de-salamanca',
         title: {
             es: 'Eco de Salamanca',
@@ -1553,6 +1565,109 @@ export const activities: Activity[] = [
                 }
             }
         ]
+    },
+    {
+        id: 21,
+        slug: 'simposio-sall-escuela-hispanica',
+        title: {
+            es: 'Crónica – III Simposio SALL-Escuela Hispánica',
+            en: 'Chronicle – III SALL-Escuela Hispánica Symposium',
+            pt: 'Crónica – III Simpósio SALL-Escuela Hispánica'
+        },
+        sortDate: '2026-04-18',
+        date: '18 Abril 2026',
+        location: {
+            es: 'Lisboa, Portugal',
+            en: 'Lisbon, Portugal',
+            pt: 'Lisboa, Portugal'
+        },
+        organizer: {
+            es: 'SALL & Escuela Hispánica',
+            en: 'SALL & Escuela Hispánica',
+            pt: 'SALL & Escuela Hispánica'
+        },
+        type: {
+            es: 'Crónica',
+            en: 'Chronicle',
+            pt: 'Crónica'
+        },
+        excerpt: {
+            es: 'La Escuela Hispánica debutó en Portugal en el III Simposio del SALL con el panel "Defender la Civilización Occidental". Cerca de cien personas se reunieron en Lisboa para pensar sobre los grandes temas de nuestra época.',
+            en: 'The Escuela Hispánica made its debut in Portugal at the III SALL Symposium with the panel "Defending Western Civilisation". Around a hundred people gathered in Lisbon to think about the great questions of our time.',
+            pt: 'A Escuela Hispánica estreou-se em Portugal no III Simpósio do SALL com o painel "Defender a Civilização Ocidental". Cerca de uma centena de pessoas reuniu-se em Lisboa para pensar sobre os grandes temas da nossa época.'
+        },
+        content: {
+            es: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> SALL & Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Fecha:</strong> 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Lugar:</strong> Lisboa, Portugal<br/>
+                        <strong style="color: #c5a059;">Panel:</strong> Defender la Civilización Occidental
+                    </p>
+                </div>
+
+                <p>Al escribir tres años después del final de la Segunda Guerra Mundial, el filósofo norteamericano Richard M. Weaver publicó un libro que sería responsable de relanzar el pensamiento conservador, o liberal-conservador, occidental. En <em>Ideas Have Consequences</em>, Weaver dejó algunas advertencias. Primera, y quizás más importante, argumentó que la sociedad moderna, al sustituir la idea de que existen valores absolutos por la religión del relativismo, camina hacia su inevitable disolución. Creer que la única verdad absoluta que existe es la ausencia de verdades absolutas es una receta mortal. En este sentido, el autor americano deja abierta la siguiente posibilidad: Occidente parece estar esperando una catástrofe para poder, finalmente, salir de esta confusión moral e intelectual y para que las diferencias entre el bien y el mal, entre la virtud y el vicio, vuelvan a estar claras en nuestro marco mental. «Si eso es lo máximo a lo que podemos aspirar», escribía Richard Weaver, «algo que contribuya a ese renacimiento podrá ser preparado mediante actos de reflexión y de voluntad, en este tiempo de declive de Occidente».</p>
+
+                <p>En el mundo de las ideas, no debería existir, hoy, causa más noble ni causa más necesaria que la defensa de la civilización occidental. Al fin y al cabo, es a esta tradición a la que pertenecemos y de ella hemos heredado valores, costumbres e ideas que revolucionaron el mundo y que transformaron a Occidente en la mejor —porque más libre— y más próspera —también porque más libre— civilización de la historia de la humanidad. Es en este sentido de deber histórico donde la Escuela Hispánica encuentra su pilar fundacional.</p>
+
+                <p>Y porque Portugal fue una pieza clave de este complejo puzzle que llamamos escolástica tardía, o segunda escolástica, desempeña un papel de ineludible importancia para la conservación de una llama que se encendió hace aproximadamente cinco siglos en el Colegio de San Gregorio en Valladolid. Una civilización de debate que, confiada en la fuerza de la verdad, remite la censura y la opresión de opiniones divergentes al basurero de la historia.</p>
+
+                <p>Este último punto fue el ancla de la mesa redonda de la Escuela Hispánica en el III Simposio del SALL, celebrado el pasado 18 de abril en Lisboa. Y no podría haberse elegido mejor evento para el debut de la Escuela Hispánica en suelo portugués. El SALL, a quien una vez más extendemos nuestro más sincero y profundo agradecimiento, organizó un simposio a la altura de la institución y de su <em>leitmotif</em>: defender la libertad.</p>
+
+                <p>En un sábado soleado en la capital portuguesa, cerca de un centenar de personas se reunió para hablar, escuchar y pensar sobre temas fundamentales de la actualidad. Un conjunto de personas con ideas —y consciente de que estas tienen consecuencias— que no se resigna a la apelativa comodidad del derrotismo ante una hegemonía cultural progresista que dinamita, a cada oportunidad, los cimientos de la civilización que tenemos la suerte y el orgullo de reclamar como nuestra, y que quiere profundizar más en un momento en que detenerse en la espuma es el nuevo normal.</p>
+
+                <p>Con oradores de alto nivel —de la política a la academia, pasando por el periodismo y la sociedad civil—, se debatió la defensa de la vida, de la familia, de la conciencia y de la civilización occidental. Si alguien quiere encontrar temas más importantes, tendrá sin duda un trabajo tortuoso. El panel que nos fue encomendado —«Defender la Civilización Occidental»— acaba por ser un resumen del evento, porque ¿qué es esta civilización sino la defensa de la vida, de la familia, de la conciencia y de la libertad? Las intervenciones de los profesores André Azevedo Alves, vicepresidente académico de la Escuela Hispánica, Rui Ramos y Juan Ángel Soto, nuestro Secretario General, dejaron algo claro: somos herederos de una civilización por la que vale la pena luchar. No para suprimir a las demás, como he escrito antes, sino porque tenemos una confianza inquebrantable en que con ideas, diálogo y debate, la verdad vencerá. Y la victoria de la verdad es, en última instancia, una victoria de todos. Y si este Simposio fue algo, fue, sin duda, un gran acto de reflexión y de voluntad.</p>
+            `,
+            en: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizer:</strong> SALL & Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Date:</strong> April 18, 2026<br/>
+                        <strong style="color: #c5a059;">Location:</strong> Lisbon, Portugal<br/>
+                        <strong style="color: #c5a059;">Panel:</strong> Defending Western Civilisation
+                    </p>
+                </div>
+
+                <p>Writing three years after the end of the Second World War, the American philosopher Richard M. Weaver published a book that would be responsible for relaunching conservative, or liberal-conservative, Western thought. In <em>Ideas Have Consequences</em>, Weaver issued several warnings. First, and perhaps most importantly, he argued that modern society, by replacing the idea that absolute values exist with the religion of relativism, is walking towards its inevitable dissolution. To believe that the only absolute truth is the absence of absolute truths is a mortal prescription. In this sense, the American thinker left open the following possibility: the West seems to be waiting for a catastrophe before it can finally emerge from this moral and intellectual confusion, and before the differences between good and evil, between virtue and vice, become clear again in our mental framework. "If that is the most we can hope for," wrote Richard Weaver, "something that will contribute to that rebirth may be prepared through acts of thought and will, in this time of the West's decline."</p>
+
+                <p>In the world of ideas, there ought to be, today, no nobler or more necessary cause than the defence of Western civilisation. After all, it is to this tradition that we belong, and from it we have inherited values, customs and ideas that revolutionised the world and transformed the West into the best — because freest — and most prosperous — also because freest — civilisation in human history. It is in this sense of historical duty that the Escuela Hispánica finds its founding pillar.</p>
+
+                <p>And because Portugal was a key piece of this complex puzzle we call late scholasticism, or the second scholastic, it plays an unavoidable role in preserving a flame that was lit some five centuries ago at the Colegio de San Gregorio in Valladolid. A civilisation of debate that, trusting in the force of truth, consigns the censorship and suppression of dissenting opinions to the dustbin of history.</p>
+
+                <p>This last point was the anchor of the Escuela Hispánica's round table at the III SALL Symposium, held on 18 April in Lisbon. And no better event could have been chosen for the Escuela Hispánica's debut on Portuguese soil. The SALL, to whom we once again extend our most sincere and heartfelt gratitude, organised a symposium worthy of the institution and its <em>leitmotif</em>: defending freedom.</p>
+
+                <p>On a sunny Saturday in the Portuguese capital, around a hundred people gathered to speak, listen and think about the fundamental questions of our time. A group of people with ideas — and conscious that ideas have consequences — who refuse to succumb to the comfortable appeal of defeatism in the face of a progressive cultural hegemony that seizes every opportunity to dynamite the foundations of the civilisation we have the good fortune and pride to claim as our own, and who wish to press deeper at a moment when floating on the surface has become the new normal.</p>
+
+                <p>With high-calibre speakers — from politics to academia, from journalism to civil society — the discussion turned on the defence of life, family, conscience and Western civilisation. Anyone wishing to find more important topics would have a torturous task ahead of them. The panel entrusted to us — "Defending Western Civilisation" — turns out to be a summary of the entire event, for what is this civilisation if not the defence of life, family, conscience and freedom? The contributions of Professors André Azevedo Alves, Academic Vice-President of the Escuela Hispánica, Rui Ramos, and Juan Ángel Soto, our Secretary-General, made one thing clear: we are heirs to a civilisation worth fighting for. Not to suppress others, as I have written before, but because we hold an unshakeable confidence that through ideas, dialogue and debate, truth will prevail. And the victory of truth is, in the last analysis, a victory for all. And if this Symposium was anything, it was, without doubt, a great act of thought and will.</p>
+            `,
+            pt: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> SALL & Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Data:</strong> 18 de abril de 2026<br/>
+                        <strong style="color: #c5a059;">Local:</strong> Lisboa, Portugal<br/>
+                        <strong style="color: #c5a059;">Painel:</strong> Defender a Civilização Ocidental
+                    </p>
+                </div>
+
+                <p>A escrever três anos após o final da Segunda Guerra Mundial, o filósofo norte-americano Richard M. Weaver publicou um livro que seria responsável por relançar o pensamento conservador, ou liberal-conservador, ocidental. Em <em>Ideas Have Consequences</em>, Weaver deixou alguns alertas. Primeiro, e talvez mais importante, argumentou que a sociedade moderna, ao substituir a ideia de que existem valores absolutos pela religião do relativismo, caminha para a sua inevitável dissolução. Acreditar que a única verdade absoluta que existe é a ausência de verdades absolutas é uma receita mortal. Neste sentido, o autor americano deixa em aberto a seguinte possibilidade: o Ocidente parece estar à espera de uma catástrofe para que possa, finalmente, sair desta confusão moral e intelectual e para que as diferenças entre bem e o mal, entre a virtude e o vício, voltem a estar claras no nosso quadro mental. «Se isso é o máximo a que podemos aspirar», escrevia Richard Weaver, «algo que contribua para esse renascimento poderá ser preparado através de atos de reflexão e de vontade, neste tempo de declínio do Ocidente».</p>
+
+                <p>No mundo das ideias, não deverá existir, hoje, causa mais nobre, nem causa mais necessária, que a defesa da civilização ocidental. Afinal, é a esta tradição que pertencemos e foi dela que herdámos valores, costumes e ideias que revolucionaram o mundo e que transformaram o Ocidente na melhor – porque mais livre – e mais próspera – também porque mais livre – civilização da história da humanidade. É neste sentido de dever histórico que a Escuela Hispánica encontra o seu pilar fundacional.</p>
+
+                <p>E porque Portugal foi uma peça-chave deste puzzle complexo a que chamamos escolástica tardia, ou segunda escolástica, tem um papel de incontornável importância para a conservação de uma chama que foi acesa há cerca de cinco séculos no Colégio de San Gregório em Valladolid. Uma civilização de debate que, crente na força da verdade, remete a censura e a opressão de opiniões divergentes para o balde do lixo da história.</p>
+
+                <p>Este último ponto foi a âncora da mesa-redonda da Escuela Hispánica no III Simpósio do SALL que decorreu no passado dia 18 de Abril em Lisboa. E não poderia ter sido escolhido melhor evento para a estreia da Escuela Hispánica em solo português. O SALL, a quem mais uma vez estendemos o nosso mais sincero e profundo agradecimento, organizou um simpósio à altura da instituição e do seu <em>leitmotif</em>: defender a liberdade.</p>
+
+                <p>Num sábado ensolarado na capital portuguesa, cerca de uma centena de pessoas reuniu-se para falar, ouvir e pensar sobre temas fundamentais da actualidade. Um conjunto de pessoas com ideias – e consciente de que estas últimas têm consequências – que não se resigna ao conforto apelativo do derrotismo perante uma hegemonia cultural progressista que dinamita, a cada oportunidade, as bases da civilização à qual temos a sorte e orgulho de reclamar como nossa, e que quer mergulhar mais fundo num momento em que parar na espuma é o novo normal.</p>
+
+                <p>Com oradores de alto nível – da política à academia, passando pelo jornalismo e pela sociedade civil –, debateu-se a defesa da vida, da família, da consciência e da civilização ocidental. Se alguém quiser encontrar temas mais importantes, terá certamente um trabalho tortuoso. O painel que nos foi confiado – "Defender a Civilização Ocidental" – acaba por ser um resumo do evento, porque o que é esta civilização senão a defesa da vida, da família, da consciência e da liberdade? As intervenções dos professores André Azevedo Alves, vice-presidente académico da Escuela Hispánica, Rui Ramos e Juan Ángel Soto, o nosso Secretário-Geral, deixaram algo claro: somos herdeiros de uma civilização pela qual vale a pena lutar. Não para suprimir as outras, como escrevi antes, mas porque temos uma confiança inquebrantável de que com ideias, diálogo e debate, a verdade vencerá. E a vitória da verdade é, em última instância, uma vitória de todos. E se este Simpósio foi alguma coisa, foi, sem dúvida, um grande acto de reflexão e de vontade.</p>
+            `
+        },
+        image: '/images/activities/simposio-sall/portada.jpg',
+        isFeatured: true,
+        isUpcoming: false,
+        showRegistrationForm: false
     }
 ];
 

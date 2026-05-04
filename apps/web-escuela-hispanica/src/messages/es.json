@@ -213,7 +213,8 @@
         },
         "Upcoming": {
             "label": "Actividad futura",
-            "viewDetails": "Ver detalles y registro"
+            "viewDetails": "Ver detalles y registro",
+            "empty": "Ninguna actividad próxima por el momento"
         },
         "Featured": {
             "title": "ACTIVIDADES DESTACADAS",
