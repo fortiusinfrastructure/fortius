@@ -1664,7 +1664,7 @@ export const activities: Activity[] = [
                 <p>Com oradores de alto nível – da política à academia, passando pelo jornalismo e pela sociedade civil –, debateu-se a defesa da vida, da família, da consciência e da civilização ocidental. Se alguém quiser encontrar temas mais importantes, terá certamente um trabalho tortuoso. O painel que nos foi confiado – "Defender a Civilização Ocidental" – acaba por ser um resumo do evento, porque o que é esta civilização senão a defesa da vida, da família, da consciência e da liberdade? As intervenções dos professores André Azevedo Alves, vice-presidente académico da Escuela Hispánica, Rui Ramos e Juan Ángel Soto, o nosso Secretário-Geral, deixaram algo claro: somos herdeiros de uma civilização pela qual vale a pena lutar. Não para suprimir as outras, como escrevi antes, mas porque temos uma confiança inquebrantável de que com ideias, diálogo e debate, a verdade vencerá. E a vitória da verdade é, em última instância, uma vitória de todos. E se este Simpósio foi alguma coisa, foi, sem dúvida, um grande acto de reflexão e de vontade.</p>
             `
         },
-        image: '/images/activities/simposio-sall/portada.jpg',
+        image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
         isFeatured: true,
         isUpcoming: false,
         showRegistrationForm: false
