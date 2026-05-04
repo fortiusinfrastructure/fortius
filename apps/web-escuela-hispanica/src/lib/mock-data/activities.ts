@@ -173,32 +173,6 @@ export const activities: Activity[] = [
             `
         },
         image: '/images/activities/jantar da hispanidade e da lusofonia/portada.jpg',
-        gallery: [
-            {
-                src: '/images/activities/jantar da hispanidade e da lusofonia/galeria1.jpg',
-                caption: {
-                    es: 'Jantar da Hispanidade e da Lusofonia en el Real Clube Tauromáquico Português, Lisboa',
-                    en: 'Jantar da Hispanidade e da Lusofonia at the Real Clube Tauromáquico Português, Lisbon',
-                    pt: 'Jantar da Hispanidade e da Lusofonia no Real Clube Tauromáquico Português, Lisboa'
-                }
-            },
-            {
-                src: '/images/activities/jantar da hispanidade e da lusofonia/galeria2.jpg',
-                caption: {
-                    es: 'Intervención del secretario general Juan Ángel Soto y del vicepresidente académico André Azevedo Alves',
-                    en: 'Address by Secretary-General Juan Ángel Soto and Academic Vice-President André Azevedo Alves',
-                    pt: 'Intervenção do secretário-geral Juan Ángel Soto e do vice-presidente académico André Azevedo Alves'
-                }
-            },
-            {
-                src: '/images/activities/jantar da hispanidade e da lusofonia/galeria3.jpg',
-                caption: {
-                    es: 'Participantes en el III Simposio del SALL, Lisboa, 18 de abril de 2026',
-                    en: 'Participants at the III SALL Symposium, Lisbon, April 18, 2026',
-                    pt: 'Participantes no III Simpósio do SALL, Lisboa, 18 de abril de 2026'
-                }
-            }
-        ],
         isFeatured: true,
         isUpcoming: false,
         showRegistrationForm: false
@@ -1664,7 +1638,33 @@ export const activities: Activity[] = [
                 <p>Com oradores de alto nível – da política à academia, passando pelo jornalismo e pela sociedade civil –, debateu-se a defesa da vida, da família, da consciência e da civilização ocidental. Se alguém quiser encontrar temas mais importantes, terá certamente um trabalho tortuoso. O painel que nos foi confiado – "Defender a Civilização Ocidental" – acaba por ser um resumo do evento, porque o que é esta civilização senão a defesa da vida, da família, da consciência e da liberdade? As intervenções dos professores André Azevedo Alves, vice-presidente académico da Escuela Hispánica, Rui Ramos e Juan Ángel Soto, o nosso Secretário-Geral, deixaram algo claro: somos herdeiros de uma civilização pela qual vale a pena lutar. Não para suprimir as outras, como escrevi antes, mas porque temos uma confiança inquebrantável de que com ideias, diálogo e debate, a verdade vencerá. E a vitória da verdade é, em última instância, uma vitória de todos. E se este Simpósio foi alguma coisa, foi, sem dúvida, um grande acto de reflexão e de vontade.</p>
             `
         },
-        image: '/images/activities/escola hispânica en la lusofonía/portada.jpg',
+        image: '/images/activities/simposio sall escuela hispanica/portada.jpg',
+        gallery: [
+            {
+                src: '/images/activities/simposio sall escuela hispanica/galeria1.jpg',
+                caption: {
+                    es: 'Mesa redonda «Defender la Civilización Occidental» en el III Simposio del SALL, Lisboa, 18 de abril de 2026',
+                    en: 'Round table "Defending Western Civilisation" at the III SALL Symposium, Lisbon, April 18, 2026',
+                    pt: 'Mesa-redonda «Defender a Civilização Ocidental» no III Simpósio do SALL, Lisboa, 18 de abril de 2026'
+                }
+            },
+            {
+                src: '/images/activities/simposio sall escuela hispanica/galeria2.jpg',
+                caption: {
+                    es: 'Intervención de los profesores André Azevedo Alves, Rui Ramos y Juan Ángel Soto',
+                    en: 'Contributions by Professors André Azevedo Alves, Rui Ramos, and Juan Ángel Soto',
+                    pt: 'Intervenções dos professores André Azevedo Alves, Rui Ramos e Juan Ángel Soto'
+                }
+            },
+            {
+                src: '/images/activities/simposio sall escuela hispanica/galeria3.jpg',
+                caption: {
+                    es: 'Participantes del III Simposio SALL-Escuela Hispánica, Lisboa, 18 de abril de 2026',
+                    en: 'Participants of the III SALL-Escuela Hispánica Symposium, Lisbon, April 18, 2026',
+                    pt: 'Participantes do III Simpósio SALL-Escuela Hispánica, Lisboa, 18 de abril de 2026'
+                }
+            }
+        ],
         isFeatured: true,
         isUpcoming: false,
         showRegistrationForm: false
