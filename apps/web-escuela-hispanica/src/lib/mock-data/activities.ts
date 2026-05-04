@@ -98,7 +98,7 @@ export const activities: Activity[] = [
             pt: 'Crónica – Jantar da Hispanidade e Da Lusofonia'
         },
         sortDate: '2026-04-18',
-        date: '17 - 18 Abril 2026',
+        date: '17-18 Abril 2026',
         location: {
             es: 'Real Clube Tauromáquico Português, Lisboa, Portugal',
             en: 'Real Clube Tauromáquico Português, Lisbon, Portugal',
@@ -714,7 +714,7 @@ export const activities: Activity[] = [
             pt: 'II Jornadas de Pensamento Hispânico'
         },
         sortDate: '2025-06-08',
-        date: '08 - 10 Junio 2025',
+        date: '08-10 Junio 2025',
         location: {
             es: 'Real Centro Universitario María Cristina, San Lorenzo de El Escorial, España',
             en: 'Real Centro Universitario María Cristina, San Lorenzo de El Escorial, Spain',
@@ -942,7 +942,7 @@ export const activities: Activity[] = [
             pt: 'I Jornadas de Pensamento Hispânico'
         },
         sortDate: '2024-07-01',
-        date: '01 - 02 Julio 2024',
+        date: '01-02 Julio 2024',
         location: {
             es: 'El Escorial, Madrid, España',
             en: 'El Escorial, Madrid, Spain',
@@ -1059,7 +1059,7 @@ export const activities: Activity[] = [
             pt: 'X Encontro Internacional de História do Pensamento'
         },
         sortDate: '2024-04-11',
-        date: '11 - 12 Abril 2024',
+        date: '11-12 Abril 2024',
         location: {
             es: 'Salamanca, España',
             en: 'Salamanca, Spain',
@@ -1389,7 +1389,7 @@ export const activities: Activity[] = [
             pt: 'Eco de Salamanca'
         },
         sortDate: '2025-10-12',
-        date: '12 - 15 Octubre 2025',
+        date: '12-15 Octubre 2025',
         location: {
             es: 'La Antigua, Guatemala',
             en: 'La Antigua, Guatemala',
