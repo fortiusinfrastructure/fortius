@@ -113,10 +113,10 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                     </div>
                 </div>
 
-                {/* Insights — CTAs editoriales */}
+                {/* Área de trabajo — featured + locked preview */}
                 <div className="mb-24">
                     <div className="flex items-end justify-between mb-8">
-                        <Bracketed variant="kicker">Insights · {v.label}</Bracketed>
+                        <Bracketed variant="kicker">Área de trabajo · {v.label}</Bracketed>
                         <a
                             href={`${v.href}#insights`}
                             className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
@@ -167,32 +167,96 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                                 </p>
                             </div>
                         </motion.a>
-                        <div className="col-span-1 lg:col-span-5 flex flex-col divide-y divide-[var(--border-subtle)]">
-                            {rest.map((p, i) => (
-                                <motion.a
-                                    key={p.slug}
-                                    href={`/publicaciones/${p.slug}`}
-                                    initial={{ opacity: 0, y: 16 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-60px" }}
-                                    transition={{ duration: 0.5, delay: i * 0.08, ease }}
-                                    className="group py-6 first:pt-0 last:pb-0 flex gap-5 items-start"
-                                >
-                                    <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)] shrink-0 w-16 pt-1">
-                                        {p.date.split(" ").slice(0, 2).join(" ")}
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-80px" }}
+                            transition={{ duration: 0.6, ease }}
+                            className="col-span-1 lg:col-span-5 flex flex-col"
+                        >
+                            <div className="flex flex-col divide-y divide-[var(--border-subtle)] mb-6">
+                                {rest.map((p, i) => (
+                                    <motion.a
+                                        key={p.slug}
+                                        href={`/publicaciones/${p.slug}`}
+                                        initial={{ opacity: 0, y: 16 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, margin: "-60px" }}
+                                        transition={{ duration: 0.5, delay: i * 0.08, ease }}
+                                        className="group py-5 first:pt-0 flex gap-5 items-start"
+                                    >
+                                        <div className="text-[0.65rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)] shrink-0 w-16 pt-1">
+                                            {p.date.split(" ").slice(0, 2).join(" ")}
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <Bracketed variant="tag">{p.category}</Bracketed>
+                                            <h4 className="font-display text-lg font-light leading-[1.2] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
+                                                {p.title}
+                                            </h4>
+                                            <p className="text-[0.85rem] text-[var(--text-tertiary)] leading-relaxed line-clamp-2">
+                                                {p.excerpt}
+                                            </p>
+                                        </div>
+                                    </motion.a>
+                                ))}
+                            </div>
+
+                            <article
+                                aria-label={`Artículo bloqueado — ${v.lockedArticle.title}`}
+                                className="relative border border-[var(--border-default)] bg-[var(--surface-primary)] overflow-hidden"
+                            >
+                                <div className="p-6 space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <Bracketed variant="tag">
+                                            {v.lockedArticle.category}
+                                        </Bracketed>
+                                        <span className="inline-flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-accent-400)]">
+                                            Acceso restringido
+                                        </span>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <Bracketed variant="tag">{p.category}</Bracketed>
-                                        <h4 className="font-display text-lg font-light leading-[1.2] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
-                                            {p.title}
-                                        </h4>
-                                        <p className="text-[0.85rem] text-[var(--text-tertiary)] leading-relaxed line-clamp-2">
-                                            {p.excerpt}
+                                    <h4 className="font-display text-[1.35rem] font-light leading-[1.18] tracking-tight text-[var(--text-primary)]">
+                                        {v.lockedArticle.title}
+                                    </h4>
+                                    <div className="flex items-center gap-4 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                                        <span>{v.lockedArticle.publishedAt}</span>
+                                        <span>·</span>
+                                        <span>{v.lockedArticle.readTime}</span>
+                                    </div>
+                                    <div className="relative">
+                                        <p className="text-[0.9rem] text-[var(--text-secondary)] leading-relaxed">
+                                            {v.lockedArticle.excerpt}
                                         </p>
+                                        <div
+                                            className="pointer-events-none absolute inset-x-0 bottom-0 h-20"
+                                            style={{
+                                                background:
+                                                    "linear-gradient(180deg, rgba(5,10,20,0) 0%, var(--surface-primary) 90%)",
+                                            }}
+                                            aria-hidden
+                                        />
                                     </div>
-                                </motion.a>
-                            ))}
-                        </div>
+                                </div>
+                                <div className="border-t border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-6 py-4 flex items-center gap-3">
+                                    <p className="text-[0.75rem] text-[var(--text-secondary)] leading-snug">
+                                        Contenido reservado para miembros del Área Privada.
+                                    </p>
+                                </div>
+                            </article>
+
+                            <a
+                                href="/area-privada"
+                                className="group inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
+                            >
+                                <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
+                                    Acceder al Área Privada
+                                </span>
+                                <ArrowUpRight
+                                    size={16}
+                                    className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+                                />
+                            </a>
+                        </motion.div>
                     </div>
                 </div>
 
@@ -261,35 +325,7 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                     onClose={() => setActivePerson(null)}
                 />
 
-                {/* Área privada — CTA */}
-                <a
-                    href={`${v.href}#area-privada`}
-                    className="group flex items-center justify-between gap-6 p-8 border border-[var(--border-default)] hover:border-[var(--color-accent-500)] transition-colors"
-                >
-                    <div className="flex items-start gap-4">
-                        <Lock
-                            size={20}
-                            className="text-[var(--color-accent-500)] shrink-0 mt-0.5"
-                            aria-hidden
-                        />
-                        <div className="space-y-1">
-                            <p className="font-display text-xl font-light text-[var(--text-primary)]">
-                                {v.privateArea.title}
-                            </p>
-                            <p className="text-[0.85rem] text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                                {v.privateArea.description}
-                            </p>
-                        </div>
-                    </div>
-                    <span className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] shrink-0">
-                        {v.privateArea.ctaLabel}
-                        <ArrowUpRight
-                            size={14}
-                            className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
-                        />
-                    </span>
-                </a>
-            </div>
+                            </div>
         </section>
     );
 }

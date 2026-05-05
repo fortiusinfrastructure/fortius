@@ -8,6 +8,8 @@ import {
     PersonDialog,
     type PersonDialogData,
 } from "@/components/consulting-v2/PersonDialog";
+import { HistoryTimeline } from "@/components/consulting-v2/HistoryTimeline";
+import { WorldMap } from "@/components/consulting-v2/WorldMap";
 import {
     DEPARTMENT_LABEL,
     DEPARTMENT_ORDER,
@@ -17,7 +19,7 @@ import {
     type TeamMember,
     type ExternalExpert,
 } from "@/content/team";
-import { Mail, Linkedin } from "lucide-react";
+import { Mail, Linkedin, ArrowUpRight } from "lucide-react";
 
 const VERTICAL_LABEL: Record<"civil" | "intelligence", string> = {
     civil: "Sociedad Civil",
@@ -68,37 +70,63 @@ export function NosotrosClient() {
                     defendemos.
                 </p>
 
-                {/* Founder destacado */}
+                <HistoryTimeline />
+
+                {/* Filosofía + Fundador */}
                 {founder && (
-                    <article className="mt-20 border-t border-[var(--border-subtle)] pt-12">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-                            <button
-                                type="button"
-                                onClick={() => setActive(memberToDialog(founder))}
-                                className="group md:col-span-4 flex flex-col items-start gap-6 text-left"
-                            >
-                                <PersonPortrait
-                                    name={founder.name}
-                                    photo={founder.photo}
-                                    size="lg"
-                                    className="group-hover:border-[var(--color-accent-500)] transition-colors"
-                                />
-                                <span className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)] group-hover:text-[var(--color-accent-400)] transition-colors">
-                                    + bio completa
-                                </span>
-                            </button>
-                            <div className="md:col-span-8 space-y-5">
-                                <Bracketed variant="kicker">Fundador</Bracketed>
-                                <h2 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-light leading-tight text-[var(--text-primary)]">
-                                    {founder.name}
+                    <article className="mt-24 border-t border-[var(--border-subtle)] pt-12">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
+                            <div className="md:col-span-6 space-y-6">
+                                <Bracketed variant="kicker">Filosofía</Bracketed>
+                                <h2 className="font-display text-[clamp(1.6rem,2.6vw,2.2rem)] font-light leading-[1.18] tracking-tight text-[var(--text-primary)]">
+                                    Las ideas solo transforman la realidad cuando
+                                    encuentran personas e instituciones capaces de
+                                    defenderlas con{" "}
+                                    <span className="italic text-[var(--color-accent-400)]">
+                                        inteligencia, disciplina y visión estratégica.
+                                    </span>
                                 </h2>
-                                <p className="text-[0.9rem] uppercase tracking-[0.15em] text-[var(--color-accent-400)]">
-                                    {founder.role}
+                                <p className="text-[var(--text-secondary)] leading-relaxed">
+                                    Fortius nace para ayudar a esas personas e
+                                    instituciones a convertir convicciones en
+                                    estructura, influencia e impacto.
                                 </p>
-                                <p className="text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+                                <p className="text-[var(--text-secondary)] leading-relaxed">
+                                    Porque servir a una causa noble requiere algo más
+                                    que convicción.{" "}
+                                    <span className="text-[var(--text-primary)]">
+                                        Exige excelencia.
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div className="md:col-span-6 space-y-6">
+                                <Bracketed variant="kicker">Fundador</Bracketed>
+                                <button
+                                    type="button"
+                                    onClick={() => setActive(memberToDialog(founder))}
+                                    className="group flex items-start gap-6 text-left"
+                                    aria-label={`Ver bio de ${founder.name}`}
+                                >
+                                    <PersonPortrait
+                                        name={founder.name}
+                                        photo={founder.photo}
+                                        size="lg"
+                                        className="group-hover:border-[var(--color-accent-500)] transition-colors shrink-0"
+                                    />
+                                    <div className="space-y-2 pt-2">
+                                        <h3 className="font-display text-[clamp(1.4rem,2.4vw,1.9rem)] font-light leading-tight text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
+                                            {founder.name}
+                                        </h3>
+                                        <p className="text-[0.8rem] uppercase tracking-[0.15em] text-[var(--color-accent-400)]">
+                                            {founder.role}
+                                        </p>
+                                    </div>
+                                </button>
+                                <p className="text-[var(--text-secondary)] leading-relaxed">
                                     {founder.bio}
                                 </p>
-                                <div className="pt-2 flex flex-wrap gap-3">
+                                <div className="pt-2 flex flex-wrap items-center gap-3">
                                     {founder.email && (
                                         <a
                                             href={`mailto:${founder.email}`}
@@ -119,6 +147,17 @@ export function NosotrosClient() {
                                             LinkedIn
                                         </a>
                                     )}
+                                    <button
+                                        type="button"
+                                        onClick={() => setActive(memberToDialog(founder))}
+                                        className="group inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-4 py-2 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
+                                    >
+                                        Conoce más
+                                        <ArrowUpRight
+                                            size={14}
+                                            className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
+                                        />
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -173,6 +212,20 @@ export function NosotrosClient() {
                             />
                         ))}
                     </div>
+                </section>
+
+                {/* Nuestro trabajo */}
+                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                    <div className="mb-10 md:mb-12 space-y-5">
+                        <Bracketed variant="kicker">Nuestro trabajo</Bracketed>
+                        <h2 className="font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]">
+                            Operando en los entornos institucionales{" "}
+                            <span className="italic text-[var(--color-accent-400)]">
+                                más complejos.
+                            </span>
+                        </h2>
+                    </div>
+                    <WorldMap />
                 </section>
             </section>
 

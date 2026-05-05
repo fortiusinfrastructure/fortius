@@ -42,6 +42,14 @@ export interface Testimonial {
     role: string;
 }
 
+export interface LockedArticle {
+    category: string;
+    title: string;
+    excerpt: string;
+    readTime: string;
+    publishedAt: string;
+}
+
 export interface VerticalDef {
     id: VerticalId;
     number: string;
@@ -53,6 +61,7 @@ export interface VerticalDef {
     description: string;
     services: ServiceItem[];
     insights: Insight[];
+    lockedArticle: LockedArticle;
     experts: Expert[];
     testimonials: Testimonial[];
     clients: string[];
@@ -69,55 +78,64 @@ export const VERTICALS: VerticalDef[] = [
         number: "01",
         label: "Sociedad Civil",
         href: "/sociedad-civil",
-        kicker: "Vertical 01",
+        kicker: "Área de trabajo 01",
         headline: "Fortalecemos a quienes defienden",
         headlineItalic: "principios en la sociedad.",
         description:
             "Acompañamos a think tanks, fundaciones, ONGs y plataformas ciudadanas en el diseño e implementación de estrategias que maximicen el impacto de sus valores.",
         services: [
             {
-                title: "Análisis y medición de impacto",
-                description: "Medimos lo que importa para que tomes las mejores decisiones.",
-                icon: "search",
-            },
-            {
-                title: "Asuntos públicos",
-                description: "Conectamos tu voz con quienes toman decisiones clave.",
-                icon: "fileText",
-            },
-            {
-                title: "Comunicación y campañas",
-                description: "Damos vida a tu marca y la conectamos con tu público ideal.",
-                icon: "megaphone",
-            },
-            {
-                title: "Constitución y desarrollo de organizaciones",
-                description: "Te ayudamos a construir una organización fuerte y preparada para crecer.",
+                title: "Diseño y estructuración de organizaciones",
+                description:
+                    "Creamos organizaciones sólidas, escalables y preparadas para crecer, con estructuras de gobernanza, procesos y arquitectura institucional profesionalizados.",
                 icon: "users",
             },
             {
-                title: "Diseño y gestión de proyectos",
-                description: "Hacemos que tus ideas cobren vida con planificación y resultados reales.",
+                title: "Estrategia de posicionamiento e impacto",
+                description:
+                    "Definimos planes estratégicos para maximizar la influencia pública, la relevancia institucional y la capacidad transformadora de cada organización.",
                 icon: "network",
             },
             {
-                title: "Headhunting y desarrollo de talento",
-                description: "Encontramos el talento que tu organización necesita para triunfar.",
-                icon: "userCheck",
+                title: "Relaciones institucionales y asuntos públicos",
+                description:
+                    "Conectamos a las organizaciones con los actores públicos y privados relevantes para sus objetivos estratégicos.",
+                icon: "fileText",
             },
             {
-                title: "Investigaciones e informes",
-                description: "Transformamos datos en información que impulsa tus decisiones.",
+                title: "Medición y evaluación de impacto",
+                description:
+                    "Diseñamos sistemas de indicadores y evaluación para medir el impacto real de la actividad institucional y orientar la toma de decisiones.",
+                icon: "search",
+            },
+            {
+                title: "Investigación estratégica e informes",
+                description:
+                    "Elaboramos estudios, informes y análisis aplicados para apoyar decisiones estratégicas y fortalecer el posicionamiento intelectual de la organización.",
                 icon: "bookOpen",
             },
             {
-                title: "Movilización social y alianzas",
-                description: "Creamos conexiones estratégicas que generan cambios reales.",
+                title: "Comunicación estratégica y campañas",
+                description:
+                    "Diseñamos narrativas, campañas y estrategias de comunicación orientadas a amplificar influencia, notoriedad y capacidad de movilización.",
+                icon: "megaphone",
+            },
+            {
+                title: "Movilización social y construcción de alianzas",
+                description:
+                    "Articulamos redes, alianzas y plataformas de colaboración para multiplicar la capacidad de incidencia.",
                 icon: "handshake",
             },
             {
-                title: "Comunicación, diseño y audiovisuales",
-                description: "Diseñamos y optimizamos tu presencia online para destacar en el mundo digital.",
+                title: "Selección y desarrollo de talento",
+                description:
+                    "Identificamos y atraemos perfiles clave alineados con la misión, cultura y necesidades estratégicas de la organización.",
+                icon: "userCheck",
+            },
+            {
+                title: "Sistemas digitales y gestión de comunidades",
+                description:
+                    "Diseñamos la infraestructura digital necesaria para profesionalizar operaciones, captación, comunicación y relación con comunidades de apoyo.",
                 icon: "monitor",
             },
         ],
@@ -149,6 +167,14 @@ export const VERTICALS: VerticalDef[] = [
                 readTime: "7 min",
             },
         ],
+        lockedArticle: {
+            category: "Informe Premium",
+            title: "Madurez institucional: diagnóstico cerrado para fundaciones europeas",
+            excerpt:
+                "Benchmark interno con métricas de gobernanza, captación y reputación de 32 fundaciones de referencia. Acceso reservado a organizaciones con convenio.",
+            readTime: "22 min",
+            publishedAt: "Abril 2026",
+        },
         experts: [
             { name: "Dídac Sánchez Olaya", role: "Director Asuntos Públicos" },
             { name: "Alexia Cosmello Guisande", role: "Asuntos Públicos" },
@@ -174,37 +200,49 @@ export const VERTICALS: VerticalDef[] = [
     {
         id: "intelligence",
         number: "02",
-        label: "Inteligencia",
-        href: "/inteligencia",
-        kicker: "Vertical 02",
+        label: "Política",
+        href: "/politica",
+        kicker: "Área de trabajo 02",
         headline: "Información precisa para decisiones de",
         headlineItalic: "alto impacto.",
         description:
             "Inteligencia política y análisis de riesgos geopolíticos para líderes que necesitan contexto antes de actuar. Informes periódicos, monitorización continua y due diligence reputacional.",
         services: [
             {
-                title: "Geopolitical & Intelligence Reports",
+                title: "Inteligencia política y legislativa",
                 description:
-                    "Informes periódicos sobre riesgos geopolíticos que afectan a tu sector y geografías de interés.",
-                icon: "globe",
-            },
-            {
-                title: "Monitorización política y legislativa",
-                description:
-                    "Seguimiento en tiempo real de iniciativas legislativas, nombramientos y cambios regulatorios.",
+                    "Seguimiento, interpretación y anticipación de dinámicas políticas, parlamentarias, regulatorias e institucionales.",
                 icon: "activity",
             },
             {
-                title: "Due diligence reputacional",
+                title: "Informes de coyuntura y análisis ejecutivo",
                 description:
-                    "Análisis exhaustivo del perfil público y riesgos reputacionales de personas, organizaciones y socios.",
+                    "Elaboramos análisis periódicos y documentos de síntesis para decisores que requieren contexto claro y útil para la acción.",
+                icon: "bookOpen",
+            },
+            {
+                title: "Evaluación reputacional y de actores clave",
+                description:
+                    "Analizamos perfiles, socios potenciales, aliados, adversarios y riesgos reputacionales asociados.",
                 icon: "shieldCheck",
             },
             {
-                title: "Investigación de ecosistemas institucionales",
+                title: "Cartografía de poder y ecosistemas institucionales",
                 description:
-                    "Mapeo de actores clave, relaciones de poder y dinámicas de influencia en ecosistemas complejos.",
+                    "Identificamos actores, redes de influencia, incentivos y relaciones estructurales en entornos complejos.",
                 icon: "network",
+            },
+            {
+                title: "Análisis de riesgo geopolítico",
+                description:
+                    "Evaluamos escenarios internacionales, tendencias regionales y amenazas estratégicas con potencial impacto político o reputacional.",
+                icon: "globe",
+            },
+            {
+                title: "Prospectiva estratégica y análisis de escenarios",
+                description:
+                    "Construimos escenarios futuros plausibles para anticipar riesgos, oportunidades y puntos de inflexión.",
+                icon: "search",
             },
         ],
         insights: [
@@ -235,6 +273,14 @@ export const VERTICALS: VerticalDef[] = [
                 readTime: "9 min",
             },
         ],
+        lockedArticle: {
+            category: "Briefing Confidencial",
+            title: "Mapa de riesgo geopolítico Q2 2026: vectores críticos para tomadores de decisión",
+            excerpt:
+                "Lectura reservada con escenarios prospectivos sobre Sahel, Latinoamérica y dinámicas en la UE. Incluye ventanas de oportunidad y líneas rojas detectadas por nuestros analistas.",
+            readTime: "30 min",
+            publishedAt: "Abril 2026",
+        },
         experts: [
             { name: "Beatriz de León Cobo", role: "Inteligencia Política", area: "Norte de África y Sahel" },
             { name: "Tasnim Idriss", role: "Inteligencia Política", area: "Norte de África y Sahel" },
@@ -251,9 +297,9 @@ export const VERTICALS: VerticalDef[] = [
         ],
         clients: ["Axioma", "ISI", "Cooperación Internacional", "Acton Institute"],
         privateArea: {
-            title: "Área privada — Intelligence",
+            title: "Área privada — Política",
             description:
-                "Acceso exclusivo a informes, monitorizaciones y dashboards de inteligencia.",
+                "Acceso exclusivo a informes, monitorizaciones y dashboards de inteligencia política.",
             ctaLabel: "Solicitar acceso",
         },
     },

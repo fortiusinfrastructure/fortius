@@ -45,7 +45,7 @@ export function HeroEditorial() {
                     transition={{ duration: 0.5, delay: 0.15, ease }}
                     className="mb-10"
                 >
-                    <Bracketed variant="hero">Fortius Consulting — desde 2010</Bracketed>
+                    <Bracketed variant="hero">Fortius Consulting — desde 2015</Bracketed>
                 </motion.div>
 
                 <div className="grid grid-cols-12 gap-6 items-end">
@@ -73,8 +73,8 @@ export function HeroEditorial() {
                         className="col-span-12 lg:col-span-4 space-y-8 lg:pb-6"
                     >
                         <p className="text-[var(--text-secondary)] text-base leading-relaxed font-light max-w-sm">
-                            Consultoría estratégica para organizaciones con principios.
-                            Dos verticales, un mismo objetivo: maximizar el impacto de sus valores en la sociedad.
+                            Estrategia para quienes entienden el liderazgo como servicio.
+                            Acompañamos para que las ideas correctas transformen la sociedad.
                         </p>
                         <a
                             href="#verticales"

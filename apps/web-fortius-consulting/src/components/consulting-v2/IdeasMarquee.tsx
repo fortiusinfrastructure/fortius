@@ -2,14 +2,22 @@ import { Bracketed } from "@/components/system/Bracketed";
 import { Marquee } from "@/components/system/Marquee";
 import { RADICAL_IDEAS } from "@/content/home-v2";
 
-export function IdeasMarquee() {
+interface IdeasMarqueeProps {
+    kicker?: string;
+    ariaLabel?: string;
+}
+
+export function IdeasMarquee({
+    kicker = "Ideas que movemos",
+    ariaLabel,
+}: IdeasMarqueeProps = {}) {
     return (
         <section
-            aria-label="Ideas que movemos"
+            aria-label={ariaLabel ?? kicker}
             className="relative py-20 md:py-24 border-t border-[var(--border-subtle)] space-y-10"
         >
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
-                <Bracketed variant="kicker">Ideas que movemos</Bracketed>
+                <Bracketed variant="kicker">{kicker}</Bracketed>
             </div>
             <Marquee speed={50} className="py-4">
                 {RADICAL_IDEAS.map((idea) => (

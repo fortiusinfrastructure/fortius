@@ -2,14 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
+import { Menu, Lock } from "lucide-react";
+import { BrandLockup } from "@/components/system/BrandLockup";
 
 const LINKS = [
     { label: "Nosotros", href: "/nosotros" },
     { label: "Sociedad Civil", href: "/sociedad-civil" },
-    { label: "Inteligencia", href: "/inteligencia" },
+    { label: "Política", href: "/politica" },
     { label: "Contacto", href: "/contacto" },
 ];
+
+const FOUNDATION_URL = "https://fortiusfoundation.org";
 
 export function NavV2() {
     const [scrolled, setScrolled] = useState(false);
@@ -32,17 +35,8 @@ export function NavV2() {
             }`}
         >
             <nav className="mx-auto flex items-center justify-between h-[var(--nav-height)] max-w-[var(--container-max)] px-[var(--container-px)]">
-                <a href="/" className="flex items-center gap-1" aria-label="Fortius Consulting — inicio">
-                    <span className="text-[var(--color-accent-500)] text-lg font-light">[</span>
-                    <span className="flex flex-col items-center leading-none -space-y-0.5 px-1">
-                        <span className="font-sans font-normal tracking-[0.22em] text-[var(--text-primary)] uppercase text-[0.95rem]">
-                            Fortius
-                        </span>
-                        <span className="font-display tracking-[0.18em] text-[0.58rem] text-[var(--text-secondary)] uppercase">
-                            Consulting
-                        </span>
-                    </span>
-                    <span className="text-[var(--color-accent-500)] text-lg font-light">]</span>
+                <a href="/" aria-label="Fortius Consulting — inicio">
+                    <BrandLockup variant="consulting" />
                 </a>
 
                 <div className="hidden lg:flex items-center gap-10">
@@ -55,20 +49,29 @@ export function NavV2() {
                             {l.label}
                         </a>
                     ))}
+                    <a
+                        href={FOUNDATION_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Fortius Foundation"
+                    >
+                        <BrandLockup variant="foundation" tone="compact" />
+                    </a>
                 </div>
 
                 <div className="hidden lg:flex items-center gap-3">
                     <a
-                        href="/fundacion"
-                        className="text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
+                        href="/area-privada"
+                        className="inline-flex items-center gap-2 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--text-secondary)] border border-[var(--border-default)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-colors"
                     >
-                        [Foundation]
+                        <Lock size={12} strokeWidth={2} aria-hidden />
+                        Área privada
                     </a>
                     <a
                         href="/contacto"
                         className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                     >
-                        Háblanos
+                        Contacto
                     </a>
                 </div>
 
