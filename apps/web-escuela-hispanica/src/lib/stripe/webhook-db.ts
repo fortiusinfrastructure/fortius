@@ -123,6 +123,8 @@ function normalizeSubscriptionStatus(status: Stripe.Subscription.Status) {
 }
 
 function normalizeMembershipStatus(status: ReturnType<typeof normalizeSubscriptionStatus>) {
+    // `active` is the final operational state after Stripe confirms
+    // the subscription or recurring payment lifecycle.
     if (status === 'active' || status === 'trialing') return 'active';
     if (status === 'past_due' || status === 'incomplete') return 'past_due';
     return 'inactive';

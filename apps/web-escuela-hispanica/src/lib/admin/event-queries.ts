@@ -26,15 +26,10 @@ export async function getEventDashboard(filters: {
     ]);
 
     const activities = (activitiesResult.data ?? []) as Pick<Activity, 'id' | 'slug' | 'title_es' | 'event_date' | 'location' | 'status'>[];
-    const registrations = ((registrationsResult.data ?? []) as Registration[]).filter((registration) => {
-        const eventMatch = !filters.event || filters.event === 'all' || registration.event_slug === filters.event;
-        const statusMatch = !filters.status || filters.status === 'all' || registration.status === filters.status;
-        const attendanceMatch = !filters.attendance || filters.attendance === 'all' || registration.attendance_status === filters.attendance;
-        return eventMatch && statusMatch && attendanceMatch;
-    });
+    const allRegistrations = (registrationsResult.data ?? []) as Registration[];
 
     const metricsByEvent = activities.map((activity) => {
-        const byEvent = registrations.filter((registration) => registration.event_slug === activity.slug);
+        const byEvent = allRegistrations.filter((registration) => registration.event_slug === activity.slug);
         return {
             slug: activity.slug,
             title: activity.title_es,
@@ -48,12 +43,23 @@ export async function getEventDashboard(filters: {
         };
     });
 
+    const selectedEvent = filters.event && filters.event !== 'all'
+        ? metricsByEvent.find((event) => event.slug === filters.event) ?? null
+        : null;
+
+    const registrations = allRegistrations.filter((registration) => {
+        const eventMatch = !selectedEvent || registration.event_slug === selectedEvent.slug;
+        const statusMatch = !filters.status || filters.status === 'all' || registration.status === filters.status;
+        const attendanceMatch = !filters.attendance || filters.attendance === 'all' || registration.attendance_status === filters.attendance;
+        return eventMatch && statusMatch && attendanceMatch;
+    });
+
     const totals = {
         activities: activities.length,
-        registrations: registrations.length,
-        paid: registrations.filter((registration) => registration.status === 'paid').length,
-        attended: registrations.filter((registration) => registration.attendance_status === 'attended').length,
+        registrations: allRegistrations.length,
+        paid: allRegistrations.filter((registration) => registration.status === 'paid').length,
+        attended: allRegistrations.filter((registration) => registration.attendance_status === 'attended').length,
     };
 
-    return { org, totals, metricsByEvent, registrations };
+    return { org, totals, metricsByEvent, registrations, selectedEvent };
 }

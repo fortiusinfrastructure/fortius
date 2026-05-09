@@ -56,7 +56,8 @@ export async function GET(request: NextRequest) {
     // Generate a long-lived payment token for the intermediate page
     const paymentToken = createAcademicPaymentToken(decoded.membershipId);
 
-    // Update status to approved and store payment token
+    // `approved` means Secretaría validated the application,
+    // but Stripe has not confirmed payment yet.
     await admin
         .from('user_memberships')
         .update({

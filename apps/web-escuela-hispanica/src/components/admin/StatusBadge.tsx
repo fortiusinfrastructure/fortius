@@ -20,10 +20,33 @@ const styles: Record<string, string> = {
     unconfirmed: 'bg-slate-100 text-slate-600',
 };
 
+const labels: Record<string, string> = {
+    active: 'Activo',
+    approved: 'Aprobado',
+    pending: 'Pendiente',
+    expired: 'Expirado',
+    inactive: 'Inactivo',
+    rejected: 'Rechazado',
+    past_due: 'Pago atrasado',
+    paid: 'Pagado',
+    cancelled: 'Cancelado',
+    sent: 'Enviado',
+    failed: 'Fallido',
+    notification: 'Alerta interna',
+    confirmation: 'Confirmación',
+    reminder: 'Recordatorio',
+    receipt: 'Recibo',
+    failure: 'Fallo de pago',
+    attended: 'Asistió',
+    absent: 'Ausente',
+    unconfirmed: 'Sin confirmar',
+};
+
 export function StatusBadge({ value }: { value: string | null | undefined }) {
-    const label = (value || 'unknown').replace('_', ' ');
+    const key = value || 'inactive';
+    const label = labels[key] ?? key.replace('_', ' ');
     return (
-        <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${styles[value || 'inactive'] ?? styles.inactive}`}>
+        <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${styles[key] ?? styles.inactive}`}>
             {label}
         </span>
     );
