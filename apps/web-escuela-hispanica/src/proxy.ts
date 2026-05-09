@@ -11,6 +11,7 @@ const AUTH_ROUTES = ['/auth/login', '/auth/register'];
 
 // Routes that bypass both i18n and auth (API, callbacks, static)
 const PASSTHROUGH_ROUTES = ['/api/', '/auth/callback', '/_next/', '/favicon.ico'];
+const ADMIN_PUBLIC_ROUTES = ['/admin/login', '/admin/unauthorized'];
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -25,6 +26,45 @@ function stripLocale(pathname: string): string {
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Admin routes bypass i18n entirely
+  if (pathname.startsWith('/admin')) {
+    if (ADMIN_PUBLIC_ROUTES.includes(pathname)) {
+      return NextResponse.next();
+    }
+
+    const response = NextResponse.next({
+      request: { headers: request.headers },
+    });
+
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll: () => request.cookies.getAll(),
+          setAll: (cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) => {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              request.cookies.set(name, value);
+              response.cookies.set(name, value, options as any);
+            });
+          },
+        },
+      },
+    );
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('redirect', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    return response;
+  }
 
   // 1. Skip passthrough routes entirely
   if (isPassthrough(pathname)) {

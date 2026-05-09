@@ -104,6 +104,10 @@ export async function GET(request: NextRequest) {
         <p><strong>Secretaría</strong><br>Escuela Hispánica</p>
       </div>
     `,
+        kind: 'confirmation',
+        relatedTable: 'user_memberships',
+        relatedId: decoded.membershipId,
+        metadata: { tier: 'academico', status: 'approved' },
     });
 
     return new NextResponse(

@@ -15,7 +15,6 @@ interface NavItem {
     label: string;
     href: string;
     icon: React.ReactNode;
-    active?: boolean;
 }
 
 interface AdminShellProps {
@@ -25,6 +24,7 @@ interface AdminShellProps {
     currentPath: string;
     userEmail?: string;
     onSignOut?: () => void;
+    navItems?: NavItem[];
 }
 
 const NAV_ITEMS = (orgSlug: string): NavItem[] => [
@@ -52,9 +52,10 @@ export function AdminShell({
     currentPath,
     userEmail,
     onSignOut,
+    navItems: customNavItems,
 }: AdminShellProps) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const navItems = NAV_ITEMS(orgSlug);
+    const navItems = customNavItems ?? NAV_ITEMS(orgSlug);
 
     const SidebarContent = () => (
         <nav className="flex flex-col h-full">

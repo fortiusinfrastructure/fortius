@@ -1,202 +1,174 @@
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { createServerClient } from '@supabase/ssr';
+import type Stripe from 'stripe';
 import { headers } from 'next/headers';
+import { createAdminClient } from '@fortius/database';
+import { stripe } from '@/lib/stripe';
+import { insertPaymentHistory, getWebhookOrganizationId, recordStripeEvent, syncSubscriptionFromStripe } from '@/lib/stripe/webhook-db';
+import {
+    sendEventRecoveryEmail,
+    sendEventRegistrationEmails,
+    sendInvoiceFailedEmails,
+    sendInvoiceReceiptEmails,
+    sendMembershipCheckoutEmails,
+} from '@/lib/stripe/webhook-notifications';
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY || '';
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
-const stripe = new Stripe(stripeSecretKey, {
-    apiVersion: '2025-02-24.acacia',
-} as any);
+function getInvoiceSubscriptionId(invoice: Stripe.Invoice) {
+    const invoiceWithLegacyFields = invoice as Stripe.Invoice & {
+        subscription?: string | null;
+        payment_intent?: string | null;
+    };
 
-function createSupabaseAdmin() {
-    return createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!,
-        {
-            cookies: {
-                getAll: () => [],
-                setAll: () => { },
-            },
-        }
-    );
+    return {
+        subscriptionId:
+            typeof invoiceWithLegacyFields.subscription === 'string'
+                ? invoiceWithLegacyFields.subscription
+                : null,
+        paymentIntentId:
+            typeof invoiceWithLegacyFields.payment_intent === 'string'
+                ? invoiceWithLegacyFields.payment_intent
+                : null,
+    };
 }
 
 export async function POST(req: Request) {
     const rawBody = await req.text();
-    const headersList = await headers();
-    const sig = headersList.get('stripe-signature');
+    const signature = (await headers()).get('stripe-signature');
 
-    if (!sig) {
+    if (!signature) {
         return NextResponse.json({ error: 'Missing stripe-signature header' }, { status: 400 });
     }
 
     let event: Stripe.Event;
-
     try {
-        event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
-    } catch (err: any) {
-        console.error('⚠️  Webhook signature verification failed.', err.message);
-        return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+        event = stripe.webhooks.constructEvent(rawBody, signature, endpointSecret);
+    } catch (error) {
+        const message = error instanceof Error ? error.message : 'unknown_error';
+        return NextResponse.json({ error: `Webhook Error: ${message}` }, { status: 400 });
     }
 
-    const supabase = createSupabaseAdmin();
+    const metadata = ((event.data.object as { metadata?: Record<string, string> }).metadata || {});
+    const orgSlug = metadata.orgSlug || 'escuela-hispanica';
+    const organizationId = await getWebhookOrganizationId(orgSlug);
+    const recorded = await recordStripeEvent(event.id, event.type, organizationId);
+    if (!recorded) return NextResponse.json({ received: true, duplicate: true });
 
-    if (event.type === 'checkout.session.completed') {
-        const session = event.data.object as Stripe.Checkout.Session;
-        const registrationId = session.metadata?.registration_id;
+    const admin = createAdminClient();
 
-        if (registrationId) {
-            console.log(`✅  Payment fulfilled for registration: ${registrationId}`);
+    switch (event.type) {
+        case 'checkout.session.completed': {
+            const session = event.data.object as Stripe.Checkout.Session;
+            const registrationId = session.metadata?.registration_id;
 
-            // 1. Update the DB status to 'paid'
-            const { data: registration, error: updateError } = await supabase
-                .from('event_registrations')
-                .update({
-                    status: 'paid',
-                    stripe_session_id: session.id
-                })
-                .eq('id', registrationId)
-                .select()
-                .single();
+            if (registrationId) {
+                const { data: registration } = await admin
+                    .from('event_registrations')
+                    .update({ status: 'paid', stripe_session_id: session.id })
+                    .eq('id', registrationId)
+                    .select('id, first_name, last_name, email, event_slug, amount')
+                    .single();
 
-            if (updateError) {
-                console.error('❌ Error updating registration:', updateError);
+                if (registration) await sendEventRegistrationEmails(registration);
+                break;
             }
 
-            // 2. Send confirmation emails if DB update succeeded
-            if (registration) {
-                const { sendEmail } = await import('@/lib/email');
-                const { first_name, last_name, email, event_slug, amount } = registration;
-                const approverEmail = process.env.APPROVER_EMAIL || 'info@escuelahispanica.org';
-
-                // 2a. Confirmation to the attendee
-                await sendEmail({
-                    to: email,
-                    subject: `✅ Confirmación de Inscripción al Jantar Da Hispanidade e Da Lusofonia`,
-                    html: `
-                        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
-                            <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">
-                                Inscripción Confirmada
-                            </h2>
-                            <p>Estimado/a <strong>${first_name} ${last_name}</strong>,</p>
-                            <p>Su pago ha sido recibido y su plaza está reservada. Le esperamos con mucho gusto.</p>
-                            <table style="width: 100%; border-collapse: collapse; margin: 24px 0;">
-                                <tr>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee; color: #666;">Evento</td>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Jantar Da Hispanidade e Da Lusofonia</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee; color: #666;">Fecha</td>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee;">17 de Abril de 2026, 20:00</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee; color: #666;">Lugar</td>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee;">Real Clube Tauromáquico Português, Lisboa</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee; color: #666;">Importe Abonado</td>
-                                    <td style="padding: 8px; border-bottom: 1px solid #eee;">${amount ? `${amount}€` : '25€'}</td>
-                                </tr>
-                            </table>
-                            <p>Si tiene alguna pregunta, no dude en ponerse en contacto con nosotros respondiendo a este email.</p>
-                            <p style="margin-top: 30px;">Atentamente,</p>
-                            <p><strong>Escuela Hispánica</strong><br>
-                            <a href="https://www.escuelahispanica.org" style="color: #c5a059;">www.escuelahispanica.org</a></p>
-                        </div>
-                    `
-                });
-
-                // 2b. Internal notification to the organizers
-                await sendEmail({
-                    to: approverEmail,
-                    subject: `💰 Nueva Inscripción Pagada — ${event_slug}`,
-                    html: `
-                        <h2>Nueva Inscripción Pagada</h2>
-                        <p><strong>Evento:</strong> ${event_slug}</p>
-                        <p><strong>Nombre:</strong> ${first_name} ${last_name}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Importe:</strong> ${amount ? `${amount}€` : '25€'}</p>
-                        <p><strong>Stripe Session:</strong> ${session.id}</p>
-                    `
-                });
-
-                console.log(`✉️ Confirmation emails sent to ${email} and ${approverEmail}`);
+            if (session.mode === 'subscription' && typeof session.subscription === 'string') {
+                const subscription = await stripe.subscriptions.retrieve(session.subscription);
+                await syncSubscriptionFromStripe(subscription, orgSlug);
             }
-        } else {
-            console.warn('⚠️  Checkout session completed but no registration_id in metadata.');
+
+            if (session.metadata?.tier) {
+                await sendMembershipCheckoutEmails(session);
+            }
+            break;
         }
-    } else if (event.type === 'checkout.session.expired') {
-        const session = event.data.object as Stripe.Checkout.Session;
 
-        // Prevent infinite loops by checking metadata.recovery_attempt
-        const attempts = parseInt(session.metadata?.recovery_attempt || '0', 10);
+        case 'checkout.session.expired': {
+            const session = event.data.object as Stripe.Checkout.Session;
+            const attempts = parseInt(session.metadata?.recovery_attempt || '0', 10);
+            const registrationId = session.metadata?.registration_id;
 
-        if (attempts < 2) {
-            console.log(`⚠️  Session expired for ${session.customer_email}. Attempting to regenerate (attempt ${attempts + 1}).`);
+            if (!registrationId || !session.customer_email || attempts >= 2) break;
 
-            try {
-                // Fetch the line items from the expired session
-                const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+            const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+            const recoveredLineItems = lineItems.data
+                .filter((item) => item.price?.id)
+                .map((item) => ({ price: item.price!.id, quantity: item.quantity || 1 }));
 
-                if (lineItems.data.length > 0 && session.customer_email) {
-                    // Prepare the new line items format for session creation
-                    const newLineItems = lineItems.data.map(item => {
-                        if (item.price && item.price.id) {
-                            return {
-                                price: item.price.id,
-                                quantity: item.quantity || 1
-                            };
-                        }
-                        throw new Error('Line item has no price id');
-                    });
+            if (recoveredLineItems.length === 0) break;
 
-                    // Create the new session
-                    const newMetadata = {
-                        ...session.metadata,
-                        recovery_attempt: (attempts + 1).toString()
-                    };
+            const newSession = await stripe.checkout.sessions.create({
+                mode: 'payment',
+                customer_email: session.customer_email,
+                line_items: recoveredLineItems,
+                metadata: { ...session.metadata, recovery_attempt: String(attempts + 1) },
+                success_url: session.success_url || process.env.NEXT_PUBLIC_SITE_URL || 'https://escuelahispanica.org',
+                cancel_url: session.cancel_url || process.env.NEXT_PUBLIC_SITE_URL || 'https://escuelahispanica.org',
+            });
 
-                    const newSession = await stripe.checkout.sessions.create({
-                        mode: session.mode,
-                        customer_email: session.customer_email,
-                        line_items: newLineItems,
-                        metadata: newMetadata,
-                        success_url: session.success_url || 'https://www.escuelahispanica.org',
-                        cancel_url: session.cancel_url || 'https://www.escuelahispanica.org',
-                    });
+            await sendEventRecoveryEmail({
+                email: session.customer_email,
+                recoveryUrl: newSession.url!,
+                registrationId,
+                eventSlug: session.metadata?.event_slug || 'evento',
+            });
+            break;
+        }
 
-                    // Send an email to the customer with the new link
-                    const { sendEmail } = await import('@/lib/email');
+        case 'invoice.payment_succeeded': {
+            const invoice = event.data.object as Stripe.Invoice;
+            const { subscriptionId, paymentIntentId } = getInvoiceSubscriptionId(invoice);
+            if (!subscriptionId) break;
 
-                    await sendEmail({
-                        to: session.customer_email,
-                        subject: `💡 Tu enlace de inscripción ha expirado. Aquí tienes uno nuevo.`,
-                        html: `
-                            <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #333;">
-                                <h2 style="color: #1a1a2e; border-bottom: 2px solid #c5a059; padding-bottom: 12px;">Enlace de Pago Expirado</h2>
-                                <p>Hola,</p>
-                                <p>Hemos detectado que tu enlace para completar tu solicitud en <strong>Escuela Hispánica</strong> ha expirado por motivos de seguridad (los enlaces caducan a las 24 horas).</p>
-                                <p>Para que puedas finalizar el proceso sin interrupciones, hemos generado un enlace completamente nuevo y seguro para ti:</p>
-                                <div style="text-align: center; margin: 40px 0;">
-                                    <a href="${newSession.url}" style="background-color: #c5a059; color: #050a14; padding: 14px 28px; text-decoration: none; font-weight: bold; border-radius: 4px; text-transform: uppercase; font-size: 14px; letter-spacing: 2px;">Continuar con el Pago</a>
-                                </div>
-                                <p>Si necesitas cualquier tipo de asistencia adicional, no dudes en responder directamente a este correo.</p>
-                                <p style="margin-top: 30px;">Atentamente,<br><strong>Escuela Hispánica</strong></p>
-                            </div>
-                        `
-                    });
-
-                    console.log(`✅  Recovery email sent with new session: ${newSession.id}`);
-                } else {
-                    console.log('⚠️  Could not recover session. Missing line items or customer email.');
-                }
-            } catch (recoveryError) {
-                console.error('❌ Error recovering expired session:', recoveryError);
+            const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+            const synced = await syncSubscriptionFromStripe(subscription, orgSlug);
+            if (subscription.metadata.userId && synced) {
+                await insertPaymentHistory({
+                    userId: subscription.metadata.userId,
+                    subscriptionId: synced.subscriptionId,
+                    paymentIntentId,
+                    amountCents: invoice.amount_paid,
+                    currency: invoice.currency || 'eur',
+                    status: 'paid',
+                    description: invoice.lines.data[0]?.description || 'Cobro recurrente',
+                });
             }
-        } else {
-            console.log(`🛑 Session expired for ${session.customer_email}. Max recovery attempts reached.`);
+
+            if (invoice.billing_reason !== 'subscription_create') {
+                await sendInvoiceReceiptEmails(invoice);
+            }
+            break;
+        }
+
+        case 'invoice.payment_failed': {
+            const invoice = event.data.object as Stripe.Invoice;
+            const { subscriptionId, paymentIntentId } = getInvoiceSubscriptionId(invoice);
+            if (!subscriptionId) break;
+
+            const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+            const synced = await syncSubscriptionFromStripe(subscription, orgSlug);
+            if (subscription.metadata.userId && synced) {
+                await insertPaymentHistory({
+                    userId: subscription.metadata.userId,
+                    subscriptionId: synced.subscriptionId,
+                    paymentIntentId,
+                    amountCents: invoice.amount_due,
+                    currency: invoice.currency || 'eur',
+                    status: 'failed',
+                    description: invoice.lines.data[0]?.description || 'Cobro fallido',
+                });
+            }
+
+            await sendInvoiceFailedEmails(invoice);
+            break;
+        }
+
+        case 'customer.subscription.updated':
+        case 'customer.subscription.deleted': {
+            const subscription = event.data.object as Stripe.Subscription;
+            await syncSubscriptionFromStripe(subscription, orgSlug);
+            break;
         }
     }
 

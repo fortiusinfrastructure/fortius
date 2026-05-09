@@ -104,6 +104,13 @@ export async function sendPendingPaymentReminders(): Promise<{
                     paymentUrl,
                     reminderNumber: (membership.reminder_count || 0) + 1,
                 }),
+                kind: 'reminder',
+                relatedTable: 'user_memberships',
+                relatedId: membershipId,
+                metadata: {
+                    tier: 'academico',
+                    reminder_number: (membership.reminder_count || 0) + 1,
+                },
             });
 
             if (emailResult.success) {

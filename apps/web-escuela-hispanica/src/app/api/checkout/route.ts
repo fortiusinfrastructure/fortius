@@ -98,7 +98,11 @@ export async function POST(req: Request) {
                         <p>Su inscripción ha sido registrada correctamente. Le esperamos con mucho gusto en el evento.</p>
                         <p style="margin-top: 30px;">Atentamente,<br><strong>Escuela Hispánica</strong></p>
                     </div>
-                `
+                `,
+                kind: 'confirmation',
+                relatedTable: 'event_registrations',
+                relatedId: registrationId,
+                metadata: { event_slug }
             });
 
             // Internal notification
@@ -110,7 +114,11 @@ export async function POST(req: Request) {
                        <p><strong>Nombre:</strong> ${first_name} ${last_name}</p>
                        <p><strong>Email:</strong> ${email}</p>
                        ${institution ? `<p><strong>Institución:</strong> ${institution}</p>` : ''}
-                       ${message ? `<p><strong>Mensaje:</strong> ${message}</p>` : ''}`
+                       ${message ? `<p><strong>Mensaje:</strong> ${message}</p>` : ''}`,
+                kind: 'notification',
+                relatedTable: 'event_registrations',
+                relatedId: registrationId,
+                metadata: { event_slug }
             });
 
             return NextResponse.json({

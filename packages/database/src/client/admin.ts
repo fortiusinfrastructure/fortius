@@ -1,10 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
-// ONLY use this from secure server environments like API routes
-// This bypasses Row Level Security!
-// Intentionally untyped — the admin client operates on tables that may not
-// be reflected in the auto-generated Database types (e.g. stripe_events).
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// ONLY use this from secure server environments like API routes.
+// This bypasses Row Level Security.
+// Intentionally untyped because this client is often used against tables
+// that evolve faster than the generated database helpers.
 export function createAdminClient() {
     return createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,

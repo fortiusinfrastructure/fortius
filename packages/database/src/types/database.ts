@@ -628,21 +628,127 @@ export interface Database {
                     created_at?: string | null
                 }
             }
+            event_registrations: {
+                Row: {
+                    id: string
+                    organization_id: string
+                    event_slug: string
+                    first_name: string
+                    last_name: string
+                    email: string
+                    institution: string | null
+                    message: string | null
+                    status: string
+                    stripe_session_id: string | null
+                    amount: number | null
+                    currency: string | null
+                    attendance_status: string | null
+                    attended_at: string | null
+                    created_at: string | null
+                    updated_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    organization_id: string
+                    event_slug: string
+                    first_name: string
+                    last_name: string
+                    email: string
+                    institution?: string | null
+                    message?: string | null
+                    status?: string
+                    stripe_session_id?: string | null
+                    amount?: number | null
+                    currency?: string | null
+                    attendance_status?: string | null
+                    attended_at?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    organization_id?: string
+                    event_slug?: string
+                    first_name?: string
+                    last_name?: string
+                    email?: string
+                    institution?: string | null
+                    message?: string | null
+                    status?: string
+                    stripe_session_id?: string | null
+                    amount?: number | null
+                    currency?: string | null
+                    attendance_status?: string | null
+                    attended_at?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+            }
+            communication_logs: {
+                Row: {
+                    id: string
+                    organization_id: string
+                    channel: string
+                    kind: string
+                    recipient_email: string
+                    subject: string
+                    status: string
+                    provider: string | null
+                    provider_message_id: string | null
+                    related_table: string | null
+                    related_id: string | null
+                    metadata: Json | null
+                    created_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    organization_id: string
+                    channel?: string
+                    kind: string
+                    recipient_email: string
+                    subject: string
+                    status: string
+                    provider?: string | null
+                    provider_message_id?: string | null
+                    related_table?: string | null
+                    related_id?: string | null
+                    metadata?: Json | null
+                    created_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    organization_id?: string
+                    channel?: string
+                    kind?: string
+                    recipient_email?: string
+                    subject?: string
+                    status?: string
+                    provider?: string | null
+                    provider_message_id?: string | null
+                    related_table?: string | null
+                    related_id?: string | null
+                    metadata?: Json | null
+                    created_at?: string | null
+                }
+            }
             stripe_events: {
                 Row: {
                     id: string
+                    organization_id: string | null
                     event_id: string
                     event_type: string
                     processed_at: string | null
                 }
                 Insert: {
                     id?: string
+                    organization_id?: string | null
                     event_id: string
                     event_type: string
                     processed_at?: string | null
                 }
                 Update: {
                     id?: string
+                    organization_id?: string | null
                     event_id?: string
                     event_type?: string
                     processed_at?: string | null

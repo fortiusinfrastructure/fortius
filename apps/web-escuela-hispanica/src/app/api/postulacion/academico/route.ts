@@ -165,6 +165,10 @@ export async function POST(request: NextRequest) {
             <p style="margin-top: 30px; font-size: 12px; color: #999;">Estos enlaces son de un solo uso y expiran en 30 días.</p>
           </div>
         `,
+                kind: 'notification',
+                relatedTable: 'user_memberships',
+                relatedId: membership.id,
+                metadata: { tier: 'academico', status: 'pending_review' },
             });
         }
 
@@ -185,6 +189,10 @@ export async function POST(request: NextRequest) {
               <p><strong>Secretaría</strong><br>Escuela Hispánica</p>
             </div>
           `,
+                kind: 'confirmation',
+                relatedTable: 'user_memberships',
+                relatedId: membership.id,
+                metadata: { tier: 'academico', status: 'pending' },
             });
         }
 

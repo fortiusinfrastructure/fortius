@@ -76,6 +76,10 @@ export async function GET(request: NextRequest) {
           <p style="margin-top: 30px;"><strong>Secretaría</strong><br>Escuela Hispánica</p>
         </div>
       `,
+            kind: 'notification',
+            relatedTable: 'user_memberships',
+            relatedId: decoded.membershipId,
+            metadata: { tier: 'academico', status: 'rejected' },
         });
     }
 
