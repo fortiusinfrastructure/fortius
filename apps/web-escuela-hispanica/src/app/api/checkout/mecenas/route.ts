@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createCheckoutSession } from '@/lib/stripe';
+import { buildSubscriptionMetadata } from '@/lib/stripe/checkout-metadata';
 import { createServerClient } from '@fortius/database';
 
 /**
@@ -15,6 +16,13 @@ export async function POST(request: NextRequest) {
             data: { user },
         } = await supabase.auth.getUser();
 
+        if (!user?.id || !user.email) {
+            return NextResponse.json(
+                { error: 'Para una suscripción de Mecenas debe iniciar sesión primero.' },
+                { status: 401 },
+            );
+        }
+
         const priceId = process.env.STRIPE_PRICE_MECENAS_ANNUAL;
         if (!priceId) {
             console.error('[checkout/mecenas] STRIPE_PRICE_MECENAS_ANNUAL not configured');
@@ -29,12 +37,12 @@ export async function POST(request: NextRequest) {
         const session = await createCheckoutSession({
             mode: 'subscription',
             priceId,
-            customerEmail: user?.email,
-            metadata: {
+            customerEmail: user.email,
+            metadata: buildSubscriptionMetadata({
                 tier: 'mecenas',
-                userId: user?.id || 'anonymous',
+                userId: user.id,
                 orgSlug: 'escuela-hispanica',
-            },
+            }),
             successUrl: `${siteUrl}/colabora/exito?tier=mecenas&session_id={CHECKOUT_SESSION_ID}`,
             cancelUrl: `${siteUrl}/colabora`,
         });

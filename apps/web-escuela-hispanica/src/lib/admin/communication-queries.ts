@@ -3,12 +3,13 @@ import { getAdminOrganization } from './org';
 
 type CommunicationLog = Database['public']['Tables']['communication_logs']['Row'];
 type StripeEvent = Database['public']['Tables']['stripe_events']['Row'];
+type StripeSyncIssue = Database['public']['Tables']['stripe_sync_issues']['Row'];
 
 export async function getCommunicationDashboard(filters: { kind?: string; status?: string } = {}) {
     const admin = createAdminClient();
     const org = await getAdminOrganization();
 
-    const [logsResult, stripeEventsResult] = await Promise.all([
+    const [logsResult, stripeEventsResult, syncIssuesResult] = await Promise.all([
         admin
             .from('communication_logs')
             .select('*')
@@ -21,6 +22,12 @@ export async function getCommunicationDashboard(filters: { kind?: string; status
             .eq('organization_id', org.id)
             .order('processed_at', { ascending: false })
             .limit(100),
+        admin
+            .from('stripe_sync_issues')
+            .select('*')
+            .eq('organization_id', org.id)
+            .order('created_at', { ascending: false })
+            .limit(50),
     ]);
 
     const logs = ((logsResult.data ?? []) as CommunicationLog[]).filter((log) => {
@@ -30,6 +37,7 @@ export async function getCommunicationDashboard(filters: { kind?: string; status
     });
 
     const stripeEvents = (stripeEventsResult.data ?? []) as StripeEvent[];
+    const syncIssues = (syncIssuesResult.data ?? []) as StripeSyncIssue[];
     const stripeSummary = {
         completed: stripeEvents.filter((event) => event.event_type === 'checkout.session.completed').length,
         expired: stripeEvents.filter((event) => event.event_type === 'checkout.session.expired').length,
@@ -43,5 +51,12 @@ export async function getCommunicationDashboard(filters: { kind?: string; status
         failed: logs.filter((log) => log.status === 'failed').length,
     };
 
-    return { org, logs, stripeEvents, logSummary, stripeSummary };
+    const syncSummary = {
+        total: syncIssues.length,
+        unresolved: syncIssues.filter((issue) => !issue.resolved_at).length,
+        errors: syncIssues.filter((issue) => issue.severity === 'error' && !issue.resolved_at).length,
+        warnings: syncIssues.filter((issue) => issue.severity === 'warning' && !issue.resolved_at).length,
+    };
+
+    return { org, logs, stripeEvents, syncIssues, logSummary, stripeSummary, syncSummary };
 }

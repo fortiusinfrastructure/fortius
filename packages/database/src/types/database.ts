@@ -754,6 +754,50 @@ export interface Database {
                     processed_at?: string | null
                 }
             }
+            stripe_sync_issues: {
+                Row: {
+                    id: string
+                    organization_id: string
+                    event_id: string | null
+                    event_type: string | null
+                    stripe_subscription_id: string | null
+                    stripe_customer_id: string | null
+                    issue_type: string
+                    severity: string
+                    message: string
+                    metadata: Json | null
+                    resolved_at: string | null
+                    created_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    organization_id: string
+                    event_id?: string | null
+                    event_type?: string | null
+                    stripe_subscription_id?: string | null
+                    stripe_customer_id?: string | null
+                    issue_type: string
+                    severity?: string
+                    message: string
+                    metadata?: Json | null
+                    resolved_at?: string | null
+                    created_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    organization_id?: string
+                    event_id?: string | null
+                    event_type?: string | null
+                    stripe_subscription_id?: string | null
+                    stripe_customer_id?: string | null
+                    issue_type?: string
+                    severity?: string
+                    message?: string
+                    metadata?: Json | null
+                    resolved_at?: string | null
+                    created_at?: string | null
+                }
+            }
         }
     }
 }

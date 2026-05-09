@@ -1,5 +1,6 @@
 import { createHmac, timingSafeEqual } from 'crypto';
 import { createCheckoutSession } from './index';
+import { buildSubscriptionMetadata } from './checkout-metadata';
 import { createAdminClient } from '@fortius/database';
 
 const APPROVAL_SECRET = process.env.APPROVAL_SECRET || 'dev-secret-change-me';
@@ -96,9 +97,10 @@ export async function createAcademicCheckoutSession(membershipId: string) {
         throw new Error('Email de usuario no encontrado');
     }
 
-    const priceId =
-        process.env.STRIPE_PRICE_ACADEMICO_ANNUAL ||
-        process.env.STRIPE_PRICE_ACADEMICO_MONTHLY;
+    const annualPriceId = process.env.STRIPE_PRICE_ACADEMICO_ANNUAL;
+    const monthlyPriceId = process.env.STRIPE_PRICE_ACADEMICO_MONTHLY;
+    const priceId = annualPriceId || monthlyPriceId;
+    const planId = annualPriceId ? 'eh-academico-annual' : monthlyPriceId ? 'eh-academico-monthly' : undefined;
 
     if (!priceId) {
         throw new Error('Precio académico no configurado');
@@ -110,12 +112,13 @@ export async function createAcademicCheckoutSession(membershipId: string) {
         mode: 'subscription',
         priceId,
         customerEmail: authUser.user.email,
-        metadata: {
+        metadata: buildSubscriptionMetadata({
             tier: 'academico',
             userId: membership.user_id,
             membershipId,
             orgSlug: 'escuela-hispanica',
-        },
+            planId,
+        }),
         successUrl: `${siteUrl}/colabora/exito?tier=academico&session_id={CHECKOUT_SESSION_ID}`,
         cancelUrl: `${siteUrl}/colabora`,
     });

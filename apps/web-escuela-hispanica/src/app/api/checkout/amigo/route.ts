@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createCheckoutSession } from '@/lib/stripe';
+import { buildSubscriptionMetadata } from '@/lib/stripe/checkout-metadata';
 import { createServerClient } from '@fortius/database';
 
 /**
@@ -40,6 +41,13 @@ export async function POST(request: NextRequest) {
             data: { user },
         } = await supabase.auth.getUser();
 
+        if (mode === 'subscription' && (!user?.id || !user.email)) {
+            return NextResponse.json(
+                { error: 'Para una suscripción recurrente debe iniciar sesión primero.' },
+                { status: 401 },
+            );
+        }
+
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
         const session = await createCheckoutSession({
@@ -47,11 +55,17 @@ export async function POST(request: NextRequest) {
             amount: mode === 'payment' ? amount : undefined,
             priceId: mode === 'subscription' ? process.env.STRIPE_PRICE_AMIGO_MONTHLY : undefined,
             customerEmail: user?.email,
-            metadata: {
-                tier: 'amigo',
-                userId: user?.id || 'anonymous',
-                orgSlug: 'escuela-hispanica',
-            },
+            metadata:
+                mode === 'subscription'
+                    ? buildSubscriptionMetadata({
+                          tier: 'amigo',
+                          userId: user!.id,
+                          orgSlug: 'escuela-hispanica',
+                      })
+                    : {
+                          tier: 'amigo',
+                          orgSlug: 'escuela-hispanica',
+                      },
             successUrl: `${siteUrl}/colabora/exito?tier=amigo&session_id={CHECKOUT_SESSION_ID}`,
             cancelUrl: `${siteUrl}/colabora`,
         });

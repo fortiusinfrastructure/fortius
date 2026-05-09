@@ -38,6 +38,7 @@
 - Subscription events sync `subscriptions` and `payment_history`
 - Initial subscription checkouts send confirmation/internal alerts
 - Recurring invoice success/failure also trigger logged notifications
+- When Stripe cannot be reconciled safely, the webhook records a row in `stripe_sync_issues` instead of silently guessing by email
 
 ### Admin refresh model
 
@@ -51,6 +52,18 @@
 - `communication_logs` table for email traceability
 - `stripe_events.organization_id` for org-scoped admin queries
 - `event_registrations.attendance_status` and `attended_at`
+- `stripe_sync_issues` table for unresolved or partially recovered Stripe reconciliation cases
+
+### Anti-desbalance rules now enforced
+
+- Every recurring subscription checkout must carry at least: `tier`, `userId`, `orgSlug`
+- Subscription checkouts are rejected if they try to use `userId='anonymous'`
+- Academic subscription checkouts now also send `membershipId` and `planId`
+- `/api/checkout/amigo` and `/api/checkout/mecenas` require authenticated users for recurring subscriptions
+- The Stripe webhook only auto-reconciles when the relationship is deterministic:
+  - exact `membershipId`, or
+  - a unique membership for `userId + organization_id + tier`
+- If tier, user, organization or plan mismatch, the webhook logs an issue instead of forcing the update
 
 ### Production event creation protocol
 

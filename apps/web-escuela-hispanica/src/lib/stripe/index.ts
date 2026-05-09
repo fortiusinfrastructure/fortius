@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { ensureSubscriptionMetadata } from './checkout-metadata';
 
 // Warning instead of throw during build so Next.js static generation doesn't crash
 if (!process.env.STRIPE_SECRET_KEY && process.env.NODE_ENV !== 'production') {
@@ -39,6 +40,13 @@ export async function createCheckoutSession({
 }) {
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
+    if (mode === 'subscription') {
+        ensureSubscriptionMetadata(metadata, 'createCheckoutSession');
+        if (!customerEmail) {
+            throw new Error('Las suscripciones recurrentes requieren un email válido.');
+        }
+    }
+
     if (priceId) {
         // Use a pre-defined Stripe Price
         lineItems.push({ price: priceId, quantity: 1 });
@@ -55,6 +63,10 @@ export async function createCheckoutSession({
             },
             quantity: 1,
         });
+    }
+
+    if (lineItems.length === 0) {
+        throw new Error('No hay line_items válidos para crear la sesión de Stripe.');
     }
 
     const session = await stripe.checkout.sessions.create({

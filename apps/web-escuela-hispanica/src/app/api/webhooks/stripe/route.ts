@@ -3,7 +3,8 @@ import type Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { createAdminClient } from '@fortius/database';
 import { stripe } from '@/lib/stripe';
-import { insertPaymentHistory, getWebhookOrganizationId, recordStripeEvent, syncSubscriptionFromStripe } from '@/lib/stripe/webhook-db';
+import { insertPaymentHistory, getWebhookOrganizationId, recordStripeEvent } from '@/lib/stripe/webhook-db';
+import { syncSubscriptionFromStripe } from '@/lib/stripe/subscription-sync';
 import {
     sendEventRecoveryEmail,
     sendEventRegistrationEmails,
@@ -75,7 +76,11 @@ export async function POST(req: Request) {
 
             if (session.mode === 'subscription' && typeof session.subscription === 'string') {
                 const subscription = await stripe.subscriptions.retrieve(session.subscription);
-                await syncSubscriptionFromStripe(subscription, orgSlug);
+                await syncSubscriptionFromStripe(subscription, {
+                    orgSlug,
+                    eventId: event.id,
+                    eventType: event.type,
+                });
             }
 
             if (session.metadata?.tier) {
@@ -122,7 +127,11 @@ export async function POST(req: Request) {
             if (!subscriptionId) break;
 
             const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-            const synced = await syncSubscriptionFromStripe(subscription, orgSlug);
+            const synced = await syncSubscriptionFromStripe(subscription, {
+                orgSlug,
+                eventId: event.id,
+                eventType: event.type,
+            });
             if (subscription.metadata.userId && synced) {
                 await insertPaymentHistory({
                     userId: subscription.metadata.userId,
@@ -147,7 +156,11 @@ export async function POST(req: Request) {
             if (!subscriptionId) break;
 
             const subscription = await stripe.subscriptions.retrieve(subscriptionId);
-            const synced = await syncSubscriptionFromStripe(subscription, orgSlug);
+            const synced = await syncSubscriptionFromStripe(subscription, {
+                orgSlug,
+                eventId: event.id,
+                eventType: event.type,
+            });
             if (subscription.metadata.userId && synced) {
                 await insertPaymentHistory({
                     userId: subscription.metadata.userId,
@@ -167,7 +180,11 @@ export async function POST(req: Request) {
         case 'customer.subscription.updated':
         case 'customer.subscription.deleted': {
             const subscription = event.data.object as Stripe.Subscription;
-            await syncSubscriptionFromStripe(subscription, orgSlug);
+            await syncSubscriptionFromStripe(subscription, {
+                orgSlug,
+                eventId: event.id,
+                eventType: event.type,
+            });
             break;
         }
     }
