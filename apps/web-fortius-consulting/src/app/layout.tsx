@@ -18,6 +18,7 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "Fortius Consulting",
   description: "Consultoría estratégica para transformar la sociedad.",
 };

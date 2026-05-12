@@ -54,8 +54,8 @@ export default function ConsultingPage() {
       />
       <main id="main-content">
         <HeroEditorial />
-        <VerticalSection vertical={civil} accentSide="left" />
-        <VerticalSection vertical={intelligence} accentSide="right" />
+        <VerticalSection vertical={civil} accentSide="left" summaryOnly />
+        <VerticalSection vertical={intelligence} accentSide="right" summaryOnly />
         <IdeasMarquee />
         <FoundationBridge />
         <NewsletterCTA />

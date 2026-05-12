@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PersonCard } from "@/components/consulting-v2/PersonCard";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
@@ -45,6 +46,7 @@ function expertToDialog(e: ExternalExpert): PersonDialogData {
         role: e.role,
         bio: e.bio,
         linkedin: e.linkedin,
+        photo: e.photo,
         verticalLabel: VERTICAL_LABEL[e.vertical],
     };
 }
@@ -102,11 +104,10 @@ export function NosotrosClient() {
 
                             <div className="md:col-span-6 space-y-6">
                                 <Bracketed variant="kicker">Fundador</Bracketed>
-                                <button
-                                    type="button"
-                                    onClick={() => setActive(memberToDialog(founder))}
+                                <Link
+                                    href="/juan-A-soto"
                                     className="group flex items-start gap-6 text-left"
-                                    aria-label={`Ver bio de ${founder.name}`}
+                                    aria-label={`Ver página personal de ${founder.name}`}
                                 >
                                     <PersonPortrait
                                         name={founder.name}
@@ -122,9 +123,12 @@ export function NosotrosClient() {
                                             {founder.role}
                                         </p>
                                     </div>
-                                </button>
+                                </Link>
                                 <p className="text-[var(--text-secondary)] leading-relaxed">
-                                    {founder.bio}
+                                    Juan Ángel Soto Gómez es fundador y CEO de Fortius. Su trayectoria combina dirección de think tanks, emprendimiento cívico, docencia y consultoría estratégica en entornos institucionales complejos.
+                                </p>
+                                <p className="text-[var(--text-secondary)] leading-relaxed">
+                                    En su página personal encontrarás una visión más completa de su recorrido académico, ejecutivo e institucional.
                                 </p>
                                 <div className="pt-2 flex flex-wrap items-center gap-3">
                                     {founder.linkedin && (
@@ -138,9 +142,8 @@ export function NosotrosClient() {
                                             LinkedIn
                                         </a>
                                     )}
-                                    <button
-                                        type="button"
-                                        onClick={() => setActive(memberToDialog(founder))}
+                                    <Link
+                                        href="/juan-A-soto"
                                         className="group inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.15em] px-4 py-2 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                                     >
                                         Conoce más
@@ -148,7 +151,7 @@ export function NosotrosClient() {
                                             size={14}
                                             className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
                                         />
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -198,6 +201,7 @@ export function NosotrosClient() {
                                 name={e.name}
                                 role={e.role}
                                 area={VERTICAL_LABEL[e.vertical]}
+                                photo={e.photo}
                                 variant="full"
                                 onOpen={() => setActive(expertToDialog(e))}
                             />

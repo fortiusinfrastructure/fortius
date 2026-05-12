@@ -1,10 +1,14 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import { getInitials } from "@/content/team";
 
 interface PersonPortraitProps {
     name: string;
-    photo?: string;
+    photo?: string | string[];
     size?: "sm" | "md" | "lg";
     className?: string;
+    fit?: "cover" | "contain";
 }
 
 const SIZE_CLASS: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
@@ -18,7 +22,16 @@ export function PersonPortrait({
     photo,
     size = "md",
     className = "",
+    fit = "cover",
 }: PersonPortraitProps) {
+    const sources = useMemo(() => {
+        if (!photo) return [];
+        return Array.isArray(photo) ? photo : [photo];
+    }, [photo]);
+
+    const [sourceIndex, setSourceIndex] = useState(0);
+    const currentPhoto = sources[sourceIndex];
+
     return (
         <div
             className={`relative shrink-0 overflow-hidden border border-[var(--border-strong)] ${SIZE_CLASS[size]} ${className}`}
@@ -26,15 +39,18 @@ export function PersonPortrait({
                 background:
                     "radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.10) 0%, transparent 55%), linear-gradient(145deg, rgba(28,20,18,0.95) 0%, rgba(10,8,7,1) 100%)",
             }}
-            aria-hidden={Boolean(photo)}
+            aria-hidden={Boolean(currentPhoto)}
         >
-            {photo ? (
+            {currentPhoto ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                    src={photo}
+                    src={currentPhoto}
                     alt={name}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className={`absolute inset-0 w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
                     style={{ filter: "grayscale(1) contrast(1.05) sepia(0.35)" }}
+                    onError={() => {
+                        setSourceIndex((current) => current + 1);
+                    }}
                 />
             ) : (
                 <>

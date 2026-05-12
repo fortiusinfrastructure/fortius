@@ -1,5 +1,5 @@
 import { TEAM, EXPERTS } from "@/content/team";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ExpertClient } from "./ExpertClient";
 import type { Metadata } from "next";
 
@@ -30,6 +30,9 @@ export default async function ExpertPage({
     params: { slug: string };
 }) {
     const slug = (await params).slug;
+    if (slug === "juan-angel-soto") {
+        redirect("/juan-A-soto");
+    }
     const teamMember = TEAM.find((m) => m.slug === slug);
     const expertMember = EXPERTS.find((e) => e.slug === slug);
     

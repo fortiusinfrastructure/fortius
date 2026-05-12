@@ -14,6 +14,8 @@ import {
     type Article,
     type ArticleCategory,
 } from "@/lib/articles";
+import { getArticleCover, getArticleImageSources } from "@/lib/article-display";
+import { ArticleCoverImage } from "./ArticleCoverImage";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -28,7 +30,9 @@ const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
 
 export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
+    const cover = getArticleCover(category);
     const slots = category ? getEditorialSlots(category) : null;
+    const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured = slots?.featured
         ? articleToInsight(slots.featured)
@@ -58,6 +62,7 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
 
     return (
         <section
+            id="analisis"
             aria-labelledby={`work-area-${v.id}-title`}
             className="relative border-t border-[var(--border-subtle)] py-24 md:py-32"
         >
@@ -91,9 +96,10 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                         className="group col-span-1 lg:col-span-7 block"
                     >
                         <div className="relative aspect-[16/10] overflow-hidden bg-[var(--surface-tertiary)] mb-6">
-                            <img
-                                src={v.id === "civil" ? "/images/eje1.png" : "/images/eje2.jpg"}
-                                alt=""
+                            <ArticleCoverImage
+                                primarySrc={featuredImage?.primarySrc ?? cover.src}
+                                fallbackSources={featuredImage?.fallbackSources ?? [cover.hardFallback]}
+                                alt={`Portada editorial de ${featured.title}`}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                             />
                             <div

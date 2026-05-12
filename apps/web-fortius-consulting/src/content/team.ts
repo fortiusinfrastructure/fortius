@@ -33,7 +33,7 @@ export interface TeamMember {
     bio: string;
     linkedin?: string;
     twitter?: string;
-    photo?: string;
+    photo?: string | string[];
 }
 
 export interface ExternalExpert {
@@ -43,6 +43,7 @@ export interface ExternalExpert {
     vertical: VerticalId;
     bio: string;
     linkedin?: string;
+    photo?: string | string[];
 }
 
 export const TEAM: TeamMember[] = [
@@ -52,8 +53,8 @@ export const TEAM: TeamMember[] = [
         role: "Founder & CEO",
         department: "direccion",
         verticals: ["civil", "intelligence"],
-        bio: "Fundador de Fortius Consulting. Más de quince años acompañando a organizaciones con principios en su estrategia institucional, comunicación y relaciones con decisores públicos. Conferenciante habitual en foros sobre sociedad civil, valores y política.",
-        linkedin: "https://www.linkedin.com/in/juan-angel-soto",
+        bio: "Juan Ángel Soto (Murcia, 1992), es graduado en Administración y Dirección de Empresas y en Derecho por la Universidad de Navarra, así como en Ciencias Políticas y de la Administración por la UNED. Cuenta con un máster en Teoría Política y Jurídica por University College London (UCL) y es doctorando en Ciencia Política en St. Mary’s University de Londres. Es fundador y CEO de Fortius, una firma de consultoría estratégica especializada en think tanks, inteligencia y riesgos geopolíticos que opera en Europa, América y África. Asimismo, ha ocupado distintos cargos ejecutivos en varios centros de pensamiento, siendo director ejecutivo de la Fundación Civismo (2018–2021) y director internacional de la Fundación Disenso (2021–2023). Es emprendedor social y ha fundado numerosas organizaciones cívicas, como la Fundación Fortius y Principios, de las que es presidente; y ha impulsado iniciativas como el Instituto Español de Análisis Migratorio o Escuela Hispánica. Colabora de forma habitual en medios de comunicación españoles e internacionales. Como académico, es profesor de teoría política en la Universidad de Navarra. Es Visiting Fellow del Danube Institute de Budapest y de la Universidad Ludovika, e imparte clases en diferentes universidades europeas y escuelas de negocios, como la Universidad de las Hespérides.",
+        linkedin: "https://www.linkedin.com/in/juanangelsoto/",
     },
     {
         slug: "didac-sanchez-olaya",
@@ -207,6 +208,24 @@ export const EXPERTS: ExternalExpert[] = [
         linkedin: "https://www.linkedin.com/in/carloscasares/",
     },
 ];
+
+function getPersonPhotoPaths(slug: string, legacyPath?: string): string[] {
+    return [
+        `/images/team/${slug}.png`,
+        ...(legacyPath ? [legacyPath] : []),
+    ];
+}
+
+TEAM.forEach((member) => {
+    member.photo = getPersonPhotoPaths(
+        member.slug,
+        member.slug === "juan-angel-soto" ? "/images/team/juansoto.png" : undefined,
+    );
+});
+
+EXPERTS.forEach((expert) => {
+    expert.photo = getPersonPhotoPaths(expert.slug);
+});
 
 export function getTeamByVertical(vertical: VerticalId): TeamMember[] {
     return TEAM.filter((m) => m.verticals.includes(vertical));

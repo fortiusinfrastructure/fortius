@@ -51,7 +51,7 @@ const KIND_LABEL: Record<ArticleKind, string> = {
     comentario: "Comentario",
     informe: "Informe",
     nota: "Nota de Inteligencia",
-    evento: "Evento",
+    evento: "Oportunidad & Evento",
     articulo: "Artículo",
 };
 
@@ -144,14 +144,14 @@ export interface EditorialSlots {
 
 export function getEditorialSlots(category: ArticleCategory): EditorialSlots {
     const all = listArticlesByCategory(category);
-    const publics = all.filter((a) => a.access === "public");
-    const paids = all.filter((a) => a.access === "paid");
+    const publics = all.filter((a) => a.access === "public" && a.kind !== "evento");
+    const restricted = all.filter((a) => a.access === "paid" || a.kind === "evento");
 
     const featured = publics[0] ?? null;
     const rest = publics
         .filter((a) => a.slug !== featured?.slug)
         .slice(0, 2);
-    const locked = paids[0] ?? null;
+    const locked = restricted[0] ?? null;
 
     return { featured, rest, locked };
 }

@@ -20,10 +20,7 @@ import {
 } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { ServiceIcon, VerticalDef } from "@/content/home-v2";
-import {
-    getTeamByVertical,
-    getExpertsByVertical,
-} from "@/content/team";
+import { getExpertsByVertical } from "@/content/team";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog, type PersonDialogData } from "./PersonDialog";
 import {
@@ -36,6 +33,8 @@ import {
     type Article,
     type ArticleCategory,
 } from "@/lib/articles";
+import { getArticleCover, getArticleImageSources } from "@/lib/article-display";
+import { ArticleCoverImage } from "./ArticleCoverImage";
 
 const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
     civil: "sociedad-civil",
@@ -73,11 +72,14 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 interface VerticalSectionProps {
     vertical: VerticalDef;
     accentSide?: "left" | "right";
+    summaryOnly?: boolean;
 }
 
-export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSectionProps) {
+export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly = false }: VerticalSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
+    const cover = getArticleCover(category);
     const slots = category ? getEditorialSlots(category) : null;
+    const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured = slots?.featured
         ? articleToInsight(slots.featured)
@@ -105,7 +107,6 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
           }
         : { ...v.lockedArticle, href: "/area-privada" };
 
-    const team = getTeamByVertical(v.id);
     const experts = getExpertsByVertical(v.id);
 
     const [activePerson, setActivePerson] = useState<PersonDialogData | null>(null);
@@ -188,9 +189,10 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                             className="group col-span-1 lg:col-span-7 block"
                         >
                             <div className="relative aspect-[16/10] overflow-hidden bg-[var(--surface-tertiary)] mb-6">
-                                <img
-                                    src={v.id === "civil" ? "/images/eje1.png" : "/images/eje2.jpg"}
-                                    alt=""
+                                <ArticleCoverImage
+                                    primarySrc={featuredImage?.primarySrc ?? cover.src}
+                                    fallbackSources={featuredImage?.fallbackSources ?? [cover.hardFallback]}
+                                    alt={`Portada editorial de ${featured.title}`}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                                 />
                                 <div
@@ -313,72 +315,105 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                     </div>
                 </div>
 
-                {/* Servicios */}
-                <div className="mb-24">
-                    <Bracketed variant="kicker">Servicios · {v.label}</Bracketed>
-                    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-default)] border border-[var(--border-default)]">
-                        {v.services.map((s) => {
-                            const Icon = ICONS[s.icon];
-                            return (
-                                <div
-                                    key={s.title}
-                                    className="bg-[var(--surface-primary)] p-6 hover:bg-[var(--surface-secondary)] transition-colors duration-300 flex flex-col gap-5"
-                                >
-                                    <span
-                                        className="inline-flex items-center justify-center w-11 h-11 border border-[var(--color-accent-500)]/30 text-[var(--color-accent-500)]"
-                                        aria-hidden
-                                    >
-                                        <Icon size={20} strokeWidth={1.5} />
-                                    </span>
-                                    <div className="space-y-2">
-                                        <h4 className="font-medium text-[var(--text-primary)] text-[0.95rem] leading-snug">
-                                            {s.title}
-                                        </h4>
-                                        <p className="text-[0.85rem] text-[var(--text-secondary)] leading-relaxed">
-                                            {s.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Expertos vinculados - placeholders con bio emergente */}
-                {experts.length > 0 && (
-                    <div className="mb-20">
-                        <div className="flex items-end justify-between mb-6">
-                            <Bracketed variant="kicker">Expertos vinculados · {v.label}</Bracketed>
-                            <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                                + bio al pulsar
-                            </span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                            {experts.map((e) => (
-                                <PersonCard
-                                    key={e.slug}
-                                    name={e.name}
-                                    role={e.role}
-                                    onOpen={() =>
-                                        setActivePerson({
-                                            name: e.name,
-                                            role: e.role,
-                                            bio: e.bio,
-                                            verticalLabel: v.label,
-                                        })
-                                    }
-                                />
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                <PersonDialog
-                    person={activePerson}
-                    onClose={() => setActivePerson(null)}
-                />
-
+                {summaryOnly ? (
+                    <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 md:p-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+                            <div className="lg:col-span-8">
+                                <Bracketed variant="kicker">Explorar la vertical completa</Bracketed>
+                                <h3 className="mt-4 font-display text-[clamp(1.4rem,2.5vw,2.2rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]">
+                                    En {v.label} encontrarás servicios, expertos vinculados y acceso a la biblioteca completa.
+                                </h3>
+                                <p className="mt-4 max-w-3xl text-[var(--text-secondary)] leading-relaxed">
+                                    Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y las opciones de acceso privado.
+                                </p>
                             </div>
+                            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">
+                                <a
+                                    href={`${v.href}#servicios`}
+                                    className="inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
+                                >
+                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">Ver servicios</span>
+                                    <ArrowUpRight size={16} />
+                                </a>
+                                <a
+                                    href={`${v.href}#expertos`}
+                                    className="inline-flex items-center justify-between gap-4 px-5 py-4 border border-[var(--border-strong)] text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
+                                >
+                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">Ver expertos</span>
+                                    <ArrowUpRight size={16} />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <>
+                        <div className="mb-24">
+                            <Bracketed variant="kicker">Servicios · {v.label}</Bracketed>
+                            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-default)] border border-[var(--border-default)]">
+                                {v.services.map((s) => {
+                                    const Icon = ICONS[s.icon];
+                                    return (
+                                        <div
+                                            key={s.title}
+                                            className="bg-[var(--surface-primary)] p-6 hover:bg-[var(--surface-secondary)] transition-colors duration-300 flex flex-col gap-5"
+                                        >
+                                            <span
+                                                className="inline-flex items-center justify-center w-11 h-11 border border-[var(--color-accent-500)]/30 text-[var(--color-accent-500)]"
+                                                aria-hidden
+                                            >
+                                                <Icon size={20} strokeWidth={1.5} />
+                                            </span>
+                                            <div className="space-y-2">
+                                                <h4 className="font-medium text-[var(--text-primary)] text-[0.95rem] leading-snug">
+                                                    {s.title}
+                                                </h4>
+                                                <p className="text-[0.85rem] text-[var(--text-secondary)] leading-relaxed">
+                                                    {s.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {experts.length > 0 && (
+                            <div className="mb-20">
+                                <div className="flex items-end justify-between mb-6">
+                                    <Bracketed variant="kicker">Expertos vinculados · {v.label}</Bracketed>
+                                    <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                                        + bio al pulsar
+                                    </span>
+                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
+                                    {experts.map((e) => (
+                                        <PersonCard
+                                            key={e.slug}
+                                            name={e.name}
+                                            role={e.role}
+                                            photo={e.photo}
+                                            onOpen={() =>
+                                                setActivePerson({
+                                                    name: e.name,
+                                                    role: e.role,
+                                                    bio: e.bio,
+                                                    photo: e.photo,
+                                                    verticalLabel: v.label,
+                                                })
+                                            }
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <PersonDialog
+                            person={activePerson}
+                            onClose={() => setActivePerson(null)}
+                        />
+                    </>
+                )}
+            </div>
         </section>
     );
 }

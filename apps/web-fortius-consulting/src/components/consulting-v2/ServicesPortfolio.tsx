@@ -50,6 +50,7 @@ export function ServicesPortfolio({
 }: ServicesPortfolioProps) {
     return (
         <section
+            id="servicios"
             aria-labelledby="services-portfolio-title"
             className="relative border-t border-[var(--border-subtle)] py-24 md:py-32"
         >

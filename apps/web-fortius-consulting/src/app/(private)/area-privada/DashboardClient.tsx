@@ -1,18 +1,39 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
-import { MOCK_PROJECTS, MOCK_PUBLICATIONS, MOCK_EVENTS } from "@/content/dashboard";
+import { MOCK_PROJECTS } from "@/content/dashboard";
 import { TEAM } from "@/content/team";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
-import { FileText, Lock, CalendarPlus, Activity, CheckCircle2, Clock } from "lucide-react";
+import { ArrowUpRight, FileText, Lock, CalendarPlus, Activity, CheckCircle2, Clock } from "lucide-react";
 import type { ClientUser } from "@/lib/auth";
+import {
+    formatPublishedDate,
+    kindLabel,
+    listArticlesByCategory,
+    type ArticleCategory,
+} from "@/lib/articles";
+import { getEventArticleData } from "@/lib/article-display";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
+const PLAN_TO_CATEGORY: Record<string, ArticleCategory> = {
+    politica: "politica",
+    "sociedad-civil": "sociedad-civil",
+};
 
 export function DashboardClient({ user }: { user: ClientUser }) {
     // Simulamos que el usuario tiene vinculados a Juan Ángel y Beatriz
     const linkedExperts = TEAM.filter(m => m.slug === "juan-angel-soto" || m.slug === "beatriz-de-leon-cobo");
+    const category = PLAN_TO_CATEGORY[user.planId] ?? "politica";
+    const memberContent = listArticlesByCategory(category);
+    const publications = memberContent
+        .filter((item) => item.access === "paid" && item.kind !== "evento")
+        .slice(0, 4);
+    const events = memberContent
+        .filter((item) => item.kind === "evento")
+        .map((item) => ({ item, event: getEventArticleData(item) }))
+        .slice(0, 4);
 
     return (
         <div className="pt-[var(--nav-height)] pb-24 md:pb-36 min-h-screen bg-[var(--color-neutral-1000,#0a111e)]">
@@ -90,42 +111,65 @@ export function DashboardClient({ user }: { user: ClientUser }) {
                     <section>
                         <Bracketed variant="tag">Contenido Exclusivo</Bracketed>
                         <div className="mt-8 space-y-4">
-                            {MOCK_PUBLICATIONS.map(pub => (
-                                <a key={pub.id} href={pub.url || "#"} className="group block p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] hover:border-[var(--color-accent-500)] transition-colors">
-                                    <div className="flex items-center justify-between mb-3">
-                                        <span className="text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)]">{pub.type}</span>
-                                        {pub.isPrivate && <Lock size={14} className="text-[var(--color-accent-400)]" />}
+                            {publications.length > 0 ? publications.map((pub) => (
+                                <Link
+                                    key={pub.slug}
+                                    href={`/${pub.category}/${pub.slug}`}
+                                    className="group block p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] hover:border-[var(--color-accent-500)] transition-colors"
+                                >
+                                    <div className="flex items-center justify-between mb-3 gap-4">
+                                        <span className="text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)]">{kindLabel(pub.kind)}</span>
+                                        <Lock size={14} className="text-[var(--color-accent-400)] shrink-0" />
                                     </div>
-                                    <h4 className="font-display text-[1.2rem] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors mb-2">{pub.title}</h4>
+                                    <h4 className="font-display text-[1.2rem] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors mb-2">
+                                        {pub.title}
+                                    </h4>
                                     <div className="flex items-center gap-2 text-[0.75rem] text-[var(--text-secondary)]">
-                                        <Clock size={12} /> {pub.date}
+                                        <Clock size={12} /> {formatPublishedDate(pub.published_at)}
                                     </div>
-                                </a>
-                            ))}
+                                </Link>
+                            )) : (
+                                <div className="p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] text-[0.9rem] text-[var(--text-secondary)]">
+                                    Todavía no hay publicaciones exclusivas disponibles para este plan.
+                                </div>
+                            )}
                         </div>
                     </section>
 
                     <section>
                         <Bracketed variant="tag">Oportunidades & Eventos</Bracketed>
                         <div className="mt-8 space-y-4">
-                            {MOCK_EVENTS.map(evt => (
-                                <div key={evt.id} className="p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)]">
+                            {events.length > 0 ? events.map(({ item, event }) => (
+                                <div key={item.slug} className="p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)]">
                                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                                         <div>
-                                            <span className="text-[0.65rem] uppercase tracking-widest text-[#10b981] mb-2 block">{evt.location}</span>
-                                            <h4 className="font-display text-[1.2rem] text-[var(--text-primary)] mb-2">{evt.title}</h4>
-                                            <p className="text-[0.85rem] text-[var(--text-secondary)]">{evt.description}</p>
+                                            <span className="text-[0.65rem] uppercase tracking-widest text-[#10b981] mb-2 block">
+                                                {event?.location ?? "Oportunidad exclusiva para miembros"}
+                                            </span>
+                                            <h4 className="font-display text-[1.2rem] text-[var(--text-primary)] mb-2">{item.title}</h4>
+                                            <p className="text-[0.85rem] text-[var(--text-secondary)]">
+                                                {event?.date ?? formatPublishedDate(item.published_at)}
+                                            </p>
                                         </div>
                                         <div className="text-right shrink-0">
-                                            <span className="block text-[1.4rem] font-display text-[var(--text-primary)]">{evt.price}€</span>
-                                            <span className="text-[0.65rem] uppercase tracking-wider text-[var(--text-tertiary)]">Acceso único</span>
+                                            <span className="block text-[1.1rem] font-display text-[var(--text-primary)]">
+                                                {event?.packages[0]?.price ? `Desde ${event.packages[0].price}` : "Consultar"}
+                                            </span>
+                                            <span className="text-[0.65rem] uppercase tracking-wider text-[var(--text-tertiary)]">Miembros</span>
                                         </div>
                                     </div>
-                                    <button className="w-full flex items-center justify-center gap-2 py-3 border border-[var(--color-accent-500)] text-[var(--color-accent-400)] hover:bg-[var(--color-accent-500)] hover:text-white transition-colors text-[0.8rem] uppercase tracking-widest">
-                                        <CalendarPlus size={16} /> Adquirir Acceso
-                                    </button>
+                                    <Link
+                                        href={`/${item.category}/${item.slug}`}
+                                        className="w-full flex items-center justify-center gap-2 py-3 border border-[var(--color-accent-500)] text-[var(--color-accent-400)] hover:bg-[var(--color-accent-500)] hover:text-white transition-colors text-[0.8rem] uppercase tracking-widest"
+                                    >
+                                        <CalendarPlus size={16} /> Ver oportunidad
+                                    </Link>
                                 </div>
-                            ))}
+                            )) : (
+                                <div className="p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] text-[0.9rem] text-[var(--text-secondary)]">
+                                    No hay oportunidades activas disponibles en este momento.
+                                </div>
+                            )}
                         </div>
                     </section>
                 </div>

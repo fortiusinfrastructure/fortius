@@ -19,6 +19,7 @@ export function ExpertsSection({ vertical: v }: ExpertsSectionProps) {
 
     return (
         <section
+            id="expertos"
             aria-labelledby={`experts-${v.id}-title`}
             className="relative border-t border-[var(--border-subtle)] py-24 md:py-32"
         >
@@ -43,11 +44,13 @@ export function ExpertsSection({ vertical: v }: ExpertsSectionProps) {
                             key={e.slug}
                             name={e.name}
                             role={e.role}
+                            photo={e.photo}
                             onOpen={() =>
                                 setActivePerson({
                                     name: e.name,
                                     role: e.role,
                                     bio: e.bio,
+                                    photo: e.photo,
                                     verticalLabel: v.label,
                                 })
                             }

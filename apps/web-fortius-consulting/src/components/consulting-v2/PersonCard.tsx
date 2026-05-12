@@ -7,7 +7,7 @@ interface PersonCardProps {
     name: string;
     role: string;
     area?: string;
-    photo?: string;
+    photo?: string | string[];
     onOpen: () => void;
     variant?: "compact" | "full";
 }

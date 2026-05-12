@@ -13,7 +13,7 @@ export interface PersonDialogData {
     bio: string;
     linkedin?: string;
     twitter?: string;
-    photo?: string;
+    photo?: string | string[];
     verticalLabel?: string;
 }
 
