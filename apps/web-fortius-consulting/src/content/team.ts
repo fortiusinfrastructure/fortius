@@ -31,7 +31,6 @@ export interface TeamMember {
     verticals: VerticalId[];
     area?: string;
     bio: string;
-    email?: string;
     linkedin?: string;
     twitter?: string;
     photo?: string;
@@ -43,6 +42,7 @@ export interface ExternalExpert {
     role: string;
     vertical: VerticalId;
     bio: string;
+    linkedin?: string;
 }
 
 export const TEAM: TeamMember[] = [
@@ -53,7 +53,6 @@ export const TEAM: TeamMember[] = [
         department: "direccion",
         verticals: ["civil", "intelligence"],
         bio: "Fundador de Fortius Consulting. Más de quince años acompañando a organizaciones con principios en su estrategia institucional, comunicación y relaciones con decisores públicos. Conferenciante habitual en foros sobre sociedad civil, valores y política.",
-        email: "juan.soto@fortiusconsulting.com",
         linkedin: "https://www.linkedin.com/in/juan-angel-soto",
     },
     {
@@ -63,7 +62,6 @@ export const TEAM: TeamMember[] = [
         department: "asuntos-publicos",
         verticals: ["civil"],
         bio: "Lidera la práctica de asuntos públicos de Fortius. Diseño y ejecución de campañas de incidencia, mapeo de stakeholders y estrategia de relación con instituciones europeas y nacionales.",
-        email: "didac.sanchez@fortiusconsulting.com",
         linkedin: "https://www.linkedin.com/in/didac-sanchez-olaya",
     },
     {
@@ -73,7 +71,6 @@ export const TEAM: TeamMember[] = [
         department: "asuntos-publicos",
         verticals: ["civil"],
         bio: "Analista y ejecutora de campañas de asuntos públicos. Especializada en el seguimiento legislativo y la elaboración de documentos de posición para clientes del tercer sector.",
-        email: "alexia.cosmello@fortiusconsulting.com",
         linkedin: "https://www.linkedin.com/in/alexia-cosmello",
     },
     {
@@ -82,8 +79,8 @@ export const TEAM: TeamMember[] = [
         role: "Asistente de Comunicación",
         department: "asuntos-publicos",
         verticals: ["civil"],
-        bio: "Apoya la ejecución de campañas de comunicación y contenidos editoriales para clientes de sociedad civil. Coordinación de redes, piezas gráficas y newsletters.",
-        email: "calli.pacheco@fortiusconsulting.com",
+        bio: "Ciudad de México (México). Estudiante de Comunicación Audiovisual en la Universidad Complutense de Madrid. Con formación en liderazgo y vida pública. Ha participado en programas formativos centrados en el pensamiento político y el compromiso social, formando parte de la primera promoción de la Escuela de Líderes \"Patria Unida\".\n\nCuenta con experiencia en creación de contenido en el ámbito del marketing. Actualmente es asistente de comunicación en Fortius, centrada en proyectos vinculados a la comunicación y el marketing digital.",
+        linkedin: "https://www.linkedin.com/in/calli-pacheco-mu%C3%B1oz-2b5390323/",
     },
     {
         slug: "beatriz-de-leon-cobo",
@@ -92,9 +89,8 @@ export const TEAM: TeamMember[] = [
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Norte de África y Sahel",
-        bio: "Analista senior de la región Norte de África y Sahel. Seguimiento de dinámicas de poder, actores armados y escenarios de riesgo para clientes institucionales y corporativos.",
-        email: "beatriz.deleon@fortiusconsulting.com",
-        linkedin: "https://www.linkedin.com/in/beatriz-de-leon-cobo",
+        bio: "Madrid (España). Beatriz de León Cobo es especialista en Norte de África y el Sahel, con amplia experiencia en análisis de riesgos geopolíticos, seguridad, migración y dinámicas de conflicto en África Occidental. Colabora como consultora e investigadora con gobiernos, organizaciones internacionales, think tanks y entidades del tercer sector en el diseño de estrategias y análisis sobre estabilidad regional, radicalización violenta y gestión migratoria.\n\nEs doctoranda en Sociología por la Universidad de la Sorbona, profesora del Máster de Acción Política de la Universidad Francisco de Vitoria y analista en su Centro de Seguridad Internacional, donde dirige el Foro de Diálogo Sahel Europe. Asimismo, es investigadora asociada (Fellow) del Royal United Services Institute y cuenta con un máster en Defensa, Seguridad y Gestión de Crisis por el Institut de Relations Internationales et Stratégiques.\n\nCompagina su labor académica y analítica con la dirección del Instituto Español de Análisis Migratorio (IEAM) y de su plataforma empresarial, Mediterranean Dialogue.",
+        linkedin: "https://www.linkedin.com/in/beatriz-de-leon-cobo/",
     },
     {
         slug: "tasnim-idriss",
@@ -103,8 +99,8 @@ export const TEAM: TeamMember[] = [
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Norte de África y Sahel",
-        bio: "Investigadora en dinámicas sociopolíticas del Magreb. Conecta fuentes primarias sobre el terreno con análisis aplicado a decisiones estratégicas.",
-        email: "tasnim.idriss@fortiusconsulting.com",
+        bio: "Túnez (Túnez). Tasnim es especialista en Norte de África y mundo árabe, con experiencia en análisis político, gobernanza y dinámicas socioculturales en sociedades de mayoría musulmana. Su trabajo se centra en el estudio de procesos políticos, evolución institucional y transformación sociopolítica en la región MENA, con especial atención al Magreb.\n\nActualmente coordina el proyecto Diálogo Mediterráneo del Instituto Español de Análisis Migratorio (IEAM) y es profesora en la Universidad de Túnez El Manar. Anteriormente fue subdirectora de Islam & Liberty Network, iniciativa internacional centrada en la promoción de la libertad económica y política en países de mayoría musulmana.\n\nCuenta con amplia experiencia en gobernanza, procesos electorales y desarrollo institucional, habiendo colaborado con organizaciones internacionales como Initiatives of Change Foundation y Atlas Network. Es licenciada en Literatura Angloamericana por la École Normale Supérieure de Túnez, máster en Estudios Culturales por la Universidad de Cartago, y actualmente doctoranda en Ciencia Política en la Universidad de la Civilización de Estambul.",
+        linkedin: "https://www.linkedin.com/in/tasnim-idriss-a44775b3/",
     },
     {
         slug: "juan-pablo-chamon-saucedo",
@@ -114,8 +110,41 @@ export const TEAM: TeamMember[] = [
         verticals: ["intelligence"],
         area: "América",
         bio: "Analista de ciclos electorales y transición de élites en América Latina. Seguimiento de procesos constituyentes, riesgo regulatorio y dinámicas hemisféricas.",
-        email: "juan.chamon@fortiusconsulting.com",
-        linkedin: "https://www.linkedin.com/in/juan-pablo-chamon",
+    },
+    {
+        slug: "segundo-carafi",
+        name: "Segundo Carafí",
+        role: "Inteligencia Política",
+        department: "inteligencia-politica",
+        verticals: ["intelligence"],
+        area: "América",
+        bio: "Analista especializado en América. Seguimiento de dinámicas políticas, actores institucionales y escenarios de riesgo en la región.",
+    },
+    {
+        slug: "matthaus-konradsheim",
+        name: "Matthäus Konradsheim",
+        role: "Inteligencia Política",
+        department: "inteligencia-politica",
+        verticals: ["intelligence"],
+        area: "Europa",
+        bio: "Analista especializado en Europa. Seguimiento de procesos políticos, marcos regulatorios y dinámicas institucionales en el entorno europeo.",
+    },
+    {
+        slug: "jose-maria-cortes",
+        name: "José María Cortés",
+        role: "Inteligencia Política",
+        department: "inteligencia-politica",
+        verticals: ["intelligence"],
+        area: "Europa",
+        bio: "Analista especializado en Europa. Cobertura de actores políticos, tendencias legislativas y escenarios de riesgo en el ámbito europeo.",
+    },
+    {
+        slug: "jose-manuel-perez-ariza",
+        name: "José Manuel Pérez Ariza",
+        role: "CTO",
+        department: "digital",
+        verticals: ["civil", "intelligence"],
+        bio: "Director de Tecnología de Fortius. Lidera la arquitectura digital, la infraestructura de análisis y las plataformas internas al servicio de los equipos de inteligencia y asuntos públicos.",
     },
     {
         slug: "alberto-andres-rodriguez",
@@ -124,18 +153,14 @@ export const TEAM: TeamMember[] = [
         department: "digital",
         verticals: ["intelligence"],
         bio: "Asesor externo para estrategia digital, reputación online y monitorización de ecosistemas de información. Puente entre inteligencia política y presencia digital.",
-        email: "alberto.andres@fortiusconsulting.com",
-        linkedin: "https://www.linkedin.com/in/alberto-andres-rodriguez",
     },
     {
         slug: "diego-salazar-ramirez",
         name: "Diego Salazar Ramírez",
-        role: "CTO",
+        role: "Arquitecto de productos digitales",
         department: "digital",
         verticals: ["intelligence"],
-        bio: "Responsable de tecnología y producto en Fortius. Diseña las plataformas internas de análisis, dashboards de monitorización y áreas privadas para clientes.",
-        email: "diego.salazar@fortiusconsulting.com",
-        linkedin: "https://www.linkedin.com/in/diego-salazar-ramirez",
+        bio: "Responsable del diseño y desarrollo de las plataformas digitales de Fortius. Construye las herramientas internas de análisis, dashboards de monitorización y áreas privadas para clientes.",
     },
     {
         slug: "javier-soto-gomez",
@@ -143,56 +168,43 @@ export const TEAM: TeamMember[] = [
         role: "Legal y Contable",
         department: "legal-contable",
         verticals: ["civil"],
-        bio: "Responsable del área legal y contable. Constitución y gobierno de entidades, cumplimiento normativo y acompañamiento fiscal a fundaciones y asociaciones.",
-        email: "javier.soto@fortiusconsulting.com",
+        bio: "Murcia (España), 2002. Graduado en Derecho y Economía por la Universidad de Navarra. Ha trabajado anteriormente para despachos como GES Abogados y Vicente Ortega Abogados, donde adquirió experiencia en el ámbito jurídico, especializándose en áreas relacionadas con el asesoramiento laboral, contable y jurídico, participando en el apoyo a clientes y en la gestión de distintas cuestiones administrativas y normativas. En particular, en el ámbito de las organizaciones sin ánimo de lucro, como fundaciones y asociaciones. Es responsable del departamento legal y contable de Fortius.",
+        linkedin: "https://www.linkedin.com/in/javier-soto-g%C3%B3mez-2b60b218a/",
     },
 ];
 
-const LOREM =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.";
-
 export const EXPERTS: ExternalExpert[] = [
     {
-        slug: "experto-civil-1",
-        name: "Experto vinculado · 01",
-        role: "Gobernanza de fundaciones",
+        slug: "carlos-andreu-pintado",
+        name: "Carlos Andreu Pintado",
+        role: "Liderazgo y Desarrollo Organizativo",
         vertical: "civil",
-        bio: LOREM,
+        bio: "Carlos Andreu es experto en liderazgo, formación de directivos y desarrollo organizativo, con una consolidada trayectoria como formador, conferenciante y asesor de empresas e instituciones.\n\nLicenciado en Derecho por la Universidad de Zaragoza y MBA por IESE Business School – Universidad de Navarra, combina una sólida formación académica con una amplia experiencia práctica en dirección, consultoría y desarrollo empresarial.\n\nHa ejercido como directivo en compañías de distintos sectores antes de dedicarse plenamente a la consultoría y formación ejecutiva, ámbito en el que acumula una extensa experiencia asesorando y formando a directivos, equipos de liderazgo y organizaciones en procesos de mejora del desempeño, cultura corporativa y desarrollo del talento.\n\nEs profesor habitual en universidades y escuelas de negocio de referencia en España y América Latina, incluyendo la Universidad de Navarra, Universidad CEU San Pablo, Universidad Nebrija, Instituto Internacional San Telmo y diversas instituciones internacionales.\n\nAutor del bestseller Del Ataúd a la Cometa (Editorial Planeta), obra de referencia en liderazgo y desarrollo personal con múltiples ediciones publicadas, es uno de los conferenciantes más reconocidos en España en materia de liderazgo, actitud y transformación de equipos.",
+        linkedin: "https://www.linkedin.com/in/carlosandreu/",
     },
     {
-        slug: "experto-civil-2",
-        name: "Experto vinculado · 02",
-        role: "Medición de impacto social",
+        slug: "ramsi-jazmati-akili",
+        name: "Ramsi Jazmati Akili",
+        role: "Mundo árabe, Geoeconomía y Diplomacia Cultural",
+        vertical: "intelligence",
+        bio: "Dr. Ramsi Jazmati Akili es experto en mundo árabe, relaciones hispano-árabes, geoeconomía y diplomacia cultural, con una sólida trayectoria académica e institucional especializada en la región del Golfo y Oriente Medio.\n\nEs investigador no residente en la Mohammed Bin Rashid School of Government e investigador en el Instituto de Cultura y Sociedad de la Universidad de Navarra, donde obtuvo su doctorado con una investigación centrada en el liderazgo de las mujeres emiratíes. Cuenta además con formación de posgrado en bioética, dirección de empresas y alta dirección por instituciones como ESADE y IESE Business School, así como especialización en gobernanza y diplomacia cultural por la Academia de Diplomacia Cultural de Berlín.\n\nHa desarrollado buena parte de su trayectoria profesional en la intersección entre empresa, instituciones y mundo árabe, destacando su labor como Director de Proyectos para la agencia de competitividad empresarial del Gobierno de Cataluña en la región del Golfo, donde lideró la expansión institucional y comercial de empresas españolas en Oriente Medio.\n\nActualmente es subdirector de Instituto Choiseul España y colabora regularmente en análisis sobre geoeconomía, relaciones internacionales y vínculos entre España y el mundo árabe.",
+        linkedin: "https://www.linkedin.com/in/ramzi-jazmati-akili-4a958a2b2/",
+    },
+    {
+        slug: "victor-gonzalez-coello-de-portugal",
+        name: "Víctor González-Coello de Portugal",
+        role: "Estrategia Empresarial y Asuntos Públicos Internacionales",
+        vertical: "intelligence",
+        bio: "Víctor Guido González Coello de Portugal es empresario, exdiputado en el Congreso de los Diputados y experto en estrategia empresarial, finanzas corporativas y asuntos públicos internacionales.\n\nPosee una doble licenciatura en Administración y Dirección de Empresas, un Bachelor of Arts with Honors in European Business por la University of Portsmouth, un Máster en Finanzas por CUNEF y un Executive MBA por IESE Business School.\n\nCuenta con más de veinte años de experiencia en alta dirección, banca de inversión, desarrollo corporativo y reestructuración empresarial, habiendo liderado operaciones de fusiones y adquisiciones por valor superior a 3.000 millones de dólares. Inició su carrera en UBS y ocupó posteriormente posiciones de responsabilidad en BBVA y Ebro Foods. Actualmente es Executive Director en MPR.\n\nEn el ámbito público, fue diputado por Salamanca y vicepresidente de VOX, desempeñando funciones de liderazgo en áreas como economía, asuntos exteriores, defensa y seguridad nacional.",
+        linkedin: "https://www.linkedin.com/in/v%C3%ADctor-gonz%C3%A1lez-coello-de-portugal/",
+    },
+    {
+        slug: "carlos-casares",
+        name: "Carlos Casares",
+        role: "Experto Vinculado",
         vertical: "civil",
-        bio: LOREM,
-    },
-    {
-        slug: "experto-civil-3",
-        name: "Experto vinculado · 03",
-        role: "Filantropía estratégica",
-        vertical: "civil",
-        bio: LOREM,
-    },
-    {
-        slug: "experto-intel-1",
-        name: "Experto vinculado · 01",
-        role: "Riesgo geopolítico Europa",
-        vertical: "intelligence",
-        bio: LOREM,
-    },
-    {
-        slug: "experto-intel-2",
-        name: "Experto vinculado · 02",
-        role: "Análisis Indo-Pacífico",
-        vertical: "intelligence",
-        bio: LOREM,
-    },
-    {
-        slug: "experto-intel-3",
-        name: "Experto vinculado · 03",
-        role: "Due diligence reputacional",
-        vertical: "intelligence",
-        bio: LOREM,
+        bio: "Experto vinculado a Fortius Consulting.",
+        linkedin: "https://www.linkedin.com/in/carloscasares/",
     },
 ];
 

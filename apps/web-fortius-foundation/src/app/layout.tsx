@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
+const metadataBase = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL("https://fundacionfortius.org");
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "600", "700"],
@@ -18,6 +22,7 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
+  metadataBase,
   title: "Fortius Foundation",
   description:
     "Fortius Foundation — grant-making foundation al servicio de una sociedad civil más fuerte.",

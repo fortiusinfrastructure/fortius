@@ -1,98 +1,108 @@
+import Link from "next/link";
 import { FoundationLockup } from "./FoundationLockup";
-
-const LEGAL = [
-    { label: "Aviso legal", href: "/legal" },
-    { label: "Política de privacidad", href: "/privacidad" },
-    { label: "Política de cookies", href: "/cookies" },
-];
+import {
+  FOUNDATION_CONTACT,
+  FOUNDATION_NAV_LINKS,
+  LEGAL_LINKS,
+  STRATEGIC_PARTNERS,
+} from "@/content/site";
 
 export function FooterF() {
-    return (
-        <footer className="border-t border-[var(--border-subtle)]">
-            <div className="bg-[var(--color-neutral-550)]/30">
-                <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-2">
-                        <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
-                            Socio de
-                        </p>
-                        <a
-                            href="https://www.together.eu"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-display text-2xl text-[var(--text-primary)] hover:text-[var(--color-accent-300)] transition-colors"
-                        >
-                            together.eu
-                        </a>
-                    </div>
-                    <div className="space-y-2 md:text-right">
-                        <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
-                            Miembro español de
-                        </p>
-                        <a
-                            href="https://www.trustbridgeglobal.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-display text-2xl text-[var(--text-primary)] hover:text-[var(--color-accent-300)] transition-colors"
-                        >
-                            TrustBridge <span className="italic text-[var(--color-accent-400)]">global</span>
-                        </a>
-                    </div>
-                </div>
+  return (
+    <footer className="border-t border-[var(--border-subtle)]">
+      <div className="bg-[var(--color-neutral-550)]/30">
+        <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-12">
+          <div className="mb-8 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
+                Socios estratégicos
+              </p>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-secondary)]">
+                Trabajamos con aliados que refuerzan nuestra capacidad de servir,
+                conectar y sostener iniciativas con impacto.
+              </p>
             </div>
+          </div>
 
-            <div
-                className="border-t border-[var(--border-subtle)]"
-                style={{ backgroundColor: "var(--surface-brand)" }}
-            >
-                <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-14 grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                    <div className="md:col-span-6 flex items-center gap-6">
-                        <a href="/" aria-label="Fortius Fundación">
-                            <FoundationLockup />
-                        </a>
-                        <a
-                            href="https://fortiusconsulting.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Fortius Consulting"
-                            className="inline-flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity"
-                        >
-                            <span
-                                className="text-lg font-light"
-                                style={{ color: "var(--color-sibling-500)" }}
-                            >
-                                [
-                            </span>
-                            <span className="flex flex-col items-center leading-none -space-y-0.5 px-1">
-                                <span className="font-sans font-normal tracking-[0.22em] text-[var(--text-primary)] uppercase text-[0.82rem]">
-                                    Fortius
-                                </span>
-                                <span className="font-display tracking-[0.18em] text-[0.5rem] text-[var(--text-secondary)] uppercase">
-                                    Consulting
-                                </span>
-                            </span>
-                            <span
-                                className="text-lg font-light"
-                                style={{ color: "var(--color-sibling-500)" }}
-                            >
-                                ]
-                            </span>
-                        </a>
-                    </div>
+          <div className="grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-3">
+            {STRATEGIC_PARTNERS.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.href}
+                target={partner.href.startsWith("http") ? "_blank" : undefined}
+                rel={partner.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="bg-[var(--surface-primary)] p-6 transition-colors hover:bg-[var(--surface-secondary)]"
+              >
+                <p className="font-display text-2xl font-light text-[var(--text-primary)]">
+                  {partner.name}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                  {partner.copy}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
 
-                    <ul className="md:col-span-6 md:justify-self-end flex flex-wrap gap-x-6 gap-y-2">
-                        {LEGAL.map((l) => (
-                            <li key={l.href}>
-                                <a
-                                    href={l.href}
-                                    className="text-[0.7rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
-                                >
-                                    [{l.label}]
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+      <div
+        className="border-t border-[var(--border-subtle)]"
+        style={{ backgroundColor: "var(--surface-brand)" }}
+      >
+        <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-10 px-[var(--container-px)] py-14 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+          <div className="space-y-5">
+            <Link href="/" aria-label="Fortius Fundación" className="inline-flex">
+              <FoundationLockup />
+            </Link>
+            <p className="max-w-md text-sm leading-relaxed text-[var(--text-secondary)]">
+              Fortius Foundation impulsa a quienes entienden el liderazgo como
+              servicio y trabajan para dejar un legado institucional, cultural y
+              cívico duradero.
+            </p>
+            <div className="space-y-2 text-sm text-[var(--text-secondary)]">
+              <p>{FOUNDATION_CONTACT.email}</p>
+              <p>{FOUNDATION_CONTACT.spain}</p>
+              <p>{FOUNDATION_CONTACT.usa}</p>
             </div>
-        </footer>
-    );
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
+              Navegación
+            </p>
+            <ul className="space-y-3">
+              {FOUNDATION_NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[0.78rem] uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                  >
+                    [{link.label}]
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--text-tertiary)]">
+              Legal
+            </p>
+            <ul className="space-y-3">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-[0.78rem] uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                  >
+                    [{link.label}]
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

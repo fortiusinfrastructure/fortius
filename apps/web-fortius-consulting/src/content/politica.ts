@@ -35,12 +35,12 @@ export const POLITICA_SUBVERTICALS: Subvertical[] = [
 export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
     {
         id: "basica",
-        name: "Básica",
+        name: "Básico",
         tagline:
             "Para equipos que necesitan inteligencia política continua y contexto accionable.",
-        priceMonthly: 500,
-        priceAnnual: 6000,
-        ctaLabel: "Empezar plan Básica",
+        priceMonthly: 1500,
+        priceAnnual: 18000,
+        ctaLabel: "Empezar plan Básico",
         benefits: [
             {
                 title: "Acceso al Área Privada",
@@ -48,7 +48,7 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Biblioteca completa de informes, briefings y dashboards de inteligencia política.",
             },
             {
-                title: "Newsletter quincenal",
+                title: "Newsletter mensual",
                 description:
                     "Lectura estratégica con coyuntura política, legislativa y geopolítica.",
             },
@@ -58,9 +58,9 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Dos sesiones anuales con analistas del equipo y voces invitadas.",
             },
             {
-                title: "Consulta trimestral",
+                title: "Consulta mensual",
                 description:
-                    "Sesión breve (30 min) por trimestre para revisar prioridades y riesgos.",
+                    "Sesión breve (30 min) mensual para revisar prioridades y riesgos.",
             },
             {
                 title: "Descuentos en eventos",
@@ -74,13 +74,13 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
         name: "Premium",
         tagline:
             "Para liderazgos que requieren acompañamiento experto, confidencial y bajo demanda.",
-        priceMonthly: 2000,
-        priceAnnual: 24000,
+        priceMonthly: 3000,
+        priceAnnual: 36000,
         featured: true,
         ctaLabel: "Solicitar plan Premium",
         benefits: [
             {
-                title: "Todo lo incluido en el plan Básica",
+                title: "Todo lo incluido en el Plan Básico",
             },
             {
                 title: "Briefings confidenciales y prospectiva a medida",
@@ -88,9 +88,9 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Lecturas reservadas con escenarios, riesgos y recomendaciones operativas para tu agenda.",
             },
             {
-                title: "Sesión mensual con el equipo Fortius",
+                title: "Sesión quincenal con el equipo Fortius",
                 description:
-                    "60 minutos al mes con un analista senior para trabajar tu contexto.",
+                    "60 minutos cada quincena con un analista senior para trabajar tu contexto.",
             },
             {
                 title: "Cartografía de poder personalizada",

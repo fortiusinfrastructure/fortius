@@ -26,6 +26,32 @@ import {
 } from "@/content/team";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog, type PersonDialogData } from "./PersonDialog";
+import {
+    getEditorialSlots,
+    categoryLabel,
+    kindLabel,
+    estimateReadTime,
+    formatShortDate,
+    formatMonthYear,
+    type Article,
+    type ArticleCategory,
+} from "@/lib/articles";
+
+const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
+    civil: "sociedad-civil",
+    intelligence: "politica",
+};
+
+function articleToInsight(a: Article) {
+    return {
+        slug: a.slug,
+        category: kindLabel(a.kind),
+        title: a.title,
+        excerpt: a.excerpt,
+        date: formatShortDate(a.published_at) || categoryLabel(a.category),
+        readTime: estimateReadTime(a.content_markdown),
+    };
+}
 
 const ICONS: Record<ServiceIcon, typeof Search> = {
     search: Search,
@@ -50,8 +76,35 @@ interface VerticalSectionProps {
 }
 
 export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSectionProps) {
-    const featured = v.insights.find((i) => i.featured) ?? v.insights[0];
-    const rest = v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
+    const category = VERTICAL_TO_CATEGORY[v.id];
+    const slots = category ? getEditorialSlots(category) : null;
+
+    const featured = slots?.featured
+        ? articleToInsight(slots.featured)
+        : v.insights.find((i) => i.featured) ?? v.insights[0];
+    const featuredHref = slots?.featured
+        ? `${v.href}/${slots.featured.slug}`
+        : `/publicaciones/${featured.slug}`;
+
+    const rest = slots && slots.rest.length > 0
+        ? slots.rest.map(articleToInsight)
+        : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
+    const restHref = (i: number): string =>
+        slots && slots.rest[i]
+            ? `${v.href}/${slots.rest[i].slug}`
+            : `/publicaciones/${rest[i].slug}`;
+
+    const locked = slots?.locked
+        ? {
+              category: kindLabel(slots.locked.kind),
+              title: slots.locked.title,
+              excerpt: slots.locked.excerpt,
+              readTime: estimateReadTime(slots.locked.content_markdown),
+              publishedAt: formatMonthYear(slots.locked.published_at) || "Disponible",
+              href: `${v.href}/${slots.locked.slug}`,
+          }
+        : { ...v.lockedArticle, href: "/area-privada" };
+
     const team = getTeamByVertical(v.id);
     const experts = getExpertsByVertical(v.id);
 
@@ -127,7 +180,7 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
                         <motion.a
-                            href={`/publicaciones/${featured.slug}`}
+                            href={featuredHref}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-80px" }}
@@ -179,7 +232,7 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                                 {rest.map((p, i) => (
                                     <motion.a
                                         key={p.slug}
-                                        href={`/publicaciones/${p.slug}`}
+                                        href={restHref(i)}
                                         initial={{ opacity: 0, y: 16 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-60px" }}
@@ -203,29 +256,29 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                             </div>
 
                             <article
-                                aria-label={`Artículo bloqueado — ${v.lockedArticle.title}`}
+                                aria-label={`Artículo bloqueado — ${locked.title}`}
                                 className="relative border border-[var(--border-default)] bg-[var(--surface-primary)] overflow-hidden"
                             >
                                 <div className="p-6 space-y-4">
                                     <div className="flex items-center justify-between">
                                         <Bracketed variant="tag">
-                                            {v.lockedArticle.category}
+                                            {locked.category}
                                         </Bracketed>
                                         <span className="inline-flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-accent-400)]">
                                             Acceso restringido
                                         </span>
                                     </div>
                                     <h4 className="font-display text-[1.35rem] font-light leading-[1.18] tracking-tight text-[var(--text-primary)]">
-                                        {v.lockedArticle.title}
+                                        {locked.title}
                                     </h4>
                                     <div className="flex items-center gap-4 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                                        <span>{v.lockedArticle.publishedAt}</span>
+                                        <span>{locked.publishedAt}</span>
                                         <span>·</span>
-                                        <span>{v.lockedArticle.readTime}</span>
+                                        <span>{locked.readTime}</span>
                                     </div>
                                     <div className="relative">
                                         <p className="text-[0.9rem] text-[var(--text-secondary)] leading-relaxed">
-                                            {v.lockedArticle.excerpt}
+                                            {locked.excerpt}
                                         </p>
                                         <div
                                             className="pointer-events-none absolute inset-x-0 bottom-0 h-20"
@@ -245,7 +298,7 @@ export function VerticalSection({ vertical: v, accentSide = "left" }: VerticalSe
                             </article>
 
                             <a
-                                href="/area-privada"
+                                href={locked.href}
                                 className="group inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                             >
                                 <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">

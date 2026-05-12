@@ -24,34 +24,58 @@ interface Pin {
 }
 
 const PINES: Pin[] = [
-    {
-        id: "madrid",
-        name: "Madrid",
-        coordinates: [-3.7038, 40.4168],
-        category: "Oficinas",
-        description: "Oficina Central",
-    },
-    {
-        id: "washington",
-        name: "Washington D.C.",
-        coordinates: [-77.0369, 38.9072],
-        category: "Proyectos",
-        description: "Proyecto Estratégico",
-    },
-    {
-        id: "londres",
-        name: "Londres",
-        coordinates: [-0.1276, 51.5074],
-        category: "Equipo",
-        description: "Operaciones UK",
-    },
-    {
-        id: "nairobi",
-        name: "Kenia",
-        coordinates: [36.8219, -1.2921],
-        category: "Proyectos",
-        description: "Desarrollo Económico",
-    },
+    // Oficinas
+    { id: "ofi-madrid", name: "Madrid", coordinates: [-3.7038, 40.4168], category: "Oficinas", description: "España" },
+    { id: "ofi-pamplona", name: "Pamplona", coordinates: [-1.6432, 42.8125], category: "Oficinas", description: "España" },
+    { id: "ofi-houston", name: "Houston", coordinates: [-95.3698, 29.7604], category: "Oficinas", description: "EE.UU." },
+    { id: "ofi-wash", name: "Washington D.C.", coordinates: [-77.0369, 38.9072], category: "Oficinas", description: "EE.UU." },
+    // Equipo
+    { id: "eq-madrid", name: "Madrid", coordinates: [-3.4, 40.2], category: "Equipo", description: "España" },
+    { id: "eq-pamplona", name: "Pamplona", coordinates: [-1.4, 42.6], category: "Equipo", description: "España" },
+    { id: "eq-houston", name: "Houston", coordinates: [-95.1, 29.5], category: "Equipo", description: "EE.UU." },
+    { id: "eq-wash", name: "Washington D.C.", coordinates: [-76.8, 38.7], category: "Equipo", description: "EE.UU." },
+    { id: "eq-viena", name: "Viena", coordinates: [16.3738, 48.2082], category: "Equipo", description: "Austria" },
+    { id: "eq-lisboa", name: "Lisboa", coordinates: [-9.1393, 38.7223], category: "Equipo", description: "Portugal" },
+    { id: "eq-bruselas", name: "Bruselas", coordinates: [4.3517, 50.8503], category: "Equipo", description: "Bélgica" },
+    { id: "eq-budapest", name: "Budapest", coordinates: [19.0402, 47.4979], category: "Equipo", description: "Hungría" },
+    { id: "eq-lapaz", name: "La Paz", coordinates: [-68.1193, -16.4897], category: "Equipo", description: "Bolivia" },
+    { id: "eq-santiago", name: "Santiago de Chile", coordinates: [-70.6693, -33.4489], category: "Equipo", description: "Chile" },
+    { id: "eq-tunez", name: "Túnez", coordinates: [10.1815, 36.8065], category: "Equipo", description: "Túnez" },
+    { id: "eq-buenos", name: "Buenos Aires", coordinates: [-58.3816, -34.6037], category: "Equipo", description: "Argentina" },
+    { id: "eq-cdmx", name: "Ciudad de México", coordinates: [-99.1332, 19.4326], category: "Equipo", description: "México" },
+    // Proyectos
+    { id: "pr-esp", name: "España", coordinates: [-4.0, 39.5], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-fra", name: "Francia", coordinates: [2.2137, 46.2276], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-por", name: "Portugal", coordinates: [-8.2245, 39.3999], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-ita", name: "Italia", coordinates: [12.5674, 41.8719], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-rum", name: "Rumanía", coordinates: [24.9668, 45.9432], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-hun", name: "Hungría", coordinates: [19.5033, 47.1625], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-bel", name: "Bélgica", coordinates: [4.4699, 50.5039], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-pba", name: "Países Bajos", coordinates: [5.2913, 52.1326], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-gbr", name: "Reino Unido", coordinates: [-3.4360, 55.3781], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-dnk", name: "Dinamarca", coordinates: [9.5018, 56.2639], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-swe", name: "Suecia", coordinates: [18.6435, 60.1282], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-mar", name: "Marruecos", coordinates: [-7.0926, 31.7917], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-dza", name: "Argelia", coordinates: [1.6596, 28.0339], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-tun", name: "Túnez", coordinates: [9.5375, 33.8869], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-mli", name: "Mali", coordinates: [-3.9962, 17.5707], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-sen", name: "Senegal", coordinates: [-14.4524, 14.4974], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-mrt", name: "Mauritania", coordinates: [-10.9408, 21.0079], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-egy", name: "Egipto", coordinates: [30.8025, 26.8206], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-isr", name: "Israel", coordinates: [34.8516, 31.0461], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-aze", name: "Azerbaiyán", coordinates: [47.5769, 40.1431], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-chn", name: "Shanghai (China)", coordinates: [121.4737, 31.2304], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-phl", name: "Filipinas", coordinates: [121.7740, 12.8797], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-ken", name: "Kenia", coordinates: [37.9062, -0.0236], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-zaf", name: "Sudáfrica", coordinates: [22.9375, -30.5595], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-mex", name: "México", coordinates: [-102.5528, 23.6345], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-usa", name: "EE.UU.", coordinates: [-95.7129, 37.0902], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-gtm", name: "Guatemala", coordinates: [-90.2308, 15.7835], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-bol", name: "Bolivia", coordinates: [-63.5887, -16.2902], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-chl", name: "Chile", coordinates: [-71.5430, -35.6751], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-arg", name: "Argentina", coordinates: [-63.6167, -38.4161], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-bra", name: "Brasil", coordinates: [-51.9253, -14.2350], category: "Proyectos", description: "Operaciones y Asesoría" },
+    { id: "pr-col", name: "Colombia", coordinates: [-74.2973, 4.5709], category: "Proyectos", description: "Operaciones y Asesoría" },
 ];
 
 const categoryConfig = {
@@ -139,10 +163,13 @@ export function WorldMap() {
                                     whileHover={{ scale: 1.3 }}
                                     transition={{ type: "spring", stiffness: 260, damping: 20 }}
                                 >
-                                    {/* Un sutil halo trasero */}
-                                    <circle cx={0} cy={0} r={6} fill={color} opacity={0.2} />
-                                    {/* El punto o icono en sí. SVG puro para evitar problemas con react-simple-maps Marker. */}
-                                    <circle cx={0} cy={0} r={3} fill={color} />
+                                    {hoveredPin?.id === pin.id ? (
+                                        <g transform="translate(-8, -8)">
+                                            <Icon size={16} color={color} strokeWidth={2} />
+                                        </g>
+                                    ) : (
+                                        <circle cx={0} cy={0} r={2} fill={color} />
+                                    )}
                                 </motion.g>
                             </Marker>
                         );

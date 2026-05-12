@@ -13,7 +13,7 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 const JUAN_TIMELINE = [
     { year: "2016", title: "Grado Derecho y ADE", location: "UNAV" },
     { year: "2017", title: "Grado Ciencia Política", location: "UNED" },
-    { year: "2018", title: "Master Teoría Política", location: "UCL" },
+    { year: "2028", title: "Master Teoría Política", location: "UCL" },
     { year: "2026", title: "PHD", location: "ST. MARY'S UNIVERSITY" },
 ];
 

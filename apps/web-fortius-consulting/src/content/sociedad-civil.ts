@@ -37,12 +37,12 @@ export const SOCIEDAD_CIVIL_INTRO = {
 export const MEMBERSHIP_TIERS: MembershipTier[] = [
     {
         id: "basica",
-        name: "Básica",
+        name: "Básico",
         tagline:
             "Para organizaciones que necesitan inteligencia estratégica continua.",
-        priceMonthly: 250,
-        priceAnnual: 3000,
-        ctaLabel: "Empezar plan Básica",
+        priceMonthly: 1000,
+        priceAnnual: 12000,
+        ctaLabel: "Empezar plan Básico",
         benefits: [
             {
                 title: "Acceso al Área Privada",
@@ -50,7 +50,7 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Biblioteca completa de informes, briefings y diagnósticos de Sociedad Civil.",
             },
             {
-                title: "Newsletter quincenal",
+                title: "Newsletter mensual",
                 description:
                     "Lectura estratégica con análisis de coyuntura, casos y benchmarks.",
             },
@@ -60,9 +60,9 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Dos sesiones anuales con expertos del equipo y voces invitadas.",
             },
             {
-                title: "Consulta trimestral",
+                title: "Consulta mensual",
                 description:
-                    "Sesión breve (30 min) por trimestre para revisar prioridades.",
+                    "Sesión breve (30 min) mensual para revisar prioridades.",
             },
             {
                 title: "Descuentos en eventos",
@@ -76,13 +76,13 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
         name: "Premium",
         tagline:
             "Para liderazgos que requieren acompañamiento experto y confidencial.",
-        priceMonthly: 1000,
-        priceAnnual: 12000,
+        priceMonthly: 2000,
+        priceAnnual: 24000,
         featured: true,
         ctaLabel: "Solicitar plan Premium",
         benefits: [
             {
-                title: "Todo lo incluido en el plan Básica",
+                title: "Todo lo incluido en el Plan Básico",
             },
             {
                 title: "Informes premium y briefings confidenciales",
@@ -90,9 +90,9 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
                     "Lecturas reservadas con escenarios prospectivos y recomendaciones operativas.",
             },
             {
-                title: "Sesión mensual con el equipo Fortius",
+                title: "Sesión quincenal con el equipo Fortius",
                 description:
-                    "60 minutos al mes con uno de los responsables del área para trabajar tu agenda.",
+                    "60 minutos cada quincena con uno de los responsables del área para trabajar tu agenda.",
             },
             {
                 title: "Briefing trimestral a medida",

@@ -1,135 +1,120 @@
-# Turborepo starter
+# Fortius
 
-This Turborepo starter is maintained by the Turborepo core team.
+Monorepo del ecosistema digital Fortius. Reúne varias organizaciones con marcas,
+sitios y flujos editoriales distintos, pero con una base técnica compartida:
+**Turborepo + pnpm + Next.js 16 + Tailwind CSS v4 + Supabase**.
 
-## Using this example
+## Qué hay en este repositorio
 
-Run the following command:
+Fortius opera como un ecosistema multi-organización. Las aplicaciones activas hoy son:
 
-```sh
-npx create-turbo@latest
+- `apps/web-escuela-hispanica`: plataforma editorial, membresías, pagos y administración.
+- `apps/web-ieam`: sitio institucional y CMS del Instituto de Estudios sobre África y el Mediterráneo.
+- `apps/web-fortius-consulting`: web corporativa y laboratorio de diseño de Fortius Consulting.
+- `apps/web-fortius-foundation`: web institucional de Fortius Foundation.
+
+La estructura principal del monorepo es:
+
+```text
+fortius/
+├── apps/                 # Aplicaciones Next.js
+├── packages/             # Paquetes compartidos (DB, UI, admin, lint, TS)
+├── supabase/migrations/  # Esquema SQL y evolución del backend
+├── turbo.json            # Pipeline de Turborepo
+└── pnpm-workspace.yaml   # Workspaces de apps/* y packages/*
 ```
 
-## What's inside?
+## Arquitectura compartida
 
-This Turborepo includes the following packages/apps:
+### Monorepo con Turborepo
 
-### Apps and Packages
+- `pnpm` gestiona dependencias y workspaces.
+- `turbo` coordina tareas de `dev`, `build`, `lint` y `check-types`.
+- `packages/database` centraliza clientes y queries de Supabase.
+- `packages/admin-ui` concentra piezas reutilizables del CMS.
+- `packages/ui` guarda tokens y pautas del **Premium Editorial Design System**.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Backend compartido en Supabase
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+El backend es común para todo el ecosistema y aplica **multi-tenencia por
+`organization_id`**. Eso permite que varias organizaciones compartan esquema y
+servicios, sin mezclar contenido, membresías ni permisos.
 
-### Utilities
+Piezas clave:
 
-This Turborepo has some additional tools already setup for you:
+- tabla `organizations` como catálogo de organizaciones;
+- tablas de negocio como `articles`, `activities`, `user_memberships`,
+  `subscriptions`, `payment_history` y `stripe_events`;
+- políticas RLS basadas en `organization_id`;
+- `createServerClient()` para acceso con sesión y RLS;
+- `createAdminClient()` para rutas seguras de servidor, webhooks y tareas admin.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Stack técnico
 
-### Build
+- **Next.js 16** con App Router.
+- **React 19**.
+- **Tailwind CSS v4** como base visual.
+- **next-intl** en las apps multilingües (`web-escuela-hispanica` e `web-ieam`).
+- **Supabase** para autenticación, datos, RLS y flujos administrativos.
 
-To build all apps and packages, run the following command:
+> Nota: `web-fortius-consulting` y `web-fortius-foundation` comparten la base
+> de Next.js 16 + Tailwind v4 y el sistema visual del ecosistema, pero hoy no
+> activan `next-intl` en runtime.
 
-```
-cd my-turborepo
+## Comandos principales
 
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
+Ejecuta estos comandos desde la raíz del monorepo (`fortius/`):
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+pnpm install
+pnpm dev
+pnpm build
+pnpm lint
+pnpm check-types
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+Para trabajar en una sola aplicación:
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+pnpm --filter web-escuela-hispanica dev
+pnpm --filter web-ieam dev
+pnpm --filter web-fortius-consulting dev
+pnpm --filter web-fortius-foundation dev
 ```
 
-### Remote Caching
+Tarea útil de migración para IEAM:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+```bash
+pnpm tsx apps/web-ieam/scripts/seed-content.ts
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Rutas y carpetas que conviene conocer
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- `apps/*/src/app/[locale]`: rutas públicas con internacionalización.
+- `apps/web-ieam/src/app/admin`: CMS de IEAM sin prefijo de idioma.
+- `apps/web-escuela-hispanica/src/app/admin`: panel interno de Escuela Hispánica.
+- `apps/web-escuela-hispanica/src/app/api`: checkout, webhooks y acciones seguras.
+- `apps/web-ieam/src/lib/admin`: queries y mutaciones del CMS.
+- `apps/web-escuela-hispanica/src/lib/admin`: consultas operativas del panel.
+- `packages/database/src`: clientes, tipos y queries compartidas.
+- `supabase/migrations`: fuente de verdad del esquema SQL.
 
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+## Estado de migración de contenido
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+El ecosistema está convergiendo desde contenido estático hacia tablas compartidas
+en Supabase. El estado actual es híbrido:
 
-## Useful Links
+| App                      | Estado actual                                                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `web-escuela-hispanica`  | Integración real con Supabase para auth, admin, membresías, pagos y eventos; todavía convive con `src/lib/mock-data` en parte del contenido editorial.                    |
+| `web-ieam`               | La web pública mantiene `src/lib/mock-data` como fuente transicional; existe script idempotente para sembrar `articles` y `activities` en Supabase por `organization_id`. |
+| `web-fortius-consulting` | Contenido actual servido desde `src/content/*.ts`; preparada para converger con el backend compartido, pero aún en fase frontend/MVP.                                     |
+| `web-fortius-foundation` | Contenido institucional actualmente en `src/content/*.ts`; la migración al backend compartido sigue pendiente.                                                            |
 
-Learn more about the power of Turborepo:
+## Onboarding recomendado
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+1. Instala dependencias con `pnpm install`.
+2. Revisa el README de la app donde vayas a trabajar.
+3. Confirma si esa app ya lee de Supabase o sigue en `mock-data` / `src/content`.
+4. Si tocas acceso a datos, valida siempre el filtro por `organization_id`.
+5. Si tocas build o variables de entorno globales, revisa también `turbo.json`.

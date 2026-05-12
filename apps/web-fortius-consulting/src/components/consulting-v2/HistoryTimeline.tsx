@@ -28,12 +28,9 @@ const TIMELINE: TimelineItem[] = [
         },
     },
     {
-        year: "2017",
-        consulting: { title: "Fortius se traslada a Londres." },
-    },
-    {
         year: "2017-2022",
         consulting: {
+            title: "Fortius se traslada a Londres.",
             description:
                 "Actividad centrada en think tanks que velan por el florecimiento humano, tanto a nivel de desarrollo económico como espiritual, y que trabajan por el bien común. Primeros proyectos en Bélgica, Reino Unido y Estados Unidos.",
         },
@@ -98,98 +95,87 @@ export function HistoryTimeline() {
                 </div>
             </div>
 
-            <div className="relative pt-8 md:pt-16 pb-12">
-                <div
-                    className="overflow-x-auto scrollbar-thin -mx-[var(--container-px)] px-[var(--container-px)] pb-8"
-                    style={{ scrollSnapType: "x mandatory" }}
-                >
-                    <div className="flex gap-0 min-w-max">
-                        {TIMELINE.map((m, i) => (
-                            <div
-                                key={m.year}
-                                className="w-[18rem] md:w-[22rem] shrink-0 flex flex-col"
-                                style={{ scrollSnapAlign: "start" }}
-                            >
-                                {/* 1. Consulting Content */}
-                                <div className="min-h-[14rem] flex flex-col justify-end pb-6 px-4 md:px-6">
+            <div className="relative pt-8 md:pt-16 pb-12 max-w-5xl mx-auto">
+                <div className="flex flex-col">
+                    {TIMELINE.map((m, i) => (
+                        <div key={m.year} className="flex relative group">
+                            {/* Track Area */}
+                            <div className="w-16 md:w-24 shrink-0 relative flex justify-center">
+                                <div className="relative w-4 md:w-6">
+                                    {/* Red Line */}
+                                    <div
+                                        className="w-px bg-[var(--color-accent-500)] opacity-35 absolute left-0"
+                                        style={{
+                                            top: i === 0 ? "2rem" : 0,
+                                            bottom: i === TIMELINE.length - 1 ? "calc(100% - 2.5rem)" : 0,
+                                        }}
+                                    />
+
+                                    {/* Green Line */}
+                                    {m.foundationActive && (
+                                        <div
+                                            className="w-px bg-[#10b981] opacity-35 absolute right-0"
+                                            style={{
+                                                top: m.year === "2023" ? "2rem" : 0,
+                                                bottom: i === TIMELINE.length - 1 ? "calc(100% - 2.5rem)" : 0,
+                                            }}
+                                        />
+                                    )}
+
+                                    {/* Red Node */}
+                                    {m.consulting && (
+                                        <div className="absolute top-[2rem] left-0 -translate-x-1/2 w-3 h-3 rounded-full bg-[var(--color-neutral-1000,#0a111e)] border border-[var(--color-accent-500)] ring-[4px] ring-[var(--color-neutral-1000,#0a111e)] transition-transform duration-500 ease-out group-hover:scale-150 z-10" />
+                                    )}
+
+                                    {/* Green Node */}
+                                    {m.foundation && (
+                                        <div className="absolute top-[2rem] right-0 translate-x-1/2 w-3 h-3 rounded-full bg-[var(--color-neutral-1000,#0a111e)] border border-[#10b981] ring-[4px] ring-[var(--color-neutral-1000,#0a111e)] transition-transform duration-500 ease-out group-hover:scale-150 z-10" />
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Content Area */}
+                            <div className="flex-1 pb-16 pt-[1.6rem] pr-4">
+                                <h3 className="font-display text-[1.8rem] md:text-[2.2rem] text-[var(--text-primary)] leading-none mb-6">
+                                    {m.year}
+                                </h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {/* Consulting */}
                                     {m.consulting && (
                                         <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 0.6, ease }}
                                         >
                                             {m.consulting.title && (
-                                                <h3 className="font-display text-[1.1rem] font-light leading-snug text-[var(--text-primary)] mb-2">
+                                                <h4 className="text-[1.1rem] text-[var(--color-accent-500)] mb-2">
                                                     {m.consulting.title}
-                                                </h3>
+                                                </h4>
                                             )}
                                             {m.consulting.description && (
-                                                <p className="text-[0.85rem] text-[var(--text-secondary)] leading-relaxed">
+                                                <p className="text-[0.95rem] text-[var(--text-secondary)] leading-relaxed">
                                                     {m.consulting.description}
                                                 </p>
                                             )}
                                         </motion.div>
                                     )}
-                                </div>
 
-                                {/* 2. Red Line Track */}
-                                <div className="relative h-6 w-full flex items-center justify-center group">
-                                    <div
-                                        className={`absolute h-px bg-[var(--color-accent-500)] opacity-35 ${
-                                            i === 0
-                                                ? "left-1/2 right-0"
-                                                : i === TIMELINE.length - 1
-                                                ? "left-0 right-1/2"
-                                                : "left-0 right-0"
-                                        }`}
-                                    />
-                                    {m.consulting && (
-                                        <div className="w-3 h-3 rounded-full bg-[var(--color-neutral-1000,#0a111e)] border-[1px] border-[var(--color-accent-500)] ring-[6px] ring-[var(--color-neutral-1000,#0a111e)] transition-transform duration-500 ease-out group-hover:scale-150 z-10" />
-                                    )}
-                                </div>
-
-                                {/* 3. Year */}
-                                <div className="h-20 flex items-center justify-center">
-                                    <span className="font-display text-[clamp(1.6rem,2.5vw,2.2rem)] font-light leading-none text-[var(--text-primary)]">
-                                        {m.year}
-                                    </span>
-                                </div>
-
-                                {/* 4. Green Line Track */}
-                                <div className="relative h-6 w-full flex items-center justify-center group">
-                                    {m.foundationActive && (
-                                        <div
-                                            className={`absolute h-px bg-[#10b981] opacity-35 ${
-                                                m.year === "2023"
-                                                    ? "left-1/2 right-0"
-                                                    : m.year === "2025"
-                                                    ? "left-0 right-1/2"
-                                                    : "left-0 right-0"
-                                            }`}
-                                        />
-                                    )}
-                                    {m.foundation && (
-                                        <div className="w-3 h-3 rounded-full bg-[var(--color-neutral-1000,#0a111e)] border-[1px] border-[#10b981] ring-[6px] ring-[var(--color-neutral-1000,#0a111e)] transition-transform duration-500 ease-out group-hover:scale-150 z-10" />
-                                    )}
-                                </div>
-
-                                {/* 5. Foundation Content */}
-                                <div className="min-h-[10rem] flex flex-col justify-start pt-6 px-4 md:px-6">
+                                    {/* Foundation */}
                                     {m.foundation && (
                                         <motion.div
-                                            initial={{ opacity: 0, y: -10 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 0.6, ease }}
+                                            transition={{ duration: 0.6, ease, delay: 0.1 }}
                                         >
                                             {m.foundation.title && (
-                                                <h3 className="font-display text-[1.1rem] font-light leading-snug text-[#10b981] mb-2">
+                                                <h4 className="text-[1.1rem] text-[#10b981] mb-2">
                                                     {m.foundation.title}
-                                                </h3>
+                                                </h4>
                                             )}
                                             {m.foundation.description && (
-                                                <p className="text-[0.85rem] text-[var(--text-secondary)] leading-relaxed">
+                                                <p className="text-[0.95rem] text-[var(--text-secondary)] leading-relaxed">
                                                     {m.foundation.description}
                                                 </p>
                                             )}
@@ -197,8 +183,8 @@ export function HistoryTimeline() {
                                     )}
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

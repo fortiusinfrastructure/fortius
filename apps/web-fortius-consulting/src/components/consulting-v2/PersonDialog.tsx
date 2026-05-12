@@ -11,7 +11,6 @@ export interface PersonDialogData {
     area?: string;
     department?: string;
     bio: string;
-    email?: string;
     linkedin?: string;
     twitter?: string;
     photo?: string;
@@ -106,17 +105,8 @@ export function PersonDialog({ person, onClose }: PersonDialogProps) {
                                     {person.bio}
                                 </p>
 
-                                {(person.email || person.linkedin || person.twitter) && (
+                                {(person.linkedin || person.twitter) && (
                                     <div className="pt-4 flex flex-wrap gap-3">
-                                        {person.email && (
-                                            <a
-                                                href={`mailto:${person.email}`}
-                                                className="inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.15em] px-3 py-2 border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
-                                            >
-                                                <Mail size={14} />
-                                                Email
-                                            </a>
-                                        )}
                                         {person.linkedin && (
                                             <a
                                                 href={person.linkedin}

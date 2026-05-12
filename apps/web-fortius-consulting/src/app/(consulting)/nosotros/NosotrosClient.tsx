@@ -33,7 +33,6 @@ function memberToDialog(m: TeamMember): PersonDialogData {
         area: m.area,
         department: DEPARTMENT_LABEL[m.department],
         bio: m.bio,
-        email: m.email,
         linkedin: m.linkedin,
         twitter: m.twitter,
         photo: m.photo,
@@ -45,6 +44,7 @@ function expertToDialog(e: ExternalExpert): PersonDialogData {
         name: e.name,
         role: e.role,
         bio: e.bio,
+        linkedin: e.linkedin,
         verticalLabel: VERTICAL_LABEL[e.vertical],
     };
 }
@@ -127,15 +127,6 @@ export function NosotrosClient() {
                                     {founder.bio}
                                 </p>
                                 <div className="pt-2 flex flex-wrap items-center gap-3">
-                                    {founder.email && (
-                                        <a
-                                            href={`mailto:${founder.email}`}
-                                            className="inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.15em] px-3 py-2 border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
-                                        >
-                                            <Mail size={14} />
-                                            Email
-                                        </a>
-                                    )}
                                     {founder.linkedin && (
                                         <a
                                             href={founder.linkedin}
