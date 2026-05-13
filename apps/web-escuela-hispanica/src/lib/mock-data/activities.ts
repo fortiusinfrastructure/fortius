@@ -2,6 +2,75 @@ import type { Activity } from '@/types';
 
 export const activities: Activity[] = [
     {
+        id: 20,
+        slug: 'iv-jornadas-pensamiento-hispanico',
+        title: {
+            es: 'IV Jornadas de Pensamiento Hispánico',
+            en: 'IV Hispanic Thought Days',
+            pt: 'IV Jornadas de Pensamento Hispânico'
+        },
+        sortDate: '2026-05-25',
+        date: '25 Mayo 2026',
+        location: {
+            es: 'Universidad de Navarra, Pamplona, Navarra, España',
+            en: 'University of Navarra, Pamplona, Navarre, Spain',
+            pt: 'Universidade de Navarra, Pamplona, Navarra, Espanha'
+        },
+        organizer: {
+            es: 'Escuela Hispánica',
+            en: 'Escuela Hispánica',
+            pt: 'Escuela Hispánica'
+        },
+        type: {
+            es: 'Jornadas',
+            en: 'Conference',
+            pt: 'Jornadas'
+        },
+        excerpt: {
+            es: 'Este año las jornadas se enmarcan dentro del Proyecto 1776 desarrollado por Escuela Hispánica, cuyo objetivo consiste en explorar la influencia de España en la Declaración de Independencia de los Estados Unidos, así como sus implicaciones históricas, culturales y políticas.',
+            en: 'This year, the conference is framed within the 1776 Project developed by Escuela Hispánica, whose objective is to explore the influence of Spain on the Declaration of Independence of the United States, as well as its historical, cultural, and political implications.',
+            pt: 'Este ano as jornadas enquadram-se no Projeto 1776 desenvolvido pela Escuela Hispânica, cujo objetivo é explorar a influência de Espanha na Declaração de Independência dos Estados Unidos, bem como as suas implicações históricas, culturais e políticas.'
+        },
+        content: {
+            es: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Fecha:</strong> 25 de mayo de 2026<br/>
+                        <strong style="color: #c5a059;">Horario:</strong> 9:45-14:00h<br/>
+                        <strong style="color: #c5a059;">Lugar:</strong> Aula Siemens Gamesa, Instituto Cultura y Sociedad, Universidad de Navarra (Pamplona, España)
+                    </p>
+                </div>
+                <p>Este año las jornadas se enmarcan dentro del Proyecto 1776 desarrollado por Escuela Hispánica, cuyo objetivo consiste en explorar la influencia de España en la Declaración de Independencia de los Estados Unidos, así como sus implicaciones históricas, culturales y políticas.</p>
+            `,
+            en: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizer:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Date:</strong> May 25, 2026<br/>
+                        <strong style="color: #c5a059;">Schedule:</strong> 9:45 AM - 2:00 PM<br/>
+                        <strong style="color: #c5a059;">Location:</strong> Siemens Gamesa Room, Institute for Culture and Society, University of Navarra (Pamplona, Spain)
+                    </p>
+                </div>
+                <p>This year, the conference is framed within the 1776 Project developed by Escuela Hispánica, whose objective is to explore the influence of Spain on the Declaration of Independence of the United States, as well as its historical, cultural, and political implications.</p>
+            `,
+            pt: `
+                <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
+                    <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
+                        <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
+                        <strong style="color: #c5a059;">Data:</strong> 25 de maio de 2026<br/>
+                        <strong style="color: #c5a059;">Horário:</strong> 9:45-14:00h<br/>
+                        <strong style="color: #c5a059;">Local:</strong> Sala Siemens Gamesa, Instituto Cultura e Sociedade, Universidade de Navarra (Pamplona, Espanha)
+                    </p>
+                </div>
+                <p>Este ano as jornadas enquadram-se no Projeto 1776 desenvolvido pela Escuela Hispânica, cujo objetivo é explorar a influência de Espanha na Declaração de Independência dos Estados Unidos, bem como as suas implicações históricas, culturais e políticas.</p>
+            `
+        },
+        image: '/images/activities/iv-jornadas-pensamiento-hispanico/portada.jpg',
+        isFeatured: true,
+        isUpcoming: true,
+        showRegistrationForm: true
+    },
         id: 19,
         slug: 'jantar-da-hispanidade-e-da-lusofonia',
         title: {
