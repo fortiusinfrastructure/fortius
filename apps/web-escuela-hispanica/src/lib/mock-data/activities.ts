@@ -71,6 +71,7 @@ export const activities: Activity[] = [
         isUpcoming: true,
         showRegistrationForm: true
     },
+    {
         id: 19,
         slug: 'jantar-da-hispanidade-e-da-lusofonia',
         title: {
