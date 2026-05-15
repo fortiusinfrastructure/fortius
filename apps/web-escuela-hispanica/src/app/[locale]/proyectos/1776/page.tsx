@@ -177,6 +177,7 @@ export default async function Proyecto1776Page({ params }: Props) {
     const t = await getTranslations('Proyecto1776');
 
     const TOC_LINKS = [
+        { id: 'acuerdo', label: t('Sidebar.acuerdo') },
         { id: 'introduccion', label: t('Sidebar.introduccion') },
         { id: 'hitos', label: t('Sidebar.hitos') },
         { id: 'fundadores', label: t('Sidebar.fundadores') },
@@ -351,6 +352,37 @@ export default async function Proyecto1776Page({ params }: Props) {
 
                         {/* Article Content */}
                         <article className="space-y-24">
+
+                            {/* ACUERDO INSTITUTO FE Y LIBERTAD */}
+                            <section id="acuerdo" className="scroll-mt-32 space-y-10">
+                                <h2 className="font-serif text-4xl text-white mb-12 tracking-tight uppercase">
+                                    {t('Acuerdo.title')}
+                                </h2>
+
+                                <div className="relative aspect-[16/7] overflow-hidden border border-white/5 mb-8">
+                                    <img
+                                        src="/images/proyectos/1776/institutofelibertad.jpg"
+                                        alt={t('Acuerdo.imageAlt')}
+                                        className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-all duration-700"
+                                    />
+                                </div>
+
+                                <div className="prose-hispana space-y-6">
+                                    <p>{t('Acuerdo.paragraph1')}</p>
+                                    <p>
+                                        {t('Acuerdo.paragraph2Before')}{' '}
+                                        <a
+                                            href="https://feylibertad.org/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#c5a059] hover:text-white underline underline-offset-4 transition-colors"
+                                        >
+                                            {t('Acuerdo.linkText')}
+                                        </a>
+                                        {t('Acuerdo.paragraph2After')}
+                                    </p>
+                                </div>
+                            </section>
 
                             {/* INTRODUCCIÓN */}
                             <section id="introduccion" className="scroll-mt-32">

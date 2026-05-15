@@ -159,6 +159,7 @@
         },
         "Sidebar": {
             "contents": "CONTENTS",
+            "acuerdo": "AGREEMENT WITH INSTITUTO FE Y LIBERTAD",
             "introduccion": "INTRODUCTION",
             "hitos": "MILESTONES OF THOUGHT",
             "fundadores": "FOUNDING FATHERS",
@@ -166,6 +167,14 @@
             "ejes": "PROJECT AXES",
             "vision": "VISION AND FOUNDATIONS",
             "bibliografia": "BIBLIOGRAPHY"
+        },
+        "Acuerdo": {
+            "title": "Agreement with Instituto de Fe y Libertad",
+            "imageAlt": "Instituto Fe y Libertad",
+            "paragraph1": "Escuela Hispánica has begun working jointly with the Instituto Fe y Libertad on various initiatives aimed at the research and dissemination of Hispanic thought on liberty. In this context, we would like to announce the open call for submissions to the Institute's academic journal, whose next edition will be dedicated to topics related to Project 1776 and the influence of the Hispanic tradition on the development of modern political thought.",
+            "paragraph2Before": "The initiative seeks to continue expanding the study of the Hispanic tradition and its influence on the development of modern political thought, while promoting new spaces for academic dialogue and international intellectual cooperation. We invite all those interested in contributing articles or research related to this topic to contact the",
+            "linkText": "Instituto Fe y Libertad",
+            "paragraph2After": " for more information on the publication process."
         },
         "Content": {
             "introTitle": "Introduction",

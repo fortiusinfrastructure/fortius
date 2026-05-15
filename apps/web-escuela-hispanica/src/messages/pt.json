@@ -159,6 +159,7 @@
         },
         "Sidebar": {
             "contents": "CONTEÚDOS",
+            "acuerdo": "ACORDO COM O INSTITUTO FE Y LIBERTAD",
             "introduccion": "INTRODUÇÃO",
             "hitos": "MARCOS DO PENSAMENTO",
             "fundadores": "PAIS FUNDADORES",
@@ -166,6 +167,14 @@
             "ejes": "EIXOS DO PROJETO",
             "vision": "VISÃO E ALICERCES",
             "bibliografia": "BIBLIOGRAFIA"
+        },
+        "Acuerdo": {
+            "title": "Acordo com o Instituto de Fe y Libertad",
+            "imageAlt": "Instituto Fe y Libertad",
+            "paragraph1": "A Escuela Hispánica começou a trabalhar conjuntamente com o Instituto Fe y Libertad em diversas iniciativas orientadas à investigação e difusão do pensamento hispânico da liberdade. Neste âmbito, queremos dar a conhecer a convocatória atualmente aberta da revista académica do Instituto, cuja próxima edição será dedicada a temas relacionados com o Projeto 1776 e com a influência da tradição hispânica no desenvolvimento do pensamento político moderno.",
+            "paragraph2Before": "A iniciativa procura continuar a ampliar o estudo da tradição hispânica e a sua influência no desenvolvimento do pensamento político moderno, promovendo ao mesmo tempo novos espaços de diálogo académico e de cooperação intelectual internacional. Convidamos todos os interessados em participar com artigos ou investigações relacionados com esta temática a contactar o",
+            "linkText": "Instituto Fe y Libertad",
+            "paragraph2After": " para obter mais informações sobre o processo de publicação."
         },
         "Content": {
             "introTitle": "Introdução",
