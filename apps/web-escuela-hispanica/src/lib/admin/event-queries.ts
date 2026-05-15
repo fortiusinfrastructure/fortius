@@ -67,6 +67,7 @@ export async function getEventDashboard(filters: {
     event?: string;
     status?: string;
     attendance?: string;
+    q?: string;
 } = {}) {
     const admin = createAdminClient();
     const org = await getAdminOrganization();
@@ -135,11 +136,25 @@ export async function getEventDashboard(filters: {
         ? metricsByEvent.find((event) => event.slug === filters.event) ?? null
         : null;
 
+    const query = filters.q?.trim().toLowerCase() ?? '';
+
     const registrations = allRegistrations.filter((registration) => {
         const eventMatch = !selectedEvent || registration.event_slug === selectedEvent.slug;
         const statusMatch = !filters.status || filters.status === 'all' || registration.status === filters.status;
         const attendanceMatch = !filters.attendance || filters.attendance === 'all' || registration.attendance_status === filters.attendance;
-        return eventMatch && statusMatch && attendanceMatch;
+        const searchHaystack = [
+            registration.first_name,
+            registration.last_name,
+            registration.email,
+            registration.institution,
+            registration.message,
+            registration.event_slug,
+        ]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase();
+        const queryMatch = !query || searchHaystack.includes(query);
+        return eventMatch && statusMatch && attendanceMatch && queryMatch;
     });
 
     const totals = {
