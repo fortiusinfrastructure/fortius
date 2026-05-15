@@ -50,6 +50,11 @@ export default async function EventsPage({
                     <code className="mx-1 rounded bg-white px-1.5 py-0.5 text-xs">event_registrations</code>
                     y se sincronizan cuando Stripe llama al webhook y este marca pagos completados en la base de datos.
                 </p>
+                <p className="mt-2">
+                    Para que el centro de verificación sea útil mientras EH termina la migración, el listado combina
+                    eventos de base de datos con el catálogo público actual. Si un evento solo existe en el catálogo público,
+                    también aparecerá aquí y se podrá contrastar con sus inscripciones por <code className="mx-1 rounded bg-white px-1.5 py-0.5 text-xs">event_slug</code>.
+                </p>
             </section>
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -70,40 +75,49 @@ export default async function EventsPage({
                     </a>
                 </div>
 
-                <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
-                    {metricsByEvent.map((event) => {
-                        const isSelected = selectedEvent?.slug === event.slug;
-                        return (
-                            <a
-                                key={event.slug}
-                                href={hrefWith({ event: event.slug })}
-                                className={`rounded-2xl border p-5 transition-colors ${isSelected ? 'border-[#c5a059] bg-amber-50' : 'border-slate-200 bg-white hover:border-slate-300'}`}
-                            >
-                                <div className="flex items-start justify-between gap-3">
-                                    <div>
-                                        <p className="font-semibold text-slate-900">{event.title}</p>
-                                        <p className="mt-1 text-xs text-slate-500">{event.date} · {event.location || 'Sin ubicación'}</p>
+                {metricsByEvent.length === 0 ? (
+                    <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-500">
+                        No se encontraron eventos ni en base de datos ni en el catálogo público actual.
+                    </div>
+                ) : (
+                    <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+                        {metricsByEvent.map((event) => {
+                            const isSelected = selectedEvent?.slug === event.slug;
+                            return (
+                                <a
+                                    key={event.slug}
+                                    href={hrefWith({ event: event.slug })}
+                                    className={`rounded-2xl border p-5 transition-colors ${isSelected ? 'border-[#c5a059] bg-amber-50' : 'border-slate-200 bg-white hover:border-slate-300'}`}
+                                >
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{event.title}</p>
+                                            <p className="mt-1 text-xs text-slate-500">{event.date} · {event.location || 'Sin ubicación'}</p>
+                                            <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-slate-400">
+                                                Fuente: {event.source === 'database' ? 'Base de datos' : event.source === 'mock' ? 'Catálogo público' : 'Registros'}
+                                            </p>
+                                        </div>
+                                        <StatusBadge value={event.publishedStatus} />
                                     </div>
-                                    <StatusBadge value={event.publishedStatus} />
-                                </div>
-                                <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-600">
-                                    <div>
-                                        <p className="font-semibold text-slate-900">{event.registrations}</p>
-                                        <p>Inscritos</p>
+                                    <div className="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-600">
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{event.registrations}</p>
+                                            <p>Inscritos</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{event.paid}</p>
+                                            <p>Pagados</p>
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold text-slate-900">{event.attended}</p>
+                                            <p>Asistencias</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-900">{event.paid}</p>
-                                        <p>Pagados</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-900">{event.attended}</p>
-                                        <p>Asistencias</p>
-                                    </div>
-                                </div>
-                            </a>
-                        );
-                    })}
-                </div>
+                                </a>
+                            );
+                        })}
+                    </div>
+                )}
             </section>
 
             {selectedEvent ? (
