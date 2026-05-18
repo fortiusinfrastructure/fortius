@@ -39,12 +39,13 @@ export function NewsletterCTA() {
                         transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
                         className="mt-6 font-display text-[clamp(2rem,4.5vw,3.8rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]"
                     >
-                        Sólo lo que te importa.{" "}
+                        Ideas útiles para decidir mejor. {" "}
                         <span className="italic text-[var(--color-accent-400)]">Una vez al mes.</span>
                     </motion.h2>
                     <p className="mt-6 text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                        Lo que leemos, lo que pensamos, lo que sabemos. Lo que no
-                        encontrarás en ningún otro sitio. Una vez al mes.
+                        Recibe análisis, lecturas y señales relevantes para
+                        organizaciones con vocación de impacto. Sin ruido y con
+                        criterio editorial.
                     </p>
 
                     <form onSubmit={handleSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg">

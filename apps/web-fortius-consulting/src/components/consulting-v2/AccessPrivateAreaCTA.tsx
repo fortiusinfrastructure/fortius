@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Lock, ArrowUpRight } from "lucide-react";
 
 interface AccessPrivateAreaCTAProps {
+    eyebrow?: string;
     label?: string;
     description?: string;
     href?: string;
@@ -12,6 +13,7 @@ interface AccessPrivateAreaCTAProps {
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
 export function AccessPrivateAreaCTA({
+    eyebrow,
     label = "Accede al Área clientes",
     description = "Inicia sesión o solicita acceso para consultar informes, briefings y dashboards reservados.",
     href = "/area-privada",
@@ -45,6 +47,11 @@ export function AccessPrivateAreaCTA({
                             <Lock size={20} strokeWidth={1.5} aria-hidden />
                         </span>
                         <div className="space-y-2">
+                            {eyebrow && (
+                                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                                    {eyebrow}
+                                </p>
+                            )}
                             <h3 className="font-display text-[clamp(1.6rem,3vw,2.4rem)] font-light leading-tight tracking-tight">
                                 {label}
                             </h3>

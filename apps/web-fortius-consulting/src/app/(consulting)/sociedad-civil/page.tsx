@@ -30,10 +30,12 @@ export default function SociedadCivilPage() {
                 hero={SOCIEDAD_CIVIL_INTRO.hero}
                 subcopy={SOCIEDAD_CIVIL_INTRO.subcopy}
                 description={SOCIEDAD_CIVIL_INTRO.description}
-                claim={SOCIEDAD_CIVIL_INTRO.claim}
             />
 
-            <WorkAreaSection vertical={civil} />
+            <WorkAreaSection
+                vertical={civil}
+                title="El contexto y criterio que necesitas para decidir bien"
+            />
 
             <ServicesPortfolio
                 kicker={`Portafolio · ${civil.label}`}
@@ -47,15 +49,21 @@ export default function SociedadCivilPage() {
             <MembershipTiers
                 kicker="Darse de Alta"
                 title="Membresías para acompañamiento continuo."
-                description="Acceso al Área clientes y a la inteligencia institucional de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
+                description="Acceso al Área Privada y a herramientas, conocimiento y comunidad. Para organizaciones con vocación de impacto. Dos planes diseñados para distintos niveles de exigencia y profundidad."
                 tiers={MEMBERSHIP_TIERS}
                 contactVertical="Sociedad Civil"
             />
 
-            <AccessPrivateAreaCTA />
+            <AccessPrivateAreaCTA
+                eyebrow="¿Ya eres cliente?"
+                label="Accede al Área Privada"
+                description="Inicia sesión o solicita acceso para acceder a todas tus ventajas y consultar informes y notas exclusivas."
+            />
 
             <IdeasMarquee
                 kicker="Experiencia"
+                title="Organizaciones, redes e instituciones con las que Fortius ya ha trabajado o colaborado."
+                description="Una parte de nuestra experiencia en sociedad civil se ha construido acompañando a fundaciones, universidades, think tanks y plataformas que operan con exigencia institucional."
                 ariaLabel="Experiencia — organizaciones e ideas que movemos"
             />
 

@@ -26,6 +26,7 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 
 interface WorkAreaSectionProps {
     vertical: VerticalDef;
+    title?: string;
 }
 
 interface EditorialInsightItem {
@@ -43,7 +44,10 @@ const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
     intelligence: "politica",
 };
 
-export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
+export function WorkAreaSection({
+    vertical: v,
+    title = "Análisis, briefings y lecturas estratégicas.",
+}: WorkAreaSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
     const slots = category ? getEditorialSlots(category) : null;
@@ -89,7 +93,7 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                             id={`work-area-${v.id}-title`}
                             className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-light leading-tight tracking-tight text-[var(--text-primary)]"
                         >
-                            Análisis, briefings y lecturas estratégicas.
+                            {title}
                         </h2>
                     </div>
                     <a
@@ -270,6 +274,6 @@ function articleToInsight(a: Article) {
         excerpt: getArticleSummary(a),
         date: formatShortDate(a.published_at) || categoryLabel(a.category),
         readTime: estimateReadTime(a.content_markdown),
-        author: lead.author,
+        author: lead.author ?? "Equipo Fortius",
     };
 }

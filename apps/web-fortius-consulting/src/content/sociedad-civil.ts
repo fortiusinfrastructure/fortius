@@ -29,10 +29,6 @@ export const SOCIEDAD_CIVIL_INTRO = {
         "En Fortius ayudamos a construir, profesionalizar y escalar organizaciones e iniciativas capaces de moldear el debate público, influir en instituciones y generar cambio cultural sostenido.",
         "Desde el diseño organizativo hasta la ejecución operativa, acompañamos a quienes entienden que las ideas solo importan cuando logran traducirse en poder social.",
     ],
-    claim: {
-        primary: "Ideas con estructura.",
-        secondary: "Principios con impacto.",
-    },
 };
 
 export const MEMBERSHIP_TIERS: MembershipTier[] = [
@@ -43,7 +39,8 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
             "Para organizaciones que necesitan inteligencia estratégica continua.",
         priceMonthly: 1000,
         priceAnnual: 12000,
-        ctaLabel: "Empezar plan Básico",
+        ctaLabel: "Acceder al plan básico",
+        href: "/area-privada",
         benefits: [
             {
                 title: "Acceso al Área clientes",
@@ -80,7 +77,8 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
         priceMonthly: 2000,
         priceAnnual: 24000,
         featured: true,
-        ctaLabel: "Solicitar plan Premium",
+        ctaLabel: "Acceder al plan Premium",
+        href: "/area-privada",
         benefits: [
             {
                 title: "Todo lo incluido en el Plan Básico",

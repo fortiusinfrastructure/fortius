@@ -25,6 +25,9 @@ export function MembershipTiers({
     tiers,
     contactVertical,
 }: MembershipTiersProps) {
+    const formatPlanLabel = (tier: MembershipTier) =>
+        tier.id === "basica" ? "básico" : tier.id;
+
     const getTierHref = (tier: MembershipTier) => {
         if (tier.href) return tier.href;
 
@@ -91,7 +94,7 @@ export function MembershipTiers({
                                         {tier.name}
                                     </h3>
                                     <span className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                                        Plan {tier.id}
+                                        Plan {formatPlanLabel(tier)}
                                     </span>
                                 </div>
                                 <p className="text-[0.9rem] text-[var(--text-secondary)] leading-relaxed">
