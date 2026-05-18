@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import NewsletterCTA from '@/components/NewsletterCTA';
 import { Card } from '@/components/ui/UnifiedCard';
-import { articles, getArticleBySlug } from '@/lib/mock-data';
+import { getResearchArticleBySlug, researchArticles } from '@/lib/content/research';
 import type { Locale } from '@/lib/utils/content';
 
 type Params = { locale: string; slug: string };
@@ -16,7 +16,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   const isEn = locale === 'en';
   const t = await getTranslations('article');
 
-  const article = getArticleBySlug(slug);
+  const article = getResearchArticleBySlug(slug);
   if (!article) notFound();
 
   const loc = {
@@ -32,7 +32,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   };
 
   const authorsList = article.authors ?? [article.author];
-  const related = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
+  const related = researchArticles.filter((a) => a.slug !== article.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-white">

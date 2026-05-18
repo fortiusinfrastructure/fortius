@@ -50,7 +50,10 @@ export function HeroEditorial() {
 
                 <div className="grid grid-cols-12 gap-6 items-end">
                     <div className="col-span-12 lg:col-span-8 space-y-2">
-                        {["Inteligencia política.", "Sociedades fuertes."].map((line, i) => (
+                        {[
+                            "Estrategia para quienes entienden",
+                            "el liderazgo como servicio.",
+                        ].map((line, i) => (
                             <div key={line} className="overflow-hidden">
                                 <motion.h1
                                     initial={{ y: 60, opacity: 0 }}
@@ -73,14 +76,13 @@ export function HeroEditorial() {
                         className="col-span-12 lg:col-span-4 space-y-8 lg:pb-6"
                     >
                         <p className="text-[var(--text-secondary)] text-base leading-relaxed font-light max-w-sm">
-                            Estrategia para quienes entienden el liderazgo como servicio.
                             Acompañamos para que las ideas correctas transformen la sociedad.
                         </p>
                         <a
                             href="#verticales"
                             className="group inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-primary)] border-b border-[var(--border-strong)] hover:border-[var(--color-accent-500)] transition-colors pb-2"
                         >
-                            Explorar verticales
+                            Explora nuestras áreas de trabajo
                             <ArrowDownRight
                                 size={14}
                                 className="group-hover:translate-y-0.5 group-hover:translate-x-0.5 transition-transform"

@@ -44,9 +44,9 @@ export function EventArticleBlocks({ article, membersOnly = false }: { article: 
 
             {data.packages.length > 0 && membersOnly && (
                 <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-primary)] p-6 md:p-7">
-                    <Bracketed variant="kicker">Acceso para miembros</Bracketed>
+                    <Bracketed variant="kicker">Acceso para clientes</Bracketed>
                     <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                        Esta oportunidad incluye paquetes de participación, agenda coordinada y soporte Fortius. El detalle completo se desbloquea desde el Área Privada en la sección Oportunidades & Eventos.
+                        Esta oportunidad incluye paquetes de participación, agenda coordinada y soporte Fortius. El detalle completo se desbloquea desde el Área clientes en la sección Oportunidades & Eventos.
                     </p>
                 </div>
             )}

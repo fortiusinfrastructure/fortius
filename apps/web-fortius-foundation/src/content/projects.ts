@@ -15,7 +15,7 @@ export interface FoundationProject {
 export const PROJECTS: FoundationProject[] = [
   {
     slug: "ieam",
-    name: "IEAM",
+    name: "ANÁLISIS MIGRATORIO",
     stage: "exito",
     title: "Instituto Español de Análisis Migratorio",
     summary:
@@ -31,9 +31,9 @@ export const PROJECTS: FoundationProject[] = [
   },
   {
     slug: "escuela-hispanica",
-    name: "Escuela Hispánica",
+    name: "TRADICIÓN HISPÁNICA DE LA LIBERTAD",
     stage: "exito",
-    title: "Formación, pensamiento y comunidad en el espacio hispánico",
+    title: "Escuela Hispánica",
     summary:
       "Escuela Hispánica es una iniciativa de formación, pensamiento y comunidad orientada a la revitalización y difusión de la tradición intelectual hispánica y al fortalecimiento de una conciencia cultural compartida en el espacio hispánico.",
     details: [
@@ -46,9 +46,9 @@ export const PROJECTS: FoundationProject[] = [
   },
   {
     slug: "principios",
-    name: "Principios",
+    name: "Vínculos, Trabajo y Civismo",
     stage: "exito",
-    title: "Formación de jóvenes líderes con vocación de impacto",
+    title: "Principios",
     summary:
       "Principios es una asociación independiente española nacida en 2014 con el compromiso de contribuir a la regeneración cultural, institucional y política de España.",
     details: [
@@ -62,9 +62,9 @@ export const PROJECTS: FoundationProject[] = [
   },
   {
     slug: "free-press-forum",
-    name: "Free Press Forum",
+    name: "LIBERTAD DE EXPRESIÓN",
     stage: "incubacion",
-    title: "Defensa de la libertad de expresión y del pluralismo",
+    title: "Free Press Forum",
     summary:
       "Con sede en Bruselas e impulsado desde septiembre de 2024, Free Press Forum es una iniciativa actualmente incubada por la Fundación Fortius dedicada a la defensa de la libertad de expresión, la libertad de prensa y el pluralismo en el debate público.",
     details: [

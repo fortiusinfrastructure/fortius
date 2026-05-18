@@ -5,7 +5,7 @@ import { LegalSection } from "@/components/consulting-v2/LegalSection";
 export const metadata: Metadata = {
     title: "Política de Privacidad — Fortius Consulting",
     description:
-        "Política de privacidad de Fortius Strategies SL: responsable, finalidades, conservación, derechos del usuario y procedencia de los datos.",
+        "Política de privacidad del sitio web titularidad de Fortius Strategies SL y Fortius Americas LLC.",
 };
 
 const PRIVACY_ITEMS = [
@@ -16,10 +16,12 @@ const PRIVACY_ITEMS = [
         content: (
             <>
                 <ul className="space-y-1 list-none">
-                    <li><strong>Identidad Empresa:</strong> Fortius Strategies SL</li>
+                    <li><strong>Titular en España:</strong> Fortius Strategies SL</li>
                     <li><strong>NIF:</strong> B72443567</li>
-                    <li><strong>Dir. Postal:</strong> C/ Cabo De La Estaca De Bares 30 (Las Rozas de Madrid)</li>
-                    <li><strong>CP:</strong> 28290</li>
+                    <li><strong>Dirección postal:</strong> Calle Zurbano 71, Oficina 9, 28010, Madrid, Reino de España</li>
+                    <li className="pt-3"><strong>Titular en EE.UU.:</strong> Fortius Americas LLC</li>
+                    <li><strong>EIN:</strong> 38-4393967</li>
+                    <li><strong>Dirección postal:</strong> 1417 Oak Tree Dr., 77055, Houston, Texas, Estados Unidos de América</li>
                     <li><strong>E-Mail:</strong> <a href="mailto:info@fortiusconsulting.org" className="underline hover:text-[var(--color-accent-400)] transition-colors">info@fortiusconsulting.org</a></li>
                 </ul>
                 <p>Datos de contacto del delegado en protección de datos: No se dispone de Delegado.</p>
@@ -127,8 +129,8 @@ const PRIVACY_ITEMS = [
                     derecho a retirar el consentimiento otorgado en cualquier momento, sin que
                     ello afecte a la licitud del tratamiento basado en el consentimiento previo a
                     su retirada. Para ello podrá emplear los formularios habilitados por la
-                    empresa, o bien dirigir un escrito a Fortius Strategies SL – C/ Cabo De La
-                    Estaca De Bares 30 (Las Rozas de Madrid) – CP: 28290. También puede enviar
+                    empresa, o bien dirigir un escrito a Fortius Strategies SL – Calle Zurbano
+                    71, Oficina 9, 28010, Madrid, Reino de España. También puede enviar
                     un email a:{" "}
                     <a
                         href="mailto:info@fortiusconsulting.org"
@@ -196,16 +198,15 @@ export default function PoliticaPrivacidadPage() {
             <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-36">
                 <Bracketed variant="tag">Política de Privacidad</Bracketed>
                 <h1 className="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.8rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)] max-w-3xl">
-                    Fortius Strategies SL{" "}
+                    Fortius Strategies SL y Fortius Americas LLC{" "}
                     <span className="italic text-[var(--color-accent-400)]">
                         Protección de datos personales.
                     </span>
                 </h1>
                 <p className="mt-8 text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-                    A continuación le ofrecemos la información relativa al tratamiento de
-                    datos personales que realizamos en nuestra empresa conforme al Reglamento
-                    General de Protección de Datos y a la normativa vigente en materia de
-                    privacidad.
+                    Toda esta web es propiedad de Fortius Strategies SL y Fortius Americas LLC.
+                    A continuación le ofrecemos la información relativa al tratamiento de datos
+                    personales y a la privacidad aplicable al sitio.
                 </p>
 
                 <div className="mt-20">

@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, BriefcaseBusiness, FileText, GraduationCap, Landmark, Linkedin, Loader2, Send } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, FileText, GraduationCap, Landmark, Loader2, Send } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
+import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
 import type { TeamMember } from "@/content/team";
 import { submitContact } from "@/lib/actions/contact";
@@ -77,7 +78,7 @@ export function JuanClient({ member, publications }: { member: TeamMember; publi
             <div className="flex flex-wrap gap-3 pt-2">
               {member.linkedin && (
                 <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--border-default)] text-[0.78rem] uppercase tracking-[0.15em] text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors">
-                  <Linkedin size={14} /> LinkedIn
+                  <LinkedInBrandIcon size={14} /> LinkedIn
                 </a>
               )}
               <Link href="/contacto" className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-accent-500)] text-white text-[0.78rem] uppercase tracking-[0.15em] hover:bg-[var(--color-accent-400)] transition-colors">
@@ -117,7 +118,6 @@ export function JuanClient({ member, publications }: { member: TeamMember; publi
             <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease, delay: 0.04 }} className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] p-6 md:p-8">
               <Bracketed variant="tag">Áreas de trabajo</Bracketed>
               <div className="mt-6 space-y-4 text-[var(--text-secondary)] leading-relaxed">
-                <p>Fortius nace de una comprensión práctica del ecosistema de think tanks, fundaciones, plataformas de influencia y entornos geopolíticos complejos.</p>
                 <p>Juan Ángel Soto acompaña a organizaciones y liderazgos que necesitan criterio estratégico, arquitectura institucional y una lectura más fina del terreno político y cultural.</p>
                 <p>Su trabajo combina dirección, diseño institucional, interlocución pública, desarrollo de proyectos y construcción de redes en España, Europa y el espacio transatlántico.</p>
               </div>
@@ -125,13 +125,18 @@ export function JuanClient({ member, publications }: { member: TeamMember; publi
           </div>
 
           <motion.section initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease, delay: 0.08 }} className="lg:col-span-5">
-            <Bracketed variant="tag">Solicitar consulta</Bracketed>
+            <Bracketed variant="tag">Contacta con nuestro CEO</Bracketed>
             <form onSubmit={handleContact} className="mt-8 p-6 md:p-8 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] space-y-5">
               <p className="text-[0.9rem] text-[var(--text-secondary)]">Solicita una conversación para consultoría estratégica, conferencias, docencia o colaboración institucional.</p>
               <div className="space-y-4">
                 <input type="text" name="name" required placeholder="Nombre completo" className="w-full bg-transparent border-b border-[var(--border-subtle)] py-3 px-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-accent-400)] transition-colors text-[0.9rem]" />
                 <input type="email" name="email" required placeholder="Email corporativo" className="w-full bg-transparent border-b border-[var(--border-subtle)] py-3 px-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-accent-400)] transition-colors text-[0.9rem]" />
-                <input type="text" name="subject" required placeholder="Asunto" className="w-full bg-transparent border-b border-[var(--border-subtle)] py-3 px-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-accent-400)] transition-colors text-[0.9rem]" />
+                <select name="subject" required defaultValue="" className="w-full bg-[var(--color-neutral-900)] border-b border-[var(--border-subtle)] py-3 px-2 text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-accent-400)] transition-colors text-[0.9rem]">
+                  <option value="" disabled>Asunto</option>
+                  <option value="Asesoramiento">Asesoramiento</option>
+                  <option value="Conferencias o talleres">Conferencias o talleres</option>
+                  <option value="Entrevistas">Entrevistas</option>
+                </select>
                 <textarea name="message" required placeholder="Mensaje" rows={5} className="w-full bg-transparent border border-[var(--border-subtle)] p-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-accent-400)] transition-colors text-[0.9rem] resize-none" />
               </div>
               <button type="submit" disabled={isSubmitting} className="w-full flex items-center justify-center gap-2 py-3 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors text-[0.8rem] uppercase tracking-widest disabled:opacity-50">

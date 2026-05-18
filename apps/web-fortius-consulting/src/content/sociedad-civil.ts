@@ -13,6 +13,7 @@ export interface MembershipTier {
     benefits: MembershipBenefit[];
     featured?: boolean;
     ctaLabel: string;
+    href?: string;
 }
 
 export const SOCIEDAD_CIVIL_INTRO = {
@@ -45,7 +46,7 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
         ctaLabel: "Empezar plan Básico",
         benefits: [
             {
-                title: "Acceso al Área Privada",
+                title: "Acceso al Área clientes",
                 description:
                     "Biblioteca completa de informes, briefings y diagnósticos de Sociedad Civil.",
             },

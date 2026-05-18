@@ -47,8 +47,9 @@ export default function SociedadCivilPage() {
             <MembershipTiers
                 kicker="Darse de Alta"
                 title="Membresías para acompañamiento continuo."
-                description="Acceso al Área Privada y a la inteligencia institucional de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
+                description="Acceso al Área clientes y a la inteligencia institucional de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
                 tiers={MEMBERSHIP_TIERS}
+                contactVertical="Sociedad Civil"
             />
 
             <AccessPrivateAreaCTA />

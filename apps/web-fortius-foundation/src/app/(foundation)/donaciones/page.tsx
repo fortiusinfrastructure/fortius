@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
+import { DonationInterestForm } from "@/components/foundation/DonationInterestForm";
 import { Bracketed } from "@/components/system/Bracketed";
-import { FOUNDATION_CONTACT, STRATEGIC_PARTNERS } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Donaciones — Fundación Fortius",
   description:
-    "Opciones de colaboración y donación para apoyar el ecosistema de Fundación Fortius.",
+    "Información fiscal y formulario de interés para apoyar a Fundación Fortius y sus proyectos desde España o Estados Unidos.",
 };
+
+const SPAIN_BENEFITS = [
+  "Los importes indicados en esta página no incluyen IVA por tratarse de donaciones económicas de carácter social.",
+  "Si eres persona física: las donaciones de hasta 250 € tienen una desgravación del 80% en el IRPF. A partir de 250 €, la deducción es del 40%, que se incrementa al 45% desde el tercer año en caso de donaciones periódicas a la misma entidad.",
+  "Si eres persona jurídica: la deducción en cuota del Impuesto sobre Sociedades es del 40%, ampliable al 50% cuando se realizan donaciones a la misma entidad por el mismo importe o superior durante al menos tres años consecutivos.",
+] as const;
+
+const US_BENEFITS = [
+  "Si eres persona física: a partir del ejercicio fiscal 2026, puedes deducir hasta 1.000 $ en donaciones en efectivo a organizaciones benéficas reconocidas (2.000 $ para declaraciones conjuntas), incluso si optas por la deducción estándar.",
+  "Si detallas tus deducciones (itemize), la deducción aplica sobre las donaciones que superen el 0,5% de tu renta bruta ajustada. Para contribuyentes en el tramo más alto (37%), el valor de la deducción está limitado al 35% del importe donado.",
+  "Si eres persona jurídica: a partir de 2026, las empresas pueden deducir las donaciones que superen el 1% de su renta imponible, con un límite máximo del 10% anual. Las cantidades no deducidas pueden trasladarse a los cinco ejercicios siguientes.",
+] as const;
 
 export default function DonacionesPage() {
   return (
@@ -17,67 +29,50 @@ export default function DonacionesPage() {
           Ayúdanos a fortalecer causas nobles con criterio, estructura y visión de largo plazo.
         </h1>
         <p className="mt-8 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-          Puedes apoyar a la Fundación en general, impulsar proyectos concretos
-          del ecosistema o escribirnos para estudiar la mejor forma de canalizar
-          tu ayuda desde España o Estados Unidos.
+          Fundación Fortius España es una fundación inscrita en el Registro Nacional de Fundaciones. Fortius Foundation United States es una organización sin ánimo de lucro reconocida bajo la sección 501(c)(3) del código fiscal federal de los Estados Unidos. Las donaciones realizadas a ambas entidades pueden ser deducibles fiscalmente en sus respectivos países.
         </p>
 
-        <div className="mt-16 grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-3">
-          <article className="bg-[var(--surface-primary)] p-8">
-            <Bracketed variant="kicker">Fundación</Bracketed>
-            <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
-              Dona al trabajo institucional de Fortius Foundation para sostener
-              su labor de incubación, acompañamiento y fortalecimiento de causas.
-            </p>
-          </article>
-          <article className="bg-[var(--surface-primary)] p-8">
-            <Bracketed variant="kicker">Proyectos</Bracketed>
-            <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
-              Si quieres apoyar un proyecto concreto, te ayudamos a identificar
-              la iniciativa adecuada y a estructurar la mejor vía de colaboración.
-            </p>
-          </article>
-          <article className="bg-[var(--surface-primary)] p-8">
-            <Bracketed variant="kicker">Internacional</Bracketed>
-            <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
-              También trabajamos con aliados estratégicos para facilitar
-              donaciones internacionales con confianza y trazabilidad.
-            </p>
-          </article>
-        </div>
+        <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.9fr)]">
+          <div className="space-y-8">
+            <section className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8">
+              <Bracketed variant="kicker">Ventajas fiscales en España</Bracketed>
+              <div className="mt-6 space-y-4">
+                {SPAIN_BENEFITS.map((item) => (
+                  <p key={item} className="leading-relaxed text-[var(--text-secondary)]">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </section>
 
-        <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={`mailto:${FOUNDATION_CONTACT.email}?subject=Quiero%20donar%20a%20Fortius%20Foundation`}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white"
-            style={{ backgroundColor: "var(--color-accent-500)" }}
-          >
-            Escribir a {FOUNDATION_CONTACT.email}
-          </a>
-          <a
-            href={`mailto:${FOUNDATION_CONTACT.email}?subject=Quiero%20apoyar%20un%20proyecto%20de%20Fortius%20Foundation`}
-            className="inline-flex items-center justify-center gap-2 border px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
-            style={{ borderColor: "var(--color-accent-400)" }}
-          >
-            Donar a un proyecto
-          </a>
-        </div>
-
-        <section className="mt-16 border-t border-[var(--border-subtle)] pt-10">
-          <Bracketed variant="kicker">Aliados para canalizar ayuda</Bracketed>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
-            {STRATEGIC_PARTNERS.map((partner) => (
-              <article key={partner.name} className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-6">
-                <h2 className="font-display text-[1.8rem] font-light text-[var(--text-primary)]">
-                  {partner.name}
-                </h2>
-                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  {partner.copy}
-                </p>
-              </article>
-            ))}
+            <section className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8">
+              <Bracketed variant="kicker">Ventajas fiscales en Estados Unidos</Bracketed>
+              <div className="mt-6 space-y-4">
+                {US_BENEFITS.map((item) => (
+                  <p key={item} className="leading-relaxed text-[var(--text-secondary)]">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </section>
           </div>
-        </section>
+
+          <div className="space-y-6">
+            <section className="border border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-8">
+              <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-200)]">
+                Formulario de donación
+              </p>
+              <h2 className="mt-4 font-display text-[2rem] font-light leading-[1.08] text-white">
+                Elige si quieres apoyar un proyecto concreto o el trabajo general de Fortius.
+              </h2>
+              <p className="mt-4 leading-relaxed text-[var(--color-accent-100)]">
+                También puedes indicar si quieres donar desde España o desde Estados Unidos. El equipo te responderá con el siguiente paso.
+              </p>
+            </section>
+
+            <DonationInterestForm />
+          </div>
+        </div>
       </section>
     </main>
   );

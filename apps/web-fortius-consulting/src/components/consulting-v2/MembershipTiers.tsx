@@ -10,6 +10,7 @@ interface MembershipTiersProps {
     title: string;
     description?: string;
     tiers: MembershipTier[];
+    contactVertical?: string;
 }
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
@@ -22,7 +23,23 @@ export function MembershipTiers({
     title,
     description,
     tiers,
+    contactVertical,
 }: MembershipTiersProps) {
+    const getTierHref = (tier: MembershipTier) => {
+        if (tier.href) return tier.href;
+
+        const params = new URLSearchParams({
+            subject: "Servicios",
+            plan: tier.id,
+        });
+
+        if (contactVertical) {
+            params.set("vertical", contactVertical);
+        }
+
+        return `/contacto?${params.toString()}`;
+    };
+
     return (
         <section
             id="darse-de-alta"
@@ -120,7 +137,7 @@ export function MembershipTiers({
                             </ul>
 
                             <a
-                                href="/area-privada"
+                                href={getTierHref(tier)}
                                 className={`mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] transition-colors ${
                                     tier.featured
                                         ? "bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)]"

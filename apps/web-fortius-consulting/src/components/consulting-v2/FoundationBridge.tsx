@@ -2,15 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { BrandLockup } from "@/components/system/BrandLockup";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
-const PILLARS = [
-    "Educación cívica",
-    "Formación de líderes",
-    "Investigación aplicada",
-    "Becas y programas",
-];
+const PILLARS = ["Incubación", "Formación", "Investigación", "Impacto social"];
 
 export function FoundationBridge() {
     return (
@@ -45,19 +41,10 @@ export function FoundationBridge() {
             />
 
             <div className="relative mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
-                {/* Kicker diptych: [Consulting] · [Fundación] */}
                 <div className="mb-16 flex items-center gap-4 text-[0.7rem] font-medium uppercase tracking-[0.28em]">
-                    <span className="text-[var(--text-tertiary)]">
-                        <span className="text-[var(--color-accent-500)]">[</span>
-                        <span className="px-1.5">Consulting</span>
-                        <span className="text-[var(--color-accent-500)]">]</span>
-                    </span>
+                    <BrandLockup variant="consulting" tone="compact" />
                     <span className="text-[var(--text-tertiary)] text-xs">&rarr;</span>
-                    <span className="text-[var(--text-secondary)]">
-                        <span className="text-[var(--color-foundation-500)]">[</span>
-                        <span className="px-1.5">Foundation</span>
-                        <span className="text-[var(--color-foundation-500)]">]</span>
-                    </span>
+                    <BrandLockup variant="foundation" tone="compact" />
                 </div>
 
                 <div className="grid grid-cols-12 gap-6 items-end">
@@ -69,19 +56,19 @@ export function FoundationBridge() {
                             transition={{ duration: 0.75, ease }}
                             className="font-display text-[clamp(2.2rem,5vw,4.4rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]"
                         >
-                            Los mismos principios,{" "}
+                            Consultora y fundación.{" "}
                             <span
                                 className="italic"
                                 style={{ color: "var(--color-foundation-400)" }}
                             >
-                                otro vehículo de impacto.
+                                Una misma misión, dos formas de servir.
                             </span>
                         </motion.h2>
                         <p className="text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                            Fortius Foundation es el brazo sin ánimo de lucro del ecosistema Fortius.
-                            Donde la consultoría acompaña, la fundación{" "}
-                            <span className="text-[var(--text-primary)]">forma, financia e investiga</span>{" "}
-                            para que las sociedades fuertes no dependan solo de quienes pueden pagarlo.
+                            Fortius Foundation es la herramienta pro bono de Fortius.
+                            Incubamos institutos y organizaciones, formamos líderes,
+                            financiamos investigación y desarrollamos programas para impulsar
+                            el compromiso cívico y el impacto social.
                         </p>
 
                         <ul className="flex flex-wrap gap-x-3 gap-y-2 pt-2">
@@ -119,28 +106,7 @@ export function FoundationBridge() {
                             }}
                         >
                             <div className="flex items-start justify-between gap-4">
-                                <div className="flex items-center gap-1">
-                                    <span
-                                        className="text-lg font-light"
-                                        style={{ color: "var(--color-foundation-500)" }}
-                                    >
-                                        [
-                                    </span>
-                                    <div className="flex flex-col items-center leading-none -space-y-0.5 px-1">
-                                        <span className="font-display font-bold tracking-[0.08em] text-[var(--text-primary)] uppercase text-[1.05rem]">
-                                            Fortius
-                                        </span>
-                                        <span className="text-[0.5rem] font-medium tracking-[0.25em] uppercase" style={{ color: "var(--color-foundation-400)" }}>
-                                            foundation
-                                        </span>
-                                    </div>
-                                    <span
-                                        className="text-lg font-light"
-                                        style={{ color: "var(--color-foundation-500)" }}
-                                    >
-                                        ]
-                                    </span>
-                                </div>
+                                <BrandLockup variant="foundation" />
                                 <ArrowUpRight
                                     size={20}
                                     className="shrink-0 transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
@@ -148,8 +114,9 @@ export function FoundationBridge() {
                                 />
                             </div>
                             <p className="mt-8 text-[0.9rem] text-[var(--text-secondary)] leading-relaxed">
-                                Un espacio dedicado a la formación de líderes con valores, la
-                                investigación aplicada y los programas de becas.
+                                Incubamos institutos, formamos líderes, financiamos
+                                investigación y desarrollamos programas para impulsar el
+                                compromiso cívico y el impacto social.
                             </p>
                             <p
                                 className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] pb-1 border-b"

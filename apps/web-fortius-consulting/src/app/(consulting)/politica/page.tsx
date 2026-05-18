@@ -35,7 +35,7 @@ export default function PoliticaPage() {
             />
 
             <Subverticals
-                kicker="Subverticales"
+                kicker="Áreas de trabajo"
                 title="Dos lecturas complementarias para decisiones de alto impacto."
                 items={POLITICA_SUBVERTICALS}
             />
@@ -54,8 +54,9 @@ export default function PoliticaPage() {
             <MembershipTiers
                 kicker="Darse de Alta"
                 title="Membresías para acompañamiento continuo."
-                description="Acceso al Área Privada y a la inteligencia política de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
+                description="Acceso al Área clientes y a la inteligencia política de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
                 tiers={POLITICA_MEMBERSHIP_TIERS}
+                contactVertical="Política"
             />
 
             <AccessPrivateAreaCTA />

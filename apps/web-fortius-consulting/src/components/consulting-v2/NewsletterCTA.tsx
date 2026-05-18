@@ -39,12 +39,12 @@ export function NewsletterCTA() {
                         transition={{ duration: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
                         className="mt-6 font-display text-[clamp(2rem,4.5vw,3.8rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]"
                     >
-                        Inteligencia en tu bandeja.{" "}
+                        Sólo lo que te importa.{" "}
                         <span className="italic text-[var(--color-accent-400)]">Una vez al mes.</span>
                     </motion.h2>
                     <p className="mt-6 text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                        Análisis, lecturas recomendadas y avances de nuestras publicaciones.
-                        Sin ruido, sin spam, siempre con principios.
+                        Lo que leemos, lo que pensamos, lo que sabemos. Lo que no
+                        encontrarás en ningún otro sitio. Una vez al mes.
                     </p>
 
                     <form onSubmit={handleSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg">
@@ -67,9 +67,6 @@ export function NewsletterCTA() {
                             />
                         </button>
                     </form>
-                    <p className="mt-4 text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)]">
-                        Sin spam. Baja cuando quieras.
-                    </p>
                 </div>
             </div>
         </section>

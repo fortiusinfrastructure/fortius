@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { InitiativeMark } from "@/components/foundation/InitiativeMark";
 import { Bracketed } from "@/components/system/Bracketed";
 import { getProjectsByStage } from "@/content/projects";
 
@@ -36,12 +39,7 @@ export default function IncubadoraPage() {
                   id={project.slug}
                   className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8"
                 >
-                  <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                    {project.name}
-                  </p>
-                  <h2 className="mt-3 font-display text-[2rem] font-light text-[var(--text-primary)]">
-                    {project.title}
-                  </h2>
+                  <InitiativeMark title={project.name} subtitle={project.title} />
                   <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
                     {project.summary}
                   </p>
@@ -75,12 +73,7 @@ export default function IncubadoraPage() {
                   id={project.slug}
                   className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8"
                 >
-                  <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                    {project.name}
-                  </p>
-                  <h2 className="mt-3 font-display text-[2rem] font-light text-[var(--text-primary)]">
-                    {project.title}
-                  </h2>
+                  <InitiativeMark title={project.name} subtitle={project.title} />
                   <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
                     {project.summary}
                   </p>
@@ -103,6 +96,22 @@ export default function IncubadoraPage() {
                 </article>
               ))}
             </div>
+          </section>
+
+          <section className="border border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-10">
+            <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-200)]">
+              Apoyo a proyectos
+            </p>
+            <h2 className="mt-4 max-w-2xl font-display text-[2.2rem] font-light leading-[1.08] text-white">
+              ¿Quieres apoyar nuestros proyectos en incubación?
+            </h2>
+            <Link
+              href="/donaciones"
+              className="mt-6 inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-white"
+            >
+              Dona
+              <ArrowUpRight size={14} />
+            </Link>
           </section>
         </div>
       </section>

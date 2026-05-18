@@ -1,4 +1,4 @@
-import { FOUNDATION_CONTACT } from "@/content/site";
+import { FOUNDATION_CONTACT, FOUNDATION_ENTITIES } from "@/content/site";
 
 export interface LegalDocumentContent {
   kicker: string;
@@ -11,14 +11,14 @@ export const LEGAL_NOTICE_CONTENT: LegalDocumentContent = {
   kicker: "Legal",
   title: "Aviso legal",
   intro:
-    "Este sitio web pertenece a Fundación Fortius y ofrece información institucional sobre su actividad, su incubadora, sus ayudas, su blog y sus formas de colaboración.",
+    "Este sitio web recoge la actividad institucional de Fundación Fortius en España y de Fortius Foundation United States en Estados Unidos.",
   sections: [
     {
       title: "Titular del sitio",
       body: [
+        `${FOUNDATION_ENTITIES.spain.name} · ${FOUNDATION_ENTITIES.spain.codeLabel} ${FOUNDATION_ENTITIES.spain.code} · ${FOUNDATION_ENTITIES.spain.address}.`,
+        `${FOUNDATION_ENTITIES.usa.name} · ${FOUNDATION_ENTITIES.usa.codeLabel} ${FOUNDATION_ENTITIES.usa.code} · ${FOUNDATION_ENTITIES.usa.address}.`,
         `Canal general de contacto: ${FOUNDATION_CONTACT.email}.`,
-        `Dirección en España: ${FOUNDATION_CONTACT.spain}.`,
-        `Presencia en Estados Unidos: ${FOUNDATION_CONTACT.usa}.`,
       ],
     },
     {
@@ -42,8 +42,15 @@ export const PRIVACY_CONTENT: LegalDocumentContent = {
   kicker: "Legal",
   title: "Política de privacidad",
   intro:
-    "Fundación Fortius trata los datos personales que el usuario facilite de forma voluntaria a través del correo electrónico u otros canales de contacto vinculados al sitio.",
+    "Fundación Fortius trata los datos personales que el usuario facilita de forma voluntaria a través del correo electrónico u otros canales de contacto vinculados al sitio.",
   sections: [
+    {
+      title: "Responsables del tratamiento",
+      body: [
+        `${FOUNDATION_ENTITIES.spain.name} (${FOUNDATION_ENTITIES.spain.codeLabel} ${FOUNDATION_ENTITIES.spain.code}) y ${FOUNDATION_ENTITIES.usa.name} (${FOUNDATION_ENTITIES.usa.codeLabel} ${FOUNDATION_ENTITIES.usa.code}) operan este sitio en el ámbito de su actividad institucional.`,
+        `Puedes escribirnos a ${FOUNDATION_CONTACT.email} para cualquier consulta sobre protección de datos.`,
+      ],
+    },
     {
       title: "Qué datos podemos tratar",
       body: [

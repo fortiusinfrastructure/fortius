@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "cms:proxy": "decap-server"
   },
   "dependencies": {
     "@fortius/admin-ui": "workspace:*",
@@ -18,6 +19,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.5",
     "lucide-react": "^0.562.0",
+    "marked": "^18.0.3",
     "next": "16.1.6",
     "next-intl": "^4.8.3",
     "react": "19.2.3",
@@ -25,8 +27,8 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0",
-    "tsx": "^4.7.0",
+    "@content-collections/core": "^0.15.0",
+    "@content-collections/next": "^0.2.11",
     "@fortius/eslint-config": "workspace:*",
     "@fortius/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4",
@@ -34,9 +36,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "decap-server": "^3.7.0",
+    "dotenv": "^16.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.7.0",
+    "typescript": "^5",
+    "zod": "^4.4.3"
   }
 }

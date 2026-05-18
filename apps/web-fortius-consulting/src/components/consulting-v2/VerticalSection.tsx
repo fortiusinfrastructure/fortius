@@ -33,7 +33,7 @@ import {
     type Article,
     type ArticleCategory,
 } from "@/lib/articles";
-import { getArticleCover, getArticleImageSources } from "@/lib/article-display";
+import { getArticleCover, getArticleImageSources, getArticleSummary } from "@/lib/article-display";
 import { ArticleCoverImage } from "./ArticleCoverImage";
 
 const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
@@ -46,7 +46,7 @@ function articleToInsight(a: Article) {
         slug: a.slug,
         category: kindLabel(a.kind),
         title: a.title,
-        excerpt: a.excerpt,
+        excerpt: getArticleSummary(a),
         date: formatShortDate(a.published_at) || categoryLabel(a.category),
         readTime: estimateReadTime(a.content_markdown),
     };
@@ -100,7 +100,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
         ? {
               category: kindLabel(slots.locked.kind),
               title: slots.locked.title,
-              excerpt: slots.locked.excerpt,
+              excerpt: getArticleSummary(slots.locked),
               readTime: estimateReadTime(slots.locked.content_markdown),
               publishedAt: formatMonthYear(slots.locked.published_at) || "Disponible",
               href: `${v.href}/${slots.locked.slug}`,
@@ -108,6 +108,21 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
         : { ...v.lockedArticle, href: "/area-privada" };
 
     const experts = getExpertsByVertical(v.id);
+    const summaryCopy =
+        v.id === "civil"
+            ? {
+                  kicker: "Explorar oportunidades para la Sociedad Civil",
+                  title:
+                      "Todo lo que tu organización necesita para crecer con criterio: servicios, expertos y conocimiento en un solo lugar.",
+                  description:
+                      "Esto es solo una muestra. En este área de trabajo encontrarás el detalle de cómo trabajamos, quiénes nos acompañan y cómo puedes acceder.",
+              }
+            : {
+                  kicker: "Explorar la vertical completa",
+                  title: `En ${v.label} encontrarás servicios, expertos vinculados y acceso a la biblioteca completa.`,
+                  description:
+                      "Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y cómo puedes acceder.",
+              };
 
     const [activePerson, setActivePerson] = useState<PersonDialogData | null>(null);
 
@@ -294,7 +309,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 </div>
                                 <div className="border-t border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-6 py-4 flex items-center gap-3">
                                     <p className="text-[0.75rem] text-[var(--text-secondary)] leading-snug">
-                                        Contenido reservado para miembros del Área Privada.
+                                        Contenido reservado para clientes.
                                     </p>
                                 </div>
                             </article>
@@ -304,7 +319,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 className="group inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                             >
                                 <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
-                                    Acceder al Área Privada
+                                    Acceder al Área clientes
                                 </span>
                                 <ArrowUpRight
                                     size={16}
@@ -319,12 +334,12 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                     <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 md:p-8">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
                             <div className="lg:col-span-8">
-                                <Bracketed variant="kicker">Explorar la vertical completa</Bracketed>
+                                <Bracketed variant="kicker">{summaryCopy.kicker}</Bracketed>
                                 <h3 className="mt-4 font-display text-[clamp(1.4rem,2.5vw,2.2rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]">
-                                    En {v.label} encontrarás servicios, expertos vinculados y acceso a la biblioteca completa.
+                                    {summaryCopy.title}
                                 </h3>
                                 <p className="mt-4 max-w-3xl text-[var(--text-secondary)] leading-relaxed">
-                                    Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y las opciones de acceso privado.
+                                    {summaryCopy.description}
                                 </p>
                             </div>
                             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">

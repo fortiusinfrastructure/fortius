@@ -70,7 +70,7 @@ export const MOCK_EVENTS: Event[] = [
         id: "evt-1",
         title: "Cumbre de Inteligencia Estratégica 2024",
         date: "2024-05-20",
-        location: "Madrid (Exclusivo Miembros)",
+        location: "Madrid (Exclusivo clientes)",
         price: 250,
         description: "Encuentro a puerta cerrada con analistas internacionales.",
     },

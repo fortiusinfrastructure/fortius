@@ -3,7 +3,7 @@ import { DashboardClient } from "./DashboardClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Área Privada — Fortius Consulting",
+    title: "Área clientes — Fortius Consulting",
     description: "Dashboard exclusivo para clientes de Fortius Consulting.",
 };
 

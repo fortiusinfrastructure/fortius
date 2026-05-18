@@ -1,24 +1,46 @@
 # web-ieam
 
 Aplicación del **Instituto de Estudios sobre África y el Mediterráneo (IEAM)**
-dentro del monorepo Fortius. Su objetivo es combinar una presentación editorial
-de carácter académico con un CMS ligero, multilingüe y preparado para migrar el
-contenido a Supabase sin perder control editorial.
+dentro del monorepo Fortius. Combina sitio público multilingüe, CMS interno y
+una migración editorial todavía híbrida entre contenido local y Supabase.
 
-## Dominio canónico
+## Estado general
 
-`https://ieam.es/`
+- **Build verificado:** `pnpm --filter web-ieam build` ✅
+- **Dominio canónico esperado:** `https://ieam.es/`
+- **Idiomas activos:** español e inglés
+- **i18n:** `next-intl`
+- **Estado funcional:** web pública + CMS real + seed a Supabase + piloto editorial local
 
-Configura `NEXT_PUBLIC_SITE_URL` con ese dominio. El valor histórico presente en
-Supabase puede requerir una migración posterior para quedar totalmente alineado.
+## Qué ofrece hoy
+
+- sitio público multilingüe bajo `src/app/[locale]`
+- rutas públicas de:
+  - home
+  - `nosotros`
+  - `investigacion`
+  - `eventos`
+  - `contacto`
+  - `colabora`
+  - legales
+- CMS interno en `/admin` para:
+  - artículos
+  - eventos
+  - edición y publicación
+- integración con backend compartido del monorepo por `organization_id`
+- script de seed para sembrar artículos y actividades en Supabase
+- piloto local con `content-collections` y `Decap CMS`
 
 ## Stack actual
 
-- **Next.js 16** con App Router.
-- **Tailwind CSS v4**.
-- **next-intl** con español por defecto e inglés como segundo idioma.
-- **Supabase** como backend compartido del ecosistema Fortius.
-- **@fortius/admin-ui** y **@fortius/database** para CMS y acceso a datos.
+- **Next.js 16** con App Router
+- **React 19**
+- **Tailwind CSS v4**
+- **next-intl**
+- **Supabase** como backend compartido
+- `@fortius/admin-ui` y `@fortius/database`
+- `content-collections` como piloto local de contenido
+- `Decap CMS` para edición local experimental
 
 ## Comandos
 
@@ -29,12 +51,14 @@ pnpm dev
 pnpm build
 pnpm lint
 pnpm check-types
+pnpm cms:proxy
 ```
 
-Desde la raíz del monorepo:
+Desde la raíz:
 
 ```bash
 pnpm --filter web-ieam dev
+pnpm --filter web-ieam build
 pnpm tsx apps/web-ieam/scripts/seed-content.ts
 ```
 
@@ -45,59 +69,75 @@ src/
 ├── app/
 │   ├── [locale]/            # Sitio público con i18n
 │   ├── admin/               # CMS sin prefijo de idioma
-│   └── globals.css          # Tokens editoriales IEAM sobre Tailwind v4
-├── components/              # Home, análisis, eventos y bloques institucionales
-├── i18n/                    # Routing y request config de next-intl
+│   └── globals.css          # Tokens editoriales IEAM
+├── content/                 # Piloto Markdown para content-collections
+├── components/              # Home, análisis, eventos e institucional
+├── i18n/                    # Routing y request config
 ├── lib/
-│   ├── admin/               # Server Actions y queries del CMS
-│   ├── mock-data/           # Fuente transicional de contenido
-│   └── utils/               # Utilidades de app
+│   ├── admin/               # Auth, queries y mutaciones del CMS
+│   ├── content/             # Normalización híbrida
+│   ├── mock-data/           # Fuente transicional
+│   └── utils/               # Utilidades varias
 ├── messages/                # Diccionarios es/en
-└── middleware.ts            # Middleware de app
+└── middleware.ts            # Middleware legacy de app
 ```
 
 ## CMS y backend compartido
 
-IEAM usa el backend común de Fortius con aislamiento por `organization_id`.
-Esto permite compartir Supabase con otras organizaciones sin cruzar contenido,
-usuarios ni permisos.
+IEAM ya usa el backend común de Fortius con aislamiento por `organization_id`.
 
 Puntos clave:
 
-- `src/app/admin` agrupa el CMS y evita prefijo de idioma.
-- `src/lib/admin/auth.ts` valida sesión y rol activo en `user_memberships`.
-- `src/lib/admin/article-queries.ts` y `event-queries.ts` resuelven lecturas.
-- `src/lib/admin/article-actions.ts` y `event-actions.ts` agrupan mutaciones.
+- `src/app/admin` agrupa el CMS
+- `src/lib/admin/auth.ts` protege acceso por membresía/rol
+- `article-queries.ts` y `event-queries.ts` resuelven lecturas
+- `article-actions.ts` y `event-actions.ts` agrupan mutaciones
 
-### Patrón importante en páginas de edición
+### Patrón importante para edición
 
-Mantén siempre esta separación:
+Mantén esta separación:
 
-- lecturas en `*-queries.ts`;
-- mutaciones en `*-actions.ts` con `'use server'`;
-- página de edición como Server Component que carga datos y se los pasa al formulario.
+- lecturas en `*-queries.ts`
+- mutaciones en `*-actions.ts` con `'use server'`
+- páginas de edición como Server Components que cargan datos y se los pasan al formulario
 
-Este patrón evita errores del tipo **Invalid Server Actions request**.
+Ese patrón evita errores del tipo **Invalid Server Actions request**.
 
-## Estado de migración de contenido
+## Estado del contenido
 
-IEAM está en una transición ordenada desde contenido estático a contenido persistido.
+La app está en transición ordenada:
 
-- **Estado actual:** `src/lib/mock-data/*.ts` sigue siendo la fuente editorial
-  de referencia para buena parte del sitio público.
-- **Migración disponible:** `scripts/seed-content.ts` ya permite sembrar datos en
-  Supabase para `articles` y `activities`, siempre vinculados a la organización `ieam`.
-- **Pendiente:** completar la sustitución total de la capa `mock-data`, en especial
-  donde todavía falta cerrar el modelo final de `team_members` y otras piezas editoriales.
+- buena parte del sitio público todavía lee de `src/lib/mock-data/*.ts`
+- existe seed idempotente para `articles` y `activities` en Supabase
+- hay un piloto local con `content-collections` desde `src/content/research`
+- `Decap CMS` vive en `/decap` y no sustituye al CMS real de `/admin`
 
-El script de seed es **idempotente** y requiere `NEXT_PUBLIC_SUPABASE_URL` y
-`SUPABASE_SERVICE_ROLE_KEY` en `.env.local` o `.env`.
+## Variables y entorno importantes
 
-## Diseño editorial
+### Sitio
 
-IEAM conserva una estética académica y de lectura larga: jerarquía tipográfica
-clara, ritmo vertical generoso y una interfaz sobria orientada a artículos,
-eventos y contenidos de análisis.
+- `NEXT_PUBLIC_SITE_URL` debería apuntar a `https://ieam.es/`
 
-Si haces cambios visuales, empieza por `src/app/globals.css` y comprueba que el
-ajuste siga encajando con el sistema editorial compartido del ecosistema Fortius.
+### Seed y acceso admin
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+## Nota técnica conocida
+
+En el build actual aparece un aviso de Next.js indicando que la convención
+`middleware` está deprecada y que conviene migrar a `proxy` en una iteración
+posterior. No bloquea la compilación actual.
+
+## Próxima etapa natural
+
+- completar la sustitución progresiva de `mock-data`
+- cerrar el modelo final de piezas editoriales aún no migradas
+- decidir si el piloto con `content-collections` pasa a ser parte estable del flujo
+
+## Notas para desarrollo
+
+- Empieza por `src/app/[locale]` si el cambio es público.
+- Empieza por `src/app/admin` si el cambio es editorial/CMS.
+- Si tocas contenido, confirma primero si la fuente de verdad es `mock-data`, Supabase o el piloto local.
+- Si tocas i18n, revisa `src/messages/{es,en}.json`.

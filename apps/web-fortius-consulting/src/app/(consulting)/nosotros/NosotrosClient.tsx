@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Bracketed } from "@/components/system/Bracketed";
+import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
 import { PersonCard } from "@/components/consulting-v2/PersonCard";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
 import {
@@ -20,7 +21,7 @@ import {
     type TeamMember,
     type ExternalExpert,
 } from "@/content/team";
-import { Mail, Linkedin, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const VERTICAL_LABEL: Record<"civil" | "intelligence", string> = {
     civil: "Sociedad Civil",
@@ -31,6 +32,7 @@ function memberToDialog(m: TeamMember): PersonDialogData {
     return {
         name: m.name,
         role: m.role,
+        country: m.country,
         area: m.area,
         department: DEPARTMENT_LABEL[m.department],
         bio: m.bio,
@@ -44,6 +46,7 @@ function expertToDialog(e: ExternalExpert): PersonDialogData {
     return {
         name: e.name,
         role: e.role,
+        country: e.country,
         bio: e.bio,
         linkedin: e.linkedin,
         photo: e.photo,
@@ -136,10 +139,10 @@ export function NosotrosClient() {
                                             href={founder.linkedin}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.15em] px-3 py-2 border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
+                                            className="inline-flex h-10 w-10 items-center justify-center border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
+                                            aria-label="LinkedIn de Juan Ángel Soto Gómez"
                                         >
-                                            <Linkedin size={14} />
-                                            LinkedIn
+                                            <LinkedInBrandIcon size={16} />
                                         </a>
                                     )}
                                     <Link
@@ -174,6 +177,7 @@ export function NosotrosClient() {
                                             key={m.slug}
                                             name={m.name}
                                             role={m.role}
+                                            country={m.country}
                                             area={m.area}
                                             photo={m.photo}
                                             variant="full"
@@ -200,6 +204,7 @@ export function NosotrosClient() {
                                 key={e.slug}
                                 name={e.name}
                                 role={e.role}
+                                country={e.country}
                                 area={VERTICAL_LABEL[e.vertical]}
                                 photo={e.photo}
                                 variant="full"
@@ -214,7 +219,7 @@ export function NosotrosClient() {
                     <div className="mb-10 md:mb-12 space-y-5">
                         <Bracketed variant="kicker">Nuestro trabajo</Bracketed>
                         <h2 className="font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]">
-                            Operando en los entornos institucionales{" "}
+                            Operando en los entornos sociales, políticos e institucionales{" "}
                             <span className="italic text-[var(--color-accent-400)]">
                                 más complejos.
                             </span>

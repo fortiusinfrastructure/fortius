@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
   BENEFICIARY_BENEFITS,
@@ -34,8 +36,14 @@ export default function AyudasPage() {
         </p>
 
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
-          <section id="donantes" className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8">
-            <Bracketed variant="kicker">Para donantes</Bracketed>
+          <section id="donantes" className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-primary)]">
+            <div className="border-b border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-6">
+              <Bracketed variant="kicker">Para donantes</Bracketed>
+              <p className="mt-4 max-w-xl font-display text-[1.9rem] font-light leading-[1.1] text-white">
+                Ayudamos a donar con más criterio, mejor seguimiento y más claridad institucional.
+              </p>
+            </div>
+            <div className="p-8">
             <ul className="mt-6 space-y-4">
               {DONOR_BENEFITS.map((item) => (
                 <li key={item} className="text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
@@ -43,10 +51,24 @@ export default function AyudasPage() {
                 </li>
               ))}
             </ul>
+              <Link
+                href="/donaciones"
+                className="mt-8 inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-white"
+              >
+                Dona
+                <ArrowUpRight size={14} />
+              </Link>
+            </div>
           </section>
 
-          <section id="beneficiarios" className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8">
-            <Bracketed variant="kicker">Para beneficiarios</Bracketed>
+          <section id="beneficiarios" className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-primary)]">
+            <div className="border-b border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-6">
+              <Bracketed variant="kicker">Para beneficiarios</Bracketed>
+              <p className="mt-4 max-w-xl font-display text-[1.9rem] font-light leading-[1.1] text-white">
+                Acompañamos proyectos y organizaciones que necesitan estructura, foco y capacidad de crecimiento.
+              </p>
+            </div>
+            <div className="p-8">
             <ul className="mt-6 space-y-4">
               {BENEFICIARY_BENEFITS.map((item) => (
                 <li key={item} className="text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
@@ -54,6 +76,14 @@ export default function AyudasPage() {
                 </li>
               ))}
             </ul>
+              <Link
+                href="/contacto"
+                className="mt-8 inline-flex items-center gap-2 border border-[var(--color-accent-400)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
+              >
+                Escríbenos
+                <ArrowUpRight size={14} />
+              </Link>
+            </div>
           </section>
         </div>
 

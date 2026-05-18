@@ -10,7 +10,7 @@ export const FOUNDATION_NAV_LINKS = [
   { label: "Incubadora", href: "/incubadora" },
   { label: "Ayudas", href: "/ayudas" },
   { label: "Blog", href: "/blog" },
-  { label: "Donaciones", href: "/donaciones" },
+  { label: "Contacto", href: "/contacto" },
 ] as const;
 
 export const LEGAL_LINKS = [
@@ -24,47 +24,60 @@ export const ABOUT_SECTIONS = [
     kicker: "Quiénes somos",
     title: "Impulsamos a quienes entienden el liderazgo como servicio.",
     body: [
-      "Fundación Fortius es una institución dedicada a fortalecer el ecosistema de personas, organizaciones e iniciativas comprometidas con la transformación cultural, social y política de nuestra sociedad desde los principios, las ideas y la vocación de servicio.",
-      "Creemos que las grandes causas requieren instituciones fuertes, liderazgos sólidos y comunidades comprometidas capaces de sostenerlas en el tiempo.",
-      "No apoyamos proyectos orientados al protagonismo personal. Impulsamos a quienes entienden el liderazgo como una forma de servicio al bien común.",
+      "Fundación Fortius fortalece personas, organizaciones e iniciativas que quieren servir con seriedad, criterio y vocación de legado.",
+      "Creemos que las grandes causas necesitan instituciones fuertes, equipos bien preparados y una estructura capaz de sostenerlas en el tiempo.",
     ],
   },
   {
     kicker: "Nuestra filosofía",
     title: "Trabajamos para que las ideas correctas transformen la sociedad.",
     body: [
-      "Las ideas sólo cambian la historia cuando encuentran personas e instituciones capaces de encarnarlas, defenderlas y proyectarlas con excelencia.",
-      "Fundación Fortius nace para identificar, conectar y fortalecer a esos actores, contribuyendo a que las convicciones se traduzcan en cultura, comunidad e impacto duradero.",
-      "Porque servir a una causa noble exige algo más que buenas intenciones: exige estructura, formación, comunidad y visión de largo plazo.",
+      "Las ideas solo cambian la historia cuando encuentran personas e instituciones capaces de encarnarlas, defenderlas y proyectarlas con excelencia.",
+      "Por eso trabajamos allí donde hacen falta formación, estructura, comunidad y visión de largo plazo.",
     ],
   },
   {
     kicker: "A quién servimos",
     title: "Trabajamos con quienes aspiran a construir legado.",
     body: [
-      "Apoyamos a fundaciones, think tanks, iniciativas educativas, líderes emergentes, emprendedores sociales y actores cívicos comprometidos con la renovación cultural e institucional de nuestra sociedad.",
-      "Trabajamos con quienes aspiran a construir legado, no simplemente presencia.",
+      "Apoyamos a fundaciones, think tanks, iniciativas educativas, líderes emergentes, emprendedores sociales y actores cívicos comprometidos con la renovación cultural e institucional.",
+      "Trabajamos con quienes quieren construir legado, no solo presencia.",
     ],
   },
   {
     kicker: "Nuestro enfoque",
     title: "Mucho más que respaldo pasivo.",
     body: [
-      "No nos limitamos a financiar o respaldar iniciativas de forma pasiva. Actuamos como plataforma de articulación, impulso y acompañamiento estratégico para las personas y organizaciones de nuestro ecosistema.",
-      "Conectamos talento, recursos, ideas y oportunidades para fortalecer proyectos con vocación transformadora y maximizar su impacto en la sociedad.",
+      "No nos limitamos a financiar. Actuamos como plataforma de articulación, impulso y acompañamiento estratégico.",
+      "Conectamos talento, recursos, ideas y oportunidades para que los proyectos serios ganen consistencia, escala e impacto.",
     ],
   },
 ];
 
 export const FOUNDATION_TIMELINE = [
   { year: "2023", label: "Nace Fundación Fortius España", place: "Madrid" },
-  { year: "2025", label: "Nace Fortius Foundation United States", place: "Washington, D.C." },
+  { year: "2025", label: "Nace Fortius Foundation United States", place: "Houston, Texas" },
 ];
 
 export const FOUNDATION_TIMELINE_COPY = [
-  "Más de una década acompañando a organizaciones e instituciones en Europa, América y África.",
-  "A lo largo de estos años hemos tejido alianzas con think tanks, fundaciones, instituciones internacionales y líderes cívicos que operan en algunos de los contextos políticos y culturales más complejos del espacio euroatlántico.",
+  "Llevamos años acompañando a organizaciones e instituciones en Europa, América y África.",
+  "Ese recorrido nos ha permitido construir una red de aliados, proyectos y responsables institucionales con los que compartimos exigencia, criterio y vocación de servicio.",
 ];
+
+export const FOUNDATION_ENTITIES = {
+  spain: {
+    name: "Fundación Fortius España",
+    codeLabel: "NIF",
+    code: "G56299100",
+    address: "Calle Zurbano 71, Oficina 9, 28010, Madrid, Reino de España",
+  },
+  usa: {
+    name: "Fortius Foundation United States",
+    codeLabel: "EIN",
+    code: "37-2229546",
+    address: "1417 Oak Tree Dr., 77055, Houston, Texas, Estados Unidos de América",
+  },
+} as const;
 
 export const STRATEGIC_PARTNERS = [
   {
@@ -78,12 +91,6 @@ export const STRATEGIC_PARTNERS = [
     href: "https://together.europarl.europa.eu/es/",
     logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/12/togethes.svg",
     copy: "together.eu, iniciativa del Parlamento Europeo, es una plataforma paneuropea de participación cívica orientada a fortalecer la democracia y la implicación de la sociedad civil en la vida pública europea. Esta colaboración refuerza nuestra vocación de contribuir a una ciudadanía más formada, libre y comprometida con el futuro de Europa.",
-  },
-  {
-    name: "Incubadora Fortius",
-    href: "/incubadora",
-    logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/02/MD.png",
-    copy: "Nuestra incubadora identifica, estructura y acompaña proyectos con potencial transformador. Desde ideas embrionarias hasta iniciativas ya consolidadas, ayudamos a convertir vocación de servicio en instituciones sólidas, sostenibles y capaces de dejar legado.",
   },
 ];
 
@@ -111,6 +118,6 @@ export const EXPERIENCE_COPY = [
 
 export const FOUNDATION_CONTACT = {
   email: "info@fundacionfortius.org",
-  spain: "Calle Zurbano 71, Oficina 9, 28010, Madrid, Reino de España",
-  usa: "Washington, D.C., Estados Unidos de América",
+  spain: FOUNDATION_ENTITIES.spain.address,
+  usa: FOUNDATION_ENTITIES.usa.address,
 };

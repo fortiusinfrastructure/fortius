@@ -6,7 +6,7 @@ export type BoardChapter = "espana" | "usa";
 
 export const BOARD_CHAPTER_LABEL: Record<BoardChapter, string> = {
     espana: "Fundación Fortius España",
-    usa: "Fortius Foundation U.S.A.",
+    usa: "Fortius Foundation United States",
 };
 
 export interface BoardMember {
@@ -149,7 +149,7 @@ export const CONSEJO_ASESOR: AdvisoryMember[] = [
     {
         slug: "carlos-casares",
         name: "Carlos Casares",
-        bio: "Miembro del Consejo Asesor de Fundación Fortius.",
+        bio: "Carlos Casares ha desarrollado una trayectoria internacional en liderazgo, empresa y formación. Defiende que la gestión de personas es tan importante como el análisis técnico. Ha participado en procesos de crecimiento, profesionalización y venta de compañías, integrando directorios y consejos en cuatro continentes, y ha desarrollado una extensa trayectoria académica en Iberoamérica y Europa, donde es Catedrático Emérito. Cree que la verdadera formación ocurre en el trabajo con personas, en los errores y en las crisis, y que todos vivimos «en construcción» hasta el final. Reside entre Europa, Estados Unidos y el Río de la Plata.",
         linkedin: "https://www.linkedin.com/in/carloscasares/",
     },
 ];
@@ -179,7 +179,7 @@ export const TEAM: TeamMember[] = [
     {
         slug: "beatriz-de-leon-cobo-ieam",
         name: "Beatriz de León Cobo",
-        role: "Directora de IEAM",
+        role: "Directora del Instituto Español de Análisis Migratorio",
         area: "ieam",
         group: "direccion",
         isDirector: true,
@@ -199,7 +199,7 @@ export const TEAM: TeamMember[] = [
     {
         slug: "camille-dock",
         name: "Camille Dock",
-        role: "Asistente de investigación — IEAM",
+        role: "Asistente de investigación — Instituto Español de Análisis Migratorio",
         area: "ieam",
         group: "equipo",
         isDirector: false,

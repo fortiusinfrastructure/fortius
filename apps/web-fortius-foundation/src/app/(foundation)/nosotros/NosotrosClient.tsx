@@ -11,6 +11,7 @@ import {
     ABOUT_SECTIONS,
     FOUNDATION_TIMELINE,
     FOUNDATION_TIMELINE_COPY,
+    STRATEGIC_PARTNERS,
 } from "@/content/site";
 import {
     BOARD_CHAPTER_LABEL,
@@ -79,7 +80,7 @@ export function NosotrosClient() {
                 </p>
 
                 <section className="mt-20 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Bloque 1. Quiénes somos</Bracketed>
+                    <Bracketed variant="kicker">Quiénes somos</Bracketed>
                     <div className="mt-6 max-w-3xl space-y-4">
                         {whoWeAre.body.map((paragraph) => (
                             <p
@@ -93,7 +94,7 @@ export function NosotrosClient() {
                 </section>
 
                 <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Bloque 2. Nuestra filosofía</Bracketed>
+                    <Bracketed variant="kicker">Nuestra filosofía</Bracketed>
                     <div className="mt-6 max-w-3xl space-y-4">
                         {philosophy.body.map((paragraph) => (
                             <p
@@ -135,7 +136,7 @@ export function NosotrosClient() {
                 </section>
 
                 <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Bloque 3. Nuestro recorrido</Bracketed>
+                    <Bracketed variant="kicker">Nuestro recorrido</Bracketed>
                     <div className="mt-8 space-y-6 border-l border-[var(--color-accent-400)] pl-6">
                         {FOUNDATION_TIMELINE.map((item) => (
                             <div key={item.year} className="relative">
@@ -320,6 +321,32 @@ export function NosotrosClient() {
                                 ));
                             })()}
                         </div>
+                    </div>
+                </section>
+
+                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                    <Bracketed variant="kicker">Alianzas estratégicas</Bracketed>
+                    <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
+                        Trabajamos con socios que amplían nuestra capacidad de servir,
+                        canalizar ayuda y fortalecer iniciativas con impacto.
+                    </p>
+                    <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-2">
+                        {STRATEGIC_PARTNERS.map((partner) => (
+                            <a
+                                key={partner.name}
+                                href={partner.href}
+                                target={partner.href.startsWith("http") ? "_blank" : undefined}
+                                rel={partner.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                                className="bg-[var(--surface-primary)] p-6 transition-colors hover:bg-[var(--surface-secondary)]"
+                            >
+                                <p className="font-display text-[1.8rem] font-light text-[var(--text-primary)]">
+                                    {partner.name}
+                                </p>
+                                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                                    {partner.copy}
+                                </p>
+                            </a>
+                        ))}
                     </div>
                 </section>
             </section>

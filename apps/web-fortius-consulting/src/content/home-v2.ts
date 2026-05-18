@@ -191,7 +191,7 @@ export const VERTICALS: VerticalDef[] = [
         ],
         clients: ["Acton Institute", "Universidad de Navarra", "The LEX Fellowship", "ACI Prensa", "Chapel & York", "Principios"],
         privateArea: {
-            title: "Área privada — Sociedad Civil",
+            title: "Área clientes — Sociedad Civil",
             description:
                 "Acceso a frameworks, plantillas y diagnósticos para organizaciones asesoradas.",
             ctaLabel: "Solicitar acceso",
@@ -297,7 +297,7 @@ export const VERTICALS: VerticalDef[] = [
         ],
         clients: ["Axioma", "ISI", "Cooperación Internacional", "Acton Institute"],
         privateArea: {
-            title: "Área privada — Política",
+            title: "Área clientes — Política",
             description:
                 "Acceso exclusivo a informes, monitorizaciones y dashboards de inteligencia política.",
             ctaLabel: "Solicitar acceso",
@@ -305,12 +305,18 @@ export const VERTICALS: VerticalDef[] = [
     },
 ];
 
-export const RADICAL_IDEAS = [
+export const ALLIES = [
     "Universidad de Navarra",
     "Acton Institute",
     "The Lex Fellowship",
-    "Cruz del sur",
-    "OpenDoors",
+  "ACI Prensa",
+  "Chapel & York",
+  "Principios",
+  "Axioma",
+  "ISI",
+  "Cooperación Internacional",
+  "Cruz del Sur",
+  "Open Doors",
     "Universidad Francisco de Vitoria",
     "World Youth Alliance",
 ];

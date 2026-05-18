@@ -4,7 +4,8 @@ import Footer from '@/components/Footer';
 import NewsletterCTA from '@/components/NewsletterCTA';
 import ResearchPillars from '@/components/research/ResearchPillars';
 import ResearchTabs, { type ResearchCardData, type ResearchCategoryId } from '@/components/research/ResearchTabs';
-import { articles, type Article } from '@/lib/mock-data';
+import { researchArticles } from '@/lib/content/research';
+import type { Article } from '@/lib/mock-data';
 import type { Locale } from '@/lib/utils/content';
 
 function classify(type: Article['type']): ResearchCategoryId | null {
@@ -43,7 +44,7 @@ export default async function ResearchPage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations('research');
 
-  const cards = articles
+  const cards = researchArticles
     .map((a) => toCardData(a, locale))
     .filter((c): c is ResearchCardData => c !== null);
 

@@ -62,16 +62,10 @@ export function NavV2() {
                 <div className="hidden lg:flex items-center gap-3">
                     <a
                         href="/area-privada"
-                        className="inline-flex items-center gap-2 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-[var(--text-secondary)] border border-[var(--border-default)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-colors"
+                        className="inline-flex items-center gap-2 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                     >
                         <Lock size={12} strokeWidth={2} aria-hidden />
-                        Área privada
-                    </a>
-                    <a
-                        href="/contacto"
-                        className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
-                    >
-                        Contacto
+                        Área clientes
                     </a>
                 </div>
 

@@ -2,14 +2,14 @@ import { ArrowRight } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { Card } from '@/components/ui/UnifiedCard';
-import { articles } from '@/lib/mock-data/articles';
+import { researchArticles } from '@/lib/content/research';
 import { parseEventDate, pickLocalized, type Locale } from '@/lib/utils/content';
 
 export default async function LatestAnalysis() {
   const t = await getTranslations('analysis');
   const locale = (await getLocale()) as Locale;
 
-  const sorted = [...articles].sort(
+  const sorted = [...researchArticles].sort(
     (a, b) => parseEventDate(b.publishDate).getTime() - parseEventDate(a.publishDate).getTime(),
   );
 

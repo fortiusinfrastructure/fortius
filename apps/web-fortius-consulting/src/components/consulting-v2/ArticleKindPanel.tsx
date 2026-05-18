@@ -48,14 +48,14 @@ export function ArticleKindPanel({ article, author }: ArticleKindPanelProps) {
                         <MetaRow label="Fecha" value={formatPublishedDate(article.published_at)} />
                     )}
                     {author && <MetaRow label="Firma" value={author} />}
-                    <MetaRow label="Acceso" value={isMembersOnly ? "Miembros" : "Abierto"} />
+                    <MetaRow label="Acceso" value={isMembersOnly ? "Clientes" : "Abierto"} />
                     {article.kind === "evento" && (
-                        <MetaRow label="Sección" value="Área Privada · Oportunidades & Eventos" />
+                        <MetaRow label="Sección" value="Área clientes · Oportunidades & Eventos" />
                     )}
                     {isMembersOnly && (
                         <div className="flex items-center gap-2 rounded-xl border border-[var(--color-accent-500)]/25 bg-[var(--color-accent-500)]/8 px-3 py-2 text-[var(--color-accent-300)]">
                             <Lock size={14} />
-                            <span>Contenido visible al desbloquear el Área Privada.</span>
+                            <span>Contenido visible al desbloquear el Área clientes.</span>
                         </div>
                     )}
                 </dl>

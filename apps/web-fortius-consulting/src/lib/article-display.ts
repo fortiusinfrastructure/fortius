@@ -91,6 +91,12 @@ function cleanTextBlock(block: string): string {
         .trim();
 }
 
+function truncateText(text: string, max = 220): string {
+    const cleaned = text.replace(/\s+/g, " ").trim();
+    if (cleaned.length <= max) return cleaned;
+    return `${cleaned.slice(0, max).trimEnd()}…`;
+}
+
 function stripFormatting(line: string): string {
     return line.replace(/^>\s*/, "").replace(/[*_`#]/g, "").trim();
 }
@@ -108,6 +114,17 @@ function extractPrefixedValue(line: string, prefix: string): string | null {
     const plain = stripFormatting(line);
     if (!plain.toLowerCase().startsWith(prefix.toLowerCase())) return null;
     return plain.slice(prefix.length).trim() || null;
+}
+
+function cleanPreviewText(text: string): string {
+    return truncateText(
+        text
+            .replace(/imagen:\s*.*?(?=\s+[A-ZÁÉÍÓÚÜÑ¿¡])/iu, "")
+            .replace(/autor:\s*[^.]+/giu, "")
+            .replace(/fecha:\s*[^.]+/giu, "")
+            .replace(/\s+/g, " ")
+            .trim(),
+    );
 }
 
 function plainLines(markdown: string): string[] {
@@ -179,7 +196,10 @@ export function getArticleLeadData(article: Article): ArticleLeadData {
         while (lines[0]?.trim() === "") lines.shift();
     }
 
-    if (normalize(lines[0] ?? "") === normalize(article.title)) {
+    if (
+        normalize(lines[0] ?? "") === normalize(article.title) ||
+        normalize(lines[0] ?? "").startsWith(normalize(article.title))
+    ) {
         lines.shift();
         while (lines[0]?.trim() === "") lines.shift();
     }
@@ -201,14 +221,43 @@ export function getArticleLeadData(article: Article): ArticleLeadData {
         const possibleDate = canExtractMeta ? extractPrefixedValue(line, "Fecha:") : null;
         if (possibleDate) continue;
 
+        const possibleImage = canExtractMeta ? extractPrefixedValue(line, "Imagen:") : null;
+        if (possibleImage) {
+            imageNote = imageNote ?? possibleImage;
+            continue;
+        }
+
         cleaned.push(line);
     }
 
     return {
         author,
         imageNote,
-        markdown: cleaned.join("\n").trim(),
+        markdown: cleaned.join("\n").replace(/Área Privada/gi, "Área clientes").trim(),
     };
+}
+
+export function getArticleSummary(article: Article): string {
+    if (article.kind === "evento") {
+        const event = getEventArticleData(article);
+        const summary = [
+            event?.organizer ? `Organizado por ${event.organizer}.` : null,
+            event?.date ? `Fecha: ${event.date}.` : null,
+            event?.location ? `Ubicación: ${event.location}.` : null,
+        ]
+            .filter(Boolean)
+            .join(" ");
+
+        if (summary) return truncateText(summary, 180);
+    }
+
+    const lead = getArticleLeadData(article);
+    const summary =
+        getExecutiveSummary(lead.markdown, 1) ??
+        getFirstNarrativeParagraph(lead.markdown) ??
+        cleanPreviewText(article.excerpt);
+
+    return truncateText(summary, 240);
 }
 
 export function getEventArticleData(article: Article): EventArticleData | null {

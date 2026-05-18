@@ -39,7 +39,7 @@ export function NavF() {
       }`}
     >
       <nav className="mx-auto flex h-[var(--nav-height)] max-w-[var(--container-max)] items-center justify-between px-[var(--container-px)]">
-        <Link href="/" aria-label="Fortius Fundación — inicio">
+        <Link href="/" aria-label="Fortius Foundation — inicio">
           <FoundationLockup />
         </Link>
 
@@ -70,11 +70,11 @@ export function NavF() {
             [Consulting]
           </a>
           <Link
-            href="/donaciones"
+            href="/area-privada"
             className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white transition-colors"
             style={{ backgroundColor: "var(--color-accent-500)" }}
           >
-            Donar
+            Área Privada
           </Link>
         </div>
 
@@ -109,6 +109,13 @@ export function NavF() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/area-privada"
+              className="mt-3 inline-flex items-center justify-center px-4 py-3 text-[0.76rem] font-semibold uppercase tracking-[0.16em] text-white"
+              style={{ backgroundColor: "var(--color-accent-500)" }}
+            >
+              Área Privada
+            </Link>
           </div>
         </div>
       )}

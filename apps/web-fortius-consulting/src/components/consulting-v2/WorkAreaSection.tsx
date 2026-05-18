@@ -14,13 +14,28 @@ import {
     type Article,
     type ArticleCategory,
 } from "@/lib/articles";
-import { getArticleCover, getArticleImageSources } from "@/lib/article-display";
+import {
+    getArticleCover,
+    getArticleImageSources,
+    getArticleLeadData,
+    getArticleSummary,
+} from "@/lib/article-display";
 import { ArticleCoverImage } from "./ArticleCoverImage";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
 interface WorkAreaSectionProps {
     vertical: VerticalDef;
+}
+
+interface EditorialInsightItem {
+    slug: string;
+    category: string;
+    title: string;
+    excerpt: string;
+    date: string;
+    readTime: string;
+    author?: string | null;
 }
 
 const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
@@ -34,14 +49,14 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
     const slots = category ? getEditorialSlots(category) : null;
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
-    const featured = slots?.featured
+    const featured: EditorialInsightItem = slots?.featured
         ? articleToInsight(slots.featured)
         : v.insights.find((i) => i.featured) ?? v.insights[0];
     const featuredHref = slots?.featured
         ? `${v.href}/${slots.featured.slug}`
         : `/publicaciones/${featured.slug}`;
 
-    const rest = slots && slots.rest.length > 0
+    const rest: EditorialInsightItem[] = slots && slots.rest.length > 0
         ? slots.rest.map(articleToInsight)
         : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
     const restHref = (i: number): string =>
@@ -53,7 +68,7 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
         ? {
               category: kindLabel(slots.locked.kind),
               title: slots.locked.title,
-              excerpt: slots.locked.excerpt,
+              excerpt: getArticleSummary(slots.locked),
               readTime: estimateReadTime(slots.locked.content_markdown),
               publishedAt: formatMonthYear(slots.locked.published_at) || "Disponible",
               href: `${v.href}/${slots.locked.slug}`,
@@ -120,6 +135,14 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                                 <span>{featured.date}</span>
                                 <span>·</span>
                                 <span>{featured.readTime}</span>
+                                {featured.author && (
+                                    <>
+                                        <span>·</span>
+                                        <span className="normal-case tracking-normal">
+                                            {featured.author}
+                                        </span>
+                                    </>
+                                )}
                             </div>
                             <h3 className="font-display text-[clamp(1.5rem,2.3vw,2.2rem)] font-light leading-[1.12] tracking-tight text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
                                 {featured.title}
@@ -156,6 +179,11 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                                         <h4 className="font-display text-lg font-light leading-[1.2] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
                                             {p.title}
                                         </h4>
+                                        {p.author && (
+                                            <p className="text-[0.78rem] text-[var(--text-secondary)]">
+                                                {p.author}
+                                            </p>
+                                        )}
                                         <p className="text-[0.85rem] text-[var(--text-tertiary)] leading-relaxed line-clamp-2">
                                             {p.excerpt}
                                         </p>
@@ -207,7 +235,7 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                                     aria-hidden
                                 />
                                 <p className="text-[0.75rem] text-[var(--text-secondary)] leading-snug">
-                                    Contenido reservado para miembros del Área Privada.
+                                    Contenido reservado para clientes.
                                 </p>
                             </div>
                         </article>
@@ -218,7 +246,7 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
                         >
                             <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
                                 <Lock size={13} strokeWidth={2} aria-hidden />
-                                Acceder al Área Privada
+                                Acceder al Área clientes
                             </span>
                             <ArrowUpRight
                                 size={16}
@@ -233,12 +261,15 @@ export function WorkAreaSection({ vertical: v }: WorkAreaSectionProps) {
 }
 
 function articleToInsight(a: Article) {
+    const lead = getArticleLeadData(a);
+
     return {
         slug: a.slug,
         category: kindLabel(a.kind),
         title: a.title,
-        excerpt: a.excerpt,
+        excerpt: getArticleSummary(a),
         date: formatShortDate(a.published_at) || categoryLabel(a.category),
         readTime: estimateReadTime(a.content_markdown),
+        author: lead.author,
     };
 }

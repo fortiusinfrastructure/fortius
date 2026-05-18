@@ -26,6 +26,9 @@
       "@/*": [
         "./src/*"
       ],
+      "content-collections": [
+        "./.content-collections/generated"
+      ],
       "@fortius/database": [
         "../../packages/database/src/index.ts"
       ],

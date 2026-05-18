@@ -6,6 +6,7 @@ import { PersonPortrait } from "./PersonPortrait";
 interface PersonCardProps {
     name: string;
     role: string;
+    country?: string;
     area?: string;
     photo?: string | string[];
     onOpen: () => void;
@@ -15,6 +16,7 @@ interface PersonCardProps {
 export function PersonCard({
     name,
     role,
+    country,
     area,
     photo,
     onOpen,
@@ -38,8 +40,13 @@ export function PersonCard({
                 <p className="text-[0.78rem] text-[var(--text-secondary)] leading-snug">
                     {role}
                 </p>
-                {area && (
+                {country && (
                     <p className="text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] pt-1">
+                        {country}
+                    </p>
+                )}
+                {area && (
+                    <p className="text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)]">
                         {area}
                     </p>
                 )}

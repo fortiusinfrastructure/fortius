@@ -30,7 +30,7 @@ const TIMELINE: TimelineItem[] = [
     {
         year: "2017-2022",
         consulting: {
-            title: "Fortius se traslada a Londres.",
+            title: "Fortius se traslada a Londres",
             description:
                 "Actividad centrada en think tanks que velan por el florecimiento humano, tanto a nivel de desarrollo económico como espiritual, y que trabajan por el bien común. Primeros proyectos en Bélgica, Reino Unido y Estados Unidos.",
         },
@@ -149,7 +149,7 @@ export function HistoryTimeline() {
                                             transition={{ duration: 0.6, ease }}
                                         >
                                             {m.consulting.title && (
-                                                <h4 className="text-[1.1rem] text-[var(--color-accent-500)] mb-2">
+                                                <h4 className="font-display text-[1.1rem] text-[var(--color-accent-500)] mb-2">
                                                     {m.consulting.title}
                                                 </h4>
                                             )}
@@ -170,7 +170,7 @@ export function HistoryTimeline() {
                                             transition={{ duration: 0.6, ease, delay: 0.1 }}
                                         >
                                             {m.foundation.title && (
-                                                <h4 className="text-[1.1rem] text-[#10b981] mb-2">
+                                                <h4 className="font-display text-[1.1rem] text-[#10b981] mb-2">
                                                     {m.foundation.title}
                                                 </h4>
                                             )}

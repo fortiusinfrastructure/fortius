@@ -2,12 +2,14 @@
 
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Mail, Linkedin } from "lucide-react";
+import { X } from "lucide-react";
+import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
 import { PersonPortrait } from "./PersonPortrait";
 
 export interface PersonDialogData {
     name: string;
     role: string;
+    country?: string;
     area?: string;
     department?: string;
     bio: string;
@@ -95,6 +97,11 @@ export function PersonDialog({ person, onClose }: PersonDialogProps) {
                                     <p className="text-[0.9rem] text-[var(--text-secondary)]">
                                         {person.role}
                                     </p>
+                                    {person.country && (
+                                        <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)] pt-1">
+                                            {person.country}
+                                        </p>
+                                    )}
                                     {(person.area || person.department) && (
                                         <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)] pt-1">
                                             {person.area ?? person.department}
@@ -114,7 +121,7 @@ export function PersonDialog({ person, onClose }: PersonDialogProps) {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.15em] px-3 py-2 border border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
                                             >
-                                                <Linkedin size={14} />
+                                                <LinkedInBrandIcon size={14} />
                                                 LinkedIn
                                             </a>
                                         )}

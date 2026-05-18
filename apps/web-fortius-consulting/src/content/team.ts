@@ -27,6 +27,7 @@ export interface TeamMember {
     slug: string;
     name: string;
     role: string;
+    country?: string;
     department: Department;
     verticals: VerticalId[];
     area?: string;
@@ -40,10 +41,18 @@ export interface ExternalExpert {
     slug: string;
     name: string;
     role: string;
+    country?: string;
     vertical: VerticalId;
     bio: string;
     linkedin?: string;
     photo?: string | string[];
+}
+
+export interface TeamMapPin {
+    id: string;
+    name: string;
+    coordinates: [number, number];
+    description: string;
 }
 
 export const TEAM: TeamMember[] = [
@@ -204,10 +213,38 @@ export const EXPERTS: ExternalExpert[] = [
         name: "Carlos Casares",
         role: "Experto Vinculado",
         vertical: "civil",
-        bio: "Experto vinculado a Fortius Consulting.",
+        bio: "Carlos Casares (Uruguay) lleva décadas acompañando a empresarios, familias empresarias y consejos de administración en procesos complejos de estrategia, gobierno y relaciones humanas, en múltiples países y contextos culturales. Discípulo de Juan Antonio Pérez López, combina una mirada antropológica con un enfoque socrático, convencido de que entender a las personas es tan importante como el análisis técnico. Ha participado en procesos de crecimiento, profesionalización y venta de compañías, integrando directorios y consejos en cuatro continentes, y ha desarrollado una extensa trayectoria académica en Iberoamérica y Europa, donde es Catedrático Emérito. Cree que la verdadera formación ocurre en el trabajo con personas, en los errores y en las crisis — y que todos vivimos \"en construcción\" hasta el final. Reside entre Europa, Estados Unidos y el Río de la Plata.",
         linkedin: "https://www.linkedin.com/in/carloscasares/",
     },
 ];
+
+const TEAM_COUNTRY_OVERRIDES: Record<string, string> = {
+    "calli-pacheco-munoz": "México",
+    "tasnim-idriss": "Túnez",
+    "juan-pablo-chamon-saucedo": "Bolivia",
+    "segundo-carafi": "Argentina",
+    "matthaus-konradsheim": "Austria",
+    "jose-maria-cortes": "Portugal",
+    "diego-salazar-ramirez": "Ecuador",
+};
+
+const EXPERT_COUNTRY_OVERRIDES: Record<string, string> = {
+    "ramsi-jazmati-akili": "Siria",
+    "carlos-casares": "Uruguay",
+};
+
+const COUNTRY_TO_MAP_LOCATION: Record<string, Omit<TeamMapPin, "id" | "description">> = {
+    España: { name: "Madrid", coordinates: [-3.7038, 40.4168] },
+    México: { name: "Ciudad de México", coordinates: [-99.1332, 19.4326] },
+    Túnez: { name: "Túnez", coordinates: [10.1815, 36.8065] },
+    Bolivia: { name: "La Paz", coordinates: [-68.1193, -16.4897] },
+    Argentina: { name: "Buenos Aires", coordinates: [-58.3816, -34.6037] },
+    Austria: { name: "Viena", coordinates: [16.3738, 48.2082] },
+    Portugal: { name: "Lisboa", coordinates: [-9.1393, 38.7223] },
+    Ecuador: { name: "Quito", coordinates: [-78.4678, -0.1807] },
+    Siria: { name: "Damasco", coordinates: [36.2765, 33.5138] },
+    Uruguay: { name: "Montevideo", coordinates: [-56.1645, -34.9011] },
+};
 
 function getPersonPhotoPaths(slug: string, legacyPath?: string): string[] {
     return [
@@ -217,6 +254,7 @@ function getPersonPhotoPaths(slug: string, legacyPath?: string): string[] {
 }
 
 TEAM.forEach((member) => {
+    member.country = TEAM_COUNTRY_OVERRIDES[member.slug] ?? "España";
     member.photo = getPersonPhotoPaths(
         member.slug,
         member.slug === "juan-angel-soto" ? "/images/team/juansoto.png" : undefined,
@@ -224,6 +262,7 @@ TEAM.forEach((member) => {
 });
 
 EXPERTS.forEach((expert) => {
+    expert.country = EXPERT_COUNTRY_OVERRIDES[expert.slug] ?? "España";
     expert.photo = getPersonPhotoPaths(expert.slug);
 });
 
@@ -244,4 +283,26 @@ export function getInitials(name: string): string {
     if (parts.length === 0) return "";
     if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
     return (parts[0]![0]! + parts[parts.length - 1]![0]!).toUpperCase();
+}
+
+export function getPeopleMapPins(): TeamMapPin[] {
+    const countries = new Set<string>();
+
+    [...TEAM, ...EXPERTS].forEach((person) => {
+        if (person.country) countries.add(person.country);
+    });
+
+    return [...countries]
+        .map((country) => {
+            const location = COUNTRY_TO_MAP_LOCATION[country];
+            if (!location) return null;
+
+            return {
+                id: `eq-${country.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "").replace(/[^a-z0-9]+/g, "-")}`,
+                name: location.name,
+                coordinates: location.coordinates,
+                description: country,
+            } satisfies TeamMapPin;
+        })
+        .filter((pin): pin is TeamMapPin => pin !== null);
 }

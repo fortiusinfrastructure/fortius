@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
+import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
 import { MOCK_PROJECTS } from "@/content/dashboard";
 import { TEAM } from "@/content/team";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
-import { ArrowUpRight, FileText, Lock, CalendarPlus, Activity, CheckCircle2, Clock } from "lucide-react";
+import { FileText, Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin } from "lucide-react";
 import type { ClientUser } from "@/lib/auth";
 import {
     formatPublishedDate,
@@ -21,6 +22,7 @@ const PLAN_TO_CATEGORY: Record<string, ArticleCategory> = {
     politica: "politica",
     "sociedad-civil": "sociedad-civil",
 };
+const CLIENT_COORDINATION_EMAIL = "info@fortiusconsulting.org";
 
 export function DashboardClient({ user }: { user: ClientUser }) {
     // Simulamos que el usuario tiene vinculados a Juan Ángel y Beatriz
@@ -39,7 +41,7 @@ export function DashboardClient({ user }: { user: ClientUser }) {
         <div className="pt-[var(--nav-height)] pb-24 md:pb-36 min-h-screen bg-[var(--color-neutral-1000,#0a111e)]">
             <header className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-16 md:pt-24 border-b border-[var(--border-subtle)] pb-12">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
-                    <Bracketed variant="kicker">Área Privada</Bracketed>
+                    <Bracketed variant="kicker">Área clientes</Bracketed>
                     <h1 className="mt-4 font-display text-[clamp(2.2rem,4vw,3.6rem)] font-light leading-tight text-[var(--text-primary)]">
                         Bienvenido, <span className="italic text-[var(--color-accent-400)]">{user.email}</span>
                     </h1>
@@ -62,11 +64,39 @@ export function DashboardClient({ user }: { user: ClientUser }) {
                         <Bracketed variant="tag">Equipo Asignado</Bracketed>
                         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                             {linkedExperts.map((expert, i) => (
-                                <div key={expert.slug} className="flex items-center gap-4 p-4 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] hover:border-[var(--color-accent-500)] transition-colors">
-                                    <PersonPortrait name={expert.name} photo={expert.photo} size="sm" className="shrink-0" />
-                                    <div>
-                                        <h3 className="font-display text-[1.1rem] text-[var(--text-primary)]">{expert.name}</h3>
-                                        <p className="text-[0.75rem] uppercase tracking-wider text-[var(--color-accent-400)] mt-1">{expert.role}</p>
+                                <div key={expert.slug} className="border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] p-4 transition-colors hover:border-[var(--color-accent-500)]">
+                                    <div className="flex items-center gap-4">
+                                        <PersonPortrait name={expert.name} photo={expert.photo} size="sm" className="shrink-0" />
+                                        <div>
+                                            <h3 className="font-display text-[1.1rem] text-[var(--text-primary)]">{expert.name}</h3>
+                                            <p className="mt-1 text-[0.75rem] uppercase tracking-wider text-[var(--color-accent-400)]">{expert.role}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4 space-y-2 border-t border-[var(--border-subtle)] pt-4 text-[0.8rem] text-[var(--text-secondary)]">
+                                        {(expert.area || expert.country) && (
+                                            <p className="flex items-start gap-2">
+                                                <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
+                                                <span>{expert.area ?? expert.country}</span>
+                                            </p>
+                                        )}
+                                        <p className="flex items-start gap-2">
+                                            <Mail size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
+                                            <span>Coordinación: {CLIENT_COORDINATION_EMAIL}</span>
+                                        </p>
+                                    </div>
+
+                                    <div className="mt-4 flex flex-wrap gap-2">
+                                        {expert.linkedin && (
+                                            <a href={expert.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
+                                                <LinkedInBrandIcon size={14} />
+                                                LinkedIn
+                                            </a>
+                                        )}
+                                        <a href={`mailto:${CLIENT_COORDINATION_EMAIL}?subject=${encodeURIComponent(`Contacto para ${expert.name}`)}`} className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
+                                            <Mail size={14} />
+                                            Escribir
+                                        </a>
                                     </div>
                                 </div>
                             ))}
@@ -97,7 +127,7 @@ export function DashboardClient({ user }: { user: ClientUser }) {
                                         <p className="text-[0.9rem] text-[var(--text-secondary)]">{project.description}</p>
                                     </div>
                                     <div className="md:w-1/3 p-4 bg-[var(--color-neutral-1000)] border border-[var(--border-subtle)]">
-                                        <span className="block text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)] mb-2">Objetivo Clave (OKR)</span>
+                                        <span className="block text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)] mb-2">Objetivo prioritario (OKR / KPI)</span>
                                         <p className="text-[0.95rem] text-[var(--text-primary)]">{project.okr}</p>
                                     </div>
                                 </div>
@@ -155,7 +185,7 @@ export function DashboardClient({ user }: { user: ClientUser }) {
                                             <span className="block text-[1.1rem] font-display text-[var(--text-primary)]">
                                                 {event?.packages[0]?.price ? `Desde ${event.packages[0].price}` : "Consultar"}
                                             </span>
-                                            <span className="text-[0.65rem] uppercase tracking-wider text-[var(--text-tertiary)]">Miembros</span>
+                                            <span className="text-[0.65rem] uppercase tracking-wider text-[var(--text-tertiary)]">Clientes</span>
                                         </div>
                                     </div>
                                     <Link

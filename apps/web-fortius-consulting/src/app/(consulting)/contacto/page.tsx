@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, ShieldCheck } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
+import { ContactForm } from "@/components/consulting-v2/ContactForm";
 
 export const metadata: Metadata = {
     title: "Contacto — Fortius Consulting",
@@ -8,22 +9,17 @@ export const metadata: Metadata = {
         "Cuéntanos el reto. Te respondemos con una primera lectura estratégica en 48 horas.",
 };
 
-const CHANNELS = [
-    {
-        label: "Asuntos públicos y sociedad civil",
-        email: "civil@fortiusconsulting.com",
-    },
-    {
-        label: "Inteligencia política y geopolítica",
-        email: "intelligence@fortiusconsulting.com",
-    },
-    {
-        label: "Prensa y comunicación",
-        email: "prensa@fortiusconsulting.com",
-    },
-];
+interface ContactoPageProps {
+    searchParams: Promise<{
+        subject?: string;
+        plan?: string;
+        vertical?: string;
+    }>;
+}
 
-export default function ContactoPage() {
+export default async function ContactoPage({ searchParams }: ContactoPageProps) {
+    const params = await searchParams;
+
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
             <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-36">
@@ -39,60 +35,59 @@ export default function ContactoPage() {
                     estratégica y la persona del equipo más adecuada para el caso.
                 </p>
 
-                <div className="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10">
-                    <div className="col-span-1 lg:col-span-7 space-y-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                        {CHANNELS.map((c) => (
-                            <a
-                                key={c.email}
-                                href={`mailto:${c.email}`}
-                                className="group flex items-center justify-between gap-6 bg-[var(--surface-primary)] p-6 hover:bg-[var(--surface-secondary)] transition-colors"
-                            >
-                                <div className="flex items-start gap-4">
-                                    <Mail
-                                        size={18}
-                                        className="text-[var(--color-accent-500)] shrink-0 mt-0.5"
-                                        aria-hidden
-                                    />
-                                    <div className="space-y-1">
-                                        <p className="text-[0.7rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                                            {c.label}
-                                        </p>
-                                        <p className="font-display text-lg text-[var(--text-primary)]">
-                                            {c.email}
-                                        </p>
-                                    </div>
-                                </div>
-                                <ArrowUpRight
-                                    size={18}
-                                    className="text-[var(--text-secondary)] group-hover:text-[var(--color-accent-400)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-                                />
-                            </a>
-                        ))}
+                <div className="mt-20 grid grid-cols-1 gap-10 lg:grid-cols-12">
+                    <div className="col-span-1 lg:col-span-7">
+                        <ContactForm
+                            initialSubject={params.subject ?? ""}
+                            contextPlan={params.plan ?? ""}
+                            contextVertical={params.vertical ?? ""}
+                        />
                     </div>
 
                     <aside className="col-span-1 lg:col-span-5 space-y-8">
                         <div className="space-y-2">
-                            <Bracketed variant="kicker">Oficina</Bracketed>
-                            <p className="font-display text-xl text-[var(--text-primary)] flex items-start gap-3 mt-4">
-                                <MapPin
+                            <Bracketed variant="kicker">Canal central</Bracketed>
+                            <p className="mt-4 flex items-start gap-3 font-display text-xl text-[var(--text-primary)]">
+                                <Mail
                                     size={18}
-                                    className="text-[var(--color-accent-500)] shrink-0 mt-1.5"
+                                    className="mt-1.5 shrink-0 text-[var(--color-accent-500)]"
                                     aria-hidden
                                 />
-                                Madrid · Europa
+                                info@fortiusconsulting.org
                             </p>
-                            <p className="text-[0.85rem] text-[var(--text-secondary)] pl-7 leading-relaxed">
-                                Atendemos a clientes en Europa, Latinoamérica y Norte
-                                de África.
+                            <p className="pl-7 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                                Centralizamos aquí las consultas de servicios, prensa y
+                                colaboraciones institucionales.
+                            </p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Bracketed variant="kicker">Oficinas</Bracketed>
+                            <p className="mt-4 flex items-start gap-3 font-display text-xl text-[var(--text-primary)]">
+                                <MapPin
+                                    size={18}
+                                    className="mt-1.5 shrink-0 text-[var(--color-accent-500)]"
+                                    aria-hidden
+                                />
+                                Europa: Madrid-Pamplona · América: Washington D.C.- Houston
+                            </p>
+                            <p className="pl-7 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                                Atendemos proyectos en Europa, América Latina, Estados
+                                Unidos y Norte de África.
                             </p>
                         </div>
 
                         <div className="pt-8 border-t border-[var(--border-subtle)]">
                             <Bracketed variant="kicker">Compromiso</Bracketed>
-                            <p className="mt-4 text-[0.85rem] text-[var(--text-secondary)] leading-relaxed">
-                                Todas las conversaciones con Fortius son
-                                confidenciales por defecto. Firmamos NDA antes de
-                                cualquier briefing detallado.
+                            <p className="mt-4 flex items-start gap-3 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                                <ShieldCheck
+                                    size={18}
+                                    className="mt-0.5 shrink-0 text-[var(--color-accent-500)]"
+                                    aria-hidden
+                                />
+                                Todas las conversaciones con Fortius son confidenciales
+                                por defecto. Si el caso lo requiere, firmamos NDA antes
+                                de cualquier briefing detallado.
                             </p>
                         </div>
                     </aside>

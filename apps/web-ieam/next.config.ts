@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withContentCollections } from '@content-collections/next';
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
@@ -8,4 +9,4 @@ const nextConfig: NextConfig = {
   // Rewrites for Supabase Storage will be added in Phase 3 once content lives in Supabase.
 };
 
-export default withNextIntl(nextConfig);
+export default withContentCollections(withNextIntl(nextConfig));

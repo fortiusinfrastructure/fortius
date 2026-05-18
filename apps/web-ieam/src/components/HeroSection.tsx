@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import { articles } from '@/lib/mock-data/articles';
+import { researchArticles } from '@/lib/content/research';
 import { pickLocalized, type Locale } from '@/lib/utils/content';
 
 export default async function HeroSection() {
@@ -9,7 +9,7 @@ export default async function HeroSection() {
   const locale = (await getLocale()) as Locale;
 
   const featured =
-    articles.find((a) => a.type === 'Informe' || a.type === 'Policy Brief') || articles[0];
+    researchArticles.find((a) => a.type === 'Informe' || a.type === 'Policy Brief') || researchArticles[0];
   const content = featured ? pickLocalized(featured, locale) : null;
 
   return (

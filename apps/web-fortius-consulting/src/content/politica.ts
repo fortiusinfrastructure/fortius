@@ -43,7 +43,7 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
         ctaLabel: "Empezar plan Básico",
         benefits: [
             {
-                title: "Acceso al Área Privada",
+                title: "Acceso al Área clientes",
                 description:
                     "Biblioteca completa de informes, briefings y dashboards de inteligencia política.",
             },

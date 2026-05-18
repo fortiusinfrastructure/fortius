@@ -37,6 +37,14 @@ export function estimateReadTime(content: string): string {
   return `${minutes} min`;
 }
 
+export function getArticlePreview(excerpt: string, maxLength = 220): string {
+  const clean = excerpt.replace(/\s+/g, " ").trim();
+  if (clean.length <= maxLength && /[.!?…]$/.test(clean)) return clean;
+
+  const slice = clean.slice(0, maxLength).replace(/[\s.,;:!?-]*[^\s]*$/, "").trim();
+  return `${slice || clean}…`;
+}
+
 export function splitArticleContent(content: string): string[] {
   return content
     .split(/\n\n+/)

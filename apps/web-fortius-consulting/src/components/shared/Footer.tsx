@@ -1,30 +1,22 @@
 "use client";
 
-import { Linkedin, Twitter, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { BrandLockup } from "@/components/system/BrandLockup";
+
+function XIcon({ size = 15, className }: { size?: number; className?: string; strokeWidth?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} className={className ?? "fill-current"}>
+      <path d="M18.901 2H21.99l-6.75 7.715L23 22h-6.078l-4.76-6.793L6.22 22H3.13l7.22-8.252L1 2h6.232l4.303 6.164L18.901 2Zm-1.066 18.132h1.712L6.304 3.772H4.467l13.368 16.36Z" />
+    </svg>
+  );
+}
 
 const SOCIAL_LINKS = [
   { icon: Linkedin, href: "https://linkedin.com/company/fortiusconsulting", label: "LinkedIn" },
-  { icon: Twitter, href: "https://x.com/fortiusconsult", label: "X (Twitter)" },
+  { icon: XIcon, href: "https://x.com/fortiusconsult", label: "X" },
   { icon: Instagram, href: "https://instagram.com/fortiusconsulting", label: "Instagram" },
   { icon: Youtube, href: "https://youtube.com/@fortiusconsulting", label: "YouTube" },
 ];
-
-function BracketLogo({ name, sub }: { name: string; sub: string }) {
-  return (
-    <div className="flex items-center gap-1">
-      <span className="text-[var(--text-tertiary)] text-base font-light">[</span>
-      <div className="flex flex-col items-center leading-none -space-y-0.5">
-        <span className="text-[0.85rem] font-display font-bold tracking-[0.1em] text-[var(--text-secondary)] uppercase">
-          {name}
-        </span>
-        <span className="text-[0.42rem] font-body font-medium tracking-[0.2em] text-[var(--text-tertiary)] uppercase">
-          {sub}
-        </span>
-      </div>
-      <span className="text-[var(--text-tertiary)] text-base font-light">]</span>
-    </div>
-  );
-}
 
 export function Footer() {
   return (
@@ -60,11 +52,11 @@ export function Footer() {
           {/* Dual logos */}
           <div className="flex items-center gap-8 md:gap-12">
             <a href="/" aria-label="Fortius Consulting">
-              <BracketLogo name="Fortius" sub="consulting" />
+              <BrandLockup variant="consulting" tone="compact" />
             </a>
             <span className="w-px h-8 bg-[var(--border-default)]" />
             <a href="https://fortiusfoundation.org" target="_blank" rel="noopener noreferrer" aria-label="Fortius Foundation">
-              <BracketLogo name="Fortius" sub="foundation" />
+              <BrandLockup variant="foundation" tone="compact" />
             </a>
           </div>
         </div>

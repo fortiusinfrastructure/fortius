@@ -15,6 +15,7 @@ import {
     getArticleCover,
     getArticleImageSources,
     getArticleLeadData,
+    getArticleSummary,
 } from "@/lib/article-display";
 import { ArticleCoverImage } from "./ArticleCoverImage";
 import { ArticleFormatBlocks } from "./ArticleFormatBlocks";
@@ -30,12 +31,13 @@ interface ArticleDetailPageProps {
 
 export async function buildArticleMetadata(article: Article): Promise<Metadata> {
     const cover = getArticleCover(article.category);
+    const summary = getArticleSummary(article);
     return {
         title: `${article.title} — Fortius Consulting`,
-        description: article.excerpt,
+        description: summary,
         openGraph: {
             title: article.title,
-            description: article.excerpt,
+            description: summary,
             images: [{ url: cover.hardFallback }],
         },
     };
@@ -59,6 +61,7 @@ export async function ArticleDetailPage({
     const bodyMarkdown = isMembersOnly ? paidPreview(lead.markdown, previewParagraphs) : lead.markdown;
     const html = await renderMarkdown(bodyMarkdown);
     const readTime = estimateReadTime(lead.markdown);
+    const summary = getArticleSummary(article);
 
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
@@ -76,7 +79,7 @@ export async function ArticleDetailPage({
                                     <Bracketed variant="tag">{kindLabel(article.kind)} · {categoryLabel(article.category)}</Bracketed>
                                     {isMembersOnly && (
                                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm border border-[var(--color-accent-500)] text-[var(--color-accent-400)] uppercase tracking-[0.16em] text-[0.7rem]">
-                                            <Lock size={12} /> Miembros
+                                            <Lock size={12} /> Clientes
                                         </span>
                                     )}
                                 </div>
@@ -84,7 +87,7 @@ export async function ArticleDetailPage({
                                     {article.title}
                                 </h1>
                                 <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-[var(--text-secondary)]">
-                                    {article.excerpt}
+                                    {summary}
                                 </p>
                                 <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[0.8rem] text-[var(--text-tertiary)]">
                                     <span>{formatPublishedDate(article.published_at)}</span>
@@ -146,7 +149,7 @@ export async function ArticleDetailPage({
                                                 </div>
                                                 <h3 className="mt-3 font-display text-[1.2rem] font-light text-[var(--text-primary)]">{item.title}</h3>
                                                 <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--text-secondary)]">
-                                                    {item.content || "Disponible para miembros del Área Privada."}
+                                                    {item.content || "Disponible para clientes del Área clientes."}
                                                 </p>
                                             </div>
                                         ))}
@@ -167,29 +170,29 @@ export async function ArticleDetailPage({
 
 function PaywallGate({ membershipHref, category, kind, isEvent }: { membershipHref: string; category: string; kind: string; isEvent: boolean }) {
     return (
-        <div role="region" aria-label="Contenido reservado a suscriptores" className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
+        <div role="region" aria-label="Contenido reservado a clientes" className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
             <div className="flex items-start gap-4">
                 <div className="rounded-full bg-[var(--color-accent-500)]/15 p-3 text-[var(--color-accent-400)]">
                     <Lock size={20} />
                 </div>
                 <div className="flex-1">
-                    <Bracketed variant="tag">Contenido para miembros</Bracketed>
+                    <Bracketed variant="tag">Contenido para clientes</Bracketed>
                     <h2 className="mt-4 font-display text-[1.6rem] md:text-[2rem] font-light leading-[1.12] text-[var(--text-primary)]">
                         {isEvent
-                            ? "Esta oportunidad está reservada a miembros de Fortius."
-                            : `El ${kind.toLowerCase()} completo está reservado a miembros de Fortius.`}
+                            ? "Esta oportunidad está reservada a clientes de Fortius."
+                            : `El ${kind.toLowerCase()} completo está reservado a clientes de Fortius.`}
                     </h2>
                     <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
                         {isEvent
-                            ? `Accede al detalle completo del evento, los paquetes disponibles y la gestión desde el Área Privada en Oportunidades & Eventos dentro de ${category.toLowerCase()}.`
-                            : `Accede al contenido íntegro, a los subproductos vinculados y a la biblioteca completa de ${category.toLowerCase()} desde el Área Privada.`}
+                            ? `Accede al detalle completo del evento, los paquetes disponibles y la gestión desde el Área clientes en Oportunidades & Eventos dentro de ${category.toLowerCase()}.`
+                            : `Accede al contenido íntegro, a los subproductos vinculados y a la biblioteca completa de ${category.toLowerCase()} desde el Área clientes.`}
                     </p>
                     <div className="mt-6 flex flex-wrap gap-3">
                         <Link href={membershipHref} className="inline-flex items-center px-5 py-2.5 rounded-sm bg-[var(--color-accent-500)] text-white text-[0.8rem] font-medium uppercase tracking-[0.16em] hover:bg-[var(--color-accent-400)] transition-colors">
                             Ver planes
                         </Link>
                         <Link href="/area-privada" className="inline-flex items-center px-5 py-2.5 rounded-sm border border-[var(--border-strong)] text-[var(--text-primary)] text-[0.8rem] font-medium uppercase tracking-[0.16em] hover:border-[var(--color-accent-500)] transition-colors">
-                            Ya soy suscriptor
+                            Ya soy cliente
                         </Link>
                     </div>
                 </div>
