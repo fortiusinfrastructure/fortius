@@ -5,6 +5,69 @@ import { InitiativeMark } from "@/components/foundation/InitiativeMark";
 import { Bracketed } from "@/components/system/Bracketed";
 import { getProjectsByStage } from "@/content/projects";
 
+function ProjectCard({
+  project,
+  stageLabel,
+  accent,
+}: {
+  project: ReturnType<typeof getProjectsByStage>[number];
+  stageLabel: string;
+  accent: "soft" | "solid";
+}) {
+  const articleClassName =
+    accent === "solid"
+      ? "border-[var(--color-accent-400)] bg-[var(--surface-primary)]"
+      : "border-[var(--border-subtle)] bg-[var(--surface-primary)]";
+
+  return (
+    <article
+      key={project.slug}
+      id={project.slug}
+      className={`overflow-hidden border p-8 ${articleClassName}`}
+    >
+      <div className="grid gap-8 lg:grid-cols-[minmax(280px,0.75fr)_minmax(0,1fr)] lg:items-start">
+        <div>
+          <p className="mb-4 text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+            {stageLabel}
+          </p>
+          <InitiativeMark title={project.name} subtitle={project.title} />
+          <a
+            href={project.siteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 border px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
+            style={{
+              borderColor:
+                accent === "solid"
+                  ? "var(--color-accent-400)"
+                  : "var(--border-default)",
+            }}
+          >
+            {project.ctaLabel}
+            <ArrowUpRight size={14} />
+          </a>
+        </div>
+
+        <div>
+          <p className="max-w-3xl leading-relaxed text-[var(--text-secondary)]">
+            {project.summary}
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {project.details.map((detail) => (
+              <p
+                key={detail}
+                className="border border-[var(--border-subtle)] bg-[var(--surface-secondary)] p-4 text-sm leading-relaxed text-[var(--text-secondary)]"
+              >
+                {detail}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Incubadora — Fundación Fortius",
   description:
@@ -34,32 +97,12 @@ export default function IncubadoraPage() {
             <Bracketed variant="kicker">En incubación</Bracketed>
             <div className="mt-6 grid gap-6">
               {incubating.map((project) => (
-                <article
+                <ProjectCard
                   key={project.slug}
-                  id={project.slug}
-                  className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8"
-                >
-                  <InitiativeMark title={project.name} subtitle={project.title} />
-                  <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-                    {project.summary}
-                  </p>
-                  <div className="mt-6 space-y-3">
-                    {project.details.map((detail) => (
-                      <p key={detail} className="max-w-4xl text-sm leading-relaxed text-[var(--text-secondary)]">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                  <a
-                    href={project.siteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 border px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
-                    style={{ borderColor: "var(--color-accent-400)" }}
-                  >
-                    {project.ctaLabel}
-                  </a>
-                </article>
+                  project={project}
+                  stageLabel="Proyecto en incubación"
+                  accent="soft"
+                />
               ))}
             </div>
           </section>
@@ -68,32 +111,12 @@ export default function IncubadoraPage() {
             <Bracketed variant="kicker">Casos de éxito</Bracketed>
             <div className="mt-6 grid gap-6">
               {success.map((project) => (
-                <article
+                <ProjectCard
                   key={project.slug}
-                  id={project.slug}
-                  className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8"
-                >
-                  <InitiativeMark title={project.name} subtitle={project.title} />
-                  <p className="mt-4 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-                    {project.summary}
-                  </p>
-                  <div className="mt-6 space-y-3">
-                    {project.details.map((detail) => (
-                      <p key={detail} className="max-w-4xl text-sm leading-relaxed text-[var(--text-secondary)]">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                  <a
-                    href={project.siteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-white"
-                    style={{ backgroundColor: "var(--color-accent-500)" }}
-                  >
-                    {project.ctaLabel}
-                  </a>
-                </article>
+                  project={project}
+                  stageLabel="Caso de éxito"
+                  accent="solid"
+                />
               ))}
             </div>
           </section>

@@ -11,14 +11,18 @@ export const LEGAL_NOTICE_CONTENT: LegalDocumentContent = {
   kicker: "Legal",
   title: "Aviso legal",
   intro:
-    "Este sitio web recoge la actividad institucional de Fundación Fortius en España y de Fortius Foundation United States en Estados Unidos.",
+    "Toda esta web es propiedad de Fundación Fortius España y de Fortius Foundation United States.",
   sections: [
     {
-      title: "Titular del sitio",
+      title: "Titularidad del sitio",
       body: [
-        `${FOUNDATION_ENTITIES.spain.name} · ${FOUNDATION_ENTITIES.spain.codeLabel} ${FOUNDATION_ENTITIES.spain.code} · ${FOUNDATION_ENTITIES.spain.address}.`,
-        `${FOUNDATION_ENTITIES.usa.name} · ${FOUNDATION_ENTITIES.usa.codeLabel} ${FOUNDATION_ENTITIES.usa.code} · ${FOUNDATION_ENTITIES.usa.address}.`,
-        `Canal general de contacto: ${FOUNDATION_CONTACT.email}.`,
+        `${FOUNDATION_ENTITIES.spain.name}.`,
+        `${FOUNDATION_ENTITIES.spain.codeLabel}: ${FOUNDATION_ENTITIES.spain.code}.`,
+        `Dirección postal: ${FOUNDATION_ENTITIES.spain.address}.`,
+        `${FOUNDATION_ENTITIES.usa.name}.`,
+        `${FOUNDATION_ENTITIES.usa.codeLabel}: ${FOUNDATION_ENTITIES.usa.code}.`,
+        `EE.UU.: ${FOUNDATION_ENTITIES.usa.address}.`,
+        `Email de contacto: ${FOUNDATION_CONTACT.email}.`,
       ],
     },
     {
@@ -42,13 +46,16 @@ export const PRIVACY_CONTENT: LegalDocumentContent = {
   kicker: "Legal",
   title: "Política de privacidad",
   intro:
-    "Fundación Fortius trata los datos personales que el usuario facilita de forma voluntaria a través del correo electrónico u otros canales de contacto vinculados al sitio.",
+    "Toda esta web es propiedad de Fundación Fortius España y de Fortius Foundation United States, responsables de los tratamientos vinculados a su actividad institucional.",
   sections: [
     {
       title: "Responsables del tratamiento",
       body: [
-        `${FOUNDATION_ENTITIES.spain.name} (${FOUNDATION_ENTITIES.spain.codeLabel} ${FOUNDATION_ENTITIES.spain.code}) y ${FOUNDATION_ENTITIES.usa.name} (${FOUNDATION_ENTITIES.usa.codeLabel} ${FOUNDATION_ENTITIES.usa.code}) operan este sitio en el ámbito de su actividad institucional.`,
-        `Puedes escribirnos a ${FOUNDATION_CONTACT.email} para cualquier consulta sobre protección de datos.`,
+        `${FOUNDATION_ENTITIES.spain.name} · ${FOUNDATION_ENTITIES.spain.codeLabel}: ${FOUNDATION_ENTITIES.spain.code}.`,
+        `Dirección postal: ${FOUNDATION_ENTITIES.spain.address}.`,
+        `${FOUNDATION_ENTITIES.usa.name} · ${FOUNDATION_ENTITIES.usa.codeLabel}: ${FOUNDATION_ENTITIES.usa.code}.`,
+        `EE.UU.: ${FOUNDATION_ENTITIES.usa.address}.`,
+        `Email de contacto: ${FOUNDATION_CONTACT.email}.`,
       ],
     },
     {
@@ -79,8 +86,18 @@ export const COOKIES_CONTENT: LegalDocumentContent = {
   kicker: "Legal",
   title: "Política de cookies",
   intro:
-    "Este sitio puede utilizar cookies técnicas o de medición básicas necesarias para su funcionamiento, navegación y mejora del servicio.",
+    "Toda esta web es propiedad de Fundación Fortius España y de Fortius Foundation United States. Este sitio puede utilizar cookies técnicas o de medición básicas necesarias para su funcionamiento, navegación y mejora del servicio.",
   sections: [
+    {
+      title: "Titularidad del sitio",
+      body: [
+        `${FOUNDATION_ENTITIES.spain.name} · ${FOUNDATION_ENTITIES.spain.codeLabel}: ${FOUNDATION_ENTITIES.spain.code}.`,
+        `Dirección postal: ${FOUNDATION_ENTITIES.spain.address}.`,
+        `${FOUNDATION_ENTITIES.usa.name} · ${FOUNDATION_ENTITIES.usa.codeLabel}: ${FOUNDATION_ENTITIES.usa.code}.`,
+        `EE.UU.: ${FOUNDATION_ENTITIES.usa.address}.`,
+        `Email de contacto: ${FOUNDATION_CONTACT.email}.`,
+      ],
+    },
     {
       title: "Qué son las cookies",
       body: [

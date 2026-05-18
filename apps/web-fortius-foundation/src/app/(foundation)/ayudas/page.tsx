@@ -15,6 +15,70 @@ const PROCESS = [
   "Acompañamos la ejecución con visión de largo plazo y rendición de cuentas.",
 ];
 
+function AidBox({
+  id,
+  kicker,
+  title,
+  benefits,
+  ctaHref,
+  ctaLabel,
+  ctaVariant,
+}: {
+  id: string;
+  kicker: string;
+  title: string;
+  benefits: string[];
+  ctaHref: string;
+  ctaLabel: string;
+  ctaVariant: "solid" | "outline";
+}) {
+  return (
+    <div className="space-y-4">
+      <section
+        id={id}
+        className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-primary)]"
+      >
+        <div className="border-b border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-7">
+          <Bracketed variant="kicker">{kicker}</Bracketed>
+          <p className="mt-4 max-w-xl font-display text-[1.95rem] font-light leading-[1.08] text-white">
+            {title}
+          </p>
+        </div>
+
+        <div className="p-8">
+          <div className="grid gap-3">
+            {benefits.map((item, index) => (
+              <article
+                key={item}
+                className="grid grid-cols-[auto_1fr] gap-4 border border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-4 py-4"
+              >
+                <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
+                  {item}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Link
+        href={ctaHref}
+        className={`inline-flex items-center gap-2 px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition-colors ${
+          ctaVariant === "solid"
+            ? "bg-[var(--color-accent-500)] text-white"
+            : "border border-[var(--color-accent-400)] text-[var(--text-primary)] hover:bg-[var(--surface-secondary)]"
+        }`}
+      >
+        {ctaLabel}
+        <ArrowUpRight size={14} />
+      </Link>
+    </div>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Ayudas — Fundación Fortius",
   description:
@@ -36,55 +100,25 @@ export default function AyudasPage() {
         </p>
 
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
-          <section id="donantes" className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-primary)]">
-            <div className="border-b border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-6">
-              <Bracketed variant="kicker">Para donantes</Bracketed>
-              <p className="mt-4 max-w-xl font-display text-[1.9rem] font-light leading-[1.1] text-white">
-                Ayudamos a donar con más criterio, mejor seguimiento y más claridad institucional.
-              </p>
-            </div>
-            <div className="p-8">
-            <ul className="mt-6 space-y-4">
-              {DONOR_BENEFITS.map((item) => (
-                <li key={item} className="text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
-                  {item}
-                </li>
-              ))}
-            </ul>
-              <Link
-                href="/donaciones"
-                className="mt-8 inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-white"
-              >
-                Dona
-                <ArrowUpRight size={14} />
-              </Link>
-            </div>
-          </section>
+          <AidBox
+            id="donantes"
+            kicker="Para donantes"
+            title="Ayudamos a donar con más criterio, mejor seguimiento y más claridad institucional."
+            benefits={DONOR_BENEFITS}
+            ctaHref="/donaciones"
+            ctaLabel="Dona"
+            ctaVariant="solid"
+          />
 
-          <section id="beneficiarios" className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-primary)]">
-            <div className="border-b border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-6">
-              <Bracketed variant="kicker">Para beneficiarios</Bracketed>
-              <p className="mt-4 max-w-xl font-display text-[1.9rem] font-light leading-[1.1] text-white">
-                Acompañamos proyectos y organizaciones que necesitan estructura, foco y capacidad de crecimiento.
-              </p>
-            </div>
-            <div className="p-8">
-            <ul className="mt-6 space-y-4">
-              {BENEFICIARY_BENEFITS.map((item) => (
-                <li key={item} className="text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
-                  {item}
-                </li>
-              ))}
-            </ul>
-              <Link
-                href="/contacto"
-                className="mt-8 inline-flex items-center gap-2 border border-[var(--color-accent-400)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
-              >
-                Escríbenos
-                <ArrowUpRight size={14} />
-              </Link>
-            </div>
-          </section>
+          <AidBox
+            id="beneficiarios"
+            kicker="Para beneficiarios"
+            title="Acompañamos proyectos y organizaciones que necesitan estructura, foco y capacidad de crecimiento."
+            benefits={BENEFICIARY_BENEFITS}
+            ctaHref="/contacto"
+            ctaLabel="Escríbenos"
+            ctaVariant="outline"
+          />
         </div>
 
         <section className="mt-16 border-t border-[var(--border-subtle)] pt-10">

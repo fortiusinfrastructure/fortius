@@ -92,6 +92,7 @@ export async function sendInternalContactNotification({
   replyTo,
   subject,
   html,
+  attachments,
   relatedId,
   metadata,
 }: {
@@ -99,6 +100,11 @@ export async function sendInternalContactNotification({
   replyTo: string;
   subject: string;
   html: string;
+  attachments?: Array<{
+    filename: string;
+    content: string;
+    content_type?: string;
+  }>;
   relatedId?: string;
   metadata?: Record<string, unknown>;
 }) {
@@ -130,6 +136,7 @@ export async function sendInternalContactNotification({
         subject,
         html,
         reply_to: replyTo,
+        attachments,
       }),
     });
 

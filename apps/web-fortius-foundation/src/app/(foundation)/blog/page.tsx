@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { ArticleSubmissionForm } from "@/components/foundation/ArticleSubmissionForm";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
   estimateReadTime,
@@ -34,7 +35,14 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="group relative overflow-hidden bg-[var(--surface-primary)] p-7 transition-colors hover:bg-[var(--surface-secondary)]"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.16),transparent_38%),linear-gradient(135deg,rgba(20,83,45,0.06),transparent_65%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.18),transparent_34%),linear-gradient(135deg,rgba(20,83,45,0.08),transparent_64%)]" />
+              <div
+                className="absolute inset-0 opacity-50"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(135deg, rgba(34,197,94,0.045) 0, rgba(34,197,94,0.045) 2px, transparent 2px, transparent 18px), repeating-linear-gradient(45deg, rgba(21,128,61,0.03) 0, rgba(21,128,61,0.03) 1px, transparent 1px, transparent 14px)",
+                }}
+              />
               <div className="absolute -right-5 bottom-0 font-display text-[5.5rem] italic leading-none text-[var(--color-accent-500)]/10">
                 FF
               </div>
@@ -78,13 +86,7 @@ export default function BlogPage() {
           <p className="mt-4 max-w-2xl leading-relaxed text-[var(--color-accent-100)]">
             Mándanos tu artículo. Puedes enviarlo por correo y adjuntar el texto o el archivo correspondiente para que el equipo lo revise.
           </p>
-          <a
-            href={`mailto:${FOUNDATION_CONTACT.email}?subject=Propuesta%20de%20art%C3%ADculo%20para%20Fortius%20Foundation`}
-            className="mt-6 inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-white"
-          >
-            Mándanos tu artículo
-            <ArrowUpRight size={14} />
-          </a>
+          <ArticleSubmissionForm />
         </section>
       </section>
     </main>

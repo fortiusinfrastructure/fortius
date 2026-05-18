@@ -9,13 +9,10 @@ export const POLITICA_INTRO = {
     kicker: "Política",
     hero: "Inteligencia política para quienes asumen la responsabilidad de decidir y de servir.",
     subcopy: [
-        "Asesoramos a líderes políticos, institucionales y organizaciones estratégicas que necesitan contexto, anticipación y criterio para actuar en entornos complejos.",
-        "Combinamos inteligencia política, análisis de riesgos y lectura geopolítica para convertir incertidumbre en ventaja estratégica.",
+        "Asesoramos a líderes políticos, partidos e instituciones que necesitan contexto, anticipación y criterio para actuar en entornos complejos. Combinamos inteligencia política, análisis de riesgos y lectura geopolítica para convertir incertidumbre en ventaja estratégica.",
     ],
     description: [
-        "La política de alto nivel exige algo más que información. Exige contexto, interpretación y capacidad de anticipación.",
-        "Fortius proporciona inteligencia estratégica a quienes toman decisiones en escenarios de alta complejidad política, regulatoria o reputacional.",
-        "Ayudamos a comprender actores, incentivos, riesgos y dinámicas de poder antes de que se materialicen.",
+        "La política de alto nivel exige algo más que información. Exige interpretación y capacidad de anticipación. En Fortius ayudamos a comprender actores, incentivos y dinámicas de poder antes de que se materialicen —para que quienes deciden lo hagan con claridad y valentía.",
     ],
 };
 
@@ -40,7 +37,8 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
             "Para equipos que necesitan inteligencia política continua y contexto accionable.",
         priceMonthly: 1500,
         priceAnnual: 18000,
-        ctaLabel: "Empezar plan Básico",
+        ctaLabel: "Acceder al plan básico",
+        href: "/area-privada",
         benefits: [
             {
                 title: "Acceso al Área clientes",
@@ -77,7 +75,8 @@ export const POLITICA_MEMBERSHIP_TIERS: MembershipTier[] = [
         priceMonthly: 3000,
         priceAnnual: 36000,
         featured: true,
-        ctaLabel: "Solicitar plan Premium",
+        ctaLabel: "Acceder al plan Premium",
+        href: "/area-privada",
         benefits: [
             {
                 title: "Todo lo incluido en el Plan Básico",

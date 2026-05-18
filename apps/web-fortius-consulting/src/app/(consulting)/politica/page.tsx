@@ -35,12 +35,15 @@ export default function PoliticaPage() {
             />
 
             <Subverticals
-                kicker="Áreas de trabajo"
+                kicker="ÁREAS DE TRABAJO"
                 title="Dos lecturas complementarias para decisiones de alto impacto."
                 items={POLITICA_SUBVERTICALS}
             />
 
-            <WorkAreaSection vertical={politica} />
+            <WorkAreaSection
+                vertical={politica}
+                title="El contexto y criterio que necesitas para decidir bien"
+            />
 
             <ServicesPortfolio
                 kicker={`Portafolio · ${politica.label}`}
@@ -54,15 +57,21 @@ export default function PoliticaPage() {
             <MembershipTiers
                 kicker="Darse de Alta"
                 title="Membresías para acompañamiento continuo."
-                description="Acceso al Área clientes y a la inteligencia política de Fortius. Dos planes diseñados para distintos niveles de exigencia y profundidad."
+                description="Acceso al Área Privada y a herramientas, conocimiento y comunidad. Para organizaciones con vocación de impacto. Dos planes diseñados para distintos niveles de exigencia y profundidad."
                 tiers={POLITICA_MEMBERSHIP_TIERS}
                 contactVertical="Política"
             />
 
-            <AccessPrivateAreaCTA />
+            <AccessPrivateAreaCTA
+                eyebrow="¿Ya eres cliente?"
+                label="Accede al Área Privada"
+                description="Inicia sesión o solicita acceso para acceder a todas tus ventajas y consultar informes y notas exclusivas."
+            />
 
             <IdeasMarquee
                 kicker="Experiencia"
+                title="Organizaciones, redes e instituciones con las que Fortius ya ha trabajado o colaborado."
+                description="Una parte de nuestra experiencia en política se ha construido acompañando a actores, instituciones y ecosistemas donde la lectura del contexto y la anticipación marcan la diferencia."
                 ariaLabel="Experiencia — organizaciones e ideas que movemos"
             />
 

@@ -10,14 +10,13 @@ export const metadata: Metadata = {
 
 const SPAIN_BENEFITS = [
   "Los importes indicados en esta página no incluyen IVA por tratarse de donaciones económicas de carácter social.",
-  "Si eres persona física: las donaciones de hasta 250 € tienen una desgravación del 80% en el IRPF. A partir de 250 €, la deducción es del 40%, que se incrementa al 45% desde el tercer año en caso de donaciones periódicas a la misma entidad.",
-  "Si eres persona jurídica: la deducción en cuota del Impuesto sobre Sociedades es del 40%, ampliable al 50% cuando se realizan donaciones a la misma entidad por el mismo importe o superior durante al menos tres años consecutivos.",
+  "Si eres persona física: Las donaciones de hasta 250 € tienen una desgravación del 80% en el IRPF — es decir, por una donación de 250 €, recuperarás 200 € en tu próxima declaración de la renta. A partir de 250 €, la deducción es del 40%, que se incrementa al 45% desde el tercer año en caso de donaciones periódicas a la misma entidad.",
+  "Si eres persona jurídica: La deducción en cuota del Impuesto sobre Sociedades es del 40%, ampliable al 50% cuando se realizan donaciones a la misma entidad por el mismo importe o superior durante al menos tres años consecutivos.",
 ] as const;
 
 const US_BENEFITS = [
-  "Si eres persona física: a partir del ejercicio fiscal 2026, puedes deducir hasta 1.000 $ en donaciones en efectivo a organizaciones benéficas reconocidas (2.000 $ para declaraciones conjuntas), incluso si optas por la deducción estándar.",
-  "Si detallas tus deducciones (itemize), la deducción aplica sobre las donaciones que superen el 0,5% de tu renta bruta ajustada. Para contribuyentes en el tramo más alto (37%), el valor de la deducción está limitado al 35% del importe donado.",
-  "Si eres persona jurídica: a partir de 2026, las empresas pueden deducir las donaciones que superen el 1% de su renta imponible, con un límite máximo del 10% anual. Las cantidades no deducidas pueden trasladarse a los cinco ejercicios siguientes.",
+  "Si eres persona física: A partir del ejercicio fiscal 2026, puedes deducir hasta 1.000 $ en donaciones en efectivo a organizaciones benéficas reconocidas (2.000 $ para declaraciones conjuntas de matrimonio), incluso si optas por la deducción estándar. Si detalles tus deducciones (itemize), la deducción aplica sobre las donaciones que superen el 0,5% de tu renta bruta ajustada. Para contribuyentes en el tramo impositivo más alto (37%), el valor de la deducción está limitado al 35% del importe donado.",
+  "Si eres persona jurídica: A partir de 2026, las empresas pueden deducir las donaciones que superen el 1% de su renta imponible, con un límite máximo del 10% de la renta imponible anual. Las cantidades no deducidas en un ejercicio pueden trasladarse a los cinco ejercicios siguientes.",
 ] as const;
 
 export default function DonacionesPage() {

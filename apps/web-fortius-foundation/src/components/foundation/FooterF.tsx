@@ -1,41 +1,55 @@
 import Link from "next/link";
+import { Instagram, Linkedin, Youtube } from "lucide-react";
+import { ConsultingLockup } from "./ConsultingLockup";
 import { FoundationLockup } from "./FoundationLockup";
 import {
-  FOUNDATION_CONTACT,
-  FOUNDATION_ENTITIES,
+  FOUNDATION_SOCIAL_LINKS,
   LEGAL_LINKS,
 } from "@/content/site";
 
-export function FooterF() {
-  const entities = [FOUNDATION_ENTITIES.spain, FOUNDATION_ENTITIES.usa];
+function XIcon({ size = 15, className }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} className={className ?? "fill-current"}>
+      <path d="M18.901 2H21.99l-6.75 7.715L23 22h-6.078l-4.76-6.793L6.22 22H3.13l7.22-8.252L1 2h6.232l4.303 6.164L18.901 2Zm-1.066 18.132h1.712L6.304 3.772H4.467l13.368 16.36Z" />
+    </svg>
+  );
+}
 
+const SOCIAL_ICONS = {
+  LinkedIn: Linkedin,
+  X: XIcon,
+  Instagram: Instagram,
+  YouTube: Youtube,
+} as const;
+
+export function FooterF() {
   return (
     <footer
       role="contentinfo"
       className="border-t border-[var(--border-subtle)] bg-[var(--color-neutral-1000)]"
     >
       <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-12">
-        <div className="flex flex-col items-start justify-between gap-10 border-b border-[var(--border-subtle)] pb-10 md:flex-row md:items-center">
+        <div className="flex flex-col items-center justify-between gap-10 border-b border-[var(--border-subtle)] pb-10 md:flex-row">
           <div>
-            <h4 className="mb-4 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)]">
-              Contacto
+            <h4 className="mb-5 text-center text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)] md:text-left">
+              Síguenos
             </h4>
-            <p className="font-display text-[1.5rem] font-light text-[var(--text-primary)]">
-              {FOUNDATION_CONTACT.email}
-            </p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/contacto"
-                className="px-4 py-2 text-[0.7rem] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-primary)]"
-              >
-                [ Contacto ]
-              </Link>
-              <Link
-                href="/area-privada"
-                className="px-4 py-2 text-[0.7rem] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-primary)]"
-              >
-                [ Área Privada ]
-              </Link>
+            <div className="flex items-center gap-3">
+              {FOUNDATION_SOCIAL_LINKS.map(({ label, href }) => {
+                const Icon = SOCIAL_ICONS[label];
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border-default)] text-[var(--text-tertiary)] transition-all duration-150 hover:border-[var(--border-strong)] hover:bg-[var(--surface-secondary)] hover:text-[var(--text-primary)]"
+                  >
+                    <Icon size={15} strokeWidth={1.5} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -48,30 +62,11 @@ export function FooterF() {
               href="https://fortiusconsulting.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+              aria-label="Fortius Consulting"
             >
-              [ Fortius Consulting ]
+              <ConsultingLockup tone="compact" />
             </a>
           </div>
-        </div>
-
-        <div className="grid gap-6 border-b border-[var(--border-subtle)] py-8 md:grid-cols-2">
-          {entities.map((entity) => (
-            <article
-              key={entity.name}
-              className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-5"
-            >
-              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                {entity.name}
-              </p>
-              <p className="mt-3 text-[0.78rem] uppercase tracking-[0.16em] text-[var(--color-accent-300)]">
-                {entity.codeLabel} {entity.code}
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                {entity.address}
-              </p>
-            </article>
-          ))}
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-1 pt-8">
@@ -79,7 +74,7 @@ export function FooterF() {
             <span key={link.href} className="flex items-center gap-1">
               <Link
                 href={link.href}
-                className="px-2 text-[0.65rem] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-secondary)]"
+                className="px-2 text-[0.65rem] text-[var(--text-tertiary)] transition-colors duration-150 hover:text-[var(--text-secondary)]"
               >
                 [ {link.label} ]
               </Link>

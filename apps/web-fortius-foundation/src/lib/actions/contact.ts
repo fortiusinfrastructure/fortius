@@ -7,6 +7,14 @@ import {
 } from "@/lib/email";
 
 const NOTIFICATION_EMAIL = "info@fundacionfortius.org";
+const MAX_ATTACHMENT_SIZE = 8 * 1024 * 1024;
+const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
+  "pdf",
+  "doc",
+  "docx",
+  "txt",
+  "md",
+]);
 
 function createAdminClient() {
   return createClient(
@@ -42,12 +50,37 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#39;");
 }
 
+async function normalizeAttachment(fileEntry: FormDataEntryValue | null) {
+  if (!(fileEntry instanceof File) || fileEntry.size === 0) return null;
+
+  const fileName = fileEntry.name || "adjunto";
+  const extension = fileName.split(".").pop()?.toLowerCase() ?? "";
+
+  if (!ALLOWED_ATTACHMENT_EXTENSIONS.has(extension)) {
+    throw new Error(
+      "El adjunto debe estar en formato PDF, DOC, DOCX, TXT o MD.",
+    );
+  }
+
+  if (fileEntry.size > MAX_ATTACHMENT_SIZE) {
+    throw new Error("El archivo adjunto no puede superar los 8 MB.");
+  }
+
+  const buffer = Buffer.from(await fileEntry.arrayBuffer());
+
+  return {
+    file: fileEntry,
+    encoded: buffer.toString("base64"),
+  };
+}
+
 export async function submitFoundationContact(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const subject = String(formData.get("subject") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
   const organization = String(formData.get("organization") ?? "").trim();
+  const attachment = await normalizeAttachment(formData.get("attachment"));
 
   if (!name || !email || !subject || !message) {
     throw new Error("Missing required contact fields.");
@@ -59,9 +92,19 @@ export async function submitFoundationContact(formData: FormData) {
   }
 
   const { firstName, lastName } = splitName(name);
-  const finalMessage = organization
-    ? `Organización: ${organization}\n\n${message}`
-    : message;
+  const finalMessageParts = [] as string[];
+
+  if (organization) {
+    finalMessageParts.push(`Organización: ${organization}`);
+  }
+
+  finalMessageParts.push(message);
+
+  if (attachment) {
+    finalMessageParts.push(`Archivo adjunto: ${attachment.file.name}`);
+  }
+
+  const finalMessage = finalMessageParts.join("\n\n");
 
   const admin = createAdminClient();
   const { data: submission, error: insertError } = await admin
@@ -104,11 +147,21 @@ export async function submitFoundationContact(formData: FormData) {
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Asunto:</strong> ${escapeHtml(subject)}</p>
         <p><strong>Organización:</strong> ${escapeHtml(organization || "No indicada")}</p>
+        <p><strong>Adjunto:</strong> ${escapeHtml(attachment?.file.name || "No adjunto")}</p>
         <div style="margin-top: 20px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 16px; line-height: 1.7;">
           ${escapedMessage}
         </div>
       </div>
     `,
+    attachments: attachment
+      ? [
+          {
+            filename: attachment.file.name,
+            content: attachment.encoded,
+            content_type: attachment.file.type || undefined,
+          },
+        ]
+      : undefined,
   });
 
   if (!notificationResult.success) {

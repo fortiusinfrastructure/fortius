@@ -14,13 +14,13 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 
 export function AccessPrivateAreaCTA({
     eyebrow,
-    label = "Accede al Área clientes",
+    label = "Accede al Área Privada",
     description = "Inicia sesión o solicita acceso para consultar informes, briefings y dashboards reservados.",
     href = "/area-privada",
 }: AccessPrivateAreaCTAProps = {}) {
     return (
         <section
-            aria-label="Acceso al Área clientes"
+            aria-label="Acceso al Área Privada"
             className="relative border-t border-[var(--border-subtle)] py-20 md:py-28"
         >
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">

@@ -4,8 +4,8 @@ interface FoundationLockupProps {
 }
 
 export function FoundationLockup({ tone = "default", className = "" }: FoundationLockupProps) {
-    const size = tone === "compact" ? "text-[0.82rem]" : "text-[0.98rem]";
-    const sub = tone === "compact" ? "text-[0.48rem]" : "text-[0.56rem]";
+    const size = tone === "compact" ? "text-[0.86rem]" : "text-[1rem]";
+    const sub = tone === "compact" ? "text-[0.5rem]" : "text-[0.6rem]";
 
     return (
         <span className={`group inline-flex items-center gap-1 ${className}`}>
@@ -14,12 +14,12 @@ export function FoundationLockup({ tone = "default", className = "" }: Foundatio
                 <span
                     className={`font-display font-light tracking-[0.18em] text-[var(--text-primary)] uppercase ${size}`}
                 >
-                    Fortius
+                    FORTIUS
                 </span>
                 <span
-                    className={`font-sans font-semibold tracking-[0.24em] text-[var(--color-accent-300)] lowercase ${sub}`}
+                    className={`font-sans font-semibold tracking-[0.24em] text-[var(--color-accent-300)] uppercase ${sub}`}
                 >
-                    foundation
+                    FOUNDATION
                 </span>
             </span>
             <span className="text-lg font-light text-[var(--color-accent-400)] transition-colors duration-200 group-hover:text-[var(--color-accent-300)]">]</span>

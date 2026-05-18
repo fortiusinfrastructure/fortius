@@ -191,7 +191,7 @@ export const VERTICALS: VerticalDef[] = [
         ],
         clients: ["Acton Institute", "Universidad de Navarra", "The LEX Fellowship", "ACI Prensa", "Chapel & York", "Principios"],
         privateArea: {
-            title: "Área clientes — Sociedad Civil",
+            title: "Área Privada — Sociedad Civil",
             description:
                 "Acceso a frameworks, plantillas y diagnósticos para organizaciones asesoradas.",
             ctaLabel: "Solicitar acceso",
@@ -297,7 +297,7 @@ export const VERTICALS: VerticalDef[] = [
         ],
         clients: ["Axioma", "ISI", "Cooperación Internacional", "Acton Institute"],
         privateArea: {
-            title: "Área clientes — Política",
+            title: "Área Privada — Política",
             description:
                 "Acceso exclusivo a informes, monitorizaciones y dashboards de inteligencia política.",
             ctaLabel: "Solicitar acceso",

@@ -61,14 +61,12 @@ export function NavF() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="https://fortiusconsulting.com"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/donaciones"
             className="text-[0.7rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-secondary)]"
           >
-            [Consulting]
-          </a>
+            [Donar]
+          </Link>
           <Link
             href="/area-privada"
             className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white transition-colors"
@@ -109,6 +107,12 @@ export function NavF() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/donaciones"
+              className="px-2 py-3 text-[0.78rem] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+            >
+              [Donar]
+            </Link>
             <Link
               href="/area-privada"
               className="mt-3 inline-flex items-center justify-center px-4 py-3 text-[0.76rem] font-semibold uppercase tracking-[0.16em] text-white"

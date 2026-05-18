@@ -33,7 +33,12 @@ import {
     type Article,
     type ArticleCategory,
 } from "@/lib/articles";
-import { getArticleCover, getArticleImageSources, getArticleSummary } from "@/lib/article-display";
+import {
+    getArticleCover,
+    getArticleImageSources,
+    getArticleLeadData,
+    getArticleSummary,
+} from "@/lib/article-display";
 import { ArticleCoverImage } from "./ArticleCoverImage";
 
 const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
@@ -42,6 +47,8 @@ const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
 };
 
 function articleToInsight(a: Article) {
+    const lead = getArticleLeadData(a);
+
     return {
         slug: a.slug,
         category: kindLabel(a.kind),
@@ -49,6 +56,7 @@ function articleToInsight(a: Article) {
         excerpt: getArticleSummary(a),
         date: formatShortDate(a.published_at) || categoryLabel(a.category),
         readTime: estimateReadTime(a.content_markdown),
+        author: lead.author ?? "Equipo Fortius",
     };
 }
 
@@ -75,22 +83,39 @@ interface VerticalSectionProps {
     summaryOnly?: boolean;
 }
 
+interface EditorialInsightItem {
+    slug: string;
+    category: string;
+    title: string;
+    excerpt: string;
+    date: string;
+    readTime: string;
+    author?: string | null;
+}
+
+function fallbackInsight(item: VerticalDef["insights"][number]): EditorialInsightItem {
+    return {
+        ...item,
+        author: "Equipo Fortius",
+    };
+}
+
 export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly = false }: VerticalSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
     const slots = category ? getEditorialSlots(category) : null;
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
-    const featured = slots?.featured
+    const featured: EditorialInsightItem = slots?.featured
         ? articleToInsight(slots.featured)
-        : v.insights.find((i) => i.featured) ?? v.insights[0];
+        : fallbackInsight(v.insights.find((i) => i.featured) ?? v.insights[0]);
     const featuredHref = slots?.featured
         ? `${v.href}/${slots.featured.slug}`
         : `/publicaciones/${featured.slug}`;
 
-    const rest = slots && slots.rest.length > 0
+    const rest: EditorialInsightItem[] = slots && slots.rest.length > 0
         ? slots.rest.map(articleToInsight)
-        : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
+        : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2).map(fallbackInsight);
     const restHref = (i: number): string =>
         slots && slots.rest[i]
             ? `${v.href}/${slots.rest[i].slug}`
@@ -228,6 +253,14 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                     <span>{featured.date}</span>
                                     <span>·</span>
                                     <span>{featured.readTime}</span>
+                                    {featured.author && (
+                                        <>
+                                            <span>·</span>
+                                            <span className="normal-case tracking-normal">
+                                                {featured.author}
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                                 <h3 className="font-display text-[clamp(1.5rem,2.3vw,2.2rem)] font-light leading-[1.12] tracking-tight text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
                                     {featured.title}
@@ -264,6 +297,11 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                             <h4 className="font-display text-lg font-light leading-[1.2] text-[var(--text-primary)] group-hover:text-[var(--color-accent-400)] transition-colors">
                                                 {p.title}
                                             </h4>
+                                            {p.author && (
+                                                <p className="text-[0.78rem] text-[var(--text-secondary)]">
+                                                    {p.author}
+                                                </p>
+                                            )}
                                             <p className="text-[0.85rem] text-[var(--text-tertiary)] leading-relaxed line-clamp-2">
                                                 {p.excerpt}
                                             </p>
@@ -319,7 +357,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 className="group inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                             >
                                 <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
-                                    Acceder al Área clientes
+                                        Acceder al Área Privada
                                 </span>
                                 <ArrowUpRight
                                     size={16}

@@ -14,9 +14,16 @@ export const FOUNDATION_NAV_LINKS = [
 ] as const;
 
 export const LEGAL_LINKS = [
-  { label: "Aviso legal", href: "/legal" },
-  { label: "Política de privacidad", href: "/privacidad" },
-  { label: "Política de cookies", href: "/cookies" },
+  { label: "Aviso Legal", href: "/legal" },
+  { label: "Política de Privacidad", href: "/privacidad" },
+  { label: "Política de Cookies", href: "/cookies" },
+] as const;
+
+export const FOUNDATION_SOCIAL_LINKS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/fundacion-fortius/" },
+  { label: "X", href: "https://twitter.com/JuanASotoG" },
+  { label: "Instagram", href: "https://www.instagram.com/fortius_consulting/" },
+  { label: "YouTube", href: "https://www.youtube.com/@fortius_media" },
 ] as const;
 
 export const ABOUT_SECTIONS = [
@@ -81,16 +88,16 @@ export const FOUNDATION_ENTITIES = {
 
 export const STRATEGIC_PARTNERS = [
   {
-    name: "TrustBridge Global",
+    name: "TrustBridge",
     href: "https://www.trustbridgeglobal.com/",
     logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/12/trus.svg",
-    copy: "La Fundación TrustBridge Global es un centro con sede en Suiza para una plataforma global de pagos filantrópicos e inversión de impacto. Como parte de esta red, Fundación Fortius España permite a los donantes en España realizar donaciones internacionales con plena confianza y con los correspondientes certificados de desgravación fiscal.",
+    copy: "TrustBridge es un centro con sede en Suiza para una plataforma global de pagos filantrópicos e inversión de impacto. Como parte de esta red, Fundación Fortius España permite a los donantes en España realizar donaciones internacionales con plena confianza y con los correspondientes certificados de desgravación fiscal.",
   },
   {
-    name: "together.eu",
+    name: "Together.eu",
     href: "https://together.europarl.europa.eu/es/",
     logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/12/togethes.svg",
-    copy: "together.eu, iniciativa del Parlamento Europeo, es una plataforma paneuropea de participación cívica orientada a fortalecer la democracia y la implicación de la sociedad civil en la vida pública europea. Esta colaboración refuerza nuestra vocación de contribuir a una ciudadanía más formada, libre y comprometida con el futuro de Europa.",
+    copy: "Together.eu, iniciativa del Parlamento Europeo, es una plataforma paneuropea de participación cívica orientada a fortalecer la democracia y la implicación de la sociedad civil en la vida pública europea. Esta colaboración refuerza nuestra vocación de contribuir a una ciudadanía más formada, libre y comprometida con el futuro de Europa.",
   },
 ];
 

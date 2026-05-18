@@ -96,7 +96,7 @@ export function FoundationBridge() {
                         className="col-span-12 lg:col-span-5 lg:pb-4"
                     >
                         <a
-                            href="https://fortiusfoundation.org"
+                            href="https://fundacionfortius.org"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group block p-8 border transition-colors duration-300"
@@ -128,7 +128,7 @@ export function FoundationBridge() {
                                 Conocer Fortius Foundation
                             </p>
                             <p className="mt-4 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                                Próximamente · sitio dedicado
+                                Sitio institucional activo
                             </p>
                         </a>
                     </motion.div>

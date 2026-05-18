@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PersonCard } from "@/components/foundation/PersonCard";
 import {
@@ -18,7 +20,6 @@ import {
     CONSEJO_ASESOR,
     TEAM,
     TEAM_AREA_LABEL,
-    TEAM_GROUP_LABEL,
     getBoardByChapter,
     type AdvisoryMember,
     type BoardMember,
@@ -46,7 +47,7 @@ function teamToDialog(m: TeamMember): PersonDialogData {
         email: m.email,
         linkedin: m.linkedin,
         photo: m.photo,
-        sectionLabel: TEAM_GROUP_LABEL[m.group],
+        sectionLabel: "Equipo",
     };
 }
 
@@ -63,203 +64,198 @@ function advisoryToDialog(m: AdvisoryMember): PersonDialogData {
 
 export function NosotrosClient() {
     const [active, setActive] = useState<PersonDialogData | null>(null);
-    const [whoWeAre, philosophy, whoWeServe, approach] = ABOUT_SECTIONS;
-    const management = TEAM.filter((m) => m.group === "gerencia");
-    const directors = TEAM.filter((m) => m.group === "direccion");
-    const support = TEAM.filter((m) => m.group === "equipo");
 
     return (
-        <main id="main-content" className="pt-[var(--nav-height)]">
-            <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-36">
-                <Bracketed variant="tag">Nosotros</Bracketed>
-                <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,5.8vw,5.1rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
-                    Impulsamos a quienes entienden el liderazgo como servicio.
-                </h1>
-                <p className="mt-8 max-w-3xl font-display text-[clamp(1.5rem,3vw,2.3rem)] font-light leading-[1.14] text-[var(--color-accent-300)]">
-                    Trabajamos para que las ideas correctas transformen la sociedad.
-                </p>
+        <>
+            <main id="main-content" className="pt-[var(--nav-height)]">
+                <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-36">
+                    <Bracketed variant="tag">Nosotros</Bracketed>
+                    <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,5.8vw,5.1rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
+                        Impulsamos a quienes entienden el liderazgo como servicio.
+                    </h1>
 
-                <section className="mt-20 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Quiénes somos</Bracketed>
-                    <div className="mt-6 max-w-3xl space-y-4">
-                        {whoWeAre.body.map((paragraph) => (
-                            <p
-                                key={paragraph}
-                                className="leading-relaxed text-[var(--text-secondary)]"
-                            >
-                                {paragraph}
+                    <div className="mt-12 grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.48fr)]">
+                        <div className="bg-[var(--surface-primary)] p-8 md:p-10">
+                            <p className="text-[0.72rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+                                Fortius Foundation
                             </p>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Nuestra filosofía</Bracketed>
-                    <div className="mt-6 max-w-3xl space-y-4">
-                        {philosophy.body.map((paragraph) => (
-                            <p
-                                key={paragraph}
-                                className="leading-relaxed text-[var(--text-secondary)]"
-                            >
-                                {paragraph}
+                            <p className="mt-5 max-w-3xl font-display text-[clamp(1.6rem,3vw,2.4rem)] font-light leading-[1.12] text-[var(--text-primary)]">
+                                Trabajamos para que las ideas correctas transformen la sociedad.
                             </p>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">A quién servimos</Bracketed>
-                    <div className="mt-6 max-w-3xl space-y-4">
-                        {whoWeServe.body.map((paragraph) => (
-                            <p
-                                key={paragraph}
-                                className="leading-relaxed text-[var(--text-secondary)]"
-                            >
-                                {paragraph}
-                            </p>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Nuestro enfoque</Bracketed>
-                    <div className="mt-6 max-w-3xl space-y-4">
-                        {approach.body.map((paragraph) => (
-                            <p
-                                key={paragraph}
-                                className="leading-relaxed text-[var(--text-secondary)]"
-                            >
-                                {paragraph}
-                            </p>
-                        ))}
-                    </div>
-                </section>
-
-                <section className="mt-16 border-t border-[var(--border-subtle)] pt-12">
-                    <Bracketed variant="kicker">Nuestro recorrido</Bracketed>
-                    <div className="mt-8 space-y-6 border-l border-[var(--color-accent-400)] pl-6">
-                        {FOUNDATION_TIMELINE.map((item) => (
-                            <div key={item.year} className="relative">
-                                <span
-                                    className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border border-[var(--color-accent-300)] bg-[var(--surface-brand)]"
-                                    aria-hidden
-                                />
-                                <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
-                                    {item.year}
+                            <div className="mt-6 max-w-3xl space-y-4">
+                                <p className="leading-relaxed text-[var(--text-secondary)]">
+                                    Fundación Fortius fortalece personas, organizaciones e instituciones que necesitan más estructura, mejores aliados y una visión de largo plazo.
                                 </p>
-                                <p className="mt-2 font-display text-[1.7rem] font-light text-[var(--text-primary)]">
-                                    {item.label} ({item.place})
+                                <p className="leading-relaxed text-[var(--text-secondary)]">
+                                    Nuestro trabajo combina criterio institucional, acompañamiento estratégico y una vocación real de servicio.
                                 </p>
                             </div>
-                        ))}
-                    </div>
+                        </div>
 
-                    <div className="mt-10 max-w-3xl space-y-4">
-                        {FOUNDATION_TIMELINE_COPY.map((paragraph) => (
-                            <p
-                                key={paragraph}
-                                className="text-[var(--text-secondary)] leading-relaxed"
-                            >
-                                {paragraph}
+                        <div className="bg-[var(--surface-brand)] p-8 md:p-10">
+                            <p className="text-[0.72rem] uppercase tracking-[0.2em] text-[var(--color-accent-200)]">
+                                Enfoque
                             </p>
+                            <p className="mt-5 font-display text-[clamp(1.5rem,2.8vw,2.2rem)] font-light leading-[1.12] text-[var(--text-primary)]">
+                                Estructura, criterio y vocación de legado.
+                            </p>
+                            <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
+                                No buscamos presencia superficial. Buscamos reforzar causas serias para que duren, crezcan y sirvan mejor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="mt-20 border-y border-[var(--border-subtle)]">
+                        {ABOUT_SECTIONS.map((section, index) => (
+                            <section
+                                key={section.kicker}
+                                className="grid gap-8 border-b border-[var(--border-subtle)] py-12 last:border-b-0 lg:grid-cols-12 lg:gap-10"
+                            >
+                                <div className={`lg:col-span-5 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
+                                    <Bracketed variant="kicker">{section.kicker}</Bracketed>
+                                    <h2 className="mt-5 font-display text-[clamp(1.7rem,3.2vw,2.6rem)] font-light leading-[1.1] tracking-tight text-[var(--text-primary)]">
+                                        {section.title}
+                                    </h2>
+                                </div>
+                                <div className={`space-y-4 lg:col-span-7 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                                    {section.body.map((paragraph) => (
+                                        <p
+                                            key={paragraph}
+                                            className="max-w-3xl leading-relaxed text-[var(--text-secondary)]"
+                                        >
+                                            {paragraph}
+                                        </p>
+                                    ))}
+                                </div>
+                            </section>
                         ))}
                     </div>
-                </section>
 
-                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
-                    <Bracketed variant="kicker">Personas</Bracketed>
-                    <h2 className="mt-6 max-w-4xl font-display text-[clamp(2rem,4.6vw,3.4rem)] font-light leading-[1.06] tracking-tight text-[var(--text-primary)]">
-                        Un equipo multidisciplinar formado por personas comprometidas con una causa mayor que ellas mismas.
-                    </h2>
-                    <div className="mt-8 max-w-3xl space-y-4">
-                        <p className="leading-relaxed text-[var(--text-secondary)]">
-                            Fortius reúne un equipo multidisciplinar de especialistas en estrategia, inteligencia política, asuntos públicos, comunicación, derecho y desarrollo organizativo.
-                        </p>
-                        <p className="leading-relaxed text-[var(--text-secondary)]">
-                            Compartimos una misma convicción: las ideas correctas merecen ser defendidas con profesionalidad, rigor y excelencia.
-                        </p>
-                    </div>
-                </section>
-
-                {/* Patronato */}
-                <section className="mt-24 space-y-14">
-                    <Bracketed variant="kicker">Patronato</Bracketed>
-
-                    {(["espana", "usa"] as const).map((chapter) => {
-                        const members = getBoardByChapter(chapter);
-                        if (members.length === 0) return null;
-                        return (
-                            <div key={chapter} className="space-y-6">
-                                <div className="flex items-baseline gap-3">
-                                    <span
-                                        className="font-display text-2xl font-light"
-                                        style={{ color: "var(--color-accent-300)" }}
-                                    >
-                                        {chapter === "espana" ? "España" : "Estados Unidos"}
-                                    </span>
-                                    <span className="text-[0.7rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                                        · {BOARD_CHAPTER_LABEL[chapter]}
-                                    </span>
+                    <section className="mt-20 border-t border-[var(--border-subtle)] pt-16">
+                        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(280px,0.65fr)] lg:items-start">
+                            <div>
+                                <Bracketed variant="kicker">Nuestro recorrido</Bracketed>
+                                <div className="mt-8 space-y-6 border-l border-[var(--color-accent-400)] pl-6">
+                                    {FOUNDATION_TIMELINE.map((item) => (
+                                        <div key={item.year} className="relative">
+                                            <span
+                                                className="absolute -left-[31px] top-1 h-3 w-3 rounded-full border border-[var(--color-accent-300)] bg-[var(--surface-brand)]"
+                                                aria-hidden
+                                            />
+                                            <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
+                                                {item.year}
+                                            </p>
+                                            <p className="mt-2 font-display text-[1.7rem] font-light text-[var(--text-primary)]">
+                                                {item.label} ({item.place})
+                                            </p>
+                                        </div>
+                                    ))}
                                 </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                                    {members.map((m) => (
-                                        <PersonCard
-                                            key={m.slug}
-                                            name={m.name}
-                                            role={m.role}
-                                            photo={m.photo}
-                                            variant="full"
-                                            onOpen={() => setActive(boardToDialog(m))}
-                                        />
+
+                                <div className="mt-10 max-w-3xl space-y-4">
+                                    {FOUNDATION_TIMELINE_COPY.map((paragraph) => (
+                                        <p
+                                            key={paragraph}
+                                            className="leading-relaxed text-[var(--text-secondary)]"
+                                        >
+                                            {paragraph}
+                                        </p>
                                     ))}
                                 </div>
                             </div>
-                        );
-                    })}
-                </section>
 
-                {/* Consejo Asesor */}
-                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
-                    <div className="flex items-end justify-between mb-6">
+                            <div className="border border-[var(--border-subtle)] bg-[var(--surface-brand)] p-8">
+                                <p className="text-[0.72rem] uppercase tracking-[0.2em] text-[var(--color-accent-200)]">
+                                    Fortius Foundation
+                                </p>
+                                <p className="mt-5 font-display text-[clamp(1.5rem,2.8vw,2.1rem)] font-light leading-[1.15] text-[var(--text-primary)]">
+                                    Acompañamos proyectos, personas e instituciones con ambición de servicio.
+                                </p>
+                                <p className="mt-5 leading-relaxed text-[var(--text-secondary)]">
+                                    Ese recorrido nos permite evaluar mejor, conectar mejor y servir mejor a quienes necesitan algo más que apoyo puntual.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                        <Bracketed variant="kicker">Personas</Bracketed>
+                        <h2 className="mt-6 max-w-4xl font-display text-[clamp(2rem,4.6vw,3.4rem)] font-light leading-[1.06] tracking-tight text-[var(--text-primary)]">
+                            Un equipo comprometido con fortalecer causas nobles con profesionalidad, rigor y excelencia.
+                        </h2>
+                        <div className="mt-8 max-w-3xl space-y-4">
+                            <p className="leading-relaxed text-[var(--text-secondary)]">
+                                Fundación Fortius reúne perfiles con experiencia en dirección, estrategia, análisis, derecho, comunicación, fundraising y desarrollo institucional.
+                            </p>
+                            <p className="leading-relaxed text-[var(--text-secondary)]">
+                                Compartimos una misma convicción: las buenas causas también necesitan organización, exigencia y continuidad.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section className="mt-24 space-y-14">
+                        <Bracketed variant="kicker">Patronato</Bracketed>
+
+                        {(["espana", "usa"] as const).map((chapter) => {
+                            const members = getBoardByChapter(chapter);
+                            if (members.length === 0) return null;
+
+                            return (
+                                <div key={chapter} className="space-y-6">
+                                    <div className="flex items-baseline gap-3">
+                                        <span
+                                            className="font-display text-2xl font-light"
+                                            style={{ color: "var(--color-accent-300)" }}
+                                        >
+                                            {chapter === "espana" ? "España" : "Estados Unidos"}
+                                        </span>
+                                        <span className="text-[0.7rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+                                            · {BOARD_CHAPTER_LABEL[chapter]}
+                                        </span>
+                                    </div>
+                                    <div className="grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-2 lg:grid-cols-3">
+                                        {members.map((m) => (
+                                            <PersonCard
+                                                key={m.slug}
+                                                name={m.name}
+                                                role={m.role}
+                                                photo={m.photo}
+                                                variant="full"
+                                                onOpen={() => setActive(boardToDialog(m))}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </section>
+
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">Consejo Asesor</Bracketed>
-                        <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                            + bio al pulsar
-                        </span>
-                    </div>
-                    <p className="text-[var(--text-secondary)] max-w-2xl leading-relaxed mb-8">
-                        Nuestro Consejo Asesor lo componen personas de reputada
-                        experiencia que ayudan a la Fundación a elegir sus áreas de
-                        trabajo y a evaluar sus proyectos.
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                        {CONSEJO_ASESOR.map((m) => (
-                            <PersonCard
-                                key={m.slug}
-                                name={m.name}
-                                role="Consejo Asesor"
-                                photo={m.photo}
-                                variant="full"
-                                onOpen={() => setActive(advisoryToDialog(m))}
-                            />
-                        ))}
-                    </div>
-                </section>
-
-                {/* Equipo */}
-                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16 space-y-14">
-                    <Bracketed variant="kicker">Equipo</Bracketed>
-
-                    <div className="space-y-6">
-                        <div className="flex items-baseline gap-3">
-                            <span
-                                className="font-display text-2xl font-light"
-                                style={{ color: "var(--color-accent-300)" }}
-                            >
-                                Gerencia
-                            </span>
+                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
+                            Nuestro Consejo Asesor lo componen personas de reputada experiencia que ayudan a la Fundación a elegir sus áreas de trabajo y a evaluar sus proyectos.
+                        </p>
+                        <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-2 lg:grid-cols-3">
+                            {CONSEJO_ASESOR.map((m) => (
+                                <PersonCard
+                                    key={m.slug}
+                                    name={m.name}
+                                    role="Consejo Asesor"
+                                    photo={m.photo}
+                                    variant="full"
+                                    onOpen={() => setActive(advisoryToDialog(m))}
+                                />
+                            ))}
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                            {management.map((m) => (
+                    </section>
+
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                        <Bracketed variant="kicker">Equipo</Bracketed>
+                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
+                            Todo el equipo aparece reunido bajo una misma sección, porque el trabajo de la Fundación solo funciona cuando las distintas capacidades se integran y colaboran entre sí.
+                        </p>
+                        <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-2">
+                            {TEAM.map((m) => (
                                 <PersonCard
                                     key={m.slug}
                                     name={m.name}
@@ -271,87 +267,50 @@ export function NosotrosClient() {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </section>
 
-                    <div className="space-y-6">
-                        <div className="flex items-baseline gap-3">
-                            <span
-                                className="font-display text-2xl font-light"
-                                style={{ color: "var(--color-accent-300)" }}
-                            >
-                                Directores de proyecto
-                            </span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                            {directors.map((m) => (
-                                <PersonCard
-                                    key={m.slug}
-                                    name={m.name}
-                                    role={m.role}
-                                    area={TEAM_AREA_LABEL[m.area]}
-                                    photo={m.photo}
-                                    variant="full"
-                                    onOpen={() => setActive(teamToDialog(m))}
-                                />
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                        <Bracketed variant="kicker">Socios estratégicos</Bracketed>
+                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
+                            Trabajamos con socios que amplían nuestra capacidad de servir, canalizar ayuda y fortalecer iniciativas con impacto real.
+                        </p>
+                        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+                            {STRATEGIC_PARTNERS.map((partner) => (
+                                <a
+                                    key={partner.name}
+                                    href={partner.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8 transition-colors hover:bg-[var(--surface-secondary)]"
+                                >
+                                    <div className="flex min-h-[110px] items-center justify-center border border-[var(--border-subtle)] bg-white p-6">
+                                        <img
+                                            src={partner.logoSrc}
+                                            alt={`Logo de ${partner.name}`}
+                                            className="max-h-14 w-auto object-contain"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h3 className="mt-8 font-display text-[1.8rem] font-light text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">
+                                        {partner.name}
+                                    </h3>
+                                    <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                                        {partner.copy}
+                                    </p>
+                                    <span className="mt-6 inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)]">
+                                        Visitar sitio
+                                        <ArrowUpRight size={14} />
+                                    </span>
+                                </a>
                             ))}
                         </div>
-                    </div>
-
-                    <div className="space-y-6">
-                        <div className="flex items-baseline gap-3">
-                            <span
-                                className="font-display text-2xl font-light"
-                                style={{ color: "var(--color-accent-300)" }}
-                            >
-                                Equipo
-                            </span>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                            {(function renderSupport() {
-                                return support.map((m) => (
-                                    <PersonCard
-                                        key={m.slug}
-                                        name={m.name}
-                                        role={m.role}
-                                        area={TEAM_AREA_LABEL[m.area]}
-                                        photo={m.photo}
-                                        variant="full"
-                                        onOpen={() => setActive(teamToDialog(m))}
-                                    />
-                                ));
-                            })()}
-                        </div>
-                    </div>
+                    </section>
                 </section>
 
-                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
-                    <Bracketed variant="kicker">Alianzas estratégicas</Bracketed>
-                    <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                        Trabajamos con socios que amplían nuestra capacidad de servir,
-                        canalizar ayuda y fortalecer iniciativas con impacto.
-                    </p>
-                    <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-2">
-                        {STRATEGIC_PARTNERS.map((partner) => (
-                            <a
-                                key={partner.name}
-                                href={partner.href}
-                                target={partner.href.startsWith("http") ? "_blank" : undefined}
-                                rel={partner.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                                className="bg-[var(--surface-primary)] p-6 transition-colors hover:bg-[var(--surface-secondary)]"
-                            >
-                                <p className="font-display text-[1.8rem] font-light text-[var(--text-primary)]">
-                                    {partner.name}
-                                </p>
-                                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-                                    {partner.copy}
-                                </p>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-            </section>
+                <NewsletterCTA />
+            </main>
 
             <PersonDialog person={active} onClose={() => setActive(null)} />
-        </main>
+        </>
     );
 }

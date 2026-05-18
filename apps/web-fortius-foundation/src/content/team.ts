@@ -33,7 +33,7 @@ export type TeamArea = "fundacion" | "escuela-hispanica" | "ieam";
 export const TEAM_AREA_LABEL: Record<TeamArea, string> = {
     fundacion: "Fundación Fortius",
     "escuela-hispanica": "Escuela Hispánica",
-    ieam: "IEAM",
+    ieam: "Instituto Español de Análisis Migratorio",
 };
 
 export type TeamGroup = "gerencia" | "direccion" | "equipo";
@@ -149,7 +149,7 @@ export const CONSEJO_ASESOR: AdvisoryMember[] = [
     {
         slug: "carlos-casares",
         name: "Carlos Casares",
-        bio: "Carlos Casares ha desarrollado una trayectoria internacional en liderazgo, empresa y formación. Defiende que la gestión de personas es tan importante como el análisis técnico. Ha participado en procesos de crecimiento, profesionalización y venta de compañías, integrando directorios y consejos en cuatro continentes, y ha desarrollado una extensa trayectoria académica en Iberoamérica y Europa, donde es Catedrático Emérito. Cree que la verdadera formación ocurre en el trabajo con personas, en los errores y en las crisis, y que todos vivimos «en construcción» hasta el final. Reside entre Europa, Estados Unidos y el Río de la Plata.",
+        bio: "Carlos Casares (Uruguay) lleva décadas acompañando a empresarios, familias empresarias y consejos de administración en procesos complejos de estrategia, gobierno y relaciones humanas, en múltiples países y contextos culturales. Discípulo de Juan Antonio Pérez López, combina una mirada antropológica con un enfoque socrático, convencido de que entender a las personas es tan importante como el análisis técnico. Ha participado en procesos de crecimiento, profesionalización y venta de compañías, integrando directorios y consejos en cuatro continentes, y ha desarrollado una extensa trayectoria académica en Iberoamérica y Europa, donde es Catedrático Emérito. Cree que la verdadera formación ocurre en el trabajo con personas, en los errores y en las crisis — y que todos vivimos \"en construcción\" hasta el final. Reside entre Europa, Estados Unidos y el Río de la Plata.",
         linkedin: "https://www.linkedin.com/in/carloscasares/",
     },
 ];
@@ -183,7 +183,7 @@ export const TEAM: TeamMember[] = [
         area: "ieam",
         group: "direccion",
         isDirector: true,
-        bio: "Madrid (España). Beatriz de León Cobo es consultora, investigadora y analista especializada en seguridad, migración, dinámica de conflictos y radicalización violenta en África Occidental y el Sahel. Trabaja como consultora independiente para gobiernos, ONGs, organizaciones internacionales y think tanks. También es doctoranda en sociología por la Universidad de la Sorbona. Beatriz es profesora del máster de Acción Política de la Universidad Francisco de Vitoria y analista en el Centro de Seguridad Internacional de la UFV, donde dirige el «Foro de Diálogo Sahel Europe». Es investigadora asociada (Fellow) del think tank RUSI (Royal United Services Institute). Beatriz tiene un máster en Defensa, Seguridad y Gestión de Crisis por el Institut de Relations Internationales Strátegiques (IRIS). Es directora del Instituto Español de Análisis Migratorio (IEAM) y de su foro empresarial, Mediterranean Dialogue.",
+        bio: "Madrid (España). Beatriz de León Cobo es consultora, investigadora y analista especializada en seguridad, migración, dinámica de conflictos y radicalización violenta en África Occidental y el Sahel. Trabaja como consultora independiente para gobiernos, ONGs, organizaciones internacionales y think tanks. También es doctoranda en sociología por la Universidad de la Sorbona. Beatriz es profesora del máster de Acción Política de la Universidad Francisco de Vitoria y analista en el Centro de Seguridad Internacional de la UFV, donde dirige el «Foro de Diálogo Sahel Europe». Es investigadora asociada (Fellow) del think tank RUSI (Royal United Services Institute). Beatriz tiene un máster en Defensa, Seguridad y Gestión de Crisis por el Institut de Relations Internationales Strátegiques (IRIS). Es directora del Instituto Español de Análisis Migratorio y de su foro empresarial, Mediterranean Dialogue.",
         email: "beatriz.deleoncobo@ieam.es",
         linkedin: "https://www.linkedin.com/in/beatriz-de-leon-cobo/",
     },
