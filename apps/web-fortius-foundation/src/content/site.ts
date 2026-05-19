@@ -90,13 +90,13 @@ export const STRATEGIC_PARTNERS = [
   {
     name: "TrustBridge",
     href: "https://www.trustbridgeglobal.com/",
-    logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/12/trus.svg",
+    logoSrc: "/entradas/images/trus.svg",
     copy: "TrustBridge es un centro con sede en Suiza para una plataforma global de pagos filantrópicos e inversión de impacto. Como parte de esta red, Fundación Fortius España permite a los donantes en España realizar donaciones internacionales con plena confianza y con los correspondientes certificados de desgravación fiscal.",
   },
   {
     name: "Together.eu",
     href: "https://together.europarl.europa.eu/es/",
-    logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/12/togethes.svg",
+    logoSrc: "/entradas/images/togethes.svg",
     copy: "Together.eu, iniciativa del Parlamento Europeo, es una plataforma paneuropea de participación cívica orientada a fortalecer la democracia y la implicación de la sociedad civil en la vida pública europea. Esta colaboración refuerza nuestra vocación de contribuir a una ciudadanía más formada, libre y comprometida con el futuro de Europa.",
   },
 ];

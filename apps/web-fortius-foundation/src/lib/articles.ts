@@ -1,4 +1,10 @@
+import { ARTICLE_VISUALS, type ArticleVisual } from "@/content/article-visuals";
 import { FOUNDATION_ARTICLES, type FoundationArticle } from "@/content/articles";
+
+export interface ArticleBlock {
+  type: "heading" | "paragraph";
+  content: string;
+}
 
 export function listArticles(): FoundationArticle[] {
   return FOUNDATION_ARTICLES;
@@ -50,6 +56,41 @@ export function splitArticleContent(content: string): string[] {
     .split(/\n\n+/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+}
+
+function isLikelyHeading(paragraph: string): boolean {
+  const clean = paragraph.trim();
+  const wordCount = clean.split(/\s+/).length;
+
+  if (clean.length > 90 || wordCount > 9) return false;
+  if (/^[0-9]+\./.test(clean)) return true;
+  if (/^[¿¡A-ZÁÉÍÓÚÑ]/.test(clean) && !/[.!…]$/.test(clean)) return true;
+  return /[:?]$/.test(clean);
+}
+
+export function getArticleBlocks(content: string): ArticleBlock[] {
+  return splitArticleContent(content).map((paragraph) => ({
+    type: isLikelyHeading(paragraph) ? "heading" : "paragraph",
+    content: paragraph,
+  }));
+}
+
+export function getArticleAbstract(article: FoundationArticle, maxLength = 260): string {
+  return getArticlePreview(article.excerpt, maxLength);
+}
+
+export function getArticleVisual(article: FoundationArticle | string): ArticleVisual {
+  const slug = typeof article === "string" ? article : article.slug;
+  return ARTICLE_VISUALS[slug] ?? {
+    eyebrow: "Foundation",
+    label: "Fortius",
+    motif: "Ideas, criterio e impacto institucional.",
+    theme: "emerald",
+  };
+}
+
+export function getRelatedArticles(currentSlug: string, limit = 3): FoundationArticle[] {
+  return FOUNDATION_ARTICLES.filter((article) => article.slug !== currentSlug).slice(0, limit);
 }
 
 export function getFeaturedArticles(limit = 4): FoundationArticle[] {

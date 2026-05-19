@@ -283,7 +283,7 @@ export function NosotrosClient() {
                                     rel="noopener noreferrer"
                                     className="group border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8 transition-colors hover:bg-[var(--surface-secondary)]"
                                 >
-                                    <div className="flex min-h-[110px] items-center justify-center border border-[var(--border-subtle)] bg-white p-6">
+                                    <div className="flex min-h-[110px] items-center justify-center border border-[var(--border-subtle)] bg-[var(--surface-brand)] p-6">
                                         <img
                                             src={partner.logoSrc}
                                             alt={`Logo de ${partner.name}`}
