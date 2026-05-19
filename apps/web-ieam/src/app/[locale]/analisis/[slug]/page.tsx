@@ -72,7 +72,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     <a
                       key={href}
                       href={href}
-                      className="inline-flex items-center px-6 py-3 bg-[var(--color-accent-red)] text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
+                      className="inline-flex items-center px-6 py-3 bg-[#D4212A] text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
                       download
                     >
                       {(isEn && mat.label_en) || mat.label}
@@ -104,7 +104,19 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
       <section className="section-shell">
         <div className="page-shell">
           <div className="mx-auto reading-width space-y-8 text-slate-700 leading-relaxed">
-            <div dangerouslySetInnerHTML={{ __html: loc.content }} className="space-y-6 [&_p]:mb-6" />
+            <div
+              dangerouslySetInnerHTML={{ __html: loc.content }}
+              className={[
+                'space-y-6',
+                '[&_p]:mb-5 [&_p]:leading-relaxed',
+                '[&_h3]:font-serif [&_h3]:font-bold [&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-slate-900 [&_h3]:leading-snug',
+                '[&_h4]:font-serif [&_h4]:font-bold [&_h4]:text-lg [&_h4]:mt-6 [&_h4]:mb-2 [&_h4]:text-slate-800',
+                '[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2',
+                '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2',
+                '[&_li]:leading-relaxed',
+                '[&_strong]:font-semibold [&_strong]:text-slate-900',
+              ].join(' ')}
+            />
             {loc.pullQuote && (
               <div className="border-l-4 border-[var(--color-accent-red)] bg-[var(--color-paper-warm)] px-6 py-4 text-lg font-serif italic text-[var(--color-text-primary)] my-8">
                 “{loc.pullQuote}”

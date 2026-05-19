@@ -128,7 +128,7 @@ export default function CollaboratePage() {
                         <>
                           <button
                             onClick={() => handleDonate(tier.id, 'annual')}
-                            className={`w-full py-3 font-bold uppercase tracking-[0.12em] text-sm transition-colors flex items-center justify-center gap-2 group ${tier.featured ? 'bg-[var(--color-mediterranean)] text-white hover:bg-[var(--color-navy-900)]' : 'bg-[var(--color-navy-900)] text-white hover:bg-[var(--color-mediterranean)]'}`}
+                            className={`w-full py-3 font-bold uppercase tracking-[0.12em] text-sm transition-colors flex items-center justify-center gap-2 group ${tier.featured ? 'bg-[#006994] text-white hover:bg-[#0A2540]' : 'bg-[#0A2540] text-white hover:bg-[#006994]'}`}
                           >
                             <Heart className="w-4 h-4" />
                             {t('tiers.button')} €{tier.annualAmount}{t('switch.per_year')}
@@ -144,7 +144,7 @@ export default function CollaboratePage() {
                       ) : (
                         <button
                           onClick={() => handleDonate(tier.id, 'one-time')}
-                          className={`w-full py-3 font-bold uppercase tracking-[0.12em] text-sm transition-colors flex items-center justify-center gap-2 group ${tier.featured ? 'bg-[var(--color-mediterranean)] text-white hover:bg-[var(--color-navy-900)]' : 'bg-[var(--color-navy-900)] text-white hover:bg-[var(--color-mediterranean)]'}`}
+                          className={`w-full py-3 font-bold uppercase tracking-[0.12em] text-sm transition-colors flex items-center justify-center gap-2 group ${tier.featured ? 'bg-[#006994] text-white hover:bg-[#0A2540]' : 'bg-[#0A2540] text-white hover:bg-[#006994]'}`}
                         >
                           <Heart className="w-4 h-4" />
                           {t('tiers.button')} {frequency === 'one-time' ? formatAmount(tier.amount, frequency) : ''}
@@ -206,7 +206,7 @@ export default function CollaboratePage() {
             <p className="text-slate-600 mb-6">{t('other_ways.description')}</p>
             <Link
               href="/contacto"
-              className="inline-flex items-center gap-2 bg-[var(--color-navy-900)] text-white px-8 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-[var(--color-mediterranean)] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#0A2540] text-white px-8 py-3 font-bold uppercase tracking-[0.12em] text-sm hover:bg-[#006994] transition-colors"
             >
               {t('other_ways.button')}
               <ArrowRight className="w-4 h-4" />

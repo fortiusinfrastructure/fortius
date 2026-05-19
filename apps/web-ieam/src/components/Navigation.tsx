@@ -100,7 +100,7 @@ export default function Navigation() {
             </button>
             <Link
               href="/colabora"
-              className="inline-flex items-center px-6 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white bg-[var(--color-navy-900)] hover:bg-[var(--color-mediterranean)] transition-colors shadow-sm rounded-none"
+              className="inline-flex items-center px-6 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white bg-[#0A2540] hover:bg-[#006994] transition-colors shadow-sm rounded-none"
             >
               {t('collaborate')}
             </Link>
@@ -172,7 +172,7 @@ export default function Navigation() {
                 <Link
                   href="/colabora"
                   onClick={() => setIsOpen(false)}
-                  className="block w-full text-center px-4 py-2 text-sm font-bold tracking-[0.18em] text-white bg-[var(--color-navy-900)] hover:bg-[var(--color-mediterranean)]"
+                  className="block w-full text-center px-4 py-2 text-sm font-bold tracking-[0.18em] text-white bg-[#0A2540] hover:bg-[#006994]"
                 >
                   {t('collaborate')}
                 </Link>
