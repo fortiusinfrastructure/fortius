@@ -59,7 +59,7 @@ export default async function ResearchPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="relative bg-[#0A2540] text-white py-16 lg:py-24 overflow-hidden">
+      <div className="hero-dark relative bg-[#0A2540] text-white py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

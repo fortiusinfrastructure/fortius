@@ -102,6 +102,13 @@ h4 {
   line-height: 1.2;
 }
 
+.hero-dark h1,
+.hero-dark h2,
+.hero-dark h3,
+.hero-dark h4 {
+  color: inherit;
+}
+
 p {
   line-height: 1.625;
 }

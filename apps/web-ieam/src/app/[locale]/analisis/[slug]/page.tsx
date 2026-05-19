@@ -39,7 +39,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
       <Navigation />
 
       {/* Hero */}
-      <section className="relative bg-[#0A2540] text-white section-shell overflow-hidden">
+      <section className="hero-dark relative bg-[#0A2540] text-white section-shell overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={loc.heroImage} alt="" className="w-full h-full object-cover opacity-30" loading="eager" decoding="async" />

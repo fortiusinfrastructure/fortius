@@ -6,7 +6,7 @@ export default function CookiesPage() {
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      <section className="relative bg-[#0A2540] text-[var(--color-cream)] py-24 lg:py-32 overflow-hidden">
+      <section className="hero-dark relative bg-[#0A2540] text-[var(--color-cream)] py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A2540] via-[#0A2540]/85 to-transparent"></div>
         </div>

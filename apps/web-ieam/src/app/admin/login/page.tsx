@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { createBrowserClient } from '@supabase/ssr';
+import { createBrowserClient } from '@fortius/database/client/browser';
 import { Loader2 } from 'lucide-react';
 
 export default function AdminLoginPage() {
@@ -21,10 +21,12 @@ export default function AdminLoginPage() {
         setLoading(true);
 
         try {
-            const supabase = createBrowserClient(
-                process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-            );
+            if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+                setError('Falta configurar Supabase en Vercel. Revisa NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+                return;
+            }
+
+            const supabase = createBrowserClient();
 
             const { error: authError } = await supabase.auth.signInWithPassword({
                 email,
@@ -40,8 +42,15 @@ export default function AdminLoginPage() {
 
             router.push(redirectTo);
             router.refresh();
-        } catch {
-            setError('Error inesperado. Inténtalo de nuevo.');
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Error inesperado. Inténtalo de nuevo.';
+
+            if (message.toLowerCase().includes('fetch')) {
+                setError('No se pudo conectar con Supabase. Revisa la URL pública y la anon key en Vercel.');
+                return;
+            }
+
+            setError(message);
         } finally {
             setLoading(false);
         }

@@ -28,7 +28,7 @@ export default async function EventsPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="relative bg-[#0A2540] text-white py-16 lg:py-24 overflow-hidden">
+      <div className="hero-dark relative bg-[#0A2540] text-white py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop" alt="" className="w-full h-full object-cover opacity-20" loading="eager" decoding="async" />

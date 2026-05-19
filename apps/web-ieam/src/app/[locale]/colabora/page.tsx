@@ -31,7 +31,7 @@ export default function CollaboratePage() {
       <Navigation />
 
       {/* Hero */}
-      <section className="bg-[var(--color-navy-900)] text-white">
+      <section className="hero-dark bg-[var(--color-navy-900)] text-white">
         <div className="page-shell py-16 md:py-24">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60 mb-4">

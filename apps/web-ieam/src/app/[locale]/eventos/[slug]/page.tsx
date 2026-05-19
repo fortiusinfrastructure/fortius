@@ -33,7 +33,7 @@ export default async function EventDetailPage({ params }: { params: Promise<Para
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      <section className="relative bg-[var(--color-navy-900)] text-[var(--color-cream)] section-shell overflow-hidden">
+      <section className="hero-dark relative bg-[var(--color-navy-900)] text-[var(--color-cream)] section-shell overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={l.heroImage} alt={l.title} className="w-full h-full object-cover opacity-40" loading="eager" decoding="async" />
