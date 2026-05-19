@@ -48,11 +48,25 @@ function normalizeCollectionArticle(doc: (typeof allResearch)[number]): Article 
 
 const collectionArticles = allResearch.map(normalizeCollectionArticle);
 
+function mergeArticleContent(base: Article, incoming: Article): Article {
+  return {
+    ...base,
+    content: incoming.content || base.content,
+    content_en: incoming.content_en || base.content_en,
+    pullQuote: incoming.pullQuote ?? base.pullQuote,
+    pullQuote_en: incoming.pullQuote_en ?? base.pullQuote_en,
+    materials: incoming.materials?.length ? incoming.materials : base.materials,
+  };
+}
+
 function mergeArticles(): Article[] {
   const merged = new Map<string, Article>();
 
   for (const article of mockArticles) merged.set(article.slug, article);
-  for (const article of collectionArticles) merged.set(article.slug, article);
+  for (const article of collectionArticles) {
+    const existing = merged.get(article.slug);
+    merged.set(article.slug, existing ? mergeArticleContent(existing, article) : article);
+  }
 
   return [...merged.values()].sort(
     (a, b) => parseEventDate(b.publishDate).getTime() - parseEventDate(a.publishDate).getTime(),
