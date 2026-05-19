@@ -305,18 +305,29 @@ export const VERTICALS: VerticalDef[] = [
     },
 ];
 
-export const ALLIES = [
-    "Universidad de Navarra",
-    "Acton Institute",
-    "The Lex Fellowship",
-  "ACI Prensa",
-  "Chapel & York",
-  "Principios",
-  "Axioma",
-  "ISI",
-  "Cooperación Internacional",
-  "Cruz del Sur",
-  "Open Doors",
-    "Universidad Francisco de Vitoria",
-    "World Youth Alliance",
+export interface Ally {
+    name: string;
+    logo?: string;
+}
+
+export const ALLIES: Ally[] = [
+    { name: "Universidad de Navarra" },
+    { name: "Acton Institute", logo: "/images/aliados/IMG_0324.jpeg" },
+    { name: "The Lex Fellowship", logo: "/images/aliados/lexfellowship.png" },
+    { name: "ACI Prensa", logo: "/images/aliados/logo-aceprensa.svg" },
+    { name: "Chapel & York", logo: "/images/aliados/chapel-york.png" },
+    { name: "Principios", logo: "/images/aliados/Image-3-scaled-1.jpeg" },
+    { name: "Axioma", logo: "/images/aliados/axioma.png" },
+    { name: "ISI" },
+    {
+        name: "Cooperación Internacional",
+        logo: "/images/aliados/Cooperacion-Internacional.png",
+    },
+    { name: "Cruz del Sur", logo: "/images/aliados/logo-cruz-del-sur.png" },
+    { name: "Open Doors", logo: "/images/aliados/open-doors.svg" },
+    {
+        name: "Universidad Francisco de Vitoria",
+        logo: "/images/aliados/UFV_logo.svg",
+    },
+    { name: "World Youth Alliance", logo: "/images/aliados/WYA-3.png" },
 ];

@@ -79,10 +79,10 @@ export function HeroEditorial() {
                             Acompañamos para que las ideas correctas transformen la sociedad.
                         </p>
                         <a
-                            href="#verticales"
+                            href="/nosotros"
                             className="group inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-primary)] border-b border-[var(--border-strong)] hover:border-[var(--color-accent-500)] transition-colors pb-2"
                         >
-                            Explora nuestras áreas de trabajo
+                            Conócenos
                             <ArrowDownRight
                                 size={14}
                                 className="group-hover:translate-y-0.5 group-hover:translate-x-0.5 transition-transform"

@@ -2,6 +2,7 @@ import { TEAM, EXPERTS } from "@/content/team";
 import { notFound, redirect } from "next/navigation";
 import { ExpertClient } from "./ExpertClient";
 import type { Metadata } from "next";
+import { getPersonSocialImage } from "@/lib/person-social-image";
 
 export async function generateMetadata({
     params,
@@ -21,6 +22,17 @@ export async function generateMetadata({
     return {
         title: `${member.name} — Fortius Consulting`,
         description: member.bio.slice(0, 160) + "...",
+        openGraph: {
+            title: `${member.name} — Fortius Consulting`,
+            description: member.bio.slice(0, 160) + "...",
+            images: [{ url: getPersonSocialImage(member.photo) }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${member.name} — Fortius Consulting`,
+            description: member.bio.slice(0, 160) + "...",
+            images: [getPersonSocialImage(member.photo)],
+        },
     };
 }
 

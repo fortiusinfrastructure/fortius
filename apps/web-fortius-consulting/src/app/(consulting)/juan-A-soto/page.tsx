@@ -4,11 +4,29 @@ import { JuanClient } from "./JuanClient";
 import type { Metadata } from "next";
 import { listArticles, formatPublishedDate, kindLabel } from "@/lib/articles";
 import { getArticleLeadData } from "@/lib/article-display";
+import { getPersonSocialImage } from "@/lib/person-social-image";
 
-export const metadata: Metadata = {
-    title: "Juan Ángel Soto — Fortius Consulting",
-    description: "Founder & CEO de Fortius. Trayectoria académica, ejecutiva e institucional de Juan Ángel Soto Gómez.",
-};
+export function generateMetadata(): Metadata {
+    const member = TEAM.find((item) => item.slug === "juan-angel-soto");
+    const title = "Juan Ángel Soto — Fortius Consulting";
+    const description = "Founder & CEO de Fortius. Trayectoria académica, ejecutiva e institucional de Juan Ángel Soto Gómez.";
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            images: [{ url: getPersonSocialImage(member?.photo) }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [getPersonSocialImage(member?.photo)],
+        },
+    };
+}
 
 export default function JuanSotoPage() {
     const member = TEAM.find((m) => m.slug === "juan-angel-soto");

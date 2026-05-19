@@ -1,7 +1,8 @@
 "use server";
 
 import { createClient } from "@supabase/supabase-js";
-import { sendInternalContactNotification } from "@/lib/email";
+import { getContactConfirmationHtml, getContactNotificationHtml } from "@/lib/email-templates";
+import { sendEmail } from "@/lib/email";
 
 const ORG_SLUG = "fortius-consulting";
 const NOTIFICATION_EMAIL = "info@fortiusconsulting.org";
@@ -37,15 +38,6 @@ function splitName(fullName: string) {
         firstName: parts[0],
         lastName: parts.slice(1).join(" "),
     };
-}
-
-function escapeHtml(value: string) {
-    return value
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
 }
 
 export async function submitContact(formData: FormData) {
@@ -113,12 +105,13 @@ export async function submitContact(formData: FormData) {
     }
 
     const notificationSubject = `Nuevo contacto web · ${subject}`;
-    const escapedMessage = escapeHtml(finalMessage).replaceAll("\n", "<br />");
 
-    const notificationResult = await sendInternalContactNotification({
+    const notificationResult = await sendEmail({
         to: NOTIFICATION_EMAIL,
         replyTo: email,
         subject: notificationSubject,
+        kind: "contact_notification",
+        relatedTable: "contact_submissions",
         relatedId: submission.id,
         metadata: {
             source: "web-fortius-consulting",
@@ -129,29 +122,44 @@ export async function submitContact(formData: FormData) {
             contextVertical: contextVertical || null,
             expertSlug: expertSlug || null,
         },
-        html: `
-            <div style="font-family: Georgia, serif; max-width: 720px; margin: 0 auto; padding: 24px; color: #111827;">
-                <h2 style="margin: 0 0 16px; color: #7f1d1d;">Nuevo mensaje de contacto</h2>
-                <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
-                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-                <p><strong>Asunto:</strong> ${escapeHtml(subject)}</p>
-                <p><strong>Organización:</strong> ${escapeHtml(organization || "No indicada")}</p>
-                <p><strong>Área:</strong> ${escapeHtml(contextVertical || "General")}</p>
-                <p><strong>Plan:</strong> ${escapeHtml(contextPlan || "No indicado")}</p>
-                <div style="margin-top: 20px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 16px; line-height: 1.7;">
-                    ${escapedMessage}
-                </div>
-            </div>
-        `,
+        html: getContactNotificationHtml({
+            name,
+            email,
+            subject,
+            organization,
+            contextVertical,
+            contextPlan,
+            message: finalMessage,
+        }),
+    });
+
+    const confirmationResult = await sendEmail({
+        to: email,
+        replyTo: NOTIFICATION_EMAIL,
+        subject: "Hemos recibido tu mensaje — Fortius Consulting",
+        html: getContactConfirmationHtml({ name, subject }),
+        kind: "contact_confirmation",
+        relatedTable: "contact_submissions",
+        relatedId: submission.id,
+        metadata: {
+            source: "web-fortius-consulting",
+            contactSubject: subject,
+        },
     });
 
     if (!notificationResult.success) {
         console.error("[submitContact] notification failed", notificationResult.error);
     }
 
+    if (!confirmationResult.success) {
+        console.error("[submitContact] confirmation failed", confirmationResult.error);
+    }
+
     return {
         success: true,
-        message:
-            "Tu mensaje ha quedado registrado. El equipo de Fortius te responderá en menos de 48 horas.",
+        message: confirmationResult.success
+            ? "Tu mensaje ha quedado registrado. Te hemos enviado un email de confirmación."
+            : "Tu mensaje ha quedado registrado. El equipo de Fortius te responderá en menos de 48 horas.",
     };
 }
+

@@ -18,6 +18,12 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 const formatEUR = (value: number) =>
     new Intl.NumberFormat("es-ES").format(value);
 
+const getCheckoutPlanKey = (contactVertical: string | undefined, tierId: MembershipTier["id"]) => {
+    if (contactVertical === "Sociedad Civil") return `sociedad-civil-${tierId}`;
+    if (contactVertical === "Política") return `politica-${tierId}`;
+    return null;
+};
+
 export function MembershipTiers({
     kicker = "Darse de Alta",
     title,
@@ -29,6 +35,9 @@ export function MembershipTiers({
         tier.id === "basica" ? "básico" : tier.id;
 
     const getTierHref = (tier: MembershipTier) => {
+        const checkoutPlanKey = getCheckoutPlanKey(contactVertical, tier.id);
+        if (checkoutPlanKey) return `/suscribirse?plan=${checkoutPlanKey}`;
+
         if (tier.href) return tier.href;
 
         const params = new URLSearchParams({
@@ -45,7 +54,7 @@ export function MembershipTiers({
 
     return (
         <section
-            id="darse-de-alta"
+            id="membresias"
             aria-labelledby="membership-title"
             className="relative border-t border-[var(--border-subtle)] py-24 md:py-32"
         >

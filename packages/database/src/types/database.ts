@@ -634,6 +634,41 @@ export interface Database {
                     created_at?: string | null
                 }
             }
+            newsletter_subscriptions: {
+                Row: {
+                    id: string
+                    organization_id: string
+                    email: string
+                    status: string
+                    source: string | null
+                    metadata: Json | null
+                    confirmed_at: string | null
+                    created_at: string | null
+                    updated_at: string | null
+                }
+                Insert: {
+                    id?: string
+                    organization_id: string
+                    email: string
+                    status?: string
+                    source?: string | null
+                    metadata?: Json | null
+                    confirmed_at?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+                Update: {
+                    id?: string
+                    organization_id?: string
+                    email?: string
+                    status?: string
+                    source?: string | null
+                    metadata?: Json | null
+                    confirmed_at?: string | null
+                    created_at?: string | null
+                    updated_at?: string | null
+                }
+            }
             event_registrations: {
                 Row: {
                     id: string

@@ -7,6 +7,7 @@ import {
     categoryLabel,
     estimateReadTime,
     formatPublishedDate,
+    getArticleOriginalSource,
     kindLabel,
     paidPreview,
     type Article,
@@ -62,6 +63,7 @@ export async function ArticleDetailPage({
     const html = await renderMarkdown(bodyMarkdown);
     const readTime = estimateReadTime(lead.markdown);
     const summary = getArticleSummary(article);
+    const originalSource = getArticleOriginalSource(article);
 
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
@@ -108,9 +110,6 @@ export async function ArticleDetailPage({
                                     alt={lead.imageNote ?? cover.alt}
                                     className="h-full w-full object-cover"
                                 />
-                                <figcaption className="border-t border-[var(--border-subtle)] px-5 py-4 text-[0.8rem] leading-relaxed text-[var(--text-tertiary)]">
-                                    {lead.imageNote ?? cover.alt}
-                                </figcaption>
                             </figure>
                         </div>
                     </div>
@@ -119,13 +118,6 @@ export async function ArticleDetailPage({
                 <section className="mx-auto max-w-6xl px-[var(--container-px)] pt-12 md:pt-16">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-8 space-y-8">
-                            <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 md:p-7">
-                                <Bracketed variant="kicker">Lectura</Bracketed>
-                                <p className="mt-4 text-[1rem] leading-relaxed text-[var(--text-secondary)]">
-                                    Esta pieza combina contexto, interpretación y criterio editorial para facilitar decisiones mejor informadas.
-                                </p>
-                            </div>
-
                             <ArticleFormatBlocks article={article} />
 
                             <EventArticleBlocks article={article} membersOnly={isMembersOnly} />
@@ -134,6 +126,24 @@ export async function ArticleDetailPage({
                                 className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:font-light prose-headings:tracking-tight prose-p:text-[var(--text-secondary)] prose-p:leading-relaxed prose-h1:text-[2rem] prose-h2:text-[1.7rem] prose-h3:text-[1.3rem] prose-a:text-[var(--color-accent-400)] prose-strong:text-[var(--text-primary)] prose-ul:text-[var(--text-secondary)] prose-ol:text-[var(--text-secondary)] prose-li:marker:text-[var(--color-accent-500)] prose-blockquote:border-[var(--color-accent-500)] prose-blockquote:bg-[var(--surface-secondary)] prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-[var(--text-secondary)] prose-hr:border-[var(--border-subtle)]"
                                 dangerouslySetInnerHTML={{ __html: html }}
                             />
+
+                            {originalSource && (
+                                <section className="border-t border-[var(--border-subtle)] pt-8">
+                                    <Bracketed variant="kicker">Fuente original</Bracketed>
+                                    <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
+                                        Publicación original en{" "}
+                                        <a
+                                            href={originalSource.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[var(--color-accent-400)] underline underline-offset-4"
+                                        >
+                                            {originalSource.label}
+                                        </a>
+                                        .
+                                    </p>
+                                </section>
+                            )}
 
                             {isMembersOnly && <PaywallGate membershipHref={membershipHref} category={categoryLabel(article.category)} kind={kindLabel(article.kind)} isEvent={article.kind === "evento"} />}
 

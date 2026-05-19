@@ -246,25 +246,46 @@ const COUNTRY_TO_MAP_LOCATION: Record<string, Omit<TeamMapPin, "id" | "descripti
     Uruguay: { name: "Montevideo", coordinates: [-56.1645, -34.9011] },
 };
 
-function getPersonPhotoPaths(slug: string, legacyPath?: string): string[] {
-    return [
-        `/images/team/${slug}.png`,
-        ...(legacyPath ? [legacyPath] : []),
-    ];
+const VERIFIED_PHOTOS: Record<string, string> = {
+    "juan-angel-soto": "/images/nosotros/Juan Angel Soto Gómez.png",
+    "didac-sanchez-olaya": "/images/nosotros/Dídac Sanchéz.png",
+    "alexia-cosmello-guisande": "/images/nosotros/Alexia Cosmello.png",
+    "calli-pacheco-munoz": "/images/nosotros/Calli Muñoz.png",
+    "beatriz-de-leon-cobo": "/images/nosotros/Beatriz de León Cobo.png",
+    "juan-pablo-chamon-saucedo": "/images/nosotros/Juan Pablo Chamón.png",
+    "matthaus-konradsheim": "/images/nosotros/Matthaus Konradsheim.png",
+    "jose-maria-cortes": "/images/nosotros/Jose Maria Cortes.png",
+    "jose-manuel-perez-ariza": "/images/nosotros/Jose Manuel Perez Ariza.png",
+    "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
+    "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
+    "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
+};
+
+for (let index = TEAM.length - 1; index >= 0; index -= 1) {
+    const member = TEAM[index]!;
+    const verifiedPhoto = VERIFIED_PHOTOS[member.slug];
+
+    if (!verifiedPhoto) {
+        TEAM.splice(index, 1);
+        continue;
+    }
+
+    member.country = TEAM_COUNTRY_OVERRIDES[member.slug] ?? "España";
+    member.photo = [verifiedPhoto];
 }
 
-TEAM.forEach((member) => {
-    member.country = TEAM_COUNTRY_OVERRIDES[member.slug] ?? "España";
-    member.photo = getPersonPhotoPaths(
-        member.slug,
-        member.slug === "juan-angel-soto" ? "/images/team/juansoto.png" : undefined,
-    );
-});
+for (let index = EXPERTS.length - 1; index >= 0; index -= 1) {
+    const expert = EXPERTS[index]!;
+    const verifiedPhoto = VERIFIED_PHOTOS[expert.slug];
 
-EXPERTS.forEach((expert) => {
+    if (!verifiedPhoto) {
+        EXPERTS.splice(index, 1);
+        continue;
+    }
+
     expert.country = EXPERT_COUNTRY_OVERRIDES[expert.slug] ?? "España";
-    expert.photo = getPersonPhotoPaths(expert.slug);
-});
+    expert.photo = [verifiedPhoto];
+}
 
 export function getTeamByVertical(vertical: VerticalId): TeamMember[] {
     return TEAM.filter((m) => m.verticals.includes(vertical));

@@ -29,6 +29,10 @@ export interface Article {
     source_file: string;
 }
 
+export interface ArticleOriginalSource {
+    url: string;
+    label: string;
+}
 const ALL = articlesJson as Article[];
 
 export function listArticles(): Article[] {
@@ -43,10 +47,45 @@ export function getArticleBySlug(slug: string): Article | null {
     return ALL.find((a) => a.slug === slug) ?? null;
 }
 
+function extractLastExternalUrl(markdown: string): string | null {
+    const markdownLinks = [...markdown.matchAll(/\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/g)];
+    if (markdownLinks.length > 0) {
+        return markdownLinks.at(-1)?.[1] ?? null;
+    }
+
+    const bareUrls = [...markdown.matchAll(/https?:\/\/[^\s)]+/g)];
+    return bareUrls.at(-1)?.[0] ?? null;
+}
+
+function extractOriginalSourceLabel(markdown: string, url: string) {
+    const index = markdown.lastIndexOf(url);
+    const snippet = markdown.slice(Math.max(0, index - 320), index + url.length);
+    const patterns = [
+        /publicad[ao][^\n.]* en [_*“"]?([^:\n_*”"]+?)[_*”"]?(?:\s+bajo|\s+el|\s+con|:|\.|,)/i,
+        /versi[oó]n[^\n.]* en [_*“"]?([^:\n_*”"]+?)[_*”"]?(?:\s+bajo|\s+el|\s+con|:|\.|,)/i,
+    ];
+
+    for (const pattern of patterns) {
+        const match = snippet.match(pattern)?.[1]?.trim();
+        if (match) return match;
+    }
+
+    try {
+        return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+        return "fuente original";
+    }
+}
+
+export function getArticleOriginalSource(article: Article): ArticleOriginalSource | null {
+    const url = extractLastExternalUrl(article.content_markdown);
+    if (!url) return null;
+    return { url, label: extractOriginalSourceLabel(article.content_markdown, url) };
+}
+
 export function listSlugs(): string[] {
     return ALL.map((a) => a.slug);
 }
-
 const KIND_LABEL: Record<ArticleKind, string> = {
     comentario: "Comentario",
     informe: "Informe",
@@ -58,7 +97,6 @@ const KIND_LABEL: Record<ArticleKind, string> = {
 export function kindLabel(kind: ArticleKind): string {
     return KIND_LABEL[kind] ?? "Artículo";
 }
-
 const CATEGORY_LABEL: Record<ArticleCategory, string> = {
     politica: "Política",
     "sociedad-civil": "Sociedad Civil",

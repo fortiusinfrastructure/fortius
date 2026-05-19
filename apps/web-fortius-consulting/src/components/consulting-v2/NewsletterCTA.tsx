@@ -1,20 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Bracketed } from "@/components/system/Bracketed";
+import { subscribeToNewsletter } from "@/lib/actions/newsletter";
 
 export function NewsletterCTA() {
     const [email, setEmail] = useState("");
-    const [status, setStatus] = useState<"idle" | "sent">("idle");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [message, setMessage] = useState("");
 
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (!email) return;
-        setStatus("sent");
-        setEmail("");
-        setTimeout(() => setStatus("idle"), 3000);
+        setStatus("loading");
+        setMessage("");
+
+        try {
+            const formData = new FormData();
+            formData.append("email", email);
+            const result = await subscribeToNewsletter(formData);
+            setStatus("success");
+            setMessage(result.message);
+            setEmail("");
+        } catch {
+            setStatus("error");
+            setMessage("No hemos podido completar la suscripción. Inténtalo de nuevo.");
+        }
     }
 
     return (
@@ -55,19 +68,30 @@ export function NewsletterCTA() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="tu@organizacion.org"
+                            disabled={status === "loading"}
                             className="flex-1 bg-transparent border border-[var(--border-strong)] px-5 py-3.5 text-[0.9rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none transition-colors"
                         />
                         <button
                             type="submit"
+                            disabled={status === "loading"}
                             className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.18em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                         >
-                            {status === "sent" ? "¡Gracias!" : "Suscribirme"}
-                            <ArrowRight
-                                size={14}
-                                className="group-hover:translate-x-1 transition-transform"
-                            />
+                            {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : null}
+                            {status === "success" ? "¡Gracias!" : "Suscribirme"}
+                            {status !== "loading" && (
+                                <ArrowRight
+                                    size={14}
+                                    className="group-hover:translate-x-1 transition-transform"
+                                />
+                            )}
                         </button>
                     </form>
+
+                    {message && (
+                        <p className={`mt-4 text-[0.85rem] leading-relaxed ${status === "error" ? "text-[#f59e0b]" : "text-[#10b981]"}`}>
+                            {message}
+                        </p>
+                    )}
                 </div>
             </div>
         </section>

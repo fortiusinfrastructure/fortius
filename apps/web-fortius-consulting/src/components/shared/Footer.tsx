@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Instagram, Youtube } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
 import { BrandLockup } from "@/components/system/BrandLockup";
 
 function XIcon({ size = 15, className }: { size?: number; className?: string; strokeWidth?: number }) {
@@ -13,9 +13,8 @@ function XIcon({ size = 15, className }: { size?: number; className?: string; st
 
 const SOCIAL_LINKS = [
   { icon: Linkedin, href: "https://linkedin.com/company/fortiusconsulting", label: "LinkedIn" },
-  { icon: XIcon, href: "https://x.com/fortiusconsult", label: "X" },
-  { icon: Instagram, href: "https://instagram.com/fortiusconsulting", label: "Instagram" },
-  { icon: Youtube, href: "https://youtube.com/@fortiusconsulting", label: "YouTube" },
+  { icon: XIcon, href: "https://x.com/JuanASotoG", label: "X" },
+  { icon: Instagram, href: "https://www.instagram.com/fortius_consulting/", label: "Instagram" },
 ];
 
 export function Footer() {

@@ -141,6 +141,9 @@ importers:
       react-simple-maps:
         specifier: ^3.0.0
         version: 3.0.0(prop-types@15.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      stripe:
+        specifier: ^20.4.0
+        version: 20.4.0(@types/node@20.19.33)
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
@@ -308,7 +311,7 @@ importers:
         version: 0.15.0(typescript@5.9.2)
       '@content-collections/next':
         specifier: ^0.2.11
-        version: 0.2.11(@content-collections/core@0.15.0(typescript@5.9.2))(next@16.1.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
+        version: 0.2.11(@content-collections/core@0.15.0(typescript@5.9.2))(next@16.1.6(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
       '@fortius/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
@@ -4291,7 +4294,7 @@ snapshots:
     dependencies:
       '@content-collections/core': 0.15.0(typescript@5.9.2)
 
-  '@content-collections/next@0.2.11(@content-collections/core@0.15.0(typescript@5.9.2))(next@16.1.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))':
+  '@content-collections/next@0.2.11(@content-collections/core@0.15.0(typescript@5.9.2))(next@16.1.6(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))':
     dependencies:
       '@content-collections/core': 0.15.0(typescript@5.9.2)
       '@content-collections/integrations': 0.5.0(@content-collections/core@0.15.0(typescript@5.9.2))

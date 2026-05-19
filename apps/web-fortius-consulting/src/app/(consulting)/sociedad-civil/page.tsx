@@ -5,7 +5,6 @@ import { ServicesPortfolio } from "@/components/consulting-v2/ServicesPortfolio"
 import { ExpertsSection } from "@/components/consulting-v2/ExpertsSection";
 import { MembershipTiers } from "@/components/consulting-v2/MembershipTiers";
 import { AccessPrivateAreaCTA } from "@/components/consulting-v2/AccessPrivateAreaCTA";
-import { IdeasMarquee } from "@/components/consulting-v2/IdeasMarquee";
 import { NewsletterCTA } from "@/components/consulting-v2/NewsletterCTA";
 import { VERTICALS } from "@/content/home-v2";
 import {
@@ -58,13 +57,6 @@ export default function SociedadCivilPage() {
                 eyebrow="¿Ya eres cliente?"
                 label="Accede al Área Privada"
                 description="Inicia sesión o solicita acceso para acceder a todas tus ventajas y consultar informes y notas exclusivas."
-            />
-
-            <IdeasMarquee
-                kicker="Experiencia"
-                title="Organizaciones, redes e instituciones con las que Fortius ya ha trabajado o colaborado."
-                description="Una parte de nuestra experiencia en sociedad civil se ha construido acompañando a fundaciones, universidades, think tanks y plataformas que operan con exigencia institucional."
-                ariaLabel="Experiencia — organizaciones e ideas que movemos"
             />
 
             <NewsletterCTA />

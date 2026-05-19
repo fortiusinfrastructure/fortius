@@ -40,15 +40,19 @@ async function getOrganizationId() {
 async function logEmailAttempt({
     to,
     subject,
+    kind,
     status,
     providerMessageId,
+    relatedTable,
     relatedId,
     metadata,
 }: {
     to: string;
     subject: string;
+    kind: string;
     status: "sent" | "failed";
     providerMessageId?: string | null;
+    relatedTable?: string;
     relatedId?: string;
     metadata?: Record<string, unknown>;
 }) {
@@ -59,13 +63,13 @@ async function logEmailAttempt({
         await createAdminClient().from("communication_logs").insert({
             organization_id: organizationId,
             channel: "email",
-            kind: "contact_notification",
+            kind,
             recipient_email: to,
             subject,
             status,
             provider: "resend",
             provider_message_id: providerMessageId ?? null,
-            related_table: "contact_submissions",
+            related_table: relatedTable ?? null,
             related_id: relatedId ?? null,
             metadata: metadata ?? {},
         });
@@ -74,18 +78,22 @@ async function logEmailAttempt({
     }
 }
 
-export async function sendInternalContactNotification({
+export async function sendEmail({
     to,
-    replyTo,
     subject,
     html,
+    kind,
+    replyTo,
+    relatedTable,
     relatedId,
     metadata,
 }: {
     to: string;
-    replyTo: string;
     subject: string;
     html: string;
+    kind: string;
+    replyTo?: string;
+    relatedTable?: string;
     relatedId?: string;
     metadata?: Record<string, unknown>;
 }) {
@@ -93,7 +101,9 @@ export async function sendInternalContactNotification({
         await logEmailAttempt({
             to,
             subject,
+            kind,
             status: "failed",
+            relatedTable,
             relatedId,
             metadata: {
                 ...(metadata ?? {}),
@@ -115,7 +125,7 @@ export async function sendInternalContactNotification({
                 to: [to],
                 subject,
                 html,
-                reply_to: replyTo,
+                ...(replyTo ? { reply_to: replyTo } : {}),
             }),
         });
 
@@ -129,7 +139,9 @@ export async function sendInternalContactNotification({
             await logEmailAttempt({
                 to,
                 subject,
+                kind,
                 status: "failed",
+                relatedTable,
                 relatedId,
                 metadata: {
                     ...(metadata ?? {}),
@@ -142,8 +154,10 @@ export async function sendInternalContactNotification({
         await logEmailAttempt({
             to,
             subject,
+            kind,
             status: "sent",
             providerMessageId: result.id ?? null,
+            relatedTable,
             relatedId,
             metadata,
         });
@@ -153,7 +167,9 @@ export async function sendInternalContactNotification({
         await logEmailAttempt({
             to,
             subject,
+            kind,
             status: "failed",
+            relatedTable,
             relatedId,
             metadata: {
                 ...(metadata ?? {}),

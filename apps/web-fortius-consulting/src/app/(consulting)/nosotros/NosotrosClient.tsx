@@ -11,6 +11,7 @@ import {
     type PersonDialogData,
 } from "@/components/consulting-v2/PersonDialog";
 import { HistoryTimeline } from "@/components/consulting-v2/HistoryTimeline";
+import { IdeasMarquee } from "@/components/consulting-v2/IdeasMarquee";
 import { WorldMap } from "@/components/consulting-v2/WorldMap";
 import {
     DEPARTMENT_LABEL,
@@ -191,28 +192,30 @@ export function NosotrosClient() {
                 </div>
 
                 {/* Expertos vinculados */}
-                <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
-                    <div className="flex items-end justify-between mb-6">
-                        <Bracketed variant="kicker">Expertos vinculados</Bracketed>
-                        <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                            + bio al pulsar
-                        </span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
-                        {EXPERTS.map((e) => (
-                            <PersonCard
-                                key={e.slug}
-                                name={e.name}
-                                role={e.role}
-                                country={e.country}
-                                area={VERTICAL_LABEL[e.vertical]}
-                                photo={e.photo}
-                                variant="full"
-                                onOpen={() => setActive(expertToDialog(e))}
-                            />
-                        ))}
-                    </div>
-                </section>
+                {EXPERTS.length > 0 && (
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                        <div className="flex items-end justify-between mb-6">
+                            <Bracketed variant="kicker">Expertos vinculados</Bracketed>
+                            <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
+                                + bio al pulsar
+                            </span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
+                            {EXPERTS.map((e) => (
+                                <PersonCard
+                                    key={e.slug}
+                                    name={e.name}
+                                    role={e.role}
+                                    country={e.country}
+                                    area={VERTICAL_LABEL[e.vertical]}
+                                    photo={e.photo}
+                                    variant="full"
+                                    onOpen={() => setActive(expertToDialog(e))}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 {/* Nuestro trabajo */}
                 <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
@@ -227,6 +230,13 @@ export function NosotrosClient() {
                     </div>
                     <WorldMap />
                 </section>
+
+                <IdeasMarquee
+                    kicker="Aliados"
+                    title="Instituciones, redes y organizaciones con las que Fortius ha trabajado o colaborado."
+                    description="Esta red de aliados resume parte del ecosistema institucional y profesional en el que trabajamos."
+                    ariaLabel="Aliados de Fortius"
+                />
             </section>
 
             <PersonDialog person={active} onClose={() => setActive(null)} />

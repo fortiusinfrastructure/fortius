@@ -40,7 +40,7 @@ const TIMELINE: TimelineItem[] = [
         consulting: {
             title: "Fortius se traslada a Madrid",
             description:
-                "Desarrolla equipo en Barcelona, Madrid y Pamplona. Mucho trabajo en think tanks inspirados por el humanismo cristiano y rápida expansión por Europa y América.",
+                "Desarrolla equipo en Barcelona, Madrid y Pamplona. Numerosos proyectos con think tanks inspirados por el humanismo cristiano y rápida expansión por Europa y América.",
         },
     },
     {
