@@ -72,7 +72,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     <a
                       key={href}
                       href={href}
-                      className="inline-flex items-center px-6 py-3 bg-[#D4212A] text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
+                      className="inline-flex items-center px-6 py-3 bg-[#D4212A] !text-white hover:!text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
                       download
                     >
                       {(isEn && mat.label_en) || mat.label}
