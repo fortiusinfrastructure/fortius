@@ -1,18 +1,26 @@
-import createIntlMiddleware from 'next-intl/middleware';
+import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
+
+// Admin routes that are public (no auth required)
+const ADMIN_PUBLIC_ROUTES = ['/admin/login'];
+
+// Routes that bypass both i18n and auth
+const PASSTHROUGH_ROUTES = ['/api/', '/auth/callback', '/_next/', '/favicon.ico'];
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-export async function middleware(request: NextRequest) {
+function isPassthrough(pathname: string) {
+    return PASSTHROUGH_ROUTES.some((route) => pathname.startsWith(route));
+}
+
+export default async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Admin routes bypass i18n entirely
     if (pathname.startsWith('/admin')) {
-        // Allow login page without auth check
-        if (pathname === '/admin/login') {
+        if (ADMIN_PUBLIC_ROUTES.includes(pathname)) {
             return NextResponse.next();
         }
 
@@ -36,9 +44,7 @@ export async function middleware(request: NextRequest) {
             }
         );
 
-        const {
-            data: { user },
-        } = await supabase.auth.getUser();
+        const { data: { user } } = await supabase.auth.getUser();
 
         if (!user) {
             const loginUrl = new URL('/admin/login', request.url);
@@ -49,13 +55,18 @@ export async function middleware(request: NextRequest) {
         return response;
     }
 
-    // All public routes: apply i18n
+    // Skip passthrough routes
+    if (isPassthrough(pathname)) {
+        return NextResponse.next();
+    }
+
+    // Public routes: apply i18n
     return intlMiddleware(request);
 }
 
 export const config = {
     matcher: [
         // Match all paths except Next.js internals and static files
-        '/((?!_next|_vercel|.*\\..*).*)',
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
     ],
 };

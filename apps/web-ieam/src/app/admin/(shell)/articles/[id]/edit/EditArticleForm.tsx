@@ -3,7 +3,33 @@
 import { useRouter } from 'next/navigation';
 import { ArticleEditor, type ArticleFormData } from '@fortius/admin-ui';
 import { updateArticleAction } from '@/lib/admin/article-actions';
+import { coreTeam, researchFellows } from '@/lib/mock-data/team';
 import { ArrowLeft } from 'lucide-react';
+
+const TEAM_MEMBERS = [
+    {
+        name: 'Equipo IEAM',
+        name_en: 'IEAM Team',
+        role_es: 'Investigación',
+        role_en: 'Research',
+        bio_es: 'Unidad de datos y análisis del IEAM.',
+        bio_en: 'IEAM Data and Analysis Unit.',
+        image_url: '/favicon-new.png',
+        linkedin: '',
+        email: '',
+    },
+    ...[...coreTeam, ...researchFellows].map((m) => ({
+        name: m.name,
+        name_en: m.name,
+        role_es: m.role,
+        role_en: m.role_en ?? '',
+        bio_es: m.bio,
+        bio_en: m.bio_en ?? '',
+        image_url: m.img,
+        linkedin: m.linkedin ?? '',
+        email: m.email ?? '',
+    })),
+];
 
 interface EditArticleFormProps {
     articleId: string;
@@ -37,6 +63,7 @@ export function EditArticleForm({ articleId, initialData, supabaseUrl, supabaseA
                 onSave={handleSave}
                 supabaseUrl={supabaseUrl}
                 supabaseAnonKey={supabaseAnonKey}
+                teamMembers={TEAM_MEMBERS}
             />
         </div>
     );

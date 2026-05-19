@@ -6,6 +6,18 @@ import { MultilangTabs } from './MultilangTabs';
 import { RichTextEditor } from './RichTextEditor';
 import { ImageUpload } from './ImageUpload';
 
+export interface TeamMemberOption {
+    name: string;
+    name_en?: string;
+    role_es: string;
+    role_en?: string;
+    bio_es: string;
+    bio_en?: string;
+    image_url?: string;
+    linkedin?: string;
+    email?: string;
+}
+
 export interface ArticleAuthorFormData {
     name: string;
     name_en: string;
@@ -98,6 +110,7 @@ interface ArticleEditorProps {
     onSave: (data: ArticleFormData) => Promise<void>;
     supabaseUrl: string;
     supabaseAnonKey: string;
+    teamMembers?: TeamMemberOption[];
 }
 
 export function ArticleEditor({
@@ -105,6 +118,7 @@ export function ArticleEditor({
     onSave,
     supabaseUrl,
     supabaseAnonKey,
+    teamMembers,
 }: ArticleEditorProps) {
     const [form, setForm] = useState<ArticleFormData>({
         slug: '',
@@ -393,6 +407,43 @@ export function ArticleEditor({
                                 </button>
                             )}
                         </div>
+                        {/* Team member picker */}
+                        {teamMembers && teamMembers.length > 0 && (
+                            <Field label="Seleccionar del equipo IEAM">
+                                <select
+                                    value=""
+                                    onChange={(e) => {
+                                        const idx = parseInt(e.target.value, 10);
+                                        if (isNaN(idx)) return;
+                                        const m = teamMembers[idx];
+                                        setForm((prev) => {
+                                            const authors = [...prev.authors];
+                                            authors[i] = {
+                                                name: m.name,
+                                                name_en: m.name_en ?? m.name,
+                                                role_es: m.role_es,
+                                                role_en: m.role_en ?? '',
+                                                bio_es: m.bio_es,
+                                                bio_en: m.bio_en ?? '',
+                                                image_url: m.image_url ?? '',
+                                                linkedin: m.linkedin ?? '',
+                                                email: m.email ?? '',
+                                            };
+                                            return { ...prev, authors };
+                                        });
+                                    }}
+                                    className={inputCls}
+                                >
+                                    <option value="">— Seleccionar miembro del equipo —</option>
+                                    {teamMembers.map((m, idx) => (
+                                        <option key={idx} value={idx}>
+                                            {m.name} · {m.role_es}
+                                        </option>
+                                    ))}
+                                </select>
+                            </Field>
+                        )}
+
                         <div className="grid grid-cols-2 gap-3">
                             {(
                                 [

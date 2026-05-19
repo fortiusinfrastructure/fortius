@@ -54,7 +54,7 @@ Piezas clave:
 - **Next.js 16** con App Router.
 - **React 19**.
 - **Tailwind CSS v4** como base visual.
-- **next-intl** en las apps multilingües (`web-escuela-hispanica` e `web-ieam`).
+- **next-intl** en las apps multilingües (`web-escuela-hispanica` y `web-ieam`).
 - **Supabase** para autenticación, datos, RLS y flujos administrativos.
 
 > Nota: `web-fortius-consulting` y `web-fortius-foundation` comparten la base
@@ -136,7 +136,8 @@ principales del ecosistema.
 - CMS real ya operativo para artículos y eventos
 - el sitio público aún convive con `mock-data`
 - existe un piloto local con `content-collections` y `Decap CMS`
-- el build actual muestra un aviso de Next.js para migrar `middleware` a `proxy`, pero no bloquea compilación
+- el build muestra un aviso de Next.js para migrar `middleware` a `proxy`, pero no bloquea compilación
+- **contenido pendiente de migrar desde el proyecto legacy `ieam/`** (Vite/React, deprecado): 1 artículo nuevo (`migracion-irregular-ue-t1-2026`) y 3 miembros del equipo (`Dolores López`, `Souleymane Fall`, `Fodié Tandjigora`)
 
 #### `web-fortius-consulting`
 

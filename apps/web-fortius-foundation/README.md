@@ -129,3 +129,4 @@ su contenido principal al backend compartido.
 - Empieza por `src/app/(foundation)` para entender la navegación pública.
 - Usa `src/components/foundation` para mantener la coherencia del sistema editorial.
 - Si introduces datos dinámicos, documenta qué deja de ser contenido local.
+- Esta app **no usa `next-intl`** ni `proxy.ts`/`middleware.ts`; el router de Next.js es estándar.

@@ -134,7 +134,8 @@ La app sigue en estado **híbrido**:
 ### Email
 
 - `RESEND_API_KEY`
-- remitente configurado para correo transaccional
+
+> El remitente está hardcodeado en `src/lib/email/`. **No** se usa `RESEND_FROM_EMAIL` en esta app.
 
 ## Rutas y módulos que conviene conocer
 

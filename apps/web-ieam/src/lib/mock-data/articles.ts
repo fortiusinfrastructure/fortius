@@ -1559,6 +1559,86 @@ export const articles: Article[] = [
             <p>In the coming months, IEAM will begin fieldwork and the organization of workshops, with a commitment to produce actionable results that are valuable for public and social action. We are grateful to the FOESSA Foundation for their trust and for the opportunity to contribute to a deeper and more realistic understanding of migrants’ inclusion pathways in Spain.</p>
         `,
         relatedArticles: []
+    },
+    {
+        slug: 'migracion-irregular-ue-t1-2026',
+        type: 'Infografía',
+        type_en: 'Infographic',
+        contentKind: 'infografia',
+        category: 'Migración · UE',
+        category_en: 'Migration · EU',
+        title: 'Tendencias de la migración irregular hacia la UE – T1 2026',
+        title_en: 'Irregular Migration Trends Towards the EU – Q1 2026',
+        subtitle: 'Análisis de las principales tendencias de la migración irregular hacia la UE en el primer trimestre de 2026, a partir de datos de Frontex y el Ministerio del Interior de España.',
+        subtitle_en: 'Analysis of the main trends in irregular migration towards the EU in the first quarter of 2026, based on data from Frontex and the Spanish Ministry of the Interior.',
+        heroImage: '/images/infografia_migracionirregularEU2026_ES.png',
+        heroImage_en: '/images/infografia_migracionirregularEU2026_EN.png',
+        mainImage: '/images/infografia_migracionirregularEU2026_ES.png',
+        mainImage_en: '/images/infografia_migracionirregularEU2026_EN.png',
+        mainImageCaption: 'Tendencias de la migración irregular hacia la UE – T1 2026.',
+        mainImageCaption_en: 'Irregular Migration Trends Towards the EU – Q1 2026.',
+        publishDate: '28 Abr 2026',
+        readTime: '5 min',
+        author: {
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Investigación',
+            role_en: 'Research',
+            image: '/favicon-new.png',
+            bio: 'Unidad de datos y análisis del IEAM.',
+            bio_en: 'IEAM Data and Analysis Unit.'
+        },
+        materials: [
+            {
+                label: 'Descargar Infografía (ES)',
+                label_en: 'Download Infographic (ES)',
+                url: '/docs/IEAM-2026-008-ES-IrregularMigrationEU.pdf'
+            },
+            {
+                label: 'Download Infographic (EN)',
+                label_en: 'Download Infographic (EN)',
+                url: '/docs/IEAM-2026-008-EN-IrregularMigrationEU.pdf'
+            }
+        ],
+        content: `
+            <p>Este análisis del Instituto Español de Análisis Migratorio (IEAM) examina las principales tendencias de la migración irregular hacia la Unión Europea en el primer trimestre de 2026, a partir de datos publicados por Frontex y el Ministerio del Interior de España. Pone de relieve la evolución continua de los cruces fronterizos irregulares, así como los cambios observados en las llegadas a España.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Descenso de los cruces irregulares en las fronteras exteriores de la UE</h3>
+            <p>En los tres primeros meses de 2026, las detecciones de cruces irregulares en las fronteras exteriores de la UE descendieron un <strong>39 %</strong> en comparación con el mismo periodo de 2025, con algo más de <strong>21.400 cruces detectados</strong>, según datos preliminares de Frontex.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Tendencias divergentes por rutas migratorias</h3>
+            <p>En el primer trimestre de 2026, el <strong>Mediterráneo oriental</strong> se mantuvo como la principal ruta migratoria hacia la Unión Europea, con <strong>6.455 detecciones</strong>, lo que supone un descenso del <strong>34 %</strong> respecto al primer trimestre de 2025. Los nacionales afganos, bangladesíes y sudaneses figuraron entre las principales nacionalidades que utilizaron esta ruta.</p>
+            <p>El <strong>Mediterráneo central</strong> siguió de cerca, con <strong>6.162 detecciones</strong>, lo que representa un descenso interanual del <strong>33 %</strong>. Los nacionales bangladesíes, somalíes y pakistaníes figuraron entre las principales nacionalidades que utilizaron esta ruta.</p>
+            <p>El <strong>Mediterráneo occidental</strong> fue la única gran ruta que registró un aumento, con <strong>4.402 detecciones</strong>, un incremento del <strong>66 %</strong> en comparación con el primer trimestre de 2025. Los nacionales argelinos, malienses y marroquíes figuraron entre las principales nacionalidades que utilizaron esta ruta.</p>
+            <p>En contraste, la ruta de <strong>África occidental</strong> registró el mayor descenso entre las principales rutas, con <strong>1.640 detecciones</strong>, lo que supone una caída del <strong>83 %</strong> interanual. Los nacionales gambianos, senegaleses y malienses figuraron entre las principales nacionalidades que utilizaron esta ruta.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Llegadas a España por vía marítima y terrestre</h3>
+            <p>España registró un total de <strong>6.218 llegadas</strong> por vía marítima y terrestre en el primer trimestre de 2026, frente a 11.988 en el mismo periodo de 2025, lo que supone una disminución del <strong>48,1 %</strong>. Sin embargo, el descenso más acusado se observó en las rutas marítimas, donde las llegadas cayeron un <strong>62,5 %</strong>, pasando de 11.609 en el primer trimestre de 2025 a 4.352 en el primer trimestre de 2026. Esta reducción se debió principalmente a la fuerte contracción de las llegadas a las <strong>Islas Canarias</strong>, que disminuyeron un <strong>82,6 %</strong>, pasando de 9.424 a 1.640. Esta tendencia refleja el importante descenso observado en la ruta de África occidental a nivel de la UE.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">A destacar</h3>
+            <p>Las condiciones meteorológicas adversas en las principales rutas migratorias hacia la Unión Europea, así como los acuerdos con países como Senegal y Mauritania se encuentran entre los principales factores que explican el descenso general de las llegadas irregulares.</p>
+            <p>La evolución de la situación en Oriente Medio podría provocar nuevos desplazamientos de población en la región en los próximos meses.</p>
+        `,
+        content_en: `
+            <p>This analysis by the Spanish Institute for Migration Analysis (IEAM) examines the main trends in irregular migration towards the European Union in the first quarter of 2026, based on data published by Frontex and the Spanish Ministry of the Interior. It highlights the continued evolution of irregular border crossings, as well as changes observed in arrivals to Spain.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Decline in irregular crossings at EU external borders</h3>
+            <p>In the first three months of 2026, irregular border-crossing detections fell by <strong>39%</strong> compared with the same period in 2025, with just over <strong>21,400 crossings detected</strong>, according to preliminary data from Frontex.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Diverging trends across migration routes</h3>
+            <p>In the first quarter of 2026, the <strong>Eastern Mediterranean</strong> remained the main migratory route into the European Union, with <strong>6,455 detections</strong>, a <strong>34% decrease</strong> compared with the first quarter of 2025. Afghan, Bangladeshi, and Sudanese nationals were among the main nationalities using this route.</p>
+            <p>The <strong>Central Mediterranean</strong> followed closely, with <strong>6,162 detections</strong>, representing a <strong>33% year-on-year decline</strong>. Bangladeshi, Somali, and Pakistani nationals were among the main nationalities using this route.</p>
+            <p>The <strong>Western Mediterranean</strong> was the only major route to record an increase, with <strong>4,402 detections</strong>, a <strong>66% rise</strong> compared with the first quarter of 2025. Algerian, Malian, and Moroccan nationals were among the main nationalities using this route.</p>
+            <p>In contrast, the <strong>West African route</strong> recorded the steepest decline among the main routes, with <strong>1,640 detections</strong>, an <strong>83% decrease year-on-year</strong>. Gambian, Senegalese, and Malian nationals were among the main nationalities using this route.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Arrivals to Spain by Sea and Land Routes</h3>
+            <p>Spain recorded a total of <strong>6,218 arrivals</strong> by sea and land routes in the first quarter of 2026, compared with 11,988 during the same period in 2025, a decrease of <strong>48.1%</strong>. However, the sharpest decline was observed along sea routes, where arrivals fell by <strong>62.5%</strong>, from 11,609 in the first quarter of 2025 to 4,352 in the first quarter of 2026. This decrease was mainly driven by a strong contraction in arrivals to the <strong>Canary Islands</strong>, which dropped by <strong>82.6%</strong>, from 9,424 to 1,640. This trend reflects the significant decline observed along the West African route at EU level.</p>
+
+            <h3 class="text-xl font-serif font-bold text-[var(--color-text-primary)] mt-8 mb-3">Highlights</h3>
+            <p>Adverse weather conditions along major migration routes towards the European Union, as well as agreements with countries including Senegal and Mauritania, are among the main factors behind the overall decline in irregular arrivals.</p>
+            <p>The evolving situation in the Middle East could lead to further population movements in the region in the coming months.</p>
+        `,
+        relatedArticles: []
     }
 ];
 

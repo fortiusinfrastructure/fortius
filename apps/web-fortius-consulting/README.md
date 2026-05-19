@@ -109,3 +109,4 @@ El formulario de `/contacto`:
 - Usa `src/components/consulting-v2` si afecta la capa editorial actual.
 - Revisa `src/app/lab` antes de rehacer variantes visuales.
 - Si conviertes contenido local en datos remotos, documenta claramente la transición.
+- Esta app **no usa `next-intl`** ni `proxy.ts`/`middleware.ts`; el router de Next.js es estándar.

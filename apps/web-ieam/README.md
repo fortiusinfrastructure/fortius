@@ -19,6 +19,7 @@ una migración editorial todavía híbrida entre contenido local y Supabase.
   - home
   - `nosotros`
   - `investigacion`
+  - `analisis`
   - `eventos`
   - `contacto`
   - `colabora`
@@ -79,7 +80,7 @@ src/
 │   ├── mock-data/           # Fuente transicional
 │   └── utils/               # Utilidades varias
 ├── messages/                # Diccionarios es/en
-└── middleware.ts            # Middleware legacy de app
+└── middleware.ts            # ⚠️ Deprecado — pendiente migrar a proxy.ts
 ```
 
 ## CMS y backend compartido
@@ -118,22 +119,21 @@ La app está en transición ordenada:
 
 - `NEXT_PUBLIC_SITE_URL` debería apuntar a `https://ieam.es/`
 
-### Seed y acceso admin
+### Supabase
 
 - `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
-
-## Nota técnica conocida
-
-En el build actual aparece un aviso de Next.js indicando que la convención
-`middleware` está deprecada y que conviene migrar a `proxy` en una iteración
-posterior. No bloquea la compilación actual.
 
 ## Próxima etapa natural
 
-- completar la sustitución progresiva de `mock-data`
-- cerrar el modelo final de piezas editoriales aún no migradas
-- decidir si el piloto con `content-collections` pasa a ser parte estable del flujo
+- **Migrar `middleware.ts` → `proxy.ts`** (ya hecho en `web-escuela-hispanica`; el build muestra aviso pero no bloquea).
+- **Migrar contenido legacy de `ieam/`** (proyecto Vite deprecado):
+  - 1 artículo nuevo: `migracion-irregular-ue-t1-2026` (añadir a `mock-data/articles.ts` y re-correr `seed-content.ts` o cargar vía CMS).
+  - 3 miembros del equipo nuevos: `Dolores López`, `Souleymane Fall`, `Fodié Tandjigora` (actualizar `mock-data/team.ts`).
+  - Validar posibles diffs de cuerpo en los 18 artículos comunes entre `ieam/src/data/articles.ts` y `mock-data/articles.ts`.
+- Completar la sustitución progresiva de `mock-data` por lecturas directas a Supabase.
+- Decidir si el piloto con `content-collections` pasa a ser parte estable del flujo.
 
 ## Notas para desarrollo
 
