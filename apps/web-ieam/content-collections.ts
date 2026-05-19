@@ -47,6 +47,8 @@ const research = defineCollection({
           label: z.string(),
           label_en: z.string().optional(),
           url: z.string(),
+          url_es: z.string().optional(),
+          url_en: z.string().optional(),
         }),
       )
       .optional(),

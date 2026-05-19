@@ -87,6 +87,8 @@ async function seedArticles(orgId: string) {
                     category: article.category,
                     read_time: article.readTime ?? null,
                     featured_image: article.heroImage ?? null,
+                    featured_image_es: article.heroImage ?? null,
+                    featured_image_en: article.heroImage_en ?? null,
                     pull_quote_es: article.pullQuote ?? null,
                     pull_quote_en: article.pullQuote_en ?? null,
                     main_image_caption_es: article.mainImageCaption ?? null,
@@ -98,7 +100,6 @@ async function seedArticles(orgId: string) {
                         ? article.materials
                         : null,
                     metadata: {
-                        featured_image_en: article.heroImage_en ?? null,
                         main_image: article.mainImage ?? null,
                         main_image_en: article.mainImage_en ?? null,
                     },

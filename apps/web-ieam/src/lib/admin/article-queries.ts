@@ -39,6 +39,8 @@ export async function getArticleById(articleId: string): Promise<Partial<Article
         category: data.category,
         read_time: data.read_time ?? '',
         featured_image: data.featured_image ?? '',
+        featured_image_es: data.featured_image_es ?? data.featured_image ?? '',
+        featured_image_en: data.featured_image_en ?? '',
         pull_quote_es: data.pull_quote_es ?? '',
         pull_quote_en: data.pull_quote_en ?? '',
         main_image_caption_es: data.main_image_caption_es ?? '',
@@ -59,10 +61,20 @@ export async function getArticleById(articleId: string): Promise<Partial<Article
             linkedin: a.linkedin ?? '',
             email: a.email ?? '',
         })),
-        materials: rawMaterials.map((m: { label?: string; label_en?: string; url?: string }) => ({
-            label: m.label ?? '',
-            label_en: m.label_en ?? '',
-            url: m.url ?? '',
-        })),
+        materials: rawMaterials.map(
+            (m: {
+                label?: string;
+                label_en?: string;
+                url?: string;
+                url_es?: string;
+                url_en?: string;
+            }) => ({
+                label: m.label ?? '',
+                label_en: m.label_en ?? '',
+                url: m.url ?? '',
+                url_es: m.url_es ?? '',
+                url_en: m.url_en ?? '',
+            })
+        ),
     };
 }

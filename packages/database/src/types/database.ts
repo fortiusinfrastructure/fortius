@@ -325,6 +325,8 @@ export interface Database {
                     published_at: string | null
                     category: string
                     featured_image: string | null
+                    featured_image_es: string | null
+                    featured_image_en: string | null
                     is_featured: boolean | null
                     status: string | null
                     metadata: Json | null
@@ -358,6 +360,8 @@ export interface Database {
                     published_at?: string | null
                     category: string
                     featured_image?: string | null
+                    featured_image_es?: string | null
+                    featured_image_en?: string | null
                     is_featured?: boolean | null
                     status?: string | null
                     metadata?: Json | null
@@ -391,6 +395,8 @@ export interface Database {
                     published_at?: string | null
                     category?: string
                     featured_image?: string | null
+                    featured_image_es?: string | null
+                    featured_image_en?: string | null
                     is_featured?: boolean | null
                     status?: string | null
                     metadata?: Json | null

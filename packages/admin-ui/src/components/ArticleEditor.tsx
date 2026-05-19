@@ -34,6 +34,8 @@ export interface MaterialFormData {
     label: string;
     label_en: string;
     url: string;
+    url_es?: string;
+    url_en?: string;
 }
 
 export interface ArticleFormData {
@@ -50,6 +52,8 @@ export interface ArticleFormData {
     category: string;
     read_time: string;
     featured_image: string;
+    featured_image_es: string;
+    featured_image_en: string;
     pull_quote_es: string;
     pull_quote_en: string;
     main_image_caption_es: string;
@@ -73,7 +77,69 @@ const EMPTY_AUTHOR: ArticleAuthorFormData = {
     email: '',
 };
 
-const EMPTY_MATERIAL: MaterialFormData = { label: '', label_en: '', url: '' };
+const EMPTY_MATERIAL: MaterialFormData = {
+    label: '',
+    label_en: '',
+    url: '',
+    url_es: '',
+    url_en: '',
+};
+
+// Per content_kind required-field rules. EN side is enforced only when
+// any EN field has been touched (graceful bilingual). ES side is always required.
+function validateForm(form: ArticleFormData): string[] {
+    const errors: string[] = [];
+    const kind = form.content_kind;
+
+    if (!form.title_es.trim()) errors.push('El título en español es obligatorio.');
+    if (!form.content_es.trim()) errors.push('El contenido en español es obligatorio.');
+
+    const hasAnyEn = Boolean(
+        form.title_en.trim() ||
+            form.subtitle_en.trim() ||
+            form.excerpt_en.trim() ||
+            form.content_en.trim() ||
+            form.featured_image_en.trim()
+    );
+
+    const heroEs = form.featured_image_es.trim() || form.featured_image.trim();
+    const heroEn = form.featured_image_en.trim() || form.featured_image.trim();
+
+    if (kind === 'infografia') {
+        if (!heroEs) errors.push('Infografía: imagen destacada (ES) obligatoria.');
+        if (hasAnyEn && !heroEn) errors.push('Infografía: imagen destacada (EN) obligatoria.');
+        const validMaterials = form.materials.filter((m) => {
+            const urlEs = (m.url_es || m.url || '').trim();
+            const urlEn = (m.url_en || m.url || '').trim();
+            return m.label.trim() && urlEs && (!hasAnyEn || (m.label_en.trim() && urlEn));
+        });
+        if (validMaterials.length === 0)
+            errors.push('Infografía: al menos un material descargable con etiqueta y URL.');
+    }
+
+    if ((kind === 'analisis' || kind === 'policy') && form.content_es.trim().length < 50) {
+        errors.push(
+            `${kind === 'analisis' ? 'Análisis' : 'Policy brief'}: el cuerpo en español es demasiado corto.`
+        );
+    }
+
+    if (hasAnyEn) {
+        if (!form.title_en.trim()) errors.push('Si añades contenido en inglés, el título (EN) es obligatorio.');
+        if (!form.content_en.trim()) errors.push('Si añades contenido en inglés, el cuerpo (EN) es obligatorio.');
+    }
+
+    form.materials.forEach((m, i) => {
+        const hasLabel = m.label.trim() || m.label_en.trim();
+        const hasUrl = (m.url || m.url_es || m.url_en || '').trim();
+        if (hasLabel && !hasUrl) errors.push(`Material #${i + 1}: falta la URL.`);
+        if (hasUrl && !m.label.trim() && !m.label_en.trim())
+            errors.push(`Material #${i + 1}: falta la etiqueta.`);
+        if (m.label.trim() && !m.label_en.trim() && hasAnyEn)
+            errors.push(`Material #${i + 1}: añade la etiqueta en inglés.`);
+    });
+
+    return errors;
+}
 
 const CONTENT_KINDS = [
     { value: 'analisis', label: 'Análisis' },
@@ -134,6 +200,8 @@ export function ArticleEditor({
         category: '',
         read_time: '',
         featured_image: '',
+        featured_image_es: '',
+        featured_image_en: '',
         pull_quote_es: '',
         pull_quote_en: '',
         main_image_caption_es: '',
@@ -169,6 +237,13 @@ export function ArticleEditor({
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError(null);
+
+        const validationErrors = validateForm(form);
+        if (validationErrors.length > 0) {
+            setError(validationErrors.join('\n'));
+            return;
+        }
+
         setSaving(true);
         try {
             await onSave(form);
@@ -355,17 +430,38 @@ export function ArticleEditor({
                 </MultilangTabs>
             </section>
 
-            {/* Hero image */}
-            <section className="bg-white rounded-xl border border-slate-200 p-6">
-                <h2 className="text-base font-semibold text-slate-900 mb-4">Imagen principal</h2>
-                <ImageUpload
-                    value={form.featured_image}
-                    onChange={(url) => set('featured_image', url)}
-                    supabaseUrl={supabaseUrl}
-                    supabaseAnonKey={supabaseAnonKey}
-                    folder="articles"
-                    label="Imagen de portada (hero)"
-                />
+            {/* Hero image (per-locale) */}
+            <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+                <div>
+                    <h2 className="text-base font-semibold text-slate-900">Imagen principal</h2>
+                    <p className="text-xs text-slate-500 mt-1">
+                        Sube una imagen por idioma. La versión EN se usa en /en/...; si no hay
+                        EN, se usa la ES como fallback.
+                    </p>
+                </div>
+                <MultilangTabs>
+                    {(locale) => (
+                        <ImageUpload
+                            value={
+                                locale === 'es' ? form.featured_image_es : form.featured_image_en
+                            }
+                            onChange={(url) =>
+                                set(
+                                    locale === 'es' ? 'featured_image_es' : 'featured_image_en',
+                                    url
+                                )
+                            }
+                            supabaseUrl={supabaseUrl}
+                            supabaseAnonKey={supabaseAnonKey}
+                            folder="articles"
+                            label={
+                                locale === 'es'
+                                    ? 'Imagen de portada (ES)'
+                                    : 'Imagen de portada (EN)'
+                            }
+                        />
+                    )}
+                </MultilangTabs>
             </section>
 
             {/* Authors */}
@@ -522,9 +618,28 @@ export function ArticleEditor({
                 )}
 
                 {form.materials.map((mat, i) => (
-                    <div key={i} className="flex gap-3 items-start">
-                        <div className="grid grid-cols-3 gap-3 flex-1">
-                            <Field label="Etiqueta (ES)">
+                    <div
+                        key={i}
+                        className="border border-slate-100 rounded-lg p-4 space-y-3 relative"
+                    >
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setForm((prev) => ({
+                                    ...prev,
+                                    materials: prev.materials.filter((_, idx) => idx !== i),
+                                }))
+                            }
+                            className="absolute top-3 right-3 text-red-500 hover:text-red-700"
+                            aria-label="Eliminar material"
+                        >
+                            <Trash2 size={15} />
+                        </button>
+                        <span className="text-sm font-medium text-slate-700">
+                            Material {i + 1}
+                        </span>
+                        <div className="grid grid-cols-2 gap-3">
+                            <Field label="Etiqueta (ES)" required>
                                 <input
                                     type="text"
                                     value={mat.label}
@@ -542,37 +657,45 @@ export function ArticleEditor({
                                     placeholder="Download PDF"
                                 />
                             </Field>
-                            <Field label="URL">
+                        </div>
+                        <Field label="URL por defecto (fallback)" required>
+                            <input
+                                type="url"
+                                value={mat.url}
+                                onChange={(e) => setMaterial(i, 'url', e.target.value)}
+                                className={inputCls}
+                                placeholder="https://..."
+                            />
+                        </Field>
+                        <div className="grid grid-cols-2 gap-3">
+                            <Field label="URL (ES, opcional — sobrescribe el fallback)">
                                 <input
                                     type="url"
-                                    value={mat.url}
-                                    onChange={(e) => setMaterial(i, 'url', e.target.value)}
+                                    value={mat.url_es ?? ''}
+                                    onChange={(e) => setMaterial(i, 'url_es', e.target.value)}
                                     className={inputCls}
-                                    placeholder="https://..."
+                                    placeholder="https://.../es.pdf"
+                                />
+                            </Field>
+                            <Field label="URL (EN, opcional — sobrescribe el fallback)">
+                                <input
+                                    type="url"
+                                    value={mat.url_en ?? ''}
+                                    onChange={(e) => setMaterial(i, 'url_en', e.target.value)}
+                                    className={inputCls}
+                                    placeholder="https://.../en.pdf"
                                 />
                             </Field>
                         </div>
-                        <button
-                            type="button"
-                            onClick={() =>
-                                setForm((prev) => ({
-                                    ...prev,
-                                    materials: prev.materials.filter((_, idx) => idx !== i),
-                                }))
-                            }
-                            className="mt-6 text-red-500 hover:text-red-700"
-                        >
-                            <Trash2 size={15} />
-                        </button>
                     </div>
                 ))}
             </section>
 
             {/* Submit */}
             {error && (
-                <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-4 py-3 whitespace-pre-line">
                     {error}
-                </p>
+                </div>
             )}
 
             <div className="flex gap-3 justify-end pb-8">

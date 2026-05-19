@@ -33,7 +33,9 @@ export async function createArticleAction(data: ArticleFormData) {
             content_kind: data.content_kind || null,
             category: data.category,
             read_time: data.read_time || null,
-            featured_image: data.featured_image || null,
+            featured_image: data.featured_image || data.featured_image_es || null,
+            featured_image_es: data.featured_image_es || null,
+            featured_image_en: data.featured_image_en || null,
             pull_quote_es: data.pull_quote_es || null,
             pull_quote_en: data.pull_quote_en || null,
             main_image_caption_es: data.main_image_caption_es || null,
@@ -80,7 +82,9 @@ export async function updateArticleAction(articleId: string, data: ArticleFormDa
             content_kind: data.content_kind || null,
             category: data.category,
             read_time: data.read_time || null,
-            featured_image: data.featured_image || null,
+            featured_image: data.featured_image || data.featured_image_es || null,
+            featured_image_es: data.featured_image_es || null,
+            featured_image_en: data.featured_image_en || null,
             pull_quote_es: data.pull_quote_es || null,
             pull_quote_en: data.pull_quote_en || null,
             main_image_caption_es: data.main_image_caption_es || null,
@@ -153,6 +157,8 @@ export async function getArticleById(articleId: string): Promise<Partial<Article
         category: data.category,
         read_time: data.read_time ?? '',
         featured_image: data.featured_image ?? '',
+        featured_image_es: data.featured_image_es ?? data.featured_image ?? '',
+        featured_image_en: data.featured_image_en ?? '',
         pull_quote_es: data.pull_quote_es ?? '',
         pull_quote_en: data.pull_quote_en ?? '',
         main_image_caption_es: data.main_image_caption_es ?? '',
@@ -173,10 +179,20 @@ export async function getArticleById(articleId: string): Promise<Partial<Article
             linkedin: a.linkedin ?? '',
             email: a.email ?? '',
         })),
-        materials: rawMaterials.map((m: { label?: string; label_en?: string; url?: string }) => ({
-            label: m.label ?? '',
-            label_en: m.label_en ?? '',
-            url: m.url ?? '',
-        })),
+        materials: rawMaterials.map(
+            (m: {
+                label?: string;
+                label_en?: string;
+                url?: string;
+                url_es?: string;
+                url_en?: string;
+            }) => ({
+                label: m.label ?? '',
+                label_en: m.label_en ?? '',
+                url: m.url ?? '',
+                url_es: m.url_es ?? '',
+                url_en: m.url_en ?? '',
+            })
+        ),
     };
 }

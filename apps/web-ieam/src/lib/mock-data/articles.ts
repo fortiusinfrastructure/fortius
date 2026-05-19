@@ -51,7 +51,7 @@ export interface Article {
     pullQuote_en?: string;
     materialUrl?: string; // Optional downloadable material
     materialLabel?: string;
-    materials?: { label: string; label_en?: string; url: string }[];
+    materials?: { label: string; label_en?: string; url: string; url_es?: string; url_en?: string }[];
     relatedArticles: RelatedArticle[];
 }
 

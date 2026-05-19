@@ -65,16 +65,20 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
             </div>
             {article.materials && article.materials.length > 0 && (
               <div className="mt-6 flex flex-wrap gap-3">
-                {article.materials.map((mat) => (
-                  <a
-                    key={mat.url}
-                    href={mat.url}
-                    className="inline-flex items-center px-6 py-3 bg-[var(--color-accent-red)] text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
-                    download
-                  >
-                    {(isEn && mat.label_en) || mat.label}
-                  </a>
-                ))}
+                {article.materials.map((mat) => {
+                  const href = (isEn ? mat.url_en : mat.url_es) || mat.url;
+                  if (!href) return null;
+                  return (
+                    <a
+                      key={href}
+                      href={href}
+                      className="inline-flex items-center px-6 py-3 bg-[var(--color-accent-red)] text-white font-bold uppercase tracking-[0.18em] rounded-none hover:bg-[#b01b22] transition-colors"
+                      download
+                    >
+                      {(isEn && mat.label_en) || mat.label}
+                    </a>
+                  );
+                })}
               </div>
             )}
           </div>
