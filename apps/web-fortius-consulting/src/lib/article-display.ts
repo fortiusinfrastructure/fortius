@@ -63,13 +63,13 @@ export function getArticleImageSources(article: Article) {
           ]
         : [];
 
-    // Primary = first source_file candidate (most likely to exist),
-    // then slug-based, then category defaults. This avoids a guaranteed
-    // 404 on the slug .jpg when the file only exists under source_file.
+    // Slug-based names first (all images have been renamed to {slug}.png).
+    // Source_file candidates are kept as fallback for any future articles
+    // whose images haven't been renamed yet.
     const allSources = [
-        ...sourceFileCandidates,
         `/images/articles/${article.category}/${article.slug}.png`,
         `/images/articles/${article.category}/${article.slug}.jpg`,
+        ...sourceFileCandidates,
         base.src,
         base.hardFallback,
     ].filter((value, index, list) => Boolean(value) && list.indexOf(value) === index);
