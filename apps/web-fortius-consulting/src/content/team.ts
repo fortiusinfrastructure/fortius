@@ -254,7 +254,10 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
     "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
-    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Víctor González Coello de Portugal.png"
+    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Víctor González Coello de Portugal.png",
+    "carlos-andreu-pintado": "/images/nosotros/Carlos Andreu Pintado.png",
+    "ramsi-jazmati-akili": "/images/nosotros/Ramsi Jazmati Akili.png",
+    "carlos-casares": "/images/nosotros/Carlos Casares.png",
 };
 
 for (let index = TEAM.length - 1; index >= 0; index -= 1) {

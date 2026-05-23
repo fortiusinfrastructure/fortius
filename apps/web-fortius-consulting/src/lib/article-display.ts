@@ -63,15 +63,21 @@ export function getArticleImageSources(article: Article) {
           ]
         : [];
 
-    const fallbackSources = [
-        `/images/articles/${article.category}/${article.slug}.png`,
+    // Primary = first source_file candidate (most likely to exist),
+    // then slug-based, then category defaults. This avoids a guaranteed
+    // 404 on the slug .jpg when the file only exists under source_file.
+    const allSources = [
         ...sourceFileCandidates,
+        `/images/articles/${article.category}/${article.slug}.png`,
+        `/images/articles/${article.category}/${article.slug}.jpg`,
         base.src,
         base.hardFallback,
-    ].filter((value, index, list) => list.indexOf(value) === index);
+    ].filter((value, index, list) => Boolean(value) && list.indexOf(value) === index);
+
+    const [primarySrc, ...fallbackSources] = allSources as [string, ...string[]];
 
     return {
-        primarySrc: `/images/articles/${article.category}/${article.slug}.jpg`,
+        primarySrc: primarySrc ?? base.hardFallback,
         fallbackSources,
         alt: base.alt,
     };
