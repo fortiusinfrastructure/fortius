@@ -248,13 +248,13 @@ const COUNTRY_TO_MAP_LOCATION: Record<string, Omit<TeamMapPin, "id" | "descripti
 
 const VERIFIED_PHOTOS: Record<string, string> = {
     "juan-angel-soto": "/images/nosotros/Juan Angel Soto Gómez.png",
-    "didac-sanchez-olaya": "/images/nosotros/Dídac Sanchéz.png",
+    "didac-sanchez-olaya": "/images/nosotros/didac-sanchez-olaya.png",
     "alexia-cosmello-guisande": "/images/nosotros/Alexia Cosmello.png",
     "calli-pacheco-munoz": "/images/nosotros/Calli Muñoz.png",
     "beatriz-de-leon-cobo": "/images/nosotros/Beatriz de León Cobo.png",
     "juan-pablo-chamon-saucedo": "/images/nosotros/Juan Pablo Chamón.png",
     "matthaus-konradsheim": "/images/nosotros/Matthaus Konradsheim.png",
-    "jose-maria-cortes": "/images/nosotros/Jose Maria Cortes.png",
+    "jose-maria-cortes": "/images/nosotros/jose-maria-cortes.png",
     "jose-manuel-perez-ariza": "/images/nosotros/Jose Manuel Perez Ariza.png",
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
     "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",

@@ -17,6 +17,10 @@ const SIZE_CLASS: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
     lg: "w-32 h-32 text-xl",
 };
 
+const PORTRAIT_OBJECT_POSITION: Record<string, string> = {
+    "Alexia Cosmello Guisande": "50% 22%",
+};
+
 export function PersonPortrait({
     name,
     photo,
@@ -31,6 +35,7 @@ export function PersonPortrait({
 
     const [sourceIndex, setSourceIndex] = useState(0);
     const currentPhoto = sources[sourceIndex];
+    const objectPosition = PORTRAIT_OBJECT_POSITION[name] ?? "50% 50%";
 
     return (
         <div
@@ -47,7 +52,10 @@ export function PersonPortrait({
                     src={currentPhoto}
                     alt={name}
                     className={`absolute inset-0 w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
-                    style={{ filter: "grayscale(1) contrast(1.05) sepia(0.35)" }}
+                    style={{
+                        filter: "grayscale(1) contrast(1.05) sepia(0.35)",
+                        objectPosition,
+                    }}
                     onError={() => {
                         setSourceIndex((current) => current + 1);
                     }}

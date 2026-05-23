@@ -52,9 +52,27 @@ export function getArticleCover(category: ArticleCategory) {
 
 export function getArticleImageSources(article: Article) {
     const base = getArticleCover(article.category);
+    const sourceFileBase = article.source_file
+        ? article.source_file.split("/").at(-1)?.replace(/\.docx$/i, "")
+        : null;
+
+    const sourceFileCandidates = sourceFileBase
+        ? [
+              `/images/articles/${article.category}/${sourceFileBase}.png`,
+              `/images/articles/${article.category}/${sourceFileBase}.jpg`,
+          ]
+        : [];
+
+    const fallbackSources = [
+        `/images/articles/${article.category}/${article.slug}.png`,
+        ...sourceFileCandidates,
+        base.src,
+        base.hardFallback,
+    ].filter((value, index, list) => list.indexOf(value) === index);
+
     return {
         primarySrc: `/images/articles/${article.category}/${article.slug}.jpg`,
-        fallbackSources: [base.src, base.hardFallback],
+        fallbackSources,
         alt: base.alt,
     };
 }
