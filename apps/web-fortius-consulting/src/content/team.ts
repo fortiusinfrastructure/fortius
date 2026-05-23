@@ -259,6 +259,7 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
     "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
+    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Victor Gonzalez Coello de Portugal.png"
 };
 
 for (let index = TEAM.length - 1; index >= 0; index -= 1) {
