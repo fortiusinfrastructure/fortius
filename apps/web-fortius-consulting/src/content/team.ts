@@ -160,8 +160,7 @@ export const TEAM: TeamMember[] = [
         role: "Of-Counsel Digital",
         department: "digital",
         verticals: ["intelligence"],
-        bio: "Asesor externo para estrategia digital, reputación online y monitorización de ecosistemas de información. Puente entre inteligencia política y presencia digital.",
-    },
+        bio: "Pamplona (España). Acompaña a organizaciones en procesos de transformación digital, estrategia tecnológica y modernización de sus modelos operativos. Su trayectoria combina arquitectura cloud, gobierno de plataformas, seguridad, automatización, optimización de costes e inteligencia artificial, con una visión orientada a conectar las necesidades de negocio con soluciones tecnológicas realistas y sostenibles. Ha participado en proyectos de adopción cloud, diseño de arquitecturas empresariales, modelos de operación y mejora de capacidades digitales, trabajando tanto con equipos técnicos como con perfiles directivos. En Fortius Consulting aporta una mirada estratégica y práctica sobre el uso de la tecnología como palanca de eficiencia, crecimiento y fortalecimiento institucional. Cree que la tecnología solo genera verdadero valor cuando está bien alineada con las personas, los procesos y el propósito de cada organización.",    },
     {
         slug: "diego-salazar-ramirez",
         name: "Diego Salazar Ramírez",
