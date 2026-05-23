@@ -19,6 +19,11 @@ const SIZE_CLASS: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
 
 const PORTRAIT_OBJECT_POSITION: Record<string, string> = {
     "Alexia Cosmello Guisande": "50% 22%",
+    // Face at top of portrait frame — pull view toward top
+    "Carlos Andreu Pintado": "50% 8%",
+    "José María Cortes": "50% 8%",
+    "Alberto Andrés Rodríguez": "50% 8%",
+    "José Manuel Pérez Ariza": "50% 8%",
 };
 
 export function PersonPortrait({

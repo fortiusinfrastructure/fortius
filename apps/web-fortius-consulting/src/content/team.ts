@@ -242,22 +242,22 @@ const COUNTRY_TO_MAP_LOCATION: Record<string, Omit<TeamMapPin, "id" | "descripti
 };
 
 const VERIFIED_PHOTOS: Record<string, string> = {
-    "juan-angel-soto": "/images/nosotros/Juan Angel Soto Gómez.png",
+    "juan-angel-soto": "/images/nosotros/Juan Angel Soto Gomez.png",
     "didac-sanchez-olaya": "/images/nosotros/didac-sanchez-olaya.png",
     "alexia-cosmello-guisande": "/images/nosotros/Alexia Cosmello.png",
-    "calli-pacheco-munoz": "/images/nosotros/Calli Muñoz.png",
-    "beatriz-de-leon-cobo": "/images/nosotros/Beatriz de León Cobo.png",
-    "juan-pablo-chamon-saucedo": "/images/nosotros/Juan Pablo Chamón.png",
+    "calli-pacheco-munoz": "/images/nosotros/Calli Munoz.png",
+    "beatriz-de-leon-cobo": "/images/nosotros/Beatriz de Leon Cobo.png",
+    "juan-pablo-chamon-saucedo": "/images/nosotros/Juan Pablo Chamon.png",
     "matthaus-konradsheim": "/images/nosotros/Matthaus Konradsheim.png",
     "jose-maria-cortes": "/images/nosotros/jose-maria-cortes.png",
     "jose-manuel-perez-ariza": "/images/nosotros/Jose Manuel Perez Ariza.png",
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
     "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
-    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Víctor González Coello de Portugal.png",
+    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Victor Gonzalez Coello de Portugal.png",
     "carlos-andreu-pintado": "/images/nosotros/Carlos Andreu Pintado.png",
-    "ramsi-jazmati-akili": "/images/nosotros/Ramsi Jazmati Akili.png",
-    "carlos-casares": "/images/nosotros/Carlos Casares.png",
+    // ramsi-jazmati-akili: photo pending upload
+    // carlos-casares: photo pending upload
 };
 
 for (let index = TEAM.length - 1; index >= 0; index -= 1) {
