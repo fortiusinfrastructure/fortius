@@ -71,8 +71,7 @@ export const TEAM: TeamMember[] = [
         role: "Director de Asuntos Públicos",
         department: "asuntos-publicos",
         verticals: ["civil"],
-        bio: "Lidera la práctica de asuntos públicos de Fortius. Diseño y ejecución de campañas de incidencia, mapeo de stakeholders y estrategia de relación con instituciones europeas y nacionales.",
-        linkedin: "https://www.linkedin.com/in/didac-sanchez-olaya",
+        bio: "Dídac es profesional de asuntos públicos y estrategia política, especializado en incidencia institucional, movilización social y diseño de estrategias de posicionamiento para organizaciones del tercer sector y actores con impacto público.\n\nEs graduado en Derecho y Ciencias Políticas con mención en Relaciones Internacionales por la Universitat Abat Oliba CEU y posee un Máster en Derecho Parlamentario, Elecciones y Estudios Legislativos por la Complutense University of Madrid. Cuenta además con formación especializada en asuntos públicos por la Universidad Autónoma de Madrid y cursa actualmente el Máster de Acceso a la Abogacía en la Universitat Oberta de Catalunya.\n\nActualmente ejerce como responsable de Asuntos Públicos en Fortius, donde lidera proyectos de incidencia pública y consultoría estratégica en ámbitos como vivienda, tecnología y cultura. Dirige asimismo la plataforma cívica Principios, desde donde impulsa estrategias de posicionamiento institucional, movilización de base social y elaboración de informes sobre retos sociales contemporáneos. Previamente trabajó en asuntos públicos en Grayling España para sectores como tecnología, salud, alimentación y vivienda, desarrollando estrategias de advocacy, stakeholder engagement y seguimiento regulatorio. También colaboró como asistente de investigación en la Universitat Internacional de Catalunya en un proyecto financiado por la Fundación BBVA sobre gestión ética del riesgo y salud humana.",        linkedin: "https://www.linkedin.com/in/didac-sanchez-olaya",
     },
     {
         slug: "alexia-cosmello-guisande",
@@ -80,8 +79,7 @@ export const TEAM: TeamMember[] = [
         role: "Asuntos Públicos",
         department: "asuntos-publicos",
         verticals: ["civil"],
-        bio: "Analista y ejecutora de campañas de asuntos públicos. Especializada en el seguimiento legislativo y la elaboración de documentos de posición para clientes del tercer sector.",
-        linkedin: "https://www.linkedin.com/in/alexia-cosmello",
+        bio: "Alexia es profesional de asuntos públicos, estrategia y comunicación institucional, especializada en instituciones de la Unión Europea, comunicación de políticas públicas, relaciones institucionales y posicionamiento estratégico.\n\nEs graduada en Relaciones Internacionales por la University of Navarra, posee un Máster en Marketing y Comunicación Institucional por LUISS Guido Carli University y un Online Master's en Branding por Masterbrand.\n\nActualmente ejerce como responsable de Asuntos Públicos en Bruselas en Fortius, donde lidera estrategias de interlocución institucional y posicionamiento ante el ecosistema europeo. Previamente fue Policy Manager for Member State Outreach en DIGITALEUROPE, coordinando la relación con asociaciones nacionales de toda Europa y liderando campañas y eventos vinculados a la toma de decisiones europeas, y desarrolló estrategias de incidencia y comunicación en FIPRA Public Affairs para clientes internacionales en políticas digitales, competencia, transporte y sostenibilidad. Es asimismo socia de la Asociación de Profesionales de las Relaciones Institucionales (APRI) y miembro de APRI Bruselas.",        linkedin: "https://www.linkedin.com/in/alexia-cosmello",
     },
     {
         slug: "calli-pacheco-munoz",
@@ -119,7 +117,8 @@ export const TEAM: TeamMember[] = [
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "América",
-        bio: "Analista de ciclos electorales y transición de élites en América Latina. Seguimiento de procesos constituyentes, riesgo regulatorio y dinámicas hemisféricas.",
+        bio: "La Paz (Bolivia). Es un profesional boliviano especializado en think tanks, inteligencia política, liderazgo institucional y estrategia para organizaciones de la sociedad civil, con una trayectoria centrada en el diseño y fortalecimiento de iniciativas de impacto público, producción de ideas y desarrollo institucional en América Latina.\n\nCursó estudios en Ciencia Política en la Universidad Católica Boliviana, donde desarrolló la investigación Christianity and Cultural Interaction. The Ratzingerian Concept of Duplication, distinguida con honores por la universidad. Posteriormente obtuvo un Máster en Ciencia Política por la Universidad de los Andes, profundizando en teoría política, instituciones y gobernanza contemporánea.\n\nActualmente forma parte de Fortius, donde trabaja principalmente en las áreas de inteligencia política y desarrollo estratégico de think tanks, acompañando a organizaciones, fundaciones e instituciones en procesos de posicionamiento, crecimiento organizacional, generación de influencia y análisis del entorno político. Es asimismo director ejecutivo de LIBERA Bolivia, organización en la que ha desarrollado gran parte de su trayectoria profesional durante más de una década, habiendo ocupado previamente el cargo de Director de Proyectos. Desde 2022 ejerce además como presidente del consejo y director del Centro de Estudios Jurídicos Santo Tomás Moro, impulsando espacios de reflexión jurídica, política y cultural inspirados en la tradición humanista cristiana.",
+        linkedin: "https://www.linkedin.com/in/juan-pablo-chamon-saucedo/",
     },
     {
         slug: "segundo-carafi",
@@ -137,16 +136,15 @@ export const TEAM: TeamMember[] = [
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Europa",
-        bio: "Analista especializado en Europa. Seguimiento de procesos políticos, marcos regulatorios y dinámicas institucionales en el entorno europeo.",
-    },
+        bio: "Viena (Austria). Es un profesional austríaco especializado en desarrollo institucional, estrategia organizacional y fortalecimiento del ecosistema de sociedad civil y pensamiento estratégico en Europa Central y Occidental.\n\nEstudió Business, Economics and Social Sciences en la WU Vienna University of Economics and Business y completó su formación internacional en el IESE Business School.\n\nEn Fortius trabaja en el área de asociaciones cívicas y think tanks en Alemania y Austria, acompañando a organizaciones de la sociedad civil, plataformas de ideas e instituciones con propósito en procesos de crecimiento, posicionamiento estratégico y generación de impacto público. Previamente desarrolló actividad independiente en desarrollo de negocio y reestructuración organizacional, asesorando a pymes y organizaciones europeas en estrategia, posicionamiento y crecimiento institucional en sectores como cultura, automoción y medios de comunicación. Entre 2022 y 2024 presidió el Uni Management Club, una de las principales redes de captación y desarrollo para estudiantes de empresa en Austria, habiendo ejercido anteriormente como responsable de relaciones corporativas en la misma organización. También trabajó como asistente parlamentario en el Austrian Parliament y es cofundador de WizHub, una iniciativa educativa centrada en formación integral y emprendimiento digital.",    },
     {
         slug: "jose-maria-cortes",
-        name: "José María Cortés",
+        name: "José María Cortes",
         role: "Inteligencia Política",
-        department: "inteligencia-politica",
-        verticals: ["intelligence"],
+        department: "asuntos-publicos",
+        verticals: ["civil"],
         area: "Europa",
-        bio: "Analista especializado en Europa. Cobertura de actores políticos, tendencias legislativas y escenarios de riesgo en el ámbito europeo.",
+        bio: "Lisboa (Portugal). Es abogado y académico, graduado en Derecho por la Facultad de Derecho de la Universidad de Lisboa, donde ejerce actualmente como profesor asistente invitado e investigador doctoral en Derecho Privado.\n\nEspecializado en litigación civil y mercantil, arbitraje, derecho contractual, derecho societario y filosofía del derecho, ha desarrollado su carrera en despachos de abogados de primer nivel y en el sector público, y es autor de diversas publicaciones académicas en el ámbito del derecho privado.\n\nEn Fortius trabaja en el área de organizaciones de la sociedad civil e impacto social en Portugal, acompañando a fundaciones, asociaciones, think tanks e iniciativas con propósito en procesos de fortalecimiento institucional, estrategia y posicionamiento. Es asimismo asesor de la Fundação Gaudium Magnum y fundador de SALL – Só a Liberdade.",
     },
     {
         slug: "jose-manuel-perez-ariza",
@@ -170,16 +168,14 @@ export const TEAM: TeamMember[] = [
         role: "Arquitecto de productos digitales",
         department: "digital",
         verticals: ["intelligence"],
-        bio: "Responsable del diseño y desarrollo de las plataformas digitales de Fortius. Construye las herramientas internas de análisis, dashboards de monitorización y áreas privadas para clientes.",
-    },
+        bio: "Quito (Ecuador). Es un profesional especializado en transformación digital, estrategia tecnológica e innovación de procesos, con experiencia internacional en dirección de operaciones, automatización y desarrollo de soluciones tecnológicas para organizaciones en entornos complejos y de gran escala.\n\nEs graduado en Ingeniería en Diseño Industrial por la Universidad Central del Ecuador y posee un Máster en Business & Technology por Collective Academy. Actualmente complementa su formación con estudios de Filosofía en la Universidad de Navarra.\n\nEn Fortius es responsable del diseño y desarrollo de las plataformas digitales de la firma, liderando la construcción de herramientas internas de análisis, sistemas de inteligencia y entornos tecnológicos orientados a mejorar la capacidad operativa y estratégica de la organización. Anteriormente fue Leader Technology Transformation and Processes HISPAM en Telefónica, donde lideró iniciativas regionales de transformación tecnológica e innovación de procesos en los mercados hispanoamericanos del grupo, incluyendo Ecuador, Colombia, México, Perú, Chile, Uruguay y Argentina.",    },
     {
         slug: "javier-soto-gomez",
         name: "Javier Soto Gómez",
         role: "Legal y Contable",
         department: "legal-contable",
         verticals: ["civil"],
-        bio: "Murcia (España), 2002. Graduado en Derecho y Economía por la Universidad de Navarra. Ha trabajado anteriormente para despachos como GES Abogados y Vicente Ortega Abogados, donde adquirió experiencia en el ámbito jurídico, especializándose en áreas relacionadas con el asesoramiento laboral, contable y jurídico, participando en el apoyo a clientes y en la gestión de distintas cuestiones administrativas y normativas. En particular, en el ámbito de las organizaciones sin ánimo de lucro, como fundaciones y asociaciones. Es responsable del departamento legal y contable de Fortius.",
-        linkedin: "https://www.linkedin.com/in/javier-soto-g%C3%B3mez-2b60b218a/",
+        bio: "Murcia (España). Es graduado en Derecho y Economía por la Universidad de Navarra, especializado en asesoramiento jurídico, gestión contable y acompañamiento institucional a organizaciones con propósito.\n\nActualmente es responsable del departamento legal y contable de Fortius Consulting, donde supervisa la estructura jurídica y financiera de la organización y acompaña a clientes en materias de gobierno corporativo, cumplimiento normativo y diseño de estructuras organizativas. Previamente trabajó en GES Abogados y Vicente Ortega Abogados, donde desarrolló experiencia jurídica con especial foco en fundaciones y asociaciones, acompañando a organizaciones sin ánimo de lucro en procesos de constitución, adaptación normativa y cumplimiento de obligaciones legales y contables.",        linkedin: "https://www.linkedin.com/in/javier-soto-g%C3%B3mez-2b60b218a/",
     },
 ];
 
@@ -259,7 +255,7 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
     "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
-    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Victor Gonzalez Coello de Portugal.png"
+    "victor-gonzalez-coello-de-portugal": "/images/nosotros/Víctor González Coello de Portugal.png"
 };
 
 for (let index = TEAM.length - 1; index >= 0; index -= 1) {
