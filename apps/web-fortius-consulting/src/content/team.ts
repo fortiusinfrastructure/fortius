@@ -275,13 +275,10 @@ for (let index = EXPERTS.length - 1; index >= 0; index -= 1) {
     const expert = EXPERTS[index]!;
     const verifiedPhoto = VERIFIED_PHOTOS[expert.slug];
 
-    if (!verifiedPhoto) {
-        EXPERTS.splice(index, 1);
-        continue;
-    }
-
     expert.country = EXPERT_COUNTRY_OVERRIDES[expert.slug] ?? "España";
-    expert.photo = [verifiedPhoto];
+    if (verifiedPhoto) {
+        expert.photo = [verifiedPhoto];
+    }
 }
 
 export function getTeamByVertical(vertical: VerticalId): TeamMember[] {
