@@ -15,7 +15,14 @@ export function ArticleCoverImage({
     alt,
     className,
 }: ArticleCoverImageProps) {
-    const sources = useMemo(() => [primarySrc, ...fallbackSources], [primarySrc, fallbackSources]);
+    const sources = useMemo(
+        () =>
+            [primarySrc, ...fallbackSources].filter(
+                (value, index, list) => Boolean(value) && list.indexOf(value) === index,
+            ),
+        [primarySrc, fallbackSources],
+    );
+    const sourcesKey = sources.join("\n");
     const [index, setIndex] = useState(0);
     const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -27,11 +34,11 @@ export function ArticleCoverImage({
         if (img.complete && img.naturalWidth === 0 && index < sources.length - 1) {
             setIndex((current) => (current < sources.length - 1 ? current + 1 : current));
         }
-    }, [index, sources]);
+    }, [index, sources.length, sourcesKey]);
 
     useEffect(() => {
         setIndex(0);
-    }, [sources]);
+    }, [sourcesKey]);
 
     return (
         <img
