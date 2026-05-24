@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { getInitials } from "@/content/team";
 
@@ -17,6 +18,13 @@ const SIZE_CLASS: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
     lg: "w-32 h-32 text-xl",
 };
 
+// Hint for Next.js Image srcset — matches the Tailwind fixed size at 1x
+const SIZE_PX: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
+    sm: "48px",
+    md: "80px",
+    lg: "128px",
+};
+
 const PORTRAIT_OBJECT_POSITION: Record<string, string> = {
     "Alexia Cosmello Guisande": "50% 22%",
     // Face at top of portrait frame — pull view toward top
@@ -24,6 +32,8 @@ const PORTRAIT_OBJECT_POSITION: Record<string, string> = {
     "José María Cortes": "50% 8%",
     "Alberto Andrés Rodríguez": "50% 8%",
     "José Manuel Pérez Ariza": "50% 8%",
+    "Carlos Casares": "50% 15%",
+    "Ramsi Jazmati Akili": "50% 15%",
 };
 
 export function PersonPortrait({
@@ -52,11 +62,12 @@ export function PersonPortrait({
             aria-hidden={Boolean(currentPhoto)}
         >
             {currentPhoto ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                     src={currentPhoto}
                     alt={name}
-                    className={`absolute inset-0 w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
+                    fill
+                    sizes={SIZE_PX[size]}
+                    className={fit === "contain" ? "object-contain" : "object-cover"}
                     style={{
                         filter: "grayscale(1) contrast(1.05) sepia(0.35)",
                         objectPosition,
