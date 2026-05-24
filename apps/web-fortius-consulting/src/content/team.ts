@@ -258,8 +258,8 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
     "victor-gonzalez-coello-de-portugal": "/images/nosotros/Victor Gonzalez Coello de Portugal.png",
     "carlos-andreu-pintado": "/images/nosotros/Carlos Andreu Pintado.png",
-    // ramsi-jazmati-akili: photo pending upload
-    // carlos-casares: photo pending upload
+    "ramsi-jazmati-akili": "/images/nosotros/Ramsi Jazmati Akili.png",
+    "carlos-casares": "/images/nosotros/Carlos Casares.png",
 };
 
 for (let index = TEAM.length - 1; index >= 0; index -= 1) {
