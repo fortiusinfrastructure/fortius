@@ -329,4 +329,6 @@ export const ALLIES: Ally[] = [
     { name: "MKI", logo: "/images/aliados/mki-fortius-red.png" },
     { name: "New Direction", logo: "/images/aliados/newdirection-fortius-red.png" },
     { name: "PHSU", logo: "/images/aliados/phsu-fortius-red.png" },
+    { name: "Cruz del Sur", logo: "/images/aliados/Cruz -del-Sur.png" },
+    { name: "Navarra Confidencial", logo: "/images/aliados/Navarra-Confidencial.png" },
 ];

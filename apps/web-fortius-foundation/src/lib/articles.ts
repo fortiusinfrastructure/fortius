@@ -90,7 +90,24 @@ export function getArticleVisual(article: FoundationArticle | string): ArticleVi
 }
 
 export function getRelatedArticles(currentSlug: string, limit = 3): FoundationArticle[] {
-  return FOUNDATION_ARTICLES.filter((article) => article.slug !== currentSlug).slice(0, limit);
+  const others = FOUNDATION_ARTICLES.filter((a) => a.slug !== currentSlug);
+  if (others.length <= limit) return others;
+
+  const idx = FOUNDATION_ARTICLES.findIndex((a) => a.slug === currentSlug);
+  if (idx === -1) return others.slice(0, limit);
+
+  // Pick articles temporally adjacent to the current one (array is newest-first)
+  const result: FoundationArticle[] = [];
+  let after = idx + 1; // older articles
+  let before = idx - 1; // newer articles
+
+  while (result.length < limit) {
+    if (after < FOUNDATION_ARTICLES.length) result.push(FOUNDATION_ARTICLES[after++]);
+    if (result.length < limit && before >= 0) result.push(FOUNDATION_ARTICLES[before--]);
+    if (after >= FOUNDATION_ARTICLES.length && before < 0) break;
+  }
+
+  return result;
 }
 
 export function getFeaturedArticles(limit = 4): FoundationArticle[] {

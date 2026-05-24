@@ -18,7 +18,7 @@ export function BlogPreview() {
           <div className="space-y-4">
             <Bracketed variant="kicker">Blog</Bracketed>
             <h2 className="max-w-3xl font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]">
-              Entradas de Foundation, sin divisiones por vertical.
+              Reflexiones sobre liderazgo, filantropía y sociedad civil.
             </h2>
           </div>
           <Link
