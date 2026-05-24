@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+import Image from "next/image";
 import type { FoundationArticle } from "@/content/articles";
 import { getArticleAbstract, getArticleVisual } from "@/lib/articles";
 
@@ -33,9 +36,26 @@ export function ArticleArtwork({ article, compact = false, className = "" }: { a
   const theme = THEME_STYLES[visual.theme];
   const abstract = getArticleAbstract(article, compact ? 90 : 140);
 
+  const relativeImagePath = `/entradas/images/${article.slug}.png`;
+  const hasImage = fs.existsSync(
+    path.join(process.cwd(), "public", relativeImagePath)
+  );
+
   return (
-    <div className={`relative overflow-hidden border border-[var(--border-subtle)] ${className}`} style={{ background: theme.background }}>
-      <div className="absolute inset-0 opacity-80" style={{ backgroundImage: theme.pattern }} />
+    <div
+      className={`relative overflow-hidden border border-[var(--border-subtle)] ${className}`}
+      style={hasImage ? undefined : { background: theme.background }}
+    >
+      {hasImage && (
+        <Image
+          src={relativeImagePath}
+          alt={article.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+      )}
+      <div className="absolute inset-0 opacity-80" style={{ backgroundImage: hasImage ? undefined : theme.pattern, background: hasImage ? `${theme.background}8C` : undefined }} />
       <div className={`absolute right-3 ${compact ? "bottom-2 text-[4rem]" : "bottom-4 text-[6rem] md:text-[7rem]"} font-display italic leading-none text-white/10`}>
         FF
       </div>
