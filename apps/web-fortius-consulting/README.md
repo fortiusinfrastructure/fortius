@@ -91,6 +91,93 @@ El formulario de `/contacto`:
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
 
+## Herramienta de importación de artículos
+
+### Dónde está
+
+| Pieza | Ruta |
+|-------|------|
+| Página web (upload) | `src/app/(private)/herramientas/articulos/page.tsx` |
+| API de conversión | `src/app/api/admin/articulos/convert/route.ts` |
+| Scripts CLI | `scripts/convert-articulos.mjs` + `scripts/seed-articles.mjs` |
+| Documentación CLI | `scripts/README.md` |
+
+Una vez desplegada la app, el equipo editorial accede a:
+
+```
+https://tu-dominio.com/herramientas/articulos
+```
+
+Sube archivos `.docx` desde el navegador sin instalar nada. La API los convierte en memoria y los upserta directamente en Supabase.
+
+### Pasos para activarla (una sola vez, por alguien técnico)
+
+#### 1. Mover dependencias de conversión a `dependencies`
+
+`mammoth` y `turndown` están ahora en `devDependencies`. Vercel no las instala en producción. Muévalas:
+
+```bash
+# Desde apps/web-fortius-consulting/
+pnpm add mammoth turndown
+```
+
+Esto actualiza el `package.json` automáticamente.
+
+#### 2. Añadir variables de entorno en Vercel
+
+En el panel de Vercel → proyecto `web-fortius-consulting` → **Settings → Environment Variables**, añadir:
+
+| Variable | Descripción |
+|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase (ya debería existir) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role key de Supabase (ya debería existir) |
+| `ADMIN_UPLOAD_SECRET` | Contraseña arbitraria que protege el endpoint de subida |
+
+`ADMIN_UPLOAD_SECRET` puede ser cualquier cadena larga y aleatoria, por ejemplo generada con:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+> Si se omite `ADMIN_UPLOAD_SECRET` el endpoint queda abierto — no recomendado en producción.
+
+#### 3. Pasar el secreto a la página web (opcional pero recomendado)
+
+Para que la interfaz web envíe automáticamente el header de autenticación, añadir también en Vercel:
+
+| Variable | Valor |
+|----------|-------|
+| `NEXT_PUBLIC_UPLOAD_SECRET` | El mismo valor que `ADMIN_UPLOAD_SECRET` |
+
+Y actualizar la llamada en `page.tsx`:
+
+```typescript
+// En handleSubmit, añadir al fetch:
+headers: {
+  "x-admin-secret": process.env.NEXT_PUBLIC_UPLOAD_SECRET ?? "",
+},
+```
+
+#### 4. Desplegar
+
+Hacer push a `main` (o el branch conectado a Vercel). El despliegue es automático. Una vez completado, la URL `/herramientas/articulos` ya está activa.
+
+#### 5. Verificar
+
+Abrir `https://tu-dominio.com/herramientas/articulos`, subir un `.docx` de prueba y comprobar que aparece en la tabla `articles` de Supabase.
+
+### Convención de nombres de archivo
+
+Los `.docx` deben nombrarse así para que la extracción de metadatos sea automática:
+
+```
+YYYY_MM_DD. TIPO (ACCESO). Título del artículo.docx
+```
+
+Ver ejemplos y tabla de tipos en [`scripts/README.md`](scripts/README.md).
+
+---
+
 ## Qué sigue siendo local o mock
 
 - el contenido principal sigue en `src/content/*.ts`

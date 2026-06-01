@@ -1,0 +1,64 @@
+ name: Convertir entradas — Fortius Fundación
+
+# Se puede lanzar manualmente desde la pestaña Actions de GitHub.
+# No requiere tocar la terminal — solo clic en "Run workflow".
+
+on:
+  workflow_dispatch:
+
+  # También se dispara automáticamente cuando alguien sube .docx
+  # a la carpeta de entradas en la rama main.
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/web-fortius-foundation/public/entradas/**/*.docx"
+      - "apps/web-fortius-foundation/public/entradas/*.docx"
+
+jobs:
+  convert:
+    name: Convertir .docx → articles.ts
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # necesario para hacer commit del resultado
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ejecutar script de conversión
+        working-directory: apps/web-fortius-foundation
+        run: python scripts/convert-entradas.py
+
+      - name: Mostrar resumen
+        working-directory: apps/web-fortius-foundation
+        run: |
+          echo "──────────────────────────────────────"
+          echo "Artículos en src/content/articles.ts:"
+          echo "──────────────────────────────────────"
+          python - <<'PYEOF'
+          import re, pathlib
+          content = pathlib.Path("src/content/articles.ts").read_text(encoding="utf-8")
+          slugs = re.findall(r'slug:\s*"([^"]+)"', content)
+          for i, s in enumerate(slugs, 1):
+              print(f"  {i:2}. {s}")
+          print(f"\nTotal: {len(slugs)} artículo(s)")
+          PYEOF
+
+      - name: Hacer commit y push de articles.ts
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/web-fortius-foundation/src/content/articles.ts
+          if git diff --cached --quiet; then
+            echo "Sin cambios — articles.ts ya estaba actualizado."
+          else
+            git commit -m "chore(foundation): regenerar articles.ts desde entradas"
+            git push
+          fi

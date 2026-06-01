@@ -1,0 +1,77 @@
+name: Importar artículos a Supabase
+
+# Se puede lanzar manualmente desde la pestaña Actions de GitHub.
+# No requiere tocar la terminal — solo clic en "Run workflow".
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (solo convierte, NO sube a Supabase)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+  # También se dispara automáticamente cuando alguien sube .docx a la carpeta
+  # de artículos en la rama main.
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/web-fortius-consulting/public/articulos/**/*.docx"
+
+jobs:
+  convert-and-seed:
+    name: Convertir y subir artículos
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/web-fortius-consulting
+
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.CONSULTING_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CONSULTING_SUPABASE_SERVICE_ROLE_KEY }}
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+        working-directory: .  # desde la raíz del monorepo
+
+      - name: Convertir .docx → articles.json
+        run: pnpm articulos:convert
+
+      - name: Mostrar resumen de conversión
+        run: |
+          echo "Artículos generados en src/data/articles.json:"
+          node -e "
+            const fs = require('fs');
+            const articles = JSON.parse(fs.readFileSync('src/data/articles.json', 'utf8'));
+            console.log('Total:', articles.length);
+            articles.forEach(a => console.log(' -', a.slug, '|', a.kind, '|', a.access));
+          "
+
+      - name: Subir a Supabase
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: pnpm articulos:seed
+
+      - name: (Dry run) Saltar subida a Supabase
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: echo "Dry run activado — se omite la subida a Supabase."
