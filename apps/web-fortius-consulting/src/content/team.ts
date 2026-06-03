@@ -250,6 +250,7 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "calli-pacheco-munoz": "/images/nosotros/Calli Munoz.png",
     "beatriz-de-leon-cobo": "/images/nosotros/Beatriz de Leon Cobo.png",
     "juan-pablo-chamon-saucedo": "/images/nosotros/Juan Pablo Chamon.png",
+    "segundo-carafi": "/images/nosotros/Segundo Carafí.png",
     "matthaus-konradsheim": "/images/nosotros/Matthaus Konradsheim.png",
     "jose-maria-cortes": "/images/nosotros/jose-maria-cortes.png",
     "jose-manuel-perez-ariza": "/images/nosotros/Jose Manuel Perez Ariza.png",

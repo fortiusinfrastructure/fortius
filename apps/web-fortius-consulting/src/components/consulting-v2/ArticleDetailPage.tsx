@@ -31,15 +31,15 @@ interface ArticleDetailPageProps {
 }
 
 export async function buildArticleMetadata(article: Article): Promise<Metadata> {
-    const cover = getArticleCover(article.category);
     const summary = getArticleSummary(article);
+    const imageSources = getArticleImageSources(article);
     return {
         title: `${article.title} — Fortius Consulting`,
         description: summary,
         openGraph: {
             title: article.title,
             description: summary,
-            images: [{ url: cover.hardFallback }],
+            images: [{ url: imageSources.primarySrc }],
         },
     };
 }

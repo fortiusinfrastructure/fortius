@@ -13,9 +13,9 @@ interface PersonPortraitProps {
 }
 
 const SIZE_CLASS: Record<NonNullable<PersonPortraitProps["size"]>, string> = {
-    sm: "w-12 h-12 text-[0.7rem]",
-    md: "w-20 h-20 text-sm",
-    lg: "w-32 h-32 text-xl",
+    sm: "w-12 aspect-[3/4] text-[0.7rem]",
+    md: "w-[90px] h-[90px] text-sm",
+    lg: "w-32 aspect-[3/4] text-xl",
 };
 
 // Hint for Next.js Image srcset — matches the Tailwind fixed size at 1x

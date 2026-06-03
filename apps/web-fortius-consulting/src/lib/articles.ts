@@ -27,6 +27,7 @@ export interface Article {
     content_markdown: string;
     subproducts: ArticleSubproduct[];
     source_file: string;
+    cover_image?: string;
 }
 
 export interface ArticleOriginalSource {

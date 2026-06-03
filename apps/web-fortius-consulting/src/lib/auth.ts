@@ -1,8 +1,5 @@
-// MVP Mock for UI demonstration
-// import { createServerClient, createAdminClient } from "@fortius/database";
+import { createServerClient, getCurrentOrg, getUserMembership } from "@fortius/database";
 import { redirect } from "next/navigation";
-
-const ORG_SLUG = "fortius-consulting"; // Or whatever is appropriate
 
 export interface ClientUser {
     id: string;
@@ -12,12 +9,19 @@ export interface ClientUser {
 }
 
 export async function requireClientUser(): Promise<ClientUser> {
-    // MVP Mock: We return a mock user to show the dashboard without requiring database setup.
+    const supabase = await createServerClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) redirect("/login");
+
+    const org = await getCurrentOrg();
+    const membership = org ? await getUserMembership(user.id, org.id) : null;
+
     return {
-        id: "mock-user-123",
-        email: "cliente@institucion.com",
-        planId: "politica",
-        status: "active",
+        id: user.id,
+        email: user.email,
+        planId: membership?.tier ?? "sin-plan",
+        status: membership?.status ?? "inactive",
     };
 }
 
