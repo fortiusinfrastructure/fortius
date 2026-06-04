@@ -55,9 +55,8 @@ export async function createCheckoutSession({
 
     if (mode === 'subscription') {
         ensureSubscriptionMetadata(metadata, 'createCheckoutSession');
-        if (!customerEmail) {
-            throw new Error('Las suscripciones recurrentes requieren un email válido.');
-        }
+        // customerEmail is optional: Stripe collects it during checkout
+        // when the user is not logged in (pay-first / guest flow).
     }
 
     if (priceId) {
