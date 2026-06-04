@@ -21,28 +21,25 @@ export async function POST(request: Request) {
             return NextResponse.redirect(`${baseUrl}/contacto?subject=Suscripción`, 303);
         }
 
-        // Require authenticated user — userId is needed for membership sync
-        const supabase = await createServerClient();
-        const { data: { user } } = await supabase.auth.getUser();
-
-        if (!user?.id) {
-            const loginUrl = `${baseUrl}/login?redirect=${encodeURIComponent(`/suscribirse?plan=${planKey}`)}`;
-            return NextResponse.redirect(loginUrl, 303);
-        }
-
         const plan = getConsultingBillingPlan(planKey);
         if (!plan) {
             return NextResponse.redirect(`${baseUrl}/contacto?subject=Suscripción`, 303);
         }
 
+        // Try to get an authenticated user, but do NOT require it.
+        // If the user is not logged in, Stripe will collect their email at checkout.
+        // The webhook resolves / creates the Supabase user after payment.
+        const supabase = await createServerClient();
+        const { data: { user } } = await supabase.auth.getUser();
+
         const priceId = getConsultingPriceId(plan, interval);
         const successUrl = `${baseUrl}/suscripcion/exito?plan=${plan.key}&session_id={CHECKOUT_SESSION_ID}`;
         const cancelUrl = `${baseUrl}/suscribirse?plan=${plan.key}`;
 
-        // Build and validate metadata using the shared helper (same pattern as EH)
+        // Build metadata — userId is optional (pay-first flow)
         const metadata = buildSubscriptionMetadata({
             tier: plan.key,          // "politica-premium" etc. — matches membership_plans.tier
-            userId: user.id,
+            userId: user?.id,        // undefined if not logged in
             orgSlug: CONSULTING_ORG_SLUG,
             interval,
             planKey: plan.key,
@@ -52,11 +49,11 @@ export async function POST(request: Request) {
         const session = await createCheckoutSession({
             mode: "subscription",
             priceId,
-            customerEmail: user.email ?? undefined,
+            customerEmail: user?.email ?? undefined,   // Stripe asks for email if absent
             metadata,
             successUrl,
             cancelUrl,
-            clientReferenceId: user.id,
+            clientReferenceId: user?.id,
             billingAddressCollection: "auto",
             allowPromotionCodes: true,
             locale: "es",

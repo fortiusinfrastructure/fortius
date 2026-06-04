@@ -6,7 +6,11 @@
 export interface SubscriptionMetadataInput {
     /** Plan key used as tier (e.g. "politica-premium"). Must match membership_plans.tier. */
     tier: string;
-    userId: string;
+    /**
+     * Supabase user UUID. Optional when using the "pay-first" flow:
+     * the webhook resolves / creates the user from the Stripe customer email after payment.
+     */
+    userId?: string;
     orgSlug: string;
     membershipId?: string;
     planId?: string;
@@ -30,11 +34,12 @@ export function buildSubscriptionMetadata({
 }: SubscriptionMetadataInput): Record<string, string> {
     const metadata: Record<string, string> = {
         tier,
-        userId,
         orgSlug,
         source,
     };
 
+    // userId is optional for anonymous (pay-first) checkout
+    if (userId) metadata.userId = userId;
     if (membershipId) metadata.membershipId = membershipId;
     if (planId) metadata.planId = planId;
     if (interval) metadata.interval = interval;
@@ -47,7 +52,8 @@ export function buildSubscriptionMetadata({
 
 /**
  * Validates that required fields are present. Throws if anything is missing or invalid.
- * Called inside buildSubscriptionMetadata and inside createCheckoutSession for double safety.
+ * Note: userId is NOT required here — the webhook resolves it from the customer email
+ * for the "pay-first" anonymous checkout flow.
  */
 export function ensureSubscriptionMetadata(
     metadata: Record<string, string> | undefined,
@@ -57,16 +63,10 @@ export function ensureSubscriptionMetadata(
         throw new Error(`Falta metadata obligatoria para la suscripción (${context})`);
     }
 
-    const missing = ['tier', 'userId', 'orgSlug'].filter((key) => !metadata[key]);
+    const missing = ['tier', 'orgSlug'].filter((key) => !metadata[key]);
     if (missing.length > 0) {
         throw new Error(
             `Falta metadata obligatoria para la suscripción (${context}): ${missing.join(', ')}`,
-        );
-    }
-
-    if (metadata.userId === 'anonymous') {
-        throw new Error(
-            'No se permiten suscripciones recurrentes sin un usuario autenticado asociado.',
         );
     }
 

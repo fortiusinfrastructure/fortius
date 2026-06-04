@@ -5,6 +5,23 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { signIn } from '@/lib/auth/actions';
 
+const inputClass = [
+    'w-full rounded-lg px-4 py-2.5 text-sm',
+    'border transition-colors duration-150 outline-none',
+    'placeholder:opacity-40',
+].join(' ');
+
+const inputStyle = {
+    background: 'var(--surface-secondary)',
+    borderColor: 'var(--border-default)',
+    color: 'var(--text-primary)',
+};
+
+const inputFocusStyle = {
+    borderColor: 'var(--color-accent-500)',
+    boxShadow: '0 0 0 3px rgba(233,71,72,0.15)',
+};
+
 export default function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -12,6 +29,7 @@ export default function LoginForm() {
 
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
+    const [focusedField, setFocusedField] = useState<string | null>(null);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -29,9 +47,11 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
-                <label htmlFor="email" className="text-sm font-medium">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {/* Email */}
+            <div className="flex flex-col gap-1.5">
+                <label htmlFor="email" className="text-xs font-medium tracking-wide uppercase"
+                    style={{ color: 'var(--text-tertiary)' }}>
                     Correo electrónico
                 </label>
                 <input
@@ -40,12 +60,18 @@ export default function LoginForm() {
                     type="email"
                     required
                     autoComplete="email"
-                    className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                    placeholder="tu@email.com"
+                    className={inputClass}
+                    style={focusedField === 'email' ? { ...inputStyle, ...inputFocusStyle } : inputStyle}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
                 />
             </div>
 
-            <div className="flex flex-col gap-1">
-                <label htmlFor="password" className="text-sm font-medium">
+            {/* Password */}
+            <div className="flex flex-col gap-1.5">
+                <label htmlFor="password" className="text-xs font-medium tracking-wide uppercase"
+                    style={{ color: 'var(--text-tertiary)' }}>
                     Contraseña
                 </label>
                 <input
@@ -54,24 +80,46 @@ export default function LoginForm() {
                     type="password"
                     required
                     autoComplete="current-password"
-                    className="rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                    placeholder="••••••••"
+                    className={inputClass}
+                    style={focusedField === 'password' ? { ...inputStyle, ...inputFocusStyle } : inputStyle}
+                    onFocus={() => setFocusedField('password')}
+                    onBlur={() => setFocusedField(null)}
                 />
             </div>
 
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {/* Error */}
+            {error && (
+                <p className="rounded-lg px-3 py-2 text-xs"
+                    style={{ background: 'rgba(233,71,72,0.1)', color: 'var(--color-accent-300)', border: '1px solid rgba(233,71,72,0.2)' }}>
+                    {error}
+                </p>
+            )}
 
+            {/* Submit */}
             <button
                 type="submit"
                 disabled={isPending}
-                className="mt-2 rounded bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50"
+                className="mt-1 w-full rounded-lg py-2.5 text-sm font-medium tracking-wide transition-opacity duration-150 disabled:opacity-50"
+                style={{ background: 'var(--color-accent-500)', color: '#fff' }}
             >
-                {isPending ? 'Entrando…' : 'Entrar'}
+                {isPending ? 'Accediendo…' : 'Acceder'}
             </button>
 
-            <p className="text-center text-xs text-gray-500 mt-2">
-                ¿No tienes una cuenta?{' '}
-                <Link href="/registro" className="font-medium text-black hover:underline">
-                    Regístrate aquí
+            {/* Divider */}
+            <div className="flex items-center gap-3 my-1">
+                <div className="flex-1 h-px" style={{ background: 'var(--border-default)' }} />
+                <span className="text-[10px] tracking-widest uppercase" style={{ color: 'var(--text-tertiary)' }}>o</span>
+                <div className="flex-1 h-px" style={{ background: 'var(--border-default)' }} />
+            </div>
+
+            {/* Register link */}
+            <p className="text-center text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                ¿Sin cuenta?{' '}
+                <Link href={`/registro${searchParams.get('redirect') ? `?redirect=${searchParams.get('redirect')}` : ''}`}
+                    className="font-medium transition-colors hover:opacity-80"
+                    style={{ color: 'var(--color-accent-400)' }}>
+                    Créala aquí
                 </Link>
             </p>
         </form>

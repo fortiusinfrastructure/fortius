@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
+import { createAdminClient } from "@fortius/database";
+import { SITE_URL } from "@/lib/site-config";
 import { getWebhookOrganizationId, recordStripeEvent, insertPaymentHistory } from "@/lib/stripe/webhook-db";
 import { syncSubscriptionFromStripe } from "@/lib/stripe/subscription-sync";
 import {
@@ -11,6 +13,38 @@ import {
 } from "@/lib/stripe/webhook-notifications";
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+
+/**
+ * Pay-first flow: looks up an existing Supabase user by email.
+ * If none is found, invites them (creates account + sends activation email).
+ * Returns the userId so the webhook can sync the membership immediately.
+ */
+async function resolveOrInviteUser(email: string): Promise<string | null> {
+    const admin = createAdminClient();
+
+    // 1. Check if a user with this email already exists
+    const { data: profiles } = await admin
+        .from("user_profiles")
+        .select("id")
+        .eq("email", email)
+        .limit(1);
+
+    if (profiles && profiles.length > 0) {
+        return profiles[0].id;
+    }
+
+    // 2. No existing user — invite them (Supabase sends an activation email)
+    const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
+        redirectTo: `${SITE_URL}/api/auth/callback`,
+    });
+
+    if (error || !data.user) {
+        console.error("[webhook] inviteUserByEmail failed:", error?.message);
+        return null;
+    }
+
+    return data.user.id;
+}
 
 function getInvoiceSubscriptionId(invoice: Stripe.Invoice) {
     const inv = invoice as Stripe.Invoice & { subscription?: string | null; payment_intent?: string | null };
@@ -46,7 +80,26 @@ export async function POST(request: Request) {
         case "checkout.session.completed": {
             const session = event.data.object as Stripe.Checkout.Session;
             if (session.mode === "subscription" && typeof session.subscription === "string") {
-                const subscription = await stripe.subscriptions.retrieve(session.subscription);
+                let subscription = await stripe.subscriptions.retrieve(session.subscription);
+
+                // Pay-first flow: if no userId in metadata, resolve/invite user by email
+                if (!subscription.metadata?.userId) {
+                    const email = session.customer_details?.email || session.customer_email;
+                    if (email) {
+                        const userId = await resolveOrInviteUser(email);
+                        if (userId) {
+                            // Stamp userId onto the Stripe subscription so future renewal events
+                            // use the fast lookup path (same pattern as membershipId fast-path)
+                            await stripe.subscriptions.update(session.subscription, {
+                                metadata: { ...subscription.metadata, userId },
+                            });
+                            subscription = await stripe.subscriptions.retrieve(session.subscription);
+                        } else {
+                            console.error("[webhook] Could not resolve/invite user for email:", email);
+                        }
+                    }
+                }
+
                 await syncSubscriptionFromStripe(subscription, ctx);
                 sendMembershipCheckoutEmails(session).catch(console.error);
             }
