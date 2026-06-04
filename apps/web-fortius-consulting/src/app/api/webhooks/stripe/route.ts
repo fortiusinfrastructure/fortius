@@ -4,6 +4,11 @@ import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
 import { getWebhookOrganizationId, recordStripeEvent, insertPaymentHistory } from "@/lib/stripe/webhook-db";
 import { syncSubscriptionFromStripe } from "@/lib/stripe/subscription-sync";
+import {
+    sendMembershipCheckoutEmails,
+    sendInvoiceReceiptEmails,
+    sendInvoiceFailedEmails,
+} from "@/lib/stripe/webhook-notifications";
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
@@ -43,6 +48,7 @@ export async function POST(request: Request) {
             if (session.mode === "subscription" && typeof session.subscription === "string") {
                 const subscription = await stripe.subscriptions.retrieve(session.subscription);
                 await syncSubscriptionFromStripe(subscription, ctx);
+                sendMembershipCheckoutEmails(session).catch(console.error);
             }
             break;
         }
@@ -66,6 +72,7 @@ export async function POST(request: Request) {
                     description: invoice.lines.data[0]?.description || "Cobro recurrente",
                 });
             }
+            sendInvoiceReceiptEmails(invoice).catch(console.error);
             break;
         }
 
@@ -88,6 +95,7 @@ export async function POST(request: Request) {
                     description: invoice.lines.data[0]?.description || "Cobro fallido",
                 });
             }
+            sendInvoiceFailedEmails(invoice).catch(console.error);
             break;
         }
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { getConsultingBillingPlan, getConsultingPriceId } from "@/lib/billing/plans";
-import { SITE_URL } from "@/lib/site-config";
-import { stripe } from "@/lib/stripe";
+import { getConsultingBillingPlan, getConsultingPriceId, CONSULTING_ORG_SLUG } from "@/lib/billing/plans";
+import { createCheckoutSession } from "@/lib/stripe";
+import { buildSubscriptionMetadata } from "@/lib/stripe/checkout-metadata";
 import { createServerClient } from "@fortius/database";
 
 export async function POST(request: Request) {
@@ -39,29 +39,27 @@ export async function POST(request: Request) {
         const successUrl = `${baseUrl}/suscripcion/exito?plan=${plan.key}&session_id={CHECKOUT_SESSION_ID}`;
         const cancelUrl = `${baseUrl}/suscribirse?plan=${plan.key}`;
 
-        // tier = plan.key (e.g. "politica-premium") — matches what plans:seed stores in membership_plans.tier
-        const metadata = {
-            orgSlug: process.env.NEXT_PUBLIC_ORG_SLUG || "fortius-consulting",
-            source: "web-fortius-consulting",
+        // Build and validate metadata using the shared helper (same pattern as EH)
+        const metadata = buildSubscriptionMetadata({
+            tier: plan.key,          // "politica-premium" etc. — matches membership_plans.tier
+            userId: user.id,
+            orgSlug: CONSULTING_ORG_SLUG,
+            interval,
             planKey: plan.key,
             vertical: plan.vertical,
-            tier: plan.key,
-            interval,
-            userId: user.id,
-        };
+        });
 
-        const session = await stripe.checkout.sessions.create({
+        const session = await createCheckoutSession({
             mode: "subscription",
-            billing_address_collection: "auto",
-            allow_promotion_codes: true,
-            line_items: [{ price: priceId, quantity: 1 }],
-            locale: "es",
-            client_reference_id: user.id,
-            customer_email: user.email ?? undefined,
-            success_url: successUrl,
-            cancel_url: cancelUrl,
+            priceId,
+            customerEmail: user.email ?? undefined,
             metadata,
-            subscription_data: { metadata },
+            successUrl,
+            cancelUrl,
+            clientReferenceId: user.id,
+            billingAddressCollection: "auto",
+            allowPromotionCodes: true,
+            locale: "es",
         });
 
         if (!session.url) {
