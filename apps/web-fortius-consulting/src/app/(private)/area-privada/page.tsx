@@ -1,18 +1,26 @@
-import { requireClientUser } from "@/lib/auth";
-import { DashboardClient } from "./DashboardClient";
 import type { Metadata } from "next";
+import { requirePrivateUser } from "@/lib/auth";
+import { getMemberDashboardData, getAdminDashboardData } from "@/lib/private/queries";
+import { DashboardClient } from "./DashboardClient";
+import { DashboardAdmin } from "./DashboardAdmin";
 
 export const metadata: Metadata = {
-    title: "Área clientes — Fortius Consulting",
-    description: "Dashboard exclusivo para clientes de Fortius Consulting.",
+    title: "Área Privada — Fortius Consulting",
+    description: "Acceso exclusivo para clientes y equipo de Fortius Consulting.",
+    robots: { index: false, follow: false },
 };
 
 export default async function AreaPrivadaPage() {
-    const user = await requireClientUser();
-    
-    // In a real scenario, we would fetch data from Supabase based on the user ID
-    // using the created clients or admin clients, e.g.:
-    // const projects = await getProjectsForUser(user.id);
-    
-    return <DashboardClient user={user} />;
+    // Redirects to /login if not authenticated or no active membership
+    const user = await requirePrivateUser();
+
+    // CEO / admin view
+    if (user.role === "admin") {
+        const data = await getAdminDashboardData(user.orgId);
+        return <DashboardAdmin user={user} data={data} />;
+    }
+
+    // Member / client view
+    const data = await getMemberDashboardData(user.id, user.orgId);
+    return <DashboardClient user={user} data={data} />;
 }

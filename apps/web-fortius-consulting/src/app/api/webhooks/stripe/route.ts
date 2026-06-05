@@ -22,15 +22,13 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 async function resolveOrInviteUser(email: string): Promise<string | null> {
     const admin = createAdminClient();
 
-    // 1. Check if a user with this email already exists
-    const { data: profiles } = await admin
-        .from("user_profiles")
-        .select("id")
-        .eq("email", email)
-        .limit(1);
+    // 1. Look up the user in auth.users by email.
+    //    user_profiles has no email column — emails live in auth.users only.
+    const { data: { users } } = await admin.auth.admin.listUsers({ perPage: 500 });
+    const existingUser = users.find((u) => u.email === email);
 
-    if (profiles && profiles.length > 0) {
-        return profiles[0].id;
+    if (existingUser) {
+        return existingUser.id;
     }
 
     // 2. No existing user — invite them (Supabase sends an activation email)

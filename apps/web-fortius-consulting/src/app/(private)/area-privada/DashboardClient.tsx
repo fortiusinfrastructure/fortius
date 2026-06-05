@@ -7,8 +7,9 @@ import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
 import { MOCK_PROJECTS } from "@/content/dashboard";
 import { TEAM } from "@/content/team";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
-import { FileText, Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin } from "lucide-react";
-import type { ClientUser } from "@/lib/auth";
+import { Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin, CreditCard } from "lucide-react";
+import type { PrivateUser } from "@/lib/auth";
+import type { MemberDashboardData } from "@/lib/private/queries";
 import {
     formatPublishedDate,
     kindLabel,
@@ -18,16 +19,31 @@ import {
 import { getEventArticleData } from "@/lib/article-display";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
-const PLAN_TO_CATEGORY: Record<string, ArticleCategory> = {
-    politica: "politica",
-    "sociedad-civil": "sociedad-civil",
-};
 const CLIENT_COORDINATION_EMAIL = "info@fortiusconsulting.org";
 
-export function DashboardClient({ user }: { user: ClientUser }) {
-    // Simulamos que el usuario tiene vinculados a Juan Ángel y Beatriz
+function getCategoryFromTier(tier: string | null): ArticleCategory {
+    if (tier?.startsWith("sociedad-civil")) return "sociedad-civil";
+    return "politica";
+}
+
+function formatTierLabel(tier: string | null) {
+    if (!tier) return "Sin plan";
+    return tier.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
+
+function formatRenewal(iso: string | null) {
+    if (!iso) return null;
+    return new Date(iso).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
+}
+
+interface Props {
+    user: PrivateUser;
+    data: MemberDashboardData;
+}
+
+export function DashboardClient({ user, data }: Props) {
     const linkedExperts = TEAM.filter(m => m.slug === "juan-angel-soto" || m.slug === "beatriz-de-leon-cobo");
-    const category = PLAN_TO_CATEGORY[user.planId] ?? "politica";
+    const category = getCategoryFromTier(data.tier ?? user.tier);
     const memberContent = listArticlesByCategory(category);
     const publications = memberContent
         .filter((item) => item.access === "paid" && item.kind !== "evento")
@@ -37,22 +53,48 @@ export function DashboardClient({ user }: { user: ClientUser }) {
         .map((item) => ({ item, event: getEventArticleData(item) }))
         .slice(0, 4);
 
+    const greeting = user.fullName?.split(" ")[0] ?? user.email ?? "Cliente";
+    const renewalDate = formatRenewal(data.subscription?.currentPeriodEnd ?? null);
+    const isActive = (data.subscription?.stripeStatus ?? data.status) === "active";
+    const willCancel = data.subscription?.cancelAtPeriodEnd;
+
     return (
         <div className="pt-[var(--nav-height)] pb-24 md:pb-36 min-h-screen bg-[var(--color-neutral-1000,#0a111e)]">
             <header className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-16 md:pt-24 border-b border-[var(--border-subtle)] pb-12">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
                     <Bracketed variant="kicker">Área clientes</Bracketed>
                     <h1 className="mt-4 font-display text-[clamp(2.2rem,4vw,3.6rem)] font-light leading-tight text-[var(--text-primary)]">
-                        Bienvenido, <span className="italic text-[var(--color-accent-400)]">{user.email}</span>
+                        Bienvenido, <span className="italic text-[var(--color-accent-400)]">{greeting}</span>
                     </h1>
-                    <div className="mt-6 flex flex-wrap gap-4 items-center">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] text-[0.75rem] uppercase tracking-wider text-[var(--text-secondary)]">
-                            Suscripción: <strong className="text-[var(--text-primary)]">{user.planId}</strong>
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#10b981]/30 bg-[#10b981]/10 text-[0.75rem] uppercase tracking-wider text-[#10b981]">
-                            <span className="w-2 h-2 rounded-full bg-[#10b981]" />
-                            {user.status === "active" ? "Activo" : "Inactivo"}
-                        </span>
+
+                    {/* Subscription card — real data from DB */}
+                    <div className="mt-8 inline-flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 border border-[var(--border-default)] bg-[var(--color-neutral-900)]">
+                        <CreditCard size={20} className="text-[var(--color-accent-400)] shrink-0" />
+                        <div>
+                            <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">Tu plan</p>
+                            <p className="mt-1 font-display text-[1.3rem] text-[var(--text-primary)]">
+                                {formatTierLabel(data.tier ?? user.tier)}
+                            </p>
+                        </div>
+                        <div className="h-px w-full sm:h-10 sm:w-px bg-[var(--border-subtle)]" />
+                        <div>
+                            <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">Estado</p>
+                            <span className="mt-1 inline-flex items-center gap-1.5 text-[0.8rem]" style={{ color: isActive ? "#10b981" : "#9ca3af" }}>
+                                <span className="w-2 h-2 rounded-full" style={{ background: "currentColor" }} />
+                                {isActive ? "Activa" : "Inactiva"}
+                            </span>
+                        </div>
+                        {renewalDate && (
+                            <>
+                                <div className="h-px w-full sm:h-10 sm:w-px bg-[var(--border-subtle)]" />
+                                <div>
+                                    <p className="text-[0.75rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
+                                        {willCancel ? "Expira el" : "Próxima renovación"}
+                                    </p>
+                                    <p className="mt-1 text-[0.9rem] text-[var(--text-primary)]">{renewalDate}</p>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </motion.div>
             </header>

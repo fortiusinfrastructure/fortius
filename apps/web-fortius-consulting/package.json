@@ -10,7 +10,8 @@
     "check-types": "tsc --noEmit",
     "articulos:convert": "node scripts/convert-articulos.mjs",
     "articulos:seed": "node scripts/seed-articles.mjs",
-    "plans:seed": "node scripts/seed-membership-plans.mjs"
+    "plans:seed": "node scripts/seed-membership-plans.mjs",
+    "users:seed": "node scripts/seed-test-users.mjs"
   },
   "dependencies": {
     "@fortius/database": "workspace:*",
