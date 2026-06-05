@@ -157,13 +157,14 @@ async function main() {
     console.log(`   Org ID: ${orgId}\n`);
 
     // --- CEO / Admin ---
+    // tier must be null for admins — the check constraint only allows real plan keys
     console.log("👤 juan@fortiusconsulting.org (admin)");
     const juanId = await getOrCreateUser(
         "juan@fortiusconsulting.org",
         "FortiusCEO2026!",
         "Juan Ángel Soto Gómez",
     );
-    await upsertMembership(juanId, orgId, "admin", "admin");
+    await upsertMembership(juanId, orgId, "admin", null);
 
     console.log("");
 
@@ -174,7 +175,9 @@ async function main() {
         "FortiusCliente2026!",
         "Diego Salazar Ramírez",
     );
-    await upsertMembership(diegoId, orgId, "member", "politica-basica");
+    // tier is null — the check constraint only allows EH values ('amigo','academico','mecenas').
+    // A migration is needed to add consulting tiers. Subscription data carries the real plan info.
+    await upsertMembership(diegoId, orgId, "member", null);
     await upsertMockSubscription(diegoId, orgId);
 
     console.log("\n✅ Done — test users ready.");
