@@ -58,7 +58,9 @@ async function getOrCreateUser(email, password, fullName) {
     const existing = users.find(u => u.email === email);
 
     if (existing) {
-        console.log(`  ↺  user exists: ${email} (${existing.id})`);
+        console.log(`  ↺  user exists: ${email} (${existing.id}) — updating password`);
+        // Always sync the password so the seed is the source of truth for test credentials
+        await admin.auth.admin.updateUserById(existing.id, { password });
         return existing.id;
     }
 

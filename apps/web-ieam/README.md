@@ -1,6 +1,6 @@
 # web-ieam
 
-Aplicación del **Instituto de Estudios sobre África y el Mediterráneo (IEAM)**
+Aplicación del **Instituto Español de Análisis Migratorio (IEAM)**
 dentro del monorepo Fortius. Combina sitio público multilingüe, CMS interno y
 una migración editorial todavía híbrida entre contenido local y Supabase.
 
