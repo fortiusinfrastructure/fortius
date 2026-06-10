@@ -53,3 +53,50 @@ export async function insertPaymentHistory({
         description,
     });
 }
+
+export async function upsertEventPurchase({
+    userId,
+    organizationId,
+    eventSlug,
+    eventTitle,
+    stripeCheckoutSessionId,
+    stripePaymentIntentId,
+    amountCents,
+    currency,
+    metadata,
+}: {
+    userId: string;
+    organizationId: string;
+    eventSlug: string;
+    eventTitle: string;
+    stripeCheckoutSessionId: string;
+    stripePaymentIntentId: string | null;
+    amountCents: number;
+    currency: string;
+    metadata?: Record<string, unknown>;
+}) {
+    const { data, error } = await createAdminClient()
+        .from("event_purchases")
+        .upsert(
+            {
+                user_id: userId,
+                organization_id: organizationId,
+                event_slug: eventSlug,
+                event_title: eventTitle,
+                stripe_checkout_session_id: stripeCheckoutSessionId,
+                stripe_payment_intent_id: stripePaymentIntentId,
+                amount_cents: amountCents,
+                currency,
+                status: "paid",
+                metadata: metadata ?? {},
+                purchased_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+            },
+            { onConflict: "user_id,organization_id,event_slug" },
+        )
+        .select("id")
+        .single();
+
+    if (error) throw error;
+    return data?.id as string | undefined;
+}

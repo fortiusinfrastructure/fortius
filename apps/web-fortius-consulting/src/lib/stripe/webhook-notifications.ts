@@ -19,6 +19,15 @@ function formatAmount(cents: number, currency: string) {
     return `${(cents / 100).toFixed(2)} ${currency.toUpperCase()}`;
 }
 
+function escapeHtml(value: string) {
+    return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
+
 /** Sent to subscriber + internal alert when a subscription checkout succeeds. */
 export async function sendMembershipCheckoutEmails(session: Stripe.Checkout.Session) {
     const email = session.customer_details?.email || session.customer_email;
@@ -47,6 +56,44 @@ export async function sendMembershipCheckoutEmails(session: Stripe.Checkout.Sess
         relatedTable: 'user_memberships',
         relatedId: session.metadata?.membershipId,
         metadata: { tier, stripe_session_id: session.id },
+    });
+}
+
+/** Sent after a one-time event / opportunity purchase succeeds. */
+export async function sendEventPurchaseEmails(session: Stripe.Checkout.Session, purchaseId?: string) {
+    const email = session.customer_details?.email || session.customer_email;
+    if (!email) return;
+
+    const fullName = session.customer_details?.name || email;
+    const eventTitle = session.metadata?.eventTitle || 'Oportunidad Fortius';
+    const eventSlug = session.metadata?.eventSlug;
+    const amount = session.amount_total ?? 0;
+    const currency = session.currency || 'eur';
+
+    await sendEmail({
+        to: email,
+        subject: '✅ Oportunidad adquirida — Fortius Consulting',
+        html: getEventPurchaseReceiptHtml({
+            fullName,
+            eventTitle,
+            amount,
+            currency,
+            reference: session.id,
+        }),
+        kind: 'event_purchase_confirmation',
+        relatedTable: 'event_purchases',
+        relatedId: purchaseId,
+        metadata: { eventSlug, stripe_session_id: session.id },
+    });
+
+    await sendEmail({
+        to: NOTIFICATION_EMAIL,
+        subject: `🎟️ Nueva oportunidad adquirida — ${eventTitle}`,
+        html: `<h2>Nueva oportunidad adquirida</h2><p><strong>Evento:</strong> ${escapeHtml(eventTitle)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Importe:</strong> ${formatAmount(amount, currency)}</p><p><strong>Stripe Session:</strong> ${escapeHtml(session.id)}</p>`,
+        kind: 'event_purchase_notification',
+        relatedTable: 'event_purchases',
+        relatedId: purchaseId,
+        metadata: { eventSlug, stripe_session_id: session.id },
     });
 }
 
@@ -134,6 +181,32 @@ function getPaymentReceiptHtml({ fullName, amount, currency, reference, descript
 <tr><td style="padding:8px 0;color:#6b7280;">Referencia</td><td style="padding:8px 0;text-align:right;font-size:12px;color:#9ca3af;">${reference}</td></tr>
 </table>
 <p>Accede a tu área privada en <a href="https://fortiusconsulting.org/area-privada">fortiusconsulting.org/area-privada</a>.</p>
+<hr style="border:none;border-top:1px solid #e5e7eb;margin:32px 0;"/>
+<p style="font-size:12px;color:#9ca3af;">Fortius Consulting · Mensaje automático.</p>
+</div>`;
+}
+
+function getEventPurchaseReceiptHtml({ fullName, eventTitle, amount, currency, reference }: {
+    fullName: string;
+    eventTitle: string;
+    amount: number;
+    currency: string;
+    reference: string;
+}) {
+    const formatted = formatAmount(amount, currency);
+    const date = new Date().toLocaleDateString('es-ES');
+    return `<div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:40px 20px;color:#111827;">
+<h2 style="border-bottom:1px solid #e5e7eb;padding-bottom:12px;">Oportunidad adquirida</h2>
+<p>Estimado/a <strong>${escapeHtml(fullName)}</strong>,</p>
+<p>Hemos confirmado la adquisición de esta oportunidad de Fortius Consulting.</p>
+<table style="width:100%;border-collapse:collapse;margin:24px 0;">
+<tr><td style="padding:8px 0;color:#6b7280;">Evento</td><td style="padding:8px 0;text-align:right;">${escapeHtml(eventTitle)}</td></tr>
+<tr><td style="padding:8px 0;color:#6b7280;">Importe</td><td style="padding:8px 0;text-align:right;font-weight:bold;">${formatted}</td></tr>
+<tr><td style="padding:8px 0;color:#6b7280;">Fecha</td><td style="padding:8px 0;text-align:right;">${date}</td></tr>
+<tr><td style="padding:8px 0;color:#6b7280;">Referencia</td><td style="padding:8px 0;text-align:right;font-size:12px;color:#9ca3af;">${escapeHtml(reference)}</td></tr>
+</table>
+<p>Ya puedes ver la oportunidad adquirida desde tu área privada.</p>
+<p><a href="https://fortiusconsulting.org/area-privada">Acceder al área privada</a></p>
 <hr style="border:none;border-top:1px solid #e5e7eb;margin:32px 0;"/>
 <p style="font-size:12px;color:#9ca3af;">Fortius Consulting · Mensaje automático.</p>
 </div>`;

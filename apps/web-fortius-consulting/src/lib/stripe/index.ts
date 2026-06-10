@@ -30,6 +30,7 @@ export async function createCheckoutSession({
     mode,
     priceId,
     amount,
+    productName,
     metadata,
     successUrl,
     cancelUrl,
@@ -42,6 +43,7 @@ export async function createCheckoutSession({
     mode: 'payment' | 'subscription';
     priceId?: string;
     amount?: number;
+    productName?: string;
     metadata?: Record<string, string>;
     successUrl: string;
     cancelUrl: string;
@@ -65,7 +67,7 @@ export async function createCheckoutSession({
         lineItems.push({
             price_data: {
                 currency: 'eur',
-                product_data: { name: 'Fortius Consulting' },
+                product_data: { name: productName ?? 'Fortius Consulting' },
                 unit_amount: amount,
             },
             quantity: 1,

@@ -13,6 +13,8 @@ interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
     return listArticlesByCategory("sociedad-civil").map((a) => ({ slug: a.slug }));
 }

@@ -13,6 +13,7 @@ import type { MemberDashboardData } from "@/lib/private/queries";
 import {
     formatPublishedDate,
     kindLabel,
+    listArticles,
     listArticlesByCategory,
     type ArticleCategory,
 } from "@/lib/articles";
@@ -36,6 +37,13 @@ function formatRenewal(iso: string | null) {
     return new Date(iso).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" });
 }
 
+function formatAmount(cents: number, currency: string) {
+    return new Intl.NumberFormat("es-ES", {
+        style: "currency",
+        currency: currency.toUpperCase(),
+    }).format(cents / 100);
+}
+
 interface Props {
     user: PrivateUser;
     data: MemberDashboardData;
@@ -52,6 +60,11 @@ export function DashboardClient({ user, data }: Props) {
         .filter((item) => item.kind === "evento")
         .map((item) => ({ item, event: getEventArticleData(item) }))
         .slice(0, 4);
+    const allArticles = listArticles();
+    const purchasedEvents = data.eventPurchases.map((purchase) => ({
+        purchase,
+        article: allArticles.find((item) => item.slug === purchase.eventSlug),
+    }));
 
     const greeting = user.fullName?.split(" ")[0] ?? user.email ?? "Cliente";
     const renewalDate = formatRenewal(data.subscription?.currentPeriodEnd ?? null);
@@ -211,6 +224,38 @@ export function DashboardClient({ user, data }: Props) {
                     <section>
                         <Bracketed variant="tag">Oportunidades & Eventos</Bracketed>
                         <div className="mt-8 space-y-4">
+                            {purchasedEvents.length > 0 && (
+                                <div className="space-y-3">
+                                    <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
+                                        Adquiridas
+                                    </p>
+                                    {purchasedEvents.map(({ purchase, article }) => (
+                                        <Link
+                                            key={purchase.eventSlug}
+                                            href={article ? `/${article.category}/${article.slug}` : "/area-privada"}
+                                            className="block p-5 border border-[#10b981]/40 bg-[#10b981]/5 hover:border-[#10b981] transition-colors"
+                                        >
+                                            <div className="flex items-start justify-between gap-4">
+                                                <div>
+                                                    <span className="text-[0.65rem] uppercase tracking-widest text-[#10b981] mb-2 block">
+                                                        Adquirida
+                                                    </span>
+                                                    <h4 className="font-display text-[1.15rem] text-[var(--text-primary)]">
+                                                        {article?.title ?? purchase.eventTitle}
+                                                    </h4>
+                                                    <p className="mt-2 text-[0.8rem] text-[var(--text-secondary)]">
+                                                        Compra confirmada {purchase.purchasedAt ? `el ${formatRenewal(purchase.purchasedAt)}` : ""}
+                                                    </p>
+                                                </div>
+                                                <span className="text-[0.9rem] text-[var(--text-primary)] shrink-0">
+                                                    {formatAmount(purchase.amountCents, purchase.currency)}
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+
                             {events.length > 0 ? events.map(({ item, event }) => (
                                 <div key={item.slug} className="p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)]">
                                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">

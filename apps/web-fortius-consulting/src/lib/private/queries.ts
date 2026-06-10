@@ -18,6 +18,15 @@ export interface MemberDashboardData {
         currentPeriodEnd: string | null;
         cancelAtPeriodEnd: boolean | null;
     } | null;
+    eventPurchases: EventPurchaseRecord[];
+}
+
+export interface EventPurchaseRecord {
+    eventSlug: string;
+    eventTitle: string;
+    amountCents: number;
+    currency: string;
+    purchasedAt: string | null;
 }
 
 export async function getMemberDashboardData(
@@ -26,7 +35,7 @@ export async function getMemberDashboardData(
 ): Promise<MemberDashboardData> {
     const admin = createAdminClient();
 
-    const [{ data: membership }, { data: subscription }] = await Promise.all([
+    const [{ data: membership }, { data: subscription }, { data: eventPurchases }] = await Promise.all([
         admin
             .from("user_memberships")
             .select("tier, status, joined_at, expires_at")
@@ -40,6 +49,13 @@ export async function getMemberDashboardData(
             .order("created_at", { ascending: false })
             .limit(1)
             .maybeSingle(),
+        admin
+            .from("event_purchases")
+            .select("event_slug, event_title, amount_cents, currency, purchased_at")
+            .eq("user_id", userId)
+            .eq("organization_id", orgId)
+            .eq("status", "paid")
+            .order("purchased_at", { ascending: false }),
     ]);
 
     return {
@@ -54,6 +70,13 @@ export async function getMemberDashboardData(
                   cancelAtPeriodEnd: subscription.cancel_at_period_end ?? null,
               }
             : null,
+        eventPurchases: (eventPurchases ?? []).map((purchase) => ({
+            eventSlug: purchase.event_slug,
+            eventTitle: purchase.event_title,
+            amountCents: purchase.amount_cents,
+            currency: purchase.currency,
+            purchasedAt: purchase.purchased_at,
+        })),
     };
 }
 

@@ -4,10 +4,11 @@ import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@fortius/database";
 import { SITE_URL } from "@/lib/site-config";
-import { getWebhookOrganizationId, recordStripeEvent, insertPaymentHistory } from "@/lib/stripe/webhook-db";
+import { getWebhookOrganizationId, recordStripeEvent, insertPaymentHistory, upsertEventPurchase } from "@/lib/stripe/webhook-db";
 import { syncSubscriptionFromStripe } from "@/lib/stripe/subscription-sync";
 import {
     sendMembershipCheckoutEmails,
+    sendEventPurchaseEmails,
     sendInvoiceReceiptEmails,
     sendInvoiceFailedEmails,
 } from "@/lib/stripe/webhook-notifications";
@@ -52,6 +53,12 @@ function getInvoiceSubscriptionId(invoice: Stripe.Invoice) {
     };
 }
 
+function getSessionPaymentIntentId(session: Stripe.Checkout.Session) {
+    const paymentIntent = session.payment_intent;
+    if (typeof paymentIntent === "string") return paymentIntent;
+    return paymentIntent?.id ?? null;
+}
+
 export async function POST(request: Request) {
     const signature = (await headers()).get("stripe-signature");
     if (!signature) return NextResponse.json({ error: "Missing stripe-signature header" }, { status: 400 });
@@ -77,6 +84,47 @@ export async function POST(request: Request) {
     switch (event.type) {
         case "checkout.session.completed": {
             const session = event.data.object as Stripe.Checkout.Session;
+
+            if (session.mode === "payment" && session.metadata?.productType === "event_purchase") {
+                if (!organizationId) throw new Error("Missing organization for event purchase");
+
+                const userId = session.metadata.userId;
+                const eventSlug = session.metadata.eventSlug;
+                const eventTitle = session.metadata.eventTitle;
+                if (!userId || !eventSlug || !eventTitle) {
+                    throw new Error("Missing event purchase metadata");
+                }
+
+                const paymentIntentId = getSessionPaymentIntentId(session);
+                const purchaseId = await upsertEventPurchase({
+                    userId,
+                    organizationId,
+                    eventSlug,
+                    eventTitle,
+                    stripeCheckoutSessionId: session.id,
+                    stripePaymentIntentId: paymentIntentId,
+                    amountCents: session.amount_total ?? 0,
+                    currency: session.currency || "eur",
+                    metadata: {
+                        stripe_customer_id: typeof session.customer === "string" ? session.customer : session.customer?.id,
+                        category: session.metadata.category,
+                    },
+                });
+
+                await insertPaymentHistory({
+                    userId,
+                    subscriptionId: null,
+                    paymentIntentId,
+                    amountCents: session.amount_total ?? 0,
+                    currency: session.currency || "eur",
+                    status: "paid",
+                    description: `Compra de oportunidad: ${eventTitle}`,
+                });
+
+                sendEventPurchaseEmails(session, purchaseId).catch(console.error);
+                break;
+            }
+
             if (session.mode === "subscription" && typeof session.subscription === "string") {
                 let subscription = await stripe.subscriptions.retrieve(session.subscription);
 
