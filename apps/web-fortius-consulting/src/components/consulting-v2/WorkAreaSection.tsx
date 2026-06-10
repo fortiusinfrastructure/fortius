@@ -97,7 +97,7 @@ export function WorkAreaSection({
                         </h2>
                     </div>
                     <a
-                        href={`${v.href}#insights`}
+                        href="/publicaciones"
                         className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     >
                         Ver todos

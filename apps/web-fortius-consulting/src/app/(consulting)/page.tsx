@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HeroEditorial } from "@/components/consulting-v2/HeroEditorial";
 import { VerticalSection } from "@/components/consulting-v2/VerticalSection";
+import { NoticiasSection } from "@/components/consulting-v2/NoticiasSection";
 import { FoundationBridge } from "@/components/consulting-v2/FoundationBridge";
 import { NewsletterCTA } from "@/components/consulting-v2/NewsletterCTA";
 import { VERTICALS } from "@/content/home-v2";
@@ -54,6 +55,7 @@ export default function ConsultingPage() {
         <HeroEditorial />
         <VerticalSection vertical={civil} accentSide="left" summaryOnly />
         <VerticalSection vertical={intelligence} accentSide="right" summaryOnly />
+        <NoticiasSection />
         <FoundationBridge />
         <NewsletterCTA />
       </main>

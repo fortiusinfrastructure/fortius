@@ -13,7 +13,7 @@ function XIcon({ size = 15, className }: { size?: number; className?: string; st
 
 const SOCIAL_LINKS = [
   { icon: Linkedin, href: "https://linkedin.com/company/fortiusconsulting", label: "LinkedIn" },
-  { icon: XIcon, href: "https://x.com/JuanASotoG", label: "X" },
+  { icon: XIcon, href: "https://x.com/Fortius_C", label: "X" },
   { icon: Instagram, href: "https://www.instagram.com/fortius_consulting/", label: "Instagram" },
 ];
 

@@ -143,7 +143,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                       "Esto es solo una muestra. En este área de trabajo encontrarás el detalle de cómo trabajamos, quiénes nos acompañan y cómo puedes acceder.",
               }
             : {
-                  kicker: "Explorar la vertical completa",
+                kicker: "Explorar oportunidades para Política",
                   title: `En ${v.label} encontrarás servicios, expertos vinculados y acceso a la biblioteca completa.`,
                   description:
                       "Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y cómo puedes acceder.",
@@ -212,7 +212,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                     <div className="flex items-end justify-between mb-8">
                         <Bracketed variant="kicker">Área de trabajo · {v.label}</Bracketed>
                         <a
-                            href={`${v.href}#insights`}
+                            href="/publicaciones"
                             className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                         >
                             Ver todos

@@ -39,6 +39,11 @@ const KIND_COPY: Record<ArticleKind, { label: string; summary: string; bullets: 
         summary: "Ficha operativa para evaluar participación, agenda, networking y contexto del encuentro.",
         bullets: ["Fechas y formato", "Acceso y agenda", "Valor para stakeholders"],
     },
+    noticia: {
+        label: "Noticia",
+        summary: "Actualidad de Fortius: presencia institucional, encuentros y actividad en el ecosistema.",
+        bullets: ["Qué ha ocurrido", "Por qué importa", "Quiénes participan"],
+    },
     articulo: {
         label: "Artículo de análisis",
         summary: "Pieza de fondo para profundizar en una cuestión política, institucional o cultural.",

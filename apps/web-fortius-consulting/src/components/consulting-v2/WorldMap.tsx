@@ -96,7 +96,7 @@ export function WorldMap() {
         : PINES;
 
     return (
-        <div className="relative w-full aspect-[4/3] md:aspect-[2/1] lg:aspect-[2.5/1] bg-transparent rounded-lg border border-[var(--border-subtle)] overflow-hidden flex flex-col group">
+        <div className="relative w-full aspect-[4/3] md:aspect-[2/1] lg:aspect-[2.6/1] bg-transparent rounded-lg border border-[var(--border-subtle)] overflow-hidden flex flex-col group">
             {/* Leyenda */}
             <div className="absolute top-4 left-4 z-20 flex flex-col gap-2 p-3 md:p-4 bg-[var(--color-neutral-1000,#0a111e)]/80 backdrop-blur-sm border border-[var(--border-subtle)] rounded-md">
                 <span className="text-[0.65rem] uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-1">
@@ -132,13 +132,15 @@ export function WorldMap() {
             </div>
 
             <ComposableMap
+                width={1000}
+                height={385}
                 projectionConfig={{
-                    scale: 140,
-                    center: [0, 20], // Adjusted to center better
+                    scale: 190,
+                    center: [10, 12],
                 }}
                 className="w-full h-full"
             >
-                <ZoomableGroup center={[0, 20]} minZoom={1} maxZoom={3}>
+                <ZoomableGroup center={[10, 12]} zoom={1.35} minZoom={1} maxZoom={4}>
                     <Geographies geography={geoUrl}>
                         {({ geographies }) =>
                             geographies.map((geo) => (

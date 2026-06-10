@@ -20,6 +20,7 @@ const KIND_ICONS: Record<ArticleKind, typeof MessageSquareQuote> = {
     informe: FileSearch,
     nota: NotebookText,
     evento: CalendarDays,
+    noticia: Newspaper,
     articulo: Newspaper,
 };
 

@@ -78,10 +78,9 @@ function parseFilename(filename) {
     let rest = dateMatch ? base.slice(dateMatch[0].length) : base;
     rest = rest.replace(/^[\.\s]+/, "");
 
-    // Detect access tag anywhere
-    let access = "public";
-    if (/\(pago\)/i.test(rest)) access = "paid";
-    else if (/\(abierto\)/i.test(rest)) access = "public";
+    // Detect explicit access tag in filename
+    const hasExplicitPago = /\(pago\)/i.test(rest);
+    const hasExplicitAbierto = /\(abierto\)/i.test(rest);
 
     // Detect kind and strip the kind+access prefix from the title.
     let kind = "articulo";
@@ -98,6 +97,12 @@ function parseFilename(filename) {
             break;
         }
     }
+
+    // Access: explicit tag wins; events are private by default
+    let access = "public";
+    if (hasExplicitPago) access = "paid";
+    else if (hasExplicitAbierto) access = "public";
+    else if (kind === "evento") access = "paid";
 
     return { publishedAt, access, kind, title: cleanTitle(title) };
 }

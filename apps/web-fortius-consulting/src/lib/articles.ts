@@ -9,6 +9,7 @@ export type ArticleKind =
     | "informe"
     | "nota"
     | "evento"
+    | "noticia"
     | "articulo";
 
 export interface ArticleSubproduct {
@@ -92,6 +93,7 @@ const KIND_LABEL: Record<ArticleKind, string> = {
     informe: "Informe",
     nota: "Nota de Inteligencia",
     evento: "Oportunidad & Evento",
+    noticia: "Noticia",
     articulo: "Artículo",
 };
 
@@ -181,9 +183,19 @@ export interface EditorialSlots {
     locked: Article | null;
 }
 
+/**
+ * Returns the most-recent public noticias across all categories, sorted by date descending.
+ */
+export function getLatestNoticias(limit = 6): Article[] {
+    return ALL
+        .filter((a) => a.kind === "noticia" && a.access === "public")
+        .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""))
+        .slice(0, limit);
+}
+
 export function getEditorialSlots(category: ArticleCategory): EditorialSlots {
     const all = listArticlesByCategory(category);
-    const publics = all.filter((a) => a.access === "public" && a.kind !== "evento");
+    const publics = all.filter((a) => a.access === "public" && a.kind !== "evento" && a.kind !== "noticia");
     const restricted = all.filter((a) => a.access === "paid" || a.kind === "evento");
 
     const featured = publics[0] ?? null;

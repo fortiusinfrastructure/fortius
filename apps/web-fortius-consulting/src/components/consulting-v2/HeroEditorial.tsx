@@ -19,22 +19,6 @@ export function HeroEditorial() {
             aria-label="Introducción"
             className="relative min-h-[92vh] flex flex-col justify-end overflow-hidden pt-32 pb-20"
         >
-            <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                    background:
-                        "radial-gradient(ellipse at 80% 20%, rgba(233,71,72,0.10) 0%, transparent 55%), linear-gradient(180deg, rgba(5,10,20,0) 0%, rgba(5,10,20,0.9) 100%)",
-                }}
-            />
-            <div
-                className="absolute inset-0 pointer-events-none opacity-[0.03]"
-                style={{
-                    backgroundImage:
-                        "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-                    backgroundSize: "80px 80px",
-                }}
-            />
-
             <motion.div
                 style={{ y, opacity }}
                 className="relative z-10 mx-auto w-full max-w-[var(--container-max)] px-[var(--container-px)]"

@@ -21,9 +21,9 @@ export function NewsletterCTA() {
             const formData = new FormData();
             formData.append("email", email);
             const result = await subscribeToNewsletter(formData);
-            setStatus("success");
+            setStatus(result.success ? "success" : "error");
             setMessage(result.message);
-            setEmail("");
+            if (result.success) setEmail("");
         } catch {
             setStatus("error");
             setMessage("No hemos podido completar la suscripción. Inténtalo de nuevo.");
