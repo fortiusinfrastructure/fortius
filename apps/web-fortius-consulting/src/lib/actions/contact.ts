@@ -3,6 +3,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { getContactConfirmationHtml, getContactNotificationHtml } from "@/lib/email-templates";
 import { sendEmail } from "@/lib/email";
+import { sendContactNotificationWithWeb3Forms } from "@/lib/web3forms";
 
 const ORG_SLUG = "fortius-consulting";
 const NOTIFICATION_EMAIL = "info@fortiusconsulting.org";
@@ -38,6 +39,40 @@ function splitName(fullName: string) {
         firstName: parts[0],
         lastName: parts.slice(1).join(" "),
     };
+}
+
+async function logWeb3FormsAttempt({
+    organizationId,
+    to,
+    subject,
+    status,
+    relatedId,
+    metadata,
+}: {
+    organizationId: string;
+    to: string;
+    subject: string;
+    status: "sent" | "failed";
+    relatedId: string;
+    metadata?: Record<string, unknown>;
+}) {
+    try {
+        await createAdminClient().from("communication_logs").insert({
+            organization_id: organizationId,
+            channel: "email",
+            kind: "contact_notification",
+            recipient_email: to,
+            subject,
+            status,
+            provider: "web3forms",
+            provider_message_id: null,
+            related_table: "contact_submissions",
+            related_id: relatedId,
+            metadata: metadata ?? {},
+        });
+    } catch (error) {
+        console.error("[submitContact] web3forms log failed", error);
+    }
 }
 
 export async function submitContact(formData: FormData) {
@@ -133,6 +168,34 @@ export async function submitContact(formData: FormData) {
         }),
     });
 
+    let fallbackNotificationResult: { success: boolean; error?: unknown } | null = null;
+
+    if (!notificationResult.success) {
+        fallbackNotificationResult = await sendContactNotificationWithWeb3Forms({
+            name,
+            email,
+            subject,
+            organization,
+            contextVertical,
+            contextPlan,
+            message: finalMessage,
+        });
+
+        await logWeb3FormsAttempt({
+            organizationId: organizationRow.id,
+            to: NOTIFICATION_EMAIL,
+            subject: notificationSubject,
+            status: fallbackNotificationResult.success ? "sent" : "failed",
+            relatedId: submission.id,
+            metadata: {
+                source: "web-fortius-consulting",
+                fallbackFor: "resend",
+                resendError: notificationResult.error ?? null,
+                error: fallbackNotificationResult.success ? null : fallbackNotificationResult.error,
+            },
+        });
+    }
+
     const confirmationResult = await sendEmail({
         to: email,
         replyTo: NOTIFICATION_EMAIL,
@@ -149,6 +212,10 @@ export async function submitContact(formData: FormData) {
 
     if (!notificationResult.success) {
         console.error("[submitContact] notification failed", notificationResult.error);
+    }
+
+    if (fallbackNotificationResult && !fallbackNotificationResult.success) {
+        console.error("[submitContact] web3forms fallback failed", fallbackNotificationResult.error);
     }
 
     if (!confirmationResult.success) {
