@@ -31,6 +31,8 @@ export default function LoginForm() {
         ? redirectParam
         : '/area-privada';
 
+    const resetOk = searchParams.get('reset') === 'ok';
+
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
     const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -52,6 +54,12 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            {resetOk && (
+                <p className="rounded-lg px-3 py-2 text-xs"
+                    style={{ background: 'rgba(16,185,129,0.08)', color: '#10b981', border: '1px solid rgba(16,185,129,0.25)' }}>
+                    ✓ Contraseña actualizada correctamente. Ya puedes iniciar sesión.
+                </p>
+            )}
             {/* Email */}
             <div className="flex flex-col gap-1.5">
                 <label htmlFor="email" className="text-xs font-medium tracking-wide uppercase"
@@ -74,10 +82,17 @@ export default function LoginForm() {
 
             {/* Password */}
             <div className="flex flex-col gap-1.5">
-                <label htmlFor="password" className="text-xs font-medium tracking-wide uppercase"
-                    style={{ color: 'var(--text-tertiary)' }}>
-                    Contraseña
-                </label>
+                <div className="flex items-center justify-between">
+                    <label htmlFor="password" className="text-xs font-medium tracking-wide uppercase"
+                        style={{ color: 'var(--text-tertiary)' }}>
+                        Contraseña
+                    </label>
+                    <Link href="/recuperar-contrasena"
+                        className="text-[10px] hover:opacity-80 transition-opacity"
+                        style={{ color: 'var(--color-accent-400)' }}>
+                        ¿La olvidaste?
+                    </Link>
+                </div>
                 <input
                     id="password"
                     name="password"
