@@ -52,10 +52,12 @@ export default async function SuscripcionExitoPage({ searchParams }: PageProps) 
                     ) : (
                         <div className="space-y-3">
                             <p className="text-[1rem] leading-relaxed text-[var(--text-secondary)]">
-                                Tu pago se ha procesado correctamente. Recibirás un email para activar tu cuenta y acceder al área privada.
+                                Tu pago se ha procesado correctamente. Te hemos enviado un email de invitación:
+                                ábrelo y sigue el enlace para crear tu contraseña y acceder al área privada.
                             </p>
                             <p className="text-[0.85rem] text-[var(--text-tertiary)]">
                                 Si no lo recibes en unos minutos, revisa tu carpeta de spam.
+                                Si ya creaste tu contraseña, inicia sesión directamente.
                             </p>
                         </div>
                     )}
@@ -69,10 +71,10 @@ export default async function SuscripcionExitoPage({ searchParams }: PageProps) 
                                 Ir al área privada
                             </a>
                         ) : (
-                            <a href="/registro"
+                            <a href="/login?redirect=%2Farea-privada"
                                 className="inline-flex items-center justify-center px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] transition-colors"
                                 style={{ background: 'var(--color-accent-500)', color: '#fff' }}>
-                                Activar mi cuenta
+                                Iniciar sesión
                             </a>
                         )}
                         <a href="/"
