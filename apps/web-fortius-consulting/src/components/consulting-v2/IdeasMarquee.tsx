@@ -38,6 +38,7 @@ export function IdeasMarquee({
                                     src={ally.logo}
                                     alt={ally.name}
                                     className="max-h-14 w-full max-w-[180px] object-contain object-center"
+                                    style={ally.filter ? { filter: ally.filter } : undefined}
                                     loading="lazy"
                                 />
                             ) : (

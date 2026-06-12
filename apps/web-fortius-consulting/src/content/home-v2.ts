@@ -308,6 +308,7 @@ export const VERTICALS: VerticalDef[] = [
 export interface Ally {
     name: string;
     logo?: string;
+    filter?: string;
 }
 
 export const ALLIES: Ally[] = [
@@ -321,7 +322,7 @@ export const ALLIES: Ally[] = [
     { name: "World Youth Alliance", logo: "/images/aliados/wya-fortius-red.png" },
     { name: "ADF", logo: "/images/aliados/adf-fortius-red.png" },
     { name: "Civismo", logo: "/images/aliados/civismo-fortius-red.png" },
-    { name: "Acton", logo: "/images/aliados/Acton.png" },
+    { name: "Acton", logo: "/images/aliados/Acton.png", filter: "brightness(0) invert(1)" },
     { name: "Tertio Millennio", logo: "/images/aliados/Tertio Millennio.png" },
     { name: "AUR", logo: "/images/aliados/AUR.svg" },
     { name: "TEC", logo: "/images/aliados/TEC.svg" },
