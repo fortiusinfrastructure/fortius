@@ -108,6 +108,13 @@ export function DashboardClient({ user, data, articles }: Props) {
                                 </div>
                             </>
                         )}
+                        <div className="h-px w-full sm:h-10 sm:w-px bg-[var(--border-subtle)]" />
+                        <Link
+                            href="/area-privada/cuenta#suscripcion"
+                            className="text-[0.75rem] font-semibold uppercase tracking-[0.15em] text-[var(--color-accent-400)] hover:text-[var(--color-accent-500)] transition-colors whitespace-nowrap"
+                        >
+                            Gestionar →
+                        </Link>
                     </div>
                 </motion.div>
             </header>

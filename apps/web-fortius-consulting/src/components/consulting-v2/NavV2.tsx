@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Lock } from "lucide-react";
 import { BrandLockup } from "@/components/system/BrandLockup";
+import { useSessionUser, UserMenu, SignOutButton, USER_MENU_LINKS } from "./UserMenu";
 
 const LINKS = [
     { label: "Nosotros", href: "/nosotros" },
@@ -17,6 +18,7 @@ const FOUNDATION_URL = "https://fundacionfortius.org";
 export function NavV2() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const user = useSessionUser();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 32);
@@ -67,13 +69,17 @@ export function NavV2() {
                     </div>
 
                     <div className="hidden lg:flex items-center gap-3">
-                        <a
-                            href="/area-privada"
-                            className="inline-flex items-center gap-2 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
-                        >
-                            <Lock size={12} strokeWidth={2} aria-hidden />
-                            Área Privada
-                        </a>
+                        {user ? (
+                            <UserMenu user={user} />
+                        ) : (
+                            <a
+                                href="/area-privada"
+                                className="inline-flex items-center gap-2 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
+                            >
+                                <Lock size={12} strokeWidth={2} aria-hidden />
+                                Área Privada
+                            </a>
+                        )}
                     </div>
 
                     <button
@@ -141,14 +147,40 @@ export function NavV2() {
                                 transition={{ delay: 0.32, duration: 0.28 }}
                                 className="mt-8"
                             >
-                                <a
-                                    href="/area-privada"
-                                    onClick={() => setMobileOpen(false)}
-                                    className="inline-flex items-center gap-2 w-full justify-center px-6 py-3.5 text-sm font-semibold uppercase tracking-wider bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
-                                >
-                                    <Lock size={14} strokeWidth={2} aria-hidden />
-                                    Área Privada
-                                </a>
+                                {user ? (
+                                    <div className="border border-[var(--border-default)] bg-[var(--color-neutral-900)]">
+                                        <div className="px-5 py-3 border-b border-[var(--border-subtle)]">
+                                            {user.name && (
+                                                <p className="text-sm text-[var(--text-primary)] truncate">{user.name}</p>
+                                            )}
+                                            <p className="text-xs text-[var(--text-tertiary)] truncate">{user.email}</p>
+                                        </div>
+                                        {USER_MENU_LINKS.map(({ label, href, icon: Icon }) => (
+                                            <a
+                                                key={href}
+                                                href={href}
+                                                onClick={() => setMobileOpen(false)}
+                                                className="flex items-center gap-3 px-5 py-3 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] border-b border-[var(--border-subtle)] transition-colors"
+                                            >
+                                                <Icon size={15} strokeWidth={2} aria-hidden className="text-[var(--text-tertiary)]" />
+                                                {label}
+                                            </a>
+                                        ))}
+                                        <SignOutButton
+                                            onDone={() => setMobileOpen(false)}
+                                            className="flex w-full items-center gap-3 px-5 py-3 text-sm text-[var(--color-accent-400)] transition-colors disabled:opacity-60"
+                                        />
+                                    </div>
+                                ) : (
+                                    <a
+                                        href="/area-privada"
+                                        onClick={() => setMobileOpen(false)}
+                                        className="inline-flex items-center gap-2 w-full justify-center px-6 py-3.5 text-sm font-semibold uppercase tracking-wider bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
+                                    >
+                                        <Lock size={14} strokeWidth={2} aria-hidden />
+                                        Área Privada
+                                    </a>
+                                )}
                             </motion.div>
                         </nav>
                     </motion.div>
