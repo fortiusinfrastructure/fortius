@@ -33,29 +33,11 @@ export function IdeasMarquee({
                             key={ally.name}
                             className="flex min-h-[122px] items-center justify-center bg-[var(--surface-secondary)] p-6 transition-colors hover:bg-[var(--surface-primary)]"
                         >
-                            {ally.logo ? ally.maskColor ? (
-                                <span
-                                    role="img"
-                                    aria-label={ally.name}
-                                    className="block h-14 w-full max-w-[180px]"
-                                    style={{
-                                        backgroundColor: ally.maskColor,
-                                        WebkitMaskImage: `url(${ally.logo})`,
-                                        maskImage: `url(${ally.logo})`,
-                                        WebkitMaskRepeat: "no-repeat",
-                                        maskRepeat: "no-repeat",
-                                        WebkitMaskPosition: "center",
-                                        maskPosition: "center",
-                                        WebkitMaskSize: "contain",
-                                        maskSize: "contain",
-                                    }}
-                                />
-                            ) : (
+                            {ally.logo ? (
                                 <img
                                     src={ally.logo}
                                     alt={ally.name}
                                     className="max-h-14 w-full max-w-[180px] object-contain object-center"
-                                    style={ally.filter ? { filter: ally.filter } : undefined}
                                     loading="lazy"
                                 />
                             ) : (
