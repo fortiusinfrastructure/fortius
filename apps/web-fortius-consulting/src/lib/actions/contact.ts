@@ -3,7 +3,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { getContactConfirmationHtml, getContactNotificationHtml } from "@/lib/email-templates";
 import { sendEmail } from "@/lib/email";
-import { sendContactNotificationWithWeb3Forms } from "@/lib/web3forms";
 
 const ORG_SLUG = "fortius-consulting";
 const NOTIFICATION_EMAIL = "info@fortiusconsulting.org";
@@ -39,40 +38,6 @@ function splitName(fullName: string) {
         firstName: parts[0],
         lastName: parts.slice(1).join(" "),
     };
-}
-
-async function logWeb3FormsAttempt({
-    organizationId,
-    to,
-    subject,
-    status,
-    relatedId,
-    metadata,
-}: {
-    organizationId: string;
-    to: string;
-    subject: string;
-    status: "sent" | "failed";
-    relatedId: string;
-    metadata?: Record<string, unknown>;
-}) {
-    try {
-        await createAdminClient().from("communication_logs").insert({
-            organization_id: organizationId,
-            channel: "email",
-            kind: "contact_notification",
-            recipient_email: to,
-            subject,
-            status,
-            provider: "web3forms",
-            provider_message_id: null,
-            related_table: "contact_submissions",
-            related_id: relatedId,
-            metadata: metadata ?? {},
-        });
-    } catch (error) {
-        console.error("[submitContact] web3forms log failed", error);
-    }
 }
 
 export async function submitContact(formData: FormData) {
@@ -141,21 +106,12 @@ export async function submitContact(formData: FormData) {
 
     const notificationSubject = `Nuevo contacto web · ${subject}`;
 
-    const notificationResult = await sendContactNotificationWithWeb3Forms({
-        name,
-        email,
-        subject,
-        organization,
-        contextVertical,
-        contextPlan,
-        message: finalMessage,
-    });
-
-    await logWeb3FormsAttempt({
-        organizationId: organizationRow.id,
+    const notificationResult = await sendEmail({
         to: NOTIFICATION_EMAIL,
+        replyTo: email,
         subject: notificationSubject,
-        status: notificationResult.success ? "sent" : "failed",
+        kind: "contact_notification",
+        relatedTable: "contact_submissions",
         relatedId: submission.id,
         metadata: {
             source: "web-fortius-consulting",
@@ -165,39 +121,20 @@ export async function submitContact(formData: FormData) {
             contextPlan: contextPlan || null,
             contextVertical: contextVertical || null,
             expertSlug: expertSlug || null,
-            error: notificationResult.success ? null : notificationResult.error,
         },
+        html: getContactNotificationHtml({
+            name,
+            email,
+            subject,
+            organization,
+            contextVertical,
+            contextPlan,
+            message: finalMessage,
+        }),
     });
 
     if (!notificationResult.success) {
-        console.error("[submitContact] web3forms notification failed", notificationResult.error);
-
-        const fallbackResult = await sendEmail({
-            to: NOTIFICATION_EMAIL,
-            replyTo: email,
-            subject: notificationSubject,
-            kind: "contact_notification",
-            relatedTable: "contact_submissions",
-            relatedId: submission.id,
-            metadata: {
-                source: "web-fortius-consulting",
-                fallbackFor: "web3forms",
-                web3FormsError: notificationResult.error ?? null,
-            },
-            html: getContactNotificationHtml({
-                name,
-                email,
-                subject,
-                organization,
-                contextVertical,
-                contextPlan,
-                message: finalMessage,
-            }),
-        });
-
-        if (!fallbackResult.success) {
-            console.error("[submitContact] resend fallback failed", fallbackResult.error);
-        }
+        console.error("[submitContact] internal notification failed", notificationResult.error);
     }
 
     const confirmationResult = await sendEmail({

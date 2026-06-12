@@ -107,50 +107,64 @@ async function upsertMembership(userId, orgId, role, tier) {
     }
 }
 
-async function upsertMockSubscription(userId, orgId) {
-    // Check if a plan exists for politica-basica monthly
+async function upsertMockSubscription(userId, orgId, tier = "politica-premium") {
     const { data: plan } = await admin
         .from("membership_plans")
         .select("id")
         .eq("organization_id", orgId)
-        .eq("tier", "politica-basica")
+        .eq("tier", tier)
         .eq("interval", "monthly")
         .maybeSingle();
 
-    const planId = plan?.id ?? "00000000-0000-0000-0000-000000000000";
-
-    const { data: existing } = await admin
-        .from("subscriptions")
-        .select("id")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-    if (existing) {
-        console.log(`  ↺  subscription already exists for member`);
+    if (!plan) {
+        console.log(`  ℹ️  no membership_plan found for tier="${tier}" — skipping subscription (tier already set on membership)`);
         return;
     }
 
+    const planId = plan.id;
+
+    const { data: existing } = await admin
+        .from("subscriptions")
+        .select("id, plan_id")
+        .eq("user_id", userId)
+        .eq("organization_id", orgId)
+        .maybeSingle();
+
     const now = new Date();
-    const nextMonth = new Date(now);
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
+    const nextYear = new Date(now);
+    nextYear.setFullYear(nextYear.getFullYear() + 1);
 
-    const { error } = await admin.from("subscriptions").insert({
-        user_id: userId,
-        organization_id: orgId,
-        plan_id: planId,
-        stripe_subscription_id: "sub_test_seed_diego",
-        stripe_customer_id: "cus_test_seed_diego",
-        status: "active",
-        current_period_start: now.toISOString(),
-        current_period_end: nextMonth.toISOString(),
-        cancel_at_period_end: false,
-        metadata: { source: "seed-script", tier: "politica-basica", interval: "monthly" },
-    });
+    if (existing) {
+        // Keep the existing plan_id if no matching plan exists in membership_plans
+        const resolvedPlanId = planId !== "00000000-0000-0000-0000-000000000000"
+            ? planId
+            : existing.plan_id;
 
-    if (error) {
-        console.warn(`  ⚠️  subscription insert failed (may lack plan): ${error.message}`);
+        const { error } = await admin.from("subscriptions").update({
+            plan_id: resolvedPlanId,
+            status: "active",
+            current_period_start: now.toISOString(),
+            current_period_end: nextYear.toISOString(),
+            cancel_at_period_end: false,
+            metadata: { source: "seed-script", tier, interval: "monthly" },
+        }).eq("id", existing.id);
+        if (error) console.warn(`  ⚠️  subscription update failed: ${error.message}`);
+        else console.log(`  ↺  subscription upgraded → ${tier}`);
     } else {
-        console.log(`  ✓  mock subscription created`);
+        const { error } = await admin.from("subscriptions").insert({
+            user_id: userId,
+            organization_id: orgId,
+            plan_id: planId,
+            stripe_subscription_id: "sub_test_seed_diego",
+            stripe_customer_id: "cus_test_seed_diego",
+            status: "active",
+            current_period_start: now.toISOString(),
+            current_period_end: nextYear.toISOString(),
+            cancel_at_period_end: false,
+            metadata: { source: "seed-script", tier, interval: "monthly" },
+        });
+        if (error) console.warn(`  ⚠️  subscription insert failed: ${error.message}`);
+        else console.log(`  ✓  mock subscription created → ${tier}`);
     }
 }
 
@@ -180,8 +194,8 @@ async function main() {
     );
     // tier is null — the check constraint only allows EH values ('amigo','academico','mecenas').
     // A migration is needed to add consulting tiers. Subscription data carries the real plan info.
-    await upsertMembership(diegoId, orgId, "member", null);
-    await upsertMockSubscription(diegoId, orgId);
+    await upsertMembership(diegoId, orgId, "member", "politica-premium");
+    await upsertMockSubscription(diegoId, orgId, "politica-premium");
 
     console.log("\n✅ Done — test users ready.");
     console.log("   CEO:    juan@fortiusconsulting.org  /  FortiusCEO2026!");

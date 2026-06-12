@@ -3,7 +3,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { getNewsletterConfirmationHtml, getNewsletterNotificationHtml } from "@/lib/email-templates";
 import { sendEmail } from "@/lib/email";
-import { sendNewsletterNotificationWithWeb3Forms } from "@/lib/web3forms";
 
 const ORG_SLUG = "fortius-consulting";
 const NOTIFICATION_EMAIL = "info@fortiusconsulting.org";
@@ -95,41 +94,6 @@ async function saveNewsletterSubscription({
     return insertedSubscription;
 }
 
-async function logWeb3FormsNewsletterAttempt({
-    organizationId,
-    email,
-    status,
-    relatedId,
-    metadata,
-}: {
-    organizationId: string;
-    email: string;
-    status: "sent" | "failed";
-    relatedId: string;
-    metadata?: Record<string, unknown>;
-}) {
-    try {
-        await createAdminClient().from("communication_logs").insert({
-            organization_id: organizationId,
-            channel: "email",
-            kind: "newsletter_notification",
-            recipient_email: NOTIFICATION_EMAIL,
-            subject: "Nueva suscripción al boletín — Fortius Consulting",
-            status,
-            provider: "web3forms",
-            provider_message_id: null,
-            related_table: "newsletter_subscriptions",
-            related_id: relatedId,
-            metadata: {
-                ...(metadata ?? {}),
-                subscriberEmail: email,
-            },
-        });
-    } catch (error) {
-        console.error("[subscribeToNewsletter] web3forms log failed", error);
-    }
-}
-
 export async function subscribeToNewsletter(formData: FormData): Promise<NewsletterResult> {
     const email = String(formData.get("email") ?? "").trim().toLowerCase();
     if (!isValidEmail(email)) {
@@ -158,39 +122,19 @@ export async function subscribeToNewsletter(formData: FormData): Promise<Newslet
             email,
         });
 
-        const internalResult = await sendNewsletterNotificationWithWeb3Forms(email);
-        await logWeb3FormsNewsletterAttempt({
-            organizationId: organizationRow.id,
-            email,
-            status: internalResult.success ? "sent" : "failed",
+        const internalResult = await sendEmail({
+            to: NOTIFICATION_EMAIL,
+            replyTo: email,
+            subject: "Nueva suscripción al boletín — Fortius Consulting",
+            html: getNewsletterNotificationHtml(email),
+            kind: "newsletter_notification",
+            relatedTable: "newsletter_subscriptions",
             relatedId: subscription.id,
-            metadata: {
-                source: "web-fortius-consulting",
-                error: internalResult.success ? null : internalResult.error,
-            },
+            metadata: { source: "web-fortius-consulting" },
         });
 
         if (!internalResult.success) {
-            console.error("[subscribeToNewsletter] web3forms notification failed", internalResult.error);
-
-            const fallbackResult = await sendEmail({
-                to: NOTIFICATION_EMAIL,
-                replyTo: email,
-                subject: "Nueva suscripción al boletín — Fortius Consulting",
-                html: getNewsletterNotificationHtml(email),
-                kind: "newsletter_notification",
-                relatedTable: "newsletter_subscriptions",
-                relatedId: subscription.id,
-                metadata: {
-                    source: "web-fortius-consulting",
-                    fallbackFor: "web3forms",
-                    web3FormsError: internalResult.error ?? null,
-                },
-            });
-
-            if (!fallbackResult.success) {
-                console.error("[subscribeToNewsletter] resend fallback failed", fallbackResult.error);
-            }
+            console.error("[subscribeToNewsletter] internal notification failed", internalResult.error);
         }
 
         const confirmationResult = await sendEmail({
