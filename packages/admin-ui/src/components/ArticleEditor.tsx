@@ -5,6 +5,7 @@ import { Plus, Trash2, Loader2 } from 'lucide-react';
 import { MultilangTabs } from './MultilangTabs';
 import { RichTextEditor } from './RichTextEditor';
 import { ImageUpload } from './ImageUpload';
+import { FileUpload } from './FileUpload';
 
 export interface TeamMemberOption {
     name: string;
@@ -658,34 +659,28 @@ export function ArticleEditor({
                                 />
                             </Field>
                         </div>
-                        <Field label="URL por defecto (fallback)" required>
-                            <input
-                                type="url"
-                                value={mat.url}
-                                onChange={(e) => setMaterial(i, 'url', e.target.value)}
-                                className={inputCls}
-                                placeholder="https://..."
-                            />
-                        </Field>
+                        <FileUpload
+                            value={mat.url}
+                            onChange={(url) => setMaterial(i, 'url', url)}
+                            supabaseUrl={supabaseUrl}
+                            supabaseAnonKey={supabaseAnonKey}
+                            label="Documento por defecto (fallback) *"
+                        />
                         <div className="grid grid-cols-2 gap-3">
-                            <Field label="URL (ES, opcional — sobrescribe el fallback)">
-                                <input
-                                    type="url"
-                                    value={mat.url_es ?? ''}
-                                    onChange={(e) => setMaterial(i, 'url_es', e.target.value)}
-                                    className={inputCls}
-                                    placeholder="https://.../es.pdf"
-                                />
-                            </Field>
-                            <Field label="URL (EN, opcional — sobrescribe el fallback)">
-                                <input
-                                    type="url"
-                                    value={mat.url_en ?? ''}
-                                    onChange={(e) => setMaterial(i, 'url_en', e.target.value)}
-                                    className={inputCls}
-                                    placeholder="https://.../en.pdf"
-                                />
-                            </Field>
+                            <FileUpload
+                                value={mat.url_es ?? ''}
+                                onChange={(url) => setMaterial(i, 'url_es', url)}
+                                supabaseUrl={supabaseUrl}
+                                supabaseAnonKey={supabaseAnonKey}
+                                label="Documento (ES, opcional — sobrescribe el fallback)"
+                            />
+                            <FileUpload
+                                value={mat.url_en ?? ''}
+                                onChange={(url) => setMaterial(i, 'url_en', url)}
+                                supabaseUrl={supabaseUrl}
+                                supabaseAnonKey={supabaseAnonKey}
+                                label="Documento (EN, opcional — sobrescribe el fallback)"
+                            />
                         </div>
                     </div>
                 ))}

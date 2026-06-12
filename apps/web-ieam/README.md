@@ -125,8 +125,28 @@ La app está en transición ordenada:
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
 
+## Almacenamiento de archivos (Supabase Storage)
+
+IEAM maneja dos tipos de binarios (ver el modelo de buckets global en el README raíz):
+
+- **Imágenes** (portadas, autores): bucket `content-media`, vía el componente
+  `ImageUpload` del CMS. **Ya funciona.**
+- **Documentos descargables** (policy briefs, infografías): bucket `library-docs`,
+  carpeta `ieam/`. Se referencian desde `articles.materials` (JSONB
+  `[{label, url, url_es?, url_en?}]`) y se renderizan como botones en
+  `/analisis/[slug]`.
+
+> ⚠️ **Estado transicional:** los PDFs todavía viven en `public/docs/` (estáticos en
+> el repo) y `materials` apunta a rutas `/docs/x.pdf`. El destino objetivo es subirlos
+> a `library-docs/ieam/` y actualizar las URLs a Supabase Storage.
+
+> **Nota del middleware:** `proxy.ts` excluye `.pdf` del matcher y añade `/docs/` a
+> `PASSTHROUGH_ROUTES`, para que las descargas no pasen por la redirección i18n
+> (que rompía con un 404). Mantener ambos al migrar a Storage.
+
 ## Próxima etapa natural
 
+- **Cablear `library-docs`**: subir los PDFs de `public/docs/` al bucket y actualizar `materials`; añadir un `FileUpload` al CMS para nuevos documentos.
 - **Migrar `middleware.ts` → `proxy.ts`** (ya hecho en `web-escuela-hispanica`; el build muestra aviso pero no bloquea).
 - **Migrar contenido legacy de `ieam/`** (proyecto Vite deprecado):
   - 1 artículo nuevo: `migracion-irregular-ue-t1-2026` (añadir a `mock-data/articles.ts` y re-correr `seed-content.ts` o cargar vía CMS).

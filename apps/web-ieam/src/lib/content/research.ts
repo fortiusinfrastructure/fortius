@@ -1,7 +1,7 @@
 import { marked } from 'marked';
 import { allResearch } from 'content-collections';
 import { articles as mockArticles, type Article } from '@/lib/mock-data/articles';
-import { parseEventDate } from '@/lib/utils/content';
+import { parseEventDate, resolveMaterials } from '@/lib/utils/content';
 
 function renderMarkdown(markdown: string | undefined): string | undefined {
   if (!markdown?.trim()) return undefined;
@@ -68,9 +68,11 @@ function mergeArticles(): Article[] {
     merged.set(article.slug, existing ? mergeArticleContent(existing, article) : article);
   }
 
-  return [...merged.values()].sort(
-    (a, b) => parseEventDate(b.publishDate).getTime() - parseEventDate(a.publishDate).getTime(),
-  );
+  return [...merged.values()]
+    .map((article) => ({ ...article, materials: resolveMaterials(article.materials) }))
+    .sort(
+      (a, b) => parseEventDate(b.publishDate).getTime() - parseEventDate(a.publishDate).getTime(),
+    );
 }
 
 export const researchArticles = mergeArticles();

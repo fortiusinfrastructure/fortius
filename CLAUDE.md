@@ -101,6 +101,22 @@ const admin = createAdminClient();
 - `createServerClient()` respects RLS, uses cookies for auth
 - `createAdminClient()` bypasses RLS (server-only, for webhooks/admin)
 
+### File Storage (Supabase Storage)
+
+All binaries (editorial images, downloadable documents, user uploads) live in
+Supabase Storage, organized by org/purpose folder. Three buckets:
+
+| Bucket          | Visibility    | Limit | Purpose                                              | Folders                          |
+| --------------- | ------------- | ----- | ---------------------------------------------------- | -------------------------------- |
+| `content-media` | Public        | 10 MB | Editorial images embedded in public pages            | `articles/`, `team/`, `events/`  |
+| `library-docs`  | Public        | 50 MB | Public downloadable docs (policy briefs, infographics, reports) | `ieam/`, `escuela-hispanica/`    |
+| `postulaciones` | Private ⚠️    | 10 MB | Private user uploads with personal data (academic CV) | `academico/{userId}/`            |
+
+- Upload UI: `ImageUpload` (`@fortius/admin-ui`) → `content-media`; `FileUpload` (`@fortius/admin-ui`) → `library-docs/ieam` (PDF/DOC/DOCX, 50 MB), wired into the `ArticleEditor` materials section. `FileUpload` bakes `?download=<name>` into the returned public URL to force a clean attachment download. Both upload with the browser anon key today (to be hardened in Fase 3 → server-side upload + RLS).
+- IEAM article `materials` (JSONB `[{label, url, url_es?, url_en?}]`) store the canonical logical path `/docs/<file>`. At render time `resolveMaterialUrl()` (`apps/web-ieam/src/lib/utils/content.ts`) maps it to the `library-docs/ieam/` public URL with `?download` (forces `Content-Disposition: attachment`). Absolute URLs (CMS uploads) pass through unchanged. Keep `/docs/` as the stored format — it is project-portable and resolved consistently everywhere. The 34 PDFs live in `library-docs/ieam/` (the migration sanitizes accented filenames; copies remain in `apps/web-ieam/public/docs/` as a fallback).
+- `postulaciones` holds CVs (personal data): serve via server-generated **signed URLs** (short TTL), never permanent public URLs.
+- Prefer uploading via server actions/routes (service role or authenticated session) over the browser anon key.
+
 ### i18n
 
 - Routing via `next-intl`: ES default (no prefix), `/en`, `/pt`

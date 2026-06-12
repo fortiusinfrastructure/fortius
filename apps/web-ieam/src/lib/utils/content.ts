@@ -52,3 +52,45 @@ export function parseEventDate(dateString: string): Date {
   }
   return new Date();
 }
+
+/**
+ * Storage object keys must be ASCII-safe. Strip diacritics and replace any
+ * remaining unsafe char. Keep in sync with
+ * scripts/migrate-docs-to-storage.ts → sanitizeKey().
+ */
+export function sanitizeDocKey(filename: string): string {
+  return filename
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^A-Za-z0-9._-]/g, '-');
+}
+
+const LIBRARY_DOCS_BASE = `${process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''}/storage/v1/object/public/library-docs/ieam`;
+
+/**
+ * Resolve a material/download URL. Legacy `/docs/<file>` paths are mapped to
+ * their public Supabase Storage URL (library-docs/ieam). Absolute URLs (e.g.
+ * uploaded via the CMS) are returned unchanged.
+ */
+export function resolveMaterialUrl(url: string | undefined): string | undefined {
+  if (!url) return url;
+  if (url.startsWith('/docs/')) {
+    // `?download` forces Content-Disposition: attachment (cross-origin links
+    // ignore the HTML `download` attribute).
+    return `${LIBRARY_DOCS_BASE}/${sanitizeDocKey(url.slice('/docs/'.length))}?download`;
+  }
+  return url;
+}
+
+type MaterialLike = { url?: string; url_es?: string; url_en?: string } & Record<string, unknown>;
+
+/** Apply resolveMaterialUrl to every url field of a materials array. */
+export function resolveMaterials<T extends MaterialLike>(materials: T[] | undefined): T[] | undefined {
+  if (!materials?.length) return materials;
+  return materials.map((m) => ({
+    ...m,
+    url: resolveMaterialUrl(m.url) as string,
+    ...(m.url_es !== undefined ? { url_es: resolveMaterialUrl(m.url_es) } : {}),
+    ...(m.url_en !== undefined ? { url_en: resolveMaterialUrl(m.url_en) } : {}),
+  }));
+}

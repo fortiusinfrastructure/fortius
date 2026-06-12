@@ -178,6 +178,16 @@ Ver ejemplos y tabla de tipos en [`scripts/README.md`](scripts/README.md).
 
 ---
 
+## Almacenamiento de archivos (Supabase Storage)
+
+Hoy esta app **no almacena binarios** en Supabase Storage. Los `.docx` que se suben en
+`/herramientas/articulos` se convierten **en memoria** (mammoth → Markdown) y solo se
+persiste el texto resultante en la tabla `articles`; el archivo original no se guarda.
+
+Si en el futuro se necesita conservar adjuntos o imágenes, usar el modelo de buckets
+global descrito en el README raíz (`content-media` para imágenes, `library-docs` para
+documentos descargables).
+
 ## Qué sigue siendo local o mock
 
 - el contenido principal sigue en `src/content/*.ts`

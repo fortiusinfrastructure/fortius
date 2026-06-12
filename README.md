@@ -111,6 +111,43 @@ en Supabase. El estado actual es híbrido:
 | `web-fortius-consulting` | Base editorial madura con contenido en `src/content/*.ts`, área privada aún mock y formulario de contacto persistente en Supabase + notificación por Resend.              |
 | `web-fortius-foundation` | Sitio institucional/editorial con contenido local en `src/content/*.ts`, blog estático y formularios de contacto/donación persistentes en Supabase + notificación por Resend. |
 
+## Almacenamiento de archivos (Supabase Storage)
+
+Todos los binarios del ecosistema (imágenes editoriales, documentos descargables y
+envíos de usuarios) viven en **Supabase Storage**, no en el repositorio. El acceso es
+multi-tenant: cada archivo se organiza por carpeta de organización o de propósito.
+
+### Modelo de buckets (visión)
+
+| Bucket          | Visibilidad      | Límite | Propósito                                                                 | Organización          |
+| --------------- | ---------------- | ------ | ------------------------------------------------------------------------- | --------------------- |
+| `content-media` | Público          | 10 MB  | Imágenes editoriales embebidas en páginas públicas (portadas, autores, eventos). | `articles/`, `team/`, `events/` |
+| `library-docs`  | Público          | 50 MB  | Documentos descargables públicos (policy briefs, infografías, informes, publicaciones). | `ieam/`, `escuela-hispanica/` |
+| `postulaciones` | **Privado** ⚠️   | 10 MB  | Envíos privados de usuarios con datos personales (CV de postulación académica). | `academico/{userId}/` |
+
+> ⚠️ `postulaciones` contiene datos personales (CVs). Debe servirse con **signed URLs**
+> de TTL corto generadas en el servidor, nunca con URL pública permanente.
+
+### Patrón de 3 capas (uniforme)
+
+```
+CMS / Formulario  ──upload──▶  bucket de Storage  ──▶  URL (pública o firmada)
+                                                         │
+                                                    se guarda en
+                                                         ▼
+                                          DB (columna o JSONB, p.ej. articles.materials)
+                                                         │
+                                                    se renderiza en
+                                                         ▼
+                                          enlace de descarga / <img> en el sitio público
+```
+
+### Estado por bucket
+
+- `content-media`: **en uso** — el componente `ImageUpload` de `@fortius/admin-ui` sube aquí las imágenes del CMS.
+- `library-docs`: **creado, pendiente de cablear** — destino previsto para los PDFs de IEAM (`materials`), hoy todavía en `apps/web-ieam/public/docs/`.
+- `postulaciones`: **en uso** por EH (`/api/postulacion/academico`); pendiente pasar a privado + signed URLs.
+
 ## Estado actual de las apps principales
 
 La tabla siguiente resume de forma homogénea el estado real de las cuatro apps

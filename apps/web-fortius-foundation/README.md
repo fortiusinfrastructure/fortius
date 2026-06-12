@@ -108,6 +108,16 @@ La página `/donaciones` hoy no procesa pagos directamente. Lo que hace es:
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
 
+## Almacenamiento de archivos (Supabase Storage)
+
+Esta app **no almacena binarios** en Supabase Storage. El adjunto del
+`ArticleSubmissionForm` (PDF/DOC/DOCX, máx. 8 MB) se procesa **en memoria** y se envía
+por email vía Resend; no se persiste el archivo.
+
+Si más adelante se requiere conservar adjuntos, seguir el modelo de buckets global del
+README raíz (`library-docs` para documentos; `postulaciones`-style privado + signed
+URLs si contienen datos personales).
+
 ## Qué sigue siendo local
 
 - narrativa institucional en `src/content/site.ts`

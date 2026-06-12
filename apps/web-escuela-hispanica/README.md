@@ -137,6 +137,19 @@ La app sigue en estado **híbrido**:
 
 > El remitente está hardcodeado en `src/lib/email/`. **No** se usa `RESEND_FROM_EMAIL` en esta app.
 
+## Almacenamiento de archivos (Supabase Storage)
+
+EH usa Supabase Storage para dos cosas (ver el modelo de buckets global en el README raíz):
+
+- **Imágenes editoriales**: bucket `content-media`, vía el `ImageUpload` del admin.
+- **CV de postulación académica**: bucket `postulaciones`, ruta
+  `academico/{userId}/cv.{ext}`. Lo sube `/api/postulacion/academico` con el
+  admin client y la URL se incluye en el email al aprobador.
+
+> 🔴 **Privacidad pendiente:** el bucket `postulaciones` es **público** pero contiene
+> datos personales (CVs). El objetivo es pasarlo a **privado** y servir el CV con
+> **signed URLs** de TTL corto generadas en el servidor, en lugar de `getPublicUrl`.
+
 ## Rutas y módulos que conviene conocer
 
 - `src/app/[locale]`: navegación pública por idioma
