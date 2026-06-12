@@ -114,7 +114,10 @@ export async function requestPasswordReset(formData: FormData): Promise<AuthResu
         type: 'recovery',
         email,
         options: {
-            redirectTo: `${SITE_URL}/api/auth/callback?next=/nueva-contrasena`,
+            // Redirects directly to /nueva-contrasena with tokens in the URL hash.
+            // The Supabase browser client reads the hash and fires PASSWORD_RECOVERY.
+            // NOTE: this URL must be in the Supabase Auth → Redirect URLs allowlist.
+            redirectTo: `${SITE_URL}/nueva-contrasena`,
         },
     });
 
