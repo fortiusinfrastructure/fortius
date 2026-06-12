@@ -1,4 +1,4 @@
-import { estimateReadTime, listArticles, type Article, type ArticleAccess } from "@/lib/articles";
+import { estimateReadTime, type Article, type ArticleAccess } from "@/lib/articles";
 
 export type CmsVisibility = "open" | "private";
 
@@ -36,6 +36,6 @@ export function toConsultingCmsArticleRecord(article: Article): ConsultingCmsArt
     };
 }
 
-export function listConsultingCmsArticleRecords(): ConsultingCmsArticleRecord[] {
-    return listArticles().map(toConsultingCmsArticleRecord);
+export function listConsultingCmsArticleRecords(articles: Article[]): ConsultingCmsArticleRecord[] {
+    return articles.map(toConsultingCmsArticleRecord);
 }

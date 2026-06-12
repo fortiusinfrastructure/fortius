@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
-import { getLatestNoticias, formatShortDate, estimateReadTime } from "@/lib/articles";
+import { formatShortDate, estimateReadTime, type Article } from "@/lib/articles";
 import { getArticleImageSources, getArticleSummary } from "@/lib/article-display";
 import { ArticleCoverImage } from "./ArticleCoverImage";
 
@@ -14,9 +14,12 @@ const CATEGORY_HREF: Record<string, string> = {
     politica: "/inteligencia",
 };
 
-export function NoticiasSection() {
-    const noticias = getLatestNoticias(6);
+interface NoticiasSectionProps {
+    /** Latest public noticias, computed server-side (lib/articles-db + getLatestNoticias). */
+    noticias: Article[];
+}
 
+export function NoticiasSection({ noticias }: NoticiasSectionProps) {
     if (noticias.length === 0) return null;
 
     return (

@@ -5,12 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
-    listArticles,
-    listArticlesByCategory,
     kindLabel,
     categoryLabel,
     formatShortDate,
     estimateReadTime,
+    type Article,
     type ArticleAccess,
     type ArticleCategory,
 } from "@/lib/articles";
@@ -33,6 +32,8 @@ const ACCESS_FILTERS: Array<{ value: AccessFilter; label: string }> = [
 ];
 
 interface InsightsGridProps {
+    /** Full article list fetched server-side (lib/articles-db). */
+    articles: Article[];
     /** Filter by category. Omit to show all categories. */
     category?: ArticleCategory;
     /** Base path for article links, e.g. "/sociedad-civil". Omit to use "/publicaciones". */
@@ -44,6 +45,7 @@ interface InsightsGridProps {
 }
 
 export function InsightsGrid({
+    articles: sourceArticles,
     category,
     baseHref,
     includePrivate = false,
@@ -51,7 +53,9 @@ export function InsightsGrid({
     title = "Todos los artículos y análisis.",
 }: InsightsGridProps) {
     const [accessFilter, setAccessFilter] = useState<AccessFilter>("all");
-    const allArticles = category ? listArticlesByCategory(category) : listArticles();
+    const allArticles = category
+        ? sourceArticles.filter((a) => a.category === category)
+        : sourceArticles;
     const availableArticles = includePrivate
         ? allArticles
         : allArticles.filter((a) => a.access === "public");

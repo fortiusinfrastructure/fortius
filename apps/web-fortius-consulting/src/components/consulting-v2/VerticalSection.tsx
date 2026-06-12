@@ -24,7 +24,6 @@ import { getExpertsByVertical } from "@/content/team";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog, type PersonDialogData } from "./PersonDialog";
 import {
-    getEditorialSlots,
     categoryLabel,
     kindLabel,
     estimateReadTime,
@@ -32,6 +31,7 @@ import {
     formatMonthYear,
     type Article,
     type ArticleCategory,
+    type EditorialSlots,
 } from "@/lib/articles";
 import {
     getArticleCover,
@@ -81,6 +81,8 @@ interface VerticalSectionProps {
     vertical: VerticalDef;
     accentSide?: "left" | "right";
     summaryOnly?: boolean;
+    /** Editorial slots computed server-side (lib/articles-db). Null/omitted → mock fallback. */
+    slots?: EditorialSlots | null;
 }
 
 interface EditorialInsightItem {
@@ -100,10 +102,9 @@ function fallbackInsight(item: VerticalDef["insights"][number]): EditorialInsigh
     };
 }
 
-export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly = false }: VerticalSectionProps) {
+export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly = false, slots = null }: VerticalSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
-    const slots = category ? getEditorialSlots(category) : null;
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured: EditorialInsightItem = slots?.featured

@@ -4,10 +4,7 @@ import {
     ArticleDetailPage,
     buildArticleMetadata,
 } from "@/components/consulting-v2/ArticleDetailPage";
-import {
-    getArticleBySlug,
-    listArticlesByCategory,
-} from "@/lib/articles";
+import { fetchArticleBySlug } from "@/lib/articles-db";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -15,13 +12,9 @@ interface PageProps {
 
 export const dynamic = "force-dynamic";
 
-export async function generateStaticParams() {
-    return listArticlesByCategory("sociedad-civil").map((a) => ({ slug: a.slug }));
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug } = await params;
-    const article = getArticleBySlug(slug);
+    const article = await fetchArticleBySlug(slug);
     if (!article || article.category !== "sociedad-civil") {
         return { title: "Artículo no encontrado" };
     }
@@ -30,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SociedadCivilArticlePage({ params }: PageProps) {
     const { slug } = await params;
-    const article = getArticleBySlug(slug);
+    const article = await fetchArticleBySlug(slug);
     if (!article || article.category !== "sociedad-civil") notFound();
     return (
         <ArticleDetailPage

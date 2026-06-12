@@ -5,7 +5,6 @@ import { ArrowUpRight, Lock } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { VerticalDef } from "@/content/home-v2";
 import {
-    getEditorialSlots,
     categoryLabel,
     kindLabel,
     estimateReadTime,
@@ -13,6 +12,7 @@ import {
     formatMonthYear,
     type Article,
     type ArticleCategory,
+    type EditorialSlots,
 } from "@/lib/articles";
 import {
     getArticleCover,
@@ -27,6 +27,8 @@ const ease = [0.22, 0.61, 0.36, 1] as const;
 interface WorkAreaSectionProps {
     vertical: VerticalDef;
     title?: string;
+    /** Editorial slots computed server-side (lib/articles-db). Null/omitted → mock fallback. */
+    slots?: EditorialSlots | null;
 }
 
 interface EditorialInsightItem {
@@ -47,10 +49,10 @@ const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
 export function WorkAreaSection({
     vertical: v,
     title = "Análisis, briefings y lecturas estratégicas.",
+    slots = null,
 }: WorkAreaSectionProps) {
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
-    const slots = category ? getEditorialSlots(category) : null;
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured: EditorialInsightItem = slots?.featured

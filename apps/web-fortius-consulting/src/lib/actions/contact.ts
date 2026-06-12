@@ -169,10 +169,10 @@ export async function submitContact(formData: FormData) {
         },
     });
 
-    let fallbackNotificationResult: { success: boolean; error?: unknown } | null = null;
-
     if (!notificationResult.success) {
-        fallbackNotificationResult = await sendEmail({
+        console.error("[submitContact] web3forms notification failed", notificationResult.error);
+
+        const fallbackResult = await sendEmail({
             to: NOTIFICATION_EMAIL,
             replyTo: email,
             subject: notificationSubject,
@@ -194,6 +194,10 @@ export async function submitContact(formData: FormData) {
                 message: finalMessage,
             }),
         });
+
+        if (!fallbackResult.success) {
+            console.error("[submitContact] resend fallback failed", fallbackResult.error);
+        }
     }
 
     const confirmationResult = await sendEmail({
@@ -209,14 +213,6 @@ export async function submitContact(formData: FormData) {
             contactSubject: subject,
         },
     });
-
-    if (!notificationResult.success) {
-        console.error("[submitContact] web3forms notification failed", notificationResult.error);
-    }
-
-    if (fallbackNotificationResult && !fallbackNotificationResult.success) {
-        console.error("[submitContact] resend fallback failed", fallbackNotificationResult.error);
-    }
 
     if (!confirmationResult.success) {
         console.error("[submitContact] confirmation failed", confirmationResult.error);

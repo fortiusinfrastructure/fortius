@@ -13,6 +13,11 @@ import {
     POLITICA_SUBVERTICALS,
     POLITICA_MEMBERSHIP_TIERS,
 } from "@/content/politica";
+import { fetchArticles } from "@/lib/articles-db";
+import { getEditorialSlots } from "@/lib/articles";
+
+// Refresh article-driven sections every 10 minutes (ISR)
+export const revalidate = 600;
 
 export const metadata: Metadata = {
     title: "Política — Fortius Consulting",
@@ -20,9 +25,12 @@ export const metadata: Metadata = {
         "Inteligencia política y análisis de riesgos geopolíticos para líderes que asumen la responsabilidad de decidir y de servir.",
 };
 
-export default function PoliticaPage() {
+export default async function PoliticaPage() {
     const politica = VERTICALS.find((v) => v.id === "intelligence");
     if (!politica) return null;
+
+    const articles = await fetchArticles();
+    const slots = getEditorialSlots(articles, "politica");
 
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
@@ -42,6 +50,7 @@ export default function PoliticaPage() {
             <WorkAreaSection
                 vertical={politica}
                 title="El contexto y criterio que necesitas para decidir bien"
+                slots={slots}
             />
 
             <ServicesPortfolio

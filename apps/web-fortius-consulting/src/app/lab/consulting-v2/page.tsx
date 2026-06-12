@@ -6,13 +6,16 @@ import { IdeasMarquee } from "@/components/consulting-v2/IdeasMarquee";
 import { FoundationBridge } from "@/components/consulting-v2/FoundationBridge";
 import { NewsletterCTA } from "@/components/consulting-v2/NewsletterCTA";
 import { VERTICALS } from "@/content/home-v2";
+import { fetchArticles } from "@/lib/articles-db";
+import { getEditorialSlots } from "@/lib/articles";
 
 export const metadata: Metadata = {
     title: "Fortius Consulting — v2 preview",
     robots: { index: false, follow: false },
 };
 
-export default function ConsultingV2Preview() {
+export default async function ConsultingV2Preview() {
+    const articles = await fetchArticles();
     const [civil, intelligence] = VERTICALS;
 
     return (
@@ -20,8 +23,8 @@ export default function ConsultingV2Preview() {
             <NavV2 />
             <main>
                 <HeroEditorial />
-                <VerticalSection vertical={civil} accentSide="left" />
-                <VerticalSection vertical={intelligence} accentSide="right" />
+                <VerticalSection vertical={civil} accentSide="left" slots={getEditorialSlots(articles, "sociedad-civil")} />
+                <VerticalSection vertical={intelligence} accentSide="right" slots={getEditorialSlots(articles, "politica")} />
                 <IdeasMarquee />
                 <FoundationBridge />
                 <NewsletterCTA />

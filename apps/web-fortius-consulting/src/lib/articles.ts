@@ -1,5 +1,3 @@
-import articlesJson from "@/data/articles.json";
-
 export type ArticleAccess = "public" | "paid";
 
 export type ArticleCategory = "politica" | "sociedad-civil" | "home";
@@ -35,18 +33,12 @@ export interface ArticleOriginalSource {
     url: string;
     label: string;
 }
-const ALL = articlesJson as Article[];
+// Data fetching lives in lib/articles-db.ts (server-only, Supabase + fallback).
+// The helpers below are pure: they operate on the article arrays they receive,
+// so they are safe to use in both Server and Client Components.
 
-export function listArticles(): Article[] {
-    return ALL;
-}
-
-export function listArticlesByCategory(category: ArticleCategory): Article[] {
-    return ALL.filter((a) => a.category === category);
-}
-
-export function getArticleBySlug(slug: string): Article | null {
-    return ALL.find((a) => a.slug === slug) ?? null;
+export function listArticlesByCategory(articles: Article[], category: ArticleCategory): Article[] {
+    return articles.filter((a) => a.category === category);
 }
 
 function extractLastExternalUrl(markdown: string): string | null {
@@ -85,9 +77,6 @@ export function getArticleOriginalSource(article: Article): ArticleOriginalSourc
     return { url, label: extractOriginalSourceLabel(article.content_markdown, url) };
 }
 
-export function listSlugs(): string[] {
-    return ALL.map((a) => a.slug);
-}
 const KIND_LABEL: Record<ArticleKind, string> = {
     comentario: "Comentario",
     informe: "Informe",
@@ -186,15 +175,15 @@ export interface EditorialSlots {
 /**
  * Returns the most-recent public noticias across all categories, sorted by date descending.
  */
-export function getLatestNoticias(limit = 6): Article[] {
-    return ALL
+export function getLatestNoticias(articles: Article[], limit = 6): Article[] {
+    return articles
         .filter((a) => a.kind === "noticia" && a.access === "public")
         .sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? ""))
         .slice(0, limit);
 }
 
-export function getEditorialSlots(category: ArticleCategory): EditorialSlots {
-    const all = listArticlesByCategory(category);
+export function getEditorialSlots(articles: Article[], category: ArticleCategory): EditorialSlots {
+    const all = listArticlesByCategory(articles, category);
     const publics = all.filter((a) => a.access === "public" && a.kind !== "evento" && a.kind !== "noticia");
     const restricted = all.filter((a) => a.access === "paid" || a.kind === "evento");
 

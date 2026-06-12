@@ -6,6 +6,11 @@ import { FoundationBridge } from "@/components/consulting-v2/FoundationBridge";
 import { NewsletterCTA } from "@/components/consulting-v2/NewsletterCTA";
 import { VERTICALS } from "@/content/home-v2";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site-config";
+import { fetchArticles } from "@/lib/articles-db";
+import { getEditorialSlots, getLatestNoticias } from "@/lib/articles";
+
+// Refresh article-driven sections every 10 minutes (ISR)
+export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} — Consultoría estratégica para organizaciones con principios`,
@@ -42,7 +47,8 @@ const jsonLd = {
   ],
 };
 
-export default function ConsultingPage() {
+export default async function ConsultingPage() {
+  const articles = await fetchArticles();
   const [civil, intelligence] = VERTICALS;
 
   return (
@@ -53,9 +59,9 @@ export default function ConsultingPage() {
       />
       <main id="main-content">
         <HeroEditorial />
-        <VerticalSection vertical={civil} accentSide="left" summaryOnly />
-        <VerticalSection vertical={intelligence} accentSide="right" summaryOnly />
-        <NoticiasSection />
+        <VerticalSection vertical={civil} accentSide="left" summaryOnly slots={getEditorialSlots(articles, "sociedad-civil")} />
+        <VerticalSection vertical={intelligence} accentSide="right" summaryOnly slots={getEditorialSlots(articles, "politica")} />
+        <NoticiasSection noticias={getLatestNoticias(articles, 6)} />
         <FoundationBridge />
         <NewsletterCTA />
       </main>

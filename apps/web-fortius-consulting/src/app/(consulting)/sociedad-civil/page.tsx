@@ -11,6 +11,11 @@ import {
     SOCIEDAD_CIVIL_INTRO,
     MEMBERSHIP_TIERS,
 } from "@/content/sociedad-civil";
+import { fetchArticles } from "@/lib/articles-db";
+import { getEditorialSlots } from "@/lib/articles";
+
+// Refresh article-driven sections every 10 minutes (ISR)
+export const revalidate = 600;
 
 export const metadata: Metadata = {
     title: "Sociedad Civil — Fortius Consulting",
@@ -18,9 +23,12 @@ export const metadata: Metadata = {
         "Acompañamos a fundaciones, think tanks, asociaciones y plataformas ciudadanas para convertir convicciones en estructura, influencia e impacto.",
 };
 
-export default function SociedadCivilPage() {
+export default async function SociedadCivilPage() {
     const civil = VERTICALS.find((v) => v.id === "civil");
     if (!civil) return null;
+
+    const articles = await fetchArticles();
+    const slots = getEditorialSlots(articles, "sociedad-civil");
 
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
@@ -34,6 +42,7 @@ export default function SociedadCivilPage() {
             <WorkAreaSection
                 vertical={civil}
                 title="El contexto y criterio que necesitas para decidir bien"
+                slots={slots}
             />
 
             <ServicesPortfolio

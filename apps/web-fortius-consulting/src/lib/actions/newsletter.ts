@@ -170,9 +170,10 @@ export async function subscribeToNewsletter(formData: FormData): Promise<Newslet
             },
         });
 
-        let fallbackInternalResult: { success: boolean; error?: unknown } | null = null;
         if (!internalResult.success) {
-            fallbackInternalResult = await sendEmail({
+            console.error("[subscribeToNewsletter] web3forms notification failed", internalResult.error);
+
+            const fallbackResult = await sendEmail({
                 to: NOTIFICATION_EMAIL,
                 replyTo: email,
                 subject: "Nueva suscripción al boletín — Fortius Consulting",
@@ -186,6 +187,10 @@ export async function subscribeToNewsletter(formData: FormData): Promise<Newslet
                     web3FormsError: internalResult.error ?? null,
                 },
             });
+
+            if (!fallbackResult.success) {
+                console.error("[subscribeToNewsletter] resend fallback failed", fallbackResult.error);
+            }
         }
 
         const confirmationResult = await sendEmail({
@@ -198,14 +203,6 @@ export async function subscribeToNewsletter(formData: FormData): Promise<Newslet
             relatedId: subscription.id,
             metadata: { source: "web-fortius-consulting" },
         });
-
-        if (!internalResult.success) {
-            console.error("[subscribeToNewsletter] web3forms notification failed", internalResult.error);
-        }
-
-        if (fallbackInternalResult && !fallbackInternalResult.success) {
-            console.error("[subscribeToNewsletter] resend fallback failed", fallbackInternalResult.error);
-        }
 
         if (!confirmationResult.success) {
             console.error("[subscribeToNewsletter] confirmation failed", confirmationResult.error);

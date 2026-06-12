@@ -13,8 +13,7 @@ import type { MemberDashboardData } from "@/lib/private/queries";
 import {
     formatPublishedDate,
     kindLabel,
-    listArticles,
-    listArticlesByCategory,
+    type Article,
     type ArticleCategory,
 } from "@/lib/articles";
 import { getEventArticleData } from "@/lib/article-display";
@@ -47,12 +46,14 @@ function formatAmount(cents: number, currency: string) {
 interface Props {
     user: PrivateUser;
     data: MemberDashboardData;
+    /** All published articles, fetched server-side (lib/articles-db). */
+    articles: Article[];
 }
 
-export function DashboardClient({ user, data }: Props) {
+export function DashboardClient({ user, data, articles }: Props) {
     const linkedExperts = TEAM.filter(m => m.slug === "juan-angel-soto" || m.slug === "beatriz-de-leon-cobo");
     const category = getCategoryFromTier(data.tier ?? user.tier);
-    const memberContent = listArticlesByCategory(category);
+    const memberContent = articles.filter((item) => item.category === category);
     const publications = memberContent
         .filter((item) => item.access === "paid" && item.kind !== "evento")
         .slice(0, 4);
@@ -60,10 +61,9 @@ export function DashboardClient({ user, data }: Props) {
         .filter((item) => item.kind === "evento")
         .map((item) => ({ item, event: getEventArticleData(item) }))
         .slice(0, 4);
-    const allArticles = listArticles();
     const purchasedEvents = data.eventPurchases.map((purchase) => ({
         purchase,
-        article: allArticles.find((item) => item.slug === purchase.eventSlug),
+        article: articles.find((item) => item.slug === purchase.eventSlug),
     }));
 
     const greeting = user.fullName?.split(" ")[0] ?? user.email ?? "Cliente";

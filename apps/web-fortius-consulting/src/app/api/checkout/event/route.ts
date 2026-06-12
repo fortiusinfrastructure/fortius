@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient, createServerClient } from "@fortius/database";
-import { getArticleBySlug } from "@/lib/articles";
+import { fetchArticleBySlug } from "@/lib/articles-db";
 import { createCheckoutSession } from "@/lib/stripe";
 import { CONSULTING_ORG_SLUG } from "@/lib/billing/plans";
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
             return NextResponse.redirect(`${baseUrl}/area-privada`, 303);
         }
 
-        const article = getArticleBySlug(slug);
+        const article = await fetchArticleBySlug(slug);
         if (!article || article.kind !== "evento") {
             return NextResponse.redirect(`${baseUrl}/area-privada`, 303);
         }

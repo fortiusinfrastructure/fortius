@@ -2,9 +2,13 @@ import { TEAM } from "@/content/team";
 import { notFound } from "next/navigation";
 import { JuanClient } from "./JuanClient";
 import type { Metadata } from "next";
-import { listArticles, formatPublishedDate, kindLabel } from "@/lib/articles";
+import { formatPublishedDate, kindLabel } from "@/lib/articles";
+import { fetchArticles } from "@/lib/articles-db";
 import { getArticleLeadData } from "@/lib/article-display";
 import { getPersonSocialImage } from "@/lib/person-social-image";
+
+// Refresh the publications list every 10 minutes (ISR)
+export const revalidate = 600;
 
 export function generateMetadata(): Metadata {
     const member = TEAM.find((item) => item.slug === "juan-angel-soto");
@@ -28,12 +32,14 @@ export function generateMetadata(): Metadata {
     };
 }
 
-export default function JuanSotoPage() {
+export default async function JuanSotoPage() {
     const member = TEAM.find((m) => m.slug === "juan-angel-soto");
-    
+
     if (!member) {
         notFound();
     }
+
+    const articles = await fetchArticles();
 
     const normalize = (value: string) =>
         value
@@ -42,7 +48,7 @@ export default function JuanSotoPage() {
             .toLowerCase()
             .trim();
 
-    const publications = listArticles()
+    const publications = articles
         .filter((article) => {
             const author = getArticleLeadData(article).author;
             if (!author) return false;

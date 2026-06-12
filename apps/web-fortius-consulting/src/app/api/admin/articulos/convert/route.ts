@@ -333,18 +333,27 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       slugCount.set(article.slug, count);
       if (count > 1) article.slug = `${article.slug}-${count}`;
 
+      // Same column mapping as scripts/seed-articles.mjs:
+      // canonical columns + consulting fields in metadata JSONB.
       const { error: upsertErr } = await admin.from("articles").upsert(
         {
           organization_id: orgId,
           slug: article.slug,
-          title: article.title,
+          title_es: article.title,
+          excerpt_es: article.excerpt || null,
+          content_es: article.content_markdown,
           category: article.category,
-          kind: article.kind,
-          access: article.access,
-          published_at: article.published_at,
-          excerpt: article.excerpt,
-          content_markdown: article.content_markdown,
+          published_at: article.published_at
+            ? `${article.published_at}T00:00:00Z`
+            : null,
           status: "published",
+          metadata: {
+            access_level: article.access,
+            kind: article.kind,
+            subproducts: [],
+            source_file: file.name,
+            content_format: "markdown",
+          },
         },
         { onConflict: "organization_id,slug", ignoreDuplicates: false },
       );

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { InsightsGrid } from "@/components/consulting-v2/InsightsGrid";
 import { Bracketed } from "@/components/system/Bracketed";
+import { fetchArticles } from "@/lib/articles-db";
+
+// Refresh the article archive every 10 minutes (ISR)
+export const revalidate = 600;
 
 export const metadata: Metadata = {
     title: "Publicaciones — Fortius Consulting",
@@ -8,7 +12,9 @@ export const metadata: Metadata = {
         "Archivo completo de artículos, informes, notas y noticias de Fortius Consulting en Sociedad Civil y Política.",
 };
 
-export default function PublicacionesPage() {
+export default async function PublicacionesPage() {
+    const articles = await fetchArticles();
+
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">
             {/* Page header */}
@@ -47,6 +53,7 @@ export default function PublicacionesPage() {
 
             {/* All articles grid — includes private with lock indicator */}
             <InsightsGrid
+                articles={articles}
                 includePrivate
                 kicker="Todos los contenidos"
                 title="Sociedad Civil y Política."
