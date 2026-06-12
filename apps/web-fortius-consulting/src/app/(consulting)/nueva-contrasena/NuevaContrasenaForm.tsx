@@ -31,9 +31,15 @@ export default function NuevaContrasenaForm() {
     const [focused, setFocused] = useState<string | null>(null);
 
     useEffect(() => {
-        // If there's no recovery hash, this page was reached directly — show error immediately
-        const hash = window.location.hash;
-        if (!hash.includes('type=recovery') && !hash.includes('access_token')) {
+        // Parse the URL hash manually — createBrowserClient (@supabase/ssr) uses
+        // cookie storage and does NOT auto-process hash tokens, so we can't rely
+        // on the PASSWORD_RECOVERY event. Instead we call setSession() directly.
+        const params = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = params.get('access_token');
+        const refreshToken = params.get('refresh_token');
+        const type = params.get('type');
+
+        if (!accessToken || !refreshToken || type !== 'recovery') {
             setState('invalid');
             return;
         }
@@ -43,18 +49,9 @@ export default function NuevaContrasenaForm() {
             process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         );
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
-            if (event === 'PASSWORD_RECOVERY') setState('ready');
-        });
-
-        // Fallback timeout: if Supabase doesn't fire PASSWORD_RECOVERY within 8s,
-        // the token is expired or invalid
-        const timeout = setTimeout(() => setState('invalid'), 8000);
-
-        return () => {
-            subscription.unsubscribe();
-            clearTimeout(timeout);
-        };
+        supabase.auth
+            .setSession({ access_token: accessToken, refresh_token: refreshToken })
+            .then(({ error }) => setState(error ? 'invalid' : 'ready'));
     }, []);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
