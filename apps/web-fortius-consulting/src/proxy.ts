@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
-const PROTECTED = ['/area-privada'];
+const PROTECTED = ['/area-privada', '/herramientas'];
 const AUTH_ONLY = ['/login']; // redirect to dashboard if already logged in
 
 export default async function middleware(request: NextRequest) {
@@ -52,7 +52,10 @@ export default async function middleware(request: NextRequest) {
 
     if (isAuthOnly && user) {
         const dashUrl = request.nextUrl.clone();
-        dashUrl.pathname = '/area-privada';
+        const redirect = request.nextUrl.searchParams.get('redirect');
+        // Only allow internal paths (avoid open redirects)
+        dashUrl.pathname = redirect?.startsWith('/') && !redirect.startsWith('//') ? redirect : '/area-privada';
+        dashUrl.search = '';
         return NextResponse.redirect(dashUrl);
     }
 

@@ -26,6 +26,15 @@ export async function recordStripeEvent(eventId: string, eventType: string, orga
     throw error;
 }
 
+/**
+ * Releases the idempotency claim for an event whose handler failed,
+ * so Stripe's retry of the same event can be processed again.
+ */
+export async function releaseStripeEvent(eventId: string) {
+    const admin = createAdminClient();
+    await admin.from("stripe_events").delete().eq("event_id", eventId);
+}
+
 export async function insertPaymentHistory({
     userId,
     subscriptionId,

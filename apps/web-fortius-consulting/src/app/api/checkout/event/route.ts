@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         const supabase = await createServerClient();
         const { data: { user } } = await supabase.auth.getUser();
         if (!user?.email) {
-            return NextResponse.redirect(`${baseUrl}/login?next=${encodeURIComponent(fallbackPath)}`, 303);
+            return NextResponse.redirect(`${baseUrl}/login?redirect=${encodeURIComponent(fallbackPath)}`, 303);
         }
 
         const admin = createAdminClient();
@@ -58,6 +58,7 @@ export async function POST(request: Request) {
                 .from("subscriptions")
                 .select("status")
                 .eq("user_id", user.id)
+                .eq("organization_id", org.id)
                 .order("created_at", { ascending: false })
                 .limit(1)
                 .maybeSingle(),

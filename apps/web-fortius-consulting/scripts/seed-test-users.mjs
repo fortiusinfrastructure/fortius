@@ -136,6 +136,7 @@ async function upsertMockSubscription(userId, orgId) {
 
     const { error } = await admin.from("subscriptions").insert({
         user_id: userId,
+        organization_id: orgId,
         plan_id: planId,
         stripe_subscription_id: "sub_test_seed_diego",
         stripe_customer_id: "cus_test_seed_diego",

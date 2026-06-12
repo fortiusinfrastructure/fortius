@@ -46,6 +46,7 @@ export async function getMemberDashboardData(
             .from("subscriptions")
             .select("status, current_period_end, cancel_at_period_end")
             .eq("user_id", userId)
+            .eq("organization_id", orgId)
             .order("created_at", { ascending: false })
             .limit(1)
             .maybeSingle(),

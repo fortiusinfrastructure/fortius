@@ -8,11 +8,13 @@
  * Converts each file in-memory (mammoth → HTML → Markdown) and upserts the
  * resulting articles directly into Supabase. Returns a JSON summary.
  *
- * Protected by a shared secret header: X-Admin-Secret
+ * Protected by: a logged-in session with role 'admin' in the consulting org,
+ * or a shared secret header (X-Admin-Secret) for scripts/CLI.
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { createServerClient, createAdminClient } from "@fortius/database";
 // mammoth and turndown are Node-only; they run only in the Next.js runtime.
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const mammoth = require("mammoth") as typeof import("mammoth");
@@ -202,14 +204,40 @@ async function convertBuffer(
 // Route handler
 // ---------------------------------------------------------------------------
 
-export async function POST(req: NextRequest): Promise<NextResponse> {
-  // --- Auth: shared secret header ---
+async function isAuthorized(req: NextRequest): Promise<boolean> {
+  // Scripts / CLI: shared secret header
   const adminSecret = process.env.ADMIN_UPLOAD_SECRET;
-  if (adminSecret) {
-    const provided = req.headers.get("x-admin-secret");
-    if (!provided || provided !== adminSecret) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  const provided = req.headers.get("x-admin-secret");
+  if (adminSecret && provided === adminSecret) return true;
+
+  // Browser: logged-in user with role 'admin' in the consulting org
+  const supabase = await createServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return false;
+
+  const admin = createAdminClient();
+  const { data: org } = await admin
+    .from("organizations")
+    .select("id")
+    .eq("slug", ORG_SLUG)
+    .maybeSingle();
+  if (!org) return false;
+
+  const { data: membership } = await admin
+    .from("user_memberships")
+    .select("role")
+    .eq("user_id", user.id)
+    .eq("organization_id", org.id)
+    .eq("status", "active")
+    .maybeSingle();
+
+  return membership?.role === "admin";
+}
+
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  // --- Auth: admin session or shared secret header ---
+  if (!(await isAuthorized(req))) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // --- Parse multipart form ---

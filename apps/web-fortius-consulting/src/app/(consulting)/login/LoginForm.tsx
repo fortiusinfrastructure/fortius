@@ -25,7 +25,11 @@ const inputFocusStyle = {
 export default function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const redirectTo = searchParams.get('redirect') ?? '/area-privada';
+    const redirectParam = searchParams.get('redirect');
+    // Only allow internal paths (avoid open redirects)
+    const redirectTo = redirectParam?.startsWith('/') && !redirectParam.startsWith('//')
+        ? redirectParam
+        : '/area-privada';
 
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();

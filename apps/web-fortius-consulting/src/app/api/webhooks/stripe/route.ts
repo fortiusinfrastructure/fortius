@@ -4,7 +4,13 @@ import { headers } from "next/headers";
 import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@fortius/database";
 import { SITE_URL } from "@/lib/site-config";
-import { getWebhookOrganizationId, recordStripeEvent, insertPaymentHistory, upsertEventPurchase } from "@/lib/stripe/webhook-db";
+import {
+    getWebhookOrganizationId,
+    recordStripeEvent,
+    releaseStripeEvent,
+    insertPaymentHistory,
+    upsertEventPurchase,
+} from "@/lib/stripe/webhook-db";
 import { syncSubscriptionFromStripe } from "@/lib/stripe/subscription-sync";
 import {
     sendMembershipCheckoutEmails,
@@ -23,13 +29,18 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 async function resolveOrInviteUser(email: string): Promise<string | null> {
     const admin = createAdminClient();
 
-    // 1. Look up the user in auth.users by email.
+    // 1. Look up the user in auth.users by email (paginated).
     //    user_profiles has no email column — emails live in auth.users only.
-    const { data: { users } } = await admin.auth.admin.listUsers({ perPage: 500 });
-    const existingUser = users.find((u) => u.email === email);
+    const normalizedEmail = email.toLowerCase();
+    const perPage = 1000;
+    for (let page = 1; ; page++) {
+        const { data, error } = await admin.auth.admin.listUsers({ page, perPage });
+        if (error) throw new Error(`listUsers failed: ${error.message}`);
 
-    if (existingUser) {
-        return existingUser.id;
+        const existingUser = data.users.find((u) => u.email?.toLowerCase() === normalizedEmail);
+        if (existingUser) return existingUser.id;
+
+        if (data.users.length < perPage) break; // last page reached
     }
 
     // 2. No existing user — invite them (Supabase sends an activation email)
@@ -81,6 +92,23 @@ export async function POST(request: Request) {
 
     const ctx = { orgSlug, eventId: event.id, eventType: event.type };
 
+    try {
+        await processEvent(event, ctx, organizationId);
+    } catch (error) {
+        console.error(`[webhook] Handler failed for ${event.type} (${event.id}):`, error);
+        // Release the idempotency claim so Stripe's retry can be processed
+        await releaseStripeEvent(event.id);
+        return NextResponse.json({ error: "handler_failed" }, { status: 500 });
+    }
+
+    return NextResponse.json({ received: true });
+}
+
+async function processEvent(
+    event: Stripe.Event,
+    ctx: { orgSlug: string; eventId: string; eventType: string },
+    organizationId: string | null,
+) {
     switch (event.type) {
         case "checkout.session.completed": {
             const session = event.data.object as Stripe.Checkout.Session;
@@ -205,6 +233,4 @@ export async function POST(request: Request) {
             break;
         }
     }
-
-    return NextResponse.json({ received: true });
 }

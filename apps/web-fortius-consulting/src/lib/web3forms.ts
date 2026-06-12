@@ -17,15 +17,24 @@ interface Web3FormsResponse {
     message?: string;
 }
 
-export async function sendContactNotificationWithWeb3Forms({
-    name,
+interface Web3FormsField {
+    name: string;
+    value?: string;
+}
+
+async function sendWeb3FormsNotification({
+    fromName,
     email,
     subject,
     message,
-    organization,
-    contextVertical,
-    contextPlan,
-}: Web3FormsContactInput) {
+    fields = [],
+}: {
+    fromName: string;
+    email: string;
+    subject: string;
+    message: string;
+    fields?: Web3FormsField[];
+}) {
     const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
         return { success: false, error: "missing_web3forms_access_key" };
@@ -37,15 +46,16 @@ export async function sendContactNotificationWithWeb3Forms({
     try {
         const payload = new FormData();
         payload.append("access_key", accessKey);
-        payload.append("subject", `Nuevo contacto web · ${subject}`);
-        payload.append("from_name", name);
-        payload.append("name", name);
+        payload.append("subject", subject);
+        payload.append("from_name", fromName);
+        payload.append("name", fromName);
         payload.append("email", email);
-        payload.append("organization", organization || "No indicada");
-        payload.append("area", contextVertical || "General");
-        payload.append("plan", contextPlan || "No indicado");
         payload.append("message", message);
         payload.append("botcheck", "");
+
+        for (const field of fields) {
+            payload.append(field.name, field.value || "No indicado");
+        }
 
         const response = await fetch(WEB3FORMS_API_URL, {
             method: "POST",
@@ -68,4 +78,36 @@ export async function sendContactNotificationWithWeb3Forms({
     } finally {
         clearTimeout(timeoutId);
     }
+}
+
+export async function sendContactNotificationWithWeb3Forms({
+    name,
+    email,
+    subject,
+    message,
+    organization,
+    contextVertical,
+    contextPlan,
+}: Web3FormsContactInput) {
+    return sendWeb3FormsNotification({
+        fromName: name,
+        email,
+        subject: `Nuevo contacto web · ${subject}`,
+        message,
+        fields: [
+            { name: "organization", value: organization },
+            { name: "area", value: contextVertical || "General" },
+            { name: "plan", value: contextPlan },
+        ],
+    });
+}
+
+export async function sendNewsletterNotificationWithWeb3Forms(email: string) {
+    return sendWeb3FormsNotification({
+        fromName: "Fortius Consulting",
+        email,
+        subject: "Nueva suscripción al boletín — Fortius Consulting",
+        message: `Nueva suscripción al boletín:\n\nEmail: ${email}`,
+        fields: [{ name: "source", value: "web-fortius-consulting" }],
+    });
 }
