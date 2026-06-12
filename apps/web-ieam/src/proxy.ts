@@ -7,7 +7,7 @@ import { routing } from './i18n/routing';
 const ADMIN_PUBLIC_ROUTES = ['/admin/login'];
 
 // Routes that bypass both i18n and auth
-const PASSTHROUGH_ROUTES = ['/api/', '/auth/callback', '/_next/', '/favicon.ico'];
+const PASSTHROUGH_ROUTES = ['/api/', '/auth/callback', '/_next/', '/favicon.ico', '/docs/'];
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -67,6 +67,6 @@ export default async function proxy(request: NextRequest) {
 export const config = {
     matcher: [
         // Match all paths except Next.js internals and static files
-        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|pdf)$).*)',
     ],
 };
