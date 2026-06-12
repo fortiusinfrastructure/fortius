@@ -309,6 +309,7 @@ export interface Ally {
     name: string;
     logo?: string;
     filter?: string;
+    maskColor?: string;
 }
 
 export const ALLIES: Ally[] = [
@@ -322,7 +323,7 @@ export const ALLIES: Ally[] = [
     { name: "World Youth Alliance", logo: "/images/aliados/wya-fortius-red.png" },
     { name: "ADF", logo: "/images/aliados/adf-fortius-red.png" },
     { name: "Civismo", logo: "/images/aliados/civismo-fortius-red.png" },
-    { name: "Acton", logo: "/images/aliados/Acton.png", filter: "brightness(0) saturate(100%) invert(43%) sepia(96%) saturate(2572%) hue-rotate(338deg) brightness(102%) contrast(101%)" },
+    { name: "Acton", logo: "/images/aliados/Acton.png", maskColor: "var(--color-accent-500)" },
     { name: "Tertio Millennio", logo: "/images/aliados/Tertio Millennio.png" },
     { name: "AUR", logo: "/images/aliados/AUR.svg" },
     { name: "TEC", logo: "/images/aliados/TEC.svg" },
