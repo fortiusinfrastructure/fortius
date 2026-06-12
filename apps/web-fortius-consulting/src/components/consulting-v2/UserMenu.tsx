@@ -9,7 +9,7 @@
 import { useState, useEffect, useRef, useTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, UserRound, Settings, CreditCard, LogOut, LayoutDashboard } from "lucide-react";
-import { createBrowserClient } from "@fortius/database";
+import { createBrowserClient } from "@supabase/ssr";
 import { signOut } from "@/lib/auth/actions";
 
 export interface SessionUser {
@@ -22,7 +22,10 @@ export function useSessionUser(): SessionUser | null | undefined {
     const [user, setUser] = useState<SessionUser | null | undefined>(undefined);
 
     useEffect(() => {
-        const supabase = createBrowserClient();
+        const supabase = createBrowserClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        );
         const map = (u: { email?: string; user_metadata?: Record<string, unknown> } | null | undefined) =>
             u ? { email: u.email ?? null, name: (u.user_metadata?.full_name as string | undefined) ?? null } : null;
 
