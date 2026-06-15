@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import type { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { createServerClient } from '@supabase/ssr';
 import createIntlMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
@@ -46,7 +47,7 @@ export default async function proxy(request: NextRequest) {
           setAll: (cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) => {
             cookiesToSet.forEach(({ name, value, options }) => {
               request.cookies.set(name, value);
-              response.cookies.set(name, value, options as any);
+              response.cookies.set(name, value, (options as unknown) as ResponseCookie);
             });
           },
         },
@@ -75,9 +76,7 @@ export default async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
 
   // 3. Refresh Supabase session (attach/refresh cookies on every request)
-  const supabaseResponse = NextResponse.next({
-    request,
-  });
+  NextResponse.next({ request });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -93,7 +92,7 @@ export default async function proxy(request: NextRequest) {
             request.cookies.set(name, value),
           );
           cookiesToSet.forEach(({ name, value, options }) => {
-            intlResponse.cookies.set(name, value, options as any);
+            intlResponse.cookies.set(name, value, (options as unknown) as ResponseCookie);
           });
         },
       },

@@ -53,14 +53,14 @@ const content = {
         sections: [
             {
                 title: '1. What are cookies?',
-                body: <p>A cookie is a file downloaded to your computer when accessing certain web pages. Cookies allow a web page, among other things, to store and retrieve information about a user's or their equipment's browsing habits and, depending on the information they contain and how the equipment is used, they can be utilized to recognize the user.</p>
+                body: <p>A cookie is a file downloaded to your computer when accessing certain web pages. Cookies allow a web page, among other things, to store and retrieve information about a user&apos;s or their equipment&apos;s browsing habits and, depending on the information they contain and how the equipment is used, they can be utilized to recognize the user.</p>
             },
             {
                 title: '2. What types of cookies does this website use?',
                 body: (
                     <ul className="list-disc pl-6 space-y-4">
                         <li><strong>Technical cookies:</strong> Those that allow the user to navigate through a website, platform, or application and use the different options or services existing on it.</li>
-                        <li><strong>Personalization cookies:</strong> Those that allow the user to access the service with some predefined general characteristics based on a series of criteria in the user's terminal, such as language, type of browser, etc.</li>
+                        <li><strong>Personalization cookies:</strong> Those that allow the user to access the service with some predefined general characteristics based on a series of criteria in the user&apos;s terminal, such as language, type of browser, etc.</li>
                         <li><strong>Analysis cookies:</strong> Those that, whether processed by us or third parties, allow us to quantify the number of users and thus carry out measurement and statistical analysis of the use made by users of the offered service. To do this, browsing on our website is analyzed to improve our offer of products or services.</li>
                     </ul>
                 )

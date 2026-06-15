@@ -7,6 +7,7 @@ import { cookies } from 'next/headers';
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY || '';
 const stripe = new Stripe(stripeSecretKey, {
     apiVersion: '2025-02-24.acacia', // Ignoring lint error, this is standard syntax
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any);
 
 // Helper function to create an admin Supabase client strictly for backend insertions
@@ -166,10 +167,11 @@ export async function POST(req: Request) {
             checkoutUrl: session.url
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error in /api/checkout:', error);
+        const message = error instanceof Error ? error.message : 'Error interno del servidor.';
         return NextResponse.json(
-            { error: error.message || 'Error interno del servidor.' },
+            { error: message },
             { status: 500 }
         );
     }

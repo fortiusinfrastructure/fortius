@@ -4,13 +4,17 @@
  * 
  * Run: node scripts/inject-biographies.js
  */
-const fs = require("fs");
-const path = require("path");
+import { readFileSync, writeFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
-const instructionsPath = path.join(__dirname, "../public/recursos/biografias_instrucciones.md");
-const esJsonPath = path.join(__dirname, "../src/messages/es.json");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const text = fs.readFileSync(instructionsPath, "utf-8");
+const instructionsPath = join(__dirname, "../public/recursos/biografias_instrucciones.md");
+const esJsonPath = join(__dirname, "../src/messages/es.json");
+
+const text = readFileSync(instructionsPath, "utf-8");
 const lines = text.split("\n");
 
 // Map from author name (normalized) to JSON key
@@ -132,7 +136,7 @@ authors = authors.filter(a => {
 console.log(`Parsed ${authors.length} unique authors`);
 
 // Load the ES JSON
-const esJson = JSON.parse(fs.readFileSync(esJsonPath, "utf-8"));
+const esJson = JSON.parse(readFileSync(esJsonPath, "utf-8"));
 const authorsData = esJson.Biografias.authors;
 
 let updated = 0;
@@ -159,5 +163,5 @@ if (notFound.length > 0) {
     console.warn("Not found in key map:", notFound);
 }
 
-fs.writeFileSync(esJsonPath, JSON.stringify(esJson, null, 4));
+writeFileSync(esJsonPath, JSON.stringify(esJson, null, 4));
 console.log("Written to es.json");

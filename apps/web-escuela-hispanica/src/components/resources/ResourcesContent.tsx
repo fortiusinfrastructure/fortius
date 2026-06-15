@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { Search, BookOpen, FileText, ExternalLink, Globe } from 'lucide-react';
 import type { Resource } from '@/types';
 import { useTranslations } from 'next-intl';
@@ -103,9 +104,9 @@ export default function ResourcesContent({ initialResources = [] }: { initialRes
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#c5a059]/10 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 <h3 className="font-serif text-2xl text-white mb-3">{t('banner.title')}</h3>
                 <p className="font-light text-white/60 mb-6 max-w-lg mx-auto text-sm">{t('banner.description')}</p>
-                <a href="/recursos/biografias" className="inline-block border border-[#c5a059] text-[#c5a059] px-6 py-2 text-xs font-cinzel tracking-widest hover:bg-[#c5a059] hover:text-[#050a14] transition-colors">
+                <Link href="/recursos/biografias" className="inline-block border border-[#c5a059] text-[#c5a059] px-6 py-2 text-xs font-cinzel tracking-widest hover:bg-[#c5a059] hover:text-[#050a14] transition-colors">
                     {t('links.viewBiographies')}
-                </a>
+                </Link>
             </div>
 
             {/* ── Search ─────────────────────────────────────────── */}

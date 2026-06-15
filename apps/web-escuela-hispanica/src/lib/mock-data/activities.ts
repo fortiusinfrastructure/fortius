@@ -5,9 +5,9 @@ export const activities: Activity[] = [
         id: 20,
         slug: 'iv-jornadas-pensamiento-hispanico',
         title: {
-            es: 'IV Jornadas de Pensamiento Hispánico',
-            en: 'IV Hispanic Thought Days',
-            pt: 'IV Jornadas de Pensamento Hispânico'
+            es: 'Crónica – IV Jornadas de Pensamiento Hispánico',
+            en: 'Chronicle – IV Hispanic Thought Days',
+            pt: 'Crónica – IV Jornadas de Pensamento Hispânico'
         },
         sortDate: '2026-05-25',
         date: '25 Mayo 2026',
@@ -22,14 +22,14 @@ export const activities: Activity[] = [
             pt: 'Escuela Hispánica'
         },
         type: {
-            es: 'Jornadas',
-            en: 'Conference',
-            pt: 'Jornadas'
+            es: 'Crónica',
+            en: 'Chronicle',
+            pt: 'Crónica'
         },
         excerpt: {
-            es: 'Este año las jornadas se enmarcan dentro del Proyecto 1776 desarrollado por Escuela Hispánica, cuyo objetivo consiste en explorar la influencia de España en la Declaración de Independencia de los Estados Unidos, así como sus implicaciones históricas, culturales y políticas.',
-            en: 'This year, the conference is framed within the 1776 Project developed by Escuela Hispánica, whose objective is to explore the influence of Spain on the Declaration of Independence of the United States, as well as its historical, cultural, and political implications.',
-            pt: 'Este ano as jornadas enquadram-se no Projeto 1776 desenvolvido pela Escuela Hispânica, cujo objetivo é explorar a influência de Espanha na Declaração de Independência dos Estados Unidos, bem como as suas implicações históricas, culturais e políticas.'
+            es: 'La Universidad de Navarra acogió la cuarta edición de las Jornadas de Pensamiento Hispánico, organizadas por Escuela Hispánica en torno al Proyecto 1776: la investigación que explora la influencia del pensamiento político de la Segunda Escolástica en los orígenes intelectuales del constitucionalismo estadounidense.',
+            en: 'The University of Navarra hosted the fourth edition of the Hispanic Thought Days, organized by Escuela Hispánica around Project 1776: the research exploring the influence of Second Scholasticism political thought on the intellectual origins of American constitutionalism.',
+            pt: 'A Universidade de Navarra acolheu a quarta edição das Jornadas de Pensamento Hispânico, organizadas pela Escuela Hispánica em torno do Projeto 1776: a investigação que explora a influência do pensamento político da Segunda Escolástica nas origens intelectuais do constitucionalismo norte-americano.'
         },
         content: {
             es: `
@@ -37,39 +37,123 @@ export const activities: Activity[] = [
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
                         <strong style="color: #c5a059;">Fecha:</strong> 25 de mayo de 2026<br/>
-                        <strong style="color: #c5a059;">Horario:</strong> 9:45-14:00h<br/>
-                        <strong style="color: #c5a059;">Lugar:</strong> Aula Siemens Gamesa, Instituto Cultura y Sociedad, Universidad de Navarra (Pamplona, España)
+                        <strong style="color: #c5a059;">Lugar:</strong> Edificio Amigos, Universidad de Navarra, Pamplona, España
                     </p>
                 </div>
-                <p>Este año las jornadas se enmarcan dentro del Proyecto 1776 desarrollado por Escuela Hispánica, cuyo objetivo consiste en explorar la influencia de España en la Declaración de Independencia de los Estados Unidos, así como sus implicaciones históricas, culturales y políticas.</p>
+
+                <p>La Universidad de Navarra acogió el pasado 25 de mayo la cuarta edición de las Jornadas de Pensamiento Hispánico, organizadas por Escuela Hispánica. El Edificio Amigos fue el escenario de un encuentro intelectual vertebrado en torno al Proyecto 1776: la investigación que explora la influencia del pensamiento político de la Segunda Escolástica —y en particular de la Escuela de Salamanca— en los orígenes intelectuales del constitucionalismo estadounidense y en la defensa de la libertad individual frente al poder absoluto.</p>
+
+                <p>La elección del momento no es casual. En el año en que se conmemora el 250 aniversario de la Declaración de Independencia de los Estados Unidos (1776–2026), estas jornadas contribuyeron a visibilizar un puente intelectual demasiado tiempo olvidado: el que une Salamanca con Filadelfia, la teología política española del siglo XVI con los principios fundacionales de la república norteamericana.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Un hilo conductor: de Salamanca a Filadelfia</h3>
+
+                <p>La jornada fue presentada por Jorge Machín, director de Escuela Hispánica, quien situó el marco temático del encuentro y recordó que el Proyecto 1776 parte de una premisa cada vez mejor documentada: que muchos de los principios considerados pilares de las democracias modernas —la soberanía popular, la limitación del poder, el respeto a la conciencia individual— fueron formulados siglos antes por los teólogos y juristas de la Escuela de Salamanca. Un puente intelectual que reescribe, en buena medida, nuestra historia común.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Juan Ángel Soto Gómez</strong> abrió el ciclo de ponencias con «De Salamanca a Londres y Filadelfia», trazando los vínculos doctrinales que unen a los escolásticos salmantinos del siglo XVI con el pensamiento político anglosajón y con los Padres Fundadores de los Estados Unidos. Su intervención ofreció una lectura transatlántica que situó a España en el centro de la genealogía intelectual de la modernidad política.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Mario Fantini</strong> presentó su ponencia «La herencia hispánica perdida del conservadurismo americano: una recuperación transatlántica», defendiendo que el pensamiento conservador estadounidense posee raíces hispánicas que han sido sistemáticamente ignoradas, y proponiendo su recuperación como tarea urgente a ambos lados del Atlántico.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Santiago de Navascués</strong> abordó el período 1956–1962 en su ponencia «Reivindicar la Hispanidad: Anglófilos e Hispanófilos en busca de referentes comunes», analizando los proyectos de síntesis cultural entre intelectuales anglosajones e hispanistas en un momento de tensión y diálogo durante la Guerra Fría.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Guillermo Tejeda</strong> examinó la recepción de la doctrina de Francisco de Vitoria sobre la guerra justa y el derecho de resistencia en su ponencia «La rebelión como alternativa razonada: Vitoria y la Guerra Justa en la declaración de independencia de Filadelfia», estableciendo un puente doctrinal de notable profundidad entre el pensamiento salmantino y el momento fundacional norteamericano.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> amplió el foco geográfico en «Salamanca y otros Pilares del Constitucionalismo en las Américas», considerando la recepción del pensamiento escolástico hispánico no solo en los Estados Unidos, sino en el conjunto del continente americano y su papel en la construcción de los distintos ordenamientos constitucionales de la región.</p>
+
+                <p>La jornada cerró con la intervención de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influencia de las Teorías de Salamanca en el Constitucionalismo Americano», un análisis pormenorizado de cómo conceptos como la soberanía popular, la ley natural y la limitación del poder formulados en Salamanca encontraron su camino en los textos fundacionales de la república norteamericana.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Clausura</h3>
+
+                <p>Al término de las ponencias, participantes y ponentes se reunieron en el restaurante Faustino para una comida de clausura que prolongó en un ambiente más distendido los debates de la jornada, consolidando los lazos académicos propios de una comunidad intelectual en crecimiento.</p>
+
+                <p>Las IV Jornadas de Pensamiento Hispánico reafirmaron a Pamplona como uno de los espacios de referencia para el estudio y la difusión de la tradición intelectual hispánica, y supusieron un avance significativo en el desarrollo del Proyecto 1776, cuyo horizonte es precisamente este: demostrar que el legado de Salamanca no es solo historia de España, sino historia compartida de Occidente.</p>
+
+                <div style="background-color: rgba(197, 160, 89, 0.05); border: 1px solid rgba(197, 160, 89, 0.2); padding: 1.25rem 1.5rem; margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em;">
+                    Para más información sobre el Proyecto 1776 y las actividades de Escuela Hispánica: <a href="https://www.escuelahispanica.org" style="color: #c5a059;">www.escuelahispanica.org</a> — <a href="mailto:info@escuelahispanica.org" style="color: #c5a059;">info@escuelahispanica.org</a>
+                </div>
             `,
             en: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizer:</strong> Escuela Hispánica<br/>
                         <strong style="color: #c5a059;">Date:</strong> May 25, 2026<br/>
-                        <strong style="color: #c5a059;">Schedule:</strong> 9:45 AM - 2:00 PM<br/>
-                        <strong style="color: #c5a059;">Location:</strong> Siemens Gamesa Room, Institute for Culture and Society, University of Navarra (Pamplona, Spain)
+                        <strong style="color: #c5a059;">Location:</strong> Edificio Amigos, University of Navarra, Pamplona, Spain
                     </p>
                 </div>
-                <p>This year, the conference is framed within the 1776 Project developed by Escuela Hispánica, whose objective is to explore the influence of Spain on the Declaration of Independence of the United States, as well as its historical, cultural, and political implications.</p>
+
+                <p>The University of Navarra hosted the fourth edition of the Hispanic Thought Days on May 25th, organized by Escuela Hispánica. The Edificio Amigos was the setting for an intellectual gathering centered around Project 1776: the research exploring the influence of Second Scholasticism political thought—and in particular the School of Salamanca—on the intellectual origins of American constitutionalism and the defense of individual freedom against absolute power.</p>
+
+                <p>The timing is no coincidence. In the year marking the 250th anniversary of the Declaration of Independence of the United States (1776–2026), these days helped illuminate an intellectual bridge too long forgotten: the one connecting Salamanca with Philadelphia, the Spanish political theology of the 16th century with the founding principles of the American republic.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">A guiding thread: from Salamanca to Philadelphia</h3>
+
+                <p>The event was introduced by Jorge Machín, director of Escuela Hispánica, who set out the thematic framework and recalled that Project 1776 rests on an increasingly well-documented premise: that many principles considered pillars of modern democracies—popular sovereignty, the limitation of power, respect for individual conscience—were formulated centuries earlier by the theologians and jurists of the School of Salamanca. An intellectual bridge that rewrites, in large part, our shared history.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Juan Ángel Soto Gómez</strong> opened the conference with "From Salamanca to London and Philadelphia," tracing the doctrinal ties linking 16th-century Salamancan scholastics with Anglo-Saxon political thought and with the Founding Fathers of the United States. His talk offered a transatlantic reading that placed Spain at the center of the intellectual genealogy of political modernity.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Mario Fantini</strong> presented "The Lost Hispanic Heritage of American Conservatism: A Transatlantic Recovery," arguing that American conservative thought has Hispanic roots that have been systematically overlooked, and proposing their recovery as an urgent task on both sides of the Atlantic.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Santiago de Navascués</strong> addressed the 1956–1962 period in "Reclaiming Hispanidad: Anglophiles and Hispanophiles in Search of Common References," analyzing the cultural synthesis projects between Anglo-Saxon intellectuals and Hispanists at a moment of tension and dialogue during the Cold War.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Guillermo Tejeda</strong> examined the reception of Francisco de Vitoria's doctrine on just war and the right of resistance in "Rebellion as a Reasoned Alternative: Vitoria and Just War in the Philadelphia Declaration of Independence," establishing a deeply substantive doctrinal bridge between Salamancan thought and the American founding moment.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> broadened the geographic scope in "Salamanca and Other Pillars of Constitutionalism in the Americas," considering the reception of Hispanic scholastic thought not only in the United States but across the entire American continent and its role in shaping the various constitutional frameworks of the region.</p>
+
+                <p>The day closed with <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>' talk, "The Influence of Salamancan Theories on American Constitutionalism," a detailed analysis of how concepts such as popular sovereignty, natural law, and the limitation of power as formulated in Salamanca found their way into the founding texts of the American republic.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Closing</h3>
+
+                <p>After the presentations, participants and speakers gathered at the Faustino restaurant for a closing lunch that extended the day's debates in a more relaxed setting, strengthening the academic bonds of a growing intellectual community.</p>
+
+                <p>The IV Hispanic Thought Days reaffirmed Pamplona as one of the key spaces for the study and dissemination of the Hispanic intellectual tradition, and marked a significant step forward in the development of Project 1776, whose horizon is precisely this: to demonstrate that the legacy of Salamanca is not merely Spain's history, but the shared history of the West.</p>
+
+                <div style="background-color: rgba(197, 160, 89, 0.05); border: 1px solid rgba(197, 160, 89, 0.2); padding: 1.25rem 1.5rem; margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em;">
+                    For more information about Project 1776 and Escuela Hispánica activities: <a href="https://www.escuelahispanica.org" style="color: #c5a059;">www.escuelahispanica.org</a> — <a href="mailto:info@escuelahispanica.org" style="color: #c5a059;">info@escuelahispanica.org</a>
+                </div>
             `,
             pt: `
                 <div style="background-color: rgba(197, 160, 89, 0.05); border-left: 3px solid #c5a059; padding: 1.5rem; margin-bottom: 2.5rem; font-family: var(--font-cinzel);">
                     <p style="margin: 0; font-size: 0.8rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">
                         <strong style="color: #c5a059;">Organizador:</strong> Escuela Hispánica<br/>
                         <strong style="color: #c5a059;">Data:</strong> 25 de maio de 2026<br/>
-                        <strong style="color: #c5a059;">Horário:</strong> 9:45-14:00h<br/>
-                        <strong style="color: #c5a059;">Local:</strong> Sala Siemens Gamesa, Instituto Cultura e Sociedade, Universidade de Navarra (Pamplona, Espanha)
+                        <strong style="color: #c5a059;">Local:</strong> Edificio Amigos, Universidade de Navarra, Pamplona, Espanha
                     </p>
                 </div>
-                <p>Este ano as jornadas enquadram-se no Projeto 1776 desenvolvido pela Escuela Hispânica, cujo objetivo é explorar a influência de Espanha na Declaração de Independência dos Estados Unidos, bem como as suas implicações históricas, culturais e políticas.</p>
+
+                <p>A Universidade de Navarra acolheu a 25 de maio a quarta edição das Jornadas de Pensamento Hispânico, organizadas pela Escuela Hispánica. O Edificio Amigos foi o cenário de um encontro intelectual vertebrado em torno do Projeto 1776: a investigação que explora a influência do pensamento político da Segunda Escolástica — e em particular da Escola de Salamanca — nas origens intelectuais do constitucionalismo norte-americano e na defesa da liberdade individual face ao poder absoluto.</p>
+
+                <p>A escolha do momento não é casual. No ano em que se comemora o 250.º aniversário da Declaração de Independência dos Estados Unidos (1776–2026), estas jornadas contribuíram para dar visibilidade a uma ponte intelectual demasiado tempo esquecida: aquela que une Salamanca a Filadélfia, a teologia política espanhola do século XVI com os princípios fundadores da república norte-americana.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Um fio condutor: de Salamanca a Filadélfia</h3>
+
+                <p>A jornada foi apresentada por Jorge Machín, diretor da Escuela Hispánica, que situou o enquadramento temático do encontro e recordou que o Projeto 1776 parte de uma premissa cada vez melhor documentada: que muitos dos princípios considerados pilares das democracias modernas — a soberania popular, a limitação do poder, o respeito pela consciência individual — foram formulados séculos antes pelos teólogos e juristas da Escola de Salamanca. Uma ponte intelectual que reescreve, em grande medida, a nossa história comum.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Juan Ángel Soto Gómez</strong> abriu o ciclo de comunicações com «De Salamanca a Londres e Filadélfia», traçando os vínculos doutrinais que unem os escolásticos salmantinos do século XVI ao pensamento político anglo-saxónico e aos Pais Fundadores dos Estados Unidos. A sua intervenção ofereceu uma leitura transatlântica que colocou Espanha no centro da genealogia intelectual da modernidade política.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Mario Fantini</strong> apresentou a sua comunicação «A herança hispânica perdida do conservadorismo americano: uma recuperação transatlântica», defendendo que o pensamento conservador norte-americano possui raízes hispânicas que têm sido sistematicamente ignoradas, e propondo a sua recuperação como tarefa urgente dos dois lados do Atlântico.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Santiago de Navascués</strong> abordou o período 1956–1962 na sua comunicação «Reivindicar a Hispanidade: Anglófilos e Hispanófilos em busca de referências comuns», analisando os projetos de síntese cultural entre intelectuais anglo-saxónicos e hispanistas num momento de tensão e diálogo durante a Guerra Fria.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Guillermo Tejeda</strong> examinou a receção da doutrina de Francisco de Vitoria sobre a guerra justa e o direito de resistência na sua comunicação «A rebelião como alternativa razoada: Vitoria e a Guerra Justa na declaração de independência de Filadélfia», estabelecendo uma ponte doutrinal de notável profundidade entre o pensamento salmantino e o momento fundador norte-americano.</p>
+
+                <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> alargou o foco geográfico em «Salamanca e outros Pilares do Constitucionalismo nas Américas», considerando a receção do pensamento escolástico hispânico não só nos Estados Unidos, mas no conjunto do continente americano e o seu papel na construção dos diferentes ordenamentos constitucionais da região.</p>
+
+                <p>A jornada encerrou com a intervenção de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influência das Teorias de Salamanca no Constitucionalismo Americano», uma análise pormenorizada de como conceitos como a soberania popular, a lei natural e a limitação do poder formulados em Salamanca encontraram o seu caminho nos textos fundadores da república norte-americana.</p>
+
+                <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Encerramento</h3>
+
+                <p>No final das comunicações, participantes e oradores reuniram-se no restaurante Faustino para um almoço de encerramento que prolongou num ambiente mais descontraído os debates da jornada, consolidando os laços académicos próprios de uma comunidade intelectual em crescimento.</p>
+
+                <p>As IV Jornadas de Pensamento Hispânico reafirmaram Pamplona como um dos espaços de referência para o estudo e a difusão da tradição intelectual hispânica, e representaram um avanço significativo no desenvolvimento do Projeto 1776, cujo horizonte é precisamente este: demonstrar que o legado de Salamanca não é apenas história de Espanha, mas história partilhada do Ocidente.</p>
+
+                <div style="background-color: rgba(197, 160, 89, 0.05); border: 1px solid rgba(197, 160, 89, 0.2); padding: 1.25rem 1.5rem; margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em;">
+                    Para mais informações sobre o Projeto 1776 e as atividades da Escuela Hispánica: <a href="https://www.escuelahispanica.org" style="color: #c5a059;">www.escuelahispanica.org</a> — <a href="mailto:info@escuelahispanica.org" style="color: #c5a059;">info@escuelahispanica.org</a>
+                </div>
             `
         },
         image: '/images/activities/iv-jornadas-pensamiento-hispanico/portada.jpg',
         isFeatured: true,
-        isUpcoming: true,
-        showRegistrationForm: true
+        isUpcoming: false,
+        showRegistrationForm: false
     },
     {
         id: 19,

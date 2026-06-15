@@ -104,7 +104,7 @@ const content = {
             },
             {
                 title: '4. Legal Basis for Processing',
-                body: <p>The legal basis for the processing of your data is the <strong>express consent</strong> provided by the user when submitting their data through the website's forms, as well as the <strong>performance of a contract</strong> in the case of membership management.</p>
+                body: <p>The legal basis for the processing of your data is the <strong>express consent</strong> provided by the user when submitting their data through the website&apos;s forms, as well as the <strong>performance of a contract</strong> in the case of membership management.</p>
             },
             {
                 title: '5. Your Rights',

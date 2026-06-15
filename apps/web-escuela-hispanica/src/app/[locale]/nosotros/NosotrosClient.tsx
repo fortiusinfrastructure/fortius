@@ -136,7 +136,7 @@ export default function NosotrosClient() {
     // Calculate members and countries
     const totalMembers = academicMembers.length;
     const uniqueCountries = new Set(
-        academicMembers.map(m => m.country || (m as any).info).filter(Boolean)
+        academicMembers.map(m => m.country || (m as { info?: string }).info).filter(Boolean)
     ).size;
 
     return (

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { MetricCard } from '@/components/admin/MetricCard';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { requireAdminUser } from '@/lib/admin/auth';
@@ -57,9 +58,9 @@ export default async function EventsPage({
                     <h1 className="text-3xl font-bold tracking-tight text-slate-900">Gestión de eventos</h1>
                     <p className="text-sm text-slate-500 mt-1 max-w-3xl">Centro de verificación de actividades, personas inscritas, pagos y control de asistencia.</p>
                 </div>
-                <a href="/admin/events" className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 self-start lg:self-auto">
+                <Link href="/admin/events" className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 self-start lg:self-auto">
                     Restablecer panel
-                </a>
+                </Link>
             </div>
 
             <section className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-slate-700">
@@ -122,7 +123,7 @@ export default async function EventsPage({
                     </label>
                     <div className="flex gap-2">
                         <button className="rounded-xl bg-[#050a14] px-4 py-3 text-sm font-medium text-white hover:bg-slate-800">Aplicar</button>
-                        <a href="/admin/events" className="rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50">Limpiar</a>
+                        <Link href="/admin/events" className="rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50">Limpiar</Link>
                     </div>
                 </form>
             </section>

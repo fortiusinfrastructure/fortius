@@ -42,7 +42,7 @@ export async function generateMetadata({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid before trying to import messages
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     return {
       title: 'Escuela Hispánica',
     };
@@ -113,7 +113,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 

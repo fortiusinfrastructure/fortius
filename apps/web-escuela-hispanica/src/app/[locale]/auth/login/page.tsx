@@ -30,7 +30,7 @@ export default function LoginPage() {
             setError(result.error);
             setLoading(false);
         } else {
-            router.push(redirect as any);
+            router.push(redirect as Parameters<typeof router.push>[0]);
             router.refresh();
         }
     }

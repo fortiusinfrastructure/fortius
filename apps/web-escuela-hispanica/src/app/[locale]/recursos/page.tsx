@@ -29,8 +29,8 @@ export default async function RecursosPage({
     
     try {
         const { data: org } = await supabase.from('organizations').select('id').eq('slug', 'escuela-hispanica').single();
-        if (org && (org as any).id) {
-            const orgId = (org as any).id;
+        if (org && (org as { id: string }).id) {
+            const orgId = (org as { id: string }).id;
             const { data: resources, error } = await supabase
                 .from('resources')
                 .select('*')
@@ -39,12 +39,12 @@ export default async function RecursosPage({
                 .order('display_order', { ascending: true });
                 
             if (resources && !error) {
-                mappedResources = resources.map((r: any) => ({
+                mappedResources = resources.map((r: { id: string | number; category: string; link_type: string; citation: string; url: string | null }) => ({
                     id: r.id,
                     category: r.category as 'libro' | 'articulo' | 'otro',
                     linkType: r.link_type as 'pdf' | 'external',
                     citation: r.citation,
-                    url: r.url
+                    url: r.url ?? undefined
                 }));
             } else if (error) {
                 console.error("Supabase Error fetching resources:", error);

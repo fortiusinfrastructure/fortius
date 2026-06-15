@@ -120,10 +120,11 @@ export async function POST(request: NextRequest) {
         }
 
         return NextResponse.json({ success: true, emailId: approverResult.id });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('[api/contact] handler error:', error);
+        const message = error instanceof Error ? error.message : 'Error inesperado';
         return NextResponse.json(
-            { error: 'Error inesperado del servidor', details: error.message },
+            { error: 'Error inesperado del servidor', details: message },
             { status: 500 }
         );
     }

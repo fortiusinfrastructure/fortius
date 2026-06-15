@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { requireAdminUser } from '@/lib/admin/auth';
 import { getMembershipDashboard } from '@/lib/admin/membership-queries';
 import { getEventDashboard } from '@/lib/admin/event-queries';
@@ -31,7 +32,7 @@ export default async function AdminDashboardPage() {
                 <section className="bg-white rounded-2xl border border-slate-200 p-5 xl:col-span-1">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="font-semibold text-slate-900">Miembros recientes</h2>
-                        <a href="/admin/members" className="text-sm text-amber-700 hover:underline">Ver todo</a>
+                        <Link href="/admin/members" className="text-sm text-amber-700 hover:underline">Ver todo</Link>
                     </div>
                     <div className="space-y-3">
                         {members.records.slice(0, 5).map((record) => (
@@ -51,7 +52,7 @@ export default async function AdminDashboardPage() {
                 <section className="bg-white rounded-2xl border border-slate-200 p-5 xl:col-span-1">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="font-semibold text-slate-900">Eventos</h2>
-                        <a href="/admin/events" className="text-sm text-amber-700 hover:underline">Ver detalle</a>
+                        <Link href="/admin/events" className="text-sm text-amber-700 hover:underline">Ver detalle</Link>
                     </div>
                     <div className="space-y-3">
                         {events.metricsByEvent.slice(0, 5).map((event) => (
@@ -67,7 +68,7 @@ export default async function AdminDashboardPage() {
                 <section className="bg-white rounded-2xl border border-slate-200 p-5 xl:col-span-1">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="font-semibold text-slate-900">Comunicaciones</h2>
-                        <a href="/admin/communications" className="text-sm text-amber-700 hover:underline">Ver log</a>
+                        <Link href="/admin/communications" className="text-sm text-amber-700 hover:underline">Ver log</Link>
                     </div>
                     <div className="space-y-3">
                         {communications.logs.slice(0, 5).map((log) => (

@@ -73,7 +73,7 @@ export default async function ActivityPage({ params }: Props) {
         }
 
         // Auto-detect gallery images
-        let dynamicGallery = [...(activity.gallery || [])];
+        const dynamicGallery = [...(activity.gallery || [])];
 
         try {
             // activity.image format: /images/activities/folder/portada.jpg

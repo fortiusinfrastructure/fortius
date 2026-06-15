@@ -14,7 +14,7 @@ description: How to deploy an app from the Fortius monorepo to Vercel
 1. Ensure all checks pass:
 // turbo
 ```bash
-pnpm turbo lint typecheck build --filter=<app-name>
+pnpm turbo lint check-types build --filter=<app-name>
 ```
 
 2. Preview deployment (staging):

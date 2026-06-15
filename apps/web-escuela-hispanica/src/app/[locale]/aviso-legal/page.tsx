@@ -23,7 +23,7 @@ const content = {
                 title: '1. Titularidad',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entidad:</strong> FUNDACIÓN FORTIUS ESPAÑA (en adelante "FUNDACIÓN FORTIUS"), titular de https://escuelahispanica.org</li>
+                        <li><strong>Entidad:</strong> FUNDACIÓN FORTIUS ESPAÑA (en adelante &quot;FUNDACIÓN FORTIUS&quot;), titular de https://escuelahispanica.org</li>
                         <li><strong>NIF:</strong> G56299100</li>
                         <li><strong>Domicilio Social:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid.</li>
                         <li><strong>Dirección Postal:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid</li>
@@ -42,7 +42,7 @@ const content = {
             },
             {
                 title: '4. Exclusión de responsabilidad',
-                body: <p>Se suministra "tal cual", sin garantía sobre disponibilidad o ausencia de errores. FUNDACIÓN FORTIUS no responde de fallos de terceros, seguridad de redes abiertas ni de los contenidos de sitios enlazados (art. 17 LSSICE).</p>
+                body: <p>Se suministra &quot;tal cual&quot;, sin garantía sobre disponibilidad o ausencia de errores. FUNDACIÓN FORTIUS no responde de fallos de terceros, seguridad de redes abiertas ni de los contenidos de sitios enlazados (art. 17 LSSICE).</p>
             },
             {
                 title: '5. Comunicación de actividades ilícitas o inadecuadas',
@@ -70,7 +70,7 @@ const content = {
                 title: '1. Ownership',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entity:</strong> FUNDACIÓN FORTIUS ESPAÑA (hereinafter "FUNDACIÓN FORTIUS"), owner of https://escuelahispanica.org</li>
+                        <li><strong>Entity:</strong> FUNDACIÓN FORTIUS ESPAÑA (hereinafter &quot;FUNDACIÓN FORTIUS&quot;), owner of https://escuelahispanica.org</li>
                         <li><strong>VAT Number:</strong> G56299100</li>
                         <li><strong>Registered Office:</strong> Calle Zurbano 71, office 9, 28010, Madrid, Spain.</li>
                         <li><strong>Postal Address:</strong> Calle Zurbano 71, office 9, 28010, Madrid, Spain</li>
@@ -89,7 +89,7 @@ const content = {
             },
             {
                 title: '4. Exclusion of Liability',
-                body: <p>The site is provided "as is", without warranty regarding availability or absence of errors. FUNDACIÓN FORTIUS is not liable for third-party failures, the security of open networks, or the contents of linked sites (art. 17 LSSICE).</p>
+                body: <p>The site is provided &quot;as is&quot;, without warranty regarding availability or absence of errors. FUNDACIÓN FORTIUS is not liable for third-party failures, the security of open networks, or the contents of linked sites (art. 17 LSSICE).</p>
             },
             {
                 title: '5. Reporting Illegal or Inappropriate Activities',
@@ -117,7 +117,7 @@ const content = {
                 title: '1. Titularidade',
                 body: (
                     <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Entidade:</strong> FUNDACIÓN FORTIUS ESPAÑA (doravante "FUNDACIÓN FORTIUS"), titular de https://escuelahispanica.org</li>
+                        <li><strong>Entidade:</strong> FUNDACIÓN FORTIUS ESPAÑA (doravante &quot;FUNDACIÓN FORTIUS&quot;), titular de https://escuelahispanica.org</li>
                         <li><strong>NIF:</strong> G56299100</li>
                         <li><strong>Sede:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid, Espanha.</li>
                         <li><strong>Endereço Postal:</strong> Calle Zurbano 71, oficina 9, 28010, Madrid, Espanha</li>
@@ -136,7 +136,7 @@ const content = {
             },
             {
                 title: '4. Exclusão de Responsabilidade',
-                body: <p>O site é fornecido "como está", sem garantia quanto à disponibilidade ou ausência de erros. A FUNDACIÓN FORTIUS não se responsabiliza por falhas de terceiros, pela segurança de redes abertas ou pelos conteúdos de sites vinculados (art. 17 LSSICE).</p>
+                body: <p>O site é fornecido &quot;como está&quot;, sem garantia quanto à disponibilidade ou ausência de erros. A FUNDACIÓN FORTIUS não se responsabiliza por falhas de terceiros, pela segurança de redes abertas ou pelos conteúdos de sites vinculados (art. 17 LSSICE).</p>
             },
             {
                 title: '5. Comunicação de Atividades Ilícitas ou Inadequadas',

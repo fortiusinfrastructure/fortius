@@ -503,7 +503,7 @@ export default async function Proyecto1776Page({ params }: Props) {
                                             <div key={num} className="flex gap-6 items-start p-8 bg-[#0a111e]/50 border border-white/5 hover:border-[#c5a059]/20 transition-all group">
                                                 <div className="w-10 h-10 rounded-full border border-[#c5a059]/20 flex items-center justify-center shrink-0 text-[#c5a059] font-cinzel text-xs group-hover:bg-[#c5a059] group-hover:text-[#050a14] transition-all">{num}</div>
                                                 <p className="text-sm leading-relaxed text-white/70">
-                                                    {t(`Axes.${num}` as any)}
+                                                    {t(`Axes.${num}` as `Axes.01` | `Axes.02` | `Axes.03` | `Axes.04`)}
                                                 </p>
                                             </div>
                                         ))}
