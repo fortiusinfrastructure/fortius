@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import RecuperarForm from './RecuperarForm';
 
 export const metadata: Metadata = {
-    title: 'Recuperar contraseña — Fortius Consulting',
+    title: 'Recuperar contraseña | Fortius Consulting',
     robots: { index: false, follow: false },
 };
 

@@ -13,7 +13,7 @@ import { getEditorialSlots, getLatestNoticias } from "@/lib/articles";
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} — Consultoría estratégica para organizaciones con principios`,
+  title: `${SITE_NAME} | Consultoría estratégica para organizaciones con principios`,
   description: SITE_DESCRIPTION,
   openGraph: {
     title: SITE_NAME,

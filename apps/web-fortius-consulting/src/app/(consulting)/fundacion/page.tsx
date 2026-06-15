@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 
 export const metadata: Metadata = {
-    title: "Fortius Fundación — Brazo sin ánimo de lucro",
+    title: "Fortius Fundación | Brazo sin ánimo de lucro",
     description:
         "Formación de líderes con valores, investigación aplicada y programas de becas. Los mismos principios, otro vehículo de impacto.",
 };

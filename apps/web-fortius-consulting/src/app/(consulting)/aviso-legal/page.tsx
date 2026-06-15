@@ -3,7 +3,7 @@ import { Bracketed } from "@/components/system/Bracketed";
 import { LegalSection } from "@/components/consulting-v2/LegalSection";
 
 export const metadata: Metadata = {
-    title: "Aviso Legal — Fortius Consulting",
+    title: "Aviso Legal | Fortius Consulting",
     description:
         "Información legal del sitio web titularidad de Fortius Strategies SL y Fortius Americas LLC.",
 };

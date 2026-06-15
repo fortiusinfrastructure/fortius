@@ -20,7 +20,7 @@ import { getEditorialSlots } from "@/lib/articles";
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-    title: "Política — Fortius Consulting",
+    title: "Política | Fortius Consulting",
     description:
         "Inteligencia política y análisis de riesgos geopolíticos para líderes que asumen la responsabilidad de decidir y de servir.",
 };

@@ -4,7 +4,7 @@ import { Bracketed } from "@/components/system/Bracketed";
 import { ContactForm } from "@/components/consulting-v2/ContactForm";
 
 export const metadata: Metadata = {
-    title: "Contacto — Fortius Consulting",
+    title: "Contacto | Fortius Consulting",
     description:
         "Cuéntanos el reto. Te respondemos con una primera lectura estratégica en 48 horas.",
 };

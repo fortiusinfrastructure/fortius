@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getConsultingBillingPlan } from "@/lib/billing/plans";
 
 export const metadata: Metadata = {
-    title: "Suscribirse — Fortius Consulting",
+    title: "Suscribirse | Fortius Consulting",
     robots: { index: false, follow: false },
 };
 

@@ -18,7 +18,7 @@ import { getEditorialSlots } from "@/lib/articles";
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-    title: "Sociedad Civil — Fortius Consulting",
+    title: "Sociedad Civil | Fortius Consulting",
     description:
         "Acompañamos a fundaciones, think tanks, asociaciones y plataformas ciudadanas para convertir convicciones en estructura, influencia e impacto.",
 };

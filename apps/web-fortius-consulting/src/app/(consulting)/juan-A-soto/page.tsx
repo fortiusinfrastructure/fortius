@@ -12,7 +12,7 @@ export const revalidate = 600;
 
 export function generateMetadata(): Metadata {
     const member = TEAM.find((item) => item.slug === "juan-angel-soto");
-    const title = "Juan Ángel Soto — Fortius Consulting";
+    const title = "Juan Ángel Soto | Fortius Consulting";
     const description = "Founder & CEO de Fortius. Trayectoria académica, ejecutiva e institucional de Juan Ángel Soto Gómez.";
 
     return {

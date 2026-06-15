@@ -10,7 +10,7 @@ import { fetchArticles } from "@/lib/articles-db";
 import { getEditorialSlots } from "@/lib/articles";
 
 export const metadata: Metadata = {
-    title: "Fortius Consulting — v2 preview",
+    title: "Fortius Consulting | v2 preview",
     robots: { index: false, follow: false },
 };
 

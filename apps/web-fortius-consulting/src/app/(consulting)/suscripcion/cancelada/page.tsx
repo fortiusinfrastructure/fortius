@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getConsultingBillingPlan } from "@/lib/billing/plans";
 
 export const metadata: Metadata = {
-    title: "Suscripción cancelada — Fortius Consulting",
+    title: "Suscripción cancelada | Fortius Consulting",
     robots: { index: false, follow: false },
 };
 

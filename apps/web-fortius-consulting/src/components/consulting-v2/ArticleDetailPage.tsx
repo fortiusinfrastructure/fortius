@@ -36,7 +36,7 @@ export async function buildArticleMetadata(article: Article): Promise<Metadata> 
     const summary = getArticleSummary(article);
     const imageSources = getArticleImageSources(article);
     return {
-        title: `${article.title} — Fortius Consulting`,
+        title: `${article.title} | Fortius Consulting`,
         description: summary,
         openGraph: {
             title: article.title,

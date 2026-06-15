@@ -7,7 +7,7 @@ import { fetchArticles } from "@/lib/articles-db";
 export const revalidate = 600;
 
 export const metadata: Metadata = {
-    title: "Publicaciones — Fortius Consulting",
+    title: "Publicaciones | Fortius Consulting",
     description:
         "Archivo completo de artículos, informes, notas y noticias de Fortius Consulting en Sociedad Civil y Política.",
 };

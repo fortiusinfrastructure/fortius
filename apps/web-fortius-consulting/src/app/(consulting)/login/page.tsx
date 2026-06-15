@@ -3,7 +3,7 @@ import Link from 'next/link';
 import LoginForm from './LoginForm';
 
 export const metadata = {
-    title: 'Acceso — Fortius Consulting',
+    title: 'Acceso | Fortius Consulting',
 };
 
 export default function LoginPage() {

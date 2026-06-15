@@ -3,7 +3,7 @@ import { Bracketed } from "@/components/system/Bracketed";
 import { LegalSection } from "@/components/consulting-v2/LegalSection";
 
 export const metadata: Metadata = {
-    title: "Política de Privacidad — Fortius Consulting",
+    title: "Política de Privacidad | Fortius Consulting",
     description:
         "Política de privacidad del sitio web titularidad de Fortius Strategies SL y Fortius Americas LLC.",
 };

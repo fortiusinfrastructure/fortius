@@ -13,7 +13,7 @@ import { Bracketed } from "@/components/system/Bracketed";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-    title: "Ajustes de cuenta — Fortius Consulting",
+    title: "Ajustes de cuenta | Fortius Consulting",
     robots: { index: false, follow: false },
 };
 

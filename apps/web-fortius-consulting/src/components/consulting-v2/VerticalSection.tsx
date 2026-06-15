@@ -145,7 +145,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
               }
             : {
                 kicker: "Explorar oportunidades para Política",
-                  title: `En ${v.label} encontrarás servicios, expertos vinculados y acceso a la biblioteca completa.`,
+                  title: `En ${v.label} encontrarás servicios, expertos y acceso a la biblioteca completa.`,
                   description:
                       "Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y cómo puedes acceder.",
               };
@@ -434,7 +434,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                         {experts.length > 0 && (
                             <div className="mb-20">
                                 <div className="flex items-end justify-between mb-6">
-                                    <Bracketed variant="kicker">Expertos vinculados · {v.label}</Bracketed>
+                                    <Bracketed variant="kicker">Expertos · {v.label}</Bracketed>
                                     <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
                                         + bio al pulsar
                                     </span>

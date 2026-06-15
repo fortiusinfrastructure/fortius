@@ -6,7 +6,7 @@ import { DashboardClient } from "./DashboardClient";
 import { DashboardAdmin } from "./DashboardAdmin";
 
 export const metadata: Metadata = {
-    title: "Área Privada — Fortius Consulting",
+    title: "Área Privada | Fortius Consulting",
     description: "Acceso exclusivo para clientes y equipo de Fortius Consulting.",
     robots: { index: false, follow: false },
 };

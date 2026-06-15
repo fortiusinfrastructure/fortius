@@ -22,6 +22,26 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_NAME,
   description: SITE_DESCRIPTION,
+  icons: {
+    icon: [
+      {
+        url: "/branding/fortius-consulting-lockup-light.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/branding/fortius-consulting-lockup-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/branding/fortius-consulting-lockup-light.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/branding/fortius-consulting-lockup-light.png",
+    apple: "/branding/fortius-consulting-lockup-light.png",
+  },
 };
 
 export default function RootLayout({

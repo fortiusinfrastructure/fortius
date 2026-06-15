@@ -5,7 +5,7 @@ import SignupForm from './SignupForm';
 import { SITE_NAME } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-    title: `Crear cuenta — ${SITE_NAME}`,
+    title: `Crear cuenta | ${SITE_NAME}`,
     description: 'Activa tu suscripción de Fortius Consulting y accede a análisis e inteligencia de alto impacto.',
 };
 

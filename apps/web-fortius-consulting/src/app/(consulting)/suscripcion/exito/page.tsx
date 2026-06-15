@@ -3,7 +3,7 @@ import { getConsultingBillingPlan } from "@/lib/billing/plans";
 import { createServerClient } from "@fortius/database";
 
 export const metadata: Metadata = {
-    title: "Suscripción confirmada — Fortius Consulting",
+    title: "Suscripción confirmada | Fortius Consulting",
     robots: { index: false, follow: false },
 };
 

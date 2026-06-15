@@ -16,20 +16,20 @@ export async function generateMetadata({
     const member = teamMember || expertMember;
     
     if (!member) {
-        return { title: "No encontrado — Fortius Consulting" };
+        return { title: "No encontrado | Fortius Consulting" };
     }
 
     return {
-        title: `${member.name} — Fortius Consulting`,
+        title: `${member.name} | Fortius Consulting`,
         description: member.bio.slice(0, 160) + "...",
         openGraph: {
-            title: `${member.name} — Fortius Consulting`,
+            title: `${member.name} | Fortius Consulting`,
             description: member.bio.slice(0, 160) + "...",
             images: [{ url: getPersonSocialImage(member.photo) }],
         },
         twitter: {
             card: "summary_large_image",
-            title: `${member.name} — Fortius Consulting`,
+            title: `${member.name} | Fortius Consulting`,
             description: member.bio.slice(0, 160) + "...",
             images: [getPersonSocialImage(member.photo)],
         },
