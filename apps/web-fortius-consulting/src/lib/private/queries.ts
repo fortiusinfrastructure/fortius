@@ -237,3 +237,47 @@ export async function getMyClientProjects(orgId: string): Promise<ClientProjectR
         updatedAt: row.updated_at,
     }));
 }
+
+// ─── Client projects with user names (RLS-scoped) ─────────────────────────────
+
+export interface ClientProjectWithUsers extends ClientProjectRecord {
+    clientName: string | null;
+    consultantName: string | null;
+}
+
+type ProfileNameRow = { user_id: string; full_name: string | null };
+
+/**
+ * Same as getMyClientProjects but resolves client_user_id / consultant_user_id
+ * to user_profiles.full_name. Uses createServerClient so RLS still decides
+ * which projects are visible to the caller.
+ */
+export async function getMyClientProjectsWithUsers(
+    orgId: string,
+): Promise<ClientProjectWithUsers[]> {
+    const projects = await getMyClientProjects(orgId);
+    if (projects.length === 0) return [];
+
+    const userIds = new Set<string>();
+    for (const p of projects) {
+        userIds.add(p.clientUserId);
+        if (p.consultantUserId) userIds.add(p.consultantUserId);
+    }
+
+    const supabase = await createServerClient();
+    const res = await supabase
+        .from("user_profiles")
+        .select("user_id, full_name")
+        .in("user_id", Array.from(userIds));
+
+    const profiles = (res.data as ProfileNameRow[] | null) ?? [];
+    const nameMap = new Map(profiles.map((p) => [p.user_id, p.full_name]));
+
+    return projects.map((p) => ({
+        ...p,
+        clientName: nameMap.get(p.clientUserId) ?? null,
+        consultantName: p.consultantUserId
+            ? (nameMap.get(p.consultantUserId) ?? null)
+            : null,
+    }));
+}

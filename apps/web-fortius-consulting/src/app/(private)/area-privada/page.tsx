@@ -4,10 +4,13 @@ import {
     getMemberDashboardData,
     getAdminDashboardData,
     getMyClientProjects,
+    getMyClientProjectsWithUsers,
 } from "@/lib/private/queries";
 import { fetchArticles } from "@/lib/articles-db";
 import { DashboardClient } from "./DashboardClient";
 import { DashboardAdmin } from "./DashboardAdmin";
+import { DashboardSuperAdmin } from "./DashboardSuperAdmin";
+import { DashboardConsultant } from "./DashboardConsultant";
 
 export const metadata: Metadata = {
     title: "Área Privada | Fortius Consulting",
@@ -19,7 +22,19 @@ export default async function AreaPrivadaPage() {
     // Redirects to /login if not authenticated or no active membership
     const user = await requirePrivateUser();
 
-    // CEO / admin view
+    // Super admin → global management panel
+    if (user.role === "super_admin") {
+        const projects = await getMyClientProjectsWithUsers(user.orgId);
+        return <DashboardSuperAdmin user={user} projects={projects} />;
+    }
+
+    // Consultant → personal management panel (only assigned projects)
+    if (user.role === "consultant") {
+        const projects = await getMyClientProjectsWithUsers(user.orgId);
+        return <DashboardConsultant user={user} projects={projects} />;
+    }
+
+    // Legacy admin role (kept for compatibility)
     if (user.role === "admin") {
         const data = await getAdminDashboardData(user.orgId);
         return <DashboardAdmin user={user} data={data} />;
