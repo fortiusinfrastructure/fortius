@@ -4,12 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
 import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
-import { MOCK_PROJECTS } from "@/content/dashboard";
 import { TEAM } from "@/content/team";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
 import { Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin, CreditCard } from "lucide-react";
 import type { PrivateUser } from "@/lib/auth";
-import type { MemberDashboardData } from "@/lib/private/queries";
+import type { MemberDashboardData, ClientProjectRecord } from "@/lib/private/queries";
 import {
     formatPublishedDate,
     kindLabel,
@@ -48,9 +47,19 @@ interface Props {
     data: MemberDashboardData;
     /** All published articles, fetched server-side (lib/articles-db). */
     articles: Article[];
+    /** Client projects visible to the viewer via RLS. */
+    projects: ClientProjectRecord[];
 }
 
-export function DashboardClient({ user, data, articles }: Props) {
+function formatKpiValue(kpi: ClientProjectRecord["kpis"][number]) {
+    const value = kpi.value ?? "—";
+    const target = kpi.target ?? null;
+    const unit = kpi.unit ?? "";
+    const right = target !== null ? ` / ${target}` : "";
+    return `${value}${right}${unit ? ` ${unit}` : ""}`.trim();
+}
+
+export function DashboardClient({ user, data, articles, projects }: Props) {
     const linkedExperts = TEAM.filter(m => m.slug === "juan-angel-soto" || m.slug === "beatriz-de-leon-cobo");
     const category = getCategoryFromTier(data.tier ?? user.tier);
     const memberContent = articles.filter((item) => item.category === category);
@@ -171,7 +180,7 @@ export function DashboardClient({ user, data, articles }: Props) {
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease }}>
                         <Bracketed variant="tag">Estado de Proyectos</Bracketed>
                         <div className="mt-8 space-y-4">
-                            {MOCK_PROJECTS.map((project) => (
+                            {projects.length > 0 ? projects.map((project) => (
                                 <div key={project.id} className="p-6 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] flex flex-col md:flex-row md:items-center justify-between gap-6">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-3 mb-2">
@@ -182,18 +191,35 @@ export function DashboardClient({ user, data, articles }: Props) {
                                                 </span>
                                             ) : (
                                                 <span className="flex items-center gap-1.5 px-2 py-1 bg-gray-500/10 text-gray-400 text-[0.65rem] uppercase tracking-widest border border-gray-500/30">
-                                                    <CheckCircle2 size={12} /> Completado
+                                                    <CheckCircle2 size={12} /> {project.status === "completed" ? "Completado" : project.status}
                                                 </span>
                                             )}
                                         </div>
-                                        <p className="text-[0.9rem] text-[var(--text-secondary)]">{project.description}</p>
+                                        {project.summary && (
+                                            <p className="text-[0.9rem] text-[var(--text-secondary)]">{project.summary}</p>
+                                        )}
                                     </div>
                                     <div className="md:w-1/3 p-4 bg-[var(--color-neutral-1000)] border border-[var(--border-subtle)]">
-                                        <span className="block text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)] mb-2">Objetivo prioritario (OKR / KPI)</span>
-                                        <p className="text-[0.95rem] text-[var(--text-primary)]">{project.okr}</p>
+                                        <span className="block text-[0.65rem] uppercase tracking-widest text-[var(--text-tertiary)] mb-2">Objetivos / KPIs</span>
+                                        {project.kpis.length > 0 ? (
+                                            <ul className="space-y-1.5">
+                                                {project.kpis.map((kpi, i) => (
+                                                    <li key={i} className="flex items-baseline justify-between gap-3 text-[0.85rem]">
+                                                        <span className="text-[var(--text-secondary)]">{kpi.label || "—"}</span>
+                                                        <span className="text-[var(--text-primary)] tabular-nums">{formatKpiValue(kpi)}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <p className="text-[0.85rem] text-[var(--text-tertiary)]">Sin KPIs definidos.</p>
+                                        )}
                                     </div>
                                 </div>
-                            ))}
+                            )) : (
+                                <div className="p-6 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] text-[0.9rem] text-[var(--text-secondary)]">
+                                    Aún no tienes proyectos asignados. Tu equipo de Fortius te avisará cuando se inicie el primero.
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 </section>

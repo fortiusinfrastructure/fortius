@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { requirePrivateUser } from "@/lib/auth";
-import { getMemberDashboardData, getAdminDashboardData } from "@/lib/private/queries";
+import {
+    getMemberDashboardData,
+    getAdminDashboardData,
+    getMyClientProjects,
+} from "@/lib/private/queries";
 import { fetchArticles } from "@/lib/articles-db";
 import { DashboardClient } from "./DashboardClient";
 import { DashboardAdmin } from "./DashboardAdmin";
@@ -22,9 +26,12 @@ export default async function AreaPrivadaPage() {
     }
 
     // Member / client view
-    const [data, articles] = await Promise.all([
+    const [data, articles, projects] = await Promise.all([
         getMemberDashboardData(user.id, user.orgId),
         fetchArticles(),
+        getMyClientProjects(user.orgId),
     ]);
-    return <DashboardClient user={user} data={data} articles={articles} />;
+    return (
+        <DashboardClient user={user} data={data} articles={articles} projects={projects} />
+    );
 }

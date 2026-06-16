@@ -1,4 +1,4 @@
-import { createServerClient, createAdminClient, getCurrentOrg, getUserMembership } from "@fortius/database";
+import { createServerClient, getCurrentOrg, getUserMembership } from "@fortius/database";
 import { redirect } from "next/navigation";
 
 export interface ClientUser {
@@ -27,8 +27,9 @@ export async function requireClientUser(): Promise<ClientUser> {
 
 /**
  * Used by /area-privada pages.
- * Fetches auth session + active membership (with role) using the admin client
- * to bypass RLS. Redirects to /login if not authenticated or no active membership.
+ * Fetches auth session + active membership (with role) using the server
+ * client so RLS is the security contract. Redirects to /login if not
+ * authenticated or to /login?error=sin-acceso if no active membership.
  */
 export interface PrivateUser {
     id: string;
@@ -40,39 +41,45 @@ export interface PrivateUser {
     orgId: string;
 }
 
+type OrgRow = { id: string };
+type MembershipRow = { role: string | null; tier: string | null; status: string | null };
+type ProfileRow = { full_name: string | null };
+
 export async function requirePrivateUser(): Promise<PrivateUser> {
     const supabase = await createServerClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) redirect("/login");
 
-    const admin = createAdminClient();
     const orgSlug = process.env.NEXT_PUBLIC_ORG_SLUG ?? "fortius-consulting";
 
-    const { data: org } = await admin
+    const orgRes = await supabase
         .from("organizations")
         .select("id")
         .eq("slug", orgSlug)
         .single();
+    const org = orgRes.data as OrgRow | null;
 
     if (!org) redirect("/login");
 
-    const { data: membership } = await admin
+    const membershipRes = await supabase
         .from("user_memberships")
         .select("role, tier, status")
         .eq("user_id", user.id)
         .eq("organization_id", org.id)
         .eq("status", "active")
         .maybeSingle();
+    const membership = membershipRes.data as MembershipRow | null;
 
     // No active membership → redirect with context
     if (!membership) redirect("/login?error=sin-acceso");
 
     // Fetch display name from user_profiles (auto-created by trigger on signup)
-    const { data: profile } = await admin
+    const profileRes = await supabase
         .from("user_profiles")
         .select("full_name")
         .eq("user_id", user.id)
         .maybeSingle();
+    const profile = profileRes.data as ProfileRow | null;
 
     return {
         id: user.id,
@@ -85,3 +92,17 @@ export async function requirePrivateUser(): Promise<PrivateUser> {
     };
 }
 
+/**
+ * Used by /clients (consultant) pages.
+ * Wraps requirePrivateUser and additionally requires the role to be one of:
+ * 'consultant', 'admin', 'super_admin'. Redirects to /area-privada otherwise.
+ */
+const CONSULTANT_ROLES = ["consultant", "admin", "super_admin"] as const;
+
+export async function requireConsultantUser(): Promise<PrivateUser> {
+    const user = await requirePrivateUser();
+    if (!CONSULTANT_ROLES.includes(user.role as (typeof CONSULTANT_ROLES)[number])) {
+        redirect("/area-privada");
+    }
+    return user;
+}

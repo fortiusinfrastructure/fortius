@@ -1,10 +1,11 @@
 /**
  * Server-side queries for /area-privada dashboards.
- * Always uses createAdminClient to bypass RLS.
+ * Uses createAdminClient for cross-user views (admin dashboard) and
+ * createServerClient for caller-scoped reads where RLS is the contract.
  * No 'use server' — called directly from Server Components.
  */
 
-import { createAdminClient } from "@fortius/database";
+import { createAdminClient, createServerClient } from "@fortius/database";
 
 // ─── Member (client) dashboard ───────────────────────────────────────────────
 
@@ -158,4 +159,81 @@ export async function getAdminDashboardData(orgId: string): Promise<AdminDashboa
         totalActive: activeMembers.length,
         totalClients: activeMembers.filter((m) => m.role === "member").length,
     };
+}
+
+// ─── Client projects (RLS-scoped) ─────────────────────────────────────────────
+
+export interface ClientProjectKpi {
+    label: string;
+    value: string | number | null;
+    target: string | number | null;
+    unit: string | null;
+}
+
+export interface ClientProjectRecord {
+    id: string;
+    title: string;
+    summary: string | null;
+    status: string;
+    clientUserId: string;
+    consultantUserId: string | null;
+    kpis: ClientProjectKpi[];
+    startedAt: string | null;
+    endedAt: string | null;
+    updatedAt: string | null;
+}
+
+type ClientProjectRow = {
+    id: string;
+    title: string;
+    summary: string | null;
+    status: string;
+    client_user_id: string;
+    consultant_user_id: string | null;
+    kpis: unknown;
+    started_at: string | null;
+    ended_at: string | null;
+    updated_at: string | null;
+};
+
+function normalizeKpis(value: unknown): ClientProjectKpi[] {
+    if (!Array.isArray(value)) return [];
+    return value
+        .filter((item): item is Record<string, unknown> => typeof item === "object" && item !== null)
+        .map((item) => ({
+            label: typeof item.label === "string" ? item.label : "",
+            value: (item.value as string | number | null) ?? null,
+            target: (item.target as string | number | null) ?? null,
+            unit: typeof item.unit === "string" ? item.unit : null,
+        }));
+}
+
+/**
+ * Returns client_projects visible to the current authenticated viewer.
+ * RLS decides scope: clients see their own; consultants see assigned;
+ * admins see all in the org. Returns [] if no session or no rows.
+ */
+export async function getMyClientProjects(orgId: string): Promise<ClientProjectRecord[]> {
+    const supabase = await createServerClient();
+
+    const res = await supabase
+        .from("client_projects")
+        .select("id, title, summary, status, client_user_id, consultant_user_id, kpis, started_at, ended_at, updated_at")
+        .eq("organization_id", orgId)
+        .order("updated_at", { ascending: false });
+
+    const rows = (res.data as ClientProjectRow[] | null) ?? [];
+
+    return rows.map((row) => ({
+        id: row.id,
+        title: row.title,
+        summary: row.summary,
+        status: row.status,
+        clientUserId: row.client_user_id,
+        consultantUserId: row.consultant_user_id,
+        kpis: normalizeKpis(row.kpis),
+        startedAt: row.started_at,
+        endedAt: row.ended_at,
+        updatedAt: row.updated_at,
+    }));
 }

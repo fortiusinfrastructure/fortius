@@ -35,6 +35,22 @@ interface ArticleRow {
     metadata: Record<string, unknown> | null;
 }
 
+function sortByPublishedDateDesc(a: Article, b: Article) {
+    return (b.published_at ?? "").localeCompare(a.published_at ?? "");
+}
+
+function mergeWithFallback(primary: Article[]): Article[] {
+    const bySlug = new Map(primary.map((article) => [article.slug, article]));
+
+    for (const fallbackArticle of FALLBACK) {
+        if (!bySlug.has(fallbackArticle.slug)) {
+            bySlug.set(fallbackArticle.slug, fallbackArticle);
+        }
+    }
+
+    return [...bySlug.values()].sort(sortByPublishedDateDesc);
+}
+
 function rowToArticle(row: ArticleRow): Article | null {
     if (!CATEGORIES.includes(row.category as ArticleCategory)) return null;
 
@@ -64,8 +80,9 @@ function rowToArticle(row: ArticleRow): Article | null {
 
 /**
  * All published consulting articles, newest first.
- * Deduplicated per request via React cache(); falls back to the JSON
- * snapshot when Supabase is unavailable or returns no rows.
+ * Deduplicated per request via React cache(); merges Supabase rows with the
+ * local JSON snapshot so local editorial fallbacks (like home noticias) do
+ * not disappear when the DB is only partially seeded.
  */
 export const fetchArticles = cache(async (): Promise<Article[]> => {
     try {
@@ -91,7 +108,7 @@ export const fetchArticles = cache(async (): Promise<Article[]> => {
             .map((row) => rowToArticle(row as ArticleRow))
             .filter((a): a is Article => a !== null);
 
-        return mapped.length > 0 ? mapped : FALLBACK;
+        return mapped.length > 0 ? mergeWithFallback(mapped) : FALLBACK;
     } catch {
         return FALLBACK;
     }
