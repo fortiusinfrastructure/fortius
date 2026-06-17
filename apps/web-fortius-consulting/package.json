@@ -14,6 +14,7 @@
     "users:seed": "node scripts/seed-test-users.mjs"
   },
   "dependencies": {
+    "@fortius/admin-ui": "workspace:*",
     "@fortius/database": "workspace:*",
     "@fortius/ui": "workspace:*",
     "@supabase/ssr": "^0.5.2",

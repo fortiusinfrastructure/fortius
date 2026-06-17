@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
-import { Activity, Users, Briefcase, CheckCircle2 } from "lucide-react";
+import { Activity, Users, Briefcase, CheckCircle2, FileText, ArrowRight } from "lucide-react";
 import type { PrivateUser } from "@/lib/auth";
 import type { ClientProjectWithUsers } from "@/lib/private/queries";
 
@@ -48,6 +49,24 @@ export function DashboardSuperAdmin({ user, projects }: Props) {
             </header>
 
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-16 space-y-24">
+                {/* Herramientas editoriales */}
+                <section>
+                    <Bracketed variant="tag">Herramientas</Bracketed>
+                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Link
+                            href="/area-privada/admin/articulos"
+                            className="group p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] hover:border-[var(--color-accent-500)]/40 transition-colors flex items-center gap-4"
+                        >
+                            <FileText size={22} className="text-[var(--color-accent-400)] shrink-0" />
+                            <div className="flex-1">
+                                <p className="font-display text-[1.05rem] text-[var(--text-primary)]">Gestionar artículos</p>
+                                <p className="text-[0.8rem] text-[var(--text-tertiary)]">Publicar, editar y archivar contenidos del sitio.</p>
+                            </div>
+                            <ArrowRight size={16} className="text-[var(--text-tertiary)] group-hover:text-[var(--color-accent-400)] transition-colors" />
+                        </Link>
+                    </div>
+                </section>
+
                 {/* KPIs agregados */}
                 <section>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease }}>
@@ -101,7 +120,9 @@ export function DashboardSuperAdmin({ user, projects }: Props) {
                                     <div className="md:col-span-3">
                                         <p className="text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">Consultor</p>
                                         <p className="mt-1 text-[0.9rem] text-[var(--text-primary)]">
-                                            {project.consultantName ?? <span className="text-[var(--text-tertiary)]">Sin asignar</span>}
+                                            {project.consultantUserId
+                                                ? (project.consultantName ?? <span className="text-[var(--text-tertiary)]">Sin nombre</span>)
+                                                : <span className="text-[var(--text-tertiary)]">Sin asignar</span>}
                                         </p>
                                     </div>
 

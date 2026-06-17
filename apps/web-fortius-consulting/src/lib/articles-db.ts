@@ -14,6 +14,7 @@ import type {
     Article,
     ArticleAccess,
     ArticleCategory,
+    ArticleContentFormat,
     ArticleKind,
     ArticleSubproduct,
 } from "./articles";
@@ -61,6 +62,9 @@ function rowToArticle(row: ArticleRow): Article | null {
     // Fail closed: anything without an explicit "public" marker is treated as paid.
     const access: ArticleAccess = meta.access_level === "public" ? "public" : "paid";
 
+    const contentFormat: ArticleContentFormat =
+        meta.content_format === "html" ? "html" : "markdown";
+
     return {
         slug: row.slug,
         title: row.title_es ?? row.slug,
@@ -70,6 +74,7 @@ function rowToArticle(row: ArticleRow): Article | null {
         published_at: row.published_at ? row.published_at.slice(0, 10) : null,
         excerpt: row.excerpt_es ?? "",
         content_markdown: row.content_es ?? "",
+        content_format: contentFormat,
         subproducts: Array.isArray(meta.subproducts)
             ? (meta.subproducts as ArticleSubproduct[])
             : [],

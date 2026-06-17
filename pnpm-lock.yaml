@@ -102,6 +102,9 @@ importers:
 
   apps/web-fortius-consulting:
     dependencies:
+      '@fortius/admin-ui':
+        specifier: workspace:*
+        version: link:../../packages/admin-ui
       '@fortius/database':
         specifier: workspace:*
         version: link:../../packages/database

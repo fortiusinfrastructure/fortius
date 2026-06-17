@@ -50,6 +50,10 @@ async function renderMarkdown(md: string): Promise<string> {
     return marked.parse(md, { async: true, breaks: true, gfm: true });
 }
 
+function stripHtmlTags(html: string): string {
+    return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 async function getViewerArticleAccess(article: Article) {
     if (article.access !== "paid" && article.kind !== "evento") {
         return { canReadFull: true, canPurchaseEvent: false, hasPurchasedEvent: false };
@@ -121,14 +125,27 @@ export async function ArticleDetailPage({
 }: ArticleDetailPageProps) {
     const cover = getArticleCover(article.category);
     const imageSources = getArticleImageSources(article);
-    const lead = getArticleLeadData(article);
+    const isHtmlBody = article.content_format === "html";
+    const lead = isHtmlBody
+        ? { author: null, imageNote: null, markdown: article.content_markdown }
+        : getArticleLeadData(article);
     const isMembersOnly = article.access === "paid" || article.kind === "evento";
     const access = await getViewerArticleAccess(article);
     const previewParagraphs = article.kind === "evento" ? 2 : 3;
-    const bodyMarkdown = isMembersOnly && !access.canReadFull ? paidPreview(lead.markdown, previewParagraphs) : lead.markdown;
-    const html = await renderMarkdown(bodyMarkdown);
-    const readTime = estimateReadTime(lead.markdown);
-    const summary = getArticleSummary(article);
+    let html: string;
+    if (isHtmlBody) {
+        html = isMembersOnly && !access.canReadFull
+            ? `${article.excerpt || stripHtmlTags(article.content_markdown).slice(0, 600)}…`
+            : article.content_markdown;
+    } else {
+        const bodyMarkdown = isMembersOnly && !access.canReadFull ? paidPreview(lead.markdown, previewParagraphs) : lead.markdown;
+        html = await renderMarkdown(bodyMarkdown);
+    }
+    const readTimeBasis = isHtmlBody ? stripHtmlTags(article.content_markdown) : lead.markdown;
+    const readTime = estimateReadTime(readTimeBasis);
+    const summary = isHtmlBody
+        ? (article.excerpt || stripHtmlTags(article.content_markdown).slice(0, 240))
+        : getArticleSummary(article);
     const originalSource = getArticleOriginalSource(article);
 
     return (

@@ -15,6 +15,8 @@ export interface ArticleSubproduct {
     content: string;
 }
 
+export type ArticleContentFormat = "markdown" | "html";
+
 export interface Article {
     slug: string;
     title: string;
@@ -24,6 +26,7 @@ export interface Article {
     published_at: string | null;
     excerpt: string;
     content_markdown: string;
+    content_format?: ArticleContentFormat;
     subproducts: ArticleSubproduct[];
     source_file: string;
     cover_image?: string;
