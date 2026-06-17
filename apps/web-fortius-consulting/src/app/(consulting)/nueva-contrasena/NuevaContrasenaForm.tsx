@@ -3,15 +3,13 @@
 /**
  * NuevaContrasenaForm
  *
- * After the user clicks the recovery link in their email, Supabase verifies
- * the OTP and redirects to /nueva-contrasena with the session tokens in the
- * URL hash: #access_token=...&refresh_token=...&type=recovery
+ * Used for both flows that land here with session tokens in the URL hash:
+ *   * Password recovery: `#access_token=...&refresh_token=...&type=recovery`
+ *   * Invite (post Stripe checkout): same shape with `type=invite`
  *
- * The Supabase browser client reads the hash automatically and fires the
- * PASSWORD_RECOVERY event via onAuthStateChange. We wait for that event
- * before showing the form, so we know we have a valid recovery session.
- * On submit we call supabase.auth.updateUser() directly (client-side)
- * because the session lives in the browser at this point.
+ * We parse the hash manually because `createBrowserClient` (`@supabase/ssr`)
+ * uses cookie storage and does NOT auto-process hash tokens. `setSession()`
+ * activates the session client-side so `updateUser({ password })` works.
  */
 
 import { useState, useEffect, useTransition } from 'react';
@@ -23,26 +21,27 @@ const inputStyle = { background: 'var(--surface-secondary)', borderColor: 'var(-
 const inputFocusStyle = { borderColor: 'var(--color-accent-500)', boxShadow: '0 0 0 3px rgba(233,71,72,0.15)' };
 
 type State = 'checking' | 'ready' | 'invalid';
+type Flow = 'recovery' | 'invite';
 
 export default function NuevaContrasenaForm() {
     const [state, setState] = useState<State>('checking');
+    const [flow, setFlow] = useState<Flow>('recovery');
     const [isPending, startTransition] = useTransition();
     const [error, setError] = useState<string | null>(null);
     const [focused, setFocused] = useState<string | null>(null);
 
     useEffect(() => {
-        // Parse the URL hash manually — createBrowserClient (@supabase/ssr) uses
-        // cookie storage and does NOT auto-process hash tokens, so we can't rely
-        // on the PASSWORD_RECOVERY event. Instead we call setSession() directly.
         const params = new URLSearchParams(window.location.hash.slice(1));
         const accessToken = params.get('access_token');
         const refreshToken = params.get('refresh_token');
         const type = params.get('type');
 
-        if (!accessToken || !refreshToken || type !== 'recovery') {
+        if (!accessToken || !refreshToken || (type !== 'recovery' && type !== 'invite')) {
             setState('invalid');
             return;
         }
+
+        setFlow(type);
 
         const supabase = createBrowserClient(
             process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -81,7 +80,7 @@ export default function NuevaContrasenaForm() {
                 return;
             }
             await supabase.auth.signOut();
-            window.location.href = '/login?reset=ok';
+            window.location.href = flow === 'invite' ? '/login?activated=ok' : '/login?reset=ok';
         });
     }
 

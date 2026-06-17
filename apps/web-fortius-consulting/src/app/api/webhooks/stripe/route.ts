@@ -25,8 +25,16 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
  * Pay-first flow: looks up an existing Supabase user by email.
  * If none is found, invites them (creates account + sends activation email).
  * Returns the userId so the webhook can sync the membership immediately.
+ *
+ * If `fullName` is provided it is stored in `user_metadata.full_name` so the
+ * `on_auth_user_created` trigger can seed `user_profiles.full_name`. For users
+ * that already exist we backfill `user_profiles.full_name` only when it is
+ * currently empty, to avoid overwriting edits made from the private area.
+ *
+ * Invites land on `/nueva-contrasena` (hash flow with `type=invite`), not on
+ * `/api/auth/callback` which is PKCE-only for OAuth/recovery codes.
  */
-async function resolveOrInviteUser(email: string): Promise<string | null> {
+async function resolveOrInviteUser(email: string, fullName?: string | null): Promise<string | null> {
     const admin = createAdminClient();
 
     // 1. Look up the user in auth.users by email (paginated).
@@ -38,14 +46,32 @@ async function resolveOrInviteUser(email: string): Promise<string | null> {
         if (error) throw new Error(`listUsers failed: ${error.message}`);
 
         const existingUser = data.users.find((u) => u.email?.toLowerCase() === normalizedEmail);
-        if (existingUser) return existingUser.id;
+        if (existingUser) {
+            if (fullName) {
+                const { data: profile } = await admin
+                    .from("user_profiles")
+                    .select("full_name")
+                    .eq("id", existingUser.id)
+                    .single();
+                if (!profile?.full_name) {
+                    await admin
+                        .from("user_profiles")
+                        .update({ full_name: fullName })
+                        .eq("id", existingUser.id);
+                }
+            }
+            return existingUser.id;
+        }
 
         if (data.users.length < perPage) break; // last page reached
     }
 
-    // 2. No existing user — invite them (Supabase sends an activation email)
+    // 2. No existing user — invite them (Supabase sends an activation email).
+    //    Send the user to /nueva-contrasena where the hash tokens (type=invite)
+    //    are parsed client-side and a fresh password is set.
     const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
-        redirectTo: `${SITE_URL}/api/auth/callback`,
+        redirectTo: `${SITE_URL}/nueva-contrasena`,
+        data: fullName ? { full_name: fullName } : undefined,
     });
 
     if (error || !data.user) {
@@ -159,8 +185,9 @@ async function processEvent(
                 // Pay-first flow: if no userId in metadata, resolve/invite user by email
                 if (!subscription.metadata?.userId) {
                     const email = session.customer_details?.email || session.customer_email;
+                    const fullName = session.customer_details?.name ?? null;
                     if (email) {
-                        const userId = await resolveOrInviteUser(email);
+                        const userId = await resolveOrInviteUser(email, fullName);
                         if (userId) {
                             // Stamp userId onto the Stripe subscription so future renewal events
                             // use the fast lookup path (same pattern as membershipId fast-path)

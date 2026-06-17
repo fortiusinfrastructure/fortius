@@ -32,6 +32,7 @@ export default function LoginForm() {
         : '/area-privada';
 
     const resetOk = searchParams.get('reset') === 'ok';
+    const activatedOk = searchParams.get('activated') === 'ok';
 
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
@@ -58,6 +59,12 @@ export default function LoginForm() {
                 <p className="rounded-lg px-3 py-2 text-xs"
                     style={{ background: 'rgba(16,185,129,0.08)', color: '#10b981', border: '1px solid rgba(16,185,129,0.25)' }}>
                     ✓ Contraseña actualizada correctamente. Ya puedes iniciar sesión.
+                </p>
+            )}
+            {activatedOk && (
+                <p className="rounded-lg px-3 py-2 text-xs"
+                    style={{ background: 'rgba(16,185,129,0.08)', color: '#10b981', border: '1px solid rgba(16,185,129,0.25)' }}>
+                    ✓ Cuenta activada. Inicia sesión para acceder a tu área privada.
                 </p>
             )}
             {/* Email */}
@@ -124,23 +131,6 @@ export default function LoginForm() {
             >
                 {isPending ? 'Accediendo…' : 'Acceder'}
             </button>
-
-            {/* Divider */}
-            <div className="flex items-center gap-3 my-1">
-                <div className="flex-1 h-px" style={{ background: 'var(--border-default)' }} />
-                <span className="text-[10px] tracking-widest uppercase" style={{ color: 'var(--text-tertiary)' }}>o</span>
-                <div className="flex-1 h-px" style={{ background: 'var(--border-default)' }} />
-            </div>
-
-            {/* Register link */}
-            <p className="text-center text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                ¿Sin cuenta?{' '}
-                <Link href={`/registro${searchParams.get('redirect') ? `?redirect=${searchParams.get('redirect')}` : ''}`}
-                    className="font-medium transition-colors hover:opacity-80"
-                    style={{ color: 'var(--color-accent-400)' }}>
-                    Créala aquí
-                </Link>
-            </p>
         </form>
     );
 }

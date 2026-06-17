@@ -108,7 +108,7 @@ en Supabase. El estado actual es híbrido:
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `web-escuela-hispanica`  | Integración real con Supabase para auth, admin, membresías, pagos y eventos; todavía convive con `src/lib/mock-data` en parte del contenido editorial.                    |
 | `web-ieam`               | La web pública mantiene `src/lib/mock-data` como fuente transicional; existe script idempotente para sembrar `articles` y `activities` en Supabase por `organization_id`. |
-| `web-fortius-consulting` | Base editorial madura con contenido en `src/content/*.ts`, área privada aún mock y formulario de contacto persistente en Supabase + notificación por Resend.              |
+| `web-fortius-consulting` | Base editorial madura con contenido en `src/content/*.ts`; área privada con auth Supabase, RLS y dashboards por rol (`super_admin`, `consultant`, `member`); provisión de cuentas vía webhook de Stripe (sin signup público); contacto persistente en Supabase + notificación por Resend. |
 | `web-fortius-foundation` | Sitio institucional/editorial con contenido local en `src/content/*.ts`, blog estático y formularios de contacto/donación persistentes en Supabase + notificación por Resend. |
 
 ## Almacenamiento de archivos (Supabase Storage)
@@ -157,7 +157,7 @@ principales del ecosistema.
 | --- | --- | --- | --- | --- | --- | --- |
 | `web-escuela-hispanica` | App más operativa del monorepo: sitio, membresías, admin y pagos | Híbrido: Supabase + `src/lib/mock-data` | `es`, `en`, `pt` con `next-intl` | Admin real en `/admin` | Stripe + Resend + API routes | ✅ |
 | `web-ieam` | Sitio académico multilingüe + CMS editorial real | Híbrido: Supabase + `mock-data` + piloto `content-collections` | `es`, `en` con `next-intl` | CMS real en `/admin` | Colaboración y eventos; sin capa de pagos equivalente a EH | ✅ |
-| `web-fortius-consulting` | Sitio editorial estable con área privada aún mock | `src/content/*.ts` + contacto persistente en Supabase | Sin `next-intl` | Área privada simulada en `/area-privada` | Contacto con Supabase + Resend | ✅ |
+| `web-fortius-consulting` | Sitio editorial estable con área privada real (auth + RLS + roles) | `src/content/*.ts` + Supabase (auth, proyectos, suscripciones, contacto) | Sin `next-intl` | Dashboards por rol en `/area-privada`; provisión vía webhook de Stripe | Stripe (provisión) + contacto con Supabase + Resend | ✅ |
 | `web-fortius-foundation` | Sitio institucional/editorial ya rediseñado | `src/content/*.ts` + formularios persistentes en Supabase | Sin `next-intl` | Sin CMS; área privada informativa | Contacto y donación de intención con Supabase + Resend | ✅ |
 
 ### Notas rápidas por app
@@ -180,7 +180,19 @@ principales del ecosistema.
 
 - la capa pública está estable y compila bien
 - el contacto ya guarda en Supabase y registra comunicaciones
-- el área privada sigue siendo mock y es el principal pendiente funcional
+- el área privada ya usa auth real de Supabase con RLS y tres dashboards
+  diferenciados por rol (`super_admin`, `consultant`, `member`)
+- **no hay signup público**: las cuentas se provisionan desde el webhook de
+  Stripe (`inviteUserByEmail` tras pago verificado, con `full_name` capturado
+  de `customer_details` y `redirectTo: /nueva-contrasena`). `/registro`
+  redirige a `/login` y la server action `signUp` está deshabilitada
+- el dashboard del `member` ya bloquea "Contenido Exclusivo" y "Oportunidades
+  & Eventos" cuando la suscripción Stripe no está `active`/`trialing` (overlay
+  con CTA "Reactivar suscripción" / "Regularizar pago")
+- pendientes inmediatos: Fase 4 (CMS de artículos con `ArticleEditor`
+  compartido) y Fase 5 (subida segura de medios)
+- ver bitácora completa en
+  [`apps/web-fortius-consulting/README.md`](apps/web-fortius-consulting/README.md#bit%C3%A1cora-de-decisiones)
 
 #### `web-fortius-foundation`
 
@@ -197,7 +209,7 @@ por app.
 | --- | --- | --- | --- | --- | --- | --- |
 | `web-escuela-hispanica` | ✅ | Supabase real | ✅ | Stripe real | Resend real | seguir reduciendo `mock-data` sin romper operación |
 | `web-ieam` | ✅ | Supabase + capa híbrida | ✅ | no aplica como EH | formularios/eventos con integración parcial | completar migración desde `mock-data` y mover `middleware` a `proxy` |
-| `web-fortius-consulting` | ✅ | contenido local + contacto persistente | mock | no activo | implementado, pendiente validación runtime completa | sustituir área privada mock y cerrar keys de email |
+| `web-fortius-consulting` | ✅ | Supabase (auth, RLS, proyectos, suscripciones) + contacto persistente; contenido editorial aún local | sin CMS propio (planeado Fase 4) | Stripe activo: provisión invite-only (webhook → invite → `/nueva-contrasena`) + gate del dashboard por `stripeStatus` | implementado, pendiente validación runtime completa | Fase 4 (CMS) + Fase 5 (subida segura de medios) + cerrar keys de email |
 | `web-fortius-foundation` | ✅ | contenido local + formularios persistentes | no tiene CMS | intención de donación, sin checkout directo | implementado, pendiente validación runtime completa | decidir si más contenido migra a Supabase y cerrar keys de email |
 
 ## Matriz de variables de entorno por app

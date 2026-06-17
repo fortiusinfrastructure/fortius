@@ -3,7 +3,6 @@ import { requirePrivateUser } from "@/lib/auth";
 import {
     getMemberDashboardData,
     getAdminDashboardData,
-    getMyClientProjects,
     getMyClientProjectsWithUsers,
 } from "@/lib/private/queries";
 import { fetchArticles } from "@/lib/articles-db";
@@ -44,7 +43,7 @@ export default async function AreaPrivadaPage() {
     const [data, articles, projects] = await Promise.all([
         getMemberDashboardData(user.id, user.orgId),
         fetchArticles(),
-        getMyClientProjects(user.orgId),
+        getMyClientProjectsWithUsers(user.orgId),
     ]);
     return (
         <DashboardClient user={user} data={data} articles={articles} projects={projects} />

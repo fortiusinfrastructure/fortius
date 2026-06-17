@@ -4,11 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
 import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
-import { TEAM } from "@/content/team";
+import { TEAM, type TeamMember } from "@/content/team";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
-import { Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin, CreditCard } from "lucide-react";
+import { Lock, CalendarPlus, Activity, CheckCircle2, Clock, Mail, MapPin, CreditCard, UserCircle2 } from "lucide-react";
 import type { PrivateUser } from "@/lib/auth";
-import type { MemberDashboardData, ClientProjectRecord } from "@/lib/private/queries";
+import type { MemberDashboardData, ClientProjectWithUsers } from "@/lib/private/queries";
 import {
     formatPublishedDate,
     kindLabel,
@@ -47,11 +47,11 @@ interface Props {
     data: MemberDashboardData;
     /** All published articles, fetched server-side (lib/articles-db). */
     articles: Article[];
-    /** Client projects visible to the viewer via RLS. */
-    projects: ClientProjectRecord[];
+    /** Client projects visible to the viewer via RLS, with user names resolved. */
+    projects: ClientProjectWithUsers[];
 }
 
-function formatKpiValue(kpi: ClientProjectRecord["kpis"][number]) {
+function formatKpiValue(kpi: ClientProjectWithUsers["kpis"][number]) {
     const value = kpi.value ?? "—";
     const target = kpi.target ?? null;
     const unit = kpi.unit ?? "";
@@ -59,8 +59,35 @@ function formatKpiValue(kpi: ClientProjectRecord["kpis"][number]) {
     return `${value}${right}${unit ? ` ${unit}` : ""}`.trim();
 }
 
+function normalizeName(s: string) {
+    return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+interface AssignedConsultant {
+    userId: string;
+    name: string;
+    team: TeamMember | null;
+}
+
+function deriveAssignedConsultants(projects: ClientProjectWithUsers[]): AssignedConsultant[] {
+    const seen = new Map<string, AssignedConsultant>();
+    for (const p of projects) {
+        if (!p.consultantUserId) continue;
+        if (seen.has(p.consultantUserId)) continue;
+        const name = p.consultantName ?? "";
+        const norm = normalizeName(name);
+        const team = norm ? (TEAM.find((m) => normalizeName(m.name) === norm) ?? null) : null;
+        seen.set(p.consultantUserId, {
+            userId: p.consultantUserId,
+            name: name || "Sin nombre",
+            team,
+        });
+    }
+    return Array.from(seen.values());
+}
+
 export function DashboardClient({ user, data, articles, projects }: Props) {
-    const linkedExperts = TEAM.filter(m => m.slug === "juan-angel-soto" || m.slug === "beatriz-de-leon-cobo");
+    const linkedExperts = deriveAssignedConsultants(projects);
     const category = getCategoryFromTier(data.tier ?? user.tier);
     const memberContent = articles.filter((item) => item.category === category);
     const publications = memberContent
@@ -77,7 +104,13 @@ export function DashboardClient({ user, data, articles, projects }: Props) {
 
     const greeting = user.fullName?.split(" ")[0] ?? user.email ?? "Cliente";
     const renewalDate = formatRenewal(data.subscription?.currentPeriodEnd ?? null);
-    const isActive = (data.subscription?.stripeStatus ?? data.status) === "active";
+    const stripeStatus = data.subscription?.stripeStatus ?? null;
+    const hasActiveSubscription =
+        stripeStatus === "active" ||
+        stripeStatus === "trialing" ||
+        (stripeStatus === null && data.status === "active");
+    const isPastDue = stripeStatus === "past_due";
+    const isActive = hasActiveSubscription;
     const willCancel = data.subscription?.cancelAtPeriodEnd;
 
     return (
@@ -129,49 +162,64 @@ export function DashboardClient({ user, data, articles, projects }: Props) {
             </header>
 
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-16 space-y-24">
-                {/* Expertos Vinculados */}
+                {/* Equipo Asignado — derivado del consultor real del proyecto */}
                 <section>
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease }}>
                         <Bracketed variant="tag">Equipo Asignado</Bracketed>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                            {linkedExperts.map((expert, i) => (
-                                <div key={expert.slug} className="border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] p-4 transition-colors hover:border-[var(--color-accent-500)]">
-                                    <div className="flex items-center gap-4">
-                                        <PersonPortrait name={expert.name} photo={expert.photo} size="sm" className="shrink-0" />
-                                        <div>
-                                            <h3 className="font-display text-[1.1rem] text-[var(--text-primary)]">{expert.name}</h3>
-                                            <p className="mt-1 text-[0.75rem] uppercase tracking-wider text-[var(--color-accent-400)]">{expert.role}</p>
+                        {linkedExperts.length === 0 ? (
+                            <div className="mt-8 p-5 border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] text-[0.9rem] text-[var(--text-secondary)]">
+                                Aún no tienes un consultor asignado. En cuanto se inicie tu proyecto te lo comunicaremos.
+                            </div>
+                        ) : (
+                            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                {linkedExperts.map((expert) => {
+                                    const team = expert.team;
+                                    return (
+                                        <div key={expert.userId} className="border border-[var(--border-subtle)] bg-[var(--color-neutral-900)] p-4 transition-colors hover:border-[var(--color-accent-500)]">
+                                            <div className="flex items-center gap-4">
+                                                {team ? (
+                                                    <PersonPortrait name={team.name} photo={team.photo} size="sm" className="shrink-0" />
+                                                ) : (
+                                                    <UserCircle2 size={48} className="shrink-0 text-[var(--text-tertiary)]" />
+                                                )}
+                                                <div>
+                                                    <h3 className="font-display text-[1.1rem] text-[var(--text-primary)]">{team?.name ?? expert.name}</h3>
+                                                    {team?.role && (
+                                                        <p className="mt-1 text-[0.75rem] uppercase tracking-wider text-[var(--color-accent-400)]">{team.role}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-4 space-y-2 border-t border-[var(--border-subtle)] pt-4 text-[0.8rem] text-[var(--text-secondary)]">
+                                                {team && (team.area || team.country) && (
+                                                    <p className="flex items-start gap-2">
+                                                        <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
+                                                        <span>{team.area ?? team.country}</span>
+                                                    </p>
+                                                )}
+                                                <p className="flex items-start gap-2">
+                                                    <Mail size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
+                                                    <span>Coordinación: {CLIENT_COORDINATION_EMAIL}</span>
+                                                </p>
+                                            </div>
+
+                                            <div className="mt-4 flex flex-wrap gap-2">
+                                                {team?.linkedin && (
+                                                    <a href={team.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
+                                                        <LinkedInBrandIcon size={14} />
+                                                        LinkedIn
+                                                    </a>
+                                                )}
+                                                <a href={`mailto:${CLIENT_COORDINATION_EMAIL}?subject=${encodeURIComponent(`Contacto para ${team?.name ?? expert.name}`)}`} className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
+                                                    <Mail size={14} />
+                                                    Escribir
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div className="mt-4 space-y-2 border-t border-[var(--border-subtle)] pt-4 text-[0.8rem] text-[var(--text-secondary)]">
-                                        {(expert.area || expert.country) && (
-                                            <p className="flex items-start gap-2">
-                                                <MapPin size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
-                                                <span>{expert.area ?? expert.country}</span>
-                                            </p>
-                                        )}
-                                        <p className="flex items-start gap-2">
-                                            <Mail size={14} className="mt-0.5 shrink-0 text-[var(--color-accent-400)]" />
-                                            <span>Coordinación: {CLIENT_COORDINATION_EMAIL}</span>
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-4 flex flex-wrap gap-2">
-                                        {expert.linkedin && (
-                                            <a href={expert.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
-                                                <LinkedInBrandIcon size={14} />
-                                                LinkedIn
-                                            </a>
-                                        )}
-                                        <a href={`mailto:${CLIENT_COORDINATION_EMAIL}?subject=${encodeURIComponent(`Contacto para ${expert.name}`)}`} className="inline-flex items-center gap-2 border border-[var(--border-subtle)] px-3 py-2 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-primary)] transition-colors hover:border-[var(--color-accent-500)]">
-                                            <Mail size={14} />
-                                            Escribir
-                                        </a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </motion.div>
                 </section>
 
@@ -224,8 +272,33 @@ export function DashboardClient({ user, data, articles, projects }: Props) {
                     </motion.div>
                 </section>
 
-                {/* Ventajas: Contenido Exclusivo y Oportunidades */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 pt-8 border-t border-[var(--border-subtle)]">
+                {/* Ventajas: Contenido Exclusivo y Oportunidades — gateadas por suscripción Stripe */}
+                <div className="relative pt-8 border-t border-[var(--border-subtle)]">
+                    {!hasActiveSubscription && (
+                        <div className="absolute inset-x-0 top-8 bottom-0 z-10 flex items-start md:items-center justify-center px-4 py-10 backdrop-blur-md bg-[var(--color-neutral-1000)]/70">
+                            <div className="max-w-md w-full text-center p-8 border border-[var(--border-default)] bg-[var(--color-neutral-900)]">
+                                <Lock size={32} className="text-[var(--color-accent-400)] mx-auto mb-4" />
+                                <h3 className="font-display text-[1.4rem] text-[var(--text-primary)] mb-3">
+                                    {isPastDue ? "Pago pendiente" : "Suscripción inactiva"}
+                                </h3>
+                                <p className="text-[0.9rem] text-[var(--text-secondary)] mb-6 leading-relaxed">
+                                    {isPastDue
+                                        ? "Tu último pago no se ha completado. Regulariza tu suscripción para recuperar el acceso al contenido exclusivo y a las oportunidades reservadas para clientes."
+                                        : "Reactiva tu suscripción para acceder al contenido exclusivo y a las oportunidades reservadas para clientes de Fortius Consulting."}
+                                </p>
+                                <Link
+                                    href="/area-privada/cuenta#suscripcion"
+                                    className="inline-flex items-center gap-2 px-5 py-3 bg-[var(--color-accent-500)] text-white text-[0.75rem] uppercase tracking-[0.16em] hover:bg-[var(--color-accent-600)] transition-colors"
+                                >
+                                    {isPastDue ? "Regularizar pago" : "Reactivar suscripción"} →
+                                </Link>
+                            </div>
+                        </div>
+                    )}
+                    <div
+                        className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 ${!hasActiveSubscription ? "blur-sm pointer-events-none select-none" : ""}`}
+                        aria-hidden={!hasActiveSubscription}
+                    >
                     <section>
                         <Bracketed variant="tag">Contenido Exclusivo</Bracketed>
                         <div className="mt-8 space-y-4">
@@ -322,6 +395,7 @@ export function DashboardClient({ user, data, articles, projects }: Props) {
                             )}
                         </div>
                     </section>
+                    </div>
                 </div>
             </div>
         </div>
