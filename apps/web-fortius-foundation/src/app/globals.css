@@ -28,16 +28,16 @@
   /* --- Brand: Foundation (Deep Forest Green — base #164735) ---
      Scale designed so 500 is a slightly brighter, more vibrant variant
      that reads well on the dark surface while staying in the #164735 family. */
-  --color-accent-900: #061812;
-  --color-accent-800: #0b261c;
-  --color-accent-700: #0f3227;
-  --color-accent-600: #123c2e;
-  --color-accent-500: #164735;  /* brand base */
-  --color-accent-450: #1f5f47;
-  --color-accent-400: #2d7a5b;
-  --color-accent-300: #4f9b7c;
-  --color-accent-200: #83c0a2;
-  --color-accent-100: #c0dfd0;
+  --color-accent-900: #0a1f16;
+  --color-accent-800: #123a27;
+  --color-accent-700: #1b563a;
+  --color-accent-600: #27724d;
+  --color-accent-500: #3a9c6e;  /* brand base - electric logo green */
+  --color-accent-450: #4aa87e;
+  --color-accent-400: #5cb890;
+  --color-accent-300: #83cbab;
+  --color-accent-200: #a9dec4;
+  --color-accent-100: #d0f0e0;
 
   /* --- Consulting (sibling accent — kept for cross-brand footer/lockups) --- */
   --color-sibling-500: #e94748;

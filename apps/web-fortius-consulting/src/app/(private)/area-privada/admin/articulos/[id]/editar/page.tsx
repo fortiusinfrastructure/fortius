@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { marked } from "marked";
 import { requireConsultantUser } from "@/lib/auth";
 import { getAdminArticleById } from "@/lib/admin/article-queries";
 import { EditArticleForm } from "./EditArticleForm";
@@ -44,7 +45,7 @@ export default async function EditArticlePage({ params }: PageProps) {
                             slug: article.slug,
                             title_es: article.title_es,
                             excerpt_es: article.excerpt_es,
-                            content_es: article.content_es,
+                            content_es: article.content_format === "markdown" ? await marked.parse(article.content_es) : article.content_es,
                             category: article.category as "politica" | "sociedad-civil" | "home",
                             kind: article.kind as "comentario" | "informe" | "nota" | "evento" | "noticia" | "articulo",
                             access: article.access,

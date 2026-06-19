@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Bracketed } from "@/components/system/Bracketed";
 import { FOUNDATION_CONTACT } from "@/content/site";
 
@@ -37,12 +38,20 @@ export default function AreaPrivadaPage() {
           ))}
         </div>
 
-        <a
-          href={`mailto:${FOUNDATION_CONTACT.email}?subject=Solicitud%20de%20acceso%20al%20%C3%81rea%20Privada`}
-          className="mt-10 inline-flex items-center justify-center bg-[var(--color-accent-500)] px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white"
-        >
-          Solicitar acceso
-        </a>
+        <div className="mt-10 flex gap-4">
+          <Link
+            href="/login"
+            className="inline-flex items-center justify-center bg-[var(--color-accent-500)] px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white transition-opacity hover:opacity-90"
+          >
+            Iniciar sesión
+          </Link>
+          <Link
+            href="/registro"
+            className="inline-flex items-center justify-center border border-[var(--border-strong)] bg-transparent px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
+          >
+            Crear cuenta
+          </Link>
+        </div>
       </section>
     </main>
   );

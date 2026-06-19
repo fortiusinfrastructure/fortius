@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const metadataBase = process.env.NEXT_PUBLIC_SITE_URL
@@ -23,9 +24,21 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   metadataBase,
-  title: "Fortius Foundation",
-  description:
-    "Fortius Foundation — grant-making foundation al servicio de una sociedad civil más fuerte.",
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    type: "website",
+    locale: "es_ES",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

@@ -72,6 +72,7 @@ export function getArticleImageSources(article: Article) {
     // Source_file candidates are kept as fallback for any future articles
     // whose images haven't been renamed yet.
     const allSources = [
+        article.cover_image,
         `/images/articles/${article.category}/${article.slug}.png`,
         `/images/articles/${article.category}/${article.slug}.jpg`,
         ...sourceFileCandidates,
@@ -96,6 +97,7 @@ export interface ArticleLeadData {
     author: string | null;
     imageNote: string | null;
     markdown: string;
+    html?: string;
 }
 
 export interface EventPackage {
@@ -156,9 +158,12 @@ function cleanPreviewText(text: string): string {
     );
 }
 
-function plainLines(markdown: string): string[] {
-    return markdown
-        .split("\n")
+function plainLines(text: string, isHtml: boolean): string[] {
+    const rawLines = isHtml
+        ? text.replace(/<br\s*\/?>/gi, "\n").replace(/<\/p>/gi, "\n").replace(/<[^>]+>/g, "").split("\n")
+        : text.split("\n");
+
+    return rawLines
         .map((line) => stripFormatting(line))
         .map((line) => line.replace(/\[(.*?)\]\((.*?)\)/g, "$1"))
         .map((line) => line.trim())
@@ -215,7 +220,14 @@ export function getFirstNarrativeParagraph(markdown: string): string | null {
 }
 
 export function getArticleLeadData(article: Article): ArticleLeadData {
-    const lines = [...article.content_markdown.split("\n")];
+    const rawContent = article.content_format === "html"
+        ? article.content_markdown
+              .replace(/<h[1-6][^>]*>/gi, "\n\n# ")
+              .replace(/<br\s*\/?>/gi, "\n")
+              .replace(/<\/p>/gi, "\n\n")
+              .replace(/<[^>]+>/g, "")
+        : article.content_markdown;
+    const lines = [...rawContent.split("\n")];
     let imageNote: string | null = null;
 
     while (lines[0]?.trim() === "") lines.shift();
@@ -293,7 +305,7 @@ export function getEventArticleData(article: Article): EventArticleData | null {
     if (article.kind !== "evento") return null;
 
     const lead = getArticleLeadData(article);
-    const lines = plainLines(lead.markdown);
+    const lines = plainLines(lead.markdown, article.content_format === "html");
     let date: string | null = null;
     let location: string | null = null;
     let organizer: string | null = null;

@@ -35,12 +35,11 @@ async function getOrgId(): Promise<string> {
     return data.id;
 }
 
-function buildMetadata(input: ConsultingArticleInput, sourceFile: string) {
+function buildMetadata(input: ConsultingArticleInput, existingMeta: Record<string, unknown> = {}) {
     return {
+        ...existingMeta,
         access_level: input.access,
         kind: input.kind,
-        subproducts: [],
-        source_file: sourceFile,
         content_format: "html" as const,
     };
 }
@@ -80,7 +79,7 @@ export async function createArticleAction(input: ConsultingArticleInput): Promis
             published_at: publishedAtToIso(input),
             read_time: input.read_time || null,
             author_id: user.id,
-            metadata: buildMetadata(input, "manual-cms"),
+            metadata: buildMetadata(input, { source_file: "manual-cms" }),
         })
         .select("id")
         .single();
@@ -122,7 +121,7 @@ export async function updateArticleAction(id: string, input: ConsultingArticleIn
             featured_image: input.featured_image || null,
             published_at: publishedAtToIso(input),
             read_time: input.read_time || null,
-            metadata: buildMetadata(input, sourceFile),
+            metadata: buildMetadata(input, existingMeta),
         })
         .eq("id", id)
         .eq("organization_id", orgId);

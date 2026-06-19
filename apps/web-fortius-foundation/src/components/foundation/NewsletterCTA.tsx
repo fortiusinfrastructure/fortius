@@ -1,7 +1,34 @@
+"use client";
+
+import { useState } from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
-import { FOUNDATION_CONTACT } from "@/content/site";
+import { subscribeToNewsletter } from "@/lib/actions/newsletter";
 
 export function NewsletterCTA() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!email) return;
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      const result = await subscribeToNewsletter(formData);
+      setStatus(result.success ? "success" : "error");
+      setMessage(result.message);
+      if (result.success) setEmail("");
+    } catch {
+      setStatus("error");
+      setMessage("No hemos podido completar la suscripción. Inténtalo de nuevo.");
+    }
+  }
+
   return (
     <section
       aria-labelledby="newsletter-title"
@@ -29,21 +56,38 @@ export function NewsletterCTA() {
             sitio. Una vez al mes.
           </p>
 
-          <p className="mt-8 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-            Suscripción por correo
-          </p>
-          <p className="mt-3 font-display text-[1.8rem] font-light text-[var(--text-primary)]">
-            {FOUNDATION_CONTACT.email}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={`mailto:${FOUNDATION_CONTACT.email}?subject=Alta%20bolet%C3%ADn%20Fortius%20Foundation`}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors"
+          <form onSubmit={handleSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="tu@correo.com"
+              disabled={status === "loading"}
+              className="flex-1 bg-transparent border border-[var(--border-strong)] px-5 py-3.5 text-[0.9rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none transition-colors"
+            />
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors"
               style={{ backgroundColor: "var(--color-accent-500)" }}
             >
-              Suscribirme
-            </a>
-          </div>
+              {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : null}
+              {status === "success" ? "¡Gracias!" : "Suscribirme"}
+              {status !== "loading" && (
+                <ArrowRight
+                  size={14}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              )}
+            </button>
+          </form>
+
+          {message && (
+            <p className={`mt-4 text-[0.85rem] leading-relaxed ${status === "error" ? "text-[#f59e0b]" : "text-[#10b981]"}`}>
+              {message}
+            </p>
+          )}
         </div>
       </div>
     </section>

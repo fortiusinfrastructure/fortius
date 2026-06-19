@@ -11,6 +11,9 @@
     "entradas:convert": "python3 scripts/convert-entradas.py"
   },
   "dependencies": {
+    "@fortius/database": "workspace:*",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.39.0",
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.5",

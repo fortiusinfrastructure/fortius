@@ -21,9 +21,6 @@ export const LEGAL_LINKS = [
 
 export const FOUNDATION_SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/fundacion-fortius/" },
-  { label: "X", href: "https://twitter.com/JuanASotoG" },
-  { label: "Instagram", href: "https://www.instagram.com/fortius_consulting/" },
-  { label: "YouTube", href: "https://www.youtube.com/@fortius_media" },
 ] as const;
 
 export const ABOUT_SECTIONS = [

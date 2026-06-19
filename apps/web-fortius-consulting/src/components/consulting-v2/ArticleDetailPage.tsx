@@ -126,23 +126,21 @@ export async function ArticleDetailPage({
     const cover = getArticleCover(article.category);
     const imageSources = getArticleImageSources(article);
     const isHtmlBody = article.content_format === "html";
-    const lead = isHtmlBody
-        ? { author: null, imageNote: null, markdown: article.content_markdown }
-        : getArticleLeadData(article);
+    const lead = getArticleLeadData(article);
     const isMembersOnly = article.access === "paid" || article.kind === "evento";
     const access = await getViewerArticleAccess(article);
     const previewParagraphs = article.kind === "evento" ? 2 : 3;
     let html: string;
     if (isHtmlBody) {
         html = isMembersOnly && !access.canReadFull
-            ? `${article.excerpt || stripHtmlTags(article.content_markdown).slice(0, 600)}…`
-            : article.content_markdown;
+            ? `${article.excerpt || stripHtmlTags(lead.html || article.content_markdown).slice(0, 600)}…`
+            : (lead.html || article.content_markdown);
     } else {
         const bodyMarkdown = isMembersOnly && !access.canReadFull ? paidPreview(lead.markdown, previewParagraphs) : lead.markdown;
         html = await renderMarkdown(bodyMarkdown);
     }
     const readTimeBasis = isHtmlBody ? stripHtmlTags(article.content_markdown) : lead.markdown;
-    const readTime = estimateReadTime(readTimeBasis);
+    const readTime = article.read_time || estimateReadTime(readTimeBasis);
     const summary = isHtmlBody
         ? (article.excerpt || stripHtmlTags(article.content_markdown).slice(0, 240))
         : getArticleSummary(article);

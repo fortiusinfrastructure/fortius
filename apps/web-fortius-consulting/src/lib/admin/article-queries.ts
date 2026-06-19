@@ -133,7 +133,7 @@ export async function getAdminArticleById(id: string): Promise<AdminArticleRecor
         access: readAccess(row.metadata),
         status: (row.status as AdminArticleRecord["status"]) ?? "draft",
         is_featured: row.is_featured ?? false,
-        featured_image: row.featured_image ?? "",
+        featured_image: row.featured_image ?? (typeof row.metadata?.cover_image === "string" ? row.metadata.cover_image : ""),
         published_at: row.published_at ? row.published_at.split("T")[0] : "",
         read_time: row.read_time ?? "",
     };

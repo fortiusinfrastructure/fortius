@@ -272,7 +272,7 @@ export function NosotrosClient() {
                     <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">Socios estratégicos</Bracketed>
                         <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                            Trabajamos con socios que amplían nuestra capacidad de servir, canalizar ayuda y fortalecer iniciativas con impacto real.
+                            Trabajamos con socios que amplifican nuestra capacidad de servir, canalizar ayuda y fortalecer iniciativas con impacto real.
                         </p>
                         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
                             {STRATEGIC_PARTNERS.map((partner) => (
@@ -283,13 +283,24 @@ export function NosotrosClient() {
                                     rel="noopener noreferrer"
                                     className="group border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8 transition-colors hover:bg-[var(--surface-secondary)]"
                                 >
-                                    <div className="flex min-h-[110px] items-center justify-center border border-[var(--border-subtle)] bg-[var(--surface-brand)] p-6">
-                                        <img
-                                            src={partner.logoSrc}
-                                            alt={`Logo de ${partner.name}`}
-                                            className="max-h-14 w-auto object-contain"
-                                            loading="lazy"
+                                    <div className="relative overflow-hidden flex min-h-[110px] items-center justify-center border border-[var(--border-subtle)] bg-[var(--surface-brand)] p-6">
+                                        <div
+                                            className="absolute inset-0 opacity-50"
+                                            style={{
+                                                background:
+                                                    "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%), linear-gradient(135deg, rgba(11,31,22,0.18) 0%, rgba(11,31,22,0) 65%)",
+                                            }}
                                         />
+                                        <div className="absolute -right-5 top-1/2 -translate-y-1/2 text-[5rem] font-display italic leading-none text-[var(--color-accent-300)]/10">
+                                            ]
+                                        </div>
+                                        <div className="relative flex items-center gap-2">
+                                            <span className="text-xl font-light text-[var(--color-accent-300)]">[</span>
+                                            <span className="font-display text-xl md:text-2xl font-light text-white text-center">
+                                                {partner.name}
+                                            </span>
+                                            <span className="text-xl font-light text-[var(--color-accent-300)]">]</span>
+                                        </div>
                                     </div>
                                     <h3 className="mt-8 font-display text-[1.8rem] font-light text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">
                                         {partner.name}

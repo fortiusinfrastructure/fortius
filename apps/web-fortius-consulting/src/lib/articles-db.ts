@@ -34,6 +34,9 @@ interface ArticleRow {
     category: string | null;
     published_at: string | null;
     metadata: Record<string, unknown> | null;
+    featured_image: string | null;
+    is_featured: boolean | null;
+    read_time: string | null;
 }
 
 function sortByPublishedDateDesc(a: Article, b: Article) {
@@ -79,7 +82,9 @@ function rowToArticle(row: ArticleRow): Article | null {
             ? (meta.subproducts as ArticleSubproduct[])
             : [],
         source_file: typeof meta.source_file === "string" ? meta.source_file : "",
-        cover_image: typeof meta.cover_image === "string" ? meta.cover_image : undefined,
+        cover_image: row.featured_image ?? (typeof meta.cover_image === "string" ? meta.cover_image : undefined),
+        is_featured: row.is_featured ?? false,
+        read_time: row.read_time ?? undefined,
     };
 }
 
@@ -102,7 +107,7 @@ export const fetchArticles = cache(async (): Promise<Article[]> => {
 
         const { data, error } = await admin
             .from("articles")
-            .select("slug, title_es, excerpt_es, content_es, category, published_at, metadata")
+            .select("slug, title_es, excerpt_es, content_es, category, published_at, metadata, featured_image, is_featured, read_time")
             .eq("organization_id", org.id)
             .eq("status", "published")
             .order("published_at", { ascending: false, nullsFirst: false });

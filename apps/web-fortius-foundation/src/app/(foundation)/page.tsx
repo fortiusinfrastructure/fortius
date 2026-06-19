@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import { FoundationHomeFeatureSection } from "@/components/foundation/FoundationHomeFeatureSection";
 import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
+import { InitiativesMarquee } from "@/components/foundation/InitiativesMarquee";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PROJECTS } from "@/content/projects";
 import {
@@ -136,6 +137,8 @@ export default function FoundationHome() {
           }}
           items={aidItems}
         />
+
+        <InitiativesMarquee />
 
         <NewsletterCTA />
       </main>

@@ -3,8 +3,12 @@
 import { createClient } from "@supabase/supabase-js";
 import {
   getFoundationOrganizationId,
-  sendInternalContactNotification,
+  sendEmail,
 } from "@/lib/email";
+import {
+  getContactConfirmationHtml,
+  getContactNotificationHtml,
+} from "@/lib/email-templates";
 
 const NOTIFICATION_EMAIL = "info@fundacionfortius.org";
 const MAX_ATTACHMENT_SIZE = 8 * 1024 * 1024;
@@ -126,13 +130,14 @@ export async function submitFoundationContact(formData: FormData) {
     throw new Error("Contact insert failed.");
   }
 
-  const escapedMessage = escapeHtml(finalMessage).replaceAll("\n", "<br />");
   const notificationSubject = `Nuevo contacto web · ${subject}`;
 
-  const notificationResult = await sendInternalContactNotification({
+  const notificationResult = await sendEmail({
     to: NOTIFICATION_EMAIL,
     replyTo: email,
     subject: notificationSubject,
+    kind: "contact_notification",
+    relatedTable: "contact_submissions",
     relatedId: submission.id,
     metadata: {
       source: "web-fortius-foundation",
@@ -140,19 +145,14 @@ export async function submitFoundationContact(formData: FormData) {
       contactSubject: subject,
       organization: organization || null,
     },
-    html: `
-      <div style="font-family: Georgia, serif; max-width: 720px; margin: 0 auto; padding: 24px; color: #111827;">
-        <h2 style="margin: 0 0 16px; color: #14532d;">Nuevo mensaje de contacto</h2>
-        <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Asunto:</strong> ${escapeHtml(subject)}</p>
-        <p><strong>Organización:</strong> ${escapeHtml(organization || "No indicada")}</p>
-        <p><strong>Adjunto:</strong> ${escapeHtml(attachment?.file.name || "No adjunto")}</p>
-        <div style="margin-top: 20px; border: 1px solid #e5e7eb; background: #f9fafb; padding: 16px; line-height: 1.7;">
-          ${escapedMessage}
-        </div>
-      </div>
-    `,
+    html: getContactNotificationHtml({
+      name,
+      email,
+      subject,
+      organization,
+      message,
+      attachmentName: attachment?.file.name,
+    }),
     attachments: attachment
       ? [
           {
@@ -168,6 +168,27 @@ export async function submitFoundationContact(formData: FormData) {
     console.error(
       "[submitFoundationContact] notification failed",
       notificationResult.error,
+    );
+  }
+
+  const confirmationResult = await sendEmail({
+    to: email,
+    replyTo: NOTIFICATION_EMAIL,
+    subject: "Hemos recibido tu mensaje — Fundación Fortius",
+    html: getContactConfirmationHtml({ name, subject }),
+    kind: "contact_confirmation",
+    relatedTable: "contact_submissions",
+    relatedId: submission.id,
+    metadata: {
+      source: "web-fortius-foundation",
+      contactSubject: subject,
+    },
+  });
+
+  if (!confirmationResult.success) {
+    console.error(
+      "[submitFoundationContact] confirmation failed",
+      confirmationResult.error,
     );
   }
 

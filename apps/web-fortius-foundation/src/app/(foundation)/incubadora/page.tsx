@@ -31,10 +31,10 @@ function ProjectCard({
             {stageLabel}
           </p>
           <InitiativeMark title={project.name} subtitle={project.title} />
-          <a
+          <Link
             href={project.siteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={project.siteUrl.startsWith("http") ? "_blank" : undefined}
+            rel={project.siteUrl.startsWith("http") ? "noopener noreferrer" : undefined}
             className="mt-6 inline-flex items-center gap-2 border px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
             style={{
               borderColor:
@@ -45,7 +45,7 @@ function ProjectCard({
           >
             {project.ctaLabel}
             <ArrowUpRight size={14} />
-          </a>
+          </Link>
         </div>
 
         <div>

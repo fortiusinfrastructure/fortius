@@ -75,6 +75,21 @@ export const PROJECTS: FoundationProject[] = [
     siteUrl: "https://freepressforum.org/",
     ctaLabel: "Ir a la web de Free Press Forum",
   },
+  {
+    slug: "transatlantic-fellowship",
+    name: "LIDERAZGO Y SOCIEDAD",
+    stage: "incubacion",
+    title: "Transatlantic Fellowship",
+    summary:
+      "Transatlantic Fellowship es un programa de formación y conexión entre futuros líderes europeos y americanos, enfocado en el intercambio de ideas y el fortalecimiento de la sociedad civil a ambos lados del Atlántico.",
+    details: [
+      "A través de seminarios inmersivos, encuentros y proyectos compartidos, buscamos construir una red sólida de jóvenes profesionales comprometidos con los valores de la libertad y el humanismo.",
+      "Los participantes colaboran en propuestas tangibles, estableciendo vínculos que superan fronteras y promueven una visión constructiva para Occidente.",
+    ],
+    logoSrc: "https://fundacionfortius.org/wp-content/uploads/2024/04/Logos_FREE.jpg", // Placeholder
+    siteUrl: "/incubadora/transatlantic-fellowship",
+    ctaLabel: "Ver detalles de incubación",
+  },
 ];
 
 export function getProjectsByStage(stage: ProjectStage): FoundationProject[] {

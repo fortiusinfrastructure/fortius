@@ -38,7 +38,6 @@ export default function BlogPage() {
             >
               <ArticleArtwork article={article} compact className="aspect-[16/10]" />
               <div className="p-7">
-                <Bracketed variant="tag">Foundation</Bracketed>
                 <div className="mt-5 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
                   <span>{formatPublishedDate(article.published_at)}</span>
                   <span>·</span>

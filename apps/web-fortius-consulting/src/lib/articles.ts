@@ -30,6 +30,8 @@ export interface Article {
     subproducts: ArticleSubproduct[];
     source_file: string;
     cover_image?: string;
+    is_featured?: boolean;
+    read_time?: string;
 }
 
 export interface ArticleOriginalSource {
@@ -45,6 +47,11 @@ export function listArticlesByCategory(articles: Article[], category: ArticleCat
 }
 
 function extractLastExternalUrl(markdown: string): string | null {
+    const htmlLinks = [...markdown.matchAll(/<a[^>]*href=["'](https?:\/\/[^"'\s]+)["'][^>]*>/g)];
+    if (htmlLinks.length > 0) {
+        return htmlLinks.at(-1)?.[1] ?? null;
+    }
+
     const markdownLinks = [...markdown.matchAll(/\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/g)];
     if (markdownLinks.length > 0) {
         return markdownLinks.at(-1)?.[1] ?? null;
@@ -190,7 +197,7 @@ export function getEditorialSlots(articles: Article[], category: ArticleCategory
     const publics = all.filter((a) => a.access === "public" && a.kind !== "evento" && a.kind !== "noticia");
     const restricted = all.filter((a) => a.access === "paid" || a.kind === "evento");
 
-    const featured = publics[0] ?? null;
+    const featured = publics.find((a) => a.is_featured) ?? publics[0] ?? null;
     const rest = publics
         .filter((a) => a.slug !== featured?.slug)
         .slice(0, 2);

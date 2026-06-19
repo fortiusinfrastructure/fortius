@@ -42,7 +42,6 @@ export function BlogPreview() {
                 FF
               </div>
               <div className="relative">
-              <Bracketed variant="tag">Foundation</Bracketed>
               <div className="mt-5 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
                 <span>{formatShortDate(article.published_at)}</span>
                 <span>·</span>

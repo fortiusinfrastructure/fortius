@@ -58,7 +58,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)] lg:items-start">
             <div>
-              <Bracketed variant="tag">Foundation</Bracketed>
               <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.5rem,5.2vw,4.7rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
                 {article.title}
               </h1>

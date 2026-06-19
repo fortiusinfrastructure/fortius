@@ -146,13 +146,7 @@ export default function AyudasPage() {
               </p>
             ))}
           </div>
-          <a
-            href={`mailto:${FOUNDATION_CONTACT.email}?subject=Consulta%20sobre%20ayudas%20de%20Fortius%20Foundation`}
-            className="mt-8 inline-flex items-center gap-2 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white"
-            style={{ backgroundColor: "var(--color-accent-500)" }}
-          >
-            Escribir a {FOUNDATION_CONTACT.email}
-          </a>
+
         </section>
       </section>
     </main>
