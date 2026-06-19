@@ -232,9 +232,6 @@ export function NosotrosClient() {
 
                     <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">Consejo Asesor</Bracketed>
-                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                            Nuestro Consejo Asesor lo componen personas de reputada experiencia que ayudan a la Fundación a elegir sus áreas de trabajo y a evaluar sus proyectos.
-                        </p>
                         <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-2 lg:grid-cols-3">
                             {CONSEJO_ASESOR.map((m) => (
                                 <PersonCard
@@ -251,9 +248,6 @@ export function NosotrosClient() {
 
                     <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">Equipo</Bracketed>
-                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                            Todo el equipo aparece reunido bajo una misma sección, porque el trabajo de la Fundación solo funciona cuando las distintas capacidades se integran y colaboran entre sí.
-                        </p>
                         <div className="mt-8 grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-2">
                             {TEAM.map((m) => (
                                 <PersonCard
@@ -271,9 +265,6 @@ export function NosotrosClient() {
 
                     <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">Socios estratégicos</Bracketed>
-                        <p className="mt-6 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                            Trabajamos con socios que amplifican nuestra capacidad de servir, canalizar ayuda y fortalecer iniciativas con impacto real.
-                        </p>
                         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
                             {STRATEGIC_PARTNERS.map((partner) => (
                                 <a
