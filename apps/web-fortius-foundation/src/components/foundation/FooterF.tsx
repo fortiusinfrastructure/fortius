@@ -7,8 +7,17 @@ import {
   LEGAL_LINKS,
 } from "@/content/site";
 
+function XIcon({ size = 15, className }: { size?: number; className?: string; strokeWidth?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} className={className ?? "fill-current"}>
+      <path d="M18.901 2H21.99l-6.75 7.715L23 22h-6.078l-4.76-6.793L6.22 22H3.13l7.22-8.252L1 2h6.232l4.303 6.164L18.901 2Zm-1.066 18.132h1.712L6.304 3.772H4.467l13.368 16.36Z" />
+    </svg>
+  );
+}
+
 const SOCIAL_ICONS = {
   LinkedIn: Linkedin,
+  X: XIcon,
 } as const;
 
 export function FooterF() {
