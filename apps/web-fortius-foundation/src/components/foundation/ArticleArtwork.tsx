@@ -27,9 +27,9 @@ export function ArticleArtwork({ article, compact = false, className = "" }: { a
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       )}
-      {(!compact || !hasImage) && (
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      {!hasImage && (
         <>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
           <div className={`absolute right-3 ${compact ? "bottom-2 text-[4rem]" : "bottom-4 text-[6rem] md:text-[7rem]"} font-display italic leading-none text-white/10`}>
             FF
           </div>
@@ -37,7 +37,7 @@ export function ArticleArtwork({ article, compact = false, className = "" }: { a
             <p className="text-[0.68rem] uppercase tracking-[0.2em] text-white/75">{visual.eyebrow}</p>
             <p className={`mt-4 font-display font-light leading-[1.05] text-white ${compact ? "text-[1.45rem]" : "text-[2rem] md:text-[2.4rem]"}`}>{visual.label}</p>
             <p className={`mt-3 text-white/78 ${compact ? "text-[0.82rem] leading-5" : "max-w-md text-[0.96rem] leading-relaxed"}`}>{visual.motif}</p>
-            {!compact && !hasImage && <p className="mt-8 max-w-lg text-[0.92rem] leading-relaxed text-white/70">{abstract}</p>}
+            {!compact && <p className="mt-8 max-w-lg text-[0.92rem] leading-relaxed text-white/70">{abstract}</p>}
           </div>
         </>
       )}
