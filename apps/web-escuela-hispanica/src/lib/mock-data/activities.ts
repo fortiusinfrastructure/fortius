@@ -59,7 +59,7 @@ export const activities: Activity[] = [
 
                 <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> amplió el foco geográfico en «Salamanca y otros Pilares del Constitucionalismo en las Américas», considerando la recepción del pensamiento escolástico hispánico no solo en los Estados Unidos, sino en el conjunto del continente americano y su papel en la construcción de los distintos ordenamientos constitucionales de la región.</p>
 
-                <p>La jornada cerró con la intervención de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influencia de las Teorías de Salamanca en el Constitucionalismo Americano», un análisis pormenorizado de cómo conceptos como la soberanía popular, la ley natural y la limitación del poder formulados en Salamanca encontraron su camino en los textos fundacionales de la república norteamericana.</p>
+                <p>La jornada concluyó con la ponencia de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influencia de las Teorías de Salamanca en el Constitucionalismo Americano», centrada en la genealogía intelectual de los derechos parentales en los Estados Unidos. A través de un recorrido que conectó a Vitoria, Soto y Suárez con la tradición jurídica angloamericana, puso de relieve cómo las categorías del derecho natural elaboradas por la Escuela de Salamanca y la Segunda Escolástica siguen ofreciendo un marco fértil para comprender algunos de los debates más relevantes del constitucionalismo contemporáneo en torno a la familia, la educación y los límites de la intervención estatal.</p>
 
                 <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Clausura</h3>
 
@@ -98,7 +98,7 @@ export const activities: Activity[] = [
 
                 <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> broadened the geographic scope in "Salamanca and Other Pillars of Constitutionalism in the Americas," considering the reception of Hispanic scholastic thought not only in the United States but across the entire American continent and its role in shaping the various constitutional frameworks of the region.</p>
 
-                <p>The day closed with <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>' talk, "The Influence of Salamancan Theories on American Constitutionalism," a detailed analysis of how concepts such as popular sovereignty, natural law, and the limitation of power as formulated in Salamanca found their way into the founding texts of the American republic.</p>
+                <p>The day concluded with <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>' paper, "The Influence of Salamancan Theories on American Constitutionalism," focused on the intellectual genealogy of parental rights in the United States. Through a journey connecting Vitoria, Soto, and Suárez with the Anglo-American legal tradition, he highlighted how the natural law categories developed by the School of Salamanca and the Second Scholasticism continue to offer a fertile framework for understanding some of the most relevant debates in contemporary constitutionalism around family, education, and the limits of state intervention.</p>
 
                 <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Closing</h3>
 
@@ -137,7 +137,7 @@ export const activities: Activity[] = [
 
                 <p><strong style="color: rgba(255,255,255,0.9);">Pier Pigozzi</strong> alargou o foco geográfico em «Salamanca e outros Pilares do Constitucionalismo nas Américas», considerando a receção do pensamento escolástico hispânico não só nos Estados Unidos, mas no conjunto do continente americano e o seu papel na construção dos diferentes ordenamentos constitucionais da região.</p>
 
-                <p>A jornada encerrou com a intervenção de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influência das Teorias de Salamanca no Constitucionalismo Americano», uma análise pormenorizada de como conceitos como a soberania popular, a lei natural e a limitação do poder formulados em Salamanca encontraram o seu caminho nos textos fundadores da república norte-americana.</p>
+                <p>A jornada concluiu com a comunicação de <strong style="color: rgba(255,255,255,0.9);">Noah Torres</strong>, «Influência das Teorias de Salamanca no Constitucionalismo Americano», centrada na genealogia intelectual dos direitos parentais nos Estados Unidos. Através de um percurso que conectou Vitoria, Soto e Suárez com a tradição jurídica anglo-americana, pôs em relevo como as categorias do direito natural elaboradas pela Escola de Salamanca e pela Segunda Escolástica continuam a oferecer um enquadramento fértil para compreender alguns dos debates mais relevantes do constitucionalismo contemporâneo em torno da família, da educação e dos limites da intervenção estatal.</p>
 
                 <h3 style="color: #c5a059; font-family: var(--font-cinzel); letter-spacing: 0.1em; margin-top: 2.5rem; margin-bottom: 1rem;">Encerramento</h3>
 

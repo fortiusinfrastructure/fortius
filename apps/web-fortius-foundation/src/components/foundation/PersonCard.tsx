@@ -30,6 +30,7 @@ export function PersonCard({
                 name={name}
                 photo={photo}
                 size={variant === "full" ? "md" : "sm"}
+                fit={variant === "full" ? "contain" : "cover"}
             />
             <div className="space-y-1 min-w-0 flex-1">
                 <p className="text-[0.95rem] font-medium text-[var(--text-primary)] leading-tight">
