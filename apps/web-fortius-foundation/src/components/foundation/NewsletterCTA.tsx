@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
-import { subscribeToNewsletter } from "@/lib/actions/newsletter";
+import { subscribeToNewsletter } from "@/lib/email/actions";
 
 export function NewsletterCTA() {
   const [email, setEmail] = useState("");

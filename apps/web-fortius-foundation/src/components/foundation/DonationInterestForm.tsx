@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, Send } from "lucide-react";
-import { submitFoundationContact } from "@/lib/actions/contact";
+import { submitFoundationContact } from "@/lib/email/actions";
 
 const ENTITY_OPTIONS = [
   "Fundación Fortius España",

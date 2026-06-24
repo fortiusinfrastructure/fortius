@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, Paperclip, Send } from "lucide-react";
-import { submitFoundationContact } from "@/lib/actions/contact";
+import { submitFoundationContact } from "@/lib/email/actions";
 
 export function ArticleSubmissionForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
