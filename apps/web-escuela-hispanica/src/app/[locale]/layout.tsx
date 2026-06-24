@@ -123,6 +123,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${playfair.variable} ${cinzel.variable} ${lato.variable}`}>
+      <head>
+        {/* Clientify Tracking Begins */}
+        <script defer src="https://analyticsplusdev.clientify.net/analytics_plus/pixel/eo1lurjDrE49GUhS"></script>
+        {/* Clientify Tracking Ends */}
+      </head>
       <body className="font-sans min-h-screen flex flex-col bg-brand-dark text-brand-text">
         <NextIntlClientProvider messages={messages}>
           {children}

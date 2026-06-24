@@ -55,6 +55,11 @@ export default function RootLayout({
       data-brand="consulting"
       className={`${cormorant.variable} ${sourceSans.variable}`}
     >
+      <head>
+        {/* Clientify Tracking Begins */}
+        <script defer src="https://analyticsplusdev.clientify.net/analytics_plus/pixel/BwIhbw1vPNNRu9iR"></script>
+        {/* Clientify Tracking Ends */}
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );
