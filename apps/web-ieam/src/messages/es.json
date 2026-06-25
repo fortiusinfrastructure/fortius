@@ -130,6 +130,10 @@
         "partners": {
             "label": "Colaboramos con",
             "description": "Las colaboraciones académicas son una pieza clave para reforzar la base investigadora del IEAM, trabajar de la mano de expertos en materia migratoria y apoyar la aplicación de sus propuestas en materia de política pública.",
+            "gobiernocanarias": {
+                "name": "Gobierno de Canarias",
+                "text": "La colaboración entre el Instituto Español de Análisis Migratorio y el Gobierno de Canarias tiene como objetivo reforzar la capacidad de análisis, diálogo estratégico y posicionamiento institucional en torno a la ruta atlántica, las dinámicas migratorias vinculadas al Sahel y África Occidental, y la cooperación entre territorios de origen, tránsito y destino. Esta línea de trabajo busca traducir el conocimiento de terreno y la inteligencia colectiva en propuestas de política pública útiles para anticipar la evolución de las rutas, reducir vulnerabilidades, mejorar la protección de las personas migrantes —especialmente menores y mujeres— y promover respuestas compartidas basadas en la corresponsabilidad europea, la cooperación con África Occidental y la dignidad humana."
+            },
             "unav": {
                 "name": "Universidad de Navarra",
                 "text": "En el marco del convenio con la Universidad de Navarra, se elaboró el informe \"Migraciones y migrantes: las rutas migratorias irregulares hacia Europa. España, un estudio de caso\", que aporta un análisis técnico sobre las rutas irregulares hacia Europa con especial foco en España. Publicación prevista para diciembre 2025."

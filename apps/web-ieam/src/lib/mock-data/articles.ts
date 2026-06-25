@@ -354,12 +354,13 @@ export const articles: Article[] = [
         publishDate: '10 Mar 2026',
         readTime: '25 min',
         author: {
-            name: 'Dolores López',
-            role: 'Investigadora asociada',
-            role_en: 'Associate Researcher',
-            image: '/team/member-5.jpg',
-            bio: 'Pamplona (España). Dolores López es licenciada en Geografía e Historia y doctora en Geografía por nuestra Universidad, además de contar con un Máster en Demografía por la London School of Economics (LSE). Es catedrática de Geografía Humana en la Facultad de Filosofía y Letras. Sus líneas de investigación se enmarcan en los estudios de familia, mortalidad y migraciones.',
-            bio_en: 'Pamplona (Spain). Dolores López holds a degree in Geography and History and a PhD in Geography, in addition to a Master\'s in Demography from the London School of Economics (LSE). She is a Professor of Human Geography. Her research focuses on family studies, mortality, and migrations.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Investigación',
+            role_en: 'Research',
+            image: '/favicon-new.png',
+            bio: 'Equipo de investigación del IEAM.',
+            bio_en: 'IEAM research team.'
         },
         content: `
       <p>Las migraciones irregulares hacia Europa y hacia España han experimentado transformaciones profundas en la última década, con cambios en la intensidad de los flujos, reconfiguración de las rutas y una presión sostenida sobre determinados territorios fronterizos. En paralelo, se han consolidado respuestas institucionales cada vez más apoyadas en el control fronterizo y la cooperación con países de origen y tránsito, mientras persisten desafíos humanitarios y limitaciones para medir con precisión el fenómeno, especialmente en lo relativo a muertes y desapariciones.</p>
@@ -638,12 +639,13 @@ export const articles: Article[] = [
         publishDate: '23 Dec 2025',
         readTime: '15 min',
         author: {
-            name: 'Beatriz de León',
-            role: 'Directora Ejecutiva',
-            role_en: 'Executive Director',
-            image: '/team/member-2.jpg',
-            bio: 'Directora Ejecutiva del IEAM.',
-            bio_en: 'Executive Director of IEAM.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Investigación',
+            role_en: 'Research',
+            image: '/favicon-new.png',
+            bio: 'Equipo de investigación del IEAM.',
+            bio_en: 'IEAM research team.'
         },
         materials: [
             {
@@ -712,12 +714,13 @@ export const articles: Article[] = [
         publishDate: '22 Dec 2025',
         readTime: '25 min',
         author: {
-            name: 'Dolores López',
-            role: 'Investigadora asociada',
-            role_en: 'Associate Researcher',
-            image: '/team/member-5.jpg',
-            bio: 'Pamplona (España). Dolores López es licenciada en Geografía e Historia y doctora en Geografía por nuestra Universidad, además de contar con un Máster en Demografía por la London School of Economics (LSE). Es catedrática de Geografía Humana en la Facultad de Filosofía y Letras. Sus líneas de investigación se enmarcan en los estudios de familia, mortalidad y migraciones.',
-            bio_en: 'Pamplona (Spain). Dolores López holds a degree in Geography and History and a PhD in Geography, in addition to a Master\'s in Demography from the London School of Economics (LSE). She is a Professor of Human Geography. Her research focuses on family studies, mortality, and migrations.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Investigación',
+            role_en: 'Research',
+            image: '/favicon-new.png',
+            bio: 'Equipo de investigación del IEAM.',
+            bio_en: 'IEAM research team.'
         },
         content: `
       <p>Las migraciones irregulares hacia Europa han experimentado transformaciones profundas en las últimas décadas. España, en particular, se ha consolidado como uno de los principales países receptores de llegadas irregulares dentro del espacio europeo, en un contexto marcado por la inestabilidad en África occidental, la presión sostenida en las rutas Atlántica y Mediterránea, y la creciente externalización de fronteras por parte de la Unión Europea. En 2025, estas dos rutas que conectan con Canarias y la Península representaron conjuntamente el 22 % del total de llegadas irregulares a la UE. Comprender estas dinámicas resulta esencial para interpretar la evolución reciente del fenómeno y sus implicaciones.</p>
@@ -827,31 +830,14 @@ export const articles: Article[] = [
         publishDate: '14 Nov 2025',
         readTime: '12 min',
         author: {
-            name: 'Beatriz de León',
-            role: 'Directora Ejecutiva',
-            role_en: 'Executive Director',
-            image: '/team/member-2.jpg',
-            bio: 'Directora Ejecutiva del IEAM.',
-            bio_en: 'Executive Director of IEAM.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Investigación',
+            role_en: 'Research',
+            image: '/favicon-new.png',
+            bio: 'Equipo de investigación del IEAM.',
+            bio_en: 'IEAM research team.'
         },
-        authors: [
-            {
-                name: 'Beatriz de León',
-                role: 'Directora Ejecutiva',
-                role_en: 'Executive Director',
-                image: '/team/member-2.jpg',
-                bio: 'Directora Ejecutiva del IEAM.',
-                bio_en: 'Executive Director of IEAM.'
-            },
-            {
-                name: 'Bréma Ely Dicko',
-                role: 'Investigador asociado',
-                role_en: 'Associate Researcher',
-                image: '/team/member-3.jpg',
-                bio: 'Investigador asociado del IEAM.',
-                bio_en: 'Associate Researcher at IEAM.'
-            }
-        ],
         pullQuote: 'La movilidad es inevitable; la diferencia está entre gestionarla con reglas claras o asumir sus costes en la irregularidad.',
         pullQuote_en: 'Mobility is inevitable; the difference lies between managing it with clear rules or assuming its costs in irregularity.',
         materials: [
@@ -1202,12 +1188,13 @@ export const articles: Article[] = [
         publishDate: '20 Sep 2025',
         readTime: '7 min',
         author: {
-            name: 'Beatriz de León Cobo',
-            role: 'Directora IEAM',
-            role_en: 'IEAM Director',
-            image: '/team/member-2.jpg',
-            bio: 'Directora del IEAM y consultora en Sic Transit Advisory; profesora en la Universidad Francisco de Vitoria.',
-            bio_en: 'Director of IEAM and consultant at Sic Transit Advisory; professor at the Universidad Francisco de Vitoria.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Comunicación',
+            role_en: 'Communications',
+            image: '/favicon-new.png',
+            bio: 'Equipo de comunicación e investigación del IEAM.',
+            bio_en: 'IEAM communications and research team.'
         },
         pullQuote: 'La presión ejercida por el Gobierno de Mauritania ha intensificado el control tras el aumento de salidas desde Senegal y Mali.',
         pullQuote_en: 'Pressure from the Government of Mauritania has led to intensified control following the increase in departures from Senegal and Mali.',
@@ -1509,12 +1496,13 @@ export const articles: Article[] = [
         publishDate: '05 Feb 2026',
         readTime: '5 min',
         author: {
-            name: 'Beatriz de León Cobo',
-            role: 'Directora IEAM',
-            role_en: 'IEAM Director',
-            image: '/team/member-2.jpg',
-            bio: 'Directora del IEAM y consultora en Sic Transit Advisory; profesora en la Universidad Francisco de Vitoria.',
-            bio_en: 'Director of IEAM and consultant at Sic Transit Advisory; professor at the Universidad Francisco de Vitoria.'
+            name: 'Equipo IEAM',
+            name_en: 'IEAM Team',
+            role: 'Comunicación',
+            role_en: 'Communications',
+            image: '/favicon-new.png',
+            bio: 'Equipo de comunicación e investigación del IEAM.',
+            bio_en: 'IEAM communications and research team.'
         },
         content: `
             <p>El Instituto Español de Análisis Migratorio (IEAM) ha sido seleccionado como ganador del Concurso de Proyectos de Investigación 2025 de la Fundación FOESSA, con el proyecto “Puentes y muros: itinerarios de inclusión de las personas migrantes en España”. El jurado ha destacado su capacidad para aportar una mirada rigurosa y conectada con la realidad social sobre uno de los grandes retos de la España actual: la inclusión social de las personas migrantes.</p>

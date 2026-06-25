@@ -131,6 +131,10 @@
         "partners": {
             "label": "We Collaborate With",
             "description": "Academic collaborations are key to reinforcing IEAM's research base, working alongside migration experts, and supporting the implementation of their public policy proposals.",
+            "gobiernocanarias": {
+                "name": "Government of the Canary Islands",
+                "text": "The collaboration between the Spanish Institute for Migration Analysis and the Government of the Canary Islands aims to strengthen analytical capacity, strategic dialogue, and institutional positioning on the Atlantic route, migration dynamics linked to the Sahel and West Africa, and cooperation between countries and territories of origin, transit, and destination. This line of work seeks to translate field-based knowledge and collective intelligence into useful public policy proposals to anticipate route dynamics, reduce vulnerabilities, improve the protection of migrants — particularly minors and women — and promote shared responses based on European co-responsibility, cooperation with West Africa, and human dignity."
+            },
             "unav": {
                 "name": "University of Navarra",
                 "text": "Within the framework of the agreement with the University of Navarra, the report \"Migrations and Migrants: Irregular Migratory Routes to Europe. Spain, a Case Study\" was produced, providing technical analysis on irregular routes to Europe with a special focus on Spain. Publication expected in December 2025."

@@ -141,11 +141,18 @@ export default async function NosotrosPage() {
           </div>
 
           <div className="flex flex-col gap-8 max-w-4xl mx-auto">
-            {(['unav', 'uir', 'foessa'] as const).map((slug) => (
+            {(
+              [
+                { slug: 'gobiernocanarias', image: 'gobiernocanarias.jpg' },
+                { slug: 'unav', image: 'unav.png' },
+                { slug: 'uir', image: 'uir.png' },
+                { slug: 'foessa', image: 'foessa.png' },
+              ] as const
+            ).map(({ slug, image }) => (
               <div key={slug} className="bg-white p-8 rounded-sm border border-slate-200 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
                 <div className="w-32 flex-shrink-0 flex items-center justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/colaboration/${slug}.png`} alt={t(`partners.${slug}.name`)} className="w-full h-auto object-contain" loading="lazy" decoding="async" />
+                  <img src={`/colaboration/${image}`} alt={t(`partners.${slug}.name`)} className="w-full h-auto object-contain" loading="lazy" decoding="async" />
                 </div>
                 <div>
                   <h4 className="text-xl font-serif font-bold text-[#0A2540] mb-2">{t(`partners.${slug}.name`)}</h4>
