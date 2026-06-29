@@ -52,12 +52,27 @@ export function HeroFoundation() {
           >
             <Bracketed variant="hero">Fortius Foundation</Bracketed>
 
-            <h1
-              id="hero-title"
-              className="font-display text-[clamp(3rem,7vw,6rem)] font-light leading-[1.02] tracking-tight text-[var(--text-primary)]"
-            >
-              {FOUNDATION_QUOTES[0]}
-            </h1>
+            <div id="hero-title" className="space-y-1">
+              {[
+                { text: "Servimos a quienes", accent: false },
+                { text: "han elegido servir.", accent: true },
+              ].map(({ text, accent }, i) => (
+                <div key={text} className="overflow-hidden">
+                  <motion.h1
+                    initial={{ y: 60, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.85, delay: 0.3 + i * 0.12, ease }}
+                    className={`font-display font-light leading-[0.98] tracking-tight text-[clamp(3rem,8.5vw,8rem)] ${
+                      accent
+                        ? "italic text-[var(--color-accent-300)]"
+                        : "text-[var(--text-primary)]"
+                    }`}
+                  >
+                    {text}
+                  </motion.h1>
+                </div>
+              ))}
+            </div>
 
             <p className="max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)]">
               Fortius Foundation fortalece a las personas, organizaciones e

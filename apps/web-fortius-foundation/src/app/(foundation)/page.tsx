@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { FoundationHomeFeatureSection } from "@/components/foundation/FoundationHomeFeatureSection";
 import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
 import { InitiativesMarquee } from "@/components/foundation/InitiativesMarquee";
+import { BlogPreview } from "@/components/foundation/BlogPreview";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PROJECTS } from "@/content/projects";
 import {
@@ -81,7 +82,10 @@ export default function FoundationHome() {
           <div className="border-b border-[var(--border-subtle)] pb-16">
             <div className="max-w-4xl">
               <Bracketed variant="hero">Fortius Foundation</Bracketed>
-              <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.8rem,6.5vw,5.6rem)] font-light leading-[1.02] tracking-tight text-[var(--text-primary)]">Servimos a quienes han elegido servir.</h1>
+              <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.8rem,6.5vw,5.6rem)] font-light leading-[1.02] tracking-tight text-[var(--text-primary)]">
+                Servimos a quienes{" "}
+                <span className="italic text-[var(--color-accent-300)]">han elegido servir.</span>
+              </h1>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] md:text-lg">Fortius Foundation fortalece personas, organizaciones e instituciones que necesitan más estructura, mejores aliados y una visión de largo plazo.</p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Link href="/donaciones" className="inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white">Donar<ArrowUpRight size={14} /></Link>
@@ -139,6 +143,8 @@ export default function FoundationHome() {
         />
 
         <InitiativesMarquee />
+
+        <BlogPreview />
 
         <NewsletterCTA />
       </main>

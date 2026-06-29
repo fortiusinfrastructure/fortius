@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { Mail, MapPin, ShieldCheck } from "lucide-react";
 import { ContactForm } from "@/components/foundation/ContactForm";
 import { Bracketed } from "@/components/system/Bracketed";
-import { FOUNDATION_CONTACT, FOUNDATION_ENTITIES } from "@/content/site";
+import { FOUNDATION_CONTACT } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Contacto — Fundación Fortius",
@@ -9,49 +10,75 @@ export const metadata: Metadata = {
 };
 
 export default function ContactoPage() {
-  const entities = [FOUNDATION_ENTITIES.spain, FOUNDATION_ENTITIES.usa];
-
   return (
     <main id="main-content" className="pt-[var(--nav-height)]">
-      <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-32">
+      <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-36">
         <Bracketed variant="tag">Contacto</Bracketed>
         <h1 className="mt-6 max-w-3xl font-display text-[clamp(2.4rem,5.5vw,4.8rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
-          Escríbenos. <span className="italic text-[var(--color-accent-300)]">Centralizamos aquí las consultas institucionales.</span>
+          Escríbenos.{" "}
+          <span className="italic text-[var(--color-accent-300)]">
+            Centralizamos aquí las consultas institucionales.
+          </span>
         </h1>
         <p className="mt-8 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-          Atendemos propuestas, colaboraciones, consultas sobre ayudas, donaciones y solicitudes relacionadas con la Fundación y su ecosistema.
+          Atendemos propuestas, colaboraciones, consultas sobre ayudas,
+          donaciones y solicitudes relacionadas con la Fundación y su ecosistema.
         </p>
 
-        <div className="mt-16 grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)]">
-          <ContactForm />
+        <div className="mt-20 grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="col-span-1 lg:col-span-7">
+            <ContactForm />
+          </div>
 
-          <div className="space-y-8">
-            <div className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-8">
+          <aside className="col-span-1 lg:col-span-5 space-y-8">
+            {/* Email */}
+            <div className="space-y-2">
               <Bracketed variant="kicker">Canal general</Bracketed>
-              <p className="mt-5 font-display text-[1.9rem] font-light text-[var(--text-primary)]">
+              <p className="mt-4 flex items-start gap-3 font-display text-xl text-[var(--text-primary)]">
+                <Mail
+                  size={18}
+                  className="mt-1.5 shrink-0 text-[var(--color-accent-500)]"
+                  aria-hidden
+                />
                 {FOUNDATION_CONTACT.email}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-                Si no sabes a quién dirigirte, este es el canal correcto. Derivamos cada mensaje al área adecuada.
+              <p className="pl-7 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                Si no sabes a quién dirigirte, este es el canal correcto.
+                Derivamos cada mensaje al área adecuada.
               </p>
             </div>
 
-            <div className="grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-2">
-              {entities.map((entity) => (
-                <article key={entity.name} className="bg-[var(--surface-primary)] p-6">
-                  <p className="text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                    {entity.name}
-                  </p>
-                  <p className="mt-3 text-[0.78rem] uppercase tracking-[0.16em] text-[var(--color-accent-300)]">
-                    {entity.codeLabel} {entity.code}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
-                    {entity.address}
-                  </p>
-                </article>
-              ))}
+            {/* Offices — cities only, no fiscal data */}
+            <div className="space-y-2">
+              <Bracketed variant="kicker">Oficinas</Bracketed>
+              <p className="mt-4 flex items-start gap-3 font-display text-xl text-[var(--text-primary)]">
+                <MapPin
+                  size={18}
+                  className="mt-1.5 shrink-0 text-[var(--color-accent-500)]"
+                  aria-hidden
+                />
+                Madrid · Washington D.C.
+              </p>
+              <p className="pl-7 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                Presencia en Europa y América. Atendemos proyectos en España,
+                Europa, Estados Unidos y Norte de África.
+              </p>
             </div>
-          </div>
+
+            {/* Commitment */}
+            <div className="space-y-2 border-t border-[var(--border-subtle)] pt-8">
+              <Bracketed variant="kicker">Compromiso</Bracketed>
+              <p className="mt-4 flex items-start gap-3 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
+                <ShieldCheck
+                  size={18}
+                  className="mt-0.5 shrink-0 text-[var(--color-accent-500)]"
+                  aria-hidden
+                />
+                Todas las conversaciones con la Fundación son confidenciales por
+                defecto. Respondemos en un plazo de 48 horas.
+              </p>
+            </div>
+          </aside>
         </div>
       </section>
     </main>

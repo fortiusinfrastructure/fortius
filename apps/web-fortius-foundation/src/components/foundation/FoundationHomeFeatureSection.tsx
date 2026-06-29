@@ -41,7 +41,7 @@ export function FoundationHomeFeatureSection({
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
             <Bracketed variant="kicker">{kicker}</Bracketed>
-            <h2 className="mt-4 max-w-3xl font-display text-[clamp(2rem,4vw,3.3rem)] font-light leading-[1.06] tracking-tight text-[var(--text-primary)]">
+            <h2 className="mt-4 max-w-3xl font-display text-[clamp(2rem,4.2vw,3.6rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]">
               {title}
             </h2>
           </div>
