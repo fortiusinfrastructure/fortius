@@ -28,7 +28,7 @@ export const AYUDAS: Ayuda[] = [
     deadline: "30 de septiembre de 2026",
     pdfUrl: "/ayudas/convocatoria_familia_fortius_2026.pdf",
     imageUrl: "/ayudas/convocatoria_familia_fortius_2026.png",
-    maxAmount: "Según proyecto",
+    maxAmount: "10.000 €",
     eligibility: [
       "Familias en situación de necesidad acreditada.",
       "Organizaciones sin ánimo de lucro con actividad en el ámbito familiar.",
@@ -56,7 +56,7 @@ export const AYUDAS: Ayuda[] = [
     deadline: "31 de octubre de 2026",
     pdfUrl: "/ayudas/convocatoria_libertad_expresion_fortius_2026.pdf",
     imageUrl: "/ayudas/convocatoria_libertad_expresion_fortius_2026.png",
-    maxAmount: "Según proyecto",
+    maxAmount: "5.000 €",
     eligibility: [
       "Periodistas independientes o en activo en medios de comunicación.",
       "Medios de comunicación digitales o impresos sin ánimo de lucro.",
