@@ -15,62 +15,101 @@ export interface FoundationPrivateUser {
   orgId: string;
 }
 
-type OrgRow = { id: string };
-type MembershipRow = { role: string | null; tier: string | null; status: string | null };
-type ProfileRow = { full_name: string | null };
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-async function lookupOrg(): Promise<OrgRow | null> {
-  const admin = createAdminClient();
-
-  const { data: byDomain } = await admin
-    .from("organizations")
-    .select("id")
-    .eq("domain", ORG_DOMAIN)
-    .maybeSingle();
-  if (byDomain?.id) return byDomain as OrgRow;
-
-  const { data: bySlug } = await admin
-    .from("organizations")
-    .select("id")
-    .eq("slug", ORG_SLUG_FALLBACK)
-    .maybeSingle();
-  return (bySlug as OrgRow | null) ?? null;
+function isNextRedirect(err: unknown): boolean {
+  return (
+    typeof err === "object" &&
+    err !== null &&
+    "digest" in err &&
+    typeof (err as Record<string, unknown>).digest === "string" &&
+    (err as Record<string, string>).digest.startsWith("NEXT_REDIRECT")
+  );
 }
 
+export async function getFoundationOrgId(): Promise<string | null> {
+  try {
+    const admin = createAdminClient();
+    const { data } = await admin
+      .from("organizations")
+      .select("id")
+      .or(`domain.eq.${ORG_DOMAIN},slug.eq.${ORG_SLUG_FALLBACK}`)
+      .limit(1)
+      .maybeSingle();
+    return (data as { id: string } | null)?.id ?? null;
+  } catch {
+    return null;
+  }
+}
+
+// ─── Auth guard ───────────────────────────────────────────────────────────────
+
+/**
+ * Used by all /area-privada pages.
+ * Uses the admin client for DB lookups to bypass RLS, which avoids crashes
+ * when the user is authenticated but the org or membership query is blocked
+ * by an incomplete policy. Redirects to /login on any access issue.
+ */
 export async function requireFoundationPrivateUser(): Promise<FoundationPrivateUser> {
-  const supabase = await createServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  try {
+    const supabase = await createServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) redirect("/login");
 
-  const org = await lookupOrg();
-  if (!org) redirect("/login");
+    const admin = createAdminClient();
 
-  const membershipRes = await supabase
-    .from("user_memberships")
-    .select("role, tier, status")
-    .eq("user_id", user.id)
-    .eq("organization_id", org.id)
-    .eq("status", "active")
-    .maybeSingle();
-  const membership = membershipRes.data as MembershipRow | null;
-  if (!membership) redirect("/login?error=sin-acceso");
+    // Org lookup
+    const { data: orgData } = await admin
+      .from("organizations")
+      .select("id")
+      .or(`domain.eq.${ORG_DOMAIN},slug.eq.${ORG_SLUG_FALLBACK}`)
+      .limit(1)
+      .maybeSingle();
+    const orgId = (orgData as { id: string } | null)?.id ?? null;
+    if (!orgId) redirect("/login");
 
-  const profileRes = await supabase
-    .from("user_profiles")
-    .select("full_name")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  const profile = profileRes.data as ProfileRow | null;
+    // Membership lookup
+    const { data: membershipData } = await admin
+      .from("user_memberships")
+      .select("role, tier, status")
+      .eq("user_id", user.id)
+      .eq("organization_id", orgId)
+      .eq("status", "active")
+      .maybeSingle();
+    const membership = membershipData as {
+      role: string | null;
+      tier: string | null;
+      status: string | null;
+    } | null;
+    if (!membership) redirect("/login?error=sin-acceso");
 
-  return {
-    id: user.id,
-    email: user.email,
-    fullName: profile?.full_name ?? null,
-    role: membership.role ?? "beneficiario",
-    tier: membership.tier,
-    status: membership.status,
-    orgId: org.id,
-  };
+    // Profile (non-critical)
+    let fullName: string | null = null;
+    try {
+      const { data: profileData } = await admin
+        .from("user_profiles")
+        .select("full_name")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      fullName = (profileData as { full_name: string | null } | null)?.full_name ?? null;
+    } catch {
+      // Non-critical — proceed without display name
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      fullName,
+      role: membership.role ?? "beneficiario",
+      tier: membership.tier,
+      status: membership.status,
+      orgId,
+    };
+  } catch (err) {
+    if (isNextRedirect(err)) throw err;
+    console.error("[requireFoundationPrivateUser] unexpected error:", err);
+    redirect("/login");
+  }
 }

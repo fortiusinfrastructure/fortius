@@ -26,6 +26,22 @@ export const metadata: Metadata = {
   metadataBase,
   title: SITE_NAME,
   description: SITE_DESCRIPTION,
+  icons: {
+    icon: [
+      {
+        url: "/branding/fortius-foundation-lockup-light.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/branding/fortius-foundation-lockup-dark.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    shortcut: "/branding/fortius-foundation-lockup-dark.svg",
+    apple: "/branding/fortius-foundation-lockup-dark.svg",
+  },
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,

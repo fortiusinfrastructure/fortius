@@ -73,6 +73,35 @@ export async function signUp(formData: FormData): Promise<AuthResult> {
         return { error: 'Error al enviar el correo de verificación. Por favor, intenta de nuevo.' };
     }
 
+    // Auto-create a beneficiario membership so the user can access the private area after verifying.
+    const newUserId = linkData.user?.id;
+    if (newUserId) {
+        try {
+            const { data: orgRow } = await admin
+                .from('organizations')
+                .select('id')
+                .or('domain.eq.fundacionfortius.org,slug.eq.fortius-foundation')
+                .limit(1)
+                .maybeSingle();
+
+            if (orgRow?.id) {
+                await admin.from('user_memberships').upsert(
+                    {
+                        user_id: newUserId,
+                        organization_id: orgRow.id,
+                        role: 'beneficiario',
+                        status: 'active',
+                        joined_at: new Date().toISOString(),
+                    },
+                    { onConflict: 'user_id,organization_id', ignoreDuplicates: true },
+                );
+            }
+        } catch (err) {
+            // Non-critical: user proceeds and admin can assign role later.
+            console.error('[auth/actions] Could not create membership:', err);
+        }
+    }
+
     return { success: true };
 }
 

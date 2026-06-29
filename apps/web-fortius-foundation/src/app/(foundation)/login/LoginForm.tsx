@@ -33,6 +33,7 @@ export default function LoginForm() {
 
     const resetOk = searchParams.get('reset') === 'ok';
     const activatedOk = searchParams.get('activated') === 'ok';
+    const sinAcceso = searchParams.get('error') === 'sin-acceso';
 
     const [error, setError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
@@ -65,6 +66,12 @@ export default function LoginForm() {
                 <p className="rounded-lg px-3 py-2 text-xs"
                     style={{ background: 'rgba(16,185,129,0.08)', color: '#10b981', border: '1px solid rgba(16,185,129,0.25)' }}>
                     ✓ Cuenta activada. Inicia sesión para acceder a tu área privada.
+                </p>
+            )}
+            {sinAcceso && (
+                <p className="rounded-lg px-3 py-2 text-xs"
+                    style={{ background: 'rgba(202,138,4,0.08)', color: '#ca8a04', border: '1px solid rgba(202,138,4,0.25)' }}>
+                    Tu cuenta está pendiente de activación. Si acabas de registrarte, revisa tu email para verificar la cuenta. Si el problema persiste, escríbenos a info@fundacionfortius.org.
                 </p>
             )}
             {/* Email */}
