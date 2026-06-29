@@ -1,55 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
   estimateReadTime,
   formatShortDate,
-  getArticlePreview,
   getArticleVisual,
   getFeaturedArticles,
 } from "@/lib/articles";
 import type { ArticleVisualTheme } from "@/content/article-visuals";
 
-const THEME_COLORS: Record<
-  ArticleVisualTheme,
-  { accent: string; bg: string; band: string; base: string }
-> = {
-  emerald: {
-    accent: "rgba(58,156,110,0.28)",
-    bg: "rgba(10,31,22,0.55)",
-    band: "var(--color-accent-500)",
-    base: "#07180f",
-  },
-  forest: {
-    accent: "rgba(27,86,58,0.32)",
-    bg: "rgba(6,16,12,0.65)",
-    band: "var(--color-accent-600)",
-    base: "#040e08",
-  },
-  gold: {
-    accent: "rgba(197,160,89,0.28)",
-    bg: "rgba(20,16,8,0.65)",
-    band: "#c5a059",
-    base: "#100d05",
-  },
-  navy: {
-    accent: "rgba(30,50,100,0.32)",
-    bg: "rgba(5,10,22,0.70)",
-    band: "#94a3b8",
-    base: "#03060f",
-  },
-  plum: {
-    accent: "rgba(120,40,120,0.26)",
-    bg: "rgba(18,8,22,0.65)",
-    band: "#a855f7",
-    base: "#0d0511",
-  },
-  stone: {
-    accent: "rgba(100,90,80,0.26)",
-    bg: "rgba(16,14,12,0.65)",
-    band: "#a8a29e",
-    base: "#0c0a09",
-  },
+const BAND: Record<ArticleVisualTheme, string> = {
+  emerald: "var(--color-accent-500)",
+  forest: "var(--color-accent-600)",
+  gold: "#c5a059",
+  navy: "#94a3b8",
+  plum: "#a855f7",
+  stone: "#a8a29e",
 };
 
 export function BlogPreview() {
@@ -77,7 +44,7 @@ export function BlogPreview() {
         <div className="grid grid-cols-1 gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-2 xl:grid-cols-4">
           {articles.map((article) => {
             const visual = getArticleVisual(article);
-            const theme = THEME_COLORS[visual.theme];
+            const band = BAND[visual.theme];
 
             return (
               <Link
@@ -85,31 +52,25 @@ export function BlogPreview() {
                 href={`/blog/${article.slug}`}
                 className="group block overflow-hidden bg-[var(--surface-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
               >
-                {/* Featured image area */}
-                <div
-                  className="relative flex h-44 items-end overflow-hidden p-5"
-                  style={{ backgroundColor: theme.base }}
-                >
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background: `radial-gradient(ellipse at top right, ${theme.accent} 0%, transparent 60%), radial-gradient(ellipse at bottom left, ${theme.accent} 0%, transparent 55%)`,
-                    }}
+                {/* Featured image */}
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={`/entradas/images/${article.slug}.png`}
+                    alt={article.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                   />
-                  <div className="relative">
-                    <p
-                      className="mb-2 text-[0.58rem] font-semibold uppercase tracking-[0.24em]"
-                      style={{ color: theme.band }}
-                    >
-                      {visual.eyebrow}
-                    </p>
-                    <p className="max-w-[20ch] font-display text-[1rem] font-light leading-snug text-white/65">
-                      {visual.motif}
-                    </p>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <span
+                    className="absolute bottom-3 left-4 text-[0.58rem] font-semibold uppercase tracking-[0.22em] text-white/80"
+                    style={{ textShadow: "0 1px 3px rgba(0,0,0,0.6)" }}
+                  >
+                    {visual.eyebrow}
+                  </span>
                   <div
-                    className="absolute right-0 top-0 h-full w-1"
-                    style={{ backgroundColor: theme.band, opacity: 0.4 }}
+                    className="absolute right-0 top-0 h-full w-0.5"
+                    style={{ backgroundColor: band, opacity: 0.5 }}
                   />
                 </div>
 
@@ -128,7 +89,10 @@ export function BlogPreview() {
 
                   {/* Author */}
                   {article.author && (
-                    <p className="mt-2 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
+                    <p
+                      className="mt-2 text-[0.7rem] uppercase tracking-[0.18em]"
+                      style={{ color: band }}
+                    >
                       {article.author}
                     </p>
                   )}
