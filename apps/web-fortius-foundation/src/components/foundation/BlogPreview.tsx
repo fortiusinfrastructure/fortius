@@ -12,37 +12,43 @@ import type { ArticleVisualTheme } from "@/content/article-visuals";
 
 const THEME_COLORS: Record<
   ArticleVisualTheme,
-  { accent: string; bg: string; band: string }
+  { accent: string; bg: string; band: string; base: string }
 > = {
   emerald: {
-    accent: "rgba(58,156,110,0.18)",
+    accent: "rgba(58,156,110,0.28)",
     bg: "rgba(10,31,22,0.55)",
     band: "var(--color-accent-500)",
+    base: "#07180f",
   },
   forest: {
-    accent: "rgba(27,86,58,0.22)",
+    accent: "rgba(27,86,58,0.32)",
     bg: "rgba(6,16,12,0.65)",
     band: "var(--color-accent-600)",
+    base: "#040e08",
   },
   gold: {
-    accent: "rgba(197,160,89,0.18)",
+    accent: "rgba(197,160,89,0.28)",
     bg: "rgba(20,16,8,0.65)",
-    band: "var(--color-gold-500)",
+    band: "#c5a059",
+    base: "#100d05",
   },
   navy: {
-    accent: "rgba(30,50,100,0.22)",
+    accent: "rgba(30,50,100,0.32)",
     bg: "rgba(5,10,22,0.70)",
-    band: "var(--color-neutral-400)",
+    band: "#94a3b8",
+    base: "#03060f",
   },
   plum: {
-    accent: "rgba(120,40,120,0.16)",
+    accent: "rgba(120,40,120,0.26)",
     bg: "rgba(18,8,22,0.65)",
     band: "#a855f7",
+    base: "#0d0511",
   },
   stone: {
-    accent: "rgba(100,90,80,0.18)",
+    accent: "rgba(100,90,80,0.26)",
     bg: "rgba(16,14,12,0.65)",
-    band: "var(--color-neutral-300)",
+    band: "#a8a29e",
+    base: "#0c0a09",
   },
 };
 
@@ -77,60 +83,58 @@ export function BlogPreview() {
               <Link
                 key={article.slug}
                 href={`/blog/${article.slug}`}
-                className="group relative overflow-hidden bg-[var(--surface-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
+                className="group block overflow-hidden bg-[var(--surface-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
               >
-                {/* Themed accent band at top */}
+                {/* Featured image area */}
                 <div
-                  className="h-1 w-full"
-                  style={{ backgroundColor: theme.band }}
-                />
+                  className="relative flex h-44 items-end overflow-hidden p-5"
+                  style={{ backgroundColor: theme.base }}
+                >
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background: `radial-gradient(ellipse at top right, ${theme.accent} 0%, transparent 60%), radial-gradient(ellipse at bottom left, ${theme.accent} 0%, transparent 55%)`,
+                    }}
+                  />
+                  <div className="relative">
+                    <p
+                      className="mb-2 text-[0.58rem] font-semibold uppercase tracking-[0.24em]"
+                      style={{ color: theme.band }}
+                    >
+                      {visual.eyebrow}
+                    </p>
+                    <p className="max-w-[20ch] font-display text-[1rem] font-light leading-snug text-white/65">
+                      {visual.motif}
+                    </p>
+                  </div>
+                  <div
+                    className="absolute right-0 top-0 h-full w-1"
+                    style={{ backgroundColor: theme.band, opacity: 0.4 }}
+                  />
+                </div>
 
-                {/* Subtle tinted background */}
-                <div
-                  className="absolute inset-0 top-1 pointer-events-none opacity-60"
-                  style={{
-                    background: `radial-gradient(ellipse at top right, ${theme.accent} 0%, transparent 55%), linear-gradient(180deg, ${theme.bg} 0%, transparent 70%)`,
-                  }}
-                />
-
-                <div className="relative p-6">
-                  {/* Eyebrow label */}
-                  <p
-                    className="text-[0.65rem] font-semibold uppercase tracking-[0.2em]"
-                    style={{ color: theme.band }}
-                  >
-                    {visual.eyebrow}
-                  </p>
-
+                <div className="p-6">
                   {/* Date + read time */}
-                  <div className="mt-3 flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
+                  <div className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
                     <span>{formatShortDate(article.published_at)}</span>
                     <span>·</span>
                     <span>{estimateReadTime(article.content)}</span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="mt-4 font-display text-[1.4rem] font-light leading-[1.12] text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">
+                  <h3 className="mt-3 font-display text-[1.25rem] font-light leading-[1.14] text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">
                     {article.title}
                   </h3>
 
                   {/* Author */}
                   {article.author && (
-                    <p className="mt-3 text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
+                    <p className="mt-2 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
                       {article.author}
                     </p>
                   )}
 
-                  {/* Excerpt */}
-                  <div className="relative mt-4 min-h-[6rem]">
-                    <p className="text-[0.9rem] leading-relaxed text-[var(--text-secondary)]">
-                      {getArticlePreview(article.excerpt, 160)}
-                    </p>
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[var(--surface-primary)] to-transparent group-hover:from-[var(--surface-secondary)]" />
-                  </div>
-
                   {/* CTA */}
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-all group-hover:gap-2.5 group-hover:text-[var(--text-primary)]">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[0.67rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-all group-hover:gap-2.5 group-hover:text-[var(--text-primary)]">
                     Leer entrada
                     <ArrowUpRight
                       size={12}

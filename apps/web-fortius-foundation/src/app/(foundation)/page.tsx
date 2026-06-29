@@ -5,6 +5,7 @@ import { FoundationHomeFeatureSection } from "@/components/foundation/Foundation
 import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
 import { InitiativesMarquee } from "@/components/foundation/InitiativesMarquee";
 import { BlogPreview } from "@/components/foundation/BlogPreview";
+import { AyudasSneak } from "@/components/foundation/AyudasSneak";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PROJECTS } from "@/content/projects";
 import {
@@ -141,6 +142,8 @@ export default function FoundationHome() {
           }}
           items={aidItems}
         />
+
+        <AyudasSneak />
 
         <InitiativesMarquee />
 
