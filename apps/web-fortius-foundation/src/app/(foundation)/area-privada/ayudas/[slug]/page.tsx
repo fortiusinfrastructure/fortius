@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Download, CheckCircle2, Clock } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import { requireFoundationPrivateUser } from "@/lib/private/auth";
@@ -30,6 +31,19 @@ export default async function GrantDetailPage({ params }: Props) {
         >
           <ArrowLeft size={14} /> Volver al área privada
         </Link>
+
+        {ayuda.imageUrl && (
+          <div className="relative mb-10 h-64 md:h-80 w-full overflow-hidden">
+            <Image
+              src={ayuda.imageUrl}
+              alt={ayuda.title}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+          </div>
+        )}
 
         <Bracketed variant="kicker">{ayuda.kicker}</Bracketed>
         <h1 className="mt-6 max-w-4xl font-display text-[clamp(2rem,4.5vw,3.8rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]">

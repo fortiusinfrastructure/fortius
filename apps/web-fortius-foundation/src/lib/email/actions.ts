@@ -5,6 +5,8 @@ import { getFoundationOrganizationId, sendEmail } from "@/lib/email";
 import {
   getContactConfirmationHtml,
   getContactNotificationHtml,
+  getDonationNotificationHtml,
+  getDonationConfirmationHtml,
   getNewsletterConfirmationHtml,
   getNewsletterNotificationHtml,
 } from "@/lib/email/templates";
@@ -168,6 +170,63 @@ export async function submitFoundationContact(formData: FormData) {
   return {
     success: true,
     message: "Tu mensaje ha quedado registrado. El equipo de la Fundación te responderá lo antes posible.",
+  };
+}
+
+// ─── Donation interest form ───────────────────────────────────────────────────
+
+export async function submitDonationInterest(formData: FormData): Promise<{
+  success: boolean;
+  message: string;
+}> {
+  const name = String(formData.get("name") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const organization = String(formData.get("organization") ?? "").trim();
+  const amount = String(formData.get("amount") ?? "").trim();
+  const entity = String(formData.get("entity") ?? "").trim();
+  const target = String(formData.get("target") ?? "").trim();
+  const notes = String(formData.get("notes") ?? "").trim();
+
+  if (!name || !email || !entity || !target) {
+    return { success: false, message: "Por favor, completa los campos obligatorios." };
+  }
+
+  const [notifResult, confirmResult] = await Promise.all([
+    sendEmail({
+      to: NOTIFICATION_EMAIL,
+      replyTo: email,
+      subject: `Nuevo interés de donación · ${entity} · ${target}`,
+      html: getDonationNotificationHtml({ name, email, entity, target, amount, organization, notes }),
+      kind: "donation_interest_notification",
+      metadata: { entity, target, amount: amount || null },
+    }),
+    sendEmail({
+      to: email,
+      replyTo: NOTIFICATION_EMAIL,
+      subject: "Hemos recibido tu interés de donación — Fundación Fortius",
+      html: getDonationConfirmationHtml({ name, entity, target }),
+      kind: "donation_interest_confirmation",
+      metadata: { entity, target },
+    }),
+  ]);
+
+  if (!notifResult.success) {
+    console.error("[submitDonationInterest] notification failed", notifResult.error);
+    return {
+      success: false,
+      message: "No hemos podido procesar tu solicitud. Por favor, escríbenos a info@fundacionfortius.org.",
+    };
+  }
+
+  if (!confirmResult.success) {
+    console.error("[submitDonationInterest] confirmation email failed", confirmResult.error);
+  }
+
+  return {
+    success: true,
+    message: confirmResult.success
+      ? "¡Gracias! Hemos recibido tu interés y te hemos enviado un email de confirmación."
+      : "¡Gracias! Hemos recibido tu interés. Nos pondremos en contacto contigo pronto.",
   };
 }
 

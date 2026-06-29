@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, Send } from "lucide-react";
-import { submitFoundationContact } from "@/lib/email/actions";
+import { submitDonationInterest } from "@/lib/email/actions";
 
 const ENTITY_OPTIONS = [
   "Fundación Fortius España",
@@ -32,35 +32,25 @@ export function DonationInterestForm() {
 
     const form = event.currentTarget;
     const data = new FormData(form);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const organization = String(data.get("organization") ?? "").trim();
-    const amount = String(data.get("amount") ?? "").trim();
-    const notes = String(data.get("notes") ?? "").trim();
 
     const payload = new FormData();
-    payload.set("name", name);
-    payload.set("email", email);
-    payload.set("organization", organization);
-    payload.set("subject", `Donaciones · ${entity} · ${target}`);
-    payload.set(
-      "message",
-      [
-        `Entidad elegida: ${entity}`,
-        `Destino de la donación: ${target}`,
-        `Importe orientativo: ${amount || "No indicado"}`,
-        "",
-        notes || "Sin comentarios adicionales.",
-      ].join("\n"),
-    );
+    payload.set("name", String(data.get("name") ?? "").trim());
+    payload.set("email", String(data.get("email") ?? "").trim());
+    payload.set("organization", String(data.get("organization") ?? "").trim());
+    payload.set("amount", String(data.get("amount") ?? "").trim());
+    payload.set("entity", entity);
+    payload.set("target", target);
+    payload.set("notes", String(data.get("notes") ?? "").trim());
 
     try {
-      const result = await submitFoundationContact(payload);
+      const result = await submitDonationInterest(payload);
       setMessage(result.message);
       setIsSuccess(result.success);
-      form.reset();
-      setEntity(ENTITY_OPTIONS[0]);
-      setTarget(TARGET_OPTIONS[4]);
+      if (result.success) {
+        form.reset();
+        setEntity(ENTITY_OPTIONS[0]);
+        setTarget(TARGET_OPTIONS[4]);
+      }
     } catch {
       setMessage("No hemos podido registrar tu interés de donación. Inténtalo de nuevo.");
       setIsSuccess(false);
@@ -79,8 +69,8 @@ export function DonationInterestForm() {
       </p>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <input name="name" required placeholder="Nombre completo" className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none" />
-        <input type="email" name="email" required placeholder="Email" className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none" />
+        <input name="name" required placeholder="Nombre completo *" className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none" />
+        <input type="email" name="email" required placeholder="Email *" className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none" />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

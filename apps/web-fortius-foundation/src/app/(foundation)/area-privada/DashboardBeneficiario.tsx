@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { FileText, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
@@ -62,64 +63,77 @@ export function DashboardBeneficiario({ user }: Props) {
                 openAyudas.map((ayuda) => (
                   <div
                     key={ayuda.slug}
-                    className="border p-6 transition-colors"
+                    className="border overflow-hidden transition-colors"
                     style={{
                       borderColor: "rgba(22,163,74,0.35)",
                       background: "rgba(22,163,74,0.05)",
                     }}
                   >
-                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <FileText
-                            size={16}
-                            style={{ color: "var(--color-accent-400)" }}
-                          />
-                          <span
-                            className="text-[0.65rem] uppercase tracking-widest"
-                            style={{ color: "var(--color-accent-400)" }}
-                          >
-                            Convocatoria abierta
-                          </span>
-                        </div>
-                        <h3
-                          className="font-display text-[1.5rem] font-light leading-tight mb-2"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          {ayuda.title}
-                        </h3>
-                        <p
-                          className="text-[0.9rem] leading-relaxed mb-4"
-                          style={{ color: "var(--text-secondary)" }}
-                        >
-                          {ayuda.summary}
-                        </p>
-                        <p
-                          className="flex items-center gap-2 text-[0.8rem]"
-                          style={{ color: "var(--text-tertiary)" }}
-                        >
-                          <Clock size={13} />
-                          Fecha límite: <strong style={{ color: "var(--text-primary)" }}>{ayuda.deadline}</strong>
-                        </p>
+                    {ayuda.imageUrl && (
+                      <div className="relative h-48 md:h-56 w-full overflow-hidden">
+                        <Image
+                          src={ayuda.imageUrl}
+                          alt={ayuda.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 800px"
+                        />
                       </div>
-                      <div className="shrink-0 flex flex-col gap-3">
-                        <Link
-                          href={`/area-privada/ayudas/${ayuda.slug}`}
-                          className="inline-flex items-center gap-2 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-white transition-opacity hover:opacity-90"
-                          style={{ background: "var(--color-accent-500)" }}
-                        >
-                          Ver convocatoria <ArrowRight size={14} />
-                        </Link>
-                        <Link
-                          href={`/area-privada/ayudas/${ayuda.slug}#solicitar`}
-                          className="inline-flex items-center gap-2 border px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-[var(--surface-secondary)]"
-                          style={{
-                            borderColor: "var(--color-accent-400)",
-                            color: "var(--text-primary)",
-                          }}
-                        >
-                          Solicitar ayuda →
-                        </Link>
+                    )}
+                    <div className="p-6">
+                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <FileText
+                              size={16}
+                              style={{ color: "var(--color-accent-400)" }}
+                            />
+                            <span
+                              className="text-[0.65rem] uppercase tracking-widest"
+                              style={{ color: "var(--color-accent-400)" }}
+                            >
+                              Convocatoria abierta
+                            </span>
+                          </div>
+                          <h3
+                            className="font-display text-[1.5rem] font-light leading-tight mb-2"
+                            style={{ color: "var(--text-primary)" }}
+                          >
+                            {ayuda.title}
+                          </h3>
+                          <p
+                            className="text-[0.9rem] leading-relaxed mb-4"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            {ayuda.summary}
+                          </p>
+                          <p
+                            className="flex items-center gap-2 text-[0.8rem]"
+                            style={{ color: "var(--text-tertiary)" }}
+                          >
+                            <Clock size={13} />
+                            Fecha límite: <strong style={{ color: "var(--text-primary)" }}>{ayuda.deadline}</strong>
+                          </p>
+                        </div>
+                        <div className="shrink-0 flex flex-col gap-3">
+                          <Link
+                            href={`/area-privada/ayudas/${ayuda.slug}`}
+                            className="inline-flex items-center gap-2 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-white transition-opacity hover:opacity-90"
+                            style={{ background: "var(--color-accent-500)" }}
+                          >
+                            Ver convocatoria <ArrowRight size={14} />
+                          </Link>
+                          <Link
+                            href={`/area-privada/ayudas/${ayuda.slug}#solicitar`}
+                            className="inline-flex items-center gap-2 border px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-[var(--surface-secondary)]"
+                            style={{
+                              borderColor: "var(--color-accent-400)",
+                              color: "var(--text-primary)",
+                            }}
+                          >
+                            Solicitar ayuda →
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
