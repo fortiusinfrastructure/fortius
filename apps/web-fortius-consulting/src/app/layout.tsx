@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { headers } from "next/headers";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site-config";
+import { routing } from "@/i18n/routing";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -44,14 +46,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = headersList.get("x-next-intl-locale") ?? routing.defaultLocale;
   return (
     <html
-      lang="es"
+      lang={locale}
       data-brand="consulting"
       className={`${cormorant.variable} ${sourceSans.variable}`}
     >

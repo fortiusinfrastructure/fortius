@@ -31,6 +31,22 @@ export const SOCIEDAD_CIVIL_INTRO = {
     ],
 };
 
+export async function getSociedadCivilIntro(locale: string) {
+    if (locale === "en") {
+        const { SOCIEDAD_CIVIL_INTRO_EN } = await import("./sociedad-civil.en");
+        return SOCIEDAD_CIVIL_INTRO_EN;
+    }
+    return SOCIEDAD_CIVIL_INTRO;
+}
+
+export async function getSociedadCivilTiers(locale: string): Promise<MembershipTier[]> {
+    if (locale === "en") {
+        const { MEMBERSHIP_TIERS_EN } = await import("./sociedad-civil.en");
+        return MEMBERSHIP_TIERS_EN;
+    }
+    return MEMBERSHIP_TIERS;
+}
+
 export const MEMBERSHIP_TIERS: MembershipTier[] = [
     {
         id: "basica",

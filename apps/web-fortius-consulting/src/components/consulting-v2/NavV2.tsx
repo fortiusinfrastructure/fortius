@@ -3,22 +3,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Lock } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { BrandLockup } from "@/components/system/BrandLockup";
 import { useSessionUser, UserMenu, SignOutButton, USER_MENU_LINKS } from "./UserMenu";
-
-const LINKS = [
-    { label: "Nosotros", href: "/nosotros" },
-    { label: "Sociedad Civil", href: "/sociedad-civil" },
-    { label: "Política", href: "/politica" },
-    { label: "Contacto", href: "/contacto" },
-];
 
 const FOUNDATION_URL = "https://fundacionfortius.org";
 
 export function NavV2() {
+    const t = useTranslations("nav");
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const user = useSessionUser();
+
+    const LINKS = [
+        { label: t("nosotros"), href: "/nosotros" as const },
+        { label: t("sociedad-civil"), href: "/sociedad-civil" as const },
+        { label: t("politica"), href: "/politica" as const },
+        { label: t("contacto"), href: "/contacto" as const },
+    ];
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 32);
@@ -44,19 +47,19 @@ export function NavV2() {
                 }`}
             >
                 <nav className="mx-auto flex items-center justify-between h-[var(--nav-height)] max-w-[var(--container-max)] px-[var(--container-px)]">
-                    <a href="/" aria-label="Fortius Consulting — inicio">
+                    <Link href="/" aria-label={t("aria-home")}>
                         <BrandLockup variant="consulting" />
-                    </a>
+                    </Link>
 
                     <div className="hidden lg:flex items-center gap-10">
                         {LINKS.map((l) => (
-                            <a
-                                key={l.label}
+                            <Link
+                                key={l.href}
                                 href={l.href}
                                 className="text-[0.75rem] font-medium uppercase tracking-[0.12em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                             >
                                 {l.label}
-                            </a>
+                            </Link>
                         ))}
                         <a
                             href={FOUNDATION_URL}
@@ -72,20 +75,20 @@ export function NavV2() {
                         {user ? (
                             <UserMenu user={user} />
                         ) : (
-                            <a
+                            <Link
                                 href="/area-privada"
                                 className="inline-flex items-center gap-2 px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                             >
                                 <Lock size={12} strokeWidth={2} aria-hidden />
-                                Área Privada
-                            </a>
+                                {t("area-privada")}
+                            </Link>
                         )}
                     </div>
 
                     <button
                         onClick={() => setMobileOpen(true)}
                         className="lg:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                        aria-label="Abrir menú"
+                        aria-label={t("open-menu")}
                         aria-expanded={mobileOpen}
                     >
                         <Menu size={22} />
@@ -104,31 +107,34 @@ export function NavV2() {
                         className="fixed inset-0 z-[60] bg-[var(--surface-primary)]"
                     >
                         <div className="flex items-center justify-between h-[var(--nav-height)] px-[var(--container-px)]">
-                            <a href="/" aria-label="Fortius Consulting — inicio" onClick={() => setMobileOpen(false)}>
+                            <Link href="/" aria-label={t("aria-home")} onClick={() => setMobileOpen(false)}>
                                 <BrandLockup variant="consulting" />
-                            </a>
+                            </Link>
                             <button
                                 onClick={() => setMobileOpen(false)}
                                 className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                                aria-label="Cerrar menú"
+                                aria-label={t("close-menu")}
                             >
                                 <X size={22} />
                             </button>
                         </div>
 
-                        <nav className="flex flex-col px-[var(--container-px)] pt-8 gap-1" aria-label="Menú móvil">
+                        <nav className="flex flex-col px-[var(--container-px)] pt-8 gap-1" aria-label="Menu">
                             {LINKS.map((l, i) => (
-                                <motion.a
+                                <motion.div
                                     key={l.href}
-                                    href={l.href}
-                                    onClick={() => setMobileOpen(false)}
                                     initial={{ opacity: 0, x: -16 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.05 * i, duration: 0.28 }}
-                                    className="py-4 text-2xl font-display font-light text-[var(--text-primary)] border-b border-[var(--border-subtle)] hover:text-[var(--color-accent-400)] transition-colors"
                                 >
-                                    {l.label}
-                                </motion.a>
+                                    <Link
+                                        href={l.href}
+                                        onClick={() => setMobileOpen(false)}
+                                        className="block py-4 text-2xl font-display font-light text-[var(--text-primary)] border-b border-[var(--border-subtle)] hover:text-[var(--color-accent-400)] transition-colors"
+                                    >
+                                        {l.label}
+                                    </Link>
+                                </motion.div>
                             ))}
                             <motion.a
                                 href={FOUNDATION_URL}
@@ -172,14 +178,14 @@ export function NavV2() {
                                         />
                                     </div>
                                 ) : (
-                                    <a
+                                    <Link
                                         href="/area-privada"
                                         onClick={() => setMobileOpen(false)}
                                         className="inline-flex items-center gap-2 w-full justify-center px-6 py-3.5 text-sm font-semibold uppercase tracking-wider bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                                     >
                                         <Lock size={14} strokeWidth={2} aria-hidden />
-                                        Área Privada
-                                    </a>
+                                        {t("area-privada")}
+                                    </Link>
                                 )}
                             </motion.div>
                         </nav>

@@ -18,7 +18,8 @@
       "Bash(pnpm check-types *)",
       "Bash(pnpm list *)",
       "Bash(npx tsc *)",
-      "Bash(pnpm turbo *)"
+      "Bash(pnpm turbo *)",
+      "Bash(xargs cat)"
     ]
   }
 }

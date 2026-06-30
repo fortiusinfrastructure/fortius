@@ -305,6 +305,15 @@ export const VERTICALS: VerticalDef[] = [
     },
 ];
 
+/** Returns VERTICALS for the given locale (lazy import to keep bundle small). */
+export async function getVerticals(locale: string): Promise<VerticalDef[]> {
+    if (locale === "en") {
+        const { VERTICALS_EN } = await import("./home-v2.en");
+        return VERTICALS_EN;
+    }
+    return VERTICALS;
+}
+
 export interface Ally {
     name: string;
     logo?: string;

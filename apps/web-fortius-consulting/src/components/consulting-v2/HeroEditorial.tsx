@@ -3,11 +3,14 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDownRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
 export function HeroEditorial() {
+    const t = useTranslations("hero");
     const ref = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
     const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
@@ -29,16 +32,13 @@ export function HeroEditorial() {
                     transition={{ duration: 0.5, delay: 0.15, ease }}
                     className="mb-10"
                 >
-                    <Bracketed variant="hero">Fortius Consulting — desde 2015</Bracketed>
+                    <Bracketed variant="hero">{t("eyebrow")}</Bracketed>
                 </motion.div>
 
                 <div className="grid grid-cols-12 gap-6 items-end">
                     <div className="col-span-12 lg:col-span-8 space-y-2">
-                        {[
-                            "Estrategia para quienes entienden",
-                            "el liderazgo como servicio.",
-                        ].map((line, i) => (
-                            <div key={line} className="overflow-hidden">
+                        {([t("line1"), t("line2")] as string[]).map((line, i) => (
+                            <div key={i} className="overflow-hidden">
                                 <motion.h1
                                     initial={{ y: 60, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
@@ -60,18 +60,18 @@ export function HeroEditorial() {
                         className="col-span-12 lg:col-span-4 space-y-8 lg:pb-6"
                     >
                         <p className="text-[var(--text-secondary)] text-base leading-relaxed font-light max-w-sm">
-                            Acompañamos para que las ideas correctas transformen la sociedad.
+                            {t("sub")}
                         </p>
-                        <a
+                        <Link
                             href="/nosotros"
                             className="group inline-flex items-center gap-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-primary)] border-b border-[var(--border-strong)] hover:border-[var(--color-accent-500)] transition-colors pb-2"
                         >
-                            Conócenos
+                            {t("cta")}
                             <ArrowDownRight
                                 size={14}
                                 className="group-hover:translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
                             />
-                        </a>
+                        </Link>
                     </motion.div>
                 </div>
             </motion.div>

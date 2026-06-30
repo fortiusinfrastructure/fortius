@@ -9,17 +9,18 @@ import {
   formatPublishedDate,
   getArticleAbstract,
   getArticlePreview,
-  listArticles,
 } from "@/lib/articles";
+import { listArticlesDB } from "@/lib/articles-server";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Blog — Fundación Fortius",
-  description:
-    "Entradas y artículos de Fundación Fortius cargados desde public/entradas.",
+  description: "Entradas y artículos de Fundación Fortius.",
 };
 
-export default function BlogPage() {
-  const articles = listArticles();
+export default async function BlogPage() {
+  const articles = await listArticlesDB();
 
   return (
     <main id="main-content" className="pt-[var(--nav-height)]">

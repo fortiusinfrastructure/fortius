@@ -16,6 +16,30 @@ export const POLITICA_INTRO = {
     ],
 };
 
+export async function getPoliticaIntro(locale: string) {
+    if (locale === "en") {
+        const { POLITICA_INTRO_EN } = await import("./politica.en");
+        return POLITICA_INTRO_EN;
+    }
+    return POLITICA_INTRO;
+}
+
+export async function getPoliticaSubverticals(locale: string): Promise<Subvertical[]> {
+    if (locale === "en") {
+        const { POLITICA_SUBVERTICALS_EN } = await import("./politica.en");
+        return POLITICA_SUBVERTICALS_EN;
+    }
+    return POLITICA_SUBVERTICALS;
+}
+
+export async function getPoliticaTiers(locale: string): Promise<MembershipTier[]> {
+    if (locale === "en") {
+        const { POLITICA_MEMBERSHIP_TIERS_EN } = await import("./politica.en");
+        return POLITICA_MEMBERSHIP_TIERS_EN;
+    }
+    return POLITICA_MEMBERSHIP_TIERS;
+}
+
 export const POLITICA_SUBVERTICALS: Subvertical[] = [
     {
         title: "Inteligencia Política",

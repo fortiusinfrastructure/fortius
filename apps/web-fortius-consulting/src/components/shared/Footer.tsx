@@ -1,6 +1,7 @@
 "use client";
 
 import { Linkedin, Instagram } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BrandLockup } from "@/components/system/BrandLockup";
 
 function XIcon({ size = 15, className }: { size?: number; className?: string; strokeWidth?: number }) {
@@ -18,6 +19,7 @@ const SOCIAL_LINKS = [
 ];
 
 export function Footer() {
+  const t = useTranslations("footer");
   return (
     <footer role="contentinfo" className="border-t border-[var(--border-subtle)] bg-[var(--color-neutral-1000)]">
       <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-12">
@@ -26,7 +28,7 @@ export function Footer() {
           {/* Social links */}
           <div>
             <h4 className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)] mb-5 text-center md:text-left">
-              Síguenos
+              {t("follow")}
             </h4>
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
@@ -63,9 +65,9 @@ export function Footer() {
         {/* Legal links */}
         <div className="pt-8 flex items-center justify-center gap-1 flex-wrap">
           {[
-            { label: "Aviso Legal", href: "/aviso-legal" },
-            { label: "Política de Privacidad", href: "/politica-de-privacidad" },
-            { label: "Política de Cookies", href: "/cookies" },
+            { label: t("legal-notice"), href: "/aviso-legal" },
+            { label: t("privacy"), href: "/politica-de-privacidad" },
+            { label: t("cookies"), href: "/cookies" },
           ].map((link, i, arr) => (
             <span key={link.label} className="flex items-center gap-1">
               <a

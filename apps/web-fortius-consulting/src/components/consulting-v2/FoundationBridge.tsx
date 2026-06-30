@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { BrandLockup } from "@/components/system/BrandLockup";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
-const PILLARS = ["Incubación", "Formación", "Investigación", "Impacto social"];
-
 export function FoundationBridge() {
+    const t = useTranslations("foundation");
+    const PILLARS = t("pillars").split("|");
     return (
         <section
             aria-label="Fortius Foundation"
@@ -56,19 +57,16 @@ export function FoundationBridge() {
                             transition={{ duration: 0.75, ease }}
                             className="font-display text-[clamp(2.2rem,5vw,4.4rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]"
                         >
-                            Consultora y fundación.{" "}
+                            {t("h2")}{" "}
                             <span
                                 className="italic"
                                 style={{ color: "var(--color-foundation-400)" }}
                             >
-                                Una misma misión, dos formas de servir.
+                                {t("h2italic")}
                             </span>
                         </motion.h2>
                         <p className="text-[var(--text-secondary)] max-w-xl leading-relaxed">
-                            Fortius Foundation es la herramienta pro bono de Fortius.
-                            Incubamos institutos y organizaciones, formamos líderes,
-                            financiamos investigación y desarrollamos programas para impulsar
-                            el compromiso cívico y el impacto social.
+                            {t("body")}
                         </p>
 
                         <ul className="flex flex-wrap gap-x-3 gap-y-2 pt-2">
@@ -114,9 +112,7 @@ export function FoundationBridge() {
                                 />
                             </div>
                             <p className="mt-8 text-[0.9rem] text-[var(--text-secondary)] leading-relaxed">
-                                Incubamos institutos, formamos líderes, financiamos
-                                investigación y desarrollamos programas para impulsar el
-                                compromiso cívico y el impacto social.
+                                {t("card-body")}
                             </p>
                             <p
                                 className="mt-6 inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] pb-1 border-b"
@@ -125,10 +121,10 @@ export function FoundationBridge() {
                                     borderColor: "var(--color-foundation-muted)",
                                 }}
                             >
-                                Conocer Fortius Foundation
+                                {t("cta")}
                             </p>
                             <p className="mt-4 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
-                                Sitio institucional activo
+                                {t("tagline")}
                             </p>
                         </a>
                     </motion.div>

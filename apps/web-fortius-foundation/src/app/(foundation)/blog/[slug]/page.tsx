@@ -9,40 +9,32 @@ import {
   estimateReadTime,
   formatPublishedDate,
   getArticleBlocks,
-  getArticleBySlug,
   getRelatedArticles,
-  listArticles,
 } from "@/lib/articles";
+import { getArticleBySlugDB, listArticlesDB } from "@/lib/articles-server";
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return listArticles().map((article) => ({ slug: article.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
-  if (!article) {
-    return { title: "Artículo no encontrado — Fundación Fortius" };
-  }
-
-  return {
-    title: `${article.title} — Fundación Fortius`,
-    description: article.excerpt,
-  };
+  const article = await getArticleBySlugDB(slug);
+  if (!article) return { title: "Artículo no encontrado — Fundación Fortius" };
+  return { title: `${article.title} — Fundación Fortius`, description: article.excerpt };
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getArticleBySlugDB(slug);
   if (!article) notFound();
 
+  const allArticles = await listArticlesDB();
   const blocks = getArticleBlocks(article.content);
   const abstract = getArticleAbstract(article, 320);
-  const related = getRelatedArticles(article.slug, 3);
+  const related = allArticles.filter((a) => a.slug !== article.slug).slice(0, 3);
   const firstParagraphIndex = blocks.findIndex((block) => block.type === "paragraph");
 
   return (
