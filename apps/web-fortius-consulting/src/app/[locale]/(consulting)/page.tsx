@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ConsultingPage({ params }: Props) {
   const { locale } = await params;
-  const articles = await fetchArticles();
+  const articles = await fetchArticles(locale);
   const verticals = await getVerticals(locale);
   const [civil, intelligence] = verticals;
 

@@ -29,6 +29,9 @@ export interface AdminArticleRecord {
     title_es: string;
     excerpt_es: string;
     content_es: string;
+    title_en: string;
+    excerpt_en: string;
+    content_en: string;
     content_format: "markdown" | "html";
     category: string;
     kind: string;
@@ -55,6 +58,9 @@ interface ArticleRowList {
 interface ArticleRowFull extends ArticleRowList {
     excerpt_es: string | null;
     content_es: string | null;
+    title_en: string | null;
+    excerpt_en: string | null;
+    content_en: string | null;
     featured_image: string | null;
     read_time: string | null;
 }
@@ -112,7 +118,7 @@ export async function getAdminArticleById(id: string): Promise<AdminArticleRecor
     const { data } = await admin
         .from("articles")
         .select(
-            "id, slug, title_es, excerpt_es, content_es, category, status, is_featured, published_at, updated_at, featured_image, read_time, metadata",
+            "id, slug, title_es, excerpt_es, content_es, title_en, excerpt_en, content_en, category, status, is_featured, published_at, updated_at, featured_image, read_time, metadata",
         )
         .eq("organization_id", orgId)
         .eq("id", id)
@@ -127,6 +133,9 @@ export async function getAdminArticleById(id: string): Promise<AdminArticleRecor
         title_es: row.title_es ?? "",
         excerpt_es: row.excerpt_es ?? "",
         content_es: row.content_es ?? "",
+        title_en: row.title_en ?? "",
+        excerpt_en: row.excerpt_en ?? "",
+        content_en: row.content_en ?? "",
         content_format: readContentFormat(row.metadata),
         category: row.category ?? "",
         kind: readKind(row.metadata),

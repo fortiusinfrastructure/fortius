@@ -42,7 +42,7 @@ export default async function AreaPrivadaPage() {
     // Member / client view
     const [data, articles, projects] = await Promise.all([
         getMemberDashboardData(user.id, user.orgId),
-        fetchArticles(),
+        fetchArticles("es"),
         getMyClientProjectsWithUsers(user.orgId),
     ]);
     return (

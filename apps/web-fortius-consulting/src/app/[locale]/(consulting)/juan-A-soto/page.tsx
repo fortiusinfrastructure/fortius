@@ -36,14 +36,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function JuanSotoPage() {
+export default async function JuanSotoPage({ params }: Props) {
+    const { locale } = await params;
     const member = TEAM.find((m) => m.slug === "juan-angel-soto");
 
     if (!member) {
         notFound();
     }
 
-    const articles = await fetchArticles();
+    const articles = await fetchArticles(locale);
 
     const normalize = (value: string) =>
         value

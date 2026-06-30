@@ -7,14 +7,14 @@ import {
 import { fetchArticleBySlug } from "@/lib/articles-db";
 
 interface PageProps {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { slug } = await params;
-    const article = await fetchArticleBySlug(slug);
+    const { slug, locale } = await params;
+    const article = await fetchArticleBySlug(slug, locale);
     if (!article || article.category !== "sociedad-civil") {
         return { title: "Artículo no encontrado" };
     }
@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function SociedadCivilArticlePage({ params }: PageProps) {
-    const { slug } = await params;
-    const article = await fetchArticleBySlug(slug);
+    const { slug, locale } = await params;
+    const article = await fetchArticleBySlug(slug, locale);
     if (!article || article.category !== "sociedad-civil") notFound();
     return (
         <ArticleDetailPage

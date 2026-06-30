@@ -17,6 +17,9 @@ export interface ConsultingArticleFormData {
     title_es: string;
     excerpt_es: string;
     content_es: string;
+    title_en: string;
+    excerpt_en: string;
+    content_en: string;
     category: "politica" | "sociedad-civil" | "home";
     kind: "comentario" | "informe" | "nota" | "evento" | "noticia" | "articulo";
     access: "public" | "paid";
@@ -58,6 +61,9 @@ const EMPTY: ConsultingArticleFormData = {
     title_es: "",
     excerpt_es: "",
     content_es: "",
+    title_en: "",
+    excerpt_en: "",
+    content_en: "",
     category: "sociedad-civil",
     kind: "articulo",
     access: "paid",
@@ -171,6 +177,19 @@ export function ConsultingArticleEditor({ initialData, onSave, onDelete, supabas
                 </Field>
                 <Field label="Cuerpo del artículo" required>
                     <RichTextEditor value={form.content_es} onChange={(html) => set("content_es", html)} placeholder="Escribe el artículo aquí. Usa encabezados, listas, citas e imágenes." />
+                </Field>
+            </section>
+
+            <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+                <h2 className="text-base font-semibold text-slate-900">Traducción EN <span className="text-slate-400 font-normal text-sm">(opcional)</span></h2>
+                <Field label="Title (EN)">
+                    <input type="text" value={form.title_en} onChange={(e) => set("title_en", e.target.value)} className={inputCls} placeholder="English article title" />
+                </Field>
+                <Field label="Excerpt (EN)">
+                    <textarea value={form.excerpt_en} onChange={(e) => set("excerpt_en", e.target.value)} className={`${inputCls} min-h-[80px]`} placeholder="2–3 lines for lists and article preview." />
+                </Field>
+                <Field label="Body (EN)">
+                    <RichTextEditor value={form.content_en} onChange={(html) => set("content_en", html)} placeholder="Write the article content in English. Use headings, lists, quotes and images." />
                 </Field>
             </section>
 

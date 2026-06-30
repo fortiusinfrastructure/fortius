@@ -33,7 +33,7 @@ export default async function PoliticaPage({ params }: Props) {
     const intro = await getPoliticaIntro(locale);
     const subverticals = await getPoliticaSubverticals(locale);
     const tiers = await getPoliticaTiers(locale);
-    const articles = await fetchArticles();
+    const articles = await fetchArticles(locale);
     const slots = getEditorialSlots(articles, "politica");
 
     return (

@@ -18,6 +18,9 @@ export interface ConsultingArticleInput {
     title_es: string;
     excerpt_es: string;
     content_es: string;
+    title_en?: string;
+    excerpt_en?: string;
+    content_en?: string;
     category: "politica" | "sociedad-civil" | "home";
     kind: "comentario" | "informe" | "nota" | "evento" | "noticia" | "articulo";
     access: "public" | "paid";
@@ -72,6 +75,9 @@ export async function createArticleAction(input: ConsultingArticleInput): Promis
             title_es: input.title_es,
             excerpt_es: input.excerpt_es || null,
             content_es: input.content_es,
+            title_en: input.title_en || null,
+            excerpt_en: input.excerpt_en || null,
+            content_en: input.content_en || null,
             category: input.category,
             status: input.status,
             is_featured: input.is_featured,
@@ -115,6 +121,9 @@ export async function updateArticleAction(id: string, input: ConsultingArticleIn
             title_es: input.title_es,
             excerpt_es: input.excerpt_es || null,
             content_es: input.content_es,
+            title_en: input.title_en || null,
+            excerpt_en: input.excerpt_en || null,
+            content_en: input.content_en || null,
             category: input.category,
             status: input.status,
             is_featured: input.is_featured,

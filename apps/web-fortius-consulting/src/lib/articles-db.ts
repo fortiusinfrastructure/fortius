@@ -29,8 +29,11 @@ const KINDS: ArticleKind[] = ["comentario", "informe", "nota", "evento", "notici
 interface ArticleRow {
     slug: string;
     title_es: string | null;
+    title_en: string | null;
     excerpt_es: string | null;
+    excerpt_en: string | null;
     content_es: string | null;
+    content_en: string | null;
     category: string | null;
     published_at: string | null;
     metadata: Record<string, unknown> | null;
@@ -55,7 +58,7 @@ function mergeWithFallback(primary: Article[]): Article[] {
     return [...bySlug.values()].sort(sortByPublishedDateDesc);
 }
 
-function rowToArticle(row: ArticleRow): Article | null {
+function rowToArticle(row: ArticleRow, locale: string): Article | null {
     if (!CATEGORIES.includes(row.category as ArticleCategory)) return null;
 
     const meta = row.metadata ?? {};
@@ -68,15 +71,17 @@ function rowToArticle(row: ArticleRow): Article | null {
     const contentFormat: ArticleContentFormat =
         meta.content_format === "html" ? "html" : "markdown";
 
+    const en = locale === "en";
+
     return {
         slug: row.slug,
-        title: row.title_es ?? row.slug,
+        title: (en && row.title_en) ? row.title_en : (row.title_es ?? row.slug),
         category: row.category as ArticleCategory,
         kind,
         access,
         published_at: row.published_at ? row.published_at.slice(0, 10) : null,
-        excerpt: row.excerpt_es ?? "",
-        content_markdown: row.content_es ?? "",
+        excerpt: (en && row.excerpt_en) ? row.excerpt_en : (row.excerpt_es ?? ""),
+        content_markdown: (en && row.content_en) ? row.content_en : (row.content_es ?? ""),
         content_format: contentFormat,
         subproducts: Array.isArray(meta.subproducts)
             ? (meta.subproducts as ArticleSubproduct[])
@@ -94,7 +99,7 @@ function rowToArticle(row: ArticleRow): Article | null {
  * local JSON snapshot so local editorial fallbacks (like home noticias) do
  * not disappear when the DB is only partially seeded.
  */
-export const fetchArticles = cache(async (): Promise<Article[]> => {
+export const fetchArticles = cache(async (locale: string): Promise<Article[]> => {
     try {
         const admin = createAdminClient();
 
@@ -107,7 +112,7 @@ export const fetchArticles = cache(async (): Promise<Article[]> => {
 
         const { data, error } = await admin
             .from("articles")
-            .select("slug, title_es, excerpt_es, content_es, category, published_at, metadata, featured_image, is_featured, read_time")
+            .select("slug, title_es, title_en, excerpt_es, excerpt_en, content_es, content_en, category, published_at, metadata, featured_image, is_featured, read_time")
             .eq("organization_id", org.id)
             .eq("status", "published")
             .order("published_at", { ascending: false, nullsFirst: false });
@@ -115,7 +120,7 @@ export const fetchArticles = cache(async (): Promise<Article[]> => {
         if (error || !data || data.length === 0) return FALLBACK;
 
         const mapped = data
-            .map((row) => rowToArticle(row as ArticleRow))
+            .map((row) => rowToArticle(row as ArticleRow, locale))
             .filter((a): a is Article => a !== null);
 
         return mapped.length > 0 ? mergeWithFallback(mapped) : FALLBACK;
@@ -124,10 +129,10 @@ export const fetchArticles = cache(async (): Promise<Article[]> => {
     }
 });
 
-export async function fetchArticlesByCategory(category: ArticleCategory): Promise<Article[]> {
-    return (await fetchArticles()).filter((a) => a.category === category);
+export async function fetchArticlesByCategory(category: ArticleCategory, locale: string): Promise<Article[]> {
+    return (await fetchArticles(locale)).filter((a) => a.category === category);
 }
 
-export async function fetchArticleBySlug(slug: string): Promise<Article | null> {
-    return (await fetchArticles()).find((a) => a.slug === slug) ?? null;
+export async function fetchArticleBySlug(slug: string, locale: string): Promise<Article | null> {
+    return (await fetchArticles(locale)).find((a) => a.slug === slug) ?? null;
 }

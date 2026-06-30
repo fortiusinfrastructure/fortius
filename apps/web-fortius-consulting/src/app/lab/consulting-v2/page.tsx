@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ConsultingV2Preview() {
-    const articles = await fetchArticles();
+    const articles = await fetchArticles("es");
     const [civil, intelligence] = VERTICALS;
 
     return (

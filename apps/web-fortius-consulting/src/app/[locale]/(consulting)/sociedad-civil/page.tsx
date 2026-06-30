@@ -31,7 +31,7 @@ export default async function SociedadCivilPage({ params }: Props) {
 
     const intro = await getSociedadCivilIntro(locale);
     const tiers = await getSociedadCivilTiers(locale);
-    const articles = await fetchArticles();
+    const articles = await fetchArticles(locale);
     const slots = getEditorialSlots(articles, "sociedad-civil");
 
     return (

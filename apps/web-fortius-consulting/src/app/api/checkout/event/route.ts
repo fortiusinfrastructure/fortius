@@ -24,7 +24,7 @@ export async function POST(request: Request) {
             return NextResponse.redirect(`${baseUrl}/area-privada`, 303);
         }
 
-        const article = await fetchArticleBySlug(slug);
+        const article = await fetchArticleBySlug(slug, "es");
         if (!article || article.kind !== "evento") {
             return NextResponse.redirect(`${baseUrl}/area-privada`, 303);
         }

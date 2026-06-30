@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PublicacionesPage({ params }: Props) {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "publicaciones" });
-    const articles = await fetchArticles();
+    const articles = await fetchArticles(locale);
 
     return (
         <main id="main-content" className="pt-[var(--nav-height)]">

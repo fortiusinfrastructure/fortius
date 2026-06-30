@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { slug, locale } = await params;
-    const article = await fetchArticleBySlug(slug);
+    const article = await fetchArticleBySlug(slug, locale);
     if (!article) {
         const t = await getTranslations({ locale, namespace: "article" });
         return { title: t("not-found") };
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PublicacionPage({ params }: PageProps) {
     const { slug, locale } = await params;
-    const article = await fetchArticleBySlug(slug);
+    const article = await fetchArticleBySlug(slug, locale);
     if (!article) notFound();
 
     const t = await getTranslations({ locale, namespace: "article" });
