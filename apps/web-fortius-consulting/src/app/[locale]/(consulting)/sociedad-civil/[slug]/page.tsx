@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import {
     ArticleDetailPage,
     buildArticleMetadata,
@@ -23,13 +24,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function SociedadCivilArticlePage({ params }: PageProps) {
     const { slug, locale } = await params;
+    const t = await getTranslations({ locale, namespace: "article" });
     const article = await fetchArticleBySlug(slug, locale);
     if (!article || article.category !== "sociedad-civil") notFound();
     return (
         <ArticleDetailPage
             article={article}
             backHref="/sociedad-civil#analisis"
-            backLabel="Volver a Sociedad Civil"
+            backLabel={t("back-civil")}
             membershipHref="/sociedad-civil#membresias"
         />
     );

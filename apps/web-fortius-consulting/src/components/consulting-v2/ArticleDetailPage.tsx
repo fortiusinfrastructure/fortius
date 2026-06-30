@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Clock3, CreditCard, Lock } from "lucide-react";
 import { marked } from "marked";
+import { getLocale, getTranslations } from "next-intl/server";
 import { createAdminClient, createServerClient } from "@fortius/database";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
-    categoryLabel,
     estimateReadTime,
     formatPublishedDate,
     getArticleOriginalSource,
-    kindLabel,
     paidPreview,
     type Article,
 } from "@/lib/articles";
@@ -123,6 +122,12 @@ export async function ArticleDetailPage({
     backLabel,
     membershipHref,
 }: ArticleDetailPageProps) {
+    const locale = await getLocale();
+    const t = await getTranslations("article");
+
+    const kindStr = t(`kind-${article.kind}` as Parameters<typeof t>[0]);
+    const categoryStr = t(`cat-${article.category}` as Parameters<typeof t>[0]);
+
     const cover = getArticleCover(article.category);
     const imageSources = getArticleImageSources(article);
     const isHtmlBody = article.content_format === "html";
@@ -159,10 +164,10 @@ export async function ArticleDetailPage({
                         <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
                             <div className="lg:col-span-7">
                                 <div className="flex flex-wrap items-center gap-3">
-                                    <Bracketed variant="tag">{kindLabel(article.kind)} · {categoryLabel(article.category)}</Bracketed>
+                                    <Bracketed variant="tag">{kindStr} · {categoryStr}</Bracketed>
                                     {isMembersOnly && (
                                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm border border-[var(--color-accent-500)] text-[var(--color-accent-400)] uppercase tracking-[0.16em] text-[0.7rem]">
-                                            <Lock size={12} /> Clientes
+                                            <Lock size={12} /> {t("clients-badge")}
                                         </span>
                                     )}
                                 </div>
@@ -180,7 +185,7 @@ export async function ArticleDetailPage({
                                         {readTime}
                                     </span>
                                     <span className="hidden md:inline">·</span>
-                                    <span>{lead.author ?? "Equipo Fortius"}</span>
+                                    <span>{lead.author ?? t("author-fallback")}</span>
                                 </div>
                             </div>
 
@@ -210,9 +215,9 @@ export async function ArticleDetailPage({
 
                             {originalSource && (
                                 <section className="border-t border-[var(--border-subtle)] pt-8">
-                                    <Bracketed variant="kicker">Fuente original</Bracketed>
+                                    <Bracketed variant="kicker">{t("original-source")}</Bracketed>
                                     <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                                        Publicación original en{" "}
+                                        {t("original-source-published")}{" "}
                                         <a
                                             href={originalSource.url}
                                             target="_blank"
@@ -228,27 +233,27 @@ export async function ArticleDetailPage({
 
                             {isMembersOnly && !access.canReadFull && (
                                 article.kind === "evento" && access.canPurchaseEvent ? (
-                                    <EventPurchaseGate article={article} />
+                                    <EventPurchaseGate article={article} t={t} />
                                 ) : (
-                                    <PaywallGate membershipHref={membershipHref} category={categoryLabel(article.category)} kind={kindLabel(article.kind)} isEvent={article.kind === "evento"} />
+                                    <PaywallGate membershipHref={membershipHref} category={categoryStr} kind={kindStr} isEvent={article.kind === "evento"} t={t} />
                                 )
                             )}
 
-                            {article.kind === "evento" && access.hasPurchasedEvent && <EventPurchasedNotice />}
+                            {article.kind === "evento" && access.hasPurchasedEvent && <EventPurchasedNotice t={t} />}
 
                             {isMembersOnly && article.subproducts.length > 0 && (
                                 <section className="space-y-5 border-t border-[var(--border-subtle)] pt-10">
-                                    <Bracketed variant="kicker">Subproductos exclusivos</Bracketed>
+                                    <Bracketed variant="kicker">{t("subproducts-title")}</Bracketed>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {article.subproducts.map((item, index) => (
                                             <div key={`${item.title}-${index}`} className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-5">
                                                 <div className="flex items-center gap-2 text-[var(--color-accent-400)]">
                                                     <Lock size={14} />
-                                                    <span className="text-[0.72rem] uppercase tracking-[0.16em]">Reservado</span>
+                                                    <span className="text-[0.72rem] uppercase tracking-[0.16em]">{t("reserved-badge")}</span>
                                                 </div>
                                                 <h3 className="mt-3 font-display text-[1.2rem] font-light text-[var(--text-primary)]">{item.title}</h3>
                                                 <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--text-secondary)]">
-                                                    {item.content || "Disponible para clientes del Área clientes."}
+                                                    {item.content || t("subproduct-fallback")}
                                                 </p>
                                             </div>
                                         ))}
@@ -258,7 +263,7 @@ export async function ArticleDetailPage({
                         </div>
 
                         <div className="lg:col-span-4">
-                            <ArticleKindPanel article={article} author={lead.author} />
+                            <ArticleKindPanel article={article} author={lead.author} locale={locale} />
                         </div>
                     </div>
                 </section>
@@ -267,25 +272,27 @@ export async function ArticleDetailPage({
     );
 }
 
-function EventPurchaseGate({ article }: { article: Article }) {
+type TranslationFn = Awaited<ReturnType<typeof getTranslations<"article">>>;
+
+function EventPurchaseGate({ article, t }: { article: Article; t: TranslationFn }) {
     return (
-        <div role="region" aria-label="Adquisición de oportunidad" className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
+        <div role="region" aria-label={t("event-purchase-tag")} className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
             <div className="flex items-start gap-4">
                 <div className="rounded-full bg-[var(--color-accent-500)]/15 p-3 text-[var(--color-accent-400)]">
                     <CreditCard size={20} />
                 </div>
                 <div className="flex-1">
-                    <Bracketed variant="tag">Adquisición para clientes</Bracketed>
+                    <Bracketed variant="tag">{t("event-purchase-tag")}</Bracketed>
                     <h2 className="mt-4 font-display text-[1.6rem] md:text-[2rem] font-light leading-[1.12] text-[var(--text-primary)]">
-                        Adquiere esta oportunidad por 10€.
+                        {t("event-purchase-title")}
                     </h2>
                     <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-                        El pago se procesa de forma segura en Stripe. Después de la confirmación, recibirás un email y la oportunidad aparecerá en tu Área clientes.
+                        {t("event-purchase-desc")}
                     </p>
                     <form action="/api/checkout/event" method="post" className="mt-6">
                         <input type="hidden" name="slug" value={article.slug} />
                         <button type="submit" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm bg-[var(--color-accent-500)] text-white text-[0.8rem] font-medium uppercase tracking-[0.16em] hover:bg-[var(--color-accent-400)] transition-colors">
-                            <CreditCard size={15} /> Comprar por 10€
+                            <CreditCard size={15} /> {t("event-purchase-cta")}
                         </button>
                     </form>
                 </div>
@@ -294,15 +301,15 @@ function EventPurchaseGate({ article }: { article: Article }) {
     );
 }
 
-function EventPurchasedNotice() {
+function EventPurchasedNotice({ t }: { t: TranslationFn }) {
     return (
         <div className="rounded-2xl border border-[#10b981]/40 bg-[#10b981]/5 p-6 text-[var(--text-primary)]">
             <div className="flex items-start gap-3">
                 <CheckCircle2 size={20} className="mt-0.5 text-[#10b981]" />
                 <div>
-                    <Bracketed variant="kicker">Oportunidad adquirida</Bracketed>
+                    <Bracketed variant="kicker">{t("event-purchased-tag")}</Bracketed>
                     <p className="mt-3 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                        Esta oportunidad ya está asociada a tu perfil. También puedes verla desde el Área clientes.
+                        {t("event-purchased-desc")}
                     </p>
                 </div>
             </div>
@@ -310,31 +317,31 @@ function EventPurchasedNotice() {
     );
 }
 
-function PaywallGate({ membershipHref, category, kind, isEvent }: { membershipHref: string; category: string; kind: string; isEvent: boolean }) {
+function PaywallGate({ membershipHref, category, kind, isEvent, t }: { membershipHref: string; category: string; kind: string; isEvent: boolean; t: TranslationFn }) {
     return (
-        <div role="region" aria-label="Contenido reservado a clientes" className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
+        <div role="region" aria-label={t("paywall-tag")} className="relative overflow-hidden rounded-2xl border border-[var(--color-accent-500)] bg-[var(--surface-highlight)] p-8 md:p-10">
             <div className="flex items-start gap-4">
                 <div className="rounded-full bg-[var(--color-accent-500)]/15 p-3 text-[var(--color-accent-400)]">
                     <Lock size={20} />
                 </div>
                 <div className="flex-1">
-                    <Bracketed variant="tag">Contenido para clientes</Bracketed>
+                    <Bracketed variant="tag">{t("paywall-tag")}</Bracketed>
                     <h2 className="mt-4 font-display text-[1.6rem] md:text-[2rem] font-light leading-[1.12] text-[var(--text-primary)]">
                         {isEvent
-                            ? "Esta oportunidad está reservada a clientes de Fortius."
-                            : `El ${kind.toLowerCase()} completo está reservado a clientes de Fortius.`}
+                            ? t("paywall-title-event")
+                            : t("paywall-title", { kind: kind.toLowerCase() })}
                     </h2>
                     <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
                         {isEvent
-                            ? `Accede al detalle completo del evento, los paquetes disponibles y la gestión desde el Área clientes en Oportunidades & Eventos dentro de ${category.toLowerCase()}.`
-                            : `Accede al contenido íntegro, a los subproductos vinculados y a la biblioteca completa de ${category.toLowerCase()} desde el Área clientes.`}
+                            ? t("paywall-desc-event", { category: category.toLowerCase() })
+                            : t("paywall-desc", { category: category.toLowerCase() })}
                     </p>
                     <div className="mt-6 flex flex-wrap gap-3">
                         <Link href={membershipHref} className="inline-flex items-center px-5 py-2.5 rounded-sm bg-[var(--color-accent-500)] text-white text-[0.8rem] font-medium uppercase tracking-[0.16em] hover:bg-[var(--color-accent-400)] transition-colors">
-                            Ver planes
+                            {t("paywall-see-plans")}
                         </Link>
                         <Link href="/area-privada" className="inline-flex items-center px-5 py-2.5 rounded-sm border border-[var(--border-strong)] text-[var(--text-primary)] text-[0.8rem] font-medium uppercase tracking-[0.16em] hover:border-[var(--color-accent-500)] transition-colors">
-                            Ya soy cliente
+                            {t("paywall-already-client")}
                         </Link>
                     </div>
                 </div>

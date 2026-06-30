@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import {
     CalendarDays,
     Lock,
@@ -8,9 +9,7 @@ import {
 } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
-    categoryLabel,
     formatPublishedDate,
-    kindLabel,
     type Article,
     type ArticleKind,
 } from "@/lib/articles";
@@ -27,11 +26,15 @@ const KIND_ICONS: Record<ArticleKind, typeof MessageSquareQuote> = {
 interface ArticleKindPanelProps {
     article: Article;
     author: string | null;
+    locale: string;
 }
 
-export function ArticleKindPanel({ article, author }: ArticleKindPanelProps) {
+export async function ArticleKindPanel({ article, author, locale: _locale }: ArticleKindPanelProps) {
+    const t = await getTranslations("article");
     const Icon = KIND_ICONS[article.kind] ?? Newspaper;
     const isMembersOnly = article.access === "paid" || article.kind === "evento";
+    const kindStr = t(`kind-${article.kind}` as Parameters<typeof t>[0]);
+    const categoryStr = t(`cat-${article.category}` as Parameters<typeof t>[0]);
 
     return (
         <aside className="space-y-6 lg:sticky lg:top-28">
@@ -40,23 +43,23 @@ export function ArticleKindPanel({ article, author }: ArticleKindPanelProps) {
                     <span className="rounded-full bg-[var(--color-accent-500)]/12 p-3 text-[var(--color-accent-400)]">
                         <Icon size={18} />
                     </span>
-                    <Bracketed variant="tag">{kindLabel(article.kind)}</Bracketed>
+                    <Bracketed variant="tag">{kindStr}</Bracketed>
                 </div>
                 <dl className="mt-5 space-y-4 text-[0.92rem]">
-                    <MetaRow label="Formato" value={kindLabel(article.kind)} />
-                    <MetaRow label="Área" value={categoryLabel(article.category)} />
+                    <MetaRow label={t("meta-format")} value={kindStr} />
+                    <MetaRow label={t("meta-area")} value={categoryStr} />
                     {article.published_at && (
-                        <MetaRow label="Fecha" value={formatPublishedDate(article.published_at)} />
+                        <MetaRow label={t("meta-date")} value={formatPublishedDate(article.published_at)} />
                     )}
-                    {author && <MetaRow label="Firma" value={author} />}
-                    <MetaRow label="Acceso" value={isMembersOnly ? "Clientes" : "Abierto"} />
+                    {author && <MetaRow label={t("meta-author")} value={author} />}
+                    <MetaRow label={t("meta-access")} value={isMembersOnly ? t("access-clients") : t("access-open")} />
                     {article.kind === "evento" && (
-                        <MetaRow label="Sección" value="Área clientes · Oportunidades & Eventos" />
+                        <MetaRow label={t("meta-section")} value={t("events-section")} />
                     )}
                     {isMembersOnly && (
                         <div className="flex items-center gap-2 rounded-xl border border-[var(--color-accent-500)]/25 bg-[var(--color-accent-500)]/8 px-3 py-2 text-[var(--color-accent-300)]">
                             <Lock size={14} />
-                            <span>Contenido visible al desbloquear el Área clientes.</span>
+                            <span>{t("access-locked")}</span>
                         </div>
                     )}
                 </dl>

@@ -10,10 +10,10 @@
 
 1. [Visión general del ecosistema](#1-visión-general-del-ecosistema)
 2. [Arquitectura técnica compartida](#2-arquitectura-técnica-compartida)
-3. [Escuela Hispánica — web-escuela-hispanica](#3-escuela-hispánica)
-4. [IEAM — web-ieam](#4-ieam)
-5. [Fortius Consulting — web-fortius-consulting](#5-fortius-consulting)
-6. [Fortius Foundation — web-fortius-foundation](#6-fortius-foundation)
+3. [Escuela Hispánica — web-escuela-hispanica](#3-escuela-hispánica) · [Guía de cambios →](#39-guía-de-cambios-frecuentes)
+4. [IEAM — web-ieam](#4-ieam) · [Guía de cambios →](#48-guía-de-cambios-frecuentes)
+5. [Fortius Consulting — web-fortius-consulting](#5-fortius-consulting) · [Guía de cambios →](#57-guía-de-cambios-frecuentes)
+6. [Fortius Foundation — web-fortius-foundation](#6-fortius-foundation) · [Guía de cambios →](#610-guía-de-cambios-frecuentes)
 7. [Servicios e infraestructura externa](#7-servicios-e-infraestructura-externa)
 8. [Variables de entorno por aplicación](#8-variables-de-entorno-por-aplicación)
 9. [Base de datos — modelo y tablas clave](#9-base-de-datos--modelo-y-tablas-clave)
@@ -101,7 +101,7 @@ Todas las apps envían email con Resend mediante `RESEND_API_KEY`. El remitente 
 |---|---|---|
 | Escuela Hispánica | ES / EN / PT | `next-intl` |
 | IEAM | ES / EN | `next-intl` |
-| Fortius Consulting | ES | No usa i18n |
+| Fortius Consulting | ES / EN | `next-intl` |
 | Fortius Foundation | ES | No usa i18n |
 
 ---
@@ -196,6 +196,60 @@ APPROVER_EMAIL
 
 La app está en estado **híbrido**: parte del negocio (auth, membresías, pagos, admin, eventos) ya vive en Supabase. El contenido editorial (publicaciones, recursos) sigue en `src/lib/mock-data/` como capa transicional pendiente de migración.
 
+### 3.9 Guía de cambios frecuentes
+
+> Los cambios en archivos de código requieren un nuevo **commit + despliegue** en Vercel.  
+> Los cambios a través del **CMS web** (`/admin`) son inmediatos sin redeploy.
+
+#### Modificar biografías o datos del equipo
+
+1. Abrir `apps/web-escuela-hispanica/src/lib/mock-data/team.ts`
+2. Localizar el miembro por su `name` en el array `teamMembers`
+3. Editar `name`, `role`, `bio` (los tres soportan objeto `{ es, en, pt }`) o `image` (ruta relativa dentro de `public/`)
+4. Si se añade foto nueva: colocar el archivo WebP en `public/equipo/` y apuntar `image` a esa ruta
+5. Commit y redeploy
+
+#### Añadir o editar un artículo de publicaciones
+
+1. Abrir `apps/web-escuela-hispanica/src/lib/mock-data/articles.ts`
+2. Añadir un nuevo objeto al array o editar el existente — campos clave: `slug`, `title`, `excerpt`, `content`, `author`, `date`, `category`, `image`
+3. Si el autor es nuevo, añadirlo también en `src/lib/mock-data/authors.ts`
+4. Colocar la imagen destacada en `public/publicaciones/` (o donde indique el campo `image`)
+5. Commit y redeploy
+
+#### Añadir o editar un evento
+
+Los eventos tienen dos fuentes según cómo se crearon:
+
+**Opción A — Sin CMS (archivo estático):**
+1. Abrir `apps/web-escuela-hispanica/src/lib/mock-data/activities.ts`
+2. Añadir o editar el objeto en el array `activities` — campos: `title`, `date`, `time`, `location`, `description`, `category`
+3. Commit y redeploy
+
+**Opción B — CMS web (sin redeploy):**
+1. Acceder a `escuelahispanica.org/admin` con cuenta administradora
+2. Ir a **Eventos** → **Nuevo evento** (o clic en el evento a editar)
+3. Completar el formulario y guardar — el cambio es inmediato en Supabase
+
+#### Añadir o editar un proyecto
+
+1. Abrir `apps/web-escuela-hispanica/src/lib/mock-data/projects.ts`
+2. Añadir o editar el objeto con `slug`, `title`, `description`, `image`, `status`, `category`
+3. Commit y redeploy
+
+#### Añadir o editar un recurso descargable
+
+1. Abrir `apps/web-escuela-hispanica/src/lib/mock-data/resources.ts`
+2. Añadir o editar el objeto con `title`, `description`, `type`, `url`, `category`
+3. Si el recurso es un PDF: subirlo al bucket `library-docs` en Supabase Storage y usar la URL pública en el campo `url`
+4. Commit y redeploy
+
+#### Modificar textos de la interfaz (UI strings)
+
+1. Abrir el archivo de idioma en `apps/web-escuela-hispanica/src/messages/` (`es.json`, `en.json` o `pt.json`)
+2. Localizar la clave por namespace (p. ej. `"home"`, `"nosotros"`, `"colabora"`)
+3. Editar el valor y hacer commit y redeploy
+
 ---
 
 ## 4. IEAM
@@ -272,6 +326,45 @@ NEXT_PUBLIC_SITE_URL=https://ieam.es
 - Artículos y eventos: **fuente en Supabase** (vía CMS + seed)
 - Equipo e institución: en `src/lib/mock-data/` (pendiente migración)
 - PDFs: en `public/docs/` del repo (objetivo moverlos a `library-docs/ieam/`)
+
+### 4.8 Guía de cambios frecuentes
+
+> Los artículos y eventos se gestionan desde el CMS web — **sin redeploy**.  
+> Los cambios de equipo y textos de UI requieren **commit + redeploy**.
+
+#### Modificar biografías o datos del equipo
+
+1. Abrir `apps/web-ieam/src/lib/mock-data/team.ts`
+2. Localizar el miembro y editar `name`, `role`, `bio` o `image`
+3. Si se añade foto nueva: colocar el WebP en `public/equipo/`
+4. Commit y redeploy
+
+#### Añadir o editar un artículo de análisis
+
+El contenido de artículos vive en Supabase y se gestiona exclusivamente desde el CMS. No requiere tocar código.
+
+1. Iniciar sesión con cuenta administradora en `ieam.es/admin`
+2. Ir a **Artículos** → **Nuevo artículo** (o clic en el artículo a editar)
+3. Completar: título ES y EN, excerpt, cuerpo (rich text), imagen destacada y, si aplica, materiales descargables
+4. Publicar — el artículo aparece en `/analisis` de inmediato
+
+#### Añadir un PDF descargable a un artículo
+
+1. Subir el PDF al bucket `library-docs/ieam/` en Supabase Storage (panel de Supabase → Storage)
+2. En el editor del artículo (CMS), sección **Materiales**: añadir entrada con etiqueta y la ruta devuelta por Supabase
+3. La función `resolveMaterialUrl()` en `src/lib/utils/content.ts` resuelve automáticamente la URL pública con descarga forzada
+
+#### Añadir o editar un evento
+
+1. En `ieam.es/admin`, ir a **Eventos** → **Nuevo evento**
+2. Completar título, fecha, ubicación, descripción e imagen destacada
+3. Guardar — el evento aparece en `/eventos` de forma inmediata
+
+#### Modificar textos de la interfaz (UI strings)
+
+1. Abrir `apps/web-ieam/src/messages/es.json` o `en.json`
+2. Localizar la clave por namespace y editar el valor
+3. Commit y redeploy
 
 ---
 
@@ -376,6 +469,68 @@ RESEND_FROM_EMAIL=noreply@fortiusconsulting.org
 ADMIN_UPLOAD_SECRET        # protege /api/admin/articulos/convert
 NEXT_PUBLIC_UPLOAD_SECRET  # mismo valor, para la interfaz web
 ```
+
+### 5.7 Guía de cambios frecuentes
+
+> Los artículos se gestionan desde el CMS web — **sin redeploy**.  
+> El equipo, los expertos y el contenido editorial estático (home, verticales) requieren **commit + redeploy**.
+
+#### Modificar el equipo o los expertos colaboradores
+
+Todo el equipo y los expertos están en un único archivo:
+
+```
+apps/web-fortius-consulting/src/content/team.ts
+```
+
+- **Equipo interno**: array `TEAM` — cada entrada tiene `slug`, `name`, `role`, `role_en`, `bio`, `bio_en`, `photo`, `department`, `linkedin`
+- **Expertos externos**: array `EXPERTS` al final del mismo archivo — misma estructura sin `department`
+- Añadir foto: colocar el WebP en `apps/web-fortius-consulting/public/equipo/` y apuntar `photo` a esa ruta (`/equipo/nombre.webp`)
+- Los campos `role_en` y `bio_en` son los que se muestran cuando el visitante cambia el idioma a EN; si se omiten, se muestra el campo ES como fallback
+- Commit y redeploy
+
+#### Añadir o editar un artículo
+
+Los artículos se gestionan desde el CMS del área privada. No requiere tocar código.
+
+1. Iniciar sesión en `fortiusconsulting.org/area-privada` con cuenta `super_admin`
+2. Ir a **CMS → Artículos** (ruta: `/area-privada/admin/articulos`)
+3. Crear nuevo artículo o editar uno existente
+4. Completar los campos en **ES** y opcionalmente en **EN** (sección «Traducción EN» al final del formulario)
+5. Guardar — el artículo aparece en la sección correspondiente de forma inmediata
+
+#### Modificar el contenido de la vertical Sociedad Civil
+
+| Idioma | Archivo |
+|---|---|
+| Español | `apps/web-fortius-consulting/src/content/sociedad-civil.ts` |
+| Inglés  | `apps/web-fortius-consulting/src/content/sociedad-civil.en.ts` |
+
+Contiene los bloques editoriales: hero, secciones descriptivas, estadísticas y CTAs. Commit y redeploy.
+
+#### Modificar el contenido de la vertical Inteligencia Política
+
+| Idioma | Archivo |
+|---|---|
+| Español | `apps/web-fortius-consulting/src/content/politica.ts` |
+| Inglés  | `apps/web-fortius-consulting/src/content/politica.en.ts` |
+
+Misma estructura que Sociedad Civil. Commit y redeploy.
+
+#### Modificar el home (página de inicio)
+
+| Idioma | Archivo |
+|---|---|
+| Español | `apps/web-fortius-consulting/src/content/home-v2.ts` |
+| Inglés  | `apps/web-fortius-consulting/src/content/home-v2.en.ts` |
+
+Contiene tagline, bloques editoriales y secciones de verticales del home v2. Commit y redeploy.
+
+#### Modificar textos de la interfaz (UI strings)
+
+1. Abrir `apps/web-fortius-consulting/src/messages/es.json` o `en.json`
+2. Localizar la clave por namespace (p. ej. `"nosotros"`, `"article"`, `"expert"`)
+3. Editar el valor y hacer commit y redeploy
 
 ---
 
@@ -517,6 +672,57 @@ NEXT_PUBLIC_ORG_SLUG=fortius-foundation
 RESEND_API_KEY
 RESEND_FROM_EMAIL=noreply@fundacionfortius.org   # opcional, tiene default
 ```
+
+### 6.10 Guía de cambios frecuentes
+
+> Todo el contenido de Foundation vive en archivos de código — **todos los cambios requieren commit + redeploy**.
+
+#### Modificar el equipo (patronato, consejo asesor, equipo ejecutivo)
+
+Archivo único:
+
+```
+apps/web-fortius-foundation/src/content/team.ts
+```
+
+El archivo exporta tres arrays separados: `PATRONATO`, `CONSEJO_ASESOR` y `EQUIPO`. Cada persona tiene `name`, `role`, `bio`, `image`, `linkedin`. Para añadir una foto nueva, colocar el WebP en `public/equipo/` y apuntar `image` a esa ruta.
+
+#### Añadir o editar un artículo del blog
+
+1. Abrir `apps/web-fortius-foundation/src/content/articles.ts` y añadir o editar el objeto en el array `ARTICLES`
+   - Campos: `slug`, `title`, `excerpt`, `content`, `author`, `published_at`, `category`
+2. Si el artículo tiene categoría o tema de color específico: añadir la entrada correspondiente en `src/content/article-visuals.ts` (formato `{ slug → { category, colorTheme } }`)
+3. Colocar la imagen destacada en `public/entradas/images/{slug}.png` — el nombre de archivo **debe coincidir exactamente con el slug**
+4. Commit y redeploy
+
+#### Añadir o editar un proyecto de la incubadora
+
+1. Abrir `apps/web-fortius-foundation/src/content/projects.ts`
+2. Añadir o editar el objeto en el array `PROJECTS` — campos: `slug`, `title`, `description`, `status`, `image`, `area`, `impact`
+3. Commit y redeploy
+
+#### Añadir o modificar una convocatoria de ayudas
+
+1. Abrir `apps/web-fortius-foundation/src/content/ayudas.ts`
+2. Añadir o editar el objeto en el array `AYUDAS`:
+
+| Campo | Descripción |
+|---|---|
+| `slug` | Identificador único — define la URL `/area-privada/ayudas/{slug}` |
+| `title` | Nombre de la convocatoria |
+| `kicker` | Etiqueta corta (p. ej. `"Convocatoria abierta"`) |
+| `summary` | Resumen para la tarjeta |
+| `description` | Array de párrafos con la descripción completa |
+| `deadline` | Fecha límite en texto libre |
+| `maxAmount` | Importe máximo (p. ej. `"10.000 €"`) o `null` |
+| `eligibility` | Array de strings con los criterios de elegibilidad |
+| `requirements` | Array de strings con la documentación requerida |
+| `status` | `"open"` · `"closed"` · `"upcoming"` |
+| `pdfUrl` | Ruta al PDF de bases en `public/ayudas/` o `null` |
+| `imageUrl` | Ruta a la imagen en `public/ayudas/` o `null` |
+
+3. Si hay PDF o imagen: colocarlos en `public/ayudas/` y actualizar `pdfUrl` / `imageUrl`
+4. Commit y redeploy
 
 ---
 

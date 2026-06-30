@@ -1,25 +1,27 @@
+import { getTranslations } from "next-intl/server";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { Article } from "@/lib/articles";
 import { getEventArticleData } from "@/lib/article-display";
 
-export function EventArticleBlocks({ article, membersOnly = false }: { article: Article; membersOnly?: boolean }) {
+export async function EventArticleBlocks({ article, membersOnly = false }: { article: Article; membersOnly?: boolean }) {
+    const t = await getTranslations("article");
     const data = getEventArticleData(article);
     if (!data) return null;
 
     return (
         <section className="space-y-6">
             <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 md:p-7">
-                <Bracketed variant="kicker">Ficha del evento</Bracketed>
+                <Bracketed variant="kicker">{t("event-sheet")}</Bracketed>
                 <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <InfoCard label="Fechas" value={data.date ?? "Pendiente de definir"} />
-                    <InfoCard label="Ubicación" value={data.location ?? "Pendiente de definir"} />
-                    <InfoCard label="Organizador" value={data.organizer ?? "Pendiente de definir"} />
+                    <InfoCard label={t("event-dates")} value={data.date ?? t("event-tbd")} />
+                    <InfoCard label={t("event-location")} value={data.location ?? t("event-tbd")} />
+                    <InfoCard label={t("event-organizer")} value={data.organizer ?? t("event-tbd")} />
                 </div>
             </div>
 
             {data.packages.length > 0 && !membersOnly && (
                 <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-primary)] p-6 md:p-7">
-                    <Bracketed variant="kicker">Opciones detectadas</Bracketed>
+                    <Bracketed variant="kicker">{t("event-options")}</Bracketed>
                     <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                         {data.packages.map((pkg) => (
                             <article key={pkg.name} className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-secondary)] p-5">
@@ -34,7 +36,7 @@ export function EventArticleBlocks({ article, membersOnly = false }: { article: 
                                     )}
                                 </div>
                                 <p className="mt-3 text-[0.92rem] leading-relaxed text-[var(--text-secondary)]">
-                                    {pkg.summary ?? "Consulta el cuerpo del documento para ver el detalle completo del paquete y sus condiciones."}
+                                    {pkg.summary ?? t("event-pkg-fallback")}
                                 </p>
                             </article>
                         ))}
@@ -44,9 +46,9 @@ export function EventArticleBlocks({ article, membersOnly = false }: { article: 
 
             {data.packages.length > 0 && membersOnly && (
                 <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-primary)] p-6 md:p-7">
-                    <Bracketed variant="kicker">Acceso para clientes</Bracketed>
+                    <Bracketed variant="kicker">{t("event-client-access")}</Bracketed>
                     <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                        Esta oportunidad incluye paquetes de participación, agenda coordinada y soporte Fortius. El detalle completo se desbloquea desde el Área clientes en la sección Oportunidades & Eventos.
+                        {t("event-client-desc")}
                     </p>
                 </div>
             )}

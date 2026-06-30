@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
 import { LinkedInBrandIcon } from "@/components/system/LinkedInBrandIcon";
@@ -15,49 +15,53 @@ import { HistoryTimeline } from "@/components/consulting-v2/HistoryTimeline";
 import { IdeasMarquee } from "@/components/consulting-v2/IdeasMarquee";
 import { WorldMap } from "@/components/consulting-v2/WorldMap";
 import {
-    DEPARTMENT_LABEL,
     DEPARTMENT_ORDER,
     EXPERTS,
     TEAM,
     getTeamByDepartment,
+    getDepartmentLabel,
     type TeamMember,
     type ExternalExpert,
 } from "@/content/team";
 import { ArrowUpRight } from "lucide-react";
 
-const VERTICAL_LABEL: Record<"civil" | "intelligence", string> = {
-    civil: "Sociedad Civil",
-    intelligence: "Inteligencia",
+const VERTICAL_LABEL: Record<"civil" | "intelligence", { es: string; en: string }> = {
+    civil: { es: "Sociedad Civil", en: "Civil Society" },
+    intelligence: { es: "Inteligencia", en: "Intelligence" },
 };
 
-function memberToDialog(m: TeamMember): PersonDialogData {
+function memberToDialog(m: TeamMember, locale: string): PersonDialogData {
+    const isEn = locale === "en";
     return {
         name: m.name,
-        role: m.role,
+        role: (isEn && m.role_en) ? m.role_en : m.role,
         country: m.country,
         area: m.area,
-        department: DEPARTMENT_LABEL[m.department],
-        bio: m.bio,
+        department: getDepartmentLabel(m.department, locale),
+        bio: (isEn && m.bio_en) ? m.bio_en : m.bio,
         linkedin: m.linkedin,
         twitter: m.twitter,
         photo: m.photo,
     };
 }
 
-function expertToDialog(e: ExternalExpert): PersonDialogData {
+function expertToDialog(e: ExternalExpert, locale: string): PersonDialogData {
+    const isEn = locale === "en";
     return {
         name: e.name,
-        role: e.role,
+        role: (isEn && e.role_en) ? e.role_en : e.role,
         country: e.country,
-        bio: e.bio,
+        bio: (isEn && e.bio_en) ? e.bio_en : e.bio,
         linkedin: e.linkedin,
         photo: e.photo,
-        verticalLabel: VERTICAL_LABEL[e.vertical],
+        verticalLabel: VERTICAL_LABEL[e.vertical][isEn ? "en" : "es"],
     };
 }
 
 export function NosotrosClient() {
     const t = useTranslations("nosotros");
+    const locale = useLocale();
+    const isEn = locale === "en";
     const [active, setActive] = useState<PersonDialogData | null>(null);
     const founder = TEAM.find((m) => m.department === "direccion");
 
@@ -118,7 +122,7 @@ export function NosotrosClient() {
                                             {founder.name}
                                         </h3>
                                         <p className="text-[0.8rem] uppercase tracking-[0.15em] text-[var(--color-accent-400)]">
-                                            {founder.role}
+                                            {(isEn && founder.role_en) ? founder.role_en : founder.role}
                                         </p>
                                     </div>
                                 </Link>
@@ -164,19 +168,19 @@ export function NosotrosClient() {
                         return (
                             <section key={dept}>
                                 <Bracketed variant="kicker">
-                                    Departamento · {DEPARTMENT_LABEL[dept]}
+                                    {isEn ? "Department" : "Departamento"} · {getDepartmentLabel(dept, locale)}
                                 </Bracketed>
                                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">
                                     {members.map((m) => (
                                         <PersonCard
                                             key={m.slug}
                                             name={m.name}
-                                            role={m.role}
+                                            role={(isEn && m.role_en) ? m.role_en : m.role}
                                             country={m.country}
                                             area={m.area}
                                             photo={m.photo}
                                             variant="full"
-                                            onOpen={() => setActive(memberToDialog(m))}
+                                            onOpen={() => setActive(memberToDialog(m, locale))}
                                         />
                                     ))}
                                 </div>
@@ -199,12 +203,12 @@ export function NosotrosClient() {
                                 <PersonCard
                                     key={e.slug}
                                     name={e.name}
-                                    role={e.role}
+                                    role={(isEn && e.role_en) ? e.role_en : e.role}
                                     country={e.country}
-                                    area={VERTICAL_LABEL[e.vertical]}
+                                    area={VERTICAL_LABEL[e.vertical][isEn ? "en" : "es"]}
                                     photo={e.photo}
                                     variant="full"
-                                    onOpen={() => setActive(expertToDialog(e))}
+                                    onOpen={() => setActive(expertToDialog(e, locale))}
                                 />
                             ))}
                         </div>

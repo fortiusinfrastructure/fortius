@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PersonPortrait } from "@/components/consulting-v2/PersonPortrait";
@@ -20,6 +20,10 @@ const JUAN_TIMELINE = [
 
 export function ExpertClient({ member }: { member: TeamMember | ExternalExpert }) {
     const t = useTranslations("expert");
+    const locale = useLocale();
+    const isEn = locale === "en";
+    const displayRole = (isEn && member.role_en) ? member.role_en : member.role;
+    const displayBio = (isEn && member.bio_en) ? member.bio_en : member.bio;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitMessage, setSubmitMessage] = useState("");
 
@@ -79,12 +83,12 @@ export function ExpertClient({ member }: { member: TeamMember | ExternalExpert }
                                 {member.name}
                             </h1>
                             <p className="mt-2 text-[0.8rem] uppercase tracking-[0.15em] text-[var(--color-accent-400)]">
-                                {member.role}
+                                {displayRole}
                             </p>
                         </div>
                         <div className="prose prose-invert prose-p:text-[var(--text-secondary)] prose-p:leading-relaxed max-w-none pt-4">
                             <p className="text-[1.05rem] md:text-[1.1rem] leading-relaxed">
-                                {member.bio}
+                                {displayBio}
                             </p>
                             <p>{t("bio-extra")}</p>
                         </div>

@@ -15,6 +15,18 @@ export const DEPARTMENT_LABEL: Record<Department, string> = {
     "legal-contable": "Legal y Contable",
 };
 
+export const DEPARTMENT_LABEL_EN: Record<Department, string> = {
+    direccion: "Leadership",
+    "asuntos-publicos": "Public Affairs",
+    "inteligencia-politica": "Political Intelligence",
+    digital: "Digital",
+    "legal-contable": "Legal & Finance",
+};
+
+export function getDepartmentLabel(dept: Department, locale: string): string {
+    return locale === "en" ? DEPARTMENT_LABEL_EN[dept] : DEPARTMENT_LABEL[dept];
+}
+
 export const DEPARTMENT_ORDER: Department[] = [
     "direccion",
     "asuntos-publicos",
@@ -27,11 +39,13 @@ export interface TeamMember {
     slug: string;
     name: string;
     role: string;
+    role_en?: string;
     country?: string;
     department: Department;
     verticals: VerticalId[];
     area?: string;
     bio: string;
+    bio_en?: string;
     linkedin?: string;
     twitter?: string;
     photo?: string | string[];
@@ -41,9 +55,11 @@ export interface ExternalExpert {
     slug: string;
     name: string;
     role: string;
+    role_en?: string;
     country?: string;
     vertical: VerticalId;
     bio: string;
+    bio_en?: string;
     linkedin?: string;
     photo?: string | string[];
 }
@@ -60,15 +76,18 @@ export const TEAM: TeamMember[] = [
         slug: "juan-angel-soto",
         name: "Juan Ángel Soto Gómez",
         role: "Founder & CEO",
+        role_en: "Founder & CEO",
         department: "direccion",
         verticals: ["civil", "intelligence"],
         bio: "Juan Ángel Soto (Murcia, 1992), es graduado en Administración y Dirección de Empresas y en Derecho por la Universidad de Navarra, así como en Ciencias Políticas y de la Administración por la UNED. Cuenta con un máster en Teoría Política y Jurídica por University College London (UCL) y es doctorando en Ciencia Política en St. Mary’s University de Londres. Es fundador y CEO de Fortius, una firma de consultoría estratégica especializada en think tanks, inteligencia y riesgos geopolíticos que opera en Europa, América y África. Asimismo, ha ocupado distintos cargos ejecutivos en varios centros de pensamiento, siendo director ejecutivo de la Fundación Civismo (2018–2021) y director internacional de la Fundación Disenso (2021–2023). Es emprendedor social y ha fundado numerosas organizaciones cívicas, como la Fundación Fortius y Principios, de las que es presidente; y ha impulsado iniciativas como el Instituto Español de Análisis Migratorio o Escuela Hispánica. Colabora de forma habitual en medios de comunicación españoles e internacionales. Como académico, es profesor de teoría política en la Universidad de Navarra. Es Visiting Fellow del Danube Institute de Budapest y de la Universidad Ludovika, e imparte clases en diferentes universidades europeas y escuelas de negocios, como la Universidad de las Hespérides.",
+        bio_en: "Juan Ángel Soto (Murcia, 1992) holds degrees in Business Administration and Law from the University of Navarra, as well as in Political and Administrative Science from UNED. He holds a Master’s in Political and Legal Theory from University College London (UCL) and is a doctoral candidate in Political Science at St. Mary’s University London. He is the founder and CEO of Fortius, a strategic consulting firm specialising in think tanks, political intelligence and geopolitical risks, operating across Europe, the Americas and Africa. He has held executive positions at several think tanks, serving as Executive Director of Fundación Civismo (2018–2021) and International Director of Fundación Disenso (2021–2023). He is a social entrepreneur and has founded numerous civic organisations, including Fortius Foundation and Principios, of which he serves as president, and has driven initiatives such as the Instituto Español de Análisis Migratorio and Escuela Hispánica. He regularly contributes to Spanish and international media. As an academic, he is a professor of political theory at the University of Navarra, a Visiting Fellow at the Danube Institute in Budapest and Ludovika University, and lectures at various European universities and business schools, including the University of the Hesperides.",
         linkedin: "https://www.linkedin.com/in/juanangelsoto/",
     },
     {
         slug: "didac-sanchez-olaya",
         name: "Dídac Sánchez Olaya",
         role: "Director de Asuntos Públicos",
+        role_en: "Director of Public Affairs",
         department: "asuntos-publicos",
         verticals: ["civil"],
         bio: "Dídac es profesional de asuntos públicos y estrategia política, especializado en incidencia institucional, movilización social y diseño de estrategias de posicionamiento para organizaciones del tercer sector y actores con impacto público.\n\nEs graduado en Derecho y Ciencias Políticas con mención en Relaciones Internacionales por la Universitat Abat Oliba CEU y posee un Máster en Derecho Parlamentario, Elecciones y Estudios Legislativos por la Complutense University of Madrid. Cuenta además con formación especializada en asuntos públicos por la Universidad Autónoma de Madrid y cursa actualmente el Máster de Acceso a la Abogacía en la Universitat Oberta de Catalunya.\n\nActualmente ejerce como responsable de Asuntos Públicos en Fortius, donde lidera proyectos de incidencia pública y consultoría estratégica en ámbitos como vivienda, tecnología y cultura. Dirige asimismo la plataforma cívica Principios, desde donde impulsa estrategias de posicionamiento institucional, movilización de base social y elaboración de informes sobre retos sociales contemporáneos. Previamente trabajó en asuntos públicos en Grayling España para sectores como tecnología, salud, alimentación y vivienda, desarrollando estrategias de advocacy, stakeholder engagement y seguimiento regulatorio. También colaboró como asistente de investigación en la Universitat Internacional de Catalunya en un proyecto financiado por la Fundación BBVA sobre gestión ética del riesgo y salud humana.",        linkedin: "https://www.linkedin.com/in/didac-sanchez-olaya",
@@ -77,6 +96,7 @@ export const TEAM: TeamMember[] = [
         slug: "alexia-cosmello-guisande",
         name: "Alexia Cosmello Guisande",
         role: "Asuntos Públicos",
+        role_en: "Public Affairs",
         department: "asuntos-publicos",
         verticals: ["civil"],
         bio: "Alexia es profesional de asuntos públicos, estrategia y comunicación institucional, especializada en instituciones de la Unión Europea, comunicación de políticas públicas, relaciones institucionales y posicionamiento estratégico.\n\nEs graduada en Relaciones Internacionales por la University of Navarra, posee un Máster en Marketing y Comunicación Institucional por LUISS Guido Carli University y un Online Master's en Branding por Masterbrand.\n\nActualmente ejerce como responsable de Asuntos Públicos en Bruselas en Fortius, donde lidera estrategias de interlocución institucional y posicionamiento ante el ecosistema europeo. Previamente fue Policy Manager for Member State Outreach en DIGITALEUROPE, coordinando la relación con asociaciones nacionales de toda Europa y liderando campañas y eventos vinculados a la toma de decisiones europeas, y desarrolló estrategias de incidencia y comunicación en FIPRA Public Affairs para clientes internacionales en políticas digitales, competencia, transporte y sostenibilidad. Es asimismo socia de la Asociación de Profesionales de las Relaciones Institucionales (APRI) y miembro de APRI Bruselas.",        linkedin: "https://www.linkedin.com/in/alexia-cosmello",
@@ -85,6 +105,7 @@ export const TEAM: TeamMember[] = [
         slug: "calli-pacheco-munoz",
         name: "Calli Pacheco Muñoz",
         role: "Asistente de Comunicación",
+        role_en: "Communications Assistant",
         department: "asuntos-publicos",
         verticals: ["civil"],
         bio: "Ciudad de México (México). Estudiante de Comunicación Audiovisual en la Universidad Complutense de Madrid. Con formación en liderazgo y vida pública. Ha participado en programas formativos centrados en el pensamiento político y el compromiso social, formando parte de la primera promoción de la Escuela de Líderes \"Patria Unida\".\n\nCuenta con experiencia en creación de contenido en el ámbito del marketing. Actualmente es asistente de comunicación en Fortius, centrada en proyectos vinculados a la comunicación y el marketing digital.",
@@ -94,6 +115,7 @@ export const TEAM: TeamMember[] = [
         slug: "beatriz-de-leon-cobo",
         name: "Beatriz de León Cobo",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Norte de África y Sahel",
@@ -104,6 +126,7 @@ export const TEAM: TeamMember[] = [
         slug: "tasnim-idriss",
         name: "Tasnim Idriss",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Norte de África y Sahel",
@@ -114,6 +137,7 @@ export const TEAM: TeamMember[] = [
         slug: "juan-pablo-chamon-saucedo",
         name: "Juan Pablo Chamón Saucedo",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "América",
@@ -124,6 +148,7 @@ export const TEAM: TeamMember[] = [
         slug: "segundo-carafi",
         name: "Segundo Carafí",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "América",
@@ -133,6 +158,7 @@ export const TEAM: TeamMember[] = [
         slug: "matthaus-konradsheim",
         name: "Matthäus Konradsheim",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "inteligencia-politica",
         verticals: ["intelligence"],
         area: "Europa",
@@ -141,6 +167,7 @@ export const TEAM: TeamMember[] = [
         slug: "jose-maria-cortes",
         name: "José María Cortes",
         role: "Inteligencia Política",
+        role_en: "Political Intelligence",
         department: "asuntos-publicos",
         verticals: ["civil"],
         area: "Europa",
@@ -166,6 +193,7 @@ export const TEAM: TeamMember[] = [
         slug: "diego-salazar-ramirez",
         name: "Diego Salazar Ramírez",
         role: "Arquitecto de productos digitales",
+        role_en: "Digital Product Architect",
         department: "digital",
         verticals: ["intelligence"],
         bio: "Quito (Ecuador). Es un profesional especializado en transformación digital, estrategia tecnológica e innovación de procesos, con experiencia internacional en dirección de operaciones, automatización y desarrollo de soluciones tecnológicas para organizaciones en entornos complejos y de gran escala.\n\nEs graduado en Ingeniería en Diseño Industrial por la Universidad Central del Ecuador y posee un Máster en Business & Technology por Collective Academy. Actualmente complementa su formación con estudios de Filosofía en la Universidad de Navarra.\n\nEn Fortius es responsable del diseño y desarrollo de las plataformas digitales de la firma, liderando la construcción de herramientas internas de análisis, sistemas de inteligencia y entornos tecnológicos orientados a mejorar la capacidad operativa y estratégica de la organización. Anteriormente fue Leader Technology Transformation and Processes HISPAM en Telefónica, donde lideró iniciativas regionales de transformación tecnológica e innovación de procesos en los mercados hispanoamericanos del grupo, incluyendo Ecuador, Colombia, México, Perú, Chile, Uruguay y Argentina.",    
@@ -174,6 +202,7 @@ export const TEAM: TeamMember[] = [
         slug: "javier-soto-gomez",
         name: "Javier Soto Gómez",
         role: "Legal y Contable",
+        role_en: "Legal & Finance",
         department: "legal-contable",
         verticals: ["civil"],
         bio: "Murcia (España). Es graduado en Derecho y Economía por la Universidad de Navarra, especializado en asesoramiento jurídico, gestión contable y acompañamiento institucional a organizaciones con propósito.\n\nActualmente es responsable del departamento legal y contable de Fortius Consulting, donde supervisa la estructura jurídica y financiera de la organización y acompaña a clientes en materias de gobierno corporativo, cumplimiento normativo y diseño de estructuras organizativas. Previamente trabajó en GES Abogados y Vicente Ortega Abogados, donde desarrolló experiencia jurídica con especial foco en fundaciones y asociaciones, acompañando a organizaciones sin ánimo de lucro en procesos de constitución, adaptación normativa y cumplimiento de obligaciones legales y contables.",        linkedin: "https://www.linkedin.com/in/javier-soto-g%C3%B3mez-2b60b218a/",
@@ -185,6 +214,7 @@ export const EXPERTS: ExternalExpert[] = [
         slug: "carlos-andreu-pintado",
         name: "Carlos Andreu Pintado",
         role: "Liderazgo y Desarrollo Organizativo",
+        role_en: "Leadership & Organisational Development",
         vertical: "civil",
         bio: "Carlos Andreu es experto en liderazgo, formación de directivos y desarrollo organizativo, con una consolidada trayectoria como formador, conferenciante y asesor de empresas e instituciones.\n\nLicenciado en Derecho por la Universidad de Zaragoza y MBA por IESE Business School – Universidad de Navarra, combina una sólida formación académica con una amplia experiencia práctica en dirección, consultoría y desarrollo empresarial.\n\nHa ejercido como directivo en compañías de distintos sectores antes de dedicarse plenamente a la consultoría y formación ejecutiva, ámbito en el que acumula una extensa experiencia asesorando y formando a directivos, equipos de liderazgo y organizaciones en procesos de mejora del desempeño, cultura corporativa y desarrollo del talento.\n\nEs profesor habitual en universidades y escuelas de negocio de referencia en España y América Latina, incluyendo la Universidad de Navarra, Universidad CEU San Pablo, Universidad Nebrija, Instituto Internacional San Telmo y diversas instituciones internacionales.\n\nAutor del bestseller Del Ataúd a la Cometa (Editorial Planeta), obra de referencia en liderazgo y desarrollo personal con múltiples ediciones publicadas, es uno de los conferenciantes más reconocidos en España en materia de liderazgo, actitud y transformación de equipos.",
         linkedin: "https://www.linkedin.com/in/carlosandreu/",
@@ -193,6 +223,7 @@ export const EXPERTS: ExternalExpert[] = [
         slug: "ramsi-jazmati-akili",
         name: "Ramsi Jazmati Akili",
         role: "Mundo árabe, Geoeconomía y Diplomacia Cultural",
+        role_en: "Arab World, Geoeconomics & Cultural Diplomacy",
         vertical: "intelligence",
         bio: "Dr. Ramsi Jazmati Akili es experto en mundo árabe, relaciones hispano-árabes, geoeconomía y diplomacia cultural, con una sólida trayectoria académica e institucional especializada en la región del Golfo y Oriente Medio.\n\nEs investigador no residente en la Mohammed Bin Rashid School of Government e investigador en el Instituto de Cultura y Sociedad de la Universidad de Navarra, donde obtuvo su doctorado con una investigación centrada en el liderazgo de las mujeres emiratíes. Cuenta además con formación de posgrado en bioética, dirección de empresas y alta dirección por instituciones como ESADE y IESE Business School, así como especialización en gobernanza y diplomacia cultural por la Academia de Diplomacia Cultural de Berlín.\n\nHa desarrollado buena parte de su trayectoria profesional en la intersección entre empresa, instituciones y mundo árabe, destacando su labor como Director de Proyectos para la agencia de competitividad empresarial del Gobierno de Cataluña en la región del Golfo, donde lideró la expansión institucional y comercial de empresas españolas en Oriente Medio.\n\nActualmente es subdirector de Instituto Choiseul España y colabora regularmente en análisis sobre geoeconomía, relaciones internacionales y vínculos entre España y el mundo árabe.",
         linkedin: "https://www.linkedin.com/in/ramzi-jazmati-akili-4a958a2b2/",
@@ -201,6 +232,7 @@ export const EXPERTS: ExternalExpert[] = [
         slug: "victor-gonzalez-coello-de-portugal",
         name: "Víctor González-Coello de Portugal",
         role: "Estrategia Empresarial y Asuntos Públicos Internacionales",
+        role_en: "Business Strategy & International Public Affairs",
         vertical: "intelligence",
         bio: "Madrid (España). Es empresario, inversor y exdiputado español, con una trayectoria que combina alta dirección, finanzas corporativas, liderazgo político e implicación internacional en asuntos económicos y geopolíticos.\n\nCuenta con una doble licenciatura en Administración y Dirección de Empresas por universidades públicas de Madrid y un Bachelor of Arts with Honors in European Business por la University of Portsmouth. Complementó su formación en la London School of Economics and Political Science y en la University of California San Diego, cursó un Máster en Finanzas en CUNEF Universidad y completó un Executive MBA en el IESE Business School.\n\nAcumula más de veinte años de experiencia en banca de inversión, desarrollo corporativo y dirección ejecutiva. Inició su carrera en UBS en el área de Corporate Finance y ocupó posteriormente posiciones de responsabilidad en BBVA y Ebro Foods, habiendo participado y liderado operaciones de fusiones y adquisiciones por un valor agregado superior a 3.000 millones de dólares. Desarrolló asimismo una trayectoria empresarial propia especializada en adquisición, transformación y recuperación de compañías en procesos de sucesión generacional o dificultades operativas. Actualmente ejerce como director ejecutivo en MPR. En el ámbito público, fue diputado nacional de Vox en el Congreso de los Diputados, donde desempeñó funciones de liderazgo en comisiones relacionadas con Economía, Asuntos Exteriores, Defensa y Seguridad Nacional. Es además autor de artículos y tribunas publicados en medios como Expansión, Vozpópuli, El Economista, El Confidencial y Libertad Digital.",
         linkedin: "https://www.linkedin.com/in/v%C3%ADctor-gonz%C3%A1lez-coello-de-portugal/",
@@ -209,6 +241,7 @@ export const EXPERTS: ExternalExpert[] = [
         slug: "carlos-casares",
         name: "Carlos Casares",
         role: "Experto Vinculado",
+        role_en: "Associate Expert",
         vertical: "civil",
         bio: "Carlos Casares (Uruguay) lleva décadas acompañando a empresarios, familias empresarias y consejos de administración en procesos complejos de estrategia, gobierno y relaciones humanas, en múltiples países y contextos culturales. Discípulo de Juan Antonio Pérez López, combina una mirada antropológica con un enfoque socrático, convencido de que entender a las personas es tan importante como el análisis técnico. Ha participado en procesos de crecimiento, profesionalización y venta de compañías, integrando directorios y consejos en cuatro continentes, y ha desarrollado una extensa trayectoria académica en Iberoamérica y Europa, donde es Catedrático Emérito. Cree que la verdadera formación ocurre en el trabajo con personas, en los errores y en las crisis — y que todos vivimos \"en construcción\" hasta el final. Reside entre Europa, Estados Unidos y el Río de la Plata.",
         linkedin: "https://www.linkedin.com/in/carloscasares/",
