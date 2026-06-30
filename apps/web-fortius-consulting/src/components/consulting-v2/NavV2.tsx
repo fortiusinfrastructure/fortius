@@ -6,6 +6,7 @@ import { Menu, X, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { BrandLockup } from "@/components/system/BrandLockup";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 import { useSessionUser, UserMenu, SignOutButton, USER_MENU_LINKS } from "./UserMenu";
 
 const FOUNDATION_URL = "https://fundacionfortius.org";
@@ -71,7 +72,8 @@ export function NavV2() {
                         </a>
                     </div>
 
-                    <div className="hidden lg:flex items-center gap-3">
+                    <div className="hidden lg:flex items-center gap-4">
+                        <LocaleSwitcher />
                         {user ? (
                             <UserMenu user={user} />
                         ) : (
@@ -150,8 +152,17 @@ export function NavV2() {
                             <motion.div
                                 initial={{ opacity: 0, y: 8 }}
                                 animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.28, duration: 0.28 }}
+                                className="mt-6"
+                            >
+                                <LocaleSwitcher />
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.32, duration: 0.28 }}
-                                className="mt-8"
+                                className="mt-6"
                             >
                                 {user ? (
                                     <div className="border border-[var(--border-default)] bg-[var(--color-neutral-900)]">
