@@ -5,6 +5,7 @@ import { CreditCard, ArrowUpRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { FoundationPrivateUser } from "@/lib/private/auth";
 import type { DonationRecord } from "@/lib/private/queries";
+import { signOut } from "@/lib/auth/actions";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -67,7 +68,20 @@ export function DashboardDonante({ user, donations }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease }}
         >
-          <Bracketed variant="kicker">Área privada · Donante</Bracketed>
+          <div className="flex items-start justify-between gap-4">
+            <Bracketed variant="kicker">Área privada · Donante</Bracketed>
+            <form action={signOut}>
+              <button
+                type="submit"
+                className="text-[0.7rem] uppercase tracking-[0.18em] transition-colors"
+                style={{ color: "var(--text-tertiary)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+              >
+                Cerrar sesión
+              </button>
+            </form>
+          </div>
           <h1 className="mt-4 font-display text-[clamp(2.2rem,4vw,3.6rem)] font-light leading-tight text-[var(--text-primary)]">
             Bienvenido/a,{" "}
             <span className="italic" style={{ color: "var(--color-accent-400)" }}>

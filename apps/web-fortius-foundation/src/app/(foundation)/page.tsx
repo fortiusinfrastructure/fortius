@@ -96,6 +96,22 @@ export default function FoundationHome() {
         </section>
 
         <FoundationHomeFeatureSection
+          kicker="Ayudas"
+          title="Ayudamos tanto a quienes quieren dar mejor como a quienes necesitan crecer mejor."
+          linkLabel="Ver ayudas"
+          linkHref="/ayudas"
+          feature={{
+            label: "Ayudas",
+            title: "Diseñamos ayudas con criterio, seguimiento y visión de largo plazo.",
+            description:
+              "Buscamos que la ayuda llegue a buenos proyectos, se administre mejor y contribuya a construir instituciones más sólidas.",
+            href: "/ayudas",
+            ctaLabel: "Conocer ayudas",
+          }}
+          items={aidItems}
+        />
+
+        <FoundationHomeFeatureSection
           kicker="Nosotros & Blog"
           title="Una plataforma para fortalecer causas serias, equipos sólidos e instituciones duraderas."
           linkLabel="Ir a nosotros"
@@ -127,27 +143,27 @@ export default function FoundationHome() {
           items={projectItems}
         />
 
-        <FoundationHomeFeatureSection
-          kicker="Ayudas"
-          title="Ayudamos tanto a quienes quieren dar mejor como a quienes necesitan crecer mejor."
-          linkLabel="Ver ayudas"
-          linkHref="/ayudas"
-          feature={{
-            label: "Ayudas",
-            title: "Diseñamos ayudas con criterio, seguimiento y visión de largo plazo.",
-            description:
-              "Buscamos que la ayuda llegue a buenos proyectos, se administre mejor y contribuya a construir instituciones más sólidas.",
-            href: "/ayudas",
-            ctaLabel: "Conocer ayudas",
-          }}
-          items={aidItems}
-        />
+        <BlogPreview />
 
         <AyudasSneak />
 
-        <InitiativesMarquee />
+        <FoundationHomeFeatureSection
+          kicker="Programas"
+          title="Formamos los líderes que el mundo necesita, con rigor, criterio y visión transatlántica."
+          linkLabel="Ver programa"
+          linkHref="/incubadora/transatlantic-fellowship"
+          feature={{
+            label: "Fellowship",
+            title: "Transatlantic Fellowship",
+            description:
+              "Programa de formación y conexión entre futuros líderes europeos y americanos, enfocado en el intercambio de ideas y el fortalecimiento de la sociedad civil a ambos lados del Atlántico.",
+            href: "/incubadora/transatlantic-fellowship",
+            ctaLabel: "Descubrir el programa",
+          }}
+          items={[]}
+        />
 
-        <BlogPreview />
+        <InitiativesMarquee />
 
         <NewsletterCTA />
       </main>

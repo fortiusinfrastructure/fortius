@@ -115,8 +115,8 @@ export default function AyudasPage() {
             kicker="Para beneficiarios"
             title="Acompañamos proyectos y organizaciones que necesitan estructura, foco y capacidad de crecimiento."
             benefits={BENEFICIARY_BENEFITS}
-            ctaHref="/contacto"
-            ctaLabel="Escríbenos"
+            ctaHref="/registro"
+            ctaLabel="Explora nuestras convocatorias"
             ctaVariant="outline"
           />
         </div>

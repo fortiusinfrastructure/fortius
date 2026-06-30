@@ -57,7 +57,7 @@ export function FooterF() {
             </Link>
             <span className="h-8 w-px bg-[var(--border-default)]" />
             <a
-              href="https://fortiusconsulting.com"
+              href="https://fortiusconsulting.org"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Fortius Consulting"

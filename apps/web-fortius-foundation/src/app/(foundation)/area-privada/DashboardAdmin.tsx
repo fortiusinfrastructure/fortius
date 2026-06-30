@@ -1,6 +1,7 @@
 import { Bracketed } from "@/components/system/Bracketed";
 import type { FoundationPrivateUser } from "@/lib/private/auth";
 import type { FoundationAdminData, FoundationMemberRecord } from "@/lib/private/queries";
+import { signOut } from "@/lib/auth/actions";
 
 function formatDate(iso: string | null) {
   if (!iso) return "—";
@@ -101,7 +102,17 @@ export function DashboardAdmin({ user, data }: Props) {
         className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-16 md:pt-24 pb-12 border-b"
         style={{ borderColor: "var(--border-subtle)" }}
       >
-        <Bracketed variant="kicker">Panel de administración</Bracketed>
+        <div className="flex items-start justify-between gap-4">
+          <Bracketed variant="kicker">Panel de administración</Bracketed>
+          <form action={signOut}>
+            <button
+              type="submit"
+              className="text-[0.7rem] uppercase tracking-[0.18em] transition-colors text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"
+            >
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
         <h1
           className="mt-4 font-display text-[clamp(2rem,4vw,3.2rem)] font-light leading-tight"
           style={{ color: "var(--text-primary)" }}

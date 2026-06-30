@@ -654,11 +654,23 @@ La acción `submitDonationInterest` en `src/lib/email/actions.ts`:
 
 ### 6.8 Blog editorial
 
-Los artículos se definen en `src/content/articles.ts`. Cada artículo tiene:
-- `slug` — usado como URL y para derivar la imagen destacada (`/entradas/images/{slug}.png`)
-- `title`, `excerpt`, `content`, `author`, `published_at`
+Los artículos se definen en `src/content/articles.ts`, exportados como array `FOUNDATION_ARTICLES`. Cada artículo tiene:
 
-Los metadatos visuales (categoría, tema de color) viven en `src/content/article-visuals.ts`. Las imágenes destacadas están en `public/entradas/images/` con el mismo nombre que el slug.
+| Campo | Descripción |
+|---|---|
+| `slug` | Identificador único — define URL `/blog/{slug}` y nombre de la imagen destacada |
+| `title` | Título del artículo |
+| `excerpt` | Resumen breve para la tarjeta |
+| `content` | Cuerpo completo (Markdown) |
+| `author` | Nombre del autor |
+| `published_at` | Fecha de publicación (ISO: `"2026-01-15"`) |
+| `category` | Fijo: `"foundation"` |
+| `kind` | Fijo: `"articulo"` |
+| `source_file` | Nombre del archivo `.docx` de origen (referencia interna) |
+
+Los metadatos visuales (tema de color) viven en `src/content/article-visuals.ts`. Las imágenes destacadas están en `public/entradas/images/{slug}.png` — el nombre **debe coincidir exactamente con el slug**.
+
+Para añadir artículos desde documentos `.docx`, ver §6.11.
 
 ### 6.9 Variables de entorno necesarias
 
@@ -685,20 +697,44 @@ Archivo único:
 apps/web-fortius-foundation/src/content/team.ts
 ```
 
-El archivo exporta tres arrays separados: `PATRONATO`, `CONSEJO_ASESOR` y `EQUIPO`. Cada persona tiene `name`, `role`, `bio`, `image`, `linkedin`. Para añadir una foto nueva, colocar el WebP en `public/equipo/` y apuntar `image` a esa ruta.
+El archivo exporta tres arrays separados:
+
+| Array | Tipo | Uso |
+|---|---|---|
+| `PATRONATO` | `BoardMember[]` | Miembros del patronato — incluye campo `chapter` (capítulo geográfico) |
+| `CONSEJO_ASESOR` | `AdvisoryMember[]` | Miembros del consejo asesor |
+| `TEAM` | `TeamMember[]` | Equipo ejecutivo |
+
+Todos tienen `name`, `role`, `bio`, `image`, `linkedin`. Para añadir foto nueva: colocar el WebP en `public/equipo/` y apuntar `image` a esa ruta.
 
 #### Añadir o editar un artículo del blog
 
-1. Abrir `apps/web-fortius-foundation/src/content/articles.ts` y añadir o editar el objeto en el array `ARTICLES`
-   - Campos: `slug`, `title`, `excerpt`, `content`, `author`, `published_at`, `category`
-2. Si el artículo tiene categoría o tema de color específico: añadir la entrada correspondiente en `src/content/article-visuals.ts` (formato `{ slug → { category, colorTheme } }`)
-3. Colocar la imagen destacada en `public/entradas/images/{slug}.png` — el nombre de archivo **debe coincidir exactamente con el slug**
+**Opción A — Manual (editar código):**
+
+1. Abrir `apps/web-fortius-foundation/src/content/articles.ts` y añadir o editar el objeto en el array `FOUNDATION_ARTICLES` con los campos indicados en §6.8
+2. Si el artículo tiene tema de color específico: añadir la entrada correspondiente en `src/content/article-visuals.ts`
+3. Colocar la imagen destacada en `public/entradas/images/{slug}.png`
 4. Commit y redeploy
+
+**Opción B — Desde un documento `.docx` (recomendada):** ver §6.11.
 
 #### Añadir o editar un proyecto de la incubadora
 
 1. Abrir `apps/web-fortius-foundation/src/content/projects.ts`
-2. Añadir o editar el objeto en el array `PROJECTS` — campos: `slug`, `title`, `description`, `status`, `image`, `area`, `impact`
+2. Añadir o editar el objeto en el array `PROJECTS`:
+
+| Campo | Descripción |
+|---|---|
+| `slug` | Identificador único |
+| `name` | Nombre del proyecto |
+| `stage` | `"incubacion"` (en marcha) o `"exito"` (caso de éxito) |
+| `summary` | Descripción breve para tarjetas |
+| `logoSrc` | Ruta al logo en `public/` |
+| `siteUrl` | URL del proyecto o ruta interna |
+| `ctaLabel` | Texto del botón CTA |
+
+El helper `getProjectsByStage(stage)` filtra por `stage` — útil al construir nuevas vistas.
+
 3. Commit y redeploy
 
 #### Añadir o modificar una convocatoria de ayudas
@@ -723,6 +759,41 @@ El archivo exporta tres arrays separados: `PATRONATO`, `CONSEJO_ASESOR` y `EQUIP
 
 3. Si hay PDF o imagen: colocarlos en `public/ayudas/` y actualizar `pdfUrl` / `imageUrl`
 4. Commit y redeploy
+
+### 6.11 Conversión de artículos desde `.docx`
+
+El repositorio incluye herramientas para convertir documentos Word al formato del blog sin necesidad de editar código manualmente.
+
+**Convención de nombre de archivo:** `YYYY_MM_DD. Título del artículo.docx`  
+*(Ejemplo: `2026_06_15. Por qué importa la sociedad civil.docx`)*
+
+---
+
+**Opción A — Herramienta web (sin instalación, recomendada):**
+
+1. Abrir el archivo `apps/web-fortius-foundation/scripts/converter.html` directamente en el navegador (doble clic en el Finder)
+2. Arrastrar los archivos `.docx` al área de drop
+3. Descargar el archivo `articles.ts` generado
+4. Reemplazar `apps/web-fortius-foundation/src/content/articles.ts` con el archivo descargado
+5. Commit y redeploy
+
+---
+
+**Opción B — Script Python (línea de comandos):**
+
+```bash
+# 1. Colocar los .docx en la carpeta:
+apps/web-fortius-foundation/public/entradas/
+
+# 2. Ejecutar el script desde la raíz del repo:
+python3 apps/web-fortius-foundation/scripts/convert-entradas.py
+```
+
+El script actualiza automáticamente `src/content/articles.ts` con los artículos convertidos.
+
+---
+
+Después de cualquier conversión: revisar que las imágenes destacadas estén en `public/entradas/images/{slug}.png`. Si no existen, añadirlas manualmente o dejarlas pendientes (la tarjeta del blog mostrará el tema de color alternativo).
 
 ---
 
@@ -896,8 +967,10 @@ Todas las migraciones están versionadas en `supabase/migrations/` con el format
 
 #### Fortius Foundation
 - [ ] Decidir si blog, incubadora y ayudas migrarán a Supabase (hoy son archivos locales)
-- [ ] Activar checkout de donaciones (Stripe) cuando se confirme la estructura legal
+- [ ] Activar checkout de donaciones (Stripe) + historial en área privada del donante — requiere cuenta Stripe configurada para Foundation España
 - [ ] Crear roles `donante` y `admin` desde panel o migración para los usuarios correspondientes
+- [ ] Incorporar logos pendientes (incluido Mediterráneo Diálogo) cuando el cliente facilite los archivos de Drive
+- [ ] Implementar i18n ES/EN completo + selector de idioma (equivalente al de Consulting)
 
 ### Contenido que vive en código (no en base de datos)
 

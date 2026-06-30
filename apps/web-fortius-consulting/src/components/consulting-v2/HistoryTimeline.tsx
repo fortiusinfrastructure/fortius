@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl";
 import { Bracketed } from "@/components/system/Bracketed";
 
 interface TimelineEvent {
@@ -15,7 +16,7 @@ interface TimelineItem {
     foundationActive?: boolean;
 }
 
-const TIMELINE: TimelineItem[] = [
+const TIMELINE_ES: TimelineItem[] = [
     {
         year: "2015",
         consulting: { title: "Nacimiento Fortius" },
@@ -65,9 +66,63 @@ const TIMELINE: TimelineItem[] = [
     },
 ];
 
+const TIMELINE_EN: TimelineItem[] = [
+    {
+        year: "2015",
+        consulting: { title: "Fortius Founded" },
+    },
+    {
+        year: "2015–2017",
+        consulting: {
+            description:
+                "Activity focused on organizations specializing in economic development. Significant work with clients and projects in South Africa and Kenya.",
+        },
+    },
+    {
+        year: "2017–2022",
+        consulting: {
+            title: "Fortius moves to London",
+            description:
+                "Activity focused on think tanks committed to human flourishing — in both economic and spiritual terms — working for the common good. First projects in Belgium, the United Kingdom, and the United States.",
+        },
+    },
+    {
+        year: "2022",
+        consulting: {
+            title: "Fortius moves to Madrid",
+            description:
+                "Team expanded across Barcelona, Madrid, and Pamplona. Numerous projects with think tanks inspired by Christian humanism and rapid expansion across Europe and the Americas.",
+        },
+    },
+    {
+        year: "2023",
+        consulting: {
+            description: "Fortius begins operations in North Africa and Central Asia.",
+        },
+        foundation: {
+            title: "Fortius Foundation Spain established",
+        },
+        foundationActive: true,
+    },
+    {
+        year: "2025",
+        consulting: {
+            title: "Fortius Americas launched",
+        },
+        foundation: {
+            title: "Fortius Foundation United States launched",
+        },
+        foundationActive: true,
+    },
+];
+
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
 export function HistoryTimeline() {
+    const t = useTranslations("nosotros");
+    const locale = useLocale();
+    const TIMELINE = locale === "en" ? TIMELINE_EN : TIMELINE_ES;
+
     return (
         <section
             aria-labelledby="historia-title"
@@ -75,22 +130,20 @@ export function HistoryTimeline() {
         >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-20 md:mb-28">
                 <div className="lg:col-span-6 space-y-5">
-                    <Bracketed variant="kicker">Nuestro Recorrido</Bracketed>
+                    <Bracketed variant="kicker">{t("history-kicker")}</Bracketed>
                     <h2
                         id="historia-title"
                         className="font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]"
                     >
-                        Más de una década acompañando a organizaciones e instituciones en{" "}
+                        {t("history-h2pre")}{" "}
                         <span className="italic text-[var(--color-accent-400)]">
-                            Europa, América y África.
+                            {t("history-h2italic")}
                         </span>
                     </h2>
                 </div>
                 <div className="lg:col-span-6 lg:pl-4">
                     <p className="text-[var(--text-secondary)] leading-relaxed max-w-2xl md:text-[1.05rem]">
-                        Durante este tiempo hemos trabajado junto a think tanks, fundaciones,
-                        líderes políticos, instituciones internacionales y plataformas ciudadanas
-                        en algunos de los entornos políticos e institucionales más complejos del espacio euroatlántico.
+                        {t("history-p")}
                     </p>
                 </div>
             </div>
