@@ -14,11 +14,14 @@ function ProjectCard({
   project,
   stageLabel,
   accent,
+  locale,
 }: {
   project: ReturnType<typeof getProjectsByStage>[number];
   stageLabel: string;
   accent: "soft" | "solid";
+  locale: string;
 }) {
+  const isEn = locale === "en";
   const articleClassName =
     accent === "solid"
       ? "border-[var(--color-accent-400)] bg-[var(--surface-primary)]"
@@ -35,7 +38,10 @@ function ProjectCard({
           <p className="mb-4 text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
             {stageLabel}
           </p>
-          <InitiativeMark title={project.name} subtitle={project.title} />
+          <InitiativeMark
+            title={isEn ? project.name_en : project.name}
+            subtitle={project.title}
+          />
           <Link
             href={project.siteUrl as "/"}
             target={project.siteUrl.startsWith("http") ? "_blank" : undefined}
@@ -48,17 +54,17 @@ function ProjectCard({
                   : "var(--border-default)",
             }}
           >
-            {project.ctaLabel}
+            {isEn ? project.ctaLabel_en : project.ctaLabel}
             <ArrowUpRight size={14} />
           </Link>
         </div>
 
         <div>
           <p className="max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-            {project.summary}
+            {isEn ? project.summary_en : project.summary}
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {project.details.map((detail) => (
+            {(isEn ? project.details_en : project.details).map((detail) => (
               <p
                 key={detail}
                 className="border border-[var(--border-subtle)] bg-[var(--surface-secondary)] p-4 text-sm leading-relaxed text-[var(--text-secondary)]"
@@ -109,6 +115,7 @@ export default async function IncubadoraPage({ params }: Props) {
                   project={project}
                   stageLabel={t("incubacion-kicker")}
                   accent="soft"
+                  locale={locale}
                 />
               ))}
             </div>
@@ -123,6 +130,7 @@ export default async function IncubadoraPage({ params }: Props) {
                   project={project}
                   stageLabel={t("casos-kicker")}
                   accent="solid"
+                  locale={locale}
                 />
               ))}
             </div>

@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Menu } from "lucide-react";
 import { FoundationLockup } from "./FoundationLockup";
+import { useSessionUser, UserMenuF } from "./UserMenuF";
 
 const NAV_HREF_KEYS = [
   { href: "/nosotros", key: "nosotros" },
@@ -29,6 +30,7 @@ export function NavF() {
   const t = useTranslations("nav");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const user = useSessionUser();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -92,13 +94,17 @@ export function NavF() {
           >
             [{t("donate-cta")}]
           </Link>
-          <Link
-            href="/area-privada"
-            className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white transition-colors"
-            style={{ backgroundColor: "var(--color-accent-500)" }}
-          >
-            {t("private-area")}
-          </Link>
+          {user ? (
+            <UserMenuF user={user} />
+          ) : (
+            <Link
+              href="/area-privada"
+              className="px-5 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-white transition-colors"
+              style={{ backgroundColor: "var(--color-accent-500)" }}
+            >
+              {t("private-area")}
+            </Link>
+          )}
         </div>
 
         <button
@@ -144,13 +150,19 @@ export function NavF() {
             >
               [{t("lang-switch")}]
             </button>
-            <Link
-              href="/area-privada"
-              className="mt-3 inline-flex items-center justify-center px-4 py-3 text-[0.76rem] font-semibold uppercase tracking-[0.16em] text-white"
-              style={{ backgroundColor: "var(--color-accent-500)" }}
-            >
-              {t("private-area")}
-            </Link>
+            {user ? (
+              <div className="mt-3 px-2 py-3">
+                <UserMenuF user={user} />
+              </div>
+            ) : (
+              <Link
+                href="/area-privada"
+                className="mt-3 inline-flex items-center justify-center px-4 py-3 text-[0.76rem] font-semibold uppercase tracking-[0.16em] text-white"
+                style={{ backgroundColor: "var(--color-accent-500)" }}
+              >
+                {t("private-area")}
+              </Link>
+            )}
           </div>
         </div>
       )}

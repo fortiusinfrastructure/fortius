@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
+import { AyudasSneak } from "@/components/foundation/AyudasSneak";
 import {
   BENEFICIARY_BENEFITS,
   DONOR_BENEFITS,
@@ -164,6 +165,8 @@ export default async function AyudasPage({ params }: Props) {
           </div>
         </section>
       </section>
+
+      <AyudasSneak />
     </main>
   );
 }

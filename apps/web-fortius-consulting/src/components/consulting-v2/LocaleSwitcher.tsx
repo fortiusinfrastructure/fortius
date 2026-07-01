@@ -23,27 +23,9 @@ export function LocaleSwitcher() {
             onClick={toggle}
             disabled={isPending}
             aria-label={`Switch to ${other.toUpperCase()}`}
-            className="flex items-center gap-0 text-[0.7rem] font-medium uppercase tracking-[0.12em] disabled:opacity-40 transition-opacity"
+            className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-secondary)] disabled:opacity-40"
         >
-            <span
-                className={
-                    locale === "es"
-                        ? "text-[var(--text-primary)]"
-                        : "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
-                }
-            >
-                ES
-            </span>
-            <span className="mx-1.5 text-[var(--border-strong)]">/</span>
-            <span
-                className={
-                    locale === "en"
-                        ? "text-[var(--text-primary)]"
-                        : "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors"
-                }
-            >
-                EN
-            </span>
+            [{other.toUpperCase()}]
         </button>
     );
 }
