@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Bracketed } from "@/components/system/Bracketed";
 import { subscribeToNewsletter } from "@/lib/email/actions";
 
@@ -9,6 +10,7 @@ export function NewsletterCTA() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const t = useTranslations("newsletter");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -25,7 +27,7 @@ export function NewsletterCTA() {
       if (result.success) setEmail("");
     } catch {
       setStatus("error");
-      setMessage("No hemos podido completar la suscripción. Inténtalo de nuevo.");
+      setMessage(t("error-fallback"));
     }
   }
 
@@ -44,16 +46,15 @@ export function NewsletterCTA() {
 
       <div className="relative mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
         <div className="max-w-3xl">
-          <Bracketed variant="kicker">Boletín</Bracketed>
+          <Bracketed variant="kicker">{t("kicker")}</Bracketed>
           <h2
             id="newsletter-title"
             className="mt-6 font-display text-[clamp(2rem,4.5vw,3.8rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]"
           >
-            Sigue nuestro trabajo. Conoce nuestras oportunidades.
+            {t("title")}
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-[var(--text-secondary)]">
-            Lo que pensamos, lo que hacemos. Lo que no encontrarás en ningún otro
-            sitio. Una vez al mes.
+            {t("p")}
           </p>
 
           <form onSubmit={handleSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-lg">
@@ -62,7 +63,7 @@ export function NewsletterCTA() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="tu@correo.com"
+              placeholder={t("placeholder")}
               disabled={status === "loading"}
               className="flex-1 bg-transparent border border-[var(--border-strong)] px-5 py-3.5 text-[0.9rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none transition-colors"
             />
@@ -73,7 +74,7 @@ export function NewsletterCTA() {
               style={{ backgroundColor: "var(--color-accent-500)" }}
             >
               {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : null}
-              {status === "success" ? "¡Gracias!" : "Suscribirme"}
+              {status === "success" ? t("success") : t("submit")}
               {status !== "loading" && (
                 <ArrowRight
                   size={14}

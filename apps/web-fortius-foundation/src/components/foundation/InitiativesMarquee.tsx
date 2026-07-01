@@ -1,40 +1,30 @@
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PROJECTS } from "@/content/projects";
 
-interface InitiativesMarqueeProps {
-  kicker?: string;
-  title?: string;
-  description?: string;
-  ariaLabel?: string;
-}
+export async function InitiativesMarquee() {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "marquee" });
 
-export function InitiativesMarquee({
-  kicker = "INICIATIVAS Y CASOS DE ÉXITO",
-  title = "Iniciativas bajo incubación y proyectos consolidados en el ecosistema Fortius.",
-  description = "Convertimos vocación de servicio en proyectos mejor definidos, sostenibles y capaces de dejar legado.",
-  ariaLabel,
-}: InitiativesMarqueeProps = {}) {
-  // Separate the featured initiative (Transatlantic Fellowship) to avoid grid orphan
   const featuredSlug = "transatlantic-fellowship";
   const mainProjects = PROJECTS.filter((p) => p.slug !== featuredSlug);
   const featuredProject = PROJECTS.find((p) => p.slug === featuredSlug);
 
   return (
     <section
-      aria-label={ariaLabel ?? kicker}
+      aria-label={t("kicker")}
       className="relative py-20 md:py-24 border-t border-[var(--border-subtle)]"
     >
       <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
-        <Bracketed variant="kicker">{kicker}</Bracketed>
+        <Bracketed variant="kicker">{t("kicker")}</Bracketed>
         <h2 className="mt-4 max-w-3xl font-display text-[clamp(1.6rem,3vw,2.6rem)] font-light leading-[1.1] tracking-tight text-[var(--text-primary)]">
-          {title}
+          {t("title")}
         </h2>
         <p className="mt-4 max-w-2xl text-[var(--text-secondary)] leading-relaxed">
-          {description}
+          {t("description")}
         </p>
 
-        {/* Main grid — 4 projects fill the grid perfectly (2 cols on sm, 4 on lg) */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
           {mainProjects.map((project) => (
             <a
@@ -65,7 +55,6 @@ export function InitiativesMarquee({
           ))}
         </div>
 
-        {/* Featured initiative — full-width, visually differentiated */}
         {featuredProject && (
           <a
             href={featuredProject.siteUrl}
@@ -82,7 +71,7 @@ export function InitiativesMarquee({
               <span className="text-xl font-light text-[var(--color-accent-300)]">[</span>
               <div>
                 <p className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-[var(--color-accent-200)]">
-                  Iniciativa destacada · Bajo incubación
+                  {t("featured-label")}
                 </p>
                 <p className="mt-1 font-display text-[1.45rem] font-light text-white">
                   {featuredProject.title}
@@ -91,7 +80,7 @@ export function InitiativesMarquee({
               <span className="text-xl font-light text-[var(--color-accent-300)]">]</span>
             </div>
             <span className="relative flex shrink-0 items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)]">
-              Ver detalles
+              {t("details-cta")}
               <ArrowUpRight size={13} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </span>
           </a>

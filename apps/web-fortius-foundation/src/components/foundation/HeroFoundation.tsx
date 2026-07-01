@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Bracketed } from "@/components/system/Bracketed";
 import { IMPACT_METRICS } from "@/content/impact";
-import { FOUNDATION_QUOTES } from "@/content/site";
+import { FOUNDATION_QUOTES, FOUNDATION_QUOTES_EN } from "@/content/site";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -17,6 +18,9 @@ export function HeroFoundation() {
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const t = useTranslations("hero");
+  const locale = useLocale();
+  const quotes = locale === "en" ? FOUNDATION_QUOTES_EN : FOUNDATION_QUOTES;
 
   return (
     <section
@@ -50,14 +54,14 @@ export function HeroFoundation() {
             transition={{ duration: 0.9, ease }}
             className="max-w-3xl space-y-10"
           >
-            <Bracketed variant="hero">Fortius Foundation</Bracketed>
+            <Bracketed variant="hero">{t("kicker")}</Bracketed>
 
             <div id="hero-title" className="space-y-1">
               {[
-                { text: "Servimos a quienes", accent: false },
-                { text: "han elegido servir.", accent: true },
+                { text: t("h1"), accent: false },
+                { text: t("h1-italic"), accent: true },
               ].map(({ text, accent }, i) => (
-                <div key={text} className="overflow-hidden">
+                <div key={i} className="overflow-hidden">
                   <motion.h1
                     initial={{ y: 60, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -75,11 +79,7 @@ export function HeroFoundation() {
             </div>
 
             <p className="max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)]">
-              Fortius Foundation fortalece a las personas, organizaciones e
-              instituciones que defienden causas nobles con criterio,
-              profesionalidad y vocación de servicio. Trabajamos para que esas
-              causas cuenten con estructura, aliados y capacidad real de dejar
-              legado.
+              {t("p")}
             </p>
 
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -88,7 +88,7 @@ export function HeroFoundation() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors"
                 style={{ backgroundColor: "var(--color-accent-500)" }}
               >
-                Conocer la fundación
+                {t("cta-nosotros")}
                 <ArrowUpRight size={14} />
               </Link>
               <Link
@@ -96,7 +96,7 @@ export function HeroFoundation() {
                 className="inline-flex items-center justify-center gap-2 border px-6 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
                 style={{ borderColor: "var(--color-accent-400)" }}
               >
-                Ver incubadora
+                {t("cta-incubadora")}
                 <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -108,13 +108,13 @@ export function HeroFoundation() {
             transition={{ duration: 0.8, delay: 0.2, ease }}
             className="grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)]"
           >
-            {FOUNDATION_QUOTES.slice(1).map((quote) => (
+            {quotes.slice(1).map((quote) => (
               <div
                 key={quote}
                 className="bg-[rgba(6,16,13,0.88)] p-6"
               >
                 <p className="text-sm uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Fortius Foundation
+                  {t("metric-label")}
                 </p>
                 <p className="mt-4 font-display text-[1.5rem] font-light leading-[1.18] text-[var(--text-primary)]">
                   {quote}
@@ -143,7 +143,7 @@ export function HeroFoundation() {
                 {metric.value}
               </p>
               <p className="mt-4 text-[0.75rem] uppercase tracking-[0.15em] leading-snug text-[var(--text-secondary)]">
-                {metric.label}
+                {locale === "en" ? metric.label_en : metric.label}
               </p>
             </div>
           ))}

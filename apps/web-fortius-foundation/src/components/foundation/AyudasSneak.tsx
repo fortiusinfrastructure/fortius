@@ -1,10 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
+import { getTranslations, getLocale } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
 import { AYUDAS } from "@/content/ayudas";
 
-export function AyudasSneak() {
+export async function AyudasSneak() {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "ayudas" });
   const open = AYUDAS.filter((a) => a.status === "open");
   if (!open.length) return null;
 
@@ -13,16 +16,17 @@ export function AyudasSneak() {
       <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div className="space-y-4">
-            <Bracketed variant="kicker">Convocatorias abiertas</Bracketed>
+            <Bracketed variant="kicker">{t("beneficiarios-cta")}</Bracketed>
             <h2 className="max-w-2xl font-display text-[clamp(1.9rem,3.8vw,3.2rem)] font-light leading-[1.06] tracking-tight text-[var(--text-primary)]">
-              Ayudas y programas activos de Fundación Fortius.
+              {t("beneficiarios-title")}
             </h2>
           </div>
           <Link
             href="/registro"
             className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors shrink-0"
           >
-            Solicitar acceso <ArrowUpRight size={14} />
+            {locale === "en" ? "Request access" : "Solicitar acceso"}
+            <ArrowUpRight size={14} />
           </Link>
         </div>
 
@@ -60,7 +64,8 @@ export function AyudasSneak() {
                     <Clock size={12} /> {ayuda.deadline}
                   </span>
                   <span className="inline-flex items-center gap-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--color-accent-400)] transition-all group-hover:gap-2">
-                    Solicitar <ArrowUpRight size={11} />
+                    {locale === "en" ? "Apply" : "Solicitar"}
+                    <ArrowUpRight size={11} />
                   </span>
                 </div>
               </div>
@@ -69,7 +74,9 @@ export function AyudasSneak() {
         </div>
 
         <p className="mt-5 text-[0.78rem] leading-relaxed text-[var(--text-tertiary)]">
-          Para acceder a las bases completas y presentar solicitud, regístrate o inicia sesión en el área privada.
+          {locale === "en"
+            ? "To access the full terms and submit your application, register or sign in to the private area."
+            : "Para acceder a las bases completas y presentar solicitud, regístrate o inicia sesión en el área privada."}
         </p>
       </div>
     </section>

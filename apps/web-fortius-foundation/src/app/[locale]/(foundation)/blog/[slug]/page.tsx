@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { ArticleArtwork } from "@/components/foundation/ArticleArtwork";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
@@ -9,25 +10,28 @@ import {
   estimateReadTime,
   formatPublishedDate,
   getArticleBlocks,
-  getRelatedArticles,
 } from "@/lib/articles";
 import { getArticleBySlugDB, listArticlesDB } from "@/lib/articles-server";
 
 interface ArticlePageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const article = await getArticleBySlugDB(slug);
-  if (!article) return { title: "Artículo no encontrado — Fundación Fortius" };
+  if (!article) {
+    const t = await getTranslations({ locale, namespace: "blog" });
+    return { title: `${t("tag")} — Fundación Fortius` };
+  }
   return { title: `${article.title} — Fundación Fortius`, description: article.excerpt };
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
   const article = await getArticleBySlugDB(slug);
   if (!article) notFound();
 
@@ -45,7 +49,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             href="/blog"
             className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)] transition-colors hover:text-[var(--text-primary)]"
           >
-            [ Volver al blog ]
+            [ {t("back")} ]
           </Link>
 
           <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)] lg:items-start">
@@ -60,7 +64,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 {article.author && (
                   <>
                     <span>·</span>
-                    <span>{article.author}</span>
+                    <span>{t("by")} {article.author}</span>
                   </>
                 )}
               </div>
@@ -100,10 +104,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
             <aside className="space-y-4 lg:sticky lg:top-[calc(var(--nav-height)+2rem)] lg:self-start">
               <div className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-5">
-                <p className="text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">Pieza</p>
-                <p className="mt-3 font-display text-[1.4rem] font-light text-[var(--text-primary)]">Reflexión editorial</p>
+                <p className="text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">{t("tag")}</p>
+                <p className="mt-3 font-display text-[1.4rem] font-light text-[var(--text-primary)]">
+                  {locale === "en" ? "Editorial piece" : "Reflexión editorial"}
+                </p>
                 <p className="mt-3 text-[0.92rem] leading-relaxed text-[var(--text-secondary)]">
-                  Un texto para pensar el trabajo institucional, la sociedad civil y el liderazgo como servicio.
+                  {locale === "en"
+                    ? "A text for thinking about institutional work, civil society and leadership as service."
+                    : "Un texto para pensar el trabajo institucional, la sociedad civil y el liderazgo como servicio."}
                 </p>
               </div>
             </aside>
@@ -113,15 +121,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {related.length > 0 && (
           <section className="border-t border-[var(--border-subtle)]">
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-16 md:py-20">
-              <Bracketed variant="kicker">Seguir leyendo</Bracketed>
+              <Bracketed variant="kicker">
+                {locale === "en" ? "Continue reading" : "Seguir leyendo"}
+              </Bracketed>
               <div className="mt-8 grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-3">
                 {related.map((item) => (
-                  <Link key={item.slug} href={`/blog/${item.slug}`} className="group bg-[var(--surface-primary)] p-6 transition-colors hover:bg-[var(--surface-secondary)]">
+                  <Link key={item.slug} href={`/blog/${item.slug}` as "/"} className="group bg-[var(--surface-primary)] p-6 transition-colors hover:bg-[var(--surface-secondary)]">
                     <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">{formatPublishedDate(item.published_at)}</p>
                     <h2 className="mt-4 font-display text-[1.4rem] font-light leading-[1.15] text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">{item.title}</h2>
                     <p className="mt-4 text-[0.92rem] leading-relaxed text-[var(--text-secondary)]">{getArticleAbstract(item, 150)}</p>
                     <p className="mt-5 inline-flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-300)]">
-                      Leer artículo
+                      {t("read-more")}
                       <ArrowUpRight size={14} />
                     </p>
                   </Link>

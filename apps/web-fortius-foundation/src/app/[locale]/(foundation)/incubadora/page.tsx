@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { InitiativeMark } from "@/components/foundation/InitiativeMark";
 import { Bracketed } from "@/components/system/Bracketed";
 import { getProjectsByStage } from "@/content/projects";
+
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
 function ProjectCard({
   project,
@@ -32,7 +37,7 @@ function ProjectCard({
           </p>
           <InitiativeMark title={project.name} subtitle={project.title} />
           <Link
-            href={project.siteUrl}
+            href={project.siteUrl as "/"}
             target={project.siteUrl.startsWith("http") ? "_blank" : undefined}
             rel={project.siteUrl.startsWith("http") ? "noopener noreferrer" : undefined}
             className="mt-6 inline-flex items-center gap-2 border px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
@@ -68,39 +73,41 @@ function ProjectCard({
   );
 }
 
-export const metadata: Metadata = {
-  title: "Incubadora — Fundación Fortius",
-  description:
-    "Proyectos incubados y casos de éxito del ecosistema Fortius Foundation.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "incubadora" });
+  return {
+    title: t("meta-title"),
+    description: t("meta-desc"),
+  };
+}
 
-export default function IncubadoraPage() {
+export default async function IncubadoraPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "incubadora" });
   const incubating = getProjectsByStage("incubacion");
   const success = getProjectsByStage("exito");
 
   return (
     <main id="main-content" className="pt-[var(--nav-height)]">
       <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-32">
-        <Bracketed variant="tag">Incubadora</Bracketed>
+        <Bracketed variant="tag">{t("tag")}</Bracketed>
         <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.5rem,5.5vw,4.8rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
-          Convertimos vocación de servicio en proyectos mejor definidos,
-          sostenibles y capaces de dejar legado.
+          {t("h1")}
         </h1>
         <p className="mt-8 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-          Nuestra incubadora identifica iniciativas valiosas, las ayuda a ganar
-          estructura y acompaña su desarrollo con criterio institucional,
-          visión estratégica y una red de apoyo de alto valor.
+          {t("p")}
         </p>
 
         <div className="mt-16 space-y-16">
           <section>
-            <Bracketed variant="kicker">En incubación</Bracketed>
+            <Bracketed variant="kicker">{t("incubacion-kicker")}</Bracketed>
             <div className="mt-6 grid gap-6">
               {incubating.map((project) => (
                 <ProjectCard
                   key={project.slug}
                   project={project}
-                  stageLabel="Proyecto en incubación"
+                  stageLabel={t("incubacion-kicker")}
                   accent="soft"
                 />
               ))}
@@ -108,13 +115,13 @@ export default function IncubadoraPage() {
           </section>
 
           <section>
-            <Bracketed variant="kicker">Casos de éxito</Bracketed>
+            <Bracketed variant="kicker">{t("casos-kicker")}</Bracketed>
             <div className="mt-6 grid gap-6">
               {success.map((project) => (
                 <ProjectCard
                   key={project.slug}
                   project={project}
-                  stageLabel="Caso de éxito"
+                  stageLabel={t("casos-kicker")}
                   accent="solid"
                 />
               ))}
@@ -123,16 +130,18 @@ export default function IncubadoraPage() {
 
           <section className="border border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-10">
             <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-200)]">
-              Apoyo a proyectos
+              {t("newsletter-kicker")}
             </p>
             <h2 className="mt-4 max-w-2xl font-display text-[2.2rem] font-light leading-[1.08] text-white">
-              ¿Quieres apoyar nuestros proyectos en incubación?
+              {locale === "en"
+                ? "Would you like to support our incubated projects?"
+                : "¿Quieres apoyar nuestros proyectos en incubación?"}
             </h2>
             <Link
               href="/donaciones"
               className="mt-6 inline-flex items-center gap-2 bg-[var(--color-accent-500)] px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] text-white"
             >
-              Dona
+              {locale === "en" ? "Donate" : "Dona"}
               <ArrowUpRight size={14} />
             </Link>
           </section>

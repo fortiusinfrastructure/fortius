@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
   BENEFICIARY_BENEFITS,
   DONOR_BENEFITS,
   EXPERIENCE_COPY,
-  FOUNDATION_CONTACT,
 } from "@/content/site";
 
-const PROCESS = [
+interface Props {
+  params: Promise<{ locale: string }>;
+}
+
+const PROCESS_ES = [
   "Evaluamos la causa, el proyecto y la estructura del beneficiario.",
   "Diseñamos la ayuda, el seguimiento y los criterios de impacto.",
   "Acompañamos la ejecución con visión de largo plazo y rendición de cuentas.",
+];
+
+const PROCESS_EN = [
+  "We assess the cause, the project and the grantee's structure.",
+  "We design the grant, the oversight framework and the impact criteria.",
+  "We support execution with a long-term vision and full accountability.",
 ];
 
 function AidBox({
@@ -65,7 +75,7 @@ function AidBox({
       </section>
 
       <Link
-        href={ctaHref}
+        href={ctaHref as "/"}
         className={`inline-flex items-center gap-2 px-6 py-3 text-[0.74rem] font-semibold uppercase tracking-[0.18em] transition-colors ${
           ctaVariant === "solid"
             ? "bg-[var(--color-accent-500)] text-white"
@@ -79,55 +89,61 @@ function AidBox({
   );
 }
 
-export const metadata: Metadata = {
-  title: "Ayudas — Fundación Fortius",
-  description:
-    "Cómo trabaja Fundación Fortius con donantes, beneficiarios y proyectos en crecimiento.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ayudas" });
+  return {
+    title: t("meta-title"),
+    description: t("meta-desc"),
+  };
+}
 
-export default function AyudasPage() {
+export default async function AyudasPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ayudas" });
+  const isEn = locale === "en";
+  const process = isEn ? PROCESS_EN : PROCESS_ES;
+
   return (
     <main id="main-content" className="pt-[var(--nav-height)]">
       <section className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] py-24 md:py-32">
-        <Bracketed variant="tag">Ayudas</Bracketed>
+        <Bracketed variant="tag">{t("tag")}</Bracketed>
         <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.5rem,5.5vw,4.8rem)] font-light leading-[1.03] tracking-tight text-[var(--text-primary)]">
-          Diseñamos ayudas con criterio, seguimiento y vocación de impacto.
+          {t("h1")}
         </h1>
         <p className="mt-8 max-w-3xl leading-relaxed text-[var(--text-secondary)]">
-          Trabajamos para que la ayuda económica o estratégica llegue mejor, se
-          ejecute con más orden y fortalezca de verdad a las organizaciones que
-          sirven causas valiosas.
+          {t("p")}
         </p>
 
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
           <AidBox
             id="donantes"
-            kicker="Para donantes"
-            title="Ayudamos a donar con más criterio, mejor seguimiento y más claridad institucional."
+            kicker={t("donantes-kicker")}
+            title={t("donantes-title")}
             benefits={DONOR_BENEFITS}
             ctaHref="/donaciones"
-            ctaLabel="Dona"
+            ctaLabel={t("donantes-cta")}
             ctaVariant="solid"
           />
 
           <AidBox
             id="beneficiarios"
-            kicker="Para beneficiarios"
-            title="Acompañamos proyectos y organizaciones que necesitan estructura, foco y capacidad de crecimiento."
+            kicker={t("beneficiarios-kicker")}
+            title={t("beneficiarios-title")}
             benefits={BENEFICIARY_BENEFITS}
             ctaHref="/registro"
-            ctaLabel="Explora nuestras convocatorias"
+            ctaLabel={t("beneficiarios-cta")}
             ctaVariant="outline"
           />
         </div>
 
         <section className="mt-16 border-t border-[var(--border-subtle)] pt-10">
-          <Bracketed variant="kicker">Cómo trabajamos</Bracketed>
+          <Bracketed variant="kicker">{t("proceso-kicker")}</Bracketed>
           <div className="mt-6 grid gap-px border border-[var(--border-subtle)] bg-[var(--border-subtle)] md:grid-cols-3">
-            {PROCESS.map((step, index) => (
+            {process.map((step, index) => (
               <article key={step} className="bg-[var(--surface-primary)] p-6">
                 <p className="text-[0.7rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                  Paso {index + 1}
+                  {t("proceso-step")} {index + 1}
                 </p>
                 <p className="mt-4 text-[0.96rem] leading-relaxed text-[var(--text-secondary)]">
                   {step}
@@ -138,7 +154,7 @@ export default function AyudasPage() {
         </section>
 
         <section className="mt-16 border-t border-[var(--border-subtle)] pt-10">
-          <Bracketed variant="kicker">Experiencia</Bracketed>
+          <Bracketed variant="kicker">{t("experiencia-kicker")}</Bracketed>
           <div className="mt-6 space-y-4 max-w-3xl">
             {EXPERIENCE_COPY.map((paragraph) => (
               <p key={paragraph} className="leading-relaxed text-[var(--text-secondary)]">
@@ -146,7 +162,6 @@ export default function AyudasPage() {
               </p>
             ))}
           </div>
-
         </section>
       </section>
     </main>

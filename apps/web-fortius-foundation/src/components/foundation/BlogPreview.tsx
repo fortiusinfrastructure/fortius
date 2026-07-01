@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations, getLocale } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
 import {
   estimateReadTime,
@@ -19,24 +20,27 @@ const BAND: Record<ArticleVisualTheme, string> = {
   stone: "#a8a29e",
 };
 
-export function BlogPreview() {
+export async function BlogPreview() {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "blog" });
   const articles = getFeaturedArticles(4);
+  const isEn = locale === "en";
 
   return (
     <section className="border-t border-[var(--border-subtle)] py-24 md:py-32">
       <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div className="space-y-4">
-            <Bracketed variant="kicker">Blog</Bracketed>
+            <Bracketed variant="kicker">{t("tag")}</Bracketed>
             <h2 className="max-w-3xl font-display text-[clamp(2rem,4.2vw,3.6rem)] font-light leading-[1.05] tracking-tight text-[var(--text-primary)]">
-              Reflexiones sobre liderazgo, filantropía y sociedad civil.
+              {t("h1")}
             </h2>
           </div>
           <Link
             href="/blog"
             className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
-            Ver blog completo
+            {isEn ? "View full blog" : "Ver blog completo"}
             <ArrowUpRight size={14} />
           </Link>
         </div>
@@ -49,10 +53,9 @@ export function BlogPreview() {
             return (
               <Link
                 key={article.slug}
-                href={`/blog/${article.slug}`}
+                href={`/blog/${article.slug}` as "/"}
                 className="group block overflow-hidden bg-[var(--surface-primary)] transition-colors hover:bg-[var(--surface-secondary)]"
               >
-                {/* Featured image */}
                 <div className="relative h-44 overflow-hidden">
                   <Image
                     src={`/entradas/images/${article.slug}.png`}
@@ -75,19 +78,16 @@ export function BlogPreview() {
                 </div>
 
                 <div className="p-6">
-                  {/* Date + read time */}
                   <div className="flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
                     <span>{formatShortDate(article.published_at)}</span>
                     <span>·</span>
                     <span>{estimateReadTime(article.content)}</span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="mt-3 font-display text-[1.25rem] font-light leading-[1.14] text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">
                     {article.title}
                   </h3>
 
-                  {/* Author */}
                   {article.author && (
                     <p
                       className="mt-2 text-[0.7rem] uppercase tracking-[0.18em]"
@@ -97,9 +97,8 @@ export function BlogPreview() {
                     </p>
                   )}
 
-                  {/* CTA */}
                   <span className="mt-4 inline-flex items-center gap-1.5 text-[0.67rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-all group-hover:gap-2.5 group-hover:text-[var(--text-primary)]">
-                    Leer entrada
+                    {t("read-more")}
                     <ArrowUpRight
                       size={12}
                       className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -116,7 +115,7 @@ export function BlogPreview() {
             href="/blog"
             className="inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           >
-            Ver blog completo
+            {isEn ? "View full blog" : "Ver blog completo"}
             <ArrowUpRight size={14} />
           </Link>
         </div>

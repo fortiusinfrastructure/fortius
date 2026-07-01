@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { getTranslations, getLocale } from "next-intl/server";
+import { Link } from "@/i18n/routing";
 import { Linkedin } from "lucide-react";
 import { ConsultingLockup } from "./ConsultingLockup";
 import { FoundationLockup } from "./FoundationLockup";
 import {
   FOUNDATION_SOCIAL_LINKS,
-  LEGAL_LINKS,
 } from "@/content/site";
 
 function XIcon({ size = 15, className }: { size?: number; className?: string; strokeWidth?: number }) {
@@ -20,7 +20,17 @@ const SOCIAL_ICONS = {
   X: XIcon,
 } as const;
 
-export function FooterF() {
+export async function FooterF() {
+  const locale = await getLocale();
+  const t = await getTranslations({ locale, namespace: "footer" });
+  const isEn = locale === "en";
+
+  const legalLinks = [
+    { label: t("legal"), href: "/legal" as "/" },
+    { label: t("privacidad"), href: "/privacidad" as "/" },
+    { label: t("cookies"), href: "/cookies" as "/" },
+  ];
+
   return (
     <footer
       role="contentinfo"
@@ -30,7 +40,7 @@ export function FooterF() {
         <div className="flex flex-col items-center justify-between gap-10 border-b border-[var(--border-subtle)] pb-10 md:flex-row">
           <div>
             <h4 className="mb-5 text-center text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[var(--text-secondary)] md:text-left">
-              Síguenos
+              {t("siguenos")}
             </h4>
             <div className="flex items-center gap-3">
               {FOUNDATION_SOCIAL_LINKS.map(({ label, href }) => {
@@ -68,7 +78,7 @@ export function FooterF() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-1 pt-8">
-          {LEGAL_LINKS.map((link, index) => (
+          {legalLinks.map((link, index) => (
             <span key={link.href} className="flex items-center gap-1">
               <Link
                 href={link.href}
@@ -76,7 +86,7 @@ export function FooterF() {
               >
                 [ {link.label} ]
               </Link>
-              {index < LEGAL_LINKS.length - 1 && (
+              {index < legalLinks.length - 1 && (
                 <span className="text-[0.65rem] text-[var(--text-tertiary)]">|</span>
               )}
             </span>
