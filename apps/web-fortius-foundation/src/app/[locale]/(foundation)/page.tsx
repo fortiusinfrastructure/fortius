@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { FoundationHomeFeatureSection } from "@/components/foundation/FoundationHomeFeatureSection";
+import { TransatlanticBanner } from "@/components/foundation/TransatlanticBanner";
 import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
 import { InitiativesMarquee } from "@/components/foundation/InitiativesMarquee";
 import { BlogPreview } from "@/components/foundation/BlogPreview";
@@ -159,20 +160,7 @@ export default async function FoundationHome({ params }: Props) {
 
         <AyudasSneak />
 
-        <FoundationHomeFeatureSection
-          kicker={t("programas-kicker")}
-          title={t("programas-title")}
-          linkLabel={t("programas-link")}
-          linkHref="/incubadora/transatlantic-fellowship"
-          feature={{
-            label: t("programas-feature-label"),
-            title: t("programas-feature-title"),
-            description: t("programas-feature-desc"),
-            href: "/incubadora/transatlantic-fellowship",
-            ctaLabel: t("programas-feature-cta"),
-          }}
-          items={[]}
-        />
+        <TransatlanticBanner locale={locale} />
 
         <InitiativesMarquee />
 
