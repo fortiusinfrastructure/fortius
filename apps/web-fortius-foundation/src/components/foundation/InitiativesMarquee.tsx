@@ -1,16 +1,61 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Bracketed } from "@/components/system/Bracketed";
-import { PROJECTS } from "@/content/projects";
+
+const ALL_INITIATIVES = [
+  {
+    logoSrc: "/logos/ieam-green-399C6E.png",
+    alt: "Instituto Español de Análisis Migratorio",
+    href: "https://ieam.es/",
+    external: true,
+  },
+  {
+    logoSrc: "/logos/escuela-hispanica-green-troquelado.png",
+    alt: "Escuela Hispánica",
+    href: "https://escuelahispanica.org/",
+    external: true,
+  },
+  {
+    logoSrc: "/logos/principios-green.png",
+    alt: "Principios",
+    href: "https://www.principios.org/",
+    external: true,
+  },
+  {
+    logoSrc: "/logos/free-press-forum-green-2.png",
+    alt: "Free Press Forum",
+    href: "https://freepressforum.org/",
+    external: true,
+  },
+  {
+    logoSrc: "/logos/transatlantic-fellowship-green.png",
+    alt: "Transatlantic Fellowship",
+    href: "/incubadora/transatlantic-fellowship",
+    external: false,
+  },
+  {
+    logoSrc: "/logos/together-green-letters.png",
+    alt: "Together",
+    href: "#",
+    external: false,
+  },
+  {
+    logoSrc: "/logos/trustbridge-green.png",
+    alt: "TrustBridge",
+    href: "#",
+    external: false,
+  },
+  {
+    logoSrc: "/logos/md.png",
+    alt: "Mediterranean Dialogue",
+    href: "https://ieam.es/",
+    external: true,
+  },
+] as const;
 
 export async function InitiativesMarquee() {
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "marquee" });
-
-  const featuredSlug = "transatlantic-fellowship";
-  const mainProjects = PROJECTS.filter((p) => p.slug !== featuredSlug);
-  const featuredProject = PROJECTS.find((p) => p.slug === featuredSlug);
 
   return (
     <section
@@ -26,73 +71,33 @@ export async function InitiativesMarquee() {
           {t("description")}
         </p>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
-          {mainProjects.map((project) => (
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
+          {ALL_INITIATIVES.map((item) => (
             <a
-              key={project.slug}
-              href={project.siteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative overflow-hidden flex min-h-[122px] items-center justify-center bg-[var(--surface-brand)] p-6 transition-colors hover:bg-[var(--surface-primary)] group"
+              key={item.alt}
+              href={item.href}
+              {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="relative overflow-hidden flex min-h-[120px] items-center justify-center bg-[var(--surface-brand)] p-6 transition-colors hover:bg-[var(--surface-primary)] group"
             >
               <div
-                className="absolute inset-0 opacity-50 transition-opacity group-hover:opacity-70"
+                className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
                 style={{
                   background:
-                    "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%), linear-gradient(135deg, rgba(11,31,22,0.18) 0%, rgba(11,31,22,0) 65%)",
+                    "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
                 }}
               />
-              <div className="absolute -right-5 top-1/2 -translate-y-1/2 text-[5rem] font-display italic leading-none text-[var(--color-accent-300)]/10">
-                ]
-              </div>
-              <div className="relative flex items-center justify-center w-full px-4">
+              <div className="relative flex items-center justify-center w-full">
                 <Image
-                  src={project.logoSrc}
-                  alt={project.title}
+                  src={item.logoSrc}
+                  alt={item.alt}
                   width={180}
                   height={56}
-                  className="object-contain max-h-14 w-auto"
+                  className="object-contain max-h-12 w-auto"
                 />
               </div>
             </a>
           ))}
         </div>
-
-        {featuredProject && (
-          <a
-            href={featuredProject.siteUrl}
-            className="group mt-px flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border border-[var(--border-default)] bg-[var(--surface-brand)] px-8 py-7 transition-colors hover:bg-[var(--surface-primary)]"
-          >
-            <div
-              className="absolute inset-0 pointer-events-none opacity-30"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 90% 50%, rgba(134,239,172,0.10) 0%, transparent 55%)",
-              }}
-            />
-            <div className="relative flex items-center gap-6">
-              <Image
-                src={featuredProject.logoSrc}
-                alt={featuredProject.title}
-                width={220}
-                height={64}
-                className="object-contain max-h-16 w-auto"
-              />
-              <div>
-                <p className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-[var(--color-accent-200)]">
-                  {t("featured-label")}
-                </p>
-                <p className="mt-1 font-display text-[1.1rem] font-light text-[var(--text-secondary)]">
-                  {featuredProject.title}
-                </p>
-              </div>
-            </div>
-            <span className="relative flex shrink-0 items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)]">
-              {t("details-cta")}
-              <ArrowUpRight size={13} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </span>
-          </a>
-        )}
       </div>
     </section>
   );
