@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Bracketed } from "@/components/system/Bracketed";
@@ -44,12 +45,14 @@ export async function InitiativesMarquee() {
               <div className="absolute -right-5 top-1/2 -translate-y-1/2 text-[5rem] font-display italic leading-none text-[var(--color-accent-300)]/10">
                 ]
               </div>
-              <div className="relative flex items-center gap-2">
-                <span className="text-xl font-light text-[var(--color-accent-300)]">[</span>
-                <span className="font-display text-xl font-light text-white text-center">
-                  {project.title}
-                </span>
-                <span className="text-xl font-light text-[var(--color-accent-300)]">]</span>
+              <div className="relative flex items-center justify-center w-full px-4">
+                <Image
+                  src={project.logoSrc}
+                  alt={project.title}
+                  width={180}
+                  height={56}
+                  className="object-contain max-h-14 w-auto"
+                />
               </div>
             </a>
           ))}
@@ -67,17 +70,22 @@ export async function InitiativesMarquee() {
                   "radial-gradient(ellipse at 90% 50%, rgba(134,239,172,0.10) 0%, transparent 55%)",
               }}
             />
-            <div className="relative flex items-center gap-3">
-              <span className="text-xl font-light text-[var(--color-accent-300)]">[</span>
+            <div className="relative flex items-center gap-6">
+              <Image
+                src={featuredProject.logoSrc}
+                alt={featuredProject.title}
+                width={220}
+                height={64}
+                className="object-contain max-h-16 w-auto"
+              />
               <div>
                 <p className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-[var(--color-accent-200)]">
                   {t("featured-label")}
                 </p>
-                <p className="mt-1 font-display text-[1.45rem] font-light text-white">
+                <p className="mt-1 font-display text-[1.1rem] font-light text-[var(--text-secondary)]">
                   {featuredProject.title}
                 </p>
               </div>
-              <span className="text-xl font-light text-[var(--color-accent-300)]">]</span>
             </div>
             <span className="relative flex shrink-0 items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)]">
               {t("details-cta")}
