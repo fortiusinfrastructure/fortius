@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { DonationInterestForm } from "@/components/foundation/DonationInterestForm";
+import { DonacionesCheckoutForm } from "@/components/foundation/DonacionesCheckoutForm";
 import { Bracketed } from "@/components/system/Bracketed";
 
 interface Props {
@@ -88,23 +89,20 @@ export default async function DonacionesPage({ params }: Props) {
           </div>
 
           <div className="space-y-6">
+            {/* ─── Stripe checkout form (primary) ─── */}
             <section className="border border-[var(--border-subtle)] bg-[var(--surface-brand)] px-8 py-8">
-              <p className="text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-accent-200)]">
-                {isEn ? "Donation form" : "Formulario de donación"}
-              </p>
-              <h2 className="mt-4 font-display text-[2rem] font-light leading-[1.08] text-white">
-                {isEn
-                  ? "Choose whether to support a specific project or the general work of Fortius."
-                  : "Elige si quieres apoyar un proyecto concreto o el trabajo general de Fortius."}
-              </h2>
-              <p className="mt-4 leading-relaxed text-[var(--color-accent-100)]">
-                {isEn
-                  ? "You can also indicate whether you wish to donate from Spain or from the United States. The team will get back to you with the next step."
-                  : "También puedes indicar si quieres donar desde España o desde Estados Unidos. El equipo te responderá con el siguiente paso."}
-              </p>
+              <DonacionesCheckoutForm locale={locale} />
             </section>
 
-            <DonationInterestForm />
+            {/* ─── Interest form for corporate / coordinated donations ─── */}
+            <div>
+              <p className="mb-4 text-[0.72rem] uppercase tracking-[0.16em] text-[var(--text-tertiary)]">
+                {isEn
+                  ? "Large or corporate donation? Contact us."
+                  : "¿Donación grande o empresarial? Escríbenos."}
+              </p>
+              <DonationInterestForm />
+            </div>
           </div>
         </div>
       </section>

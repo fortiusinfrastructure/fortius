@@ -27,7 +27,7 @@ export default async function AreaPrivadaPage() {
 
   // Donante → donation history
   if (user.role === "donante") {
-    const donations = await getDonationHistory(user.id);
+    const donations = await getDonationHistory(user.id, user.orgId);
     return <DashboardDonante user={user} donations={donations} />;
   }
 

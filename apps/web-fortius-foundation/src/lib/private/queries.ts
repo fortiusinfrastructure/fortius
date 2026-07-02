@@ -16,14 +16,19 @@ export interface DonationRecord {
   createdAt: string | null;
 }
 
-export async function getDonationHistory(userId: string): Promise<DonationRecord[]> {
+export async function getDonationHistory(userId: string, orgId?: string): Promise<DonationRecord[]> {
   const admin = createAdminClient();
 
-  const { data } = await admin
+  let query = admin
     .from("payment_history")
     .select("id, amount_cents, currency, status, description, created_at")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false });
+    .eq("user_id", userId);
+
+  if (orgId) {
+    query = query.eq("organization_id", orgId);
+  }
+
+  const { data } = await query.order("created_at", { ascending: false });
 
   return (data ?? []).map((row) => ({
     id: row.id,

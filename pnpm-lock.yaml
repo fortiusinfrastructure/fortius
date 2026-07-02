@@ -247,6 +247,9 @@ importers:
       resend:
         specifier: ^6.9.2
         version: 6.9.2
+      stripe:
+        specifier: ^20.4.0
+        version: 20.4.0(@types/node@20.19.33)
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
