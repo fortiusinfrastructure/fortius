@@ -30,19 +30,7 @@ const ALL_INITIATIVES = [
   {
     logoSrc: "/logos/transatlantic-fellowship-green.png",
     alt: "Transatlantic Fellowship",
-    href: "/incubadora/transatlantic-fellowship",
-    external: false,
-  },
-  {
-    logoSrc: "/logos/together-green-letters.png",
-    alt: "Together",
-    href: "#",
-    external: false,
-  },
-  {
-    logoSrc: "/logos/trustbridge-green.png",
-    alt: "TrustBridge",
-    href: "#",
+    href: "/programas/transatlantic-fellowship",
     external: false,
   },
   {
@@ -71,13 +59,13 @@ export async function InitiativesMarquee() {
           {t("description")}
         </p>
 
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
           {ALL_INITIATIVES.map((item) => (
             <a
               key={item.alt}
               href={item.href}
               {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="relative overflow-hidden flex min-h-[120px] items-center justify-center bg-[var(--surface-brand)] p-6 transition-colors hover:bg-[var(--surface-primary)] group"
+              className="relative overflow-hidden flex min-h-[130px] items-center justify-center bg-[var(--surface-brand)] p-8 transition-colors hover:bg-[var(--surface-primary)] group"
             >
               <div
                 className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
@@ -86,13 +74,13 @@ export async function InitiativesMarquee() {
                     "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
                 }}
               />
-              <div className="relative flex items-center justify-center w-full">
+              <div className="relative h-10 w-[180px]">
                 <Image
                   src={item.logoSrc}
                   alt={item.alt}
-                  width={180}
-                  height={56}
-                  className="object-contain max-h-12 w-auto"
+                  fill
+                  className="object-contain"
+                  sizes="180px"
                 />
               </div>
             </a>

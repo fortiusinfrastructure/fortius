@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
-import { InitiativeMark } from "@/components/foundation/InitiativeMark";
 import { Bracketed } from "@/components/system/Bracketed";
 import { getProjectsByStage } from "@/content/projects";
 
@@ -38,10 +38,15 @@ function ProjectCard({
           <p className="mb-4 text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
             {stageLabel}
           </p>
-          <InitiativeMark
-            title={isEn ? project.name_en : project.name}
-            subtitle={project.title}
-          />
+          <div className="relative h-10 w-[180px] mb-6">
+            <Image
+              src={project.logoSrc}
+              alt={project.title}
+              fill
+              className="object-contain object-left"
+              sizes="180px"
+            />
+          </div>
           <Link
             href={project.siteUrl as "/"}
             target={project.siteUrl.startsWith("http") ? "_blank" : undefined}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { NewsletterCTA } from "@/components/foundation/NewsletterCTA";
@@ -267,6 +268,39 @@ export function NosotrosClient() {
                                     variant="full"
                                     onOpen={() => setActive(teamToDialog(m, t("team-section-label")))}
                                 />
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
+                        <Bracketed variant="kicker">
+                            {isEn ? "Ecosystem initiatives" : "Iniciativas del ecosistema"}
+                        </Bracketed>
+                        <p className="mt-4 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
+                            {isEn
+                                ? "Independent initiatives developed and incubated within the Fortius ecosystem."
+                                : "Iniciativas independientes desarrolladas e incubadas dentro del ecosistema Fortius."}
+                        </p>
+                        <div className="mt-8 grid grid-cols-2 gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-2 max-w-lg">
+                            {[
+                                { logoSrc: "/logos/together-green-letters.png", alt: "Together EU", href: "#" },
+                                { logoSrc: "/logos/trustbridge-green.png", alt: "TrustBridge Global", href: "#" },
+                            ].map((item) => (
+                                <div
+                                    key={item.alt}
+                                    className="relative overflow-hidden flex min-h-[110px] items-center justify-center bg-[var(--surface-brand)] p-6 group"
+                                >
+                                    <div
+                                        className="absolute inset-0 opacity-40"
+                                        style={{
+                                            background:
+                                                "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
+                                        }}
+                                    />
+                                    <div className="relative h-10 w-[160px]">
+                                        <Image src={item.logoSrc} alt={item.alt} fill className="object-contain" sizes="160px" />
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </section>
