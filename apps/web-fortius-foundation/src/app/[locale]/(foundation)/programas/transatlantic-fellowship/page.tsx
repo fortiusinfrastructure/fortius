@@ -11,13 +11,35 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
+  const pageTitle = isEn
+    ? "Transatlantic Fellowship — Fortius Foundation"
+    : "Transatlantic Fellowship — Fundación Fortius";
+  const pageDesc = isEn
+    ? "A programme for the next generation of transatlantic leaders. Research fellowships, institutional visits, parliamentary traineeships and leadership seminars across Europe and the United States."
+    : "Un programa para la próxima generación de líderes transatlánticos. Fellowships de investigación, visitas institucionales, prácticas parlamentarias y seminarios a ambos lados del Atlántico.";
+  const pageUrl = `/${locale}/programas/transatlantic-fellowship`;
   return {
-    title: isEn
-      ? "Transatlantic Fellowship — Fortius Foundation"
-      : "Transatlantic Fellowship — Fundación Fortius",
-    description: isEn
-      ? "A programme for the next generation of transatlantic leaders. Research fellowships, institutional visits, parliamentary traineeships and leadership seminars across Europe and the United States."
-      : "Un programa para la próxima generación de líderes transatlánticos. Fellowships de investigación, visitas institucionales, prácticas parlamentarias y seminarios a ambos lados del Atlántico.",
+    title: pageTitle,
+    description: pageDesc,
+    openGraph: {
+      title: pageTitle,
+      description: pageDesc,
+      type: "website",
+      url: pageUrl,
+      siteName: isEn ? "Fortius Foundation" : "Fundación Fortius",
+      images: [
+        {
+          url: "/programas/transatlantic-fellowship/brussels-06.png",
+          alt: "Transatlantic Fellowship — Brussels & Bruges Study Visit",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDesc,
+      images: ["/programas/transatlantic-fellowship/brussels-06.png"],
+    },
   };
 }
 

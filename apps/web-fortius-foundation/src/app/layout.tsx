@@ -51,11 +51,20 @@ export const metadata: Metadata = {
     locale: "es_ES",
     siteName: SITE_NAME,
     url: SITE_URL,
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1024,
+        height: 1024,
+        alt: SITE_NAME,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
+    images: ["/opengraph-image.jpg"],
   },
 };
 

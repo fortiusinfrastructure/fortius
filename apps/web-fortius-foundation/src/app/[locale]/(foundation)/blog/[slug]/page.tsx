@@ -26,7 +26,26 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
     const t = await getTranslations({ locale, namespace: "blog" });
     return { title: `${t("tag")} — Fundación Fortius` };
   }
-  return { title: `${article.title} — Fundación Fortius`, description: article.excerpt };
+  const pageTitle = `${article.title} — Fundación Fortius`;
+  const pageUrl = `/${locale}/blog/${slug}`;
+  return {
+    title: pageTitle,
+    description: article.excerpt,
+    openGraph: {
+      title: pageTitle,
+      description: article.excerpt,
+      type: "article",
+      url: pageUrl,
+      siteName: "Fundación Fortius",
+      images: [{ url: "/opengraph-image.jpg", width: 1024, height: 1024, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: article.excerpt,
+      images: ["/opengraph-image.jpg"],
+    },
+  };
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
