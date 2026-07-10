@@ -65,7 +65,7 @@ export async function InitiativesMarquee() {
               key={item.alt}
               href={item.href}
               {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="relative overflow-hidden flex min-h-[130px] items-center justify-center bg-[var(--surface-brand)] p-8 transition-colors hover:bg-[var(--surface-primary)] group"
+              className="relative overflow-hidden flex min-h-[150px] items-center justify-center bg-[var(--surface-brand)] p-8 transition-colors hover:bg-[var(--surface-primary)] group"
             >
               <div
                 className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
@@ -74,13 +74,13 @@ export async function InitiativesMarquee() {
                     "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
                 }}
               />
-              <div className="relative h-10 w-[180px]">
+              <div className="relative h-16 w-[220px] sm:h-20 sm:w-[240px]">
                 <Image
                   src={item.logoSrc}
                   alt={item.alt}
                   fill
                   className="object-contain"
-                  sizes="180px"
+                  sizes="(max-width: 640px) 220px, 240px"
                 />
               </div>
             </a>
