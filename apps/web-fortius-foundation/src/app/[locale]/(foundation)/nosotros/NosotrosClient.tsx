@@ -273,39 +273,6 @@ export function NosotrosClient() {
                     </section>
 
                     <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
-                        <Bracketed variant="kicker">
-                            {isEn ? "Ecosystem initiatives" : "Iniciativas del ecosistema"}
-                        </Bracketed>
-                        <p className="mt-4 max-w-2xl leading-relaxed text-[var(--text-secondary)]">
-                            {isEn
-                                ? "Independent initiatives developed and incubated within the Fortius ecosystem."
-                                : "Iniciativas independientes desarrolladas e incubadas dentro del ecosistema Fortius."}
-                        </p>
-                        <div className="mt-8 grid grid-cols-2 gap-px border border-[var(--border-default)] bg-[var(--border-default)] sm:grid-cols-2 max-w-lg">
-                            {[
-                                { logoSrc: "/logos/together-green-letters.png", alt: "Together EU", href: "#" },
-                                { logoSrc: "/logos/trustbridge-green.png", alt: "TrustBridge Global", href: "#" },
-                            ].map((item) => (
-                                <div
-                                    key={item.alt}
-                                    className="relative overflow-hidden flex min-h-[110px] items-center justify-center bg-[var(--surface-brand)] p-6 group"
-                                >
-                                    <div
-                                        className="absolute inset-0 opacity-40"
-                                        style={{
-                                            background:
-                                                "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
-                                        }}
-                                    />
-                                    <div className="relative h-10 w-[160px]">
-                                        <Image src={item.logoSrc} alt={item.alt} fill className="object-contain" sizes="160px" />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    <section className="mt-24 border-t border-[var(--border-subtle)] pt-16">
                         <Bracketed variant="kicker">{t("socios-kicker")}</Bracketed>
                         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
                             {STRATEGIC_PARTNERS.map((partner) => (
@@ -324,15 +291,14 @@ export function NosotrosClient() {
                                                     "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%), linear-gradient(135deg, rgba(11,31,22,0.18) 0%, rgba(11,31,22,0) 65%)",
                                             }}
                                         />
-                                        <div className="absolute -right-5 top-1/2 -translate-y-1/2 text-[5rem] font-display italic leading-none text-[var(--color-accent-300)]/10">
-                                            ]
-                                        </div>
-                                        <div className="relative flex items-center gap-2">
-                                            <span className="text-xl font-light text-[var(--color-accent-300)]">[</span>
-                                            <span className="font-display text-xl md:text-2xl font-light text-white text-center">
-                                                {partner.name}
-                                            </span>
-                                            <span className="text-xl font-light text-[var(--color-accent-300)]">]</span>
+                                        <div className="relative h-10 w-[160px]">
+                                            <Image
+                                                src={partner.logoSrc}
+                                                alt={partner.name}
+                                                fill
+                                                className="object-contain"
+                                                sizes="160px"
+                                            />
                                         </div>
                                     </div>
                                     <h3 className="mt-8 font-display text-[1.8rem] font-light text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-accent-300)]">

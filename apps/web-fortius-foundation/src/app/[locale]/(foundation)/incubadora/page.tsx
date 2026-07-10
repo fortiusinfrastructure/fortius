@@ -38,13 +38,13 @@ function ProjectCard({
           <p className="mb-4 text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
             {stageLabel}
           </p>
-          <div className="relative h-10 w-[180px] mb-6">
+          <div className="relative h-14 w-[220px] sm:h-16 sm:w-[260px] mb-6">
             <Image
               src={project.logoSrc}
               alt={project.title}
               fill
               className="object-contain object-left"
-              sizes="180px"
+              sizes="(max-width: 640px) 220px, 260px"
             />
           </div>
           <Link
