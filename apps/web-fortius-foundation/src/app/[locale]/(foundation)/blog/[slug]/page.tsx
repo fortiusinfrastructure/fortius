@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
@@ -21,7 +22,7 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug, locale } = await params;
-  const article = await getArticleBySlugDB(slug);
+  const article = await getArticleBySlugDB(slug, locale);
   if (!article) {
     const t = await getTranslations({ locale, namespace: "blog" });
     return { title: `${t("tag")} — Fundación Fortius` };
@@ -51,11 +52,12 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug, locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
-  const article = await getArticleBySlugDB(slug);
+  const article = await getArticleBySlugDB(slug, locale);
   if (!article) notFound();
 
-  const allArticles = await listArticlesDB();
-  const blocks = getArticleBlocks(article.content);
+  const allArticles = await listArticlesDB(locale);
+  const isHtml = article.content_format === "html";
+  const blocks = isHtml ? [] : getArticleBlocks(article.content);
   const abstract = getArticleAbstract(article, 320);
   const related = allArticles.filter((a) => a.slug !== article.slug).slice(0, 3);
   const firstParagraphIndex = blocks.findIndex((block) => block.type === "paragraph");
@@ -104,22 +106,39 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <section className="border-t border-[var(--border-subtle)]">
           <div className="mx-auto grid max-w-[var(--container-max)] gap-12 px-[var(--container-px)] py-16 lg:grid-cols-[minmax(0,1fr)_280px] lg:py-20">
-            <div className="space-y-6">
-              {blocks.map((block, index) =>
-                block.type === "heading" ? (
-                  <h2 key={`${block.content}-${index}`} className="pt-4 font-display text-[1.9rem] font-light leading-[1.12] text-[var(--text-primary)]">
-                    {block.content}
-                  </h2>
-                ) : (
-                  <p
-                    key={`${block.content}-${index}`}
-                    className={index === firstParagraphIndex ? "text-[1.12rem] leading-8 text-[var(--text-primary)]" : "text-[1.02rem] leading-8 text-[var(--text-secondary)]"}
-                  >
-                    {block.content}
-                  </p>
-                ),
-              )}
-            </div>
+            {isHtml ? (
+              <div
+                className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-light prose-p:leading-8 prose-a:text-[var(--color-accent-400)]"
+                style={
+                  {
+                    "--tw-prose-body": "var(--text-secondary)",
+                    "--tw-prose-headings": "var(--text-primary)",
+                    "--tw-prose-bold": "var(--text-primary)",
+                    "--tw-prose-links": "var(--color-accent-400)",
+                    "--tw-prose-quotes": "var(--text-primary)",
+                    "--tw-prose-quote-borders": "var(--border-subtle)",
+                  } as CSSProperties
+                }
+                dangerouslySetInnerHTML={{ __html: article.content }}
+              />
+            ) : (
+              <div className="space-y-6">
+                {blocks.map((block, index) =>
+                  block.type === "heading" ? (
+                    <h2 key={`${block.content}-${index}`} className="pt-4 font-display text-[1.9rem] font-light leading-[1.12] text-[var(--text-primary)]">
+                      {block.content}
+                    </h2>
+                  ) : (
+                    <p
+                      key={`${block.content}-${index}`}
+                      className={index === firstParagraphIndex ? "text-[1.12rem] leading-8 text-[var(--text-primary)]" : "text-[1.02rem] leading-8 text-[var(--text-secondary)]"}
+                    >
+                      {block.content}
+                    </p>
+                  ),
+                )}
+              </div>
+            )}
 
             <aside className="space-y-4 lg:sticky lg:top-[calc(var(--nav-height)+2rem)] lg:self-start">
               <div className="border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-5">

@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { FileText, ArrowRight } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { FoundationPrivateUser } from "@/lib/private/auth";
 import type { FoundationAdminData, FoundationMemberRecord } from "@/lib/private/queries";
@@ -130,6 +132,25 @@ export function DashboardAdmin({ user, data }: Props) {
       <div
         className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)] pt-14 space-y-20"
       >
+        {/* Herramientas */}
+        <section>
+          <Bracketed variant="tag">Herramientas</Bracketed>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Link
+              href="/area-privada/admin/articulos"
+              className="group p-5 border transition-colors flex items-center gap-4"
+              style={{ borderColor: "var(--border-subtle)", background: "var(--surface-secondary)" }}
+            >
+              <FileText size={22} className="shrink-0" style={{ color: "var(--color-accent-400)" }} />
+              <div className="flex-1">
+                <p className="font-display text-[1.05rem]" style={{ color: "var(--text-primary)" }}>Gestionar artículos</p>
+                <p className="text-[0.8rem]" style={{ color: "var(--text-tertiary)" }}>Publicar, editar y archivar entradas del blog.</p>
+              </div>
+              <ArrowRight size={16} style={{ color: "var(--text-tertiary)" }} />
+            </Link>
+          </div>
+        </section>
+
         {/* Metrics */}
         <section>
           <Bracketed variant="tag">Resumen</Bracketed>

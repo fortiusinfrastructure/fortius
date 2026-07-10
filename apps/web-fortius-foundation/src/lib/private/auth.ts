@@ -113,3 +113,18 @@ export async function requireFoundationPrivateUser(): Promise<FoundationPrivateU
     redirect("/login");
   }
 }
+
+/**
+ * Used by /area-privada/admin pages (article CMS).
+ * Wraps requireFoundationPrivateUser and additionally requires the role to be
+ * 'admin' or 'super_admin'. Redirects to /area-privada otherwise.
+ */
+const ADMIN_ROLES = ["admin", "super_admin"] as const;
+
+export async function requireFoundationAdminUser(): Promise<FoundationPrivateUser> {
+  const user = await requireFoundationPrivateUser();
+  if (!ADMIN_ROLES.includes(user.role as (typeof ADMIN_ROLES)[number])) {
+    redirect("/area-privada");
+  }
+  return user;
+}

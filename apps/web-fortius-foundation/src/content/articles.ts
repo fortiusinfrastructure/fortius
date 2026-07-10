@@ -7,6 +7,7 @@ export interface FoundationArticle {
   author: string | null;
   excerpt: string;
   content: string;
+  content_format?: "html" | "text";
   source_file: string;
 }
 

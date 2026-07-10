@@ -38,7 +38,7 @@ export function formatShortDate(iso: string): string {
 }
 
 export function estimateReadTime(content: string): string {
-  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  const words = content.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(3, Math.round(words / 220));
   return `${minutes} min`;
 }
