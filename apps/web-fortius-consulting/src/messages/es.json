@@ -365,5 +365,30 @@
     "back-blog": "[ Volver al blog ]",
     "request-access": "Solicitar acceso",
     "private-area": "Área Privada"
+  },
+  "work-area": {
+    "kicker-prefix": "Área de trabajo",
+    "services-prefix": "Servicios",
+    "experts-prefix": "Expertos",
+    "view-all": "Ver todos",
+    "explore": "Explorar {label}",
+    "bio-hint": "+ bio al pulsar",
+    "view-services": "Ver servicios",
+    "view-experts": "Ver expertos",
+    "restricted": "Acceso restringido",
+    "reserved": "Contenido reservado para clientes.",
+    "access-clients": "Acceder al Área clientes",
+    "access-private": "Acceder al Área Privada",
+    "available": "Disponible",
+    "team": "Equipo Fortius",
+    "locked-aria": "Artículo bloqueado — {title}",
+    "cover-alt": "Portada editorial de {title}",
+    "summary-civil-kicker": "Explorar oportunidades para la Sociedad Civil",
+    "summary-civil-title": "Todo lo que tu organización necesita para crecer con criterio: servicios, expertos y conocimiento en un solo lugar.",
+    "summary-civil-desc": "Esto es solo una muestra. En este área de trabajo encontrarás el detalle de cómo trabajamos, quiénes nos acompañan y cómo puedes acceder.",
+    "summary-intel-kicker": "Explorar oportunidades para Política",
+    "summary-intel-title": "En {label} encontrarás servicios, expertos y acceso a la biblioteca completa.",
+    "summary-intel-desc": "Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y cómo puedes acceder.",
+    "experts-title": "Conoce a nuestros expertos."
   }
 }

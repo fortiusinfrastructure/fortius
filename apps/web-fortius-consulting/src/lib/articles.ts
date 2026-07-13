@@ -96,8 +96,18 @@ const KIND_LABEL: Record<ArticleKind, string> = {
     articulo: "Artículo",
 };
 
-export function kindLabel(kind: ArticleKind): string {
-    return KIND_LABEL[kind] ?? "Artículo";
+const KIND_LABEL_EN: Record<ArticleKind, string> = {
+    comentario: "Commentary",
+    informe: "Report",
+    nota: "Intelligence Note",
+    evento: "Opportunity & Event",
+    noticia: "News",
+    articulo: "Article",
+};
+
+export function kindLabel(kind: ArticleKind, locale: string = "es"): string {
+    const map = locale === "en" ? KIND_LABEL_EN : KIND_LABEL;
+    return map[kind] ?? map.articulo;
 }
 const CATEGORY_LABEL: Record<ArticleCategory, string> = {
     politica: "Política",
@@ -105,8 +115,15 @@ const CATEGORY_LABEL: Record<ArticleCategory, string> = {
     home: "Fortius",
 };
 
-export function categoryLabel(category: ArticleCategory): string {
-    return CATEGORY_LABEL[category] ?? "Fortius";
+const CATEGORY_LABEL_EN: Record<ArticleCategory, string> = {
+    politica: "Politics",
+    "sociedad-civil": "Civil Society",
+    home: "Fortius",
+};
+
+export function categoryLabel(category: ArticleCategory, locale: string = "es"): string {
+    const map = locale === "en" ? CATEGORY_LABEL_EN : CATEGORY_LABEL;
+    return map[category] ?? "Fortius";
 }
 
 export function formatPublishedDate(iso: string | null): string {
@@ -143,11 +160,11 @@ export function estimateReadTime(markdown: string): string {
 /**
  * Shorter date label ("18 mar") used by the inline list inside the editorial card.
  */
-export function formatShortDate(iso: string | null): string {
+export function formatShortDate(iso: string | null, locale: string = "es"): string {
     if (!iso) return "";
     const d = new Date(`${iso}T00:00:00Z`);
     if (Number.isNaN(d.getTime())) return "";
-    return new Intl.DateTimeFormat("es-ES", {
+    return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "es-ES", {
         day: "2-digit",
         month: "short",
         timeZone: "UTC",
@@ -155,13 +172,13 @@ export function formatShortDate(iso: string | null): string {
 }
 
 /**
- * Long date label ("Marzo 2026") used by the locked-article card.
+ * Long date label ("Marzo 2026" / "March 2026") used by the locked-article card.
  */
-export function formatMonthYear(iso: string | null): string {
+export function formatMonthYear(iso: string | null, locale: string = "es"): string {
     if (!iso) return "";
     const d = new Date(`${iso}T00:00:00Z`);
     if (Number.isNaN(d.getTime())) return "";
-    return new Intl.DateTimeFormat("es-ES", {
+    return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "es-ES", {
         month: "long",
         year: "numeric",
         timeZone: "UTC",

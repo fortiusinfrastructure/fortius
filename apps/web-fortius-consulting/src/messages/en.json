@@ -365,5 +365,30 @@
     "back-blog": "[ Back to blog ]",
     "request-access": "Request access",
     "private-area": "Private Area"
+  },
+  "work-area": {
+    "kicker-prefix": "Work area",
+    "services-prefix": "Services",
+    "experts-prefix": "Experts",
+    "view-all": "View all",
+    "explore": "Explore {label}",
+    "bio-hint": "+ bio on click",
+    "view-services": "View services",
+    "view-experts": "View experts",
+    "restricted": "Restricted access",
+    "reserved": "Content reserved for clients.",
+    "access-clients": "Access client area",
+    "access-private": "Access private area",
+    "available": "Available",
+    "team": "Fortius Team",
+    "locked-aria": "Locked article — {title}",
+    "cover-alt": "Editorial cover of {title}",
+    "summary-civil-kicker": "Explore opportunities for Civil Society",
+    "summary-civil-title": "Everything your organisation needs to grow with judgement: services, experts and knowledge in one place.",
+    "summary-civil-desc": "This is just a sample. In this work area you'll find the detail of how we work, who joins us and how you can get access.",
+    "summary-intel-kicker": "Explore opportunities for Politics",
+    "summary-intel-title": "In {label} you'll find services, experts and access to the full library.",
+    "summary-intel-desc": "This block on the home page is just an editorial summary. In the full vertical you'll see the scope of the service, the network of experts and how you can get access.",
+    "experts-title": "Meet our experts."
   }
 }

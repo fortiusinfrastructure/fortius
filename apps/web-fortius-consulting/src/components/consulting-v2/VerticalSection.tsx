@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import {
     ArrowUpRight,
     Lock,
@@ -46,17 +47,17 @@ const VERTICAL_TO_CATEGORY: Record<string, ArticleCategory> = {
     intelligence: "politica",
 };
 
-function articleToInsight(a: Article) {
+function articleToInsight(a: Article, locale: string, teamLabel: string) {
     const lead = getArticleLeadData(a);
 
     return {
         slug: a.slug,
-        category: kindLabel(a.kind),
+        category: kindLabel(a.kind, locale),
         title: a.title,
         excerpt: getArticleSummary(a),
-        date: formatShortDate(a.published_at) || categoryLabel(a.category),
+        date: formatShortDate(a.published_at, locale) || categoryLabel(a.category, locale),
         readTime: estimateReadTime(a.content_markdown),
-        author: lead.author ?? "Equipo Fortius",
+        author: lead.author ?? teamLabel,
     };
 }
 
@@ -95,28 +96,31 @@ interface EditorialInsightItem {
     author?: string | null;
 }
 
-function fallbackInsight(item: VerticalDef["insights"][number]): EditorialInsightItem {
+function fallbackInsight(item: VerticalDef["insights"][number], teamLabel: string): EditorialInsightItem {
     return {
         ...item,
-        author: "Equipo Fortius",
+        author: teamLabel,
     };
 }
 
 export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly = false, slots = null }: VerticalSectionProps) {
+    const locale = useLocale();
+    const t = useTranslations("work-area");
+    const teamLabel = t("team");
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured: EditorialInsightItem = slots?.featured
-        ? articleToInsight(slots.featured)
-        : fallbackInsight(v.insights.find((i) => i.featured) ?? v.insights[0]);
+        ? articleToInsight(slots.featured, locale, teamLabel)
+        : fallbackInsight(v.insights.find((i) => i.featured) ?? v.insights[0], teamLabel);
     const featuredHref = slots?.featured
         ? `${v.href}/${slots.featured.slug}`
         : `/publicaciones/${featured.slug}`;
 
     const rest: EditorialInsightItem[] = slots && slots.rest.length > 0
-        ? slots.rest.map(articleToInsight)
-        : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2).map(fallbackInsight);
+        ? slots.rest.map((a) => articleToInsight(a, locale, teamLabel))
+        : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2).map((i) => fallbackInsight(i, teamLabel));
     const restHref = (i: number): string =>
         slots && slots.rest[i]
             ? `${v.href}/${slots.rest[i].slug}`
@@ -124,11 +128,11 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
 
     const locked = slots?.locked
         ? {
-              category: kindLabel(slots.locked.kind),
+              category: kindLabel(slots.locked.kind, locale),
               title: slots.locked.title,
               excerpt: getArticleSummary(slots.locked),
               readTime: estimateReadTime(slots.locked.content_markdown),
-              publishedAt: formatMonthYear(slots.locked.published_at) || "Disponible",
+              publishedAt: formatMonthYear(slots.locked.published_at, locale) || t("available"),
               href: `${v.href}/${slots.locked.slug}`,
           }
         : { ...v.lockedArticle, href: "/area-privada" };
@@ -137,17 +141,14 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
     const summaryCopy =
         v.id === "civil"
             ? {
-                  kicker: "Explorar oportunidades para la Sociedad Civil",
-                  title:
-                      "Todo lo que tu organización necesita para crecer con criterio: servicios, expertos y conocimiento en un solo lugar.",
-                  description:
-                      "Esto es solo una muestra. En este área de trabajo encontrarás el detalle de cómo trabajamos, quiénes nos acompañan y cómo puedes acceder.",
+                  kicker: t("summary-civil-kicker"),
+                  title: t("summary-civil-title"),
+                  description: t("summary-civil-desc"),
               }
             : {
-                kicker: "Explorar oportunidades para Política",
-                  title: `En ${v.label} encontrarás servicios, expertos y acceso a la biblioteca completa.`,
-                  description:
-                      "Este bloque en home es solo un resumen editorial. En la vertical completa podrás ver el alcance del servicio, la red de expertos y cómo puedes acceder.",
+                  kicker: t("summary-intel-kicker"),
+                  title: t("summary-intel-title", { label: v.label }),
+                  description: t("summary-intel-desc"),
               };
 
     const [activePerson, setActivePerson] = useState<PersonDialogData | null>(null);
@@ -183,7 +184,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                             href={v.href}
                             className="group inline-flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-primary)] hover:text-[var(--color-accent-400)] transition-colors"
                         >
-                            Explorar {v.label}
+                            {t("explore", { label: v.label })}
                             <ArrowUpRight
                                 size={14}
                                 className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform"
@@ -211,12 +212,12 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                 {/* Área de trabajo — featured + locked preview */}
                 <div className="mb-24">
                     <div className="flex items-end justify-between mb-8">
-                        <Bracketed variant="kicker">Área de trabajo · {v.label}</Bracketed>
+                        <Bracketed variant="kicker">{t("kicker-prefix")} · {v.label}</Bracketed>
                         <a
                             href="/publicaciones"
                             className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                         >
-                            Ver todos
+                            {t("view-all")}
                             <ArrowUpRight size={14} />
                         </a>
                     </div>
@@ -233,7 +234,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 <ArticleCoverImage
                                     primarySrc={featuredImage?.primarySrc ?? cover.src}
                                     fallbackSources={featuredImage?.fallbackSources ?? [cover.hardFallback]}
-                                    alt={`Portada editorial de ${featured.title}`}
+                                    alt={t("cover-alt", { title: featured.title })}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                                 />
                                 <div
@@ -312,7 +313,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                             </div>
 
                             <article
-                                aria-label={`Artículo bloqueado — ${locked.title}`}
+                                aria-label={t("locked-aria", { title: locked.title })}
                                 className="relative border border-[var(--border-default)] bg-[var(--surface-primary)] overflow-hidden"
                             >
                                 <div className="p-6 space-y-4">
@@ -321,7 +322,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                             {locked.category}
                                         </Bracketed>
                                         <span className="inline-flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-accent-400)]">
-                                            Acceso restringido
+                                            {t("restricted")}
                                         </span>
                                     </div>
                                     <h4 className="font-display text-[1.35rem] font-light leading-[1.18] tracking-tight text-[var(--text-primary)]">
@@ -348,7 +349,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 </div>
                                 <div className="border-t border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-6 py-4 flex items-center gap-3">
                                     <p className="text-[0.75rem] text-[var(--text-secondary)] leading-snug">
-                                        Contenido reservado para clientes.
+                                        {t("reserved")}
                                     </p>
                                 </div>
                             </article>
@@ -358,7 +359,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                 className="group inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                             >
                                 <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
-                                        Acceder al Área Privada
+                                        {t("access-private")}
                                 </span>
                                 <ArrowUpRight
                                     size={16}
@@ -386,14 +387,14 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                     href={`${v.href}#servicios`}
                                     className="inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
                                 >
-                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">Ver servicios</span>
+                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">{t("view-services")}</span>
                                     <ArrowUpRight size={16} />
                                 </a>
                                 <a
                                     href={`${v.href}#expertos`}
                                     className="inline-flex items-center justify-between gap-4 px-5 py-4 border border-[var(--border-strong)] text-[var(--text-primary)] hover:border-[var(--color-accent-500)] transition-colors"
                                 >
-                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">Ver expertos</span>
+                                    <span className="text-[0.72rem] font-semibold uppercase tracking-[0.18em]">{t("view-experts")}</span>
                                     <ArrowUpRight size={16} />
                                 </a>
                             </div>
@@ -402,7 +403,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                 ) : (
                     <>
                         <div className="mb-24">
-                            <Bracketed variant="kicker">Servicios · {v.label}</Bracketed>
+                            <Bracketed variant="kicker">{t("services-prefix")} · {v.label}</Bracketed>
                             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-default)] border border-[var(--border-default)]">
                                 {v.services.map((s) => {
                                     const Icon = ICONS[s.icon];
@@ -434,9 +435,9 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                         {experts.length > 0 && (
                             <div className="mb-20">
                                 <div className="flex items-end justify-between mb-6">
-                                    <Bracketed variant="kicker">Expertos · {v.label}</Bracketed>
+                                    <Bracketed variant="kicker">{t("experts-prefix")} · {v.label}</Bracketed>
                                     <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
-                                        + bio al pulsar
+                                        {t("bio-hint")}
                                     </span>
                                 </div>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">

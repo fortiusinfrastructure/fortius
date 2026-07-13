@@ -8,7 +8,8 @@ export const LOGO_META: Record<
   string,
   { w: number; h: number; heightClass: string }
 > = {
-  "/logos/ieam-green-399C6E.png": { w: 3200, h: 3200, heightClass: "h-16" },
+  // dims match the trimmed (padding-removed) files so aspect ratio is truthful
+  "/logos/ieam-green-399C6E.png": { w: 3045, h: 1577, heightClass: "h-14" },
   "/logos/escuela-hispanica-green-troquelado.png": {
     w: 1959,
     h: 544,
@@ -25,7 +26,7 @@ export const LOGO_META: Record<
     h: 891,
     heightClass: "h-14",
   },
-  "/logos/md.png": { w: 1200, h: 1200, heightClass: "h-14" },
+  "/logos/md.png": { w: 1156, h: 613, heightClass: "h-12" },
 };
 
 const DEFAULT_LOGO_META = { w: 240, h: 80, heightClass: "h-14" };

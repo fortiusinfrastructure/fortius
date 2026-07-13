@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Bracketed } from "@/components/system/Bracketed";
 import { PersonCard } from "./PersonCard";
 import { PersonDialog, type PersonDialogData } from "./PersonDialog";
@@ -12,6 +13,7 @@ interface ExpertsSectionProps {
 }
 
 export function ExpertsSection({ vertical: v }: ExpertsSectionProps) {
+    const t = useTranslations("work-area");
     const experts = getExpertsByVertical(v.id);
     const [activePerson, setActivePerson] = useState<PersonDialogData | null>(null);
 
@@ -26,16 +28,16 @@ export function ExpertsSection({ vertical: v }: ExpertsSectionProps) {
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
                 <div className="flex items-end justify-between mb-8">
                     <div className="space-y-2">
-                        <Bracketed variant="kicker">Expertos · {v.label}</Bracketed>
+                        <Bracketed variant="kicker">{t("experts-prefix")} · {v.label}</Bracketed>
                         <h2
                             id={`experts-${v.id}-title`}
                             className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-light leading-tight tracking-tight text-[var(--text-primary)]"
                         >
-                            Conoce a nuestros expertos.
+                            {t("experts-title")}
                         </h2>
                     </div>
                     <span className="text-[0.65rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)] shrink-0">
-                        + bio al pulsar
+                        {t("bio-hint")}
                     </span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)]">

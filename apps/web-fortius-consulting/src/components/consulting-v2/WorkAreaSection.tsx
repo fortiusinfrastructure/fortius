@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { Bracketed } from "@/components/system/Bracketed";
 import type { VerticalDef } from "@/content/home-v2";
@@ -51,19 +52,22 @@ export function WorkAreaSection({
     title = "Análisis, briefings y lecturas estratégicas.",
     slots = null,
 }: WorkAreaSectionProps) {
+    const locale = useLocale();
+    const t = useTranslations("work-area");
+    const teamLabel = t("team");
     const category = VERTICAL_TO_CATEGORY[v.id];
     const cover = getArticleCover(category);
     const featuredImage = slots?.featured ? getArticleImageSources(slots.featured) : null;
 
     const featured: EditorialInsightItem = slots?.featured
-        ? articleToInsight(slots.featured)
+        ? articleToInsight(slots.featured, locale, teamLabel)
         : v.insights.find((i) => i.featured) ?? v.insights[0];
     const featuredHref = slots?.featured
         ? `${v.href}/${slots.featured.slug}`
         : `/publicaciones/${featured.slug}`;
 
     const rest: EditorialInsightItem[] = slots && slots.rest.length > 0
-        ? slots.rest.map(articleToInsight)
+        ? slots.rest.map((a) => articleToInsight(a, locale, teamLabel))
         : v.insights.filter((i) => i.slug !== featured.slug).slice(0, 2);
     const restHref = (i: number): string =>
         slots && slots.rest[i]
@@ -72,11 +76,11 @@ export function WorkAreaSection({
 
     const locked = slots?.locked
         ? {
-              category: kindLabel(slots.locked.kind),
+              category: kindLabel(slots.locked.kind, locale),
               title: slots.locked.title,
               excerpt: getArticleSummary(slots.locked),
               readTime: estimateReadTime(slots.locked.content_markdown),
-              publishedAt: formatMonthYear(slots.locked.published_at) || "Disponible",
+              publishedAt: formatMonthYear(slots.locked.published_at, locale) || t("available"),
               href: `${v.href}/${slots.locked.slug}`,
           }
         : { ...v.lockedArticle, href: "/area-privada" };
@@ -90,7 +94,7 @@ export function WorkAreaSection({
             <div className="mx-auto max-w-[var(--container-max)] px-[var(--container-px)]">
                 <div className="flex items-end justify-between mb-8">
                     <div className="space-y-2">
-                        <Bracketed variant="kicker">Área de trabajo · {v.label}</Bracketed>
+                        <Bracketed variant="kicker">{t("kicker-prefix")} · {v.label}</Bracketed>
                         <h2
                             id={`work-area-${v.id}-title`}
                             className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-light leading-tight tracking-tight text-[var(--text-primary)]"
@@ -102,7 +106,7 @@ export function WorkAreaSection({
                         href="/publicaciones"
                         className="hidden md:inline-flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     >
-                        Ver todos
+                        {t("view-all")}
                         <ArrowUpRight size={14} />
                     </a>
                 </div>
@@ -120,7 +124,7 @@ export function WorkAreaSection({
                             <ArticleCoverImage
                                 primarySrc={featuredImage?.primarySrc ?? cover.src}
                                 fallbackSources={featuredImage?.fallbackSources ?? [cover.hardFallback]}
-                                alt={`Portada editorial de ${featured.title}`}
+                                alt={t("cover-alt", { title: featured.title })}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                             />
                             <div
@@ -199,7 +203,7 @@ export function WorkAreaSection({
                         </div>
 
                         <article
-                            aria-label={`Artículo bloqueado — ${locked.title}`}
+                            aria-label={t("locked-aria", { title: locked.title })}
                             className="relative border border-[var(--border-default)] bg-[var(--surface-primary)] overflow-hidden"
                         >
                             <div className="p-6 space-y-4">
@@ -209,7 +213,7 @@ export function WorkAreaSection({
                                     </Bracketed>
                                     <span className="inline-flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-accent-400)]">
                                         <Lock size={11} strokeWidth={2} aria-hidden />
-                                        Acceso restringido
+                                        {t("restricted")}
                                     </span>
                                 </div>
                                 <h4 className="font-display text-[1.35rem] font-light leading-[1.18] tracking-tight text-[var(--text-primary)]">
@@ -241,7 +245,7 @@ export function WorkAreaSection({
                                     aria-hidden
                                 />
                                 <p className="text-[0.75rem] text-[var(--text-secondary)] leading-snug">
-                                    Contenido reservado para clientes.
+                                    {t("reserved")}
                                 </p>
                             </div>
                         </article>
@@ -252,7 +256,7 @@ export function WorkAreaSection({
                         >
                             <span className="inline-flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em]">
                                 <Lock size={13} strokeWidth={2} aria-hidden />
-                                Acceder al Área clientes
+                                {t("access-clients")}
                             </span>
                             <ArrowUpRight
                                 size={16}
@@ -266,16 +270,16 @@ export function WorkAreaSection({
     );
 }
 
-function articleToInsight(a: Article) {
+function articleToInsight(a: Article, locale: string, teamLabel: string) {
     const lead = getArticleLeadData(a);
 
     return {
         slug: a.slug,
-        category: kindLabel(a.kind),
+        category: kindLabel(a.kind, locale),
         title: a.title,
         excerpt: getArticleSummary(a),
-        date: formatShortDate(a.published_at) || categoryLabel(a.category),
+        date: formatShortDate(a.published_at, locale) || categoryLabel(a.category, locale),
         readTime: estimateReadTime(a.content_markdown),
-        author: lead.author ?? "Equipo Fortius",
+        author: lead.author ?? teamLabel,
     };
 }
