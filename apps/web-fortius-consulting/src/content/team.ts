@@ -190,15 +190,6 @@ export const TEAM: TeamMember[] = [
         bio: "Pamplona (España). Acompaña a organizaciones en procesos de transformación digital, estrategia tecnológica y modernización de sus modelos operativos. Su trayectoria combina arquitectura cloud, gobierno de plataformas, seguridad, automatización, optimización de costes e inteligencia artificial, con una visión orientada a conectar las necesidades de negocio con soluciones tecnológicas realistas y sostenibles. Ha participado en proyectos de adopción cloud, diseño de arquitecturas empresariales, modelos de operación y mejora de capacidades digitales, trabajando tanto con equipos técnicos como con perfiles directivos. En Fortius Consulting aporta una mirada estratégica y práctica sobre el uso de la tecnología como palanca de eficiencia, crecimiento y fortalecimiento institucional. Cree que la tecnología solo genera verdadero valor cuando está bien alineada con las personas, los procesos y el propósito de cada organización.",    
     },
     {
-        slug: "diego-salazar-ramirez",
-        name: "Diego Salazar Ramírez",
-        role: "Arquitecto de productos digitales",
-        role_en: "Digital Product Architect",
-        department: "digital",
-        verticals: ["intelligence"],
-        bio: "Quito (Ecuador). Es un profesional especializado en transformación digital, estrategia tecnológica e innovación de procesos, con experiencia internacional en dirección de operaciones, automatización y desarrollo de soluciones tecnológicas para organizaciones en entornos complejos y de gran escala.\n\nEs graduado en Ingeniería en Diseño Industrial por la Universidad Central del Ecuador y posee un Máster en Business & Technology por Collective Academy. Actualmente complementa su formación con estudios de Filosofía en la Universidad de Navarra.\n\nEn Fortius es responsable del diseño y desarrollo de las plataformas digitales de la firma, liderando la construcción de herramientas internas de análisis, sistemas de inteligencia y entornos tecnológicos orientados a mejorar la capacidad operativa y estratégica de la organización. Anteriormente fue Leader Technology Transformation and Processes HISPAM en Telefónica, donde lideró iniciativas regionales de transformación tecnológica e innovación de procesos en los mercados hispanoamericanos del grupo, incluyendo Ecuador, Colombia, México, Perú, Chile, Uruguay y Argentina.",    
-    },
-    {
         slug: "javier-soto-gomez",
         name: "Javier Soto Gómez",
         role: "Legal y Contable",
@@ -255,7 +246,6 @@ const TEAM_COUNTRY_OVERRIDES: Record<string, string> = {
     "segundo-carafi": "Argentina",
     "matthaus-konradsheim": "Austria",
     "jose-maria-cortes": "Portugal",
-    "diego-salazar-ramirez": "Ecuador",
 };
 
 const EXPERT_COUNTRY_OVERRIDES: Record<string, string> = {
@@ -288,7 +278,6 @@ const VERIFIED_PHOTOS: Record<string, string> = {
     "jose-maria-cortes": "/images/nosotros/jose-maria-cortes.png",
     "jose-manuel-perez-ariza": "/images/nosotros/Jose Manuel Perez Ariza.png",
     "alberto-andres-rodriguez": "/images/nosotros/Alberto A.png",
-    "diego-salazar-ramirez": "/images/nosotros/Diego Salazar.png",
     "javier-soto-gomez": "/images/nosotros/Javier Soto.png",
     "victor-gonzalez-coello-de-portugal": "/images/nosotros/Victor Gonzalez Coello de Portugal.png",
     "carlos-andreu-pintado": "/images/nosotros/Carlos Andreu Pintado.png",
