@@ -372,7 +372,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
 
                 {summaryOnly ? (
                     <div className="rounded-2xl border border-[var(--border-default)] bg-[var(--surface-secondary)] p-6 md:p-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                             <div className="lg:col-span-8">
                                 <Bracketed variant="kicker">{summaryCopy.kicker}</Bracketed>
                                 <h3 className="mt-4 font-display text-[clamp(1.4rem,2.5vw,2.2rem)] font-light leading-[1.08] tracking-tight text-[var(--text-primary)]">
@@ -382,7 +382,7 @@ export function VerticalSection({ vertical: v, accentSide = "left", summaryOnly 
                                     {summaryCopy.description}
                                 </p>
                             </div>
-                            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">
+                            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch lg:pt-1">
                                 <a
                                     href={`${v.href}#servicios`}
                                     className="inline-flex items-center justify-between gap-4 px-5 py-4 bg-[var(--color-accent-500)] text-white hover:bg-[var(--color-accent-400)] transition-colors"
