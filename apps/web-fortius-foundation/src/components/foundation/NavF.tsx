@@ -13,6 +13,7 @@ import { useSessionUser, UserMenuF } from "./UserMenuF";
 const NAV_HREF_KEYS = [
   { href: "/nosotros", key: "nosotros" },
   { href: "/incubadora", key: "incubadora" },
+  { href: "/programas/transatlantic-fellowship", key: "transatlantic" },
   { href: "/ayudas", key: "ayudas" },
   { href: "/blog", key: "blog" },
   { href: "/contacto", key: "contacto" },
@@ -63,12 +64,12 @@ export function NavF() {
           <FoundationLockup />
         </Link>
 
-        <div className="hidden items-center gap-10 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex xl:gap-8">
           {NAV_HREF_KEYS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[0.75rem] font-medium uppercase tracking-[0.12em] transition-colors"
+              className="whitespace-nowrap text-[0.75rem] font-medium uppercase tracking-[0.12em] transition-colors"
               style={{
                 color: isActive(pathname, link.href)
                   ? "var(--text-primary)"

@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { Bracketed } from "@/components/system/Bracketed";
-import { getProjectsByStage } from "@/content/projects";
+import { getLogoMeta, getProjectsByStage } from "@/content/projects";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -38,13 +38,13 @@ function ProjectCard({
           <p className="mb-4 text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-tertiary)]">
             {stageLabel}
           </p>
-          <div className="relative h-14 w-[220px] sm:h-16 sm:w-[260px] mb-6">
+          <div className="mb-6 flex h-16 items-center">
             <Image
               src={project.logoSrc}
               alt={project.title}
-              fill
-              className="object-contain object-left"
-              sizes="(max-width: 640px) 220px, 260px"
+              width={getLogoMeta(project.logoSrc).w}
+              height={getLogoMeta(project.logoSrc).h}
+              className={`w-auto max-w-full object-contain ${getLogoMeta(project.logoSrc).heightClass}`}
             />
           </div>
           <Link

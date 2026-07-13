@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Bracketed } from "@/components/system/Bracketed";
+import { getLogoMeta } from "@/content/projects";
 
 const ALL_INITIATIVES = [
   {
@@ -60,31 +61,32 @@ export async function InitiativesMarquee() {
         </p>
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-px border border-[var(--border-default)] bg-[var(--border-default)]">
-          {ALL_INITIATIVES.map((item) => (
-            <a
-              key={item.alt}
-              href={item.href}
-              {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="relative overflow-hidden flex min-h-[150px] items-center justify-center bg-[var(--surface-brand)] p-8 transition-colors hover:bg-[var(--surface-primary)] group"
-            >
-              <div
-                className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
-                }}
-              />
-              <div className="relative h-16 w-[220px] sm:h-20 sm:w-[240px]">
+          {ALL_INITIATIVES.map((item) => {
+            const meta = getLogoMeta(item.logoSrc);
+            return (
+              <a
+                key={item.alt}
+                href={item.href}
+                {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="relative overflow-hidden flex min-h-[150px] items-center justify-center bg-[var(--surface-brand)] p-8 transition-colors hover:bg-[var(--surface-primary)] group"
+              >
+                <div
+                  className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at top right, rgba(134,239,172,0.12) 0%, transparent 48%)",
+                  }}
+                />
                 <Image
                   src={item.logoSrc}
                   alt={item.alt}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 220px, 240px"
+                  width={meta.w}
+                  height={meta.h}
+                  className={`relative w-auto max-w-[80%] object-contain ${meta.heightClass}`}
                 />
-              </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

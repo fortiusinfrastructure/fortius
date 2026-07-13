@@ -1,3 +1,39 @@
+/**
+ * Intrinsic dimensions + normalized render height per initiative logo.
+ * Logos have very different aspect ratios (square icons vs. wide wordmarks),
+ * so we render each by a consistent optical height (`heightClass` + `w-auto`)
+ * instead of squeezing them all into one fixed box. Keeps the logo wall uniform.
+ */
+export const LOGO_META: Record<
+  string,
+  { w: number; h: number; heightClass: string }
+> = {
+  "/logos/ieam-green-399C6E.png": { w: 3200, h: 3200, heightClass: "h-16" },
+  "/logos/escuela-hispanica-green-troquelado.png": {
+    w: 1959,
+    h: 544,
+    heightClass: "h-11",
+  },
+  "/logos/principios-green.png": { w: 4013, h: 904, heightClass: "h-10" },
+  "/logos/free-press-forum-green-2.png": {
+    w: 1248,
+    h: 984,
+    heightClass: "h-14",
+  },
+  "/logos/transatlantic-fellowship-green.png": {
+    w: 1267,
+    h: 891,
+    heightClass: "h-14",
+  },
+  "/logos/md.png": { w: 1200, h: 1200, heightClass: "h-14" },
+};
+
+const DEFAULT_LOGO_META = { w: 240, h: 80, heightClass: "h-14" };
+
+export function getLogoMeta(logoSrc: string) {
+  return LOGO_META[logoSrc] ?? DEFAULT_LOGO_META;
+}
+
 export type ProjectStage = "exito" | "incubacion";
 
 export interface FoundationProject {
@@ -132,7 +168,7 @@ export const PROJECTS: FoundationProject[] = [
       "Participants collaborate on tangible proposals, establishing ties that transcend borders and promote a constructive vision for the West.",
     ],
     logoSrc: "/logos/transatlantic-fellowship-green.png",
-    siteUrl: "/incubadora/transatlantic-fellowship",
+    siteUrl: "/programas/transatlantic-fellowship",
     ctaLabel: "Ver detalles de incubación",
     ctaLabel_en: "View incubation details",
   },

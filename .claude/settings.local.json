@@ -34,7 +34,13 @@
       "Bash(pkill -f \"next dev --turbopack --port 3002\")",
       "Bash(NEXT_PUBLIC_SUPABASE_URL=\"https://placeholder.supabase.co\" pnpm dev)",
       "Bash(node -e ' *)",
-      "Bash(rm -rf /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-foundation/.next)"
+      "Bash(rm -rf /Users/dasalazarr/Projects/Fortius/fortius/apps/web-fortius-foundation/.next)",
+      "Bash(ls src/messages)",
+      "Bash(grep -rl '\"nav\"' src/messages)",
+      "Bash(python3 -c \"import json;d=json.load\\(open\\('src/messages/es.json'\\)\\);print\\(json.dumps\\(d['nav'],ensure_ascii=False,indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json;d=json.load\\(open\\('src/messages/en.json'\\)\\);print\\(json.dumps\\(d['nav'],ensure_ascii=False,indent=2\\)\\)\")",
+      "Bash(python3 *)",
+      "Bash(pnpm lint *)"
     ]
   }
 }
