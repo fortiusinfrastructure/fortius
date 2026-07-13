@@ -68,26 +68,34 @@ async function seedArticles(orgId, articles) {
             ? `${a.published_at}T00:00:00Z`
             : null;
 
-        const { error } = await admin.from("articles").upsert(
-            {
-                organization_id: orgId,
-                slug: a.slug,
-                title_es: a.title,
-                excerpt_es: a.excerpt || null,
-                content_es: a.content_markdown,
-                category: a.category,
-                published_at: publishedAtIso,
-                status: "published",
-                metadata: {
-                    access_level: a.access,
-                    kind: a.kind,
-                    subproducts: a.subproducts ?? [],
-                    source_file: a.source_file,
-                    content_format: "markdown",
-                },
+        const row = {
+            organization_id: orgId,
+            slug: a.slug,
+            title_es: a.title,
+            excerpt_es: a.excerpt || null,
+            content_es: a.content_markdown,
+            category: a.category,
+            published_at: publishedAtIso,
+            status: "published",
+            metadata: {
+                access_level: a.access,
+                kind: a.kind,
+                subproducts: a.subproducts ?? [],
+                source_file: a.source_file,
+                content_format: "markdown",
             },
-            { onConflict: "organization_id,slug", ignoreDuplicates: false },
-        );
+        };
+
+        // Carry English fields only when the JSON provides them, so re-seeding
+        // never nulls out translations produced by translate-articles.ts.
+        if (a.title_en) row.title_en = a.title_en;
+        if (a.excerpt_en) row.excerpt_en = a.excerpt_en;
+        if (a.content_en) row.content_en = a.content_en;
+
+        const { error } = await admin.from("articles").upsert(row, {
+            onConflict: "organization_id,slug",
+            ignoreDuplicates: false,
+        });
 
         if (error) {
             console.error(`  ✗ ${a.slug}: ${error.message}`);
@@ -107,7 +115,15 @@ async function main() {
 
     const jsonPath = path.join(APP_ROOT, "src", "data", "articles.json");
     const raw = await fs.readFile(jsonPath, "utf8");
-    const articles = JSON.parse(raw);
+    let articles = JSON.parse(raw);
+
+    // Optional slug filter: `node scripts/seed-articles.mjs <slug> [<slug>...]`
+    // upserts only the given article(s) — handy for adding a single new one.
+    const slugFilter = process.argv.slice(2).filter((s) => !s.startsWith("-"));
+    if (slugFilter.length > 0) {
+        articles = articles.filter((a) => slugFilter.includes(a.slug));
+        console.log(`   Filter:   ${slugFilter.join(", ")}`);
+    }
     console.log(`   Source:   ${path.relative(APP_ROOT, jsonPath)} (${articles.length} rows)`);
 
     const orgId = await ensureOrg();

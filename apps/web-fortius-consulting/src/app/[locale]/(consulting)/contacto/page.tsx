@@ -9,6 +9,7 @@ interface ContactoPageProps {
         subject?: string;
         plan?: string;
         vertical?: string;
+        message?: string;
     }>;
     params: Promise<{ locale: string }>;
 }
@@ -44,6 +45,7 @@ export default async function ContactoPage({ searchParams }: ContactoPageProps) 
                     <div className="col-span-1 lg:col-span-7">
                         <ContactForm
                             initialSubject={params.subject ?? ""}
+                            initialMessage={params.message ?? ""}
                             contextPlan={params.plan ?? ""}
                             contextVertical={params.vertical ?? ""}
                         />

@@ -16,6 +16,7 @@ function normalizeSubject(value: string | null, options: readonly string[]): str
 interface ContactFormProps {
     expertSlug?: string;
     initialSubject?: string | null;
+    initialMessage?: string | null;
     contextPlan?: string | null;
     contextVertical?: string | null;
 }
@@ -23,6 +24,7 @@ interface ContactFormProps {
 export function ContactForm({
     expertSlug = "contacto-web",
     initialSubject = "",
+    initialMessage = "",
     contextPlan = "",
     contextVertical = "",
 }: ContactFormProps) {
@@ -88,7 +90,7 @@ export function ContactForm({
                 </select>
             </div>
 
-            <textarea name="message" required rows={6} placeholder={t("message-placeholder")} className="w-full resize-none border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none transition-colors" />
+            <textarea name="message" required rows={6} defaultValue={initialMessage ?? ""} placeholder={t("message-placeholder")} className="w-full resize-none border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-[0.92rem] text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-[var(--color-accent-500)] focus:outline-none transition-colors" />
 
             <button type="submit" disabled={isSubmitting} className="inline-flex w-full items-center justify-center gap-2 bg-[var(--color-accent-500)] px-5 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[var(--color-accent-400)] disabled:opacity-60">
                 {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}

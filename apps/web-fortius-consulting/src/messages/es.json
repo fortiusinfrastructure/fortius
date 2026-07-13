@@ -255,7 +255,14 @@
     "event-options": "Opciones detectadas",
     "event-client-access": "Acceso para clientes",
     "event-client-desc": "Esta oportunidad incluye paquetes de participación, agenda coordinada y soporte Fortius. El detalle completo se desbloquea desde el Área clientes en la sección Oportunidades & Eventos.",
-    "event-pkg-fallback": "Consulta el cuerpo del documento para ver el detalle completo del paquete y sus condiciones."
+    "event-pkg-fallback": "Consulta el cuerpo del documento para ver el detalle completo del paquete y sus condiciones.",
+    "event-pkg-includes": "Incluye",
+    "event-cta-interested": "Me interesa",
+    "event-cta-pay": "Pago directo",
+    "event-exclusive-note": "Acceso exclusivo para clientes. Escríbenos y coordinamos tu participación en la agenda de reuniones.",
+    "event-contact-prefix": "¿Dudas? Escríbenos a",
+    "event-interest-message": "Hola, me interesa el paquete «{package}» de {event}. ¿Podéis enviarme más información sobre la participación?",
+    "event-interest-subject": "Servicios"
   },
   "fundacion-page": {
     "meta-title": "Fortius Fundación | Brazo sin ánimo de lucro",

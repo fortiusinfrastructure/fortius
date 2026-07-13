@@ -255,7 +255,14 @@
     "event-options": "Detected options",
     "event-client-access": "Members access",
     "event-client-desc": "This opportunity includes participation packages, coordinated agenda and Fortius support. Full details are unlocked from the Member Area under Opportunities & Events.",
-    "event-pkg-fallback": "Check the document body for full package details and conditions."
+    "event-pkg-fallback": "Check the document body for full package details and conditions.",
+    "event-pkg-includes": "Includes",
+    "event-cta-interested": "I'm interested",
+    "event-cta-pay": "Pay directly",
+    "event-exclusive-note": "Client-exclusive access. Write to us and we'll coordinate your participation in the meeting agenda.",
+    "event-contact-prefix": "Questions? Write to us at",
+    "event-interest-message": "Hello, I'm interested in the \"{package}\" package for {event}. Could you send me more information about participating?",
+    "event-interest-subject": "Services"
   },
   "fundacion-page": {
     "meta-title": "Fortius Foundation | Non-profit arm",
