@@ -124,9 +124,9 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${playfair.variable} ${cinzel.variable} ${lato.variable}`}>
       <head>
-        {/* Clientify Tracking Begins */}
-        <script defer src="https://analyticsplusdev.clientify.net/analytics_plus/pixel/eo1lurjDrE49GUhS"></script>
-        {/* Clientify Tracking Ends */}
+        {/* Clientify pixel eo1lurjDrE49GUhS actually belongs to ieam.es in Clientify's
+            backend (website_id 3689) and was moved there. Escuela Hispánica has no
+            dedicated pixel yet — pending a new one from Clientify. */}
       </head>
       <body className="font-sans min-h-screen flex flex-col bg-brand-dark text-brand-text">
         <NextIntlClientProvider messages={messages}>

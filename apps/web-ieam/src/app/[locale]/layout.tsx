@@ -114,7 +114,7 @@ export default async function RootLayout({
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
       <head>
         {/* Clientify Tracking Begins */}
-        <script defer src="https://analyticsplusdev.clientify.net/analytics_plus/pixel/BwIhbw1vPNNRu9iR"></script>
+        <script defer src="https://analyticsplusdev.clientify.net/analytics_plus/pixel/eo1lurjDrE49GUhS"></script>
         {/* Clientify Tracking Ends */}
       </head>
       <body className="min-h-screen flex flex-col bg-paper text-ink">
